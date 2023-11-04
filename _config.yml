@@ -1,8 +1,13 @@
-title:               My digital garden
-include:             ['_pages']
-exclude:             ['_includes/notes_graph.json']
+title: Syncopated Notes
+include:
+  - '_pages'
+  - '_notes'
+exclude:
+  - '_includes/notes_graph.json'
+  - '_notes/.obsidian'
+
 # You may need to change the base URL depending on your deploy configuration.
-baseurl:             ''
+baseurl: ''
 
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
@@ -22,6 +27,7 @@ relative_permalinks: false
 
 plugins:
   - jekyll-last-modified-at
+  - jekyll-jupyter-notebook
 
 sass:
   sass_dir:          _sass

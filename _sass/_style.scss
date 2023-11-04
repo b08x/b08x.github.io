@@ -4,8 +4,8 @@ $color-subtext: hsl(0, 0%, 30%);
 $color-border: hsl(0, 0%, 85%);
 $color-box-background: mix($color-primary, white, 4%);
 $border-radius: 4px;
-$font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-  sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+$font-family: 'IBM Plex Mono', monospace;
+$font-family-special: 'Special Elite', monospace;
 
 body {
   box-sizing: content-box;
@@ -14,6 +14,7 @@ body {
   line-height: 1.7;
   padding: 4vh 6vw;
   overflow-x: hidden;
+  background-color: #bdb76b;
   color: $color-text;
   font-size: 1rem;
   max-width: 63em;
@@ -64,7 +65,10 @@ hr {
   background: $color-border;
 }
 
-h1,
+h1 {
+  font-family: $font-family-special;
+}
+
 h2,
 h3,
 h4,
@@ -75,6 +79,12 @@ h6 {
   padding-bottom: 0;
 }
 
+p {
+  font-family: $font-family;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
 a {
   transition: background 300ms;
   padding: 0 0.1em;
@@ -83,14 +93,14 @@ a {
   color: $color-primary;
   &:hover {
     color: black !important;
-    background: #fffaf1;
+    background: #3f3e3d;
   }
   &:after {
     position: relative;
     top: -0.5em;
     font-size: 0.7em;
     content: "↗";
-    color: #aaaaaa;
+    color: #2e2e2e;
   }
   &.internal-link:after,
   &.footnote:after,
@@ -98,6 +108,7 @@ a {
     content: "";
   }
 }
+
 
 *:focus {
   background: #ffe8bc !important;
@@ -128,7 +139,7 @@ nav {
 }
 
 code {
-  background: #f5f5f5;
+  background: #7f7f7f;
   padding: 0.1em 0.2em;
   border-radius: 4px;
 }
@@ -143,4 +154,12 @@ code {
 .invalid-link-brackets {
   color: #ccc;
   cursor: help;
+}
+
+graph-wrapper {
+  background-color: #161616;
+}
+
+.nodes circle {
+  fill: #3ace62;
 }
