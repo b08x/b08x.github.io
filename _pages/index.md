@@ -28,3 +28,5 @@ permalink: /
     max-width: 46em;
   }
 </style>
+
+{% include notes_graph.html %}

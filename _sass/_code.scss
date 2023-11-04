@@ -1,14 +1,34 @@
+$font-family-source: 'Source Code Pro', monospace;
+
+highlight { 
+  background-color: #ffffff;
+  padding: 5px 10px;
+  margin: 20px 0;
+}
+
+
 .highlight  {
-  background: #f8f8f8;
-  padding: 1px 1em;
+  font-family: $font-family-source;
+  font-weight: 500;
+  background: #121212;
+  color:#c6c5c5;
+  padding: 5px 10px;
   border-radius: 3px;
-  font-size: 1em;
-  font-size: 0.9em;
-  overflow: auto;
-  margin: 1em -1em;
+  font-size: 0.95em;
+  overflow-y: auto;
+  // margin: 1em -1em;
+  margin: 20px 0;
+
   code{
     padding: 0;
   }
+}
+
+.highlight pre {
+  /* overflow: scroll; Prefer no word wrap? Uncomment this line and comment out the 2 lines below. */
+  // overflow-x: scroll;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 div.highlight {
