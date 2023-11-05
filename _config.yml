@@ -2,9 +2,11 @@ title: Syncopated Notes
 include:
   - '_pages'
   - '_notes'
+  - '_projects'
 exclude:
   - '_includes/notes_graph.json'
-  - '_notes/.obsidian'
+  - '.obsidian'
+  - '*.cast'
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ''
 

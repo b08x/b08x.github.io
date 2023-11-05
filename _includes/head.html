@@ -53,4 +53,7 @@
       {{ page.title }} &mdash; {{ site.title }}
     {% endif %}
   </title>
+  {% if site.tags != "" %}
+    {% include tags/collect.html %}
+  {% endif %}
 </head>
