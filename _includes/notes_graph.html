@@ -6,14 +6,14 @@
 
   .nodes circle {
     cursor: pointer;
-    fill: #8b88e6;
+    fill: #858418;
     transition: all 0.15s ease-out;
   }
 
   .text text {
     cursor: pointer;
-    fill: #333;
-    text-shadow: -1px -1px 0 #fafafabb, 1px -1px 0 #fafafabb, -1px 1px 0 #fafafabb, 1px 1px 0 #fafafabb;
+    /* fill: #333;
+    text-shadow: -1px -1px 0 #fafafabb, 1px -1px 0 #fafafabb, -1px 1px 0 #fafafabb, 1px 1px 0 #fafafabb; */
   }
 
   .nodes [active],
@@ -30,12 +30,12 @@
   #graph-wrapper {
     background: #3d3d3d;
     border-radius: 4px;
-    max-height: 50%;
   }
   
   #graph-wrapper > svg {
     max-width: 100%;
     display: block;
+    height: 25rem;
   }
 </style>
 
@@ -184,8 +184,10 @@
         window.onresize = reportWindowSize;
 
         const svg = d3.select("svg");
-        const width = Number(svg.attr("width"));
-        const height = Number(svg.attr("height"));
+        // const width = Number(svg.attr("width"));
+        // const height = Number(svg.attr("height"));
+        const width = 800;
+        const height = 400;        
         let zoomLevel = 1;
 
         const simulation = d3

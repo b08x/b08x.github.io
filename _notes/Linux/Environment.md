@@ -5,9 +5,10 @@ tags:
   - shell
   - systemd
 ---
+something [^1] 
 
 
-
+## Heading II
 ### pam_env
 
 * `/etc/environment` is used by the [pam_env module](https://wiki.archlinux.org/title/environment_variables#Using_pam_env) and is shell agnostic so scripting or glob expansion cannot be used.
@@ -70,3 +71,5 @@ tags:
 
 [source](https://wiki.archlinux.org/title/Systemd/User#Environment_variables)
 [source](https://www.alibabacloud.com/blog/a-guide-on-environment-variable-configuration-in-linux_598423)
+
+[^1]: Hey

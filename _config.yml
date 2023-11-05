@@ -5,7 +5,6 @@ include:
 exclude:
   - '_includes/notes_graph.json'
   - '_notes/.obsidian'
-
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ''
 

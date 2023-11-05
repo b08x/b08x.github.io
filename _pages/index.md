@@ -5,7 +5,7 @@ id: home
 permalink: /
 ---
 
-# Welcome! 🌱
+# Welcome!
 
 <p style="padding: 3em 1em; background: #5f5f5f; border-radius: 4px;">
   Take a look at <span style="font-weight: bold">[[Docker Stacks]]</span> to get started on your exploration.
@@ -26,7 +26,11 @@ permalink: /
 <style>
   .wrapper {
     max-width: 46em;
+    display: flex;
+    flex-direction: column;
   }
 </style>
+
+<p>Knowledge Graph:</p>
 
 {% include notes_graph.html %}

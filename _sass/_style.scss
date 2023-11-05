@@ -15,10 +15,14 @@ body {
   line-height: 1.7;
   padding: 4vh 6vw;
   overflow-x: hidden;
-  background-color: #5b3434;
+  background-color: #696969;
   color: #060505;
   font-size: 1rem;
   max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 
   @media (min-width: 820px) {
     font-size: 1.25rem;
@@ -47,11 +51,13 @@ img {
 }
 
 blockquote {
-  padding: 1.5em;
+  padding: 1em;
   margin: 0;
   font-size: 0.88em;
-  background: $color-box-background;
+  background: #597b65;
   border-radius: $border-radius;
+  font-style: italic;
+
 
   p {
     margin: 0;
@@ -110,6 +116,9 @@ a {
   }
 }
 
+li {
+  font-weight: 400;
+}
 
 *:focus {
   background: #ffe8bc !important;
@@ -142,7 +151,7 @@ nav {
 }
 
 .backlink-box {
-  background: $color-box-background;
+  background: #9b9817;
   padding: 1em;
   border-radius: $border-radius;
 }
@@ -163,12 +172,4 @@ code {
 .invalid-link-brackets {
   color: #ccc;
   cursor: help;
-}
-
-graph-wrapper {
-  background-color: #161616;
-}
-
-.nodes circle {
-  fill: #3ace62;
 }
