@@ -27,6 +27,7 @@ relative_permalinks: false
 plugins:
   - jekyll-last-modified-at
   - jekyll-jupyter-notebook
+  - jekyll_asciinema
 
 sass:
   sass_dir:          _sass
