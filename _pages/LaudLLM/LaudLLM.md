@@ -24,3 +24,9 @@ permalink: /laudllm
 [[Training]]
 
 [[notebook]]
+
+
+---
+
+https://github.com/robbie-cao/kb-audio
+https://github.com/crowding/ansible-role-audio/blob/master/notes.md
