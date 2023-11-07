@@ -1,6 +1,6 @@
 ---
 title: Ruby
-layout: page
+layout: folder
 ---
 
 [[Docker Stacks]]

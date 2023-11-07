@@ -3,7 +3,7 @@ title: Docker Stacks
 date: 2023-11-04T19:51:00
 cssid: test
 excerpt: Docker Images to run a local Jupyter Notebook with Ruby
-layout: article
+layout: page
 ---
 # nlp stack
 

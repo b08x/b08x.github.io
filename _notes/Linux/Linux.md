@@ -1,9 +1,9 @@
 ---
 title: Linux
 excerpt: It's why people stay inside
-layout: page
+layout: folder
 ---
-[[issues]]
+[[Issues]]
 
 
 

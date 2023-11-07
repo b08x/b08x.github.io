@@ -1,14 +1,9 @@
 ---
-title: sonic visualizer
-date: 2023-11-05T09:17:00
-tags:
-  - audio
-  - analysis
+title: using osc
+layout: note
 ---
 
-
 To open an audio file with specific layers and/or views, create a text file with the osc commands to send to SV:
-
 
 ```text
 /open /mnt/bender/backup/Library/sounds/collections/freesound/015_waveplaysfx_synth-seq-mellow-bass-guitar-melody-90-bpm.wav
@@ -22,4 +17,3 @@ To open an audio file with specific layers and/or views, create a text file with
 ---
 
 [sv osc documentation](https://github.com/danstowell/Sonic-Visualiser/blob/master/README.OSC)
-

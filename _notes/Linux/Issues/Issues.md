@@ -1,7 +1,8 @@
 ---
-title: issues
+title: Issues
 layout: page
 ---
+TODO: sync with gh issues
 
 <ul>
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}

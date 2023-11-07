@@ -1,1 +1,8 @@
 <a class="internal-link" href="{{ site.baseurl }}/"><b>{{ site.title }}</b></a> Include anything you'd like here, like a link to an <a class="internal-link" href="{{ site.baseurl }}/about">About</a> page.
+
+{% if site.github.uid %}
+<a href="https://github.com/{{ site.github.uid }}" class="socialinks__entry" target="_blank">
+    github
+    <i class="fa fa-github"></i>
+</a>
+{% endif %}

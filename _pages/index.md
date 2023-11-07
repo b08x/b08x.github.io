@@ -8,16 +8,16 @@ permalink: /
 # Welcome!
 
 <p style="padding: 1em 1em; background: #5f5f5f; border-radius: 4px;">
-  Take a look at <span style="font-weight: bold">[[Syncopated]]</span> to get started on your exploration.
+  Take a look at <span style="font-weight: bold">[[graph]]</span> to get started on your exploration.
 </p>
 
 
-<strong>Recently updated articles</strong>
+<strong>Recently updated pages</strong>
 
 <ul>
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
   {% for note in recent_notes limit: 25 %}
-  {% if note.layout == 'article' %}
+  {% if note.layout == 'page' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
@@ -59,6 +59,3 @@ permalink: /
   }
 </style>
 
-<p>Knowledge Graph:</p>
-
-{% include notes_graph.html %}

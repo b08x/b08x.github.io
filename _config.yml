@@ -10,6 +10,9 @@ exclude:
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ''
 
+github:
+  uid: b08x
+
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
 use_html_extension:  false
@@ -30,6 +33,7 @@ plugins:
   - jekyll-last-modified-at
   - jekyll-jupyter-notebook
   - jekyll_asciinema
+  - jekyll-spaceship  
 
 sass:
   sass_dir:          _sass
@@ -49,3 +53,10 @@ defaults:
       path: "_notes/**/*.md"
     values:
       layout: "note"
+
+jekyll-spaceship:
+  mermaid-processor:
+    css:
+      class: 'mermaid!'
+    config:
+      theme: dark
