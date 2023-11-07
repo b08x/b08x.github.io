@@ -3,6 +3,7 @@ title: vamp plugins
 tags:
   - audio
   - analysis
+layout: note
 ---
 ---
 

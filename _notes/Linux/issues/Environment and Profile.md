@@ -1,32 +1,77 @@
 ---
-title: setting environment variables
+title: environment and profile config load order
+date: 2023-11-06T01:04:00
 tags:
   - linux
-  - shell
-  - systemd
-excerpt: today was a day like any other...
+  - issues
+  - profile
+status: ongoing
+layout: note
+---
+## environment and profile config load order
+
 ---
 
+`2023-11-07 00:44`
 
-## environment and profile config load order
+A fresh install of Archlabs using i3 and autologin via getty console:
+
+```bash
+$UU_ORDER:
+/etc/environment:
+/etc/zsh/profile:
+/etc/profile:
+~/.zprofile:
+~/.xinitrc:
+~/.xprofile:
+~/.zshrc`
+```
+
+---
+`2023-11-06`
+
+After latest revision of Ansible playbook and tasks, this is the load order of environment and profile configs:
+
+* using CachyOS
 
 ```bash
 # login via ssh
-/etc/environment -> ~/.zshenv -> /etc/profile -> /etc/profile.d/ruby.sh -> ~/.profile -> ~/.zprofile -> ~/.zshrc
+/etc/environment
+~/.zshenv
+/etc/profile
+/etc/profile.d/ruby.sh
+~/.profile
+~/.zprofile
+~/.zshrc
 ```
 
 ```bash
 # autologin to i3 via xinitrc
-/etc/environment -> ~/.zshenv -> /etc/profile -> /etc/profile.d/ruby.sh -> ~/.profile -> ~/.zprofile
--> startx
-~/.xinitrc -> ~/.xprofile 
--> exec i3
-~/.zshenv -> /etc/profile -> /etc/profile.d/ruby.sh -> ~/.profile -> ~/.zprofile -> ~/.zshrc
+/etc/environment
+~/.zshenv
+/etc/profile
+/etc/profile.d/ruby.sh
+~/.profile
+~/.zprofile
+--> startx
+~/.xinitrc
+~/.xprofile 
+--> exec i3
+~/.zshenv
+/etc/profile
+/etc/profile.d/ruby.sh
+~/.profile
+~/.zprofile
+~/.zshrc
 ```
+
+For some reason, logging into i3 via agetty service (which uses xinitrc) loads the profile configurations twice
+
+
+---
 
 # notes
 ## /etc/environment & /etc/profile
-
 * `/etc/environment` is shell agnostic so scripting or glob expansion cannot be used.
 
 * The PAM module loads the variables to be set in the environment from the following files in order: `/etc/security/pam_env.conf` and `/etc/environment`.
@@ -38,7 +83,6 @@ excerpt: today was a day like any other...
 * `/etc/profile` This file should be sourced by all POSIX sh-compatible shells upon login: it sets up `$PATH` and other environment variables and application-specific (`/etc/profile.d/*.sh`) settings upon login.
 
 ## zsh
-
 * zsh will read commands from the following files in the following order: 
 
 ```bash

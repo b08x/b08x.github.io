@@ -1,9 +1,19 @@
 ---
 title: Linux
 excerpt: It's why people stay inside
+layout: page
+---
+[[issues]]
+
+
+
+
+
 ---
 
-[[Environment and Profile]]
-
-[[libvirtd IO error]]
+#### cloning a vm with virt-clone
+#libvirt 
+```bash
+% virt-clone --connect=qemu:///system --original <source-vm-name> --name <dest-vm-name-clone> --auto-clone
+```
 
