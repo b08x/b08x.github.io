@@ -138,7 +138,10 @@ h1 {
   font-family: $font-family-monospace;
   line-height: 1.25;
   font-weight: 300;
-  // letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
+  @media (max-width: 1050px) {
+    letter-spacing: 0rem;
+  }
 }
 
 h2 {
@@ -223,6 +226,16 @@ nav {
   background: #9b9817;
   padding: 1em;
   border-radius: $border-radius;
+}
+
+.box {
+ display: grid;
+ justify-content: center; 
+}
+
+.headingbox {
+  display: grid;
+  justify-content: space-around;
 }
 
 code {

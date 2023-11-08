@@ -1,6 +1,7 @@
 ---
 title: vamp plugins
 layout: note
+category: Sonic-Visualiser
 ---
 ---
 

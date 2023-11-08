@@ -7,8 +7,27 @@ tags:
   - profile
 status: ongoing
 layout: note
+category: Linux
 ---
 ## environment and profile config load order
+
+`2023-11-07 16:45`
+
+```bash
+# via ssh
+b08x@archlabs ~ % echo $UU_ORDER
+/etc/environment:/etc/zsh/profile:/etc/profile:/etc/profile.d/ruby.sh:~/.zprofile:~/.zshrc
+
+# via i3
+b08x@archlabs ~ % echo $UU_ORDER
+/etc/environment
+/etc/zsh/profile
+/etc/profile
+~/.zprofile:
+~/.xinitrc
+~/.xprofile
+~/.zshrc
+```
 
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Jekyll & SCSS
 layout: note
+category: UI
 ---
 [flexboxgrid documentation](http://sassflexboxgrid.com/views/documentation.html)
 

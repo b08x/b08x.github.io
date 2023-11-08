@@ -1,6 +1,7 @@
 ---
 title: prompts
 layout: note
+category: LLM
 ---
 
 ```bash

@@ -7,10 +7,11 @@ tags:
   - libvirt
 status: ongoing
 layout: note
+category: Linux
 ---
 
-2023-11-05
 
+### 2023-11-05
 Creating a new virtual machine with virt-manager, when creating or selecting the disk image, virt-manager crashes:
 
 ```bash
@@ -60,10 +61,7 @@ Partition:
     maj-min: 259:2
 ```
 
-This occurs on tinybot and lapbot.
-
-
-However on ninjabot, things are working as expected:
+However on another host, things are working as expected:
 
 ```bash
 #> ninjabot
@@ -101,7 +99,4 @@ Partition:
     used: 122.58 GiB (51.6%) fs: btrfs block-size: 4096 B dev: /dev/sda2
     maj-min: 8:2
 
-
-
 ```
-

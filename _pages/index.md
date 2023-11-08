@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: home
 title: Home
 id: home
 permalink: /
@@ -45,7 +45,7 @@ permalink: /
   {% for note in recent_notes limit: 25 %}
   {% if note.layout == 'note' %}
     <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.category }} - {{ note.title }}</a>
     </li>
   {% endif %}
   {% endfor %}

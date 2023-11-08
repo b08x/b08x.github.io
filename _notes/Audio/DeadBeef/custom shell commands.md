@@ -2,6 +2,7 @@
 title: Custom Shell Commands
 excerpt: 
 layout: note
+category: DeadBeef
 ---
 
 ## custom shell commands

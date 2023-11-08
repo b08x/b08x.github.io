@@ -1,6 +1,7 @@
 ---
 title: using osc
 layout: note
+category: Sonic-Visualiser
 ---
 
 To open an audio file with specific layers and/or views, create a text file with the osc commands to send to SV:

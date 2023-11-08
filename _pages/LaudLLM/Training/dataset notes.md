@@ -1,3 +1,8 @@
+---
+layout: note
+title: dataset notes
+category: Training
+---
 
 Question 1, how can I improve my vocal clarity in my recordings? Question 2, what are some common causes of audio latency and how can I reduce it? Question 3, can you recommend any free software synthesizers for electronic music production? Question 4, what are some best practices for mixing drums in a rock song?
 
