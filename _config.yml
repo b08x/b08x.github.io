@@ -1,13 +1,14 @@
 title: Syncopated Notes
 include:
   - '_pages'
-  - '_notes'
-  - '_projects'
 exclude:
   - '_includes/notes_graph.json'
   - '.obsidian'
   - '*.cast'
   - '*.ipynb'
+  - '*.pdf'
+  - 'README.md'
+  - 'LICENSE'
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ''
 
@@ -34,7 +35,8 @@ plugins:
   - jekyll-last-modified-at
   - jekyll-jupyter-notebook
   - jekyll_asciinema
-  - jekyll-spaceship  
+  - jekyll-spaceship
+  - jekyll_picture_tag
 
 sass:
   sass_dir:          _sass

@@ -27,8 +27,8 @@ body {
   color: #060505;
   font-size: 1rem;
   max-width: 80%;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   align-items: center;
 
 
@@ -238,7 +238,7 @@ nav {
     "side";
 
   @media (min-width: 1558px) {
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-template-areas: "content side";
   }
 }
@@ -268,7 +268,8 @@ nav {
 
 .box {
  display: grid;
- justify-content: center; 
+ justify-content: space-evenly;
+ justify-items: center;
 }
 
 .headingbox {
