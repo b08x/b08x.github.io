@@ -1,6 +1,6 @@
 ---
 title: DeadBeef Audio Sampler
-layout: page
+layout: note
 links:
   - https://deadbeef.sourceforge.io/
 ---
@@ -13,5 +13,5 @@ This video shows how the UI interface can be customized.
 
 
 
-[[custom shell commands]]
+
 

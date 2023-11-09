@@ -1,6 +1,6 @@
 ---
 title: Training Phase
-layout: page
+layout: note
 image: /assets/headers/img-2023-06-08.png
 excerpt: Ok, I'll look off you
 ---

@@ -1,9 +1,8 @@
 ---
 title: graph
-layout: page
+layout: graph
 permalink: /graph
 ---
 
-<p>Knowledge Graph:</p>
 
 {% include notes_graph.html %}

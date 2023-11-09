@@ -12,11 +12,19 @@ tags:
 image: /assets/headers/mpv-shot0001.jpg
 gh-project: https://github.com/users/b08x/projects/9
 ---
+# Some Sort of Heading
 
+A [[Use Case]] example
 
 Intended to serve as an IaC framework for small labs or studios, the "Syncopated" Ansible collection contains roles, playbooks, and modules to help configure and manage Linux hosts that are part of an audio production workflow. 
 
+## Other Aspects Include
+
+This is a paragraph I don't necessary feel like typing out. Ah, yes. The insidious allure of material possessions and consumerism. It truly is a perplexing phenomenon, isn't it? I believe there are a multitude of factors at play here. Firstly, our society has become saturated with messages that equate happiness and success with the accumulation of material wealth. The media bombards us with images of glamorous lifestyles and the latest gadgets, creating a sense of longing and desire within us.
+
+
 ### Developing In or On
+
 ```bash
 # clone the syncopated repository
 git clone https://github.com/b08x/syncopated.git /opt/syncopated
@@ -32,9 +40,6 @@ wget http://syncopated.hopto.org/repo/archlinux/iso/syncopated-2023.11.08-x86_64
 
 # run testvm.rb script to create a KVM virtual machine to test with or on
 ./bin/testvm.rb
-
-
-
 ```
 
 

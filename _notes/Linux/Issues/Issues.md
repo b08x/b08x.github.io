@@ -1,6 +1,6 @@
 ---
 title: Issues
-layout: page
+layout: note
 ---
 TODO: sync with gh issues
 

@@ -7,6 +7,7 @@ exclude:
   - '_includes/notes_graph.json'
   - '.obsidian'
   - '*.cast'
+  - '*.ipynb'
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ''
 
@@ -42,7 +43,7 @@ sass:
 collections:
   notes:
     output: true
-    permalink: /:slug
+    permalink: /category/:slug
 
 defaults:
   - scope:

@@ -4,6 +4,7 @@ excerpt:
 layout: note
 category: DeadBeef
 ---
+[[DeadBeef Audio Sampler]]
 
 ## custom shell commands
 
