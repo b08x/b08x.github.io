@@ -1,7 +1,7 @@
 ---
 title: Training Phase
 layout: note
-image: /assets/headers/img-2023-06-08.png
+image: /assets/img/headers/img-2023-06-08.png
 excerpt: Ok, I'll look off you
 ---
 

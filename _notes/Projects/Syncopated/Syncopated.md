@@ -5,14 +5,13 @@ subtitle: Ansible Collection For Audio Production on Linux
 status: ongoing
 permalink: /syncopated
 tags:
-  - audio
-  - linux
   - ansible
   - linux-audio
-image: /assets/headers/mpv-shot0001.jpg
+image: /assets/img/headers/mpv-shot0001.jpg
 gh-project: https://github.com/users/b08x/projects/9
 ---
-# Some Sort of Heading
+
+# Ansible and the OS
 
 A [[Use Case]] example
 
@@ -229,5 +228,48 @@ table = Terminal::Table.new do |t|
 end
 
 puts table
+
+```
+
+
+https://github.com/aplatform64/aplatform64
+
+  
+
+https://github.com/vvo/ansible-archee/blob/master/roles/base/vars/main.yml
+
+---
+
+
+
+
+```
+
+- hosts: localhost
+  become: True
+  gather_subset:
+    - hardware
+    - network
+  vars:
+    desktop:
+      wm: 'i3'
+      shell: 'zsh'
+      dm: greetd
+      terminal: 'terminator'
+      audio: 'jack'
+      ruby_version: 3.0.0
+      python_version: 3.11.1
+    cleanup: True
+environment:
+    PKG_CONFIG_PATH: "/usr/share/pkgconfig:/usr/lib/pkgconfig:/usr/local/lib/pkgconfig"
+    ZSH: "/usr/share/oh-my-zsh"
+    DISPLAY: ":0"
+
+pre_tasks:
+
+roles:
+
+  - role: desktop
+    tags: ['desktop']
 
 ```

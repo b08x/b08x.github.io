@@ -6,7 +6,7 @@ status: ongoing
 dates: 
 2023-11-05: In progress.
 links: 
-image: /assets/headers/image011.png
+image: /assets/img/headers/image011.png
 permalink: /laudllm
 ---
 
@@ -45,3 +45,6 @@ permalink: /laudllm
 
 https://github.com/robbie-cao/kb-audio
 https://github.com/crowding/ansible-role-audio/blob/master/notes.md
+
+
+[gptcache](https://gptcache.readthedocs.io/en/latest/)

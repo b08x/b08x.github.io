@@ -20,6 +20,6 @@ nfs:
 
 Run the playbook
 ```bash
-aplaybook -C -i example/inventory.ini example/playbooks/nas.yml --limit tinybot
+aplaybook -C -i inventory.ini playbooks/nas.yml --limit tinybot
 ```
 

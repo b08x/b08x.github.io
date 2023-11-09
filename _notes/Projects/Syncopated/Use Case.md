@@ -46,7 +46,8 @@ I'll give you a scenario and I'd like you to describe how Ansible could mitigate
 
 ## response
 
-```markdown
+
+
 Ansible could help mitigate this issue in a few ways:
 
 - Using the `file` module, Ansible could check if the `/etc/security/limits.d/audio.conf` file exists and rename it to remove the `.disabled` suffix. This would ensure the file is properly named to enable realtime audio capabilities.
@@ -62,7 +63,7 @@ Ansible could help mitigate this issue in a few ways:
 - Documentation within the comments, README or added handlers/asserts would explain why particular steps are required to avoid or work around issues like the audio.conf naming problem.
 
 In summary, Ansible gives you the automation capabilities to script complex multi-step workflows like setting up an audio environment, handle edge cases and inconsistencies across runs, and document what's happening to mitigate tricky issues like this audio.conf example.
-```
+
 
 ## query
 Elaborate on how the built-in _**idempotence**_ function prevents problems such as described
