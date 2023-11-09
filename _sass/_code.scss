@@ -10,7 +10,7 @@ highlight {
 .highlight  {
   font-family: $font-family-source;
   font-weight: 500;
-  background: #121212;
+  background: #0f0f0f;
   color:#c6c5c5;
   padding: 5px 10px;
   border-radius: 3px;
@@ -42,11 +42,11 @@ div.highlight {
 
 .highlight, .highlight .w {
   color: #fbf1c7;
-  background-color: #282828;
+  background-color: #1a1a1a;
 }
 .highlight .err {
   color: #fb4934;
-  background-color: #282828;
+  background-color: #1a1a1a;
   font-weight: bold;
 }
 .highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {

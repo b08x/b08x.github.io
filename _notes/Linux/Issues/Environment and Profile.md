@@ -11,6 +11,26 @@ category: Linux
 ---
 ## environment and profile config load order
 
+* browser needs to be set as when it is exported, it interferes with xdg
+
+### setting vs exporting
+
+**Setting a variable**
+
+When you set a variable, you are creating a local variable that is only accessible within the current shell session. This means that the variable will not be available to any child processes that are spawned from the current shell
+
+**Exporting a variable**
+
+When you export a variable, you are making it available to child processes that are spawned from the current shell. This means that the variable will be available to any command that you execute from the current shell, as well as to any scripts that you run.
+
+|Action|Description|Scope|
+|---|---|---|
+|Set|Creates a local variable that is only accessible within the current shell session.|Local|
+|Export|Makes a variable available to child processes.|Global|
+
+
+
+
 `2023-11-07 16:45`
 
 ```bash
@@ -21,7 +41,7 @@ b08x@archlabs ~ % echo $UU_ORDER
 # via i3
 b08x@archlabs ~ % echo $UU_ORDER
 /etc/environment
-/etc/zsh/profile
+~/.zshenv
 /etc/profile
 ~/.zprofile:
 ~/.xinitrc

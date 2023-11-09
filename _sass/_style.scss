@@ -1,6 +1,6 @@
 $color-primary: hsl(0, 0%, 10%);
 $color-text: hsl(0, 0%, 20%);
-$color-subtext: hsl(0, 0%, 30%);
+$color-subtext: #9b9817;
 $color-border: hsl(0, 0%, 85%);
 $color-box-background: mix($color-primary, white, 4%);
 $border-radius: 4px;
@@ -19,7 +19,8 @@ body {
   line-height: 1.7;
   padding: 4vh 6vw;
   overflow-x: hidden;
-  background-color: #909592;
+  // background-color: #909592;
+  background-color: #294735;
   // background-image: url("/assets/headers/mpv-shot0001.jpg");
   // background-blend-mode: difference;
   // background-size: auto;
@@ -40,6 +41,7 @@ time {
   display: block;
   color: $color-subtext;
   margin: 0em 0 1em;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 footer {
@@ -93,9 +95,10 @@ img {
 // }
 
 #object-cover {
-  max-width: 70%;
-  mix-blend-mode: difference;
-  margin-bottom: 5rem;
+  max-width: 90%;
+  mix-blend-mode:luminosity;
+  margin-top: 4rem;
+  margin-bottom: 7rem;
 }
 
 #page-cover {
@@ -114,15 +117,21 @@ blockquote {
   margin-top: auto;
   margin-bottom: 2rem;
   margin-left: 0;
-  margin-right: 0;
+  margin-right: 1rem;
   font-size: 0.88em;
-  background: #597b65;
+  background: #443b3f;
   border-radius: $border-radius;
   font-style: italic;
+  line-height: 1.3;
+  
 
 
   p {
+    font-family: $font-family-special;
     margin: 0;
+  }
+  a {
+    color:#9b9817;
   }
 }
 

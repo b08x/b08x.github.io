@@ -10,42 +10,178 @@ tags:
   - ansible
   - linux-audio
 image: /assets/headers/mpv-shot0001.jpg
+gh-project: https://github.com/users/b08x/projects/9
 ---
-The "Syncopated" Ansible collection is a framework that contains roles, playbooks, and modules to help configure and manage Linux hosts that are part of an audio production workflow. This includes digital signal processing (DSP) servers as well as digital audio workstation (DAW) client machines.
+
+
+Intended to serve as an IaC framework for small labs or studios, the "Syncopated" Ansible collection contains roles, playbooks, and modules to help configure and manage Linux hosts that are part of an audio production workflow. 
+
+### Developing In or On
+```bash
+# clone the syncopated repository
+git clone https://github.com/b08x/syncopated.git /opt/syncopated
+
+# navigate to the repostiory folder
+cd /opt/syncopated
+
+# download the iso image
+wget http://syncopated.hopto.org/repo/archlinux/iso/syncopated-2023.11.08-x86_64.iso
+
+# run bootstrap script to install required packages
+./bin/bootstrap.sh
+
+# run testvm.rb script to create a KVM virtual machine to test with or on
+./bin/testvm.rb
+
+
+
+```
+
+
+
+A **Control Node** will host the Ansible engine and the Syncopated platform.
+
+Communication between the Control Node and the Managed Nodes will be done via SSH and regular Linux user accounts with public/private key pairs. Root privilege will be provided by Sudo.
+
+The directory structure on a Control Node is as follows:
+
+
+|   Path               |  |   Content                                              |
+|:---------------------|:---|:-------------------------------------------------------|
+|   bin/               |  |   Shell scripts                                        |
+|   docs/              |  |   Repository for storing site-specific documentation   |
+|   files/             |  |   Ansible data files for custom playbooks and roles    |
+|   group_vars/        |  |   Ansible  group_vars                                  |
+|   host_vars/         |  |   Ansible host_vars                                    |
+|   playbooks/         |  |   Custom Ansible Playbooks                             |
+|   plugins/           |  |   Plugins and Modules                                  |
+|   roles/             |  |   Custom Ansible Roles                                 |
+|   tests/             |  |   For testing Custom Ansible Roles and Playbooks       |
+|   templates/         |  |   Custom Ansible templates                             |
+|   vars/              |  |   Ansible variables for custom playbooks and roles     |
+|   logs/              |  |   Execution logs                                       |  
+
+  
+
+---
+
+2. Configuration management: Ansible Collections can also handle the configuration of software tools. You can create playbooks that define the desired settings for each application, such as audio preferences, plugin configurations, or project templates. By using Ansible, you can easily apply these configurations across multiple machines, ensuring consistency and reducing manual effort.
+
+4. Plugin management: Many audio production workflows rely on various plugins for effects, virtual instruments, or signal processing. Ansible Collections can assist in managing these plugins by automating their installation, updates, and configurations. You can define the desired set of plugins for each machine or project and use Ansible to ensure they are consistently available across your studio environment.
+
+5. Dependency management: Audio production software often has specific dependencies or requirements. Ansible Collections can help manage these dependencies by automating the installation of required libraries or packages. This ensures that all necessary dependencies met on each machine, avoiding compatibility issues or missing components.
+
+4. Configuring audio interfaces and devices: Ansible Collections can provide modules and playbooks to automate the configuration of audio interfaces, sound cards, MIDI controllers, and other hardware devices. You can define the desired settings for each device and use Ansible to ensure consistent configurations across your studio machines.
+
+5. Setting up networked audio systems: If you have a networked audio setup with multiple machines collaborating on projects, Ansible Collections can help you automate the configuration of network settings, synchronization protocols, and audio streaming setups. You can create collections that include roles and playbooks specific to your networked audio requirements.
+
+
+```bash
+/*
+                                 ┌─────────────────────────────────────────┐
+    hydrogen ◄───┐               │                                         │
+                 │               │   templates   scripts     patches       │
+                 │               │                                         │
+    helm  ◄──────┼───────────────┤                                         │
+                 │               │                                         │
+                 │               │                                         │
+    linuxsam ◄───┘               │            git repo                     │
+                             ┌───┤                                         │
+                             │   └────-────────────────────────────────────┘
+                             │        
+                             │        
+                             │        
+                             ▼                                    Untitled drawing
+                             │        
+    ┌───────────────┬────────┼────────┼───────────┬──────────────┬─────────────┐
+    │               │        │        │           │              │             │
+    │               │        │        │           │              │             │
+    │               │        │        │           ▼              ▼             ▼
+    ▼               ▼        │        ▼
+audacity          reaper     │    bitwig        vst3        ambisonics        lv2
+                             │
+                             │
+                             │
+                             └───►  sonic pi
+
+                                    jacktrip
+ */
+```
+
 
 ---
 
 ```shell
 
-┌────────────────────────────────┐                      ┌──────────────────────────────────────────┐
-│                                │                      │                                          │
-│  tinybot                       │                      │        soundbot                          │
-│                                │                      │                                          │
-│                                │                      │                                          │
-│  ray_daemon -p 7777            │                      │   ray-session                            │
-│                                │◄─────────────────────┤     * starts jacktrip serer              │
-│  ray-session                   │                      │     * starts NetworkSession with tinybot │
-│    * starts jacktrip client    │                      │     * launches clients                   │
-│    * launches clients          │                      │                                          │
-│                                │                      │                                          │
-└────────────────────────────────┘                      └──────────────────────────────────────────┘
+                                                            ┌─────────────┐
+                                                            │             │
+                                              ┌────────────►│   lapbot    │
+                                              │             │             │
+                                              │             └─────────────┘
+                                              │
+                   ┌──────────────┐           │
+                   │              │           │
+                   │   soundbot   ├───────────┤
+                   │              │           │
+                   └─────┬────────┘           │        ┌────────┐
+                         │                    │        │        │
+                         │                    │        │ bender │
+                         │                    └───────►│        │
+                         │                             │        │
+                         │                             └────────┘
+                         │
+                         │                  ┌────────┐
+     ┌─────────┐         │                  │        │
+     │         │         │                  │ bigbot │
+     │ tinybot │◄────────┴─────────────────►│        │
+     │         │                            │        │
+     └─────────┘                            │        │
+                                            └────────┘
  
 ```
- 
 
----
 
 
 ```json
 
 "example/group_vars/all.yml"
-{"user"=>{"name"=>"b08x", "realname"=>"Robert Pannick", "group"=>"b08x", "uid"=>1000, "gid"=>1000, "secondary_groups"=>"input,video,audio", "sudoers"=>true, "home"=>"/home/b08x", "workspace"=>"/home/b08x/Workspace", "shell"=>"/usr/bin/zsh", "email"=>"rwpannick@gmail.com", "gpg"=>"36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A", "dots"=>"git@github.com:b08x/dots.git"}, "users"=>[{"name"=>"root", "group"=>"root", "uid"=>0, "gid"=>0, "home"=>"/root", "shell"=>"/usr/bin/zsh"}, {"name"=>"b08x", "realname"=>"Robert Pannick", "group"=>"b08x", "uid"=>1000, "gid"=>1000, "secondary_groups"=>"input,video,audio", "sudoers"=>true, "home"=>"/home/b08x", "workspace"=>"/home/b08x/Workspace", "shell"=>"/usr/bin/zsh", "email"=>"rwpannick@gmail.com", "gpg"=>"36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A", "dots"=>"git@github.com:b08x/dots.git"}], "autofs_client"=>{"host"=>"bender", "shares"=>["backup", "storage"]}, "docker"=>{"storage"=>"/var/lib/docker", "service"=>{"enabled"=>true}, "nvidia"=>false, "users"=>["b08x"]}, "libvirt"=>{"service"=>{"enabled"=>false}, "users"=>["b08x"]}}
+
+{"user"=>{"name"=>"b08x", "realname"=>"Robert Pannick", "group"=>"b08x", "uid"=>1000, "gid"=>1000, "secondary_groups"=>"input,video,audio", "sudoers"=>true, "home"=>"/home/b08x", "workspace"=>"/home/b08x/Workspace", "shell"=>"/usr/bin/zsh", "email"=>"rwpannick@gmail.com", "gpg"=>"36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A", "dots"=>"git@github.com:b08x/dots.git"}, 
+
+"users"=>[
+  {"name"=>"root", "group"=>"root", "uid"=>0, "gid"=>0, "home"=>"/root", "shell"=>"/usr/bin/zsh"}, 
+  {"name"=>"b08x", "realname"=>"Robert Pannick", "group"=>"b08x", "uid"=>1000, "gid"=>1000, "secondary_groups"=>"input,video,audio", "sudoers"=>true, "home"=>"/home/b08x", "workspace"=>"/home/b08x/Workspace", "shell"=>"/usr/bin/zsh", "email"=>"rwpannick@gmail.com", "gpg"=>"36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A", "dots"=>"git@github.com:b08x/dots.git"}], 
+  
+"autofs_client"=>{"host"=>"bender", "shares"=>["backup", "storage"]}, 
+
+"docker"=>{"storage"=>"/var/lib/docker", "service"=>{"enabled"=>true}, "nvidia"=>false, "users"=>["b08x"]}, 
+
+
+data = { 
+  "libvirt"=> { 
+    "service"=> {
+      "enabled"=>false
+      }, 
+    "users"=> ["b08x"]
+    }
+}
+
+table = Terminal::Table.new do |t|
+  t.title = "User Information"
+  t.headings = ["Key", "Value"]
+  data["libvirt"].each do |key, value|
+    t.add_row([key, value])
+  end
+end
+
+
 "example/group_vars/server.yml"
-nil
 No Variables in example/group_vars/server.yml
+
 "example/group_vars/workstation.yml"
-nil
 No Variables in example/group_vars/workstation.yml
+
+
 +---------------------------------------------------------------------------------------------------------------------------->>
 |            File            |      Key      |                                                                               >>
 +---------------------------------------------------------------------------------------------------------------------------->>
@@ -58,3 +194,35 @@ No Variables in example/group_vars/workstation.yml
 
 ```
 
+```ruby
+require 'terminal-table'
+
+data = {
+  "user" => {
+    "name" => "b08x",
+    "realname" => "Robert Pannick",
+    "group" => "b08x",
+    "uid" => 1000,
+    "gid" => 1000,
+    "secondary_groups" => "input,video,audio",
+    "sudoers" => true,
+    "home" => "/home/b08x",
+    "workspace" => "/home/b08x/Workspace",
+    "shell" => "/usr/bin/zsh",
+    "email" => "rwpannick@gmail.com",
+    "gpg" => "36A6ECD355DB42B296C0CEE2157CA2FC56ECC96A",
+    "dots" => "git@github.com:b08x/dots.git"
+  }
+}
+
+table = Terminal::Table.new do |t|
+  t.title = "User Information"
+  t.headings = ["Key", "Value"]
+  data["user"].each do |key, value|
+    t.add_row([key, value])
+  end
+end
+
+puts table
+
+```

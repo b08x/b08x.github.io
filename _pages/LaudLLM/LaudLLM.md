@@ -21,6 +21,21 @@ permalink: /laudllm
     6. Topic model each tokenized chunk and attach topics to the metadata
     7. Determine ontology label for each topic using language model and attach to root metadata
 
+
+
+- Define variables: path to documents, collection name, document preprocessing, Reddit host, Chroma DB host
+- Install Ansible using the bootstrap installer
+- Run playbook to install Docker and configure Redis container on localhost
+- Install necessary Python and Ruby libraries
+- Task 1: Glob for compatible text files (markdown, PDF) in the directory and store in a list
+- Task 2: Convert PDF or other files to text and store in Redis with UUID, file path, title, and text
+- Task 3: Chunk the document by retrieving the entry from the database and storing UUID, directory path, title, and indexed chunks
+- Task 4: Tokenize the text by retrieving the entry from the database and storing UUID, directory path, title, and tokenized text
+- Task 5: Topic model each tokenized chunk by retrieving the entry from the database and attaching topics to the tokenized chunk segments
+- Task 6: Assign ontology labels to the topics using a language model and attach to the root metadata
+- Separate Ansible modules for each task
+
+
 [[Training]]
 
 [[notebook]]
