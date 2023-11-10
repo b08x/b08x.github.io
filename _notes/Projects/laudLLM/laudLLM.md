@@ -1,16 +1,18 @@
 ---
 layout: project
 title: laudllm
-subtitle: linux audio users and developers large language model
-status: ongoing
-dates: 
-2023-11-05: In progress.
-links: 
+subtitle: linux audio users and developers ai assistant
 image: /assets/img/headers/image011.png
 permalink: /laudllm
+status: planning
 ---
 
-> Linux Audio with LLM As the sun set over the bustling city, Linux sat in his small, cluttered apartment, surrounded by piles of old computer parts and wires. He had always been fascinated by the potential of technology, and he spent most of his days tinkering with various projects, trying to create something truly innovative. But today, he was working on something special - a new audio system using LLM (LLM: Low-Level Music) technology. It was an experimental method of sound production that promised to revolutionize the music industry, and Linux was determined to be the first to harness its power. W
+# (the) Linux Audio Users & Developers Large Language Model
+
+A language model trained on data related specifically to the Linux audio domain. Documentation for APIs, Linux sound sub-services and subsystems including Jack2, Alsa, PulseAudio and eventually Pipewire. Along with API, usage documentation and code repositories for LV2, VST, CLAP plugins, corpses of audio and sound engineering, mixing and mastering and musical theory and will also. It also includes datasets of known issues, known issues that were resolved, so we can feed the model an issue with an already known resolved resolution, and we can test it that way to see if it can answer the troubleshooting questions correctly. And that's the ingest setting up portion.
+
+#TODO: [scrape this data](https://github.com/nodiscc/awesome-linuxaudio)
+
 
 - Tasks:
     1. Glob for compatible text files (markdown, pdf)
@@ -20,8 +22,6 @@ permalink: /laudllm
     5. Tokenize the text and store in Redis with UUID, directory path, title, and tokenized text
     6. Topic model each tokenized chunk and attach topics to the metadata
     7. Determine ontology label for each topic using language model and attach to root metadata
-
-
 
 - Define variables: path to documents, collection name, document preprocessing, Reddit host, Chroma DB host
 - Install Ansible using the bootstrap installer
@@ -48,3 +48,8 @@ https://github.com/crowding/ansible-role-audio/blob/master/notes.md
 
 
 [gptcache](https://gptcache.readthedocs.io/en/latest/)
+
+
+---
+
+> Linux Audio with LLM As the sun set over the bustling city, Linux sat in his small, cluttered apartment, surrounded by piles of old computer parts and wires. He had always been fascinated by the potential of technology, and he spent most of his days tinkering with various projects, trying to create something truly innovative. But today, he was working on something special - a new audio system using LLM (LLM: Low-Level Music) technology. It was an experimental method of sound production that promised to revolutionize the music industry, and Linux was determined to be the first to harness its power. W

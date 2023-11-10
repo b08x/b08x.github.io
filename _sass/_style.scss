@@ -102,9 +102,9 @@ img {
 
 #object-cover {
   max-width: 90%;
-  mix-blend-mode:luminosity;
-  margin-top: 4rem;
-  margin-bottom: 7rem;
+  mix-blend-mode:hard-light;
+  margin-top: 0rem;
+  margin-bottom: 3rem;
 }
 
 #page-cover {
@@ -124,7 +124,7 @@ blockquote {
   margin-bottom: 0;
   margin-left: 0rem;
   margin-right: 1rem;
-  background: burlywood;
+  background: rgb(99, 93, 91);
   border-radius: $border-radius;
   font-style: italic;
   line-height: 1.3;
@@ -151,6 +151,8 @@ hr {
 
 h1 {
   font-family: $font-family-special;
+  font-size: 1.8rem;
+  // text-align: center;
   line-height: 1.25;
   font-weight: 300;
   letter-spacing: 0.1rem;
@@ -168,7 +170,10 @@ h2 {
 
 }
 
-h3,
+h3 {
+  font-family: $font-family-logo
+}
+
 h4,
 h5,
 h6 {
@@ -183,6 +188,8 @@ p {
   font-family: $font-family;
   font-weight: 400;
   font-size: 1.40rem;
+  word-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
 }
 
 a {
@@ -191,7 +198,7 @@ a {
   text-decoration: none;
   // border-bottom: 1px solid $color-border;
   // color: #d91918;
-  color: #b97900;
+  color: #9b9595;
   font-weight: 500;
   &:hover {
     color: black !important;
@@ -202,7 +209,7 @@ a {
     top: -0.5em;
     font-size: 0.7em;
     content: "↗";
-    color: #0f0f0f;
+    color: #a50d0d;
     // color:#cd1111;
   }
   &.internal-link:after,
@@ -237,14 +244,20 @@ nav {
     "content"
     "side";
 
-  @media (min-width: 1558px) {
-    grid-template-columns: 2fr 1fr;
+  @media (min-width: 1023px) {
+    grid-template-columns: 4fr 1fr;
     grid-template-areas: "content side";
   }
+  
+
 }
 
 #side {
   font-size: 0.9em;
+  border-left: #000;
+  border-left-style:groove;
+  padding-left: 1rem;
+
   // text-align: end;
   
   @media (max-width: 1024px) {
@@ -254,8 +267,8 @@ nav {
 }
 
 .backlink-box {
-  background: #9b9817;
-  padding: 1em;
+  // background: #9b9817;
+  padding: 0.5rem;
   border-radius: $border-radius;
   // max-width: fit-content;
   // justify-self: end;
@@ -345,4 +358,95 @@ table {
             }
         }
     }
+}
+
+#object-comic {
+  max-width:95%;
+}
+
+/* THESE ARE RELEVANT STYLES */
+
+.figure {display: block;}
+
+img.figure{margin-bottom:13px;}
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.left, .right {
+  margin-top: 1px; /* this aligns the top of the
+  floated element with the text. Otherwise the floated element will appear to be a couple of pixel ~5px above the wrapped text. This is probably caused by the line height of the text. You can remove this whole block if you wish */
+}
+
+.left {
+  float: left;
+  margin-right: 45px;
+  margin-left: 0rem;
+  max-width: 43%; /* so wrapped text doesn't sit flush against image border -- whitespace is good. Set this value to whatever you want */
+}
+
+.right {
+   float: right;
+   margin-left: 34px; /* so wrapped text doesn't sit flush against image border -- whitespace is good. Set this value to whatever you want */
+   max-width: 40%;
+}
+
+.small {
+  width: 30%;
+  /*max-width: width of your small sized imgs */
+}
+
+.medium {
+  width: 60%;
+  /*max-width: width of your medium sized imgs */
+}
+
+.large {
+  width: 90%;
+  max-width: 640px; /* width of your large sized
+  imgs -- this value here is only for this demo.   The large image has a width of 640px so we will constrain the img-center container at this width for super large screens so the caption remains aligned with it.*/
+}
+
+.caption {
+  display: block; /* so you can use inline elements like span for captions. Block makes sure the caption always falls below the image */
+  font-size: 90%; /*play around with this value*/
+  color: #131313; /* and this too */
+  margin:1rem 0 16px; /* 13px is the bottom margin currently set on most of your block elements, p's , divs etc -- you can change this value if you wish */
+  text-align: center;
+  font-style: italic;
+  font-weight: 600;
+}
+
+
+/* General text alignment classes. You can actually use these on element you like */
+.txt-right   {text-align: right;}
+.txt-left    {text-align: left;}
+.txt-center  {text-align: center;}
+.txt-justify {text-align: justify;}
+
+/*figure with padding applied to captioned text. IE6 doesn't support the adjacent selector but that won't matter much*/
+.figure img + span {
+  display: block;
+  padding: 0 15px;
+}
+
+
+/* Adding borders */
+.figure .liner,
+.has-border {
+  // padding: 10px;
+  // background: #eee;
+  border: 1px solid #dedede;
+}
+
+.figure .liner {
+  margin: 1rem 0rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.figure .caption {
+  margin-bottom: 0;
 }

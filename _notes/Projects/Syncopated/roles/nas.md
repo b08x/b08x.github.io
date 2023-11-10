@@ -1,7 +1,14 @@
 ---
 layout: note
-title: Configuring a Network File Server
-category: Ansible
+description: a role for managing networked file servers
+tags:
+  - ansible
+  - role
+  - nas
+  - nfs
+  - samba
+  - rsync
+category: Role
 ---
 
 Add the parent folder and the exports to the host_vars

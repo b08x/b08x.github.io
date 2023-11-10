@@ -2,11 +2,18 @@
 layout: default
 ---
 
+
 {% if page.image %}
-<img
-  id="object-cover"
-  src="{{ site.baseurl }}{{ page.image }}"
-/>
+<div class="row">
+  <div class="col">
+    <img
+      id="object-cover"
+      src="{{ site.baseurl }}{{ page.image }}"
+    />
+    {% if page.caption %}
+    <h6>{{ page.caption }}</h6>
+    {% endif %}
+  </div>
 {% endif %}
 
 
@@ -47,7 +54,7 @@ layout: default
 
       <div style="font-size: 0.9em">
         <p>
-          There are no notes linking to this note.
+          []
         </p>
       </div>
       {% endif %}

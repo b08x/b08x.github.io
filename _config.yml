@@ -63,3 +63,8 @@ jekyll-spaceship:
       class: 'mermaid!'
     config:
       theme: dark
+
+picture:
+  source: "assets/img"
+  output: "assets/img/generated"
+  suppress_warnings: true

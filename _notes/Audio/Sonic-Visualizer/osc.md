@@ -15,6 +15,8 @@ To open an audio file with specific layers and/or views, create a text file with
 /set 'layer' 'Vertical Scale' 'MIDI Notes'
 ```
 
----
 
 [sv osc documentation](https://github.com/danstowell/Sonic-Visualiser/blob/master/README.OSC)
+
+[[custom shell commands]]
+

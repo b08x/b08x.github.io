@@ -21,12 +21,10 @@ class BidirectionalLinksGenerator < Jekyll::Generator
             File.extname(note_potentially_linked_to.basename)
           )
         ).gsub('\_', '[ _]').gsub('\-', '[ -]').capitalize
-
         title_from_data = note_potentially_linked_to.data['title']
         if title_from_data
           title_from_data = Regexp.escape(title_from_data)
         end
-
         new_href = "#{site.baseurl}#{note_potentially_linked_to.url}#{link_extension}"
         anchor_tag = "<a class='internal-link' href='#{new_href}'>\\1</a>"
 
@@ -59,6 +57,8 @@ class BidirectionalLinksGenerator < Jekyll::Generator
         )
       end
 
+      #TODO: account for links to images and/or other media
+      
       # At this point, all remaining double-bracket-wrapped words are
       # pointing to non-existing pages, so let's turn them into disabled
       # links by greying them out and changing the cursor

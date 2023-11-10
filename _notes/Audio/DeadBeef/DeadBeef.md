@@ -11,11 +11,22 @@ links:
 
 You can customize DeadBeef in a number of different ways. 
 
-* select files and create a beats yaml
+We will create menu items and gui buttons to:
+
+* select files and create a [beats drum machine](https://github.com/jstrait/beats)
+* select files to create sfz 
+	* selected files are copied to a tmpfs folder
+	* 
+* select up to three files and analyzse with sonic-vis, sonic-lineup or tony
+* select files to analyse and tag with sonic-annontator
+
+
+
+* analysyse clipping and rms with sox | ffmpeg info
+* 
 * *
 
-This video shows how the UI interface can be customized.
-
+[[custom shell commands]]
 
 
 
