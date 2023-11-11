@@ -3,4 +3,4 @@ title: Ruby
 layout: folder
 ---
 
-[[Docker Stacks]]
+[[Docker Stacks]]#25b1bb

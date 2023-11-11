@@ -9,20 +9,12 @@ category: DeadBeef
 
 [[DeadBeef]]
 
-{% picture image.jpg --link https://google.com %}
-
-{% picture image.jpg --picture class="some classes" --img id="object-cover" %}
-
-{% picture screenshot/commandparams.png %}
-
-## custom shell commands
 
 
-
-{% picture screenshot/Pasted\ image\ 20231109114328.png %}
-
-
-
+{ picture image.jpg --link https://google.com }
+{ picture image.jpg --picture class="some classes" --img id="object-cover" }
+{ picture screenshot/commandparams.png }
+{ picture screenshot/Pasted\ image\ 20231109114328.png }
 
 
 

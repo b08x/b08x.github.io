@@ -15,5 +15,4 @@ group :jekyll_plugins do
   gem 'jekyll-jupyter-notebook'
   gem 'jekyll-asciinema'
   gem 'jekyll-spaceship'
-  gem 'jekyll_picture_tag'
 end

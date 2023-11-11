@@ -1,6 +1,6 @@
 ---
 title: DeadBeef Audio Sampler
-layout: note
+layout: page
 links:
   - https://deadbeef.sourceforge.io/
 ---

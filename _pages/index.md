@@ -7,6 +7,7 @@ permalink: /
 
 # Welcome!
 
+
 <p style="padding: 1em 1em; border-radius: 4px;">
   Take a look at <span style="font-weight: bold">[[graph]]</span> to get started on your exploration.
 </p>
@@ -19,7 +20,7 @@ permalink: /
   {% for note in recent_notes limit: 25 %}
   {% if note.layout == 'page' %}
     <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
   {% endif %}
   {% endfor %}
@@ -28,11 +29,11 @@ permalink: /
 <strong>Recently updated projects</strong>
 
 <ul>
-  {% assign recent_pages = site.pages | sort: "last_modified_at_timestamp" | reverse %}
-  {% for page in recent_pages limit: 25 %}
-  {% if page.layout == 'project' %}
+  {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
+  {% for note in recent_notes limit: 25 %}
+  {% if note.layout == 'project' %}
     <li>
-      {{ page.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
   {% endif %}
   {% endfor %}
@@ -45,7 +46,7 @@ permalink: /
   {% for note in recent_notes limit: 25 %}
   {% if note.layout == 'note' %}
     <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.category }} - {{ note.title }}</a>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{% if note.category %}{{ note.category }} - {% endif %}{{ note.title }}</a>
     </li>
   {% endif %}
   {% endfor %}

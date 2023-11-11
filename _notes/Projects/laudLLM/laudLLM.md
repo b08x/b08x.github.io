@@ -9,6 +9,22 @@ status: planning
 
 # (the) Linux Audio Users & Developers Large Language Model
 
+```ruby
+puts "hey"
+```
+
+[[Syncopated]]
+> [!note] 
+> hey
+> 
+
+> [!abstract] 
+> something
+> 
+
+
+![Pasted image 20231109114328](assets/img/screenshot/Pasted%20image%2020231109114328.png)
+
 A language model trained on data related specifically to the Linux audio domain. Documentation for APIs, Linux sound sub-services and subsystems including Jack2, Alsa, PulseAudio and eventually Pipewire. Along with API, usage documentation and code repositories for LV2, VST, CLAP plugins, corpses of audio and sound engineering, mixing and mastering and musical theory and will also. It also includes datasets of known issues, known issues that were resolved, so we can feed the model an issue with an already known resolved resolution, and we can test it that way to see if it can answer the troubleshooting questions correctly. And that's the ingest setting up portion.
 
 #TODO: [scrape this data](https://github.com/nodiscc/awesome-linuxaudio)
