@@ -12,16 +12,20 @@ image: /assets/img/headers/mpv-shot0001.jpg
 gh-project: https://github.com/users/b08x/projects/9
 ---
 
+
 > If you're not sure what to work on, guess. But pick something and get going. You'll probably guess wrong some of the time, but that's fine. It's good to know about multiple things; some of the biggest discoveries come from noticing connections between different fields.
 > 
 > Paul Graham
+
+
+
 
 
 # Ansible and the OS
 
 A [[Use Case]] example
 
-Intended to serve as an IaC framework for small labs or studios, the "Syncopated" Ansible collection contains roles, playbooks, and modules to help configure and manage Linux hosts that are part of an audio production workflow. 
+
 
 ## Other Aspects Include
 
@@ -56,20 +60,7 @@ Communication between the Control Node and the Managed Nodes will be done via SS
 The directory structure on a Control Node is as follows:
 
 
-|   Path               |  |   Content                                              |
-|:---------------------|:---|:-------------------------------------------------------|
-|   bin/               |  |   Shell scripts                                        |
-|   docs/              |  |   Repository for storing site-specific documentation   |
-|   files/             |  |   Ansible data files for custom playbooks and roles    |
-|   group_vars/        |  |   Ansible  group_vars                                  |
-|   host_vars/         |  |   Ansible host_vars                                    |
-|   playbooks/         |  |   Custom Ansible Playbooks                             |
-|   plugins/           |  |   Plugins and Modules                                  |
-|   roles/             |  |   Custom Ansible Roles                                 |
-|   tests/             |  |   For testing Custom Ansible Roles and Playbooks       |
-|   templates/         |  |   Custom Ansible templates                             |
-|   vars/              |  |   Ansible variables for custom playbooks and roles     |
-|   logs/              |  |   Execution logs                                       |  
+
 
   
 
