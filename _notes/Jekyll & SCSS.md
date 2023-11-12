@@ -7,9 +7,7 @@ tags:
   - scss
 ---
 
-
 [jekyll picture tag documentation](https://rbuchberger.github.io/jekyll_picture_tag/users/liquid_tag/examples.html)
-
 
 
 [flexboxgrid documentation](http://sassflexboxgrid.com/views/documentation.html)

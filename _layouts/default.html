@@ -2,11 +2,11 @@
 <html lang="en">
   {% include head.html %}
   <body class="box">
-    <nav>{% include nav.html %}</nav>
-    <div class="wrapper">
-      <main>{{ content }}</main>
+    <nav class="row">{% include nav.html %}</nav>
+
+      <main class="row">{{ content }}</main>
       <footer>{% include footer.html %}</footer>
-    </div>
+
 
     {% include link-previews.html wrapperQuerySelector="content" %}
   </body>

@@ -18,7 +18,7 @@ highlight {
   overflow-y: auto;
   // margin: 1em -1em;
   margin: 1px 0;
-  max-width: 85%;
+  max-width: fit-content;
 
   @media (max-width: 1050px) {
     overflow-y: auto;
