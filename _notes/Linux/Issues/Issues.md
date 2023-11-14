@@ -1,7 +1,11 @@
 ---
 title: Issues
 layout: note
+links:
+  - "[[Linux]]"
 ---
+
+
 TODO: sync with gh issues
 
 <ul>

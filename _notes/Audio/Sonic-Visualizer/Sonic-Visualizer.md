@@ -1,7 +1,8 @@
 ---
 title: Sonic Visualiser
-layout: folder
+layout: page
 ---
+
 [[using osc]]
 
 [[vamp plugins]]

@@ -10,6 +10,9 @@ layout: note
 category: Linux
 ---
 
+[[2023-11-09]]
+
+
 
 ### 2023-11-05
 Creating a new virtual machine with virt-manager, when creating or selecting the disk image, virt-manager crashes:

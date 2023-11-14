@@ -1,50 +1,155 @@
+
+:root {
+  /* Full grid area variable */
+  --fullGrid: 1 / 1 / -1 / -1;
+  --blue-whale: #142e3c;
+  --cold-and-dark: #203e4a;
+  --nocturne: #2f4b55;
+  --great-void: #3e575e;
+  --still-water: #4d656a;
+  --north-atlantic: #60797e;
+
+  --bitter-liquorice: #282925;
+  --black-olive: #363731;
+  --armadillo: #4a4b47;
+  --iron: #616260;
+  --lucky-grey: #777876;
+  --mummys-tomb: #868c7e;
+  
+  --lava-rock: #545b64;
+  --winter-storm: #4c6c6e;
+  --antique: #838064;
+  --caramel-crumb: #c09351;
+  --polished-gold: #eca447;
+  --kombucha: #e1ab6e;
+  
+  --aztec: #273639;
+  --rosemary: #455e5a;
+  --arctic: #6a8989;
+  --shallow-sea: #95b8c5;
+  --aquatic-edge: #c1d2cd;
+  --master-key: #decf8f;
+  
+  --nirvana: #a99aa2;
+  --mighty-mauve: #8c7e85;
+  --chimera: #75676e;
+  --pinot-noir: #61545b;
+  --pitch-black: #483d43;
+  --ink-black: #2a2226;
+
+  --moutarde-de-benichon: #b88b0a;
+  --rich-gold: #a58211;
+  --jungle-king: #545132;
+  --blue-whale: #273542;
+  --sea-of-stars: #1d3041;
+  --midnight-ocean: #142940;
+}
+
+
+@font-face {
+  font-family:'mononoki';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url(../assets/fonts/mononoki-Regular.ttf) format('truetype')
+}
+  
+@font-face {
+  font-family:'mononoki';
+  font-style:italic;
+  font-weight:600;
+  font-display:swap;
+  src:url(../assets/fonts/mononoki-BoldItalic.ttf) format('truetype')
+}
+  
+@font-face {
+  font-family:'mononoki';
+  font-style:normal;
+  font-weight:700;
+  font-display:swap;
+  src:url(../assets/fonts/mononoki-Bold.ttf) format('truetype')
+}
+
+@font-face {
+  font-family:'mononoki';
+  font-style:italic;
+  font-weight:400;
+  font-display:swap;
+  src:url(../assets/fonts/mononoki-Italic.ttf) format('truetype')
+}
+
+
 $color-primary: hsl(0, 0%, 10%);
 $color-text: hsl(0, 0%, 20%);
 $color-subtext: #9b9817;
 $color-border: hsl(0, 0%, 85%);
 $color-box-background: mix($color-primary, white, 4%);
 $border-radius: 4px;
-$font-family: 'IBM Plex Mono', monospace;
+$font-family-ibm: 'IBM Plex Mono', monospace;
 $font-family-special: 'Special Elite', monospace;
 $font-family-source: 'Source Code Pro', monospace;
 $font-family-source-serif: 'Source Code Pro', serif;
 $font-family-monospace: 'Overpass Mono', monospace;
 $font-family-sans-serif: 'Overpass', sans-serif;
 $font-family-logo: 'Podkova', serif;
+$font-family-text: 'mononoki', monospace;
+
 
 body {
   box-sizing: content-box;
-  font-family: $font-family;
+  font-family: $font-family-text;
   margin: 0 auto;
   line-height: 1.7;
   padding: 4vh 6vw;
   overflow-x: hidden;
-  // background-color: #909592;
-  background-color: #294735;
-  // background-image: url("/assets/headers/mpv-shot0001.jpg");
+  background-color: var(--armadillo);
+
+  // background-image: url("/assets/img/headers/mpv-shot0001.jpg");
   // background-blend-mode: difference;
   // background-size: auto;
   color: #060505;
   font-size: 1rem;
-  max-width: 80%;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   align-items: center;
 
+  // @media (max-width: 800px) {
+  //   font-size: 1.25rem;
+  // }
 
-  @media (min-width: 820px) {
-    font-size: 1.25rem;
+  // @media (max-width: 1340px) {
+  //   font-size: 1.25rem;
+  //   max-width: 60%;
+  // }
+
+  @media (max-width: 820px) {
+    background-color: var(--cold-and-dark);
+  }
+
+}
+
+
+.wrapper {
+  // display: grid;
+  
+  @media (max-width: 820px) {
+    background-color: #672828;
+    // max-width: inherit;
   }
 }
+
+// main {
+//   max-width: 60%;
+// }
 
 time {
   display: block;
   color: #000;
   margin: 0em 0 1em;
   font: caption;
-  padding: 0.5rem;
+  // padding: 0.5rem;
   margin-top: 1rem;
-  font-family: $font-family-special;
+  font-family: $font-family-ibm;
 }
 
 footer {
@@ -65,25 +170,27 @@ img {
   border-radius: $border-radius;
 }
 
+#dark {
+  mix-blend-mode: multiply;
+}
+
 .headingobject {
   box-sizing: border-box;
-  // margin: 0 auto;
+  margin-top: 4rem;
   margin-bottom: 4rem;
   width: 100%;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   flex: 0 1 auto;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  border: #597b65;
-  border-style: dashed;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: flex-start;
+  // border: #597b65;
+  // border-style: dashed;
 }
-
-// .wrapper {
-// }
 
 .contentobject {
   display: flex;
@@ -94,22 +201,14 @@ img {
   align-content: space-between;
 }
 
-
-// .headingobject p {
-//   color: silver;
-//   font-size: 1em;
-// }
-
 #object-cover {
   max-width: 90%;
-  mix-blend-mode:luminosity;
-  margin-top: 4rem;
-  margin-bottom: 7rem;
+  mix-blend-mode:hard-light;
+  margin-top: 0rem;
+  margin-bottom: 3rem;
 }
 
 #page-cover {
-  // mix-blend-mode: luminosity;
-  // image-rendering: pixelated;
   margin-bottom: 1rem;
 }
 
@@ -118,28 +217,124 @@ img {
   align-items: center;
 }
 
-blockquote {
-  padding: 2rem;
-  margin-top: auto;
-  margin-bottom: 0;
-  margin-left: 0rem;
-  margin-right: 1rem;
-  background: burlywood;
-  border-radius: $border-radius;
-  font-style: italic;
-  line-height: 1.3;
-  letter-spacing: 0.15rem;
-  word-spacing: 0.5rem;
-  
-  p {
-    font-family: $font-family-special;
-    font-size: 1.4rem;
-    margin: 0;
-  }
-  a {
-    color:#9b9817;
+.c > div {
+  padding: 1em;
+}
+
+@media screen and (min-width: 31.42em) {
+  .c2, .c3 {
+    float: left;
+    width: 50%;
   }
 }
+
+blockquote{
+  display:block;
+  // background: #fff;
+  background-color:#142940;
+  padding: 15px 20px 15px 45px;
+  margin: 0 0 20px;
+  position: relative;
+  
+  /*Font*/
+  // font-family: $font-family-special;
+  // font-size: 16px;
+  line-height: 1.2;
+  color: #666;
+  text-align: justify;
+  
+  /*Borders - (Optional)*/
+  border-left: 15px solid #c76c0c;
+  // border-right: 2px solid #c76c0c;
+  
+  /*Box Shadow - (Optional)*/
+  // -moz-box-shadow: 2px 2px 15px #ccc;
+  // -webkit-box-shadow: 2px 2px 15px #ccc;
+  // box-shadow: 2px 2px 15px #ccc;
+}
+
+blockquote p {
+  font-family: $font-family-special;
+  font-size: 16px;
+  font-weight: 400;
+  word-spacing: 0.1rem;
+}
+
+blockquote::before{
+  content: "\201C"; /*Unicode for Left Double Quote*/
+  
+  /*Font*/
+  font-family: Georgia, serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #bb1515;
+  
+  
+  /*Positioning*/
+  position: absolute;
+  left: 10px;
+  top:5px;
+}
+
+blockquote::after{
+  /*Reset to make sure*/
+  content: "\201D  "; /*Unicode for Left Double Quote*/
+  
+  /*Font*/
+  font-family: Georgia, serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #bb1515;
+  
+  
+  /*Positioning*/
+  position: relative;
+  left: 9.7em;
+  top:-37px;
+}
+
+blockquote a{
+  text-decoration: none;
+  background: #b01010;
+  cursor: pointer;
+  padding: 0 3px;
+  color: #c76c0c;
+}
+
+blockquote a:hover{
+ color: #666;
+}
+
+blockquote em{
+  font-style: italic;
+}
+
+
+// blockquote {
+//   padding-left: 0.6rem;
+//   padding-right: 0.6rem;
+//   padding-top: 0.2rem;
+//   padding-bottom: 0.5rem;
+//   margin-top: auto;
+//   margin-bottom: 0.5rem;
+//   margin-left: 1rem;
+//   margin-right: 1rem;
+//   background: #5b5c63;
+//   border-radius: $border-radius;
+//   font-style: italic;
+//   line-height: 1.3;
+//   letter-spacing: 0.15rem;
+//   word-spacing: 0.5rem;
+  
+//   p {
+//     font-family: $font-family-ibm;
+//     font-size: 1.4rem;
+//     margin: 0;
+//   }
+//   a {
+//     color:#9b9817;
+//   }
+// }
 
 hr {
   width: 100%;
@@ -150,11 +345,11 @@ hr {
 }
 
 h1 {
-  font-family: $font-family-special;
+  font-family: $font-family-ibm;
+  font-size: 1.8rem;
   line-height: 1.25;
   font-weight: 300;
   letter-spacing: 0.1rem;
-  // text-decoration: overline;
   justify-self: center;
   @media (max-width: 1050px) {
     letter-spacing: 0rem;
@@ -168,7 +363,10 @@ h2 {
 
 }
 
-h3,
+h3 {
+  font-family: $font-family-logo
+}
+
 h4,
 h5,
 h6 {
@@ -180,18 +378,17 @@ h6 {
 }
 
 p {
-  font-family: $font-family;
+  font-family: $font-family-text;
   font-weight: 400;
   font-size: 1.40rem;
+  word-spacing: 0.1rem;
 }
 
 a {
   transition: background 300ms;
   padding: 0 0.1em;
   text-decoration: none;
-  // border-bottom: 1px solid $color-border;
-  // color: #d91918;
-  color: #b97900;
+  color: #9b9595;
   font-weight: 500;
   &:hover {
     color: black !important;
@@ -202,8 +399,7 @@ a {
     top: -0.5em;
     font-size: 0.7em;
     content: "↗";
-    color: #0f0f0f;
-    // color:#cd1111;
+    color: #a50d0d;
   }
   &.internal-link:after,
   &.footnote:after,
@@ -225,41 +421,40 @@ nav {
   margin: 1em 0 3em;
 
   a {
-    color:#080808;
+    color:var(--bitter-liquorice);
   }
 
 }
 
 #notes-entry-container {
   display: grid;
+ // justify-items: center;
+//  align-items: baseline;
   grid-gap: 2em;
   grid-template-areas:
     "content"
     "side";
 
-  @media (min-width: 1558px) {
-    grid-template-columns: 1.5fr 1fr;
+  @media (min-width: 1440px) {
+    grid-template-columns: 3fr 0.5fr;
     grid-template-areas: "content side";
   }
+  
 }
 
 #side {
   font-size: 0.9em;
-  // text-align: end;
-  
-  @media (max-width: 1024px) {
-    visibility: hidden;
-  }
+  border-left: #000;
+  border-left-style:groove;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
 
 }
 
 .backlink-box {
-  background: #9b9817;
-  padding: 1em;
+  padding: 0.5rem;
   border-radius: $border-radius;
-  // max-width: fit-content;
-  // justify-self: end;
-  
+
   a {
     color:#000;
   }
@@ -268,12 +463,13 @@ nav {
 
 .box {
  display: grid;
- justify-content: center; 
+//  justify-content: space-evenly;
+//  justify-items: center;
 }
 
 .headingbox {
   display: grid;
-  justify-content: space-around;
+  justify-content: start;
 }
 
 code {
@@ -344,4 +540,98 @@ table {
             }
         }
     }
+}
+
+#object-comic {
+  max-width:95%;
+}
+
+/* THESE ARE RELEVANT STYLES */
+.plantuml {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.figure {display: block;}
+
+img.figure{margin-bottom:13px;}
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.left, .right {
+  margin-top: 1px; /* this aligns the top of the
+  floated element with the text. Otherwise the floated element will appear to be a couple of pixel ~5px above the wrapped text. This is probably caused by the line height of the text. You can remove this whole block if you wish */
+}
+
+.left {
+  float: left;
+  margin-right: 45px;
+  margin-left: 0rem;
+  max-width: 43%; /* so wrapped text doesn't sit flush against image border -- whitespace is good. Set this value to whatever you want */
+}
+
+.right {
+   float: right;
+   margin-left: 34px; /* so wrapped text doesn't sit flush against image border -- whitespace is good. Set this value to whatever you want */
+   max-width: 40%;
+}
+
+.small {
+  width: 30%;
+  /*max-width: width of your small sized imgs */
+}
+
+.medium {
+  width: 60%;
+  /*max-width: width of your medium sized imgs */
+}
+
+.large {
+  width: 90%;
+  max-width: 640px; /* width of your large sized
+  imgs -- this value here is only for this demo.   The large image has a width of 640px so we will constrain the img-center container at this width for super large screens so the caption remains aligned with it.*/
+}
+
+.caption {
+  display: block; /* so you can use inline elements like span for captions. Block makes sure the caption always falls below the image */
+  font-size: 90%; /*play around with this value*/
+  color: #131313; /* and this too */
+  margin:1rem 0 16px; /* 13px is the bottom margin currently set on most of your block elements, p's , divs etc -- you can change this value if you wish */
+  text-align: center;
+  font-style: italic;
+  font-weight: 600;
+}
+
+
+/* General text alignment classes. You can actually use these on element you like */
+.txt-right   {text-align: right;}
+.txt-left    {text-align: left;}
+.txt-center  {text-align: center;}
+.txt-justify {text-align: justify;}
+
+/*figure with padding applied to captioned text. IE6 doesn't support the adjacent selector but that won't matter much*/
+.figure img + span {
+  display: block;
+  padding: 0 15px;
+}
+
+
+/* Adding borders */
+.figure .liner,
+.has-border {
+  // padding: 10px;
+  // background: #eee;
+  border: 1px solid #1b1b1b;
+}
+
+.figure .liner {
+  margin: 0.5rem 0rem;
+  // padding-top: 2rem;
+  // padding-bottom: 1rem;
+}
+
+.figure .caption {
+  margin-bottom: 0;
 }

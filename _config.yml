@@ -1,22 +1,24 @@
 title: Syncopated Notes
 include:
-  - '_pages'
-  - '_notes'
-  - '_projects'
+  - "_pages"
 exclude:
-  - '_includes/notes_graph.json'
-  - '.obsidian'
-  - '*.cast'
-  - '*.ipynb'
+  - "_drafts/"
+  - "_includes/notes_graph.json"
+  - ".obsidian"
+  - "*.cast"
+  - "*.ipynb"
+  - "*.pdf"
+  - "README.md"
+  - "LICENSE"
 # You may need to change the base URL depending on your deploy configuration.
-baseurl: ''
+baseurl: ""
 
 github:
   uid: b08x
 
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
-use_html_extension:  false
+use_html_extension: false
 
 # Set to `true` to open non-internal links in new tabs, or
 # set to `false` to open non-internal links in current tab.
@@ -27,23 +29,24 @@ open_external_links_in_new_tab: true
 # as their browser will communicate with Twitter's servers.
 embed_tweets: false
 
-permalink:           pretty
+permalink: pretty
 relative_permalinks: false
 
 plugins:
   - jekyll-last-modified-at
   - jekyll-jupyter-notebook
   - jekyll_asciinema
-  - jekyll-spaceship  
+  - jekyll-spaceship
+  - jekyll_picture_tag
 
 sass:
-  sass_dir:          _sass
-  style:            :compressed
+  sass_dir: _sass
+  style: compressed
 
 collections:
   notes:
     output: true
-    permalink: /:slug
+    permalink: /:title
 
 defaults:
   - scope:
@@ -58,6 +61,13 @@ defaults:
 jekyll-spaceship:
   mermaid-processor:
     css:
-      class: 'mermaid!'
+      class: "mermaid!"
     config:
       theme: dark
+
+picture:
+  source: "assets/img"
+  output: "assets/img/generated"
+  suppress_warnings: true
+  nomarkdown: false
+

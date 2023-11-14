@@ -2,20 +2,27 @@
 layout: project
 title: Syncopated
 subtitle: Ansible Collection For Audio Production on Linux
-status: ongoing
+status: under construction
 permalink: /syncopated
 tags:
+  - linux
+  - audio
   - ansible
-  - linux-audio
 image: /assets/img/headers/mpv-shot0001.jpg
 gh-project: https://github.com/users/b08x/projects/9
 ---
+
+
+
+
+
+
 
 # Ansible and the OS
 
 A [[Use Case]] example
 
-Intended to serve as an IaC framework for small labs or studios, the "Syncopated" Ansible collection contains roles, playbooks, and modules to help configure and manage Linux hosts that are part of an audio production workflow. 
+
 
 ## Other Aspects Include
 
@@ -50,20 +57,7 @@ Communication between the Control Node and the Managed Nodes will be done via SS
 The directory structure on a Control Node is as follows:
 
 
-|   Path               |  |   Content                                              |
-|:---------------------|:---|:-------------------------------------------------------|
-|   bin/               |  |   Shell scripts                                        |
-|   docs/              |  |   Repository for storing site-specific documentation   |
-|   files/             |  |   Ansible data files for custom playbooks and roles    |
-|   group_vars/        |  |   Ansible  group_vars                                  |
-|   host_vars/         |  |   Ansible host_vars                                    |
-|   playbooks/         |  |   Custom Ansible Playbooks                             |
-|   plugins/           |  |   Plugins and Modules                                  |
-|   roles/             |  |   Custom Ansible Roles                                 |
-|   tests/             |  |   For testing Custom Ansible Roles and Playbooks       |
-|   templates/         |  |   Custom Ansible templates                             |
-|   vars/              |  |   Ansible variables for custom playbooks and roles     |
-|   logs/              |  |   Execution logs                                       |  
+
 
   
 
@@ -144,6 +138,7 @@ audacity          reaper     │    bitwig        vst3        ambisonics        
  
 ```
 
+[[Configuring a Network File Server]]
 
 
 ```json
