@@ -3,17 +3,28 @@ layout: folder
 title: LLM
 ---
 
-
-[[flowise]]
-
-![](autonma01.png)
-
+<div class="figure left">
+    <div class="liner">
+     {% picture default screenshot/autonma01.png --img id="dark" --link https://github.com %}
+     <p class="caption">Steve manually compiles a dataset from one of the models </p>
+     </div>
+</div>
 
 ## testing
+
+[[flowise]]
 
 [[Testing with Agenta]]
 
 [chatbot arena](https://chat.lmsys.org/)
+
+## 2023-11-13
+
+**"lookback"**
+
+*For the document above, do X* - lookback
+
+Instead use: For the document *below*, do X
 
 
 ## 2023-11-11
@@ -21,6 +32,7 @@ title: LLM
 **“Behave like” vs. “Act like”**
 
 > You have all encountered the guidance to use “Act like an expert of some kind or other” in your prompts. In my testing “Act Like” tends to guide chat models toward persona-driven responses. “Behave like” offers more flexibility especially when the aim is for the model to operate more like a program or a system. And, it can be used in the persona-centric contexts as well.
+
 
 [[Testing with Agenta]]
 

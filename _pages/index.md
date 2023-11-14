@@ -8,7 +8,7 @@ permalink: /
 # Welcome!
 
 
-<p style="padding: 1em 1em; border-radius: 4px;">
+<p style="border-radius: 4px;">
   Take a look at <span style="font-weight: bold">[[graph]]</span> to get started on your exploration.
 </p>
 

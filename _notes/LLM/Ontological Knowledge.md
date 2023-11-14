@@ -26,9 +26,6 @@ The integration of knowledge graphs into GPT applications involves two key steps
 2. **Knowledge Graph Embedding:** Once the knowledge graph is constructed, it is embedded into the GPT model. This involves creating vector representations of the entities and relationships within the knowledge graph, allowing the model to incorporate this information into its reasoning process. Various embedding techniques can be employed, such as TransE, RotatE, or SIMPL.
 
 
-
-
-
 The goal here is to combine ontologies from three major domains, which is then to generate a 'knowledge graph' that will be used as part of a large language model training dataset. This dataset will fine-tune a model that will be used in an assistant application designed for those who work within these specific domains. 
 
 

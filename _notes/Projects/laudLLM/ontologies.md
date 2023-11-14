@@ -2,6 +2,26 @@
 ---
 
 
+[Automatic_Ontology_Generation_for_Musical_Instruments_Based_on_Audio_Analysis](https://www.researchgate.net/profile/Sefki-Kolozali/publication/260692544_Automatic_Ontology_Generation_for_Musical_Instruments_Based_on_Audio_Analysis/links/58cef917aca272335517e71b/Automatic-Ontology-Generation-for-Musical-Instruments-Based-on-Audio-Analysis.pdf)
+
+[Sound Ontologies Methods and Approaches for the Description of Sound](https://core.ac.uk/download/pdf/326909268.pdf)
+
+[The Internet of Musical Things Ontology](http://eecs.qmul.ac.uk/~gyorgyf/files/papers/turchet2020jws-preprint.pdf)
+
+[Audio Commons ontology: a data model for an audio content ecosystem](https://qmro.qmul.ac.uk/xmlui/bitstream/handle/123456789/43143/Ceriani%20Audio%20Commons%20ontology%202018%20Accepted.pdf?sequence=1&isAllowed=y)
+
+[The Music Note Ontology](https://arxiv.org/pdf/2304.00986.pdf)
+
+[AN ONTOLOGY FOR AUDIO FEATURES](https://wp.nyu.edu/ismir2016/wp-content/uploads/sites/2294/2016/07/077_Paper.pdf)
+
+[THE AUDIO EFFECTS ONTOLOGY](https://archives.ismir.net/ismir2013/paper/000041.pdf)
+
+[AN ONTOLOGY FOR AUDIO FEATURES](https://wp.nyu.edu/ismir2016/wp-content/uploads/sites/2294/2016/07/077_Paper.pdf)
+
+[The Music Ontology Class Schemas](https://github.com/motools/musicontology/wiki/Class-Schemas)
+
+
+
 ## linux audio and the studio ontology
 
 ~~The Linux Audio project is an open-source software framework for audio processing, which provides a variety of tools and libraries for audio signal processing, synthesis, and analysis. The Studio Ontology, on the other hand, is a conceptual framework for organizing and understanding the various components and processes involved in music production. Here are some correlations between the terminology and concepts from Linux Audio and the Studio Ontology:~~
