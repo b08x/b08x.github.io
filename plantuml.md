@@ -23,7 +23,71 @@ https://plantuml.com/sequence-diagram
 | ^^ B. Orange       |             | ^^ 2. Bad   |
 | ^^ C. Banana       |             |  It's OK!   |  
 
+## mermaid
+
+
 ## PlantUML Usage
+
+@startuml
+start
+:version: '';
+if (Has Extra Variable?) then (True)
+  :version: 'latest';
+  stop
+else (False)
+  if (Has Group Variable?) then (True)
+	:version: 'development';
+	stop
+  else (False)
+	:Has Playbook Variable?;
+  endif
+endif
+if (Has Role Variable?);
+	:something;
+
+@enduml
+
+@startuml
+start
+:Extra Vars (Command Line);
+:Task Vars (Specific Task);
+:Block Vars (Within Block);
+:Role and Include Vars;
+:Set_fact Vars;
+:Register Vars;
+:Playbook VarsFiles;
+:Playbook VarsPrompt;
+:Playbook Vars;
+:Host Facts;
+:HostVars;
+:GroupVars;
+:Inventory Host Vars;
+:Inventory Group Vars;
+:Inventory Vars;
+:Role Defaults;
+stop
+@enduml
+
+
+## ansible
+
+@startuml
+!define HOSTVARS_PATH host_vars/server1.yml
+
+object Playbook {
+  vars: my_variable = playbook_value
+}
+object HostVars {
+  vars: my_variable = host_value
+}
+object Host1 {
+  include HOSTVARS_PATH
+}
+Playbook -- Host1 : hosts: server1
+@enduml
+
+
+## soundbot
 
 @startuml
 lapbot -> soundbot :  1. start jacktrip

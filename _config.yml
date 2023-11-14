@@ -2,6 +2,7 @@ title: Syncopated Notes
 include:
   - "_pages"
 exclude:
+  - "_drafts/"
   - "_includes/notes_graph.json"
   - ".obsidian"
   - "*.cast"

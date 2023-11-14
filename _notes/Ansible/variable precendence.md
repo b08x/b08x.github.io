@@ -1,46 +1,193 @@
 ---
+layout: note
+title: variable precedence & scope
+subtitle: 
+category: Ansible
+tags: 
+links:
 ---
 
+Variable precedence in Ansible is influenced by the scope and context in which the variables are defined. When a variable is defined at multiple levels, Ansible uses a merging strategy based on the variable's scope. 
 
-# Variables defined within a role take precedence over host variables that share the same variable name.
+## Group Vars and Host Vars
+For testing purposes, it might be useful to know that variables *used* by a role, that are set in either group_vars/ or host_vars/ can be overwritten by:
 
+* playbook vars
+* playbook vars_files
+* playbook pre_tasks and tasks using register
+* playbook pre_tasks and tasks using set_fact
+* role variables defined in vars/main.yml or included from vars/x.yml
+* tasks using block vars, but only for that block
+* roles task using set_fact or register, but only for that task
 
-The variable precedence in Ansible is influenced by the scope and context in which the variables are defined. When a variable is defined at multiple levels, Ansible uses a merging strategy based on the variable's scope. In the case of role and host variables:
+## Role Variables and Role Defaults
 
-1. **Role Variables:** Variables defined within a role have a specific scope limited to that role.
-    
-2. **Host Variables:** Variables defined for a specific host have <font color="#953734">a broader scope</font> <font color="#5f497a">limited to</font> that particular host.
-    
+* <font color="#548dd4">role defaults</font> 
+	* are set in role/defaults/main.yml
 
-If a variable is defined both in a role and for a specific host, the role variable indeed takes precedence over the host variable. 
+* <font color="#938953">role variables</font> 
+	* are set in role/vars/main.yml
+	* take precedence over role defaults
+
+A primary distinction here is that variables declared in `vars/main.yml` require user adjustment while the variables in `defaults/main.yml` do not. The needs of the environment as well as other specific context will determine the optimal placement of variables that define the behavior of a role. 
+
+If a variable is defined both in role variables and for a specific host within host_vars, the role variable will take precedence over the host variable. Whereas the variable defined within host_vars will take precedence over the role defaults.
 
 <span style="background:rgba(163, 67, 31, 0.2)">This is because the role variable is more specific to the role in context.</span>
 
+This may or may not be desired behavior. If the requirement is to allow variables declared for a specific host or a group of hosts to overwrite default variables for a role, then declare the variable for the role in defaults/main.yml 
 
 
+#### how would setting 'private role vars: true' change things?
+
+<div class="figure right">
+@startuml
+start
+:Extra Vars (Command Line);
+:Task Vars (Specific Task);
+:Block Vars (Within Block);
+:Role and Include Vars;
+:Set_fact Vars;
+:Register Vars;
+:Playbook VarsFiles;
+:Playbook VarsPrompt;
+:Playbook Vars;
+:Host Facts;
+:HostVars;
+:GroupVars;
+:Inventory Host Vars;
+:Inventory Group Vars;
+:Inventory Vars;
+:Role Defaults;
+stop
+@enduml
+</div>
 
 
-```bash
-DEFAULT_PRIVATE_ROLE_VARS:
-  default: false
-  description:
-  - Makes role variables inaccessible from other roles.
-  - This was introduced as a way to reset role variables to default values if a role
-    is used more than once in a playbook.
-  env:
-  - name: ANSIBLE_PRIVATE_ROLE_VARS
-  ini:
-  - key: private_role_vars
-    section: defaults
-  name: Private role variables
-  type: boolean
-  yaml:
-    key: defaults.private_role_vars
+---
 
+## Precedence order
+
+[source: Mastering Ansible - Second Edition](https://subscription.packtpub.com/book/cloud-and-networking/9781787125681/1/ch01lvl1sec13/variable-precedence)
+
+1. Extra `vars` (from command-line) always win.
+2. Task `vars` (only for the specific task).
+3. Block `vars` (only for the tasks within the block).
+4. Role and include `vars`.
+5. Vars created with `set_fact`.
+6. Vars created with the `register` task directive.
+7. Play `vars_files`.
+8. Play `vars_prompt`.
+9. Play `vars`.
+10. Host facts.
+11. Playbook `host_vars`.
+12. Playbook `group_vars`.
+13. Inventory `host_vars`.
+14. Inventory `group_vars`.
+15. Inventory `vars`.
+16. Role defaults.
+
+### Merging hashes
+
+In the previous section, we focused on the precedence in which variables will override each other. The default behavior of Ansible is that any overriding definition for a variable name will completely mask the previous definition of that variable. However, that behavior can be altered for one type of variable, the hash. A hash variable (a _dictionary_ in Python terms) is a dataset of keys and values. Values can be of different types for each key, and can even be hashes themselves for complex data structures.
+
+In some advanced scenarios, it is desirable to replace just one bit of a hash or add to an existing hash rather than replacing the hash altogether. To unlock this ability, a configuration change is necessary in an Ansible `config` file. The config entry is `hash_behavior`, which takes one of **replace**, or **merge**. A setting of merge will instruct Ansible to merge or blend the values of two hashes when presented with an override scenario rather than the default of replace, which will completely replace the old variable data with the new data.
+
+Let's walk through an example of the two behaviors. We will start with a hash loaded with data and simulate a scenario where a different value for the hash is provided as a higher priority variable.
+
+Starting data:
+
+```yaml
+hash_var: 
+  fred: 
+    home: Seattle 
+    transport: Bicycle 
+
+New data loaded via `include_vars`:
+
+hash_var: 
+  fred: 
+    transport: Bus 
+
+With the default behavior, the new value for `hash_var` will be as follows:
+
+hash_var: 
+  fred: 
+    transport: Bus 
+
+However, if we enable the merge behavior, we will get the following result:
+
+hash_var: 
+  fred: 
+    home: Seattle 
+    transport: Bus 
 ```
 
-**Playbook Context:**
 
-- Understanding the variable precedence often requires considering the context of the playbook and the specific tasks being executed.
+There are even more nuances and undefined behaviors when using merge, and as such, it is strongly recommended to only use this setting if absolutely needed.
 
-- Different tasks in a playbook might have different sources of variable values, leading to varying precedence.
+---
+
+
+[ansible documentation: controlling-how-ansible-behaves-precedence-rules](https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.html#controlling-how-ansible-behaves-precedence-rules)
+
+---
+
+A flowchart depicting the general variable precedence of a playbook run:
+
+```mermaid!
+graph TD;
+classDef grey fill:#595e7b,stroke:#000,stroke-width:2px;
+
+A(Start)-->B{Extra vars?};
+B-- Yes --> C[Apply extra vars];
+C-->S(End);
+B-- No --> D{Task vars?};
+D-- Yes --> E[Apply task vars];
+E-->S;
+D-- No --> F{Block vars?};
+F-- Yes --> G[Apply block vars];
+G-->S;
+F-- No --> H{Role and include vars?};
+H-- Yes --> I[Apply role and include vars];
+I-->S;
+H-- No --> J{Set_fact vars?};
+J-- Yes --> K[Apply set_fact vars];
+K-->S;
+J-- No --> L{Register vars?};
+L-- Yes --> M[Apply register vars];
+M-->S;
+L-- No --> N{Playbook vars_files?};
+N-- Yes --> O[Apply playbook vars_files];
+O-->S;
+N-- No --> P{Playbook vars_prompt?};
+P-- Yes --> Q[Apply playbook vars_prompt];
+Q-->S;
+P-- No --> R{Playbook vars?};
+R-- Yes --> T[Apply playbook vars];
+T-->S;
+R-- No --> U{Host facts?};
+U-- Yes --> V[Apply host facts];
+V-->S;
+U-- No --> W{Playbook host_vars?};
+W-- Yes --> X[Apply host_vars];
+X-->S;
+W--No --> Y{group_vars?};
+Y-- Yes --> Z[Apply group_vars];
+Z-->S;
+Y-- No --> AA{Inventory host_vars?};
+AA-- Yes --> AB[Apply inventory host_vars];
+AB-->S;
+AA-- No --> AC{Inventory group_vars?};
+AC-- Yes --> AD[Apply inventory group_vars];
+AD-->S;
+AC-- No --> AE{Inventory vars?};
+AE-- Yes --> AF[Apply inventory vars];
+AF-->S;
+AE-- No --> AG{Role defaults?};
+AG-- Yes --> AH[Apply role defaults];
+AH-->S;
+AG-- No --> AI(Error - no var defined);
+
+class A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF,AG,AH,AI grey;
+```
