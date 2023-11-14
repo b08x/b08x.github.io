@@ -41,12 +41,12 @@ plugins:
 
 sass:
   sass_dir: _sass
-  style: :compressed
+  style: compressed
 
 collections:
   notes:
     output: true
-    permalink: /:slug
+    permalink: /:title
 
 defaults:
   - scope:
