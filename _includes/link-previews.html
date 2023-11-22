@@ -13,13 +13,13 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     overflow: hidden;
-    position: static;
+    position: absolute;
     width: 400px;
     height: 250px;
     font-size: 0.8em;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     opacity: 0;
-    transition: opacity 1000ms;
+    transition: opacity 3000ms;
   }
 
   #tooltip-wrapper:after {
@@ -46,7 +46,7 @@
 <script>
   var opacityTimeout;
   var contentTimeout;
-  var transitionDurationMs = 100;
+  var transitionDurationMs = 1000;
 
   var iframe = document.getElementById('link-preview-iframe')
   var tooltipWrapper = document.getElementById('tooltip-wrapper')

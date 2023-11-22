@@ -10,10 +10,11 @@ links:
 ---
 
 
-
-![](/assets/img/screenshot/Pasted%20image%2020231112111232.png)
-
-
+<div class="figure right">
+	<div class="liner">
+		{% picture thumbnail screenshot/ontology_embedding_flow.png %}
+	</div>
+</div>
 
 
 ```ruby
