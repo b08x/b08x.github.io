@@ -3,6 +3,18 @@ layout: folder
 title: LLM
 ---
 
+## 2023-11-22
+
+* "Use of a scratch pad for "out loud thinking" increased deceptive reasoning" [source](https://huggingface.co/papers/2311.07590?utm_source=digest-papers&utm_medium=email&utm_campaign=2023-11-15)
+	* "deceptive" in this case is subjective in the context of stock trading
+		* in the context of Sound/Audio troubleshooting/composing....
+		
+implement when [[Retrieval]] stage is upon us
+
+
+
+---
+
 <div class="figure left">
     <div class="liner">
      {% picture default screenshot/autonma01.png --img id="dark" --link https://github.com %}
