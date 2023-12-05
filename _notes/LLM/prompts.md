@@ -4,17 +4,9 @@ layout: note
 category: LLM
 ---
 
-```bash
-Erudite yet colloquial tone avoiding Grandiloquence
-```
-
-```
-explain ﻿"ansible collections"﻿
-
-  
-
-Use an ﻿"Erudite yet colloquial"﻿ tone avoiding Grandiloquence
-
-
-```
+<div class="quote">
+  <blockquote>
+    <p>Use an erudite yet colloquial tone avoiding grandiloquence</p>
+  </blockquote>
+</div>
 

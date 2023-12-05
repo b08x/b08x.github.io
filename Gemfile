@@ -10,7 +10,7 @@ gem "webrick", "~> 1.8"
 gem "nokogiri"
 gem "ruby-vips"
 gem "ruby-lsp"
-
+gem "rubocop"
 group :jekyll_plugins do
   gem 'jekyll-jupyter-notebook'
   gem 'jekyll-asciinema'
