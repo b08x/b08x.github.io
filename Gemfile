@@ -11,6 +11,8 @@ gem "nokogiri"
 gem "ruby-vips"
 gem "ruby-lsp"
 gem "rubocop"
+gem "vips"
+
 group :jekyll_plugins do
   gem 'jekyll-jupyter-notebook'
   gem 'jekyll-asciinema'
