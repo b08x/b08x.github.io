@@ -138,6 +138,11 @@ body {
   }
 }
 
+content {
+  max-width: -webkit-fill-available;
+  word-wrap: balance;
+}
+
 main {
   justify-content: center;
 }
@@ -265,6 +270,10 @@ img {
   }
 }
 
+ol,
+ul {
+  font-size: 1.25rem;
+}
 
 // blockquote{
 //   display:block;
@@ -420,6 +429,17 @@ p {
   font-weight: 400;
   font-size: 1.40rem;
   word-spacing: 0.1rem;
+
+  code {
+    color: hsl(164, 98%, 26%);
+    background-color: transparent;
+    &:before {
+      content: "`";
+    }
+    &:after {
+      content: "`";
+    }
+  }
 }
 
 a {
@@ -461,7 +481,7 @@ nav {
   justify-content: center;
 
   a {
-    color:var(--bitter-liquorice);
+    color:var(--caramel-crumb);
   }
 
 }
@@ -513,11 +533,13 @@ nav {
 }
 
 code {
-  background: #5f4b4b;
+  background: transparent;
   padding: 0.1em 0.2em;
   border-radius: 4px;
-  color: goldenrod;
-  font-size: 0.8rem;
+  color: gold;
+  font-size: 1.125rem;
+  text-wrap: balance;
+  word-break: auto-phrase;
 }
 
 .invalid-link {

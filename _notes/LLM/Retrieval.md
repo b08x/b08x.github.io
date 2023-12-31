@@ -7,6 +7,16 @@ tags:
 links:
 ---
 
+1. The input text or query is analyzed to identify keywords and topics that match an ontology or knowledge graph. 
+2. The text is tokenized into an array of individual words and phrases. 
+3. These tokens are converted into vectorized numerical representations called embeddings. 
+4. The embeddings are stored in a vector cache database (Redis)
+5. The query embeddings are compared to existing embeddings stored in a database (PostgreSQL) to find similar or related vectors based on mathematical similarity. 
+6. ~~Related keywords and topics are looked up in the knowledge graph tables to provide additional contextual information.~~ 
+ 
+* The ontology provides a formal representation of concepts and relationships that aids in understanding the meaning and context of the input text. 
+* The knowledge graph and ontology help associate the query with relevant data to improve the quality of the analysis.
+
 
 sources:
 https://eugeneyan.com/writing/llm-patterns/
