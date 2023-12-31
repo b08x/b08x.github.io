@@ -18,5 +18,5 @@ To open an audio file with specific layers and/or views, create a text file with
 
 [sv osc documentation](https://github.com/danstowell/Sonic-Visualiser/blob/master/README.OSC)
 
-[[custom shell commands]]
+[[Custom Shell Commands]]
 

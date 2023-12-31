@@ -99,7 +99,7 @@ body {
   box-sizing: content-box;
   font-family: $font-family-text;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: 1.4;
   padding: 4vh 6vw;
   overflow-x: hidden;
   background-color: var(--armadillo);
@@ -427,6 +427,7 @@ a {
   padding: 0 0.1em;
   text-decoration: none;
   color: #9b9595;
+  // color: #c1185c;
   font-weight: 500;
   &:hover {
     color: black !important;
@@ -512,9 +513,11 @@ nav {
 }
 
 code {
-  // background: #7f7f7f;
+  background: #5f4b4b;
   padding: 0.1em 0.2em;
   border-radius: 4px;
+  color: goldenrod;
+  font-size: 0.8rem;
 }
 
 .invalid-link {

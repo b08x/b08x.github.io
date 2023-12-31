@@ -26,7 +26,7 @@ We will create menu items and gui buttons to:
 * 
 * *
 
-[[custom shell commands]]
+[[Custom Shell Commands]]
 
 
 

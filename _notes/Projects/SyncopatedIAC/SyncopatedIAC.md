@@ -1,9 +1,9 @@
 ---
 layout: project
-title: Syncopated
+title: SyncopatedIaC
 subtitle: Ansible Collection For Audio Production on Linux
 status: under construction
-permalink: /syncopated
+permalink: /syncopatediac
 tags:
   - linux
   - audio

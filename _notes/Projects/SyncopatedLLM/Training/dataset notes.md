@@ -52,3 +52,5 @@ Input:
 Output:
 
 ```
+
+schizophrenia

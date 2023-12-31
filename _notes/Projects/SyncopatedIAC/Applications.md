@@ -8,7 +8,7 @@ tags:
   - audio
 image: 
 links:
-  - "[[Syncopated]]"
+  - "[[SyncopatedIAC]]"
 ---
 
 
@@ -16,7 +16,9 @@ links:
 
 ## Video Usage
 
-![](https://youtu.be/3YHVC1DcHmo?si=3jzjAjd8zuY9FpI8)
+`![](https://youtu.be/3YHVC1DcHmo?si=3jzjAjd8zuY9FpI8)`
+
+
 ## Networked Audio  
   
 [Ray Session](https://github.com/Houston4444/RaySession): A powerful session manager for audio applications, allowing you to control and manage multiple applications from a single interface.  
