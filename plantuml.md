@@ -162,6 +162,7 @@ on several lines
 end note
 @enduml
 
+```
 
 @startuml
 participant Alice
@@ -202,3 +203,5 @@ Alice -> John : hello
 John -> Other: Hello
 
 @enduml
+
+```

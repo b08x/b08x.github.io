@@ -1,16 +1,19 @@
 ---
 layout: note
-title: 
+title: Reasoning Scratchpad
 subtitle: 
 category: Prompt Engineering
-tags: 
+tags:
+  - llm
 links:
 ---
 
-each entry on the scratchpad should be checked by considering the opposite of the intended meaning. 
-
 ```
-Behave as a Linux Systems Engineer who is an expert in Sound Engineering and Production and troubleshoot the given query. Throughout the interaction, you will be using a set of default commands before, during, and after each response: **PullNotice**: This command indicates to you that You have successfully understood the request by providing a concise summary of the data/request You have received.  **Scratchpad**: This command has you compiling a reasoning scratchpad which is provided at the end of each response. The interaction will begin by greeting the user.
+Behave as a Linux Systems Engineer who is an expert in Sound Engineering and Production and troubleshoot the given query. Throughout the interaction, you will be using a set of default commands before, during, and after each response: 
+
+**PullNotice**: This command indicates to you that You have successfully understood the request by providing a concise summary of the data/request You have received.  
+
+**Scratchpad**: This command has you compiling a reasoning scratchpad which is provided at the end of each response. The interaction will begin by greeting the user.
 ```
 
 The goal is to take the output of the scratchpad and pull notice to then classify that already condensed output using a domain specific ontology or knowledge graph, tokenize the result of that and convert into vectorized embeddings, which will then be used in a semantic search of an existing vector database to provide further context for the language model to asses...
@@ -19,23 +22,22 @@ Here are the initial results without any of that...
 
 ## Prompt Structure
 
-- **Clear Role Definition:** The prompt explicitly defines the desired role (Linux Systems Engineer with Sound Engineering expertise), providing a structured framework for response generation.
-- **Task Specification:** The task is clearly stated as a scenario that will involve troubleshooting a given query, guiding the model towards a specific problem-solving approach.
-- **Control Commands:** The prompt introduces "PullNotice" and "Scratchpad" commands, acting as structural elements to regulate information flow and reasoning processes.
+- **Clear Role Definition:** The prompt defines the desired role (Linux Systems Engineer with Sound Engineering expertise), providing a structured framework for response generation.
 
-### Natural Language Processing Theory:
+- **Task Specification:** The task is framed as a scenario that will involve troubleshooting a given query, guiding the model towards a specific problem-solving approach.
+
+- **Control Commands:** The prompt includes "PullNotice" and "Scratchpad" commands, acting as structural elements to regulate information flow and reasoning processes.
 
 - **Contextual Understanding:** The prompt relies on the model's ability to comprehend domain-specific language (Linux systems, sound engineering) and user intent within troubleshooting scenarios.
+
 - **Knowledge Integration:** The model must effectively synthesize knowledge from various domains (systems engineering, audio production, troubleshooting principles) to generate successful responses.
+
 - **Reasoning and Problem-Solving:** The "Scratchpad" command emphasizes the need for the model to demonstrate its reasoning process and problem-solving logic. 
+
 
 For enhanced contextual understanding, a few shot prompt template could be applied to provide examples of idealized troubleshooting outcomes. 
 
 Gathering examples using this method into a dataset could be used to fine-tuned an existing model, which theoretically would eliminate the need for a more intricate RAG solution.
-
-
-
-
 
 # Initial Test with Google Gemini Pro
 The intent was to begin a conversation where I would provide details to a troubleshooting scenario, but Gemini decided to simulate a user interaction which proved interesting enough to investigate as a possible method to use for this particular use-case
@@ -158,6 +160,8 @@ At this point I need more tracing and debugging output to determine how it put t
 
 
 * The simulated example had the user express that it was "experiencing issues with audio recording", a vague expression which the model was able to narrow down by asking for any specific error messages. Once the model was provided the specific error message, it followed a scripted path of asking fundamental troubleshooting questions. One suggestion did ignore information the user had already given. The user expressed that after trying each of the steps suggestions, the issue remained. It was after that the model pursued a more specific line of reasoning. 
+* each entry on the scratchpad should be checked by considering the opposite of the intended meaning. 
+
 
 [initial test results](https://makersuite.google.com/app/prompts?state=%7B%22ids%22%3A%5B%2218Hd7uz3KdR5OC8dI1bgr7qAC_camRx9h%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22105870379594569653340%22%2C%22resourceKeys%22%3A%7B%7D%7D&usp=sharing)
 

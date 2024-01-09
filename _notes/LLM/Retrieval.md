@@ -3,7 +3,12 @@ layout: note
 title: ranking chunks
 subtitle: 
 category: 
-tags: 
+tags:
+  - llm
+  - nlp
+  - ruby
+  - linux
+  - audio
 links:
 ---
 

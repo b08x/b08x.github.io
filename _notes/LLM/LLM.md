@@ -1,15 +1,21 @@
 ---
 layout: folder
 title: LLM
+permalink: /llm
 ---
 
+[[Prompt Engineering]]
 
-[Reasoning Scratchpad](Reasoning%20Scratchpad.md) 
-
+[[Reasoning Scratchpad]]
 		
-implement when [[Retrieval]] stage is upon us
+[[Retrieval]]
 
 
+* generating datasets
+	* agenta
+	* nakersuite
+	* langfuse
+	* *
 
 ---
 
@@ -42,10 +48,6 @@ Instead use: For the document *below*, do X
 **“Behave like” vs. “Act like”**
 
 > You have all encountered the guidance to use “Act like an expert of some kind or other” in your prompts. In my testing “Act Like” tends to guide chat models toward persona-driven responses. “Behave like” offers more flexibility especially when the aim is for the model to operate more like a program or a system. And, it can be used in the persona-centric contexts as well.
-
-
-[[Testing with Agenta]]
-
 
 
 ## 2023-11-08

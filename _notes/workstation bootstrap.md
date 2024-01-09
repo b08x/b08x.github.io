@@ -3,7 +3,11 @@ layout: note
 title: workstation bootstrap
 subtitle: an exercise in adaptable refactoring
 category: 
-tags: 
+tags:
+  - ansible
+  - yadm
+  - linux
+  - arch
 links:
 ---
 

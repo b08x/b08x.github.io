@@ -9,7 +9,7 @@ permalink: /
 
 
 <p style="border-radius: 4px;">
-  Take a look at <span style="font-weight: bold">[[graph]]</span> to get started on your exploration.
+  Take a look at the <span style="font-weight: bold">[[graph]]</span> 
 </p>
 
 
@@ -23,32 +23,27 @@ permalink: /
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
   {% endif %}
-  {% endfor %}
-</ul>
-
-<strong>Recently updated projects</strong>
-
-<ul>
-  {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
-  {% for note in recent_notes limit: 25 %}
+  {% if note.layout == 'dox' %}
+    <li>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+    </li>
+  {% endif %}
+  {% if note.layout == 'vidpreview' %}
+    <li>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+    </li>
+  {% endif %}
   {% if note.layout == 'project' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
   {% endif %}
-  {% endfor %}
-</ul>
-
-<strong>Recently updated folders</strong>
-
-<ul>
-  {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
-  {% for note in recent_notes limit: 25 %}
   {% if note.layout == 'folder' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
   {% endif %}
+
   {% endfor %}
 </ul>
 

@@ -3,7 +3,9 @@ layout: note
 title: 
 subtitle: 
 category: 
-tags: 
+tags:
+  - llm
+  - ruby
 links:
   - https://arxiv.org/pdf/2309.09898.pdf
   - https://www.mdpi.com/2073-431X/12/1/14

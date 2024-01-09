@@ -18,4 +18,6 @@ group :jekyll_plugins do
   gem 'jekyll-asciinema'
   gem 'jekyll-spaceship'
   gem 'jekyll_picture_tag'
+  gem 'jekyll-target-blank'
+  gem 'jekyll-toc'
 end

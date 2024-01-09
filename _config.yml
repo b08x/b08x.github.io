@@ -2,9 +2,10 @@ title: Syncopated Notes
 include:
   - "_pages"
 exclude:
+  - "_templates/"
   - "_drafts/"
   - "_includes/notes_graph.json"
-  - ".obsidian"
+  - ".obsidian/"
   - "*.cast"
   - "*.ipynb"
   - "*.pdf"
@@ -38,6 +39,9 @@ plugins:
   - jekyll_asciinema
   - jekyll-spaceship
   - jekyll_picture_tag
+  - jekyll-target-blank
+  - jekyll-toc
+
 
 sass:
   sass_dir: _sass
@@ -71,3 +75,13 @@ picture:
   suppress_warnings: true
   nomarkdown: false
 
+toc:
+  min_level: 1
+  max_level: 6
+  ordered_list: false
+  no_toc_section_class: no_toc_section
+  list_id: toc
+  list_class: section-nav
+  sublist_class: ''
+  item_class: toc-entry
+  item_prefix: toc-
