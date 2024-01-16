@@ -39,7 +39,7 @@ plugins:
   - jekyll_asciinema
   - jekyll-spaceship
   - jekyll_picture_tag
-  - jekyll-target-blank
+#  - jekyll-target-blank
   - jekyll-toc
 
 
