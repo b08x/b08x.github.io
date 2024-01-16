@@ -21,14 +21,13 @@ permissions:
   id-token: write
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install deps
-        run: |
-          sudo apt update -qq && sudo apt install libvips-dev libopenslide-dev && \
-          bundle install
+     - name: Install deps
+       run: |
+         sudo apt update -qq && sudo apt install libvips-dev libopenslide-dev && \
+         bundle install
      - name: Checkout
        uses: actions/checkout@v3
      - name: Setup Pages
@@ -36,7 +35,6 @@ jobs:
      - name: Build
        uses: actions/jekyll-build-pages@v1
      - name: Upload artifact
-        Automatically uploads an artifact from the './_site' directory by default
        uses: actions/upload-pages-artifact@v2
 
   # Deployment job
