@@ -8,6 +8,8 @@ tags:
 image:
 ---
 
+![](/assets/img/screenshot/Pasted%20image%2020240109062329.png)
+
 #### subchoices
 
 *Beyond ChatBots: ExploreLLM for Structured Thoughts with Choices*

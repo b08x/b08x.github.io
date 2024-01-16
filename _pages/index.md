@@ -1,12 +1,14 @@
 ---
+id: index
+aliases:
+  - Welcome!
+tags: []
 layout: home
-title: Home
-id: home
 permalink: /
+title: Home
 ---
 
 # Welcome!
-
 
 <p style="border-radius: 4px;">
   Take a look at the <span style="font-weight: bold">[[graph]]</span> 
