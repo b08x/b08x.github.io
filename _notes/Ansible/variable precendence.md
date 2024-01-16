@@ -3,8 +3,10 @@ layout: note
 title: variable precedence & scope
 subtitle: 
 category: Ansible
-tags: 
-links:
+tags:
+  - ansible
+links: 
+permalink:
 ---
 
 Variable precedence in Ansible is influenced by the scope and context in which the variables are defined. When a variable is defined at multiple levels, Ansible uses a merging strategy based on the variable's scope. 

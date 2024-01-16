@@ -53,6 +53,12 @@ GEM
       jekyll (>= 3.6, < 5.0)
       nokogiri (~> 1.6)
       rainbow (~> 3.0)
+    jekyll-target-blank (2.0.2)
+      jekyll (>= 3.0, < 5.0)
+      nokogiri (~> 1.10)
+    jekyll-toc (0.18.0)
+      jekyll (>= 3.9)
+      nokogiri (~> 1.12)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
     jekyll_picture_tag (2.0.4)
@@ -136,6 +142,8 @@ DEPENDENCIES
   jekyll-jupyter-notebook
   jekyll-last-modified-at!
   jekyll-spaceship
+  jekyll-target-blank
+  jekyll-toc
   jekyll_picture_tag
   nokogiri
   rubocop

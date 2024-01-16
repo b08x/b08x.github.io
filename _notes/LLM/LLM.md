@@ -1,17 +1,25 @@
 ---
 layout: folder
 title: LLM
+permalink: /llm
 ---
 
-## 2023-11-22
+[[Prompt Engineering]]
 
-* "Use of a scratch pad for "out loud thinking" increased deceptive reasoning" [source](https://huggingface.co/papers/2311.07590?utm_source=digest-papers&utm_medium=email&utm_campaign=2023-11-15)
-	* "deceptive" in this case is subjective in the context of stock trading
-		* in the context of Sound/Audio troubleshooting/composing....
+[[Reasoning Scratchpad]]
 		
-implement when [[Retrieval]] stage is upon us
+[[Retrieval]]
+
+[[Graph RAG]]
+
+[[ChatBot Arena]]
 
 
+* generating datasets
+	* agenta
+	* nakersuite
+	* langfuse
+	* *
 
 ---
 
@@ -44,10 +52,6 @@ Instead use: For the document *below*, do X
 **“Behave like” vs. “Act like”**
 
 > You have all encountered the guidance to use “Act like an expert of some kind or other” in your prompts. In my testing “Act Like” tends to guide chat models toward persona-driven responses. “Behave like” offers more flexibility especially when the aim is for the model to operate more like a program or a system. And, it can be used in the persona-centric contexts as well.
-
-
-[[Testing with Agenta]]
-
 
 
 ## 2023-11-08

@@ -5,11 +5,11 @@ layout: folder
 ---
 
 
-
+[[workstation bootstrap]]
 
 [[Issues]]
 
-
+[[sysrq]]
 
 
 

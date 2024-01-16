@@ -1,6 +1,7 @@
 ---
 layout: note
-tags: 
+tags:
+  - obs-studio
 links: 
 title: mediamtx & obs-studio
 ---
