@@ -26,8 +26,15 @@ jobs:
     steps:
      - name: Install deps
        run: |
-         sudo apt update -qq && sudo apt install libvips-dev libopenslide-dev && \
-         bundle install
+         sudo apt update -qq && \
+         sudo apt install libvips-dev libopenslide-dev && \
+         sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
+     - name: Setup Ruby
+       uses: ruby/setup-ruby@master
+       with:
+         ruby-version: '3.1'
+         bundler-cache: true
+         cache-version: 0
      - name: Checkout
        uses: actions/checkout@v3
      - name: Setup Pages
