@@ -1,15 +1,53 @@
 ---
-layout: page
-title: Home
-id: home
+id: index
+aliases:
+  - Welcome!
+tags: []
+layout: home
 permalink: /
+title: Home
 ---
 
 # Welcome!
 
-<p style="padding: 3em 1em; background: #5f5f5f; border-radius: 4px;">
-  Take a look at <span style="font-weight: bold">[[Docker Stacks]]</span> to get started on your exploration.
+<p style="border-radius: 4px;">
+  Take a look at the <span style="font-weight: bold">[[graph]]</span> 
 </p>
+
+
+<strong>Recently updated pages</strong>
+
+<ul>
+  {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
+  {% for note in recent_notes limit: 25 %}
+  {% if note.layout == 'page' %}
+    <li>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+    </li>
+  {% endif %}
+  {% if note.layout == 'dox' %}
+    <li>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+    </li>
+  {% endif %}
+  {% if note.layout == 'vidpreview' %}
+    <li>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+    </li>
+  {% endif %}
+  {% if note.layout == 'project' %}
+    <li>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+    </li>
+  {% endif %}
+  {% if note.layout == 'folder' %}
+    <li>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+    </li>
+  {% endif %}
+
+  {% endfor %}
+</ul>
 
 
 <strong>Recently updated notes</strong>
@@ -17,9 +55,11 @@ permalink: /
 <ul>
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
   {% for note in recent_notes limit: 25 %}
+  {% if note.layout == 'note' %}
     <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{% if note.category %}{{ note.category }} - {% endif %}{{ note.title }}</a>
     </li>
+  {% endif %}
   {% endfor %}
 </ul>
 
@@ -31,6 +71,3 @@ permalink: /
   }
 </style>
 
-<p>Knowledge Graph:</p>
-
-{% include notes_graph.html %}

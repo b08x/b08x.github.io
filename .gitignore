@@ -15,3 +15,6 @@ _site/
 .obsidian/
 
 .ruby-gemset
+
+*.pdf
+_drafts/

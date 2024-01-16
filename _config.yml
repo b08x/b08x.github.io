@@ -1,16 +1,25 @@
 title: Syncopated Notes
 include:
-  - '_pages'
-  - '_notes'
+  - "_pages"
 exclude:
-  - '_includes/notes_graph.json'
-  - '_notes/.obsidian'
+  - "_templates/"
+  - "_drafts/"
+  - "_includes/notes_graph.json"
+  - ".obsidian/"
+  - "*.cast"
+  - "*.ipynb"
+  - "*.pdf"
+  - "README.md"
+  - "LICENSE"
 # You may need to change the base URL depending on your deploy configuration.
-baseurl: ''
+baseurl: ""
+
+github:
+  uid: b08x
 
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
-use_html_extension:  false
+use_html_extension: false
 
 # Set to `true` to open non-internal links in new tabs, or
 # set to `false` to open non-internal links in current tab.
@@ -21,22 +30,27 @@ open_external_links_in_new_tab: true
 # as their browser will communicate with Twitter's servers.
 embed_tweets: false
 
-permalink:           pretty
+permalink: pretty
 relative_permalinks: false
 
 plugins:
   - jekyll-last-modified-at
   - jekyll-jupyter-notebook
   - jekyll_asciinema
+  - jekyll-spaceship
+  - jekyll_picture_tag
+  - jekyll-target-blank
+  - jekyll-toc
+
 
 sass:
-  sass_dir:          _sass
-  style:            :compressed
+  sass_dir: _sass
+  style: compressed
 
 collections:
   notes:
     output: true
-    permalink: /:slug
+    permalink: /:title
 
 defaults:
   - scope:
@@ -47,3 +61,27 @@ defaults:
       path: "_notes/**/*.md"
     values:
       layout: "note"
+
+jekyll-spaceship:
+  mermaid-processor:
+    css:
+      class: "mermaid!"
+    config:
+      theme: dark
+
+picture:
+  source: "assets/img"
+  output: "assets/img/generated"
+  suppress_warnings: true
+  nomarkdown: false
+
+toc:
+  min_level: 1
+  max_level: 6
+  ordered_list: false
+  no_toc_section_class: no_toc_section
+  list_id: toc
+  list_class: section-nav
+  sublist_class: ''
+  item_class: toc-entry
+  item_prefix: toc-
