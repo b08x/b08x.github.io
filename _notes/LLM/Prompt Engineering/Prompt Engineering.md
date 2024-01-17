@@ -8,6 +8,9 @@ tags:
 image:
 ---
 
+
+[ai sleeper agents](https://www.astralcodexten.com/p/ai-sleeper-agents?utm_source=tldrnewsletter)
+
 ![](/assets/img/screenshot/Pasted%20image%2020240109062329.png)
 
 #### subchoices

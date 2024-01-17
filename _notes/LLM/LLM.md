@@ -8,7 +8,7 @@ permalink: /llm
 
 [[Reasoning Scratchpad]]
 		
-[[Retrieval]]
+[[Ranking Chunks]]
 
 [[Graph RAG]]
 

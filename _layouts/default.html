@@ -3,9 +3,12 @@
   {% include head.html %}
   <body>
      <nav class="row">{% include nav.html %}</nav>
-      <!-- Back to top button -->
-      <a id="button"></a>
-     <main class="row">{{ content }}</main>
+     {%- if page.video -%}
+     <header>{% include header.html %}</header>
+     {%- endif -%}
+     <main class="row">
+      {{ content }}
+    </main>
       
      <footer>{% include footer.html %}</footer>
       {% include link-previews.html wrapperQuerySelector="content" %}

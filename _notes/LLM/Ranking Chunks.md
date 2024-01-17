@@ -1,6 +1,6 @@
 ---
 layout: note
-title: ranking chunks
+title: Ranking Chunks
 subtitle: 
 category: 
 tags:

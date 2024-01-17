@@ -202,10 +202,10 @@
             d3
               .forceLink(linksData)
               .id((d) => d.id)
-              .distance(70)
+              .distance(120)
           )
           .force("center", d3.forceCenter(width / 2, height / 2))
-          .force("collision", d3.forceCollide().radius(80))
+          .force("collision", d3.forceCollide().radius(120))
           .stop();
 
         const g = svg.append("g");
