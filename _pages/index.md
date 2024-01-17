@@ -8,13 +8,6 @@ permalink: /
 title: Home
 ---
 
-# Welcome!
-
-<p style="border-radius: 4px;">
-  Take a look at the <span style="font-weight: bold">[[graph]]</span> 
-</p>
-
-
 <strong>Recently updated pages</strong>
 
 <ul>
@@ -63,11 +56,8 @@ title: Home
   {% endfor %}
 </ul>
 
-<style>
-  .wrapper {
-    max-width: 46em;
-    display: flex;
-    flex-direction: column;
-  }
-</style>
+# Welcome!
 
+<p style="border-radius: 4px;">
+  Take a look at the <span style="font-weight: bold">[[graph]]</span> 
+</p>
