@@ -1,9 +1,12 @@
 <div>
-    <a class="internal-link" href="{{ site.baseurl }}/"><b>{{ site.title }}</b></a> | 
-    {% for note in site.notes %}
+    <a class="internal-link" href="{{ site.baseurl }}/"><b>Home</b></a> |
+    <!-- {% if page.layout != 'about' %}
+    <a class="internal-link" href="{{ site.baseurl }}/about"><b>About</b></a> |
+    {% endif %} -->
+    <!-- {% for note in site.notes %}
     {% if note.layout == 'folder' %}
     <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}"><b>{{ note.title }}</b></a>
     {% endif %}
-    {% endfor %}    
+    {% endfor %} -->
 
 </div>

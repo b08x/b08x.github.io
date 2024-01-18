@@ -1,5 +1,5 @@
 ---
-layout: folder
+layout: index
 title: LLM
 permalink: /llm
 ---

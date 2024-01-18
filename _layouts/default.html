@@ -2,16 +2,14 @@
 <html lang="en">
   <head>{% include head.html %}</head>
   <body>
-     <nav class="row">{% include nav.html %}</nav>
-     {%- if page.video -%}
-     <header>{% include header.html %}</header>
-     {%- endif -%}
-     <main class="row">
-      {{ content }}
-    </main>
+     
+     {% include header.html %}
+     
+     <main class="row">{{ content }}</main>
       
-     <footer>{% include footer.html %}</footer>
-      {% include link-previews.html wrapperQuerySelector="content" %}
+    {% include footer.html %}
+        
+    {% include link-previews.html wrapperQuerySelector="content" %}
 
   </body>
 </html>

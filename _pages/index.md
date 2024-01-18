@@ -56,8 +56,3 @@ title: Home
   {% endfor %}
 </ul>
 
-# Welcome!
-
-<p style="border-radius: 4px;">
-  Take a look at the <span style="font-weight: bold">[[graph]]</span> 
-</p>

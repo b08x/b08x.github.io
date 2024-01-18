@@ -5,7 +5,7 @@ subtitle:
 category: 
 tags: 
 links:
-  - "[[SyncopatedIaC/SyncopatedIaC]]"
+  - "[[SyncopatedIaC]]"
 permalink: /testing
 link: gitflow
 image: /assets/img/screenshot/ontology_embedding_flow.png

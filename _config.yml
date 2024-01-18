@@ -1,6 +1,7 @@
 title: Syncopated Notes
 include:
   - "_pages"
+  - "_projects"
 exclude:
   - "_templates/"
   - "_drafts/"
