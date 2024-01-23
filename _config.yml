@@ -2,6 +2,7 @@ title: Syncopated Notes
 include:
   - "_pages"
   - "_projects"
+  - "_articles"
 exclude:
   - "_templates/"
   - "_drafts/"
@@ -51,6 +52,10 @@ collections:
   notes:
     output: true
     permalink: /:title
+  articles:
+    output: true
+    permalink: /:title
+
 
 defaults:
   - scope:
@@ -61,6 +66,10 @@ defaults:
       path: "_notes/**/*.md"
     values:
       layout: "note"
+  - scope:
+      path: "_articles/**/*.md"
+    values:
+      layout: "article"
 
 jekyll-spaceship:
   mermaid-processor:

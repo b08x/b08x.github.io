@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Refinements | Alchemists</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A collective devoted to the craft of software engineering where mastery is transmuted into joy.">
+    <meta name="author" content="Alchemists">
+
+    <link title="Alchemists - Favorite Icon" rel="icon" href="https://www.alchemists.io/favicon.ico" type="image/x-icon">
+    <link title="Alchemists - Apple Icon" rel="apple-touch-icon-precomposed" href="https://www.alchemists.io/images/logo/apple.png" type="image/png">
+    <link title="Alchemists - Stylesheet" rel="stylesheet" href="Refinements%20|%20Alchemists_files/site.css" type="text/css">
+    <link title="Alchemists - News" rel="alternate" href="https://www.alchemists.io/feeds/news.xml" type="application/atom+xml">
+    <link title="Alchemists - Articles" rel="alternate" href="https://www.alchemists.io/feeds/articles.xml" type="application/atom+xml">
+    <link title="Alchemists - Presentations" rel="alternate" href="https://www.alchemists.io/feeds/presentations.xml" type="application/atom+xml">
+    <link title="Alchemists - Projects" rel="alternate" href="https://www.alchemists.io/feeds/projects.xml" type="application/atom+xml">
+    <link title="Alchemists - Screencasts" rel="alternate" href="https://www.alchemists.io/feeds/screencasts.xml" type="application/atom+xml">
+    <link title="Alchemists - Refinements" rel="alternate" href="https://www.alchemists.io/oembed/projects/refinements.json?url=https%3A%2F%2Fwww.alchemists.io%2Foembed%2Fprojects%2Frefinements.json" type="application/json+oembed">
+
+    <script src="Refinements%20|%20Alchemists_files/site.js"></script>
+  </head>
+
+  <body>
+    
+<div class="visitor-portal">
+  <header class="visitor-portal-header">
+  <a href="https://www.alchemists.io/" class="visitor-portal-logo">Alchemists</a>
+  <nav>
+  <ul class="visitor-portal-menu">
+    <li class="visitor-portal-menu-item"><a href="https://www.alchemists.io/articles">Articles</a></li>
+    <li class="visitor-portal-menu-item"><a href="https://www.alchemists.io/screencasts">Screencasts</a></li>
+    <li class="visitor-portal-menu-item"><a href="https://www.alchemists.io/presentations">Presentations</a></li>
+    <li class="visitor-portal-menu-item"><a href="https://www.alchemists.io/projects" class="active">Projects</a></li>
+  </ul>
+</nav>
+
+
+  <a class="visitor-portal-media" href="https://www.alchemists.io/feeds/news.xml">
+    <img src="Refinements%20|%20Alchemists_files/feed.png" alt="Syndication Icon" width="28" height="28">
+  </a>
+</header>
+
+
+  <main class="visitor-portal-main">
+    <section class="visitor-page">
+      <header class="visitor-page-header">
+        <ul class="site-breadcrumbs">
+          <li class="breadcrumb"><a href="https://www.alchemists.io/projects">Projects</a></li>
+          <li class="breadcrumb">Refinements</li>
+        </ul>
+
+        <ul class="site-cycle">
+          <li class="direction before"><a href="https://www.alchemists.io/projects/prawn_plus" rel="prev">Previous</a></li>
+          <li class="direction after"><a href="https://www.alchemists.io/projects/rubysmith" rel="next">Next</a></li>
+        </ul>
+      </header>
+
+      <section class="visitor-page-body">
+        <header class="media-header">
+          <div class="author">
+            <img class="avatar" alt="Brooke Kuhlmann's Avatar" src="Refinements%20|%20Alchemists_files/bkuhlmann.jpg" loading="lazy" width="100" height="100">
+            <a href="https://www.alchemists.io/team/brooke_kuhlmann">Brooke Kuhlmann</a>
+          </div>
+
+          <div class="dates">
+            <span>Published July 19, 2015</span>
+            <span>Updated March 18, 2021</span>
+          </div>
+        </header>
+
+        <article class="site-article">
+          <div class="focal_point">
+            <img src="Refinements%20|%20Alchemists_files/icon.png" alt="Refinements Icon" width="200" height="200">
+            <h1>Refinements</h1>
+          </div>
+
+          <a href="https://github.com/bkuhlmann/refinements">
+            <img src="Refinements%20|%20Alchemists_files/git.png" class="git-badge" alt="Git Badge" width="43" height="18">
+          </a>
+
+          <div class="imageblock">
+<div class="content">
+<a class="image" href="http://badge.fury.io/rb/refinements"><img src="Refinements%20|%20Alchemists_files/refinements_002.svg" alt="Gem Version"></a>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://www.alchemists.io/projects/code_quality"><img src="Refinements%20|%20Alchemists_files/code_style-alchemists-brightgreen.svg" alt="Alchemists Style Guide"></a>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://circleci.com/gh/bkuhlmann/refinements"><img src="Refinements%20|%20Alchemists_files/refinements.svg" alt="Circle CI Status"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>A collection of refinements (enhancements) to primitive Ruby objects.</p>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_features">Features</a></li>
+<li><a href="#_requirements">Requirements</a></li>
+<li><a href="#_setup">Setup</a></li>
+<li><a href="#_usage">Usage</a>
+<ul class="sectlevel2">
+<li><a href="#_requires">Requires</a></li>
+<li><a href="#_using">Using</a></li>
+<li><a href="#_examples">Examples</a>
+<ul class="sectlevel3">
+<li><a href="#_array">Array</a>
+<ul class="sectlevel4">
+<li><a href="#_compress">#compress</a></li>
+<li><a href="#_compress_2">#compress!</a></li>
+<li><a href="#_excluding">#excluding</a></li>
+<li><a href="#_including">#including</a></li>
+<li><a href="#_intersperse">#intersperse</a></li>
+<li><a href="#_mean">#mean</a></li>
+<li><a href="#_pad">#pad</a></li>
+<li><a href="#_ring">#ring</a></li>
+</ul>
+</li>
+<li><a href="#_big_decimal">Big Decimal</a>
+<ul class="sectlevel4">
+<li><a href="#_inspect">#inspect</a></li>
+</ul>
+</li>
+<li><a href="#_datetime">DateTime</a>
+<ul class="sectlevel4">
+<li><a href="#_utc">.utc</a></li>
+</ul>
+</li>
+<li><a href="#_hash">Hash</a>
+<ul class="sectlevel4">
+<li><a href="#_infinite">.infinite</a></li>
+<li><a href="#_with_default">.with_default</a></li>
+<li><a href="#_deep_merge">#deep_merge</a></li>
+<li><a href="#_deep_merge_2">#deep_merge!</a></li>
+<li><a href="#_deep_stringify_keys">#deep_stringify_keys</a></li>
+<li><a href="#_deep_stringify_keys_2">#deep_stringify_keys!</a></li>
+<li><a href="#_deep_symbolize_keys">#deep_symbolize_keys</a></li>
+<li><a href="#_deep_symbolize_keys_2">#deep_symbolize_keys!</a></li>
+<li><a href="#_flatten_keys">#flatten_keys</a></li>
+<li><a href="#_flatten_keys_2">#flatten_keys!</a></li>
+<li><a href="#_recurse">#recurse</a></li>
+<li><a href="#_stringify_keys">#stringify_keys</a></li>
+<li><a href="#_stringify_keys_2">#stringify_keys!</a></li>
+<li><a href="#_symbolize_keys">#symbolize_keys</a></li>
+<li><a href="#_symbolize_keys_2">#symbolize_keys!</a></li>
+<li><a href="#_use">#use</a></li>
+</ul>
+</li>
+<li><a href="#_io">IO</a>
+<ul class="sectlevel4">
+<li><a href="#_void">.void</a></li>
+<li><a href="#_redirect">#redirect</a></li>
+<li><a href="#_reread">#reread</a></li>
+<li><a href="#_squelch">#squelch</a></li>
+</ul>
+</li>
+<li><a href="#_pathname">Pathname</a>
+<ul class="sectlevel4">
+<li><a href="#_pathname_2">Pathname</a></li>
+<li><a href="#_home">.home</a></li>
+<li><a href="#_make_temp_dir">.make_temp_dir</a></li>
+<li><a href="#_require_tree">.require_tree</a></li>
+<li><a href="#_root">.root</a></li>
+<li><a href="#_change_dir">#change_dir</a></li>
+<li><a href="#_copy">#copy</a></li>
+<li><a href="#_directories">#directories</a></li>
+<li><a href="#_extensions">#extensions</a></li>
+<li><a href="#_files">#files</a></li>
+<li><a href="#_gsub">#gsub</a></li>
+<li><a href="#_make_ancestors">#make_ancestors</a></li>
+<li><a href="#_make_dir">#make_dir</a></li>
+<li><a href="#_make_path">#make_path</a></li>
+<li><a href="#_name">#name</a></li>
+<li><a href="#_relative_parent">#relative_parent</a></li>
+<li><a href="#_remove_dir">#remove_dir</a></li>
+<li><a href="#_remove_tree">#remove_tree</a></li>
+<li><a href="#_rewrite">#rewrite</a></li>
+<li><a href="#_touch">#touch</a></li>
+<li><a href="#_write">#write</a></li>
+</ul>
+</li>
+<li><a href="#_string">String</a>
+<ul class="sectlevel4">
+<li><a href="#_blank">#blank?</a></li>
+<li><a href="#_camelcase">#camelcase</a></li>
+<li><a href="#_down">#down</a></li>
+<li><a href="#_first">#first</a></li>
+<li><a href="#_indent">#indent</a></li>
+<li><a href="#_last">#last</a></li>
+<li><a href="#_snakecase">#snakecase</a></li>
+<li><a href="#_titleize">#titleize</a></li>
+<li><a href="#_to_bool">#to_bool</a></li>
+<li><a href="#_up">#up</a></li>
+</ul>
+</li>
+<li><a href="#_string_io">String IO</a>
+<ul class="sectlevel4">
+<li><a href="#_reread_2">#reread</a></li>
+</ul>
+</li>
+<li><a href="#_struct">Struct</a>
+<ul class="sectlevel4">
+<li><a href="#_keyworded">.keyworded?</a></li>
+<li><a href="#_with_keywords">.with_keywords</a></li>
+<li><a href="#_with_positions">.with_positions</a></li>
+<li><a href="#_merge">#merge</a></li>
+<li><a href="#_merge_2">#merge!</a></li>
+<li><a href="#_revalue">#revalue</a></li>
+<li><a href="#_revalue_2">#revalue!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_development">Development</a></li>
+<li><a href="#_tests">Tests</a></li>
+<li><a href="#_versioning">Versioning</a></li>
+<li><a href="#_code_of_conduct">Code of Conduct</a></li>
+<li><a href="#_contributions">Contributions</a></li>
+<li><a href="#_license">License</a></li>
+<li><a href="#_history">History</a></li>
+<li><a href="#_credits">Credits</a></li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="_features">Features</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enhances the following objects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Array</p>
+</li>
+<li>
+<p>BigDecimal</p>
+</li>
+<li>
+<p>DateTime</p>
+</li>
+<li>
+<p>Hash</p>
+</li>
+<li>
+<p>IO</p>
+</li>
+<li>
+<p>Pathname</p>
+</li>
+<li>
+<p>String</p>
+</li>
+<li>
+<p>StringIO</p>
+</li>
+<li>
+<p>Structs</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requirements">Requirements</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://www.ruby-lang.org/">Ruby</a>.</p>
+</li>
+<li>
+<p>A solid understanding of <a href="https://www.alchemists.io/articles/ruby_refinements">Ruby refinements
+and lexical scope</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_setup">Setup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To install, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">gem <span class="nb">install </span>refinements</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add the following to your Gemfile file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">gem</span> <span class="s2">"refinements"</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage">Usage</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_requires">Requires</h3>
+<div class="paragraph">
+<p>If all refinements are not desired, add the following to your <code>Gemfile</code> instead:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">gem</span> <span class="s2">"refinements"</span><span class="p">,</span> <span class="ss">require: </span><span class="kp">false</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>…​then require the specific refinement, as needed. Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="nb">require</span> <span class="s2">"refinements/arrays"</span>
+<span class="nb">require</span> <span class="s2">"refinements/big_decimals"</span>
+<span class="nb">require</span> <span class="s2">"refinements/date_times"</span>
+<span class="nb">require</span> <span class="s2">"refinements/hashes"</span>
+<span class="nb">require</span> <span class="s2">"refinements/ios"</span>
+<span class="nb">require</span> <span class="s2">"refinements/pathnames"</span>
+<span class="nb">require</span> <span class="s2">"refinements/strings"</span>
+<span class="nb">require</span> <span class="s2">"refinements/string_ios"</span>
+<span class="nb">require</span> <span class="s2">"refinements/structs"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using">Using</h3>
+<div class="paragraph">
+<p>Much like including/extending a module, you’ll need to modify your object(s) to use the
+refinement(s):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="k">class</span> <span class="nc">Example</span>
+  <span class="n">using</span> <span class="no">Refinements</span><span class="o">::</span><span class="no">Arrays</span>
+  <span class="n">using</span> <span class="no">Refinements</span><span class="o">::</span><span class="no">BigDecimals</span>
+  <span class="n">using</span> <span class="no">Refinements</span><span class="o">::</span><span class="no">DateTimes</span>
+  <span class="n">using</span> <span class="no">Refinements</span><span class="o">::</span><span class="no">Hashes</span>
+  <span class="n">using</span> <span class="no">Refinements</span><span class="o">::</span><span class="no">IOs</span>
+  <span class="n">using</span> <span class="no">Refinements</span><span class="o">::</span><span class="no">Pathnames</span>
+  <span class="n">using</span> <span class="no">Refinements</span><span class="o">::</span><span class="no">Strings</span>
+  <span class="n">using</span> <span class="no">Refinements</span><span class="o">::</span><span class="no">StringIOs</span>
+  <span class="n">using</span> <span class="no">Refinements</span><span class="o">::</span><span class="no">Structs</span>
+<span class="k">end</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examples">Examples</h3>
+<div class="paragraph">
+<p>The following sections demonstrate how each refinement enriches your objects with new capabilities.</p>
+</div>
+<div class="sect3">
+<h4 id="_array">Array</h4>
+<div class="sect4">
+<h5 id="_compress">#compress</h5>
+<div class="paragraph">
+<p>Removes <code>nil</code> and empty values without mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"An"</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"Example"</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">compress</span>  <span class="c1"># =&gt; ["An", "Example"]</span>
+<span class="n">example</span>           <span class="c1"># =&gt; ["An", nil, "", "Example"]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_compress_2">#compress!</h5>
+<div class="paragraph">
+<p>Removes <code>nil</code> and empty values while mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"An"</span><span class="p">,</span> <span class="kp">nil</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"Example"</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">compress!</span>  <span class="c1"># =&gt; ["An", "Example"]</span>
+<span class="n">example</span>            <span class="c1"># =&gt; ["An", "Example"]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_excluding">#excluding</h5>
+<div class="paragraph">
+<p>Removes given array or elements without mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">].</span><span class="nf">excluding</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>  <span class="c1"># =&gt; [1, 2, 3]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">].</span><span class="nf">excluding</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span>    <span class="c1"># =&gt; [1, 2, 3]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_including">#including</h5>
+<div class="paragraph">
+<p>Adds given array or elements without mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nf">including</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>  <span class="c1"># =&gt; [1, 2, 3, 4, 5]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nf">including</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span>    <span class="c1"># =&gt; [1, 2, 3, 4, 5]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_intersperse">#intersperse</h5>
+<div class="paragraph">
+<p>Inserts additional elements or array between all members of given array.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nf">intersperse</span> <span class="ss">:a</span>         <span class="c1"># =&gt; [1, :a, 2, :a, 3]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nf">intersperse</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span>     <span class="c1"># =&gt; [1, :a, :b, 2, :a, :b, 3]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nf">intersperse</span> <span class="sx">%i[a b c]</span>  <span class="c1"># =&gt; [1, :a, :b, :c, 2, :a, :b, :c, 3]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_mean">#mean</h5>
+<div class="paragraph">
+<p>Answers mean/average all elements within an array.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="p">[].</span><span class="nf">mean</span>                 <span class="c1"># =&gt; 0</span>
+<span class="p">[</span><span class="mi">5</span><span class="p">].</span><span class="nf">mean</span>                <span class="c1"># =&gt; 5</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nf">mean</span>          <span class="c1"># =&gt; 2</span>
+<span class="p">[</span><span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">].</span><span class="nf">mean</span>  <span class="c1"># =&gt; 1.5</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_pad">#pad</h5>
+<div class="paragraph">
+<p>Answers new array padded with given value up to a maximum size. Useful in situations where an array
+needs to be a specific size with padded values.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">pad</span> <span class="mi">0</span>             <span class="c1"># =&gt; [1]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">pad</span> <span class="mi">0</span><span class="p">,</span> <span class="ss">max: </span><span class="mi">3</span>     <span class="c1"># =&gt; [1, 0, 0]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">].</span><span class="nf">pad</span> <span class="mi">3</span><span class="p">,</span> <span class="ss">max: </span><span class="mi">3</span>  <span class="c1"># =&gt; [1, 2, 3]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ring">#ring</h5>
+<div class="paragraph">
+<p>Answers a circular array which can enumerate before, current, after elements.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">ring</span> <span class="c1"># =&gt; #&lt;Enumerator: ...&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">ring</span> <span class="p">{</span> <span class="o">|</span><span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">after</span><span class="p">)</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="n">before</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">current</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">after</span><span class="si">}</span><span class="s2">"</span> <span class="p">}</span>
+
+<span class="c1"># [3 1 2]</span>
+<span class="c1"># [1 2 3]</span>
+<span class="c1"># [2 3 1]</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_big_decimal">Big Decimal</h4>
+<div class="sect4">
+<h5 id="_inspect">#inspect</h5>
+<div class="paragraph">
+<p>Allows one to inspect a big decimal with numeric representation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">BigDecimal</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"5.0E-10"</span><span class="p">).</span><span class="nf">inspect</span> <span class="c1"># =&gt; "#&lt;BigDecimal:3fd3d458fe84 0.0000000005&gt;"</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_datetime">DateTime</h4>
+<div class="sect4">
+<h5 id="_utc">.utc</h5>
+<div class="paragraph">
+<p>Answers new DateTime object for current UTC date/time.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">DateTime</span><span class="p">.</span><span class="nf">utc</span> <span class="c1"># =&gt; #&lt;DateTime: 2019-12-31T18:17:00+00:00 ((2458849j,65820s,181867000n),+0s,2299161j)&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_hash">Hash</h4>
+<div class="sect4">
+<h5 id="_infinite">.infinite</h5>
+<div class="paragraph">
+<p>Answers new hash where missing keys, even deeply nested, answer an empty hash.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="no">Hash</span><span class="p">.</span><span class="nf">infinite</span>
+<span class="n">example</span><span class="p">[</span><span class="ss">:a</span><span class="p">]</span>          <span class="c1"># =&gt; {}</span>
+<span class="n">example</span><span class="p">[</span><span class="ss">:a</span><span class="p">][</span><span class="ss">:b</span><span class="p">][</span><span class="ss">:c</span><span class="p">]</span>  <span class="c1"># =&gt; {}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_with_default">.with_default</h5>
+<div class="paragraph">
+<p>Answers new hash where every top-level missing key has the same default value.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="no">Hash</span><span class="p">.</span><span class="nf">with_default</span> <span class="s2">""</span>
+<span class="n">example</span><span class="p">[</span><span class="ss">:a</span><span class="p">]</span>  <span class="c1"># =&gt; ""</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="no">Hash</span><span class="p">.</span><span class="nf">with_default</span> <span class="p">[]</span>
+<span class="n">example</span><span class="p">[</span><span class="ss">:b</span><span class="p">]</span>  <span class="c1"># =&gt; []</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_deep_merge">#deep_merge</h5>
+<div class="paragraph">
+<p>Merges deeply nested hashes together without mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a: </span><span class="s2">"A"</span><span class="p">,</span> <span class="ss">b: </span><span class="p">{</span><span class="ss">one: </span><span class="s2">"One"</span><span class="p">,</span> <span class="ss">two: </span><span class="s2">"Two"</span><span class="p">}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">deep_merge</span> <span class="ss">b: </span><span class="p">{</span><span class="ss">one: </span><span class="mi">1</span><span class="p">}</span>  <span class="c1"># =&gt; {a: "A", b: {one: 1, two: "Two"}}</span>
+<span class="n">example</span>                         <span class="c1"># =&gt; {a: "A", b: {one: "One", two: "Two"}}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_deep_merge_2">#deep_merge!</h5>
+<div class="paragraph">
+<p>Merges deeply nested hashes together while mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a: </span><span class="s2">"A"</span><span class="p">,</span> <span class="ss">b: </span><span class="p">{</span><span class="ss">one: </span><span class="s2">"One"</span><span class="p">,</span> <span class="ss">two: </span><span class="s2">"Two"</span><span class="p">}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">deep_merge!</span> <span class="ss">b: </span><span class="p">{</span><span class="ss">one: </span><span class="mi">1</span><span class="p">}</span>  <span class="c1"># =&gt; {a: "A", b: {one: 1, two: "Two"}}</span>
+<span class="n">example</span>                          <span class="c1"># =&gt; {a: "A", b: {one: 1, two: "Two"}}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_deep_stringify_keys">#deep_stringify_keys</h5>
+<div class="paragraph">
+<p>Stringifies keys of nested hash without mutating itself. Does not handle nested arrays, though.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a: </span><span class="p">{</span><span class="ss">b: </span><span class="mi">2</span><span class="p">}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">deep_stringify_keys</span>  <span class="c1"># =&gt; {"a" =&gt; {"b" =&gt; 1}}</span>
+<span class="n">example</span>                      <span class="c1"># =&gt; {a: {b: 2}}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_deep_stringify_keys_2">#deep_stringify_keys!</h5>
+<div class="paragraph">
+<p>Stringifies keys of nested hash while mutating itself. Does not handle nested arrays, though.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a: </span><span class="p">{</span><span class="ss">b: </span><span class="mi">2</span><span class="p">}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">deep_stringify_keys!</span>  <span class="c1"># =&gt; {"a" =&gt; {"b" =&gt; 1}}</span>
+<span class="n">example</span>                       <span class="c1"># =&gt; {"a" =&gt; {"b" =&gt; 1}}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_deep_symbolize_keys">#deep_symbolize_keys</h5>
+<div class="paragraph">
+<p>Symbolizes keys of nested hash without mutating itself. Does not handle nested arrays, though.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"a"</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">"b"</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">deep_symbolize_keys</span>  <span class="c1"># =&gt; {a: {b: 1}}</span>
+<span class="n">example</span>                      <span class="c1"># =&gt; {"a" =&gt; {"b" =&gt; 2}}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_deep_symbolize_keys_2">#deep_symbolize_keys!</h5>
+<div class="paragraph">
+<p>Symbolizes keys of nested hash while mutating itself. Does not handle nested arrays, though.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"a"</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">"b"</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">deep_symbolize_keys!</span>  <span class="c1"># =&gt; {a: {b: 1}}</span>
+<span class="n">example</span>                       <span class="c1"># =&gt; {a: {b: 1}}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_flatten_keys">#flatten_keys</h5>
+<div class="paragraph">
+<p>Flattens nested keys as top-level keys without mutating itself. Does not handle nested arrays,
+though.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="p">{</span><span class="ss">a: </span><span class="p">{</span><span class="ss">b: </span><span class="mi">1</span><span class="p">}}.</span><span class="nf">flatten_keys</span> <span class="ss">prefix: :test</span>  <span class="c1"># =&gt; {test_a_b: 1}</span>
+<span class="p">{</span><span class="ss">a: </span><span class="p">{</span><span class="ss">b: </span><span class="mi">1</span><span class="p">}}.</span><span class="nf">flatten_keys</span> <span class="ss">delimiter: :|</span>  <span class="c1"># =&gt; {:"a|b" =&gt; 1}</span>
+
+<span class="p">{</span><span class="ss">a: </span><span class="p">{</span><span class="ss">b: </span><span class="mi">1</span><span class="p">}}.</span><span class="nf">flatten_keys</span> <span class="ss">cast: :to_s</span>            <span class="c1"># =&gt; {"a_b" =&gt; 1}</span>
+<span class="p">{</span><span class="s2">"a"</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">"b"</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">}}.</span><span class="nf">flatten_keys</span> <span class="ss">cast: :to_sym</span>  <span class="c1"># =&gt; {a_b: 1}</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a: </span><span class="p">{</span><span class="ss">b: </span><span class="mi">1</span><span class="p">}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">flatten_keys</span>  <span class="c1"># =&gt; {a_b: 1}</span>
+<span class="n">example</span>               <span class="c1"># =&gt; {a: {b: 1}}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_flatten_keys_2">#flatten_keys!</h5>
+<div class="paragraph">
+<p>Flattens nested keys as top-level keys while mutating itself. Does not handle nested arrays,
+though.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a: </span><span class="p">{</span><span class="ss">b: </span><span class="mi">1</span><span class="p">}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">flatten_keys!</span>  <span class="c1"># =&gt; {a_b: 1}</span>
+<span class="n">example</span>                <span class="c1"># =&gt; {a_b: 1}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_recurse">#recurse</h5>
+<div class="paragraph">
+<p>Recursively iterates over the hash and any hash value by applying the given block to it. Does not
+handle nested arrays, though.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"a"</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">"b"</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">recurse</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:symbolize_keys</span><span class="p">)</span>  <span class="c1"># =&gt; {a: {b: 1}}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">recurse</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:invert</span><span class="p">)</span>          <span class="c1"># =&gt; {{"b" =&gt; 1} =&gt; "a"}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_stringify_keys">#stringify_keys</h5>
+<div class="paragraph">
+<p>Converts keys to strings without mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">2</span><span class="p">}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">stringify_keys</span>  <span class="c1"># =&gt; {"a" =&gt; 1, "b" =&gt; 2}</span>
+<span class="n">example</span>                 <span class="c1"># =&gt; {a: 1, b: 2}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_stringify_keys_2">#stringify_keys!</h5>
+<div class="paragraph">
+<p>Converts keys to strings while mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="ss">a: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">2</span><span class="p">}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">stringify_keys!</span>  <span class="c1"># =&gt; {"a" =&gt; 1, "b" =&gt; 2}</span>
+<span class="n">example</span>                  <span class="c1"># =&gt; {"a" =&gt; 1, "b" =&gt; 2}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_symbolize_keys">#symbolize_keys</h5>
+<div class="paragraph">
+<p>Converts keys to symbols without mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"a"</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"b"</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">symbolize_keys</span>  <span class="c1"># =&gt; {a: 1, b: 2}</span>
+<span class="n">example</span>                 <span class="c1"># =&gt; {"a" =&gt; 1, "b" =&gt; 2}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_symbolize_keys_2">#symbolize_keys!</h5>
+<div class="paragraph">
+<p>Converts keys to symbols while mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"a"</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"b"</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">symbolize_keys!</span>  <span class="c1"># =&gt; {a: 1, b: 2}</span>
+<span class="n">example</span>                  <span class="c1"># =&gt; {a: 1, b: 2}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_use">#use</h5>
+<div class="paragraph">
+<p>Passes each hash value as a block argument for further processing.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">example</span> <span class="o">=</span> <span class="p">{</span><span class="ss">unit: </span><span class="s2">"221B"</span><span class="p">,</span> <span class="ss">street: </span><span class="s2">"Baker Street"</span><span class="p">,</span> <span class="ss">city: </span><span class="s2">"London"</span><span class="p">,</span> <span class="ss">country: </span><span class="s2">"UK"</span><span class="p">}</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">use</span> <span class="p">{</span> <span class="o">|</span><span class="n">unit</span><span class="p">,</span> <span class="n">street</span><span class="o">|</span> <span class="s2">"</span><span class="si">#{</span><span class="n">unit</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">street</span><span class="si">}</span><span class="s2">"</span> <span class="p">}</span>  <span class="c1"># =&gt; "221B Baker Street"</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_io">IO</h4>
+<div class="sect4">
+<h5 id="_void">.void</h5>
+<div class="paragraph">
+<p>Answers an IO stream which points to <code>/dev/null</code> in order to ignore any reads or writes to the
+stream. When given a block, the stream will automatically close upon block exit. When not given a
+block, you’ll need to close the stream manually.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">io</span> <span class="o">=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">void</span>                                    <span class="c1"># =&gt; #&lt;IO:fd 20&gt;</span>
+<span class="n">io</span> <span class="o">=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">void</span> <span class="p">{</span> <span class="o">|</span><span class="n">void</span><span class="o">|</span> <span class="n">void</span><span class="p">.</span><span class="nf">write</span> <span class="s2">"nevermore"</span> <span class="p">}</span>  <span class="c1"># =&gt; #&lt;IO:(closed)&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_redirect">#redirect</h5>
+<div class="paragraph">
+<p>Redirects current stream to other stream when given a block. Without a block, the original stream is
+answered instead.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">io</span> <span class="o">=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">new</span> <span class="no">IO</span><span class="p">.</span><span class="nf">sysopen</span><span class="p">(</span><span class="no">Pathname</span><span class="p">(</span><span class="s2">"test.txt"</span><span class="p">).</span><span class="nf">to_s</span><span class="p">,</span> <span class="s2">"w+"</span><span class="p">)</span>
+<span class="n">other</span> <span class="o">=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">new</span> <span class="no">IO</span><span class="p">.</span><span class="nf">sysopen</span><span class="p">(</span><span class="no">Pathname</span><span class="p">(</span><span class="s2">"other.txt"</span><span class="p">).</span><span class="nf">to_s</span><span class="p">,</span> <span class="s2">"w+"</span><span class="p">)</span>
+
+<span class="n">io</span><span class="p">.</span><span class="nf">redirect</span> <span class="n">other</span>                                    <span class="c1"># =&gt; #&lt;IO:fd 20&gt;</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">redirect</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">stream</span><span class="o">|</span> <span class="n">stream</span><span class="p">.</span><span class="nf">write</span> <span class="s2">"test"</span> <span class="p">}</span>  <span class="c1"># =&gt; #&lt;IO:fd 21&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_reread">#reread</h5>
+<div class="paragraph">
+<p>Answers full stream by rewinding to beginning of stream and reading all content.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">io</span> <span class="o">=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">new</span> <span class="no">IO</span><span class="p">.</span><span class="nf">sysopen</span><span class="p">(</span><span class="no">Pathname</span><span class="p">(</span><span class="s2">"test.txt"</span><span class="p">).</span><span class="nf">to_s</span><span class="p">,</span> <span class="s2">"w+"</span><span class="p">)</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">write</span> <span class="s2">"This is a test."</span>
+
+<span class="n">io</span><span class="p">.</span><span class="nf">reread</span>    <span class="c1"># =&gt; "This is a test."</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">reread</span> <span class="mi">4</span>  <span class="c1"># =&gt; "This"</span>
+
+<span class="n">buffer</span> <span class="o">=</span> <span class="s2">""</span><span class="p">.</span><span class="nf">dup</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">reread</span><span class="p">(</span><span class="ss">buffer: </span><span class="n">buffer</span><span class="p">)</span>  <span class="c1"># =&gt; "This is a test."</span>
+<span class="n">buffer</span>                     <span class="c1"># =&gt; "This is a test."</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_squelch">#squelch</h5>
+<div class="paragraph">
+<p>Temporarily ignores any reads/writes for code executed within a block. Answers itself without any
+arguments or when given a block.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">io</span> <span class="o">=</span> <span class="no">IO</span><span class="p">.</span><span class="nf">new</span> <span class="no">IO</span><span class="p">.</span><span class="nf">sysopen</span><span class="p">(</span><span class="no">Pathname</span><span class="p">(</span><span class="s2">"test.txt"</span><span class="p">).</span><span class="nf">to_s</span><span class="p">,</span> <span class="s2">"w+"</span><span class="p">)</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">squelch</span>                      <span class="c1"># =&gt; #&lt;IO:fd 20&gt;</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">squelch</span> <span class="p">{</span> <span class="n">io</span><span class="p">.</span><span class="nf">write</span> <span class="s2">"Test"</span> <span class="p">}</span>  <span class="c1"># =&gt; #&lt;IO:fd 20&gt;</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">reread</span>                       <span class="c1"># =&gt; ""</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_pathname">Pathname</h4>
+<div class="sect4">
+<h5 id="_pathname_2">Pathname</h5>
+<div class="paragraph">
+<p>Enhances the <code>Kernel</code> conversion function which casts <code>nil</code> into a pathname in order to avoid:
+<code>TypeError (no implicit conversion of nil into String)</code>. The pathname remains invalid but at least
+you have an instance of <code>Pathname</code>, which behaves like a <em>Null Object</em>, that can be used to
+construct a valid path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="kp">nil</span><span class="p">)</span> <span class="c1"># =&gt; Pathname("")</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_home">.home</h5>
+<div class="paragraph">
+<p>Answers user home directory.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">.</span><span class="nf">home</span>  <span class="c1"># =&gt; Pathname "/Users/bkuhlmann"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_make_temp_dir">.make_temp_dir</h5>
+<div class="paragraph">
+<p>Wraps <code>Dir.mktmpdir</code> with the following behavior (see
+<a href="https://rubyapi.org/o/Dir.mktmpdir#method-c-mktmpdir">Dir.mktmpdir</a> for details):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Without Block</strong> - Answers a newly created Pathname instance which is not automatically cleaned up.</p>
+</li>
+<li>
+<p><strong>With Block</strong>  Yields a Pathname instance, answers result of given block, and automatidally cleans
+up temporary directory after block exits.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following examples use truncated temporary directories for illustration purposes only. In
+reality, these paths will be longer depending on which operating system you are using.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">.</span><span class="nf">make_temp_dir</span>                                       <span class="c1"># =&gt; Pathname:/var/folders/T/temp-20200101-16940-r8</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">make_temp_dir</span> <span class="ss">prefix: </span><span class="s2">"prefix-"</span>                     <span class="c1"># =&gt; Pathname:/var/folders/T/prefix-20200101-16940-r8</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">make_temp_dir</span> <span class="ss">suffix: </span><span class="s2">"-suffix"</span>                     <span class="c1"># =&gt; Pathname:/var/folders/T/temp-20200101-16940-r8-suffix</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">make_temp_dir</span> <span class="ss">prefix: </span><span class="s2">"prefix-"</span><span class="p">,</span> <span class="ss">suffix: </span><span class="s2">"-suffix"</span>  <span class="c1"># =&gt; Pathname:/var/folders/T/prefix-20200101-16940-r8-suffix</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">make_temp_dir</span> <span class="ss">root: </span><span class="s2">"/example"</span>                      <span class="c1"># =&gt; Pathname:/example/temp-20200101-16940-r8</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">make_temp_dir</span> <span class="p">{</span> <span class="s2">"I am a block result"</span> <span class="p">}</span>             <span class="c1"># =&gt; "I am a block result"</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">make_temp_dir</span> <span class="p">{</span> <span class="o">|</span><span class="n">path</span><span class="o">|</span> <span class="n">path</span><span class="p">.</span><span class="nf">join</span> <span class="s2">"sub_dir"</span> <span class="p">}</span>        <span class="c1"># =&gt; Pathname:/var/folders/T/temp-20200101-16940-r8/sub_dir</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_require_tree">.require_tree</h5>
+<div class="paragraph">
+<p>Requires all files in given root path and corresponding nested tree structure. All files are sorted
+before being required to ensure consistent behavior. Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="c1"># Before</span>
+<span class="no">Dir</span><span class="p">[</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">__dir__</span><span class="p">,</span> <span class="s2">"support/shared_contexts/**/*.rb"</span><span class="p">)].</span><span class="nf">sort</span><span class="p">.</span><span class="nf">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">path</span><span class="o">|</span> <span class="nb">require</span> <span class="n">path</span> <span class="p">}</span>
+
+<span class="c1"># After</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">require_tree</span> <span class="n">__dir__</span><span class="p">,</span> <span class="s2">"support/shared_contexts/**/*.rb"</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following are further examples of potential usage:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="c1"># Requires all files in root directory and below.</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">require_tree</span> <span class="n">__dir__</span>
+
+<span class="c1"># Requires all files in `/test/**/*.rb` and below.</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">require_tree</span> <span class="s2">"/test"</span>
+
+<span class="c1"># Requires all files in RSpec shared examples directory structure.</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">require_tree</span> <span class="no">Bundler</span><span class="p">.</span><span class="nf">root</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"spec"</span><span class="p">),</span> <span class="s2">"support/shared_examples/**/*.rb"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_root">.root</h5>
+<div class="paragraph">
+<p>Answers operating system root path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">.</span><span class="nf">root</span>  <span class="c1"># =&gt; Pathname "/"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_change_dir">#change_dir</h5>
+<div class="paragraph">
+<p>Wraps <code>Dir.chdir</code> behavior by changing to directory of current path. See
+<a href="https://rubyapi.org/o/Dir.chdir#method-c-chdir">Dir.chdir</a> for details.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">.</span><span class="nf">pwd</span>                           <span class="c1"># =&gt; "/"</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/test"</span><span class="p">).</span><span class="nf">make_dir</span><span class="p">.</span><span class="nf">change_dir</span>  <span class="c1"># =&gt; Pathname "/test"</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">pwd</span>                           <span class="c1"># =&gt; "/test"</span>
+
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">pwd</span>                                         <span class="c1"># =&gt; "/"</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/test"</span><span class="p">).</span><span class="nf">make_dir</span><span class="p">.</span><span class="nf">change_dir</span> <span class="p">{</span> <span class="s2">"example"</span> <span class="p">}</span>  <span class="c1"># =&gt; "example"</span>
+<span class="no">Pathname</span><span class="p">.</span><span class="nf">pwd</span>                                         <span class="c1"># =&gt; "/"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_copy">#copy</h5>
+<div class="paragraph">
+<p>Copies file from current location to new location while answering itself so it can be chained.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"input.txt"</span><span class="p">).</span><span class="nf">copy</span> <span class="no">Pathname</span><span class="p">(</span><span class="s2">"output.txt"</span><span class="p">)</span>  <span class="c1"># =&gt; Pathname("input.txt")</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_directories">#directories</h5>
+<div class="paragraph">
+<p>Answers all directories or filtered directories for current path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"/example"</span><span class="p">).</span><span class="nf">directories</span>                           <span class="c1"># =&gt; [Pathname("a"), Pathname("b")]</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/example"</span><span class="p">).</span><span class="nf">directories</span> <span class="s2">"a*"</span>                      <span class="c1"># =&gt; [Pathname("a")]</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/example"</span><span class="p">).</span><span class="nf">directories</span> <span class="ss">flag: </span><span class="no">File</span><span class="o">::</span><span class="no">FNM_DOTMATCH</span>  <span class="c1"># =&gt; [Pathname(".."), Pathname(".")]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_extensions">#extensions</h5>
+<div class="paragraph">
+<p>Answers file extensions as an array.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"example.txt.erb"</span><span class="p">).</span><span class="nf">extensions</span>  <span class="c1"># =&gt; [".txt", ".erb"]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_files">#files</h5>
+<div class="paragraph">
+<p>Answers all files or filtered files for current path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"/example"</span><span class="p">).</span><span class="nf">files</span>                           <span class="c1"># =&gt; [Pathname("a.txt"), Pathname("a.png")]</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/example"</span><span class="p">).</span><span class="nf">files</span> <span class="s2">"*.png"</span>                   <span class="c1"># =&gt; [Pathname("a.png")]</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/example"</span><span class="p">).</span><span class="nf">files</span> <span class="ss">flag: </span><span class="no">File</span><span class="o">::</span><span class="no">FNM_DOTMATCH</span>  <span class="c1"># =&gt; [Pathname(".ruby-version")]</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_gsub">#gsub</h5>
+<div class="paragraph">
+<p>Same behavior as <code>String#gsub</code> but answers a path with patterns replaced with desired substitutes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"/a/path/some/path"</span><span class="p">).</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">"path"</span><span class="p">,</span> <span class="s2">"test"</span><span class="p">)</span>
+<span class="c1"># =&gt; Pathname("/a/test/some/test")</span>
+
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/%placeholder%/some/%placeholder%"</span><span class="p">).</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">"%placeholder%"</span><span class="p">,</span> <span class="s2">"test"</span><span class="p">)</span>
+<span class="c1"># =&gt; Pathname("/test/some/test")</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_make_ancestors">#make_ancestors</h5>
+<div class="paragraph">
+<p>Ensures all ancestor directories are created for a path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"/one/two"</span><span class="p">).</span><span class="nf">make_ancestors</span>  <span class="c1"># =&gt; Pathname("/one/two")</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/one"</span><span class="p">).</span><span class="nf">exist?</span>              <span class="c1"># =&gt; true</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/one/two"</span><span class="p">).</span><span class="nf">exist?</span>          <span class="c1"># =&gt; false</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_make_dir">#make_dir</h5>
+<div class="paragraph">
+<p>Provides alternative <code>#mkdir</code> behavior by always answering itself (even when directory exists) and
+not throwing errors when directory does exist in order to ensure the pathname can be chained.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"/one"</span><span class="p">).</span><span class="nf">make_dir</span>           <span class="c1"># =&gt; Pathname("/one")</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/one"</span><span class="p">).</span><span class="nf">make_dir</span><span class="p">.</span><span class="nf">make_dir</span>  <span class="c1"># =&gt; Pathname("/one")</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_make_path">#make_path</h5>
+<div class="paragraph">
+<p>Provides alternative <code>#mkpath</code> behavior by always answering itself (even when full path exists) and
+not throwing errors when directory does exist in order to ensure the pathname can be chained.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"/one/two/three"</span><span class="p">).</span><span class="nf">make_path</span>            <span class="c1"># =&gt; Pathname("/one/two/three")</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/one/two/three"</span><span class="p">).</span><span class="nf">make_path</span><span class="p">.</span><span class="nf">make_path</span>  <span class="c1"># =&gt; Pathname("/one/two/three")</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_name">#name</h5>
+<div class="paragraph">
+<p>Answers file name without extension.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"example.txt"</span><span class="p">).</span><span class="nf">name</span> <span class="c1"># =&gt; Pathname("example")</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_relative_parent">#relative_parent</h5>
+<div class="paragraph">
+<p>Answers relative path from parent directory. This is a complement to <code>#relative_path_from</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"/one/two/three"</span><span class="p">).</span><span class="nf">relative_parent</span><span class="p">(</span><span class="s2">"/one"</span><span class="p">)</span> <span class="c1"># =&gt; Pathname "two"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_remove_dir">#remove_dir</h5>
+<div class="paragraph">
+<p>Provides alternative <code>#rmdir</code> behavior by always answering itself (even when full path exists) and
+not throwing errors when directory does exist in order to ensure the pathname can be chained.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"/test"</span><span class="p">).</span><span class="nf">make_dir</span><span class="p">.</span><span class="nf">remove_dir</span><span class="p">.</span><span class="nf">exist?</span>  <span class="c1"># =&gt; false</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/test"</span><span class="p">).</span><span class="nf">remove_dir</span>                  <span class="c1"># =&gt; Pathname("/test")</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/test"</span><span class="p">).</span><span class="nf">remove_dir</span><span class="p">.</span><span class="nf">remove_dir</span>       <span class="c1"># =&gt; Pathname("/test")</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_remove_tree">#remove_tree</h5>
+<div class="paragraph">
+<p>Provides alternative <code>#rmtree</code> behavior by always answering itself (even when full path exists) and
+not throwing errors when directory does exist in order to ensure the pathname can be chained.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">parent_path</span> <span class="o">=</span> <span class="no">Pathname</span> <span class="s2">"/one"</span>
+<span class="n">child_path</span> <span class="o">=</span> <span class="n">parent_path</span><span class="p">.</span><span class="nf">join</span> <span class="s2">"two"</span>
+
+<span class="n">child_path</span><span class="p">.</span><span class="nf">make_path</span>
+<span class="n">child_path</span><span class="p">.</span><span class="nf">remove_tree</span>  <span class="c1"># =&gt; Pathname "/one/two"</span>
+<span class="n">child_path</span><span class="p">.</span><span class="nf">exist?</span>       <span class="c1"># =&gt; false</span>
+<span class="n">paremt_path</span><span class="p">.</span><span class="nf">exist?</span>      <span class="c1"># =&gt; true</span>
+
+<span class="n">child_path</span><span class="p">.</span><span class="nf">make_path</span>
+<span class="n">parent_path</span><span class="p">.</span><span class="nf">remove_tree</span>  <span class="c1"># =&gt; Pathname "/one"</span>
+<span class="n">child_path</span><span class="p">.</span><span class="nf">exist?</span>        <span class="c1"># =&gt; false</span>
+<span class="n">parent_path</span><span class="p">.</span><span class="nf">exist?</span>       <span class="c1"># =&gt; false</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_rewrite">#rewrite</h5>
+<div class="paragraph">
+<p>When given a block, it provides the contents of the recently read file for manipulation and
+immediate writing back to the same file.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"/test.txt"</span><span class="p">).</span><span class="nf">rewrite</span>                                           <span class="c1"># =&gt; Pathname("/test.txt")</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"/test.txt"</span><span class="p">).</span><span class="nf">rewrite</span> <span class="p">{</span> <span class="o">|</span><span class="n">body</span><span class="o">|</span> <span class="n">body</span><span class="p">.</span><span class="nf">sub</span> <span class="s2">"[token]"</span><span class="p">,</span> <span class="s2">"example"</span> <span class="p">}</span>  <span class="c1"># =&gt; Pathname("/test.txt")</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_touch">#touch</h5>
+<div class="paragraph">
+<p>Updates access and modification times for path. Defaults to current time.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"example.txt"</span><span class="p">).</span><span class="nf">touch</span>               <span class="c1"># =&gt; Pathname("example.txt")</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"example.txt"</span><span class="p">).</span><span class="nf">touch</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># =&gt; Pathname("example.txt")</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_write">#write</h5>
+<div class="paragraph">
+<p>Writes to file and answers itself so it can be chained. See <code>IO.write</code> for details on additional
+options.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Pathname</span><span class="p">(</span><span class="s2">"example.txt"</span><span class="p">).</span><span class="nf">write</span> <span class="s2">"test"</span>             <span class="c1"># =&gt; Pathname("example.txt")</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"example.txt"</span><span class="p">).</span><span class="nf">write</span> <span class="s2">"test"</span><span class="p">,</span> <span class="ss">offset: </span><span class="mi">1</span>  <span class="c1"># =&gt; Pathname("example.txt")</span>
+<span class="no">Pathname</span><span class="p">(</span><span class="s2">"example.txt"</span><span class="p">).</span><span class="nf">write</span> <span class="s2">"test"</span><span class="p">,</span> <span class="ss">mode: </span><span class="s2">"a"</span>  <span class="c1"># =&gt; Pathname("example.txt")</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_string">String</h4>
+<div class="sect4">
+<h5 id="_blank">#blank?</h5>
+<div class="paragraph">
+<p>Answers <code>true</code>/<code>false</code> based on whether string is blank, <code>&lt;space&gt;</code>, <code>\n</code>, <code>\t</code>, and/or <code>\r</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">" </span><span class="se">\n\t\r</span><span class="s2">"</span><span class="p">.</span><span class="nf">blank?</span> <span class="c1"># =&gt; true</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_camelcase">#camelcase</h5>
+<div class="paragraph">
+<p>Answers a camelcased string.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">"this_is_an_example"</span><span class="p">.</span><span class="nf">camelcase</span> <span class="c1"># =&gt; "ThisIsAnExample"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_down">#down</h5>
+<div class="paragraph">
+<p>Answers string with only first letter downcased.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">"EXAMPLE"</span><span class="p">.</span><span class="nf">down</span> <span class="c1"># =&gt; "eXAMPLE"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_first">#first</h5>
+<div class="paragraph">
+<p>Answers first character of a string or first set of characters if given a number.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">"example"</span><span class="p">.</span><span class="nf">first</span>    <span class="c1"># =&gt; "e"</span>
+<span class="s2">"example"</span><span class="p">.</span><span class="nf">first</span> <span class="mi">4</span>  <span class="c1"># =&gt; "exam"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_indent">#indent</h5>
+<div class="paragraph">
+<p>Answers string indented by two spaces by default.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">"example"</span><span class="p">.</span><span class="nf">indent</span>                  <span class="c1"># =&gt; "  example"</span>
+<span class="s2">"example"</span><span class="p">.</span><span class="nf">indent</span> <span class="mi">0</span>                <span class="c1"># =&gt; "example"</span>
+<span class="s2">"example"</span><span class="p">.</span><span class="nf">indent</span> <span class="o">-</span><span class="mi">1</span>               <span class="c1"># =&gt; "example"</span>
+<span class="s2">"example"</span><span class="p">.</span><span class="nf">indent</span> <span class="mi">2</span>                <span class="c1"># =&gt; "    example"</span>
+<span class="s2">"example"</span><span class="p">.</span><span class="nf">indent</span> <span class="mi">3</span><span class="p">,</span> <span class="ss">padding: </span><span class="s2">" "</span>  <span class="c1"># =&gt; "   example"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_last">#last</h5>
+<div class="paragraph">
+<p>Answers last character of a string or last set of characters if given a number.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">"instant"</span><span class="p">.</span><span class="nf">last</span>    <span class="c1"># =&gt; "t"</span>
+<span class="s2">"instant"</span><span class="p">.</span><span class="nf">last</span> <span class="mi">3</span>  <span class="c1"># =&gt; "ant"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_snakecase">#snakecase</h5>
+<div class="paragraph">
+<p>Answers a snakecased string.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">"ThisIsAnExample"</span><span class="p">.</span><span class="nf">snakecase</span> <span class="c1"># =&gt; "this_is_an_example"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_titleize">#titleize</h5>
+<div class="paragraph">
+<p>Answers titleized string.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">"ThisIsAnExample"</span><span class="p">.</span><span class="nf">titleize</span> <span class="c1"># =&gt; "This Is An Example"</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_to_bool">#to_bool</h5>
+<div class="paragraph">
+<p>Answers string as a boolean.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">"true"</span><span class="p">.</span><span class="nf">to_bool</span>     <span class="c1"># =&gt; true</span>
+<span class="s2">"yes"</span><span class="p">.</span><span class="nf">to_bool</span>      <span class="c1"># =&gt; true</span>
+<span class="s2">"1"</span><span class="p">.</span><span class="nf">to_bool</span>        <span class="c1"># =&gt; true</span>
+<span class="s2">""</span><span class="p">.</span><span class="nf">to_bool</span>         <span class="c1"># =&gt; false</span>
+<span class="s2">"example"</span><span class="p">.</span><span class="nf">to_bool</span>  <span class="c1"># =&gt; false</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_up">#up</h5>
+<div class="paragraph">
+<p>Answers string with only first letter upcased.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="s2">"example"</span><span class="p">.</span><span class="nf">up</span> <span class="c1"># =&gt; "Example"</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_string_io">String IO</h4>
+<div class="sect4">
+<h5 id="_reread_2">#reread</h5>
+<div class="paragraph">
+<p>Answers full string by rewinding to beginning of string and reading all content.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="n">io</span> <span class="o">=</span> <span class="no">StringIO</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">write</span> <span class="s2">"This is a test."</span>
+
+<span class="n">io</span><span class="p">.</span><span class="nf">reread</span>    <span class="c1"># =&gt; "This is a test."</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">reread</span> <span class="mi">4</span>  <span class="c1"># =&gt; "This"</span>
+
+<span class="n">buffer</span> <span class="o">=</span> <span class="s2">""</span><span class="p">.</span><span class="nf">dup</span>
+<span class="n">io</span><span class="p">.</span><span class="nf">reread</span><span class="p">(</span><span class="ss">buffer: </span><span class="n">buffer</span><span class="p">)</span>  <span class="c1"># =&gt; "This is a test."</span>
+<span class="n">buffer</span>                     <span class="c1"># =&gt; "This is a test."</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_struct">Struct</h4>
+<div class="sect4">
+<h5 id="_keyworded">.keyworded?</h5>
+<div class="paragraph">
+<p>Answers whether a struct was constructed with keyword or positional arguments.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Struct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">keyword_init: </span><span class="kp">true</span><span class="p">).</span><span class="nf">keyworded?</span>  <span class="c1"># =&gt; true</span>
+<span class="no">Struct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:a</span><span class="p">).</span><span class="nf">keyworded?</span>                      <span class="c1"># =&gt; false</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_with_keywords">.with_keywords</h5>
+<div class="paragraph">
+<p>Answers a struct instance with given keyword arguments regardless of
+whether the struct was constructed with positional or keyword arguments.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_keywords</span> <span class="ss">a: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">2</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">3</span>  <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_keywords</span> <span class="ss">a: </span><span class="mi">1</span>              <span class="c1"># =&gt; #&lt;struct a=1, b=nil, c=nil&gt;</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_keywords</span> <span class="ss">c: </span><span class="mi">1</span>              <span class="c1"># =&gt; #&lt;struct a=nil, b=nil, c=1&gt;</span>
+
+<span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">,</span> <span class="ss">keyword_init: </span><span class="kp">true</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_keywords</span> <span class="ss">a: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">2</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">3</span>  <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_keywords</span> <span class="ss">a: </span><span class="mi">1</span>              <span class="c1"># =&gt; #&lt;struct a=1, b=nil, c=nil&gt;</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_keywords</span> <span class="ss">c: </span><span class="mi">1</span>              <span class="c1"># =&gt; #&lt;struct a=nil, b=nil, c=1&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_with_positions">.with_positions</h5>
+<div class="paragraph">
+<p>Answers a struct instance with given positional arguments regardless of
+whether the struct was constructed with positional or keyword arguments.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_positions</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>  <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_positions</span> <span class="mi">1</span>        <span class="c1"># =&gt; #&lt;struct a=1, b=nil, c=nil&gt;</span>
+
+<span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">,</span> <span class="ss">keyword_init: </span><span class="kp">true</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_positions</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>  <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span>
+<span class="no">Example</span><span class="p">.</span><span class="nf">with_positions</span> <span class="mi">1</span>        <span class="c1"># =&gt; #&lt;struct a=1, b=nil, c=nil&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_merge">#merge</h5>
+<div class="paragraph">
+<p>Merges multiple attributes without mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span>
+<span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge</span> <span class="ss">a: </span><span class="mi">10</span>                <span class="c1"># =&gt; #&lt;struct a=10, b=2, c=3&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge</span> <span class="ss">a: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">30</span>         <span class="c1"># =&gt; #&lt;struct a=10, b=2, c=30&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge</span> <span class="ss">a: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">20</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">30</span>  <span class="c1"># =&gt; #&lt;struct a=10, b=20, c=30&gt;</span>
+<span class="n">example</span>                            <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span>
+
+<span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">,</span> <span class="ss">keyword_init: </span><span class="kp">true</span>
+<span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="p">[</span><span class="ss">a: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">2</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">3</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge</span> <span class="ss">a: </span><span class="mi">10</span>                <span class="c1"># =&gt; #&lt;struct a=10, b=2, c=3&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge</span> <span class="ss">a: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">30</span>         <span class="c1"># =&gt; #&lt;struct a=10, b=2, c=30&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge</span> <span class="ss">a: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">20</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">30</span>  <span class="c1"># =&gt; #&lt;struct a=10, b=20, c=30&gt;</span>
+<span class="n">example</span>                            <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_merge_2">#merge!</h5>
+<div class="paragraph">
+<p>Merges multiple attributes while mutating itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span>
+<span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge!</span> <span class="ss">a: </span><span class="mi">10</span>                <span class="c1"># =&gt; #&lt;struct a=10, b=2, c=3&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge!</span> <span class="ss">a: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">30</span>         <span class="c1"># =&gt; #&lt;struct a=10, b=2, c=30&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge!</span> <span class="ss">a: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">20</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">30</span>  <span class="c1"># =&gt; #&lt;struct a=10, b=20, c=30&gt;</span>
+<span class="n">example</span>                             <span class="c1"># =&gt; #&lt;struct a=10, b=20, c=30&gt;</span>
+
+<span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">,</span> <span class="ss">keyword_init: </span><span class="kp">true</span>
+<span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="p">[</span><span class="ss">a: </span><span class="mi">1</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">2</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">3</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge!</span> <span class="ss">a: </span><span class="mi">10</span>                <span class="c1"># =&gt; #&lt;struct a=10, b=2, c=3&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge!</span> <span class="ss">a: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">30</span>         <span class="c1"># =&gt; #&lt;struct a=10, b=2, c=30&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">merge!</span> <span class="ss">a: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">b: </span><span class="mi">20</span><span class="p">,</span> <span class="ss">c: </span><span class="mi">30</span>  <span class="c1"># =&gt; #&lt;struct a=10, b=20, c=30&gt;</span>
+<span class="n">example</span>                             <span class="c1"># =&gt; #&lt;struct a=10, b=20, c=30&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_revalue">#revalue</h5>
+<div class="paragraph">
+<p>Transforms values without mutating itself. An optional hash can be supplied to pinpoint and
+transform specific attributes. In the event that a block isn’t supplied, the struct will answer
+itself since there is nothing to operate on. Behavior is the same regardless of whether the struct
+is constructed using positional or keyword arguments. A positional struct is used in the examples
+below but a keyword struct would work too.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">revalue</span> <span class="p">{</span> <span class="o">|</span><span class="n">value</span><span class="o">|</span> <span class="n">value</span> <span class="o">*</span> <span class="mi">2</span> <span class="p">}</span>                             <span class="c1"># =&gt; #&lt;struct a=2, b=4, c=6&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">revalue</span><span class="p">(</span><span class="ss">c: </span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">previous</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span> <span class="n">previous</span> <span class="o">+</span> <span class="n">current</span> <span class="p">}</span>  <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=5&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">revalue</span> <span class="ss">c: </span><span class="mi">2</span>                                              <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">revalue</span>                                                   <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span>
+<span class="n">example</span>                                                           <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_revalue_2">#revalue!</h5>
+<div class="paragraph">
+<p>Transforms values while mutating itself. An optional hash can be supplied to pinpoint and transform
+specific attributes. In the event that a block isn’t supplied, the struct will answer itself since
+there is nothing to operate on. Behavior is the same regardless of whether the struct is constructed
+using positional or keyword arguments. A positional struct is used in the examples below but a
+keyword struct would work too.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="ruby"><span class="no">Example</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">revalue!</span> <span class="p">{</span> <span class="o">|</span><span class="n">value</span><span class="o">|</span> <span class="n">value</span> <span class="o">*</span> <span class="mi">2</span> <span class="p">}</span>                             <span class="c1"># =&gt; #&lt;struct a=2, b=4, c=6&gt;</span>
+<span class="n">example</span>                                                            <span class="c1"># =&gt; #&lt;struct a=2, b=4, c=6&gt;</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">revalue!</span><span class="p">(</span><span class="ss">c: </span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">previous</span><span class="p">,</span> <span class="n">current</span><span class="o">|</span> <span class="n">previous</span> <span class="o">+</span> <span class="n">current</span> <span class="p">}</span>  <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=5&gt;</span>
+<span class="n">example</span>                                                            <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=5&gt;</span>
+
+<span class="n">example</span> <span class="o">=</span> <span class="no">Example</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">revalue!</span> <span class="ss">c: </span><span class="mi">2</span>                                              <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span>
+<span class="n">example</span><span class="p">.</span><span class="nf">revalue!</span>                                                   <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span>
+<span class="n">example</span>                                                            <span class="c1"># =&gt; #&lt;struct a=1, b=2, c=3&gt;</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_development">Development</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To contribute, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">git clone https://github.com/bkuhlmann/refinements.git
+<span class="nb">cd </span>refinements
+bin/setup</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also use the IRB console for direct access to all objects:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">bin/console</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tests">Tests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To test, run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">bundle <span class="nb">exec </span>rake</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_versioning">Versioning</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Read <a href="https://semver.org/">Semantic Versioning</a> for details. Briefly, it means:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Major (X.y.z) - Incremented for any backwards incompatible public API changes.</p>
+</li>
+<li>
+<p>Minor (x.Y.z) - Incremented for new, backwards compatible, public API enhancements/fixes.</p>
+</li>
+<li>
+<p>Patch (x.y.Z) - Incremented for small, backwards compatible, bug fixes.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_code_of_conduct">Code of Conduct</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Read <a href="https://www.alchemists.io/code_of_conduct">Code of Conduct</a> for details.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_contributions">Contributions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Read <a href="https://www.alchemists.io/projects/contributions">Contributions</a> for details.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_license">License</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Read <a href="https://www.alchemists.io/projects/licenses/apache">License</a> for details.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_history">History</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Read <a href="https://www.alchemists.io/projects/refinements/changes.html">Changes</a> for details.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_credits">Credits</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Engineered by <a href="https://www.alchemists.io/team/brooke_kuhlmann">Brooke Kuhlmann</a>.</p>
+</div>
+</div>
+</div>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <footer class="visitor-portal-footer">
+  <ul class="visitor-portal-footer-groups">
+    <li>© 2010-2021</li>
+
+    <li>
+      <h2>Culture</h2>
+      <ul>
+        <li><a href="https://www.alchemists.io/oath">Oath</a></li>
+        <li><a href="https://www.alchemists.io/mission">Mission</a></li>
+        <li><a href="https://www.alchemists.io/values">Values</a></li>
+        <li><a href="https://www.alchemists.io/code_of_conduct">Code of Conduct</a></li>
+        <li><a href="https://www.alchemists.io/engineering">Engineering</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <h2>About</h2>
+      <ul>
+        <li><a href="https://www.alchemists.io/team">Team</a></li>
+        <li><a href="https://www.alchemists.io/stack">Stack</a></li>
+        <li><a href="https://www.alchemists.io/location">Location</a></li>
+        <li><a href="https://www.alchemists.io/history">History</a></li>
+      </ul>
+    </li>
+  </ul>
+</footer>
+
+</div>
+
+  
+
+</body></html>

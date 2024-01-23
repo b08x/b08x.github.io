@@ -14,32 +14,37 @@ introduction: Greetings! In this notebook entry, we will walk through how to use
 ---
 
 
-
-```mermaid!
-mindmap
-        Root
-            A
-              B
-              C
 ```
-
-
-
-
 ```bash
 
 +---------------------------+
 |        NLP RubyGems         |------{docker pull -p 8080:8080 b08x/nlp-notebook:latest}
 +---------------------------+
-|     Python Data Science     |-----{docker pull -p 8080:8080 b08x/datascience-notebook:latest}
+|     Python Data Science     |------{docker pull -p 8080:8080 b08x/datascience-notebook:latest}
 +---------------------------+
-|      Base Jupyter Image     |----{docker pull -p 8080:8080 b08x/minimal-notebook:latest}
+|      Base Jupyter Image     |------{docker pull -p 8080:8080 b08x/minimal-notebook:latest}
 +---------------------------+
 |        Docker Engine        |
 +---------------------------+
 
 ```
 
+```bash
+       base                    #docker-tag:  :latest
+         |                                   :<version>
+         |
+       tools                   #docker-tag:  :latest-tools
+      /  |  \                                :<version>-tools
+     /   |   \
+infra  azure  aws              #docker-tag:  :latest-infra     :latest-azure     :latest-aws
+               |                             :<version>-infra  :<version>-azure  :<version>-aws
+               |
+             awsk8s            #docker-tag:  :latest-awsk8s
+              /  \                           :<version>-awsk8s
+             /    \
+        awskops  awshelm       #docker-tag   :latest-awskops     :latest-awshelm
+                                             :<version>-awskops  :<version>-awshelm
+```
 
 
 ## install|usage

@@ -14,9 +14,22 @@ subtitle: Ansible Collection For Audio Production on Linux
 title: SyncopatedIaC
 ---
 
-[[Ansible]]
+## Ansible - Linux Desktop Survey
 
-[[Open Source Audio]]
+```markdown
+1. Describe the process of configuring Linux desktops using Ansible in your environment. Include information on:
+   - Ansible roles utilized
+   - Specific configurations managed
+   - Any unique considerations or customizations
+   - Overall approach to ensuring consistency and standardization in desktop configurations
+
+2. How do you handle user configurations for Linux desktops through Ansible? Are there any unique considerations for user accounts in an audio production setup?
+3. Are there specific challenges you've encountered when configuring and managing Linux desktops for audio production with Ansible? Please provide details.
+4. What role does Ansible play in software installation and updates on Linux desktops within your audio production environment?
+5. omitWould you be open to sharing specific Ansible playbook examples or configurations related to desktop management in your audio production setup? (Yes/No)
+```
+
+[[Audio]]
 
 
 
