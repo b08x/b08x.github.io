@@ -4,6 +4,7 @@ include:
   - "_projects"
   - "_articles"
 exclude:
+  - "textgenerator/"
   - "_templates/"
   - "_drafts/"
   - "_includes/notes_graph.json"
