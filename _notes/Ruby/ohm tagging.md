@@ -2,7 +2,7 @@
 layout: note
 title: ohm tagging
 subtitle: 
-category: 
+category: Ruby
 tags:
   - ruby
   - redis
@@ -99,4 +99,59 @@ end
 
 
 So, the goal is to make sure that the document text is extracted from the document. On the initial import, a document is created, if it doesn't already exist, the path, file name and the file type. So once that object is created, then the content is extracted, stored in a variable, and if it is not empty, or the class is something other than a string, the document object will be updated with the content, which is just the raw text, and then the document is saved to the database. So I guess trying to modularize this as much as possible, so like first pass, create the document with the path name and type, second pass, extract the raw text from the document and save it. So I guess this is to account for something being missed on the first pass, if the import is run again, and the file path is existing already in the database, that'll throw a unique index violation, at which point rescue kicks in. And this is what needs refactoring as unique index violation. Anytime error occurs, then instead of document create, it's document find by the file path. It just needs to be refactored so that the fine, or so that the, well, for once of the extract text function doesn't, or isn't listed, run twice, there's duplicate code, suppose one way to do that would be to run document find first, if that turns up empty, then do create.
+
+---
+
+## ohm datatypes
+
+```ruby
+require "bigdecimal"
+require "date"
+require "json"
+require "time"
+require "set"
+
+module Ohm
+  module DataTypes
+    module Type
+      Integer   = ->(x) { x && x.to_i }
+      Decimal   = ->(x) { x && BigDecimal(x.to_s) }
+      Float     = ->(x) { x && x.to_f }
+      Symbol    = ->(x) { x && x.to_sym }
+      Boolean   = ->(x) { !!x }
+      Time      = ->(t) { t && (t.kind_of?(::Time) ? t : ::Time.parse(t)) }
+      Date      = ->(d) { d && (d.kind_of?(::Date) ? d : ::Date.parse(d)) }
+      Timestamp = ->(t) { t && UnixTime.at(t.to_i) }
+      Hash      = ->(h) { h && SerializedHash[h.kind_of?(::Hash) ? h : JSON(h)] }
+      Array     = ->(a) { a && SerializedArray.new(a.kind_of?(::Array) ? a : JSON(a)) }
+      Set       = ->(s) { s && SerializedSet.new(s.kind_of?(::Set) ? s : JSON(s)) }
+    end
+
+    class UnixTime < Time
+      def to_s
+        to_i.to_s
+      end
+    end
+
+    class SerializedHash < Hash
+      def to_s
+        JSON.dump(self)
+      end
+    end
+
+    class SerializedArray < Array
+      def to_s
+        JSON.dump(self)
+      end
+    end
+
+    class SerializedSet < ::Set
+      def to_s
+        JSON.dump(to_a.sort)
+      end
+    end
+  end
+end
+```
+
 

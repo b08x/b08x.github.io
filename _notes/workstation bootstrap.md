@@ -18,10 +18,8 @@ The process up until now has been to run `yadm clone` on first login after an in
 
 A current, the scripts install some utility programs along with Ansible, after which an Ansible playbook is run from a remote workstation to complete the process.
 
+
 ## Adjusting The Process
 Using the ArchLabs installer, you can specify a command that will be executed at the end of the initial installation. The command is executed within the chroot environment as the root user.
 
-So, the goal is to configure a particular Ansible collection to work with `ansible-pull` running as root within chroot environment. Currently this collection is configured to run as the user, using `sudo` for privileged escalation. In this case of using the collection with an installer like this, it makes sense to run the playbook as root, using `su` to execute tasks as the user when necessary.
-
-
-
+So, the goal is to configure a particular Ansible collection to work with `ansible-pull` running as root within chroot environment. Currently this collection is configured to run as the user, using `sudo` for privileged escalation. In this case of using the collection with an installer like this, it makes sense to run the playbook as root, using `su` to execute tasks as the user 

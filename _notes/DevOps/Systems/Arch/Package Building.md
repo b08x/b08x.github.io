@@ -17,7 +17,7 @@ what is the difference...
 1. **Install `devtools` and `repoctl`**
    - Use the following command to install both tools using `pacman`:
      ```bash
-     paru -S devtools repoctl
+paru -S devtools repoctl
      ```
 
 2. **Configuration Setup**

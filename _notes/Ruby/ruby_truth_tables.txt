@@ -1,3 +1,0 @@
-# creates arrays of booleans
-
-https://www.alchemists.io/screencasts/ruby_truth_tables/

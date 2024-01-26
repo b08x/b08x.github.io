@@ -9,7 +9,6 @@ title: Home
 ---
 
 <strong>Recently updated pages</strong>
-
 <ul>
   {% assign recent_notes = site.articles | sort: "last_modified_at_timestamp" | reverse %}
   {% for note in recent_notes limit: 25 %}
@@ -24,7 +23,7 @@ title: Home
 
 <ul>
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
-  {% for note in recent_notes limit: 25 %}
+  {% for note in recent_notes limit: 50 %}
   {% if note.layout == 'page' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
@@ -45,7 +44,7 @@ title: Home
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
   {% endif %}
-  {% if note.layout == 'index' %}
+  {% if note.layout == 'folder' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>

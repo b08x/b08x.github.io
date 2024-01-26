@@ -40,7 +40,7 @@ A language model trained on data related specifically to the Linux audio domain.
 
 [[SyncopatedIaC]]
 
-[[Training]]
+[[Generating Sample Data with Inference]]
 
 [[notebook]]
 

@@ -55,3 +55,21 @@ The imperative mood is a grammatical mood that forms a command or request. The i
 https://www.perplexity.ai/search/common-issues-mraIIPrASQO.WwplI8nrVA?s=u
 
 https://www.perplexity.ai/search/common-issues-mraIIPrASQO.WwplI8nrVA?s=c
+
+---
+
+## 2023-11-13
+
+**"lookback"**
+
+*For the document above, do X* - lookback
+
+Instead use: For the document *below*, do X
+
+
+## 2023-11-11
+
+**“Behave like” vs. “Act like”**
+
+> You have all encountered the guidance to use “Act like an expert of some kind or other” in your prompts. In my testing “Act Like” tends to guide chat models toward persona-driven responses. “Behave like” offers more flexibility especially when the aim is for the model to operate more like a program or a system. And, it can be used in the persona-centric contexts as well.
+
