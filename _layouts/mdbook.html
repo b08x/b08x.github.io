@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+    <style>
+      code {
+        white-space: pre-wrap;
+      }
+    
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+    
+      span.underline {
+        text-decoration: underline;
+      }
+    
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    
+      $if(quotes)$ q {
+        quotes: "“" "”" "‘" "’";
+      }
+    
+      $endif$
+    </style>
+  </head>
+
+
+  <body>
+     <nav class="row">{% include nav.html %}</nav>
+     {%- if page.video -%}
+     <header>{% include header.html %}</header>
+     {%- endif -%}
+     <main class="row">
+      {{ content }}
+    </main>
+      
+     <footer>{% include footer.html %}</footer>
+      {% include link-previews.html wrapperQuerySelector="content" %}
+
+  </body>
+</html>
+
+
+
+
+
+
+<body class="light">
+
+  /* Provide site root to javascript */
+  <script type="text/javascript">
+    var path_to_root = "";
+    var default_theme = "light";
+  </script>
+
+  /* Work around some values being stored in localStorage wrapped in quotes */
+  <script type="text/javascript">
+    try {
+      var theme = localStorage.getItem('mdbook-theme');
+      var sidebar = localStorage.getItem('mdbook-sidebar');
+
+      if (theme.startsWith('"') && theme.endsWith('"')) {
+        localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+      }
+
+      if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+        localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+      }
+    } catch (e) { }
+  </script>
+
+  /* Set the theme before any content is loaded, prevents flash */
+  <script type="text/javascript">
+    var theme;
+    try { theme = localStorage.getItem('mdbook-theme'); } catch (e) { }
+    if (theme === null || theme === undefined) { theme = default_theme; }
+    document.body.className = theme;
+    document.querySelector('html').className = theme + ' js';
+  </script>
+
+  /* Hide / unhide sidebar before it is displayed */
+  <script type="text/javascript">
+    var html = document.querySelector('html');
+    var sidebar = 'hidden';
+    if (document.body.clientWidth >= 1080) {
+      try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
+      sidebar = sidebar || 'visible';
+    }
+    html.classList.remove('sidebar-visible');
+    html.classList.add("sidebar-" + sidebar);
+  </script>
+
+  <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+    <div class="toc">
+      {{ content | toc_only }}
+    </div>
+  </nav>
+
+  <div id="page-wrapper" class="page-wrapper">
+
+    <div class="page">
+
+      <div id="menu-bar" class="menu-bar">
+        <div id="menu-bar-sticky-container">
+          <div class="left-buttons">
+            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents"
+              aria-label="Toggle Table of Contents" aria-controls="sidebar">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+
+          <h1 class="menu-title">$title$</h1>
+
+          <div class="right-buttons">
+            <a onclick="window.print()" title="Print this book" aria-label="Print this book">
+              <i id="print-button" class="fas fa-print"></i>
+            </a>
+            <a href="SyncopatedIaC.pdf" title="View PDF file" aria-label="View PDF file">
+              <i class="fas fa-file-pdf"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="content" class="content">
+        <main>
+          {{ content }}
+        </main>
+
+        <nav class="nav-wrapper" aria-label="Page navigation">
+          /* Mobile navigation buttons */
+
+          <div style="clear: both"></div>
+        </nav>
+      </div>
+    </div>
+
+    <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+    </nav>
+
+  </div>
+
+  <script src="{{ site.baseurl }}/assets/js/book.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

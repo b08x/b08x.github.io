@@ -1,8 +1,11 @@
-<a class="internal-link" href="{{ site.baseurl }}/"><b>{{ site.title }}</b></a>
-
-{% if site.github.uid %}
-<a href="https://github.com/{{ site.github.uid }}" class="socialinks__entry" target="_blank">
-    github
-    <i class="fa fa-github"></i>
-</a>
-{% endif %}
+<footer class="row">
+  <div>
+    <a class="internal-link" href="{{ site.baseurl }}/"><b>Home</b></a> |
+    {% if site.github.uid %}
+    <a href="https://github.com/{{ site.github.uid }}" class="socialinks__entry" target="_blank">
+      github
+      <i class="fa fa-github"></i>
+    </a>
+    {% endif %}
+  </div>
+</footer>

@@ -1,18 +1,16 @@
+<header>
 {%- if page.video -%}
-<header>
-    <section class="flex">
-      <div class="video-docker">
-        <video src="{{ page.video.path }}" type="video/mp4"
-          autoplay muted loop></video>
-      </div>
-      <div class="video-content space-y-2">
-        <h1 class="font-light text-6xl">{{ page.video.desc }}</h1>
-        <h3 class="font-light text-3xl">{{ page.video.caption }}</h3>
-      </div>
-    </section>
-</header>
+  <section class="flex flex-col items-center justify-center text-center text-white">
+    <div class="overflow-hidden video-docker">
+      <video class="absolute object-cover" src="{{ site.baseurl }}{{ page.video }}" type="video/mp4"
+        autoplay muted loop></video>
+    </div>
+    <div class="video-content">
+      <h1 class="font-light">{{ page.subtitle }}</h1>
+      <h3 class="font-light">{{ page.caption }}</h3>
+    </div>
+  </section>
 {%- else -%}
-<header>
   <nav class="row">{% include nav.html %}</nav>
-</header>
 {%- endif -%}
+</header>
