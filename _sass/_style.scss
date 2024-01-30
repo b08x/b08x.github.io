@@ -101,12 +101,15 @@ body {
   line-height: 1.4;
   padding: 4vh 6vw;
   overflow-x: hidden;
-  background-color: #787878;
-
+  // background-color: #ad9b56;
+  // background-color: #a38b2e;
+  background-color: #080808;
+  max-width: 80%;
   // background-image: url("/assets/img/headers/mpv-shot0001.jpg");
   // background-blend-mode: difference;
   // background-size: auto;
-  color: #060505;
+  // color: #060505;
+  color: #519196;
   font-size: 1rem;
   // display: flex;
   // flex-direction: column;
@@ -150,6 +153,8 @@ content {
 }
 
 recently {
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   ul {
     font-size: 1rem;
@@ -175,17 +180,6 @@ time {
   font-family: $font-family-ibm;
 }
 
-footer {
-  margin: 2em 0;
-  font-size: 0.8em;
-  color: mix($color-text, white, 80%);
-  padding-top: 1em;
-
-  a {
-    color: #000;
-  }
-}
-
 img {
   max-width: 100%;
   display: block;
@@ -203,10 +197,11 @@ blockquote {
   font-style: italic;
   border-radius: 1rem;
   margin-inline-start: 1rem;
+  color: black;
 
   p {
     font-family: $font-family-ibm;
-    text-align: -webkit-center;
+    // text-align: -webkit-center;
     code {
       color: #ffe40a;
       background-color: transparent;
@@ -394,6 +389,7 @@ h2 {
   font-family: $font-family-logo;
   font-weight: 500;
   font-size: 2.25rem;
+  color: yellowgreen;
 
 }
 
@@ -438,7 +434,7 @@ a {
   transition: background 300ms;
   padding: 0 0.1em;
   text-decoration: none;
-  color: #540091;
+  color: #8e19e2;
   // color: #c1185c;
   font-weight: 500;
   font-style: italic;
@@ -500,24 +496,7 @@ li {
 
 }
 
-.section-nav {
-  background-color: var(--aztec);
-  margin: 5px 0;
-  padding: 0.5rem 1rem;
-  border: 1px solid #e8e8e8;
-  border-radius: 3px;
-}
 
-nav {
-  padding: 0.5rem;
-  justify-content: center;
-
-  a {
-    color: #ffaf3b;
-    font-style: unset;
-  }
-
-}
 
 #markdown-content {
   font-size: 1.25rem;
@@ -573,7 +552,7 @@ code {
   background: transparent;
   padding: 0.1em 0.2em;
   border-radius: 4px;
-  color: var(--midnight-ocean);
+  color: burlywood;
   font-size: 1.125rem;
   text-wrap: balance;
   word-break: auto-phrase;
@@ -622,7 +601,7 @@ table {
   tbody {
     tr {
       border-bottom: 1px solid #F1F1F1;
-      color: $lfs-grey;
+      color: #f71aba;
 
       td {
         padding: 10px;
@@ -770,21 +749,6 @@ img.figure {
   margin-bottom: 0;
 }
 
-// video {
-//   position: fixed;
-//   right: 0;
-//   bottom: 0;
-//   min-width: 100%;
-//   min-height: 100%;
-//   width: auto;
-//   height: auto;
-//   z-index: -100;
-//   background-size: cover;
-//   mix-blend-mode: color-burn;
-// }
-
-/*****************************/
-
 .overlay {
   width: 400px;
   height: 400px;
@@ -826,77 +790,37 @@ p a.orange {
   color: #f27950;
 }
 
-
-#button {
-  display: inline-block;
-  background-color: #FF9800;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  border-radius: 4px;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  transition: background-color .3s,
-    opacity .5s, visibility .5s;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 1000;
+.section-nav {
+  background-color: var(--aztec);
+  margin: 5px 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
 }
 
-#button::after {
-  content: "\f077";
-  font-family: FontAwesome;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 2em;
-  line-height: 50px;
-  color: #fff;
+nav {
+  padding: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+
+  a {
+    color: #919651;
+    font-style: unset;
+  }
+
 }
 
-#button:hover {
-  cursor: pointer;
-  background-color: #333;
+footer {
+  margin: 2em 0;
+  font-size: 1em;
+  color: mix($color-text, white, 80%);
+  padding-top: 1em;
+  justify-content: center;
+
+  a {
+    color: hsl(175, 40%, 41%);
+  }
 }
-
-#button:active {
-  background-color: #555;
-}
-
-#button.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Styles for the content section */
-
-// .content {
-//   width: 77%;
-//   margin: 50px auto;
-//   font-family: 'Merriweather', serif;
-//   font-size: 17px;
-//   color: #6c767a;
-//   line-height: 1.9;
-// }
-
-
-// @media (min-width: 500px) {
-//   .content {
-//     width: 43%;
-//   }
-//   #button {
-//     margin: 30px;
-//   }
-// }
-// .content h1 {
-//   margin-bottom: -10px;
-//   color: #03a9f4;
-//   line-height: 1.5;
-// }
-// .content h3 {
-//   font-style: italic;
-//   color: #96a2a7;
-// }
 
 header {
   section {
@@ -933,7 +857,6 @@ header {
     flex-direction: column;
     gap: 2rem; 
   }
-
 
 }
 

@@ -9,16 +9,27 @@ title: Home
 ---
 
 <strong>Recently updated pages</strong>
+<ul>
+  {% assign recent_notes = site.articles | sort: "last_modified_at_timestamp" | reverse %}
+  {% for note in recent_notes limit: 25 %}
+  {% if note.layout == 'article' %}
+    <li>
+      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+    </li>
+  {% endif %}
+
+  {% endfor %}
+</ul>
 
 <ul>
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
-  {% for note in recent_notes limit: 25 %}
+  {% for note in recent_notes limit: 50 %}
   {% if note.layout == 'page' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
   {% endif %}
-  {% if note.layout == 'dox' %}
+  {% if note.layout == 'article' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
@@ -56,8 +67,3 @@ title: Home
   {% endfor %}
 </ul>
 
-# Welcome!
-
-<p style="border-radius: 4px;">
-  Take a look at the <span style="font-weight: bold">[[graph]]</span> 
-</p>
