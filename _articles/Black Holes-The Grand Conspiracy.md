@@ -20,8 +20,6 @@ Black holes and other galaxy-related phenomena have been a source of fascination
 
 This results in the visual system receiving a degraded or challenging light source - either dimmed or warped or both. This distorts and shifts the light source that reaches our telescopes and eyes. This forces the visual system to compensate more to make sense of the image. 
 
-~~It is possible that a limitation of the human eye is a type of Metamorphopsia. Metamorphopsia is a condition in which the visual field is distorted, causing objects to appear warped or misshapen.~~ 
-
 *It makes sense that the weaker the light source, the more the brain has to compensate for the signal loss. It is also assumed that light around a black hole is moving very quickly.* 
 
 The visual system relies on a process called motion integration or inter-frame integration. This involves combining information from a sequence of blurred images to determine the true shape and position of the moving object over time. This process is also so effective that we are usually unaware of any blurring in the image.
@@ -32,8 +30,6 @@ When the eye is looking at an object that is close to the face, the image of the
 
 The brain compensates for this distortion by using a process called "retinal remapping." Retinal remapping is the process by which the brain remaps the distorted image of the object onto the retina so that it appears to be in focus. This process is so effective that we are usually unaware of any distortion in the image.
 
-In this essay, I will explore  the possibility that the human eye may be responsible for the strange behavior of light around black holes. I will argue that this could have implications for our understanding of the universe, and that redirecting our focus from outer space to introspection could help us to better understand the human condition. 
-
 The human eye is a complex organ, and our understanding of how it works is still incomplete. However, we do know that the eye is responsible for converting light into electrical signals that are sent to the brain. This process is not entirely understood, but it is believed that the eye's photoreceptors, which are located in the retina, play a key role. Photoreceptors are cells that are sensitive to light, and they convert light energy into electrical signals. These signals are then sent to the brain, where they are interpreted as visual images.
 
 One possible explanation for the strange behavior of light around black holes is that the human eye is not able to accurately perceive light that is emitted  from such a distance. 
@@ -43,7 +39,3 @@ This could be due to the fact that  the round, spherical, globular shape of the 
 Another possibility  is that the round, spherical shape of the eyeball helps us to perceive distance. This is because when we look at an object, the light rays from that object travel through the eyeball and are focused on the retina. The retina is a thin layer of tissue at the back of the eye that contains photoreceptor cells, which are responsible for converting light into electrical signals. These signals are then sent to the brain, where they are interpreted as visual images. The distance of an object from the eye is determined by the angle of the light rays that enter the eye. The closer the object is, the smaller the angle of the light rays. The farther away the object is, the larger the angle of the light rays. 
 
 The eyeball is not a perfect sphere, but rather a slightly flattened ellipse. This means that the light that enters the eye is not focused directly on the retina, but rather on a slightly curved surface. This curvature can cause the perception of distance to be distorted, making it appear as though objects are closer or farther away than they actually are.
-
-Whatever the reason, the strange behavior of light around black holes may be caused by the limitations of the human eye. This could have implications for our understanding of the universe, and it suggests that ~~we need to be careful about how we interpret the data that we collect from these objects~~.
-
-Whether it's a dim image or one warped by relativistic effects near a black hole, the outcome is a need for more visual processing to reconstruct the image.

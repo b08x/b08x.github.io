@@ -1,4 +1,11 @@
 ---
+layout: note
+title: Ruby NLP Gems
+subtitle: 
+category: Ruby
+tags:
+  - llm
+links:
 ---
 
 
@@ -23,11 +30,6 @@
 | [composable_operations](https://github.com/t6d/composable_operations.git) | tool set for creating multiple operation pipelines                     |  
 | [optimist](https://www.manageiq.org/optimist/)| commandline option parser |
 
-
-
-
-
-Certainly! The table presents a collection of RubyGems, each serving distinct functions and functionalities in the realm of software development. An overview of each RubyGem used in this project:
 
 1. **langchainrb**
    - [langchainrb GitHub Link](https://github.com/andreibondarev/langchainrb.git)
@@ -96,15 +98,3 @@ Certainly! The table presents a collection of RubyGems, each serving distinct fu
 17. **composable_operations**
     - [composable_operations GitHub Link](https://github.com/t6d/composable_operations.git)
     - A versatile toolset, composable_operations facilitates the creation of multiple operation pipelines, enhancing the modularity and extensibility of software development projects.
-
-Each of these RubyGems offers a unique set of functionalities, contributing to the diverse landscape of text processing, data analysis, and software development in the Ruby programming ecosystem.
-
-
-
-## open text summarizer
-
-to test settings for `summarize`
-
-https://www.splitbrain.org/services/ots
-
-/cod

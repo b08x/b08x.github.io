@@ -101,12 +101,15 @@ body {
   line-height: 1.4;
   padding: 4vh 6vw;
   overflow-x: hidden;
-  background-color: #2E494E;
+  // background-color: #ad9b56;
+  // background-color: #a38b2e;
+  background-color: #080808;
   max-width: 80%;
   // background-image: url("/assets/img/headers/mpv-shot0001.jpg");
   // background-blend-mode: difference;
   // background-size: auto;
-  color: #060505;
+  // color: #060505;
+  color: #519196;
   font-size: 1rem;
   // display: flex;
   // flex-direction: column;
@@ -194,10 +197,11 @@ blockquote {
   font-style: italic;
   border-radius: 1rem;
   margin-inline-start: 1rem;
+  color: black;
 
   p {
     font-family: $font-family-ibm;
-    text-align: -webkit-center;
+    // text-align: -webkit-center;
     code {
       color: #ffe40a;
       background-color: transparent;
@@ -385,6 +389,7 @@ h2 {
   font-family: $font-family-logo;
   font-weight: 500;
   font-size: 2.25rem;
+  color: yellowgreen;
 
 }
 
@@ -429,7 +434,7 @@ a {
   transition: background 300ms;
   padding: 0 0.1em;
   text-decoration: none;
-  color: #540091;
+  color: #8e19e2;
   // color: #c1185c;
   font-weight: 500;
   font-style: italic;
@@ -547,7 +552,7 @@ code {
   background: transparent;
   padding: 0.1em 0.2em;
   border-radius: 4px;
-  color: var(--midnight-ocean);
+  color: burlywood;
   font-size: 1.125rem;
   text-wrap: balance;
   word-break: auto-phrase;
@@ -596,7 +601,7 @@ table {
   tbody {
     tr {
       border-bottom: 1px solid #F1F1F1;
-      color: $lfs-grey;
+      color: #f71aba;
 
       td {
         padding: 10px;
@@ -799,7 +804,7 @@ nav {
   margin-bottom: 2rem;
 
   a {
-    color: #ffaf3b;
+    color: #919651;
     font-style: unset;
   }
 
@@ -813,7 +818,7 @@ footer {
   justify-content: center;
 
   a {
-    color: #000;
+    color: hsl(175, 40%, 41%);
   }
 }
 

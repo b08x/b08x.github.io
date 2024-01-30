@@ -11,7 +11,7 @@ links:
 
 ```ruby
 Dir.chdir(ENV["MEDIA_ROOT"]) do
-	outputFile = `fd -t f -a | fzf --preview "cat {}"`.strip
+	ouputFile = `fd -t f -a | fzf --preview "cat {}"`.strip
 	return outputFile
 end
 ```
@@ -19,7 +19,7 @@ end
 create a ruby function to traverse a list of files using the iterator design pattern
 Sure! Here’s an example of a Ruby function that uses the iterator design pattern to traverse a list of files:
 
-```
+```ruby
 class FileIterator
   def initialize(files)
     @files = files
@@ -54,7 +54,7 @@ Let me know if you need any further assistance!
 
 To use a hash with the iterator method, you can modify the `FileIterator` class to accept a hash instead of an array. Here’s an updated version of the code:
 
-```
+```ruby
 class FileIterator
   def initialize(files)
     @files = files

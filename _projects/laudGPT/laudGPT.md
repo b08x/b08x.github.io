@@ -2,7 +2,7 @@
 layout: project
 title: laudGPT
 subtitle: linux audio users and developers ai assistant
-image: /assets/img/headers/image011.png
+image: /assets/img/headers/image011-ascii-art.png
 permalink: /laudgpt
 status: planning
 ---
@@ -42,7 +42,7 @@ A language model trained on data related specifically to the Linux audio domain.
 
 [[Generating Sample Data with Inference]]
 
-[[notebook]]
+
 
 ---
 ```
