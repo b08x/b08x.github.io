@@ -1,6 +1,7 @@
 ---
 ---
 
+
 #ansible 
 
 
@@ -9,6 +10,7 @@
 
 instead, gather facts only when needed...
 
+{% raw %}
 ```yaml
 ---
 - name: Restricted fact gathering example
@@ -53,7 +55,7 @@ instead, gather facts only when needed...
             msg: "{{ ansible_devices[device].size }}, {{ total_usb_disk_space }} bytes"
           when: target_parted_data is defined
 ```
-
+{% endraw %}
 
 * [mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html#noteworthy-differences)
 

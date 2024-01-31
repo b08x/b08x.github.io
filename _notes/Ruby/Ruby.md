@@ -9,9 +9,55 @@ image:
 permalink: /ruby
 ---
 
+## [[Unless]]
+
+ 
+
+## find all the files with the timestamped suffix, then renaming those files to their original name without the suffix.
+
+```ruby
+# so, find all the files with the timestamped suffix, then renaming those files to their original name without the suffix.
+# @-----%----->---[description](
+#
+files = `fdfind --full-path -t d -t f -a -L #{Dir.pwd}`
+
+files = fix_encoding(files)
+
+files = files.split("\n")
+
+files.each do |file|
+  begin
+    matches = file.match(/(.+)(_2021-10-13_1254)/)
+    unless matches.nil?
+      p matches
+      nf = file.gsub("_2021-10-13_1254","")
+      if File.symlink?
+        FileUtils.rm(file)
+      else
+        File.rename(file,nf)
+      end
+    end
+    puts "nothing"
+  rescue StandardError =) e
+    puts "#{e.message}"
+  end
+end
+
+```
+
+---
+
+## drop_while
+```ruby
+def lines_after(lines,target)
+  lines.drop_while { |line| !line.include?(target) }
+end	
+```
+
+---
 
 
-### CodeTrans model for code documentation generation ruby
+## CodeTrans model for code documentation generation ruby
 #llm #gpt 
 
 [Pretrained model on programming language ruby using the t5 small model architecture](https://huggingface.co/SEBIS/code_trans_t5_small_code_documentation_generation_ruby_multitask?text=class+PunctuationCommand+%3C+Command%0A++def+initialize%28option%29%0A++++super%28%22punctuation%22%29%0A++++%40option+%3D+option%0A++end%0A%0A++def+execute%28text%29%0A++++Text.new%28text%29.punctuation%28%40option%29.tokenize%0A++end%0Aend)
@@ -19,19 +65,19 @@ permalink: /ruby
 
 ---
 
-#### todo: try using this with live loops in sonic-pi
+### todo: try using this with live loops in sonic-pi
 #sonic-pi 
 
 
 ```ruby
 def shutdown
-	return if @stopped
+  return if @stopped
 	@mutex.synchronize do 
-		@stopped = true
-		@executors.clear
-		@coordinators.reset
-		@client.stop
-	end
+	@stopped = true
+	@executors.clear
+	@coordinators.reset
+	@client.stop
+  end
 end
 ```
 
@@ -86,14 +132,13 @@ In the example above, you can observe that .find_all gives an array even though 
 ```ruby
 class PackageCat
   def initialize(attrs)
-		@x = attrs[:x]
-		@y = attrs[:y]
-	end
-	def hash
-		[@x, @y].Hash
-	end
+    @x = attrs[:x]
+    @y = attrs[:y]
+  end
+  def hash
+    [@x, @y].Hash
+  end
 end
-
 ```
 
 ## replace a string with an empty string by default
@@ -117,8 +162,6 @@ puts "hello".sub!("l")
 ```
 
 
-
-
 ----
 ## chaining methods
 
@@ -136,6 +179,7 @@ end
 ## forward argurments
 
 [Arguments forwarding (...) supports leading arguments](https://rubyreferences.github.io/rubychanges/3.0.html#arguments-forwarding--supports-leading-arguments)
+
 ```ruby
 def request(method, url, headers: {})
   puts "#{method.upcase} #{url} (headers=#{headers})"
@@ -165,34 +209,37 @@ logged_get('Logging', 'https://example.com', headers: {content_type: 'json'})
 https://github.com/AndyObtiva/glimmer-dsl-libui#glimmer-gui-dsl-concepts
 
 ---
+
+
 ## include extend
 f.e:
 ```ruby
 module SoxStuff
-	def get_levels(file)
-		sox stuff
-	end
+  def get_levels(file)
+    sox stuff
+  end
 end
 
 class FileObeject
-	include SoxStuff # can only access SoxStuff methods with an instance of the class
-	
-	attr_accessor :fullpath, :name, :extension
-	
-	def initialize(path)
-	end
+  include SoxStuff # can only access SoxStuff methods with an instance of the class
+
+  attr_accessor :fullpath, :name, :extension
+
+  def initialize(path)
+
+  end
 end
 
 class Library
-	extend SoxStuff # can only access SoxStuff with the class definition
+  extend SoxStuff # can only access SoxStuff with the class definition
 end
 
 FileObject.new.get_levels
-
 Library.get_levels
+
+# [source](https://www.geeksforgeeks.org/include-v-s-extend-in-ruby/)
 ```
 
-[a source](https://www.geeksforgeeks.org/include-v-s-extend-in-ruby/)
 
 ---
 ## interactive charts for ruby
@@ -382,8 +429,33 @@ str = `echo 42`.chomp # => "42"
 
 ---
 ## unless
-[ruby-unless-statement-and-unless-modifier](https://www.geeksforgeeks.org/ruby-unless-statement-and-unless-modifier/)
 
+**Common use cases for `unless`:**
+
+- **Guard clauses:** Checking conditions at the beginning of methods to return early if they aren't met.
+- **Conditional assignments:** Assigning values only if a condition is false.
+- **Conditional execution:** Performing actions only when certain conditions aren't true.
+
+**When to use `unless` vs. `if`:**
+
+- Choose `unless` when the code to be executed is more naturally expressed in terms of the condition being false.
+- Choose `if` when the code to be executed is more naturally expressed in terms of the condition being true.
+
+### Using `unless` for NLP Document Chunking:
+
+`unless` can be a helpful tool in this process by selectively excluding unwanted chunks based on specific criteria. Here are some examples:
+
+**1. Ignoring punctuation boundaries:**
+
+- **Task:** Chunk a document into noun phrases, but keep prepositions attached unless they appear at the end of the phrase.
+
+```ruby
+# - Explanation: `unless` removes trailing periods from chunks to keep prepositions like "of" within the noun phrase.
+
+chunks = text.scan(/((?:[^\s,.]+|[^,.]+[,.][^,.]+)+)/)
+chunks.map! { |chunk| chunk unless chunk.match(/\.+$/) }
+
+```
 ---
 
 ## rvm
@@ -410,48 +482,7 @@ bundle config set --local system 'true'
 ```
 
 ---
-## find all the files with the timestamped suffix, then renaming those files to their original name without the suffix.
 
-```ruby
-# so, find all the files with the timestamped suffix, then renaming those files to their original name without the suffix.
-# @-----%----->---[description](
-#
-files = `fdfind --full-path -t d -t f -a -L #{Dir.pwd}`
-
-files = fix_encoding(files)
-
-files = files.split("\n")
-
-files.each do |file|
-  begin
-    matches = file.match(/(.+)(_2021-10-13_1254)/)
-    unless matches.nil?
-      p matches
-      nf = file.gsub("_2021-10-13_1254","")
-      if File.symlink?
-        FileUtils.rm(file)
-      else
-        File.rename(file,nf)
-      end
-    end
-    puts "nothing"
-  rescue StandardError =) e
-    puts "#{e.message}"
-  end
-end
-
-```
-
----
-
-## drop_while
-```ruby
-def lines_after(lines,target)
-  lines.drop_while { |line| !line.include?(target) }
-end	
-```
-
----
 ## creates arrays of booleans
 
 https://www.alchemists.io/screencasts/ruby_truth_tables/

@@ -22,4 +22,5 @@ group :jekyll_plugins do
   gem 'jekyll-toc'
 end
 
+gem 'pry'
 # gem "vips", "~> 8.12"

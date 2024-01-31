@@ -13,15 +13,15 @@ image:
 
 An ontology establishes the fundamental concepts and their interrelationships within a particular field of knowledge.
 
- | Word              | Part of Speech | Wordnet Senses                                                              | Cognitive Grammar with Pragmatics                                              |
- |-------------------|----------------|-----------------------------------------------------------------------------|--------------------------------------------------------------------------------|
- | ontology          | noun           | 1. a branch of metaphysics concerned with the nature and relations of being | The study of the fundamental categories of being and their interrelationships. |
- | establish         | verb           | 1. to bring into existence                                                  | To create or bring about.                                                      |
- | fundamental       | adjective      | 1. of or relating to the foundation or basis of something                   | Basic or essential.                                                            |
- | concept           | noun           | 1. a general idea or notion                                                 | A mental representation of a category of things or events.                     |
- | interrelationship | noun           | 1. a relationship between two or more things                                | The way in which two or more things are connected or related.                  |
- | field             | noun           | 1. a branch of knowledge or study                                           | A domain of knowledge or activity.                                             |
- | knowledge         | noun           | 1. the sum of what is known                                                 | Information or understanding acquired through experience or education.         |
+| Word | Part of Speech | Wordnet Senses | Cognitive Grammar with Pragmatics |
+| :--: | :--: | ---- | ---- |
+| ontology | noun | a branch of metaphysics concerned with the nature and relations of being | The study of the fundamental categories of being and their interrelationships. |
+| establish | verb | to bring into existence | To create or bring about. |
+| fundamental | adjective | of or relating to the foundation or basis of something | Basic or essential. |
+| concept | noun | a general idea or notion | A mental representation of a category of things or events. |
+| interrelationship | noun | a relationship between two or more things | The way in which two or more things are connected or related. |
+| field | noun | a branch of knowledge or study | A domain of knowledge or activity. |
+| knowledge | noun | the sum of what is known | Information or understanding acquired through experience or education. |
 
 It functions like a specialized dictionary that defines terms and their rules of association. This shared vocabulary provides a common ground for understanding and communicating within that domain.
 
@@ -146,15 +146,6 @@ The ontology would function as a specialized dictionary that provides a common g
 ---
 
 
-https://tutorials.renoise.com/wiki/Linux_FAQ#Realtime_Threads
-
-https://danmackinlay.name/notebook/linux_audio.html
-
-
-
----
-
-
 |                                                                                                                                                                                               |                                                                                                                                                                                                                                                                           |
 |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Turchet, Luca, and Paolo Bouquet. "Smart Musical Instruments preset sharing: an ontology-based data access approach." _2021 IEEE 7th World Forum on Internet of Things (WF-IoT)_. IEEE, 2021. | https://github.com/muddymudskipper/aufx-o                                                                                                                                                                                                                                                                          |
@@ -192,3 +183,14 @@ https://www.reddit.com/r/audioengineering/comments/167o1i4/audio_setup_for_live_
 [^1]: https://www.ontoforce.com/knowledge-graph/ontology
 [^2]: https://graph.build/resources/ontology
 [^3]: https://www.ontoforce.com/knowledge-graph/ontology
+
+
+
+https://tutorials.renoise.com/wiki/Linux_FAQ#Realtime_Threads
+
+https://danmackinlay.name/notebook/linux_audio.html
+
+
+
+---
+

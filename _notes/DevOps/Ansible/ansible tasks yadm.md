@@ -10,6 +10,7 @@ links:
 #ansible #yadm
 
 
+{% raw %}
 ```markdown
 
 - name: install git-lfs
@@ -79,4 +80,4 @@ vars:
 yadm: "{{ user.home }}/.local/bin/yadm"
 
 ```
-
+{% endraw %}

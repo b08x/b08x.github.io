@@ -11,6 +11,7 @@ tags:
   - nlp
   - llm
 abstract: Python Data Science Docker images, with Ruby 3.1.0 install along with RubyGems
+category: Ruby
 ---
 
 
@@ -25,33 +26,13 @@ abstract: Python Data Science Docker images, with Ruby 3.1.0 install along with 
 +------------------+
 ```
 
-```bash
-       base                    #docker-tag:  :f3079808ca8c
-         |                                   :jupyter/scipy-notebook
-         |
-      minimal                   #docker-tag:  :latest-minimal
-      /  |  \                                :<version>-minimal
-     /   |   \
-   nlp data-sci  aws              #docker-tag:  :latest-infra     :latest-azure     :latest-aws
-               |                             :<version>-infra  :<version>-azure  :<version>-aws
-               |
-             awsk8s            #docker-tag:  :latest-awsk8s
-              /  \                           :<version>-awsk8s
-             /    \
-        awskops  awshelm       #docker-tag   :latest-awskops     :latest-awshelm
-                                             :<version>-awskops  :<version>-awshelm
-```
-
-
 ## install|usage
 
 ---
-
+# Included Gems
 ## [pragmatic_segmenter](https://github.com/diasks2/pragmatic_segmenter)
 
 Pragmatic Segmenter is a sentence segmentation tool for Ruby. It allows you to split a text into an array of sentences. This gem provides 2 main benefits over other segmentation gems - 1) It works well even with ill-formatted text 2) It works for multiple languages
-
-
 
 
 ```ruby
