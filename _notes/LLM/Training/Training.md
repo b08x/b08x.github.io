@@ -10,6 +10,13 @@ tags:
 [[Generating Questions with Llama-2-70b-chat-hf]]
 [[few_shot questions]]
 
+<div class="figure left">
+    <div class="liner">
+     {% picture default screenshot/tuning_stages.png 4:3 center wide: screenshot/autonma01.png mobile: screenshot/music_production_workflow.png %}
+     <p class="caption">Steve manually compiles a dataset from one of the models </p>
+     </div>
+</div>
+
 In the training phase, a developer feeds their model a curated dataset so that it can “learn” everything it needs to about the type of data it will analyze. Then, in the inference phase, the model can make predictions based on live data to produce actionable results.
 
 <div class="figure right">

@@ -106,11 +106,3 @@ networks:
 
 
 ---
-
-## configuring dd-wrt
-#networking #ddwrt #dns
-
-![](Pasted%20image%2020231029202237.png)
-
-![](Pasted%20image%2020231029202308.png)
-

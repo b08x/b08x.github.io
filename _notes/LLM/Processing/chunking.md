@@ -3,7 +3,8 @@ layout: note
 title: Chunking Text
 subtitle: 
 category: LLM
-tags: 
+tags:
+  - llm
 links:
   - https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/
 image: /assets/img/chunking_01.png

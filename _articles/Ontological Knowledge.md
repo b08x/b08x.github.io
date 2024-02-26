@@ -11,6 +11,14 @@ image:
 
 ## Why not just regular knowledge?
 
+https://www.semanticarts.com/semantic-ontology-the-basics/
+
+https://semantechs.co.uk/turtle-editor-viewer/
+
+
+
+
+
 An ontology establishes the fundamental concepts and their interrelationships within a particular field of knowledge.
 
 | Word | Part of Speech | Wordnet Senses | Cognitive Grammar with Pragmatics |

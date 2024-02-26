@@ -12,22 +12,23 @@ links:
 |  RubyGem                                                                  |  Function                                                              |
 |:--------------------------------------------------------------------------|:-----------------------------------------------------------------------|
 | [langchainrb](https://github.com/andreibondarev/langchainrb.git)          |  Document Loader, Chunker, Prompt Chaining, Accessing LLM APIs         |
+| [ollama-ai](https://github.com/gbaptista/ollama-ai)                       |  for interacting with Ollama API                                       |
 | [pragmatic_tokenizer](https://github.com/diasks2/pragmatic_tokenizer.git) |  Tokenization, Text Sanitation                                         |
 | [ruby-spacy](https://github.com/yohasebe/ruby-spacy.git)                  |  Part-of-speech Tagging, Dependency Parsing, Named Entity Recognition  |
 | [wordnet](https://github.com/ged/ruby-wordnet.git)                        |  Accessing WordNet Lexical Database                                    |
 | [tomoto](https://github.com/ankane/tomoto-ruby.git)                       |  Topic Modeling using LDA                                              |
 | [ohm](https://github.com/soveran/ohm.git)                                 |  Object Hash Mapping for Redis                                         |
 | [ohm-contrib](https://github.com/cyx/ohm-contrib.git)                     | Ohm modules                                                            |
+| [parallel](https://github.com/grosser/parallel.git)                       | run code in parallel processes                                         |
+| [pragmatic_segmenter](https://github.com/diasks2/pragmatic_segmenter.git) | rule based sentence boundary detection                                 |
+| [summarize](https://github.com/ssoper/summarize.git)                      | A Ruby C Wrapper for Open Text Summarizer                              |
+| [composable_operations](https://github.com/t6d/composable_operations.git) | tool set for creating multiple operation pipelines                     |  
 | [jsonl](https://github.com/zenizh/jsonl.git)                              |  Reading and Writing JSONL Files                                       |
 | [pgvector](https://github.com/pgvector/pgvector-ruby.git)                 |  Vector Database for Semantic Search                                   |
 | [sequel](https://github.com/jeremyevans/sequel.git)                       | Postgresql Connector                                                   |
 | [nokogiri](https://nokogiri.org/)                                         |  html/xml parser                                                       |
 | [pdf-reader](https://github.com/yob/pdf-reader.git)                       | reads pdf                                                              |
 | [lemmatizer](https://github.com/yohasebe/lemmatizer.git)                  | <div>Lemmatizer for text in English</div>                              |
-| [parallel](https://github.com/grosser/parallel.git)                       | run code in parallel processes                                         |
-| [pragmatic_segmenter](https://github.com/diasks2/pragmatic_segmenter.git) | rule based sentence boundary detection                                 |
-| [summarize](https://github.com/ssoper/summarize.git)                      | A Ruby C Wrapper for Open Text Summarizer                              |
-| [composable_operations](https://github.com/t6d/composable_operations.git) | tool set for creating multiple operation pipelines                     |  
 | [optimist](https://www.manageiq.org/optimist/)| commandline option parser |
 
 

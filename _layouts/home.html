@@ -6,18 +6,14 @@
 <body class="container">
   <nav class="row">{% include nav.html %}</nav>
 
-  <div class="row">
-    <div class="md-12">
-
+  <div class="xs">
       {% include notes_graph.html %}
-
-    </div>
-    <recently class="md-8">
-
-      {{ content }}
-
-    </recently>
   </div>
+  <br>
+  <div class="row">
+      {{ content }}
+  </div>
+ 
 
   <footer class="row">{% include footer.html %}</footer>
   {% include link-previews.html wrapperQuerySelector="content" %}

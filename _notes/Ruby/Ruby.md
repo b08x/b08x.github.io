@@ -11,9 +11,9 @@ permalink: /ruby
 
 ## [[Unless]]
 
- 
+ ![[Pasted image 20240221155415.png]]
 
-## find all the files with the timestamped suffix, then renaming those files to their original name without the suffix.
+## find all the files with the timestamped suffix, then rename those files to their original name without the suffix.
 
 ```ruby
 # so, find all the files with the timestamped suffix, then renaming those files to their original name without the suffix.
@@ -128,7 +128,6 @@ In the example above, you can observe that .find_all gives an array even though 
 [ruby pattern matvim ching](https://speakerdeck.com/bkuhlmann/ruby-pattern-matching?slide=38)
 
 ## hash
-
 ```ruby
 class PackageCat
   def initialize(attrs)
@@ -140,6 +139,7 @@ class PackageCat
   end
 end
 ```
+
 
 ## replace a string with an empty string by default
 ```ruby
@@ -164,7 +164,6 @@ puts "hello".sub!("l")
 
 ----
 ## chaining methods
-
 ```ruby
 def string_manipulation(string)
 string
@@ -176,8 +175,7 @@ end
 
 
 ---
-## forward argurments
-
+## forward arguments
 [Arguments forwarding (...) supports leading arguments](https://rubyreferences.github.io/rubychanges/3.0.html#arguments-forwarding--supports-leading-arguments)
 
 ```ruby
@@ -205,7 +203,6 @@ logged_get('Logging', 'https://example.com', headers: {content_type: 'json'})
 
 ---
 ## glimmer
-
 https://github.com/AndyObtiva/glimmer-dsl-libui#glimmer-gui-dsl-concepts
 
 ---

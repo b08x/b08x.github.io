@@ -16,11 +16,21 @@ exclude:
   - "LICENSE"
   - "*.txt"
   - "*.canvas"
+  - "index.something"
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ""
 
 github:
   uid: b08x
+
+plugins:
+  - jekyll-last-modified-at
+  - jekyll-jupyter-notebook
+  - jekyll_asciinema
+  - jekyll-spaceship
+  - jekyll_picture_tag
+  - jekyll-toc
+  - jekyll-paginate
 
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
@@ -38,14 +48,15 @@ embed_tweets: false
 permalink: pretty
 relative_permalinks: false
 
-plugins:
-  - jekyll-last-modified-at
-  - jekyll-jupyter-notebook
-  - jekyll_asciinema
-  - jekyll-spaceship
-  - jekyll_picture_tag
-  - jekyll-toc
-
+# Pagination Settings
+pagination:
+  enabled: true
+  per_page: 2
+  permalink: '/page/:num/'
+  title: ' - page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
 
 sass:
   sass_dir: _sass

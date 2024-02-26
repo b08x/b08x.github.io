@@ -1,10 +1,11 @@
 ---
-layout: page
-title: Document Processing Techniques with Ruby's "unless" Method
-subtitle: 
+layout: article
+title: Document Processing Techniques
+subtitle: with Ruby's "unless" Method
 category: Ruby
 tags:
   - llm
+  - ruby
 links:
 ---
 
@@ -39,7 +40,10 @@ Narrator: First we establish context by asking the Model to provide some example
 
 
 
+So welcome. ....This is "All Things Configured".... We'll be talking about various subjects using techniques like verbs,...adjectives,... nouns,...some times improper nouns,...usually referring to the same subjects mentioned earlier in *this* sentence but not necessarily referring to this particular sentence, which currently just only happens to be setting expectations of well...by the rules of grammar, not my rules by the way, you could call it a way to establish meaning in the present but you could also consider it information relevant in a future circumstance, if it all.  
 
+
+or rather which is to say, timeless....what i* continue to literally describe the process about talking about talking about process...and other wise fun recursive language describing...*
 
 
 

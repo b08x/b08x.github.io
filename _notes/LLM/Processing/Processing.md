@@ -1,5 +1,7 @@
 ---
 ---
+https://github.com/MLRG-CEFET-RJ/ml-class/blob/master/DataMining_week08.ipynb
+
 
 
 ## SetFit

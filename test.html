@@ -1,0 +1,181 @@
+---
+id: index
+aliases:
+  - Welcome!
+tags: []
+layout: home
+permalink: /test
+title: Home
+sitemap:
+  priority: 0.9
+---
+
+<html>
+<style>
+body {
+   font-family: 'Roboto', sans-serif;
+   margin: 0;
+   padding: 0;
+   background-color: #333;
+   color: #fff;
+}
+
+header {
+   background-color: #444;
+   padding: 20px;
+   text-align: center;
+}
+
+nav ul {
+   list-style-type: none;
+   padding: 0;
+}
+
+nav ul li {
+   display: inline;
+   margin: 0 10px;
+}
+
+nav ul li a {
+   color: #fff;
+   text-decoration: none;
+}
+
+main {
+   margin: 20px;
+}
+
+section {
+   margin: 20px 0;
+   padding: 20px;
+   border: 1px solid #444;
+}
+
+footer {
+   background-color: #444;
+   color: #fff;
+   text-align: center;
+   padding: 10px;
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+}
+.container {
+   display: flex;
+   justify-content: space-between;
+   width: 80%;
+   margin: auto;
+}
+
+.left-column, .right-column {
+   width: 45%;
+   padding: 20px;
+   box-sizing: border-box;
+}
+
+.left-column {
+   background-color: #ff6b6b;
+}
+
+.right-column {
+   background-color: #6b6bff;
+}
+
+.left-column img, .right-column img {
+   width: 100%;
+   height: auto;
+}
+
+.category {
+   font-size: 24px;
+   margin-bottom: 20px;
+   padding: 20px;
+   text-align: center;
+   border: 2px solid #000;
+   border-radius: 10px;
+}
+
+.category img {
+   width: 100%;
+   height: auto;
+}
+</style>
+<body>
+   <header>
+       <nav>
+           <ul>
+               <li><a href="#">Home</a></li>
+               <li><a href="#">About</a></li>
+               <li><a href="#">Services</a></li>
+               <li><a href="#">Contact</a></li>
+           </ul>
+       </nav>
+   </header>
+   {% include notes_graph.html %}
+   <div class="container">
+      <div class="left-column">
+          <h2>Categories</h2>
+          
+      </div>
+      <div class="right-column">
+          <h2>Categories</h2>
+          <div class="category">
+              <img src="papers.jpg" alt="Papers">
+              <p>Papers are a type of document that contains information about a topic.</p>
+          </div>
+          <div class="category">
+              <img src="books.jpg" alt="Books">
+              <p>Books are a type of document that contains information about a topic.</p>
+          </div>
+          <div class="category">
+              <img src="papers.jpg" alt="Papers">
+              <p>Papers are a type of document that contains information about a topic.</p>
+          </div>
+      </div>
+  </div>
+
+
+   <main>
+       <section id="hero">
+           <h1>Welcome to Deepseek</h1>
+           <img src="/assets/img/generative/pixel_crow-01.jpeg" width='400' height='400'>
+           <img src="/assets/img/generative/pixel_crow-02.jpeg" width='400' height='400'>
+           <img src="/assets/img/generative/pixel_crow-03.jpeg" width='400' height='400'>
+           <img src="/assets/img/generative/pixel_crow-04.jpeg" width='400' height='400'>
+         </section>
+
+
+
+
+         <section id="search">
+           <h2>Search Tools</h2>
+           {% for image in site.static_files %}
+          {% if image.path contains 'img/generative' %}
+            <img src="{{ site.baseurl }}{{ image.path }}" alt="image" />
+          {% endif %}
+          {% endfor %}
+       </section>
+       <section id="how-to">
+           <h2>How-To Guides</h2>
+           <p>Learn how to use our tools with our detailed how-to guides.</p>
+       </section>
+       <section id="reviews">
+           <h2>Product Reviews</h2>
+           <img src="/assets/img/generative/pixel_crow-10.jpeg" width='400' height='400'>
+           <img src="/assets/img/generative/pixel_crow-11.jpeg" width='400' height='400'>
+           <img src="/assets/img/generative/pixel_crow-12.jpeg" width='400' height='400'>
+           <img src="/assets/img/generative/pixel_crow-13.jpeg" width='400' height='400'>
+           <img src="/assets/img/generative/pixel_crow-93.jpeg" width='400' height='400'>
+       </section>
+       <section id="blog">
+        <img src='https://cdn-uploads.huggingface.co/production/uploads/noauth/bUmxLt6TrsuKXoLLDqAJW.jpeg' width='400' height='400'>
+        <img src='https://cdn-uploads.huggingface.co/production/uploads/noauth/BzAJXUpAf7DGv2d0UCHx7.jpeg' width='400' height='400'>
+        <img src='https://cdn-uploads.huggingface.co/production/uploads/noauth/dhAo7frWb91iiqtOw1PZT.jpeg' width='400' height='400'>
+        <img src='https://cdn-uploads.huggingface.co/production/uploads/noauth/RsoKjohQ7hSEHYX9_e-k4.jpeg' width='400' height='400'>
+       </section>
+   </main>
+   <footer>
+       <p>Deepseek &copy; 2022</p>
+   </footer>
+</body>
+</html>
