@@ -20,18 +20,19 @@ title: Home
     </li>
   {% endif %}
 
-  {% endfor %}
-</ul>
-
-<!-- <ul>
-  {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
-  {% for note in recent_notes limit: 50 %}
   {% if note.layout == 'page' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
   {% endif %}
-  {% if note.layout == 'vidheader' %}
+
+  {% endfor %}
+</ul>
+
+<ul>
+  {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
+  {% for note in recent_notes limit: 50 %}
+  {% if note.layout == 'page' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
     </li>
@@ -48,7 +49,7 @@ title: Home
   {% endif %}
 
   {% endfor %}
-</ul> -->
+</ul>
 </div>
 
 <div class="xs">
@@ -56,7 +57,7 @@ title: Home
 
 <ul>
   {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
-  {% for note in recent_notes limit: 5 %}
+  {% for note in recent_notes limit: 10 %}
   {% if note.layout == 'note' %}
     <li>
       {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{% if note.category %}{{ note.category }} - {% endif %}{{ note.title }}</a>
