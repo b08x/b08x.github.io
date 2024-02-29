@@ -1,44 +1,51 @@
 ---
 layout: default
-pagination: 
-  enabled: true
+pagination:
+enabled: true
 ---
 
 
-{% if page.image %}
+
 <div class="row">
-  <div class="col">
-    <img id="object-cover" src="{{ site.baseurl }}{{ page.image }}" />
-    {% if page.caption %}
-    <h6>{{ page.caption }}</h6>
-    {% endif %}
-  </div>
-  {% endif %}
 
-  <div class="headingobject">
-    <h1>{{ page.title }}</h1>
-    <div class="box">
-      {% include note/tags.html %}
-    </div>
-    <div class="box">
-      <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{% if page.type != 'pages' %}
-        Last updated on {{ page.last_modified_at | date: "%B %-d, %Y" }}
-        {% endif %}
-      </time>
-    </div>
-  </div>
-
-  <content>
-    <div class="row">
-      <!-- <div class="col" id="table-of-contents">
-          {{ content | toc_only }}
-        </div> -->
-      <div class="container-fluid" id="markdown-content">
-        {{ content | inject_anchors }}
+  <div class="md-4">
+    <div class="headingobject">
+      <h1>{{ page.title }}</h1>
+      <div class="box">
+        {% include note/tags.html %}
+      </div>
+      <div class="box">
+        <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{% if page.type != 'pages' %}
+          Last updated on {{ page.last_modified_at | date: "%B %-d, %Y" }}
+          {% endif %}
+        </time>
       </div>
     </div>
-    <p>{{ page.cssid }}</p>
-    <!-- <p>This line is hard-coded into note.html</p> -->
-  </content>
+  </div>
+  {% if page.image %}
+  <div class="xl">
+    <!-- <img id="object-cover" src="{{ site.baseurl }}{{ page.image }}" /> -->
+        <div class="col" id="table-of-contents">
+          {{ content | toc_only }}
+        </div>
+    <!-- {% if page.caption %}
+    <h6>{{ page.caption }}</h6>
+    {% endif %} -->
+  </div>
+  {% endif %}
+</div>
 
-  <hr>
+<hr>
+
+<content>
+  <div class="row">
+
+    <div class="container-fluid" id="markdown-content">
+      {{ content | inject_anchors }}
+    </div>
+  </div>
+  <p>{{ page.cssid }}</p>
+  <!-- <p>This line is hard-coded into note.html</p> -->
+</content>
+
+<hr>

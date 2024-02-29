@@ -104,8 +104,8 @@ body {
   overflow-x: hidden;
   // background-color: #ad9b56;
   // background-color: #a38b2e;
-  background-color: #080808;
-  max-width: 80%;
+  background-color: #091a28;
+  max-width: 65%;
   // background-image: url("/assets/img/headers/mpv-shot0001.jpg");
   // background-blend-mode: difference;
   // background-size: auto;
@@ -173,7 +173,7 @@ main {
 
 time {
   display: block;
-  color: #000;
+  color: #76b117;
   margin: 0em 0 1em;
   font: caption;
   // padding: 0.5rem;
@@ -202,6 +202,7 @@ blockquote {
 
   p {
     font-family: $font-family-ibm;
+
     // text-align: -webkit-center;
     code {
       color: #ffe40a;
@@ -250,7 +251,7 @@ blockquote {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  align-content: space-around;
+  align-content: flex-end;
   // border: #597b65;
   // border-style: dashed;
 
@@ -273,7 +274,7 @@ blockquote {
 }
 
 #dark {
-  mix-blend-mode: multiply;
+  mix-blend-mode: difference;
 }
 
 // #object-cover {
@@ -351,13 +352,27 @@ ol {
   font-size: 1.25rem;
   line-height: 2rem;
   list-style-type: auto;
+  li {
+    p {
+      strong {
+        color: #a58211;
+      }
+    }
+  }
 
 }
 
 ul {
   font-size: 1.25rem;
   line-height: 2rem;
-  list-style-type: none;
+  margin: 0rem;
+  display: contents;
+
+  li {
+    list-style-type: disc;
+    margin: 1rem;
+  }
+
 }
 
 [type=checkbox], [type=radio] {
@@ -381,6 +396,7 @@ h1 {
   font-weight: 300;
   letter-spacing: 0.1rem;
   justify-self: center;
+  color: tomato;
 
   @media (max-width: 1560px) {
     font-size: 3rem;
@@ -409,6 +425,8 @@ h2 {
 h3 {
   font-family: $font-family-logo;
   font-size: 2.0rem;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
 }
 
 h4,
@@ -426,6 +444,7 @@ p {
   font-weight: 400;
   font-size: 1.40rem;
   word-spacing: 0.1rem;
+  color: var(--aquatic-edge);
 
   code {
     color: #018361;
@@ -475,9 +494,26 @@ a {
 
 
 
+// li {
+//   font-weight: 400;
+//   color: #a50d0d;
+// }
+
 li {
-  font-weight: 400;
+  position: relative;
+  // padding-left: 15px;
+  strong {
+    color: #672828;
+  }
 }
+
+// li:before {
+//   content: "\25BA \0020";
+//   font-size: 6px;
+//   position: absolute;
+//   top: 5px;
+//   left: -10px;
+// }
 
 *:focus {
   background: #ffe8bc !important;
@@ -616,7 +652,7 @@ table {
   tbody {
     tr {
       border-bottom: 1px solid #F1F1F1;
-      color: #a93161;
+      color: #d32f5a;
 
       td {
         padding: 10px;
@@ -751,7 +787,7 @@ img.figure {
 .has-border {
   // padding: 10px;
   // background: #eee;
-  border: 1px solid #1b1b1b;
+  border: 0.1px solid #1b1b1b;
 }
 
 .figure .liner {

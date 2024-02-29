@@ -20,7 +20,9 @@ title: Graph RAG
 
 ## tagging words based on parts of speech
 
+<div>
 {% asciicast 630607 %}
+</div>
 
 [booknlp](https://github.com/booknlp/booknlp)
 
@@ -55,14 +57,17 @@ https://www.siwei.io/en/demos/text2cypher/
 https://kg-llm-build.streamlit.app/?utm_medium=oembed
 
 ---
->  Behave as an expert Rubyist and generate class and methods from this description: 
->  
+
+
+Behave as an expert Rubyist and generate classes and methods from this description: 
+
 ```
 Recursive Knowledge Graph Queries Why: This is used to combine information extracted and store a cohesive conjoined answer. LLM query the graph for the answer. This is functionally similar to a Tree of Thought or a Chain of Thought process where external information is stored in a knowledge graph to help determine the next step of investigation. You basically run the chunk extraction again and again, retrieve extracted information, and store in a knowledge graph to enforce connections to reveal relationships. Once relationships are established and the information is saved in the KG, run the query again with the full context extracted from the KG. If insufficient context, save the extracted answer in the same KG again to enforce more connections and rinse/repeat. This is also especially useful if data is continuously flowing into your system and you want to make sure that answers are updated over time with new context.
 ```
+
 [source](https://medium.com/enterprise-rag/injecting-knowledge-graphs-in-different-rag-stages-a3cd1221f57b)
 
-**Here's a Ruby design that incorporates expert practices and addresses the description's requirements:**
+**Here's a Ruby design that incorporates practices to addresses the description's requirements:**
 
 **Class:**
 
@@ -111,3 +116,9 @@ end
 - **Performance Optimization:** For large knowledge graphs or complex queries, explore optimization techniques like caching or indexing.
 - **Knowledge Graph Implementation:** Choose a suitable knowledge graph implementation (e.g., Neo4j, RDF store) based on your specific requirements.
 - **Testing:** Thoroughly test the class and its interactions with the LLM and knowledge graph to ensure correctness and robustness.
+
+
+
+
+---
+

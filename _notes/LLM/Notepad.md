@@ -6,7 +6,10 @@ category:
 tags: 
 links:
 ---
+# implementing sycl in local-ai
 
+https://github.com/LostRuins/koboldcpp/blob/concedo/README-sycl.md#intel-gpu
+https://github.com/linuxserver/docker-plex/issues/187
 
 # ollama model usage
 

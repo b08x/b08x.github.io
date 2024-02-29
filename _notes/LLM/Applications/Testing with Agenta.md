@@ -16,6 +16,7 @@ links:
 frequence penalty: -0.62
 presence penalty: 0.6
 
+<details>
 ```text
 Title: Unleashing the Power of Ruby: A Journey into NLP Document Processing for Audio Enthusiasts
 
