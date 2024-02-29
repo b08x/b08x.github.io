@@ -13,16 +13,20 @@ permalink: /llm/graph
 title: Graph RAG
 ---
 
+
+
 ![[Pasted image 20240126224214.png]]
+
+#TODO process with lida
+
 [source](https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/)
 
 ---
 
 ## tagging words based on parts of speech
 
-<div>
-{% asciicast 630607 %}
-</div>
+
+<script type="text/javascript" src="https://asciinema.org/a/630607.js" id="asciicast-630607" async="async"></script>
 
 [booknlp](https://github.com/booknlp/booknlp)
 
