@@ -1,6 +1,10 @@
 ---
 layout: note
 title: other ansible stuff
+category: Configuration
+tags:
+  - ansible
+  - linux
 ---
 
 # Wednesday 23 Nov 2022

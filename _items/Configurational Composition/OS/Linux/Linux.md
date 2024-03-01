@@ -1,5 +1,13 @@
 ---
+layout: note
+title: Linux
+subtitle: 
+category: OS
+tags: 
+links:
+  - /os/linux/
 ---
+
 
 
 

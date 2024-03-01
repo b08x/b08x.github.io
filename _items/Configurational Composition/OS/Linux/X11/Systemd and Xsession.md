@@ -2,7 +2,7 @@
 layout: note
 title: Systemd and Xsession
 subtitle: 
-category: Systems
+category: OS
 tags:
   - linux
 links:

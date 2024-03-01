@@ -1,17 +1,35 @@
 ---
-layout: note
+layout: page
 title: LLM Notepad
 subtitle: 
-category: 
-tags: 
-links:
+category: LLM
+tags:
+  - docker
+  - ollama
+links: 
+image: /assets/img/generative/pixel_crow-02
 ---
-# implementing sycl in local-ai
 
-https://github.com/LostRuins/koboldcpp/blob/concedo/README-sycl.md#intel-gpu
-https://github.com/linuxserver/docker-plex/issues/187
+
+
+
+#### implementing sycl in local-ai
+
+[some notes on working with intel-gpu & docker](https://github.com/LostRuins/koboldcpp/blob/concedo/README-sycl.md#intel-gpu)
+
+[fixing permissions when using /dev/dri in compose](https://github.com/linuxserver/docker-plex/issues/187)
+
+#### implementing sycl in local-ai
+
+https://github.com/felipeagc/ollama
+
 
 # ollama model usage
+
+
+## gemma:7b
+
+https://www.promptingguide.ai/models/gemma
 
 ## phi
 

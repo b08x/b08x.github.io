@@ -1,24 +1,29 @@
 ---
-layout: page
-title: Large Language Model
-subtitle: 
-excerpt: 
-category: Composition
 tags:
-  - ansible
-  - docker
-  - llm
-  - linux
-  - cohere
-  - elevanlabs
-  - gemini
-  - huggingface
-  - gpt
-  - llama2
-  - palm2
-  - openai
-image: 
-permalink:
+  - obsidian-auto-glossary
+layout: page
+title: LLM
+category: Composition
+permalink: /llm/
+image: /assets/img/generative/pixel_crow-02
 ---
 
-# header
+
+## Index
+- [[1708912375-VABT]]
+- [[1708912625-EIFA]]
+- [[Caching]]
+- [[Composing Documentation with Mutable]]
+- [[dataset notes]]
+- [[few_shot questions]]
+- [[Flowise]]
+- [[Generating Questions with Llama-2-70b-chat-hf]]
+- [[Generating Sample Data with Inference]]
+- [[Langfuse]]
+- [[llmos]]
+- [[LocalAI Flowise and Langfuse]]
+- [[Monadic Chat]]
+- [[Notepad]]
+- [[Ops]]
+- [[Testing with Agenta]]
+- [[Training]]

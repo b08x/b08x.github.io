@@ -14,7 +14,7 @@ permalink: /cfgcomp
 - [[ansible error handling]]
 - [[ansible tasks yadm]]
 - [[Ansible Variable Precedence]]
-- [[Arch]]
+- [[Linux]]
 - [[Audio]]
 - [[bash]]
 - [[btrfs]]

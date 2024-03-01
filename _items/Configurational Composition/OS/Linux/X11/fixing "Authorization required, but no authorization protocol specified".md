@@ -1,4 +1,11 @@
 ---
+layout: note
+title: xauth
+subtitle: 
+category: OS
+tags:
+  - linux
+links:
 ---
 
 #linux #xorg 

@@ -7,7 +7,7 @@ category:
 tags:
   - nlp
   - ruby
-image: 
+image: /assets/img/generative/pixel_crow-02
 permalink: /programming/
 ---
 

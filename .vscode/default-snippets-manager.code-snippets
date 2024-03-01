@@ -1,0 +1,19 @@
+{
+	"fer": {
+		"prefix": "fer",
+		"description": "fer",
+		"scope": "html",
+		"body": [
+			"{% for link in page.links %}",
+			"      {% endfor %}"
+		]
+	},
+	"endif": {
+		"prefix": "endif",
+		"description": "endif",
+		"scope": "html",
+		"body": [
+			"{% endif %}"
+		]
+	}
+}

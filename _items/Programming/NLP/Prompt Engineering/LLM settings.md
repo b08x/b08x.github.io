@@ -8,7 +8,7 @@ links:
 ---
 
 
-https://guide.flowgpt.com/engineering/2techniques/1setting
+[model settings](https://guide.flowgpt.com/engineering/2techniques/1setting)
 
 ```markdown
 **System message:** - This message provides the initial instructions to the model. You can provide various information in the system role including:

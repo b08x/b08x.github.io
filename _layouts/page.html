@@ -5,12 +5,19 @@ pagination:
 ---
 
 <div class="row-flex-column">
-  <div class="sm-2">
+  <div class="side">
     <h1>{{ page.title }}</h1>
-    <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{% if page.type != 'pages' %}
-      Last updated on {{ page.last_modified_at | date: "%B %-d, %Y" }}
-      {% endif %}
-    </time>
+
+    {% if page.links.size > 0 %}
+    {% for backlink in page.backlinks %}
+    <div class="backlink-box">
+      <a class="internal-link" href="{{ site.baseurl }}{{ backlink.url }}{%- if site.use_html_extension -%}.html{%- endif -%}">{{ backlink.title }}</a><br>
+    
+    </div>
+    {% endfor %}
+
+    {% endif %}
+
   </div>
 
 

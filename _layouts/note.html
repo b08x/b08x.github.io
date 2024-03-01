@@ -21,6 +21,14 @@ pagination:
         </div>
       </div>
     </div>
+    <div class="md-4">
+      {% if page.links %}
+      {% for link in page.links %}
+        <p>link!</p>
+        <p>link!</p>
+      {% endfor %}
+      {% endif %}
+    </div>
   
     {% if page.image %}
     <div class="xl">

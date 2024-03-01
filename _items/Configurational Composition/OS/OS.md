@@ -7,7 +7,7 @@ category: Configuration
 permalink: /os/
 ---
 ## Index
-- [[Arch]]
+- [[Linux]]
 - [[bash]]
 - [[btrfs]]
 - [[fixing "Authorization required, but no authorization protocol specified"]]

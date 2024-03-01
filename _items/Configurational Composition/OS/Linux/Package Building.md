@@ -2,7 +2,7 @@
 layout: note
 title: Package Building
 subtitle: 
-category: 
+category: OS
 tags:
   - archlinux
   - pk

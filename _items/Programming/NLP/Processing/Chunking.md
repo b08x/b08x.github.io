@@ -37,10 +37,6 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 # Visualizing Chunks and Processing the Raw Results
 
 
-[Chunk Visualizer](https://huggingface.co/spaces/m-ric/chunk_visualizer)
-
-[results using Gemini makersuite](https://makersuite.google.com/app/prompts?state=%7B%22ids%22%3A%5B%221FPT0d-GOcBzlU_rjWoJgAcn7YTduOaCe%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22105870379594569653340%22%2C%22resourceKeys%22%3A%7B%7D%7D&usp=sharing)
-
 
 ### Splitting by BERT tokens
 
@@ -65,7 +61,7 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 | notes           | *oddly enough, the overlapped chunks seemed appropriate to cut out..* |
 | ^^              |                                                                       |
 
-#### Odd sense
+### Odd sense & Surprise
 
 |--|--|--|--|--|--|--|--|
 | :----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -76,7 +72,6 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 | ^^     | -- This is just something ***it just made up*** as apparently "rag hopping" more commonly has to do with cars and their hydraulic systems as depicted in the 1998 classic music video "Let me Ride" |
 
 
-#### Surprising Guess
 
 | input chunk                                                                                                                                                                        | output summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -87,7 +82,7 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 | *notes*                                                                                                                                                                           | I find it impressive it reached that conclusion based on this utterance.                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 
-#### Unexpected visual breakdown
+## Unexpected visual breakdown
 
 
 |  Method           |  Langchains Recursive Text Slitter                                                                                                                                                                                                                                            |
@@ -128,4 +123,15 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 - Strategies worth noting encompass utilizing smaller chunks and retrieving adjacent chunk content or maintaining multiple embeddings for a document.
 - overlaps: For instance, if data is divided into chunks of 100 tokens, overlapping by 50 tokens would mean that the last 50 tokens of one chunk are the same as the first 50 tokens of the next chunk, thus preserving surrounding context.
 
-[source: Techniques, Challenges, and Future of Augmented Language Models](https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/)
+
+---
+
+
+### sources
+
+
+[Chunk Visualizer](https://huggingface.co/spaces/m-ric/chunk_visualizer)
+
+[results using Gemini makersuite](https://makersuite.google.com/app/prompts?state=%7B%22ids%22%3A%5B%221FPT0d-GOcBzlU_rjWoJgAcn7YTduOaCe%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22105870379594569653340%22%2C%22resourceKeys%22%3A%7B%7D%7D&usp=sharing)
+
+[Techniques, Challenges, and Future of Augmented Language Models](https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/)

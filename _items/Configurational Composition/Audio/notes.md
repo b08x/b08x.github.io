@@ -1,12 +1,13 @@
 ---
 layout: note
-title: Audio
+title: Notes
 subtitle: 
-category: Configuration
-tags:
-  - linux
+category: Audio
+tags: 
 links:
 ---
+
+# s
 
 
 [dont forget about ](https://github.com/crlandsc/tiny-audio-diffusion.git

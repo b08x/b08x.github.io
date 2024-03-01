@@ -13,10 +13,6 @@ image:
 
 # January 20th, 2024
 #alsa #raysession #patchance #patchbay #fix
-
-
-
-
 ### raysession|patchance patchbay crashes when qsampler is running:
 
 ```bash
