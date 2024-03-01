@@ -1,57 +1,78 @@
 ---
-tags:
-  - obsidian-auto-glossary
 layout: page
 title: Computer Programming
+subtitle: 
+excerpt: 
+category: 
+tags:
+  - nlp
+  - ruby
+image: 
 permalink: /programming/
 ---
-## Index
-- [[A Recipe for Generative Music]]
-- [[AgileBloom]]
-- [[alias & alias_method]]
-- [[Caching]]
-- [[Capturing Personality with Verb Phrase Extraction]]
-- [[Chunking]]
-- [[comparing and contrasting RAG and GAR]]
-- [[CRISPE]]
-- [[Design Patterns]]
-- [[Elavis Saravia]]
-- [[embedding]]
-- [[Find duplicate Audio Files]]
-- [[GAR]]
-- [[gitflow]]
-- [[Graph RAG]]
-- [[Initial]]
-- [[Installing Gems]]
-- [[Interference & Hallucinations]]
-- [[keywords and abbreviations]]
-- [[Knowlecule]]
-- [[knowledge graph]]
-- [[LLM settings]]
-- [[Mixture of Experts]]
-- [[NLP gems]]
-- [[NLP Processing for Semantic Search]]
-- [[ohm tagging]]
-- [[Ontological Knowledge]]
-- [[ontologies]]
-- [[Ontology Construction with Language Models]]
-- [[openai]]
-- [[parameters]]
-- [[Parts of a Document]]
-- [[Processing]]
-- [[Prompt Engineering]]
-- [[Ranking Chunks]]
-- [[Reasoning Scratchpad]]
-- [[Refreshing System Ruby]]
-- [[Retrieval]]
-- [[Ruby Notepad]]
-- [[Ruby]]
-- [[site your sources]]
-- [[soundfonts]]
-- [[stop words]]
-- [[Unless]]
-- [[Using NLP to Generate Music]]
-- [[Using Ruby with Jupyter]]
-- [[Using the Iterator Design Pattern]]
-- [[using tone]]
-- [[wavjourney]]
+
+
+```mermaid!
+graph LR
+
+subgraph N[Item]
+
+subgraph E[Embedding]
+
+  
+  
+
+subgraph Subject
+
+subgraph Content
+
+subgraph Page
+
+subgraph Sections
+
+A[Heading<br/>Paragraphs]
+
+  
+
+J[Subheading<br/>Paragraphs]
+
+  
+
+K[Lists<br/>Tables<br/>Figures]
+
+end
+
+end
+
+end
+
+end
+
+A --- F[Sentences] --> U[Phrases] --> W[Words] ---> S[Tokens] ---> T[Subject]
+
+  
+
+J --- F[Sentences] --> U[Phrases] --> W[Words] --> S[Tokens] --> T[Subject]
+
+  
+
+K --- F[Sentences] --> U[Phrases] --> W[Words] ---> S[Tokens] ---> T[Subject]
+
+end
+
+  
+  
+
+end
+
+style N fill:#1a1a1a,stroke:#333,stroke-width:4px
+
+style E fill:#2a1a2a,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+
+```
+
+
+[[NLP]]
+
+[[Ruby]]
+

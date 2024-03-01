@@ -1,9 +1,8 @@
 ---
 layout: note
 title: dataset notes
-category: Training
+category: LLM
 tags:
-  - llm
   - data-set
 ---
 

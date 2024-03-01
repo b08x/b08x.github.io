@@ -2,7 +2,7 @@
 layout: note
 title: Flowise
 subtitle: 
-category: LLMOps
+category: Ops
 tags:
   - llm
 links:

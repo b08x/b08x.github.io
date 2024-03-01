@@ -3,6 +3,7 @@ layout: note
 title: Notepad
 permalink: /ansible/notepad
 ---
+[[index]]
 
 #### use copy module to create files with content
 {% raw %}

@@ -105,7 +105,7 @@ body {
   // background-color: #ad9b56;
   // background-color: #a38b2e;
   background-color: #091a28;
-  max-width: 65%;
+  // max-width: 65%;
   // background-image: url("/assets/img/headers/mpv-shot0001.jpg");
   // background-blend-mode: difference;
   // background-size: auto;
@@ -151,6 +151,11 @@ body {
 content {
   max-width: -webkit-fill-available;
   // word-wrap: balance;
+}
+
+.row-flex-column {
+  display: flex;
+  justify-content: center;
 }
 
 recently {
@@ -389,6 +394,7 @@ ul {
   li {
     list-style-type: disc;
     margin: 1rem;
+    color: #c6c5c5;
   }
 
 }
@@ -521,7 +527,7 @@ li {
   position: relative;
   // padding-left: 15px;
   strong {
-    color: #672828;
+    color: #ed4949;
   }
 }
 

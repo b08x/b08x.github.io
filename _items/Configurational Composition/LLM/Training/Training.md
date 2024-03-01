@@ -2,9 +2,10 @@
 title: Training Phase
 layout: page
 tags:
-  - llm
-  - gpt
   - nlp
+  - huggingface
+  - llama2
+category: LLM
 ---
 
 [[Generating Questions with Llama-2-70b-chat-hf]]

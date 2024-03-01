@@ -3,9 +3,10 @@ layout: page
 title: Prompt Engineering
 subtitle: 
 excerpt: 
-category: 
+category: NLP
 tags: 
-image:
+image: 
+permalink: /nlp/prompt-eng/
 ---
 
 [[Reasoning Scratchpad]]

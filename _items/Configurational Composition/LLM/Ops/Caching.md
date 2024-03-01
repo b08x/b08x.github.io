@@ -1,7 +1,9 @@
 ---
 id: Caching
-aliases: []
-tags: []
+aliases: 
+tags: 
+category: LLMOps
+permalink: /llm/ops/caching
 ---
 
 

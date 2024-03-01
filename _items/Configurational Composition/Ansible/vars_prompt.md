@@ -1,7 +1,12 @@
 ---
+layout: note
+title: Vars Prompt
+subtitle: 
+category: Configuration
+tags:
+  - ansible
+links:
 ---
-
-#ansible 
 
 
 

@@ -1,4 +1,11 @@
 ---
+layout: note
+title: Capturing Personality with Verb Phrase Extraction
+subtitle: 
+category: NLP
+tags:
+  - ruby
+links:
 ---
 
 

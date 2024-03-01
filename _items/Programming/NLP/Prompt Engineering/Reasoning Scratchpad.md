@@ -5,7 +5,8 @@ subtitle:
 category: Prompt Engineering
 tags:
   - llm
-links:
+links: 
+permalink: /nlp/prompt-eng/scratchpad/
 ---
 
 ```

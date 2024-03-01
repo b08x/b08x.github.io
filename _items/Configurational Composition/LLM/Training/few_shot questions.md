@@ -2,12 +2,12 @@
 layout: note
 title: few shot questions using langchain
 subtitle: 
-category: 
+category: LLM
 tags:
-  - llm
-  - prompt-engineering
   - ruby
-links:
+  - data-set
+links: 
+permalink:
 ---
 
 ```ruby

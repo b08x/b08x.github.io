@@ -5,7 +5,7 @@ tags:
   - linux
   - audio
   - ansible
-gh-project: https://github.com/users/b08x/projects/9
+gh-project: https://github.com/users/b08x/projects/9?pane=info
 image: /assets/img/headers/mpv-shot0001.jpg
 layout: project
 permalink: /iac

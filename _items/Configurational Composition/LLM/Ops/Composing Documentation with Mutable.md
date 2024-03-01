@@ -6,7 +6,8 @@ category: LLMOps
 tags:
   - llm
   - ansible
-links:
+links: 
+permalink: /llm/ops/doc/
 ---
 
 
