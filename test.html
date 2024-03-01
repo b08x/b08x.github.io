@@ -63,7 +63,7 @@ footer {
 .container {
    display: flex;
    justify-content: space-between;
-   width: 80%;
+   /* width: 80%; */
    margin: auto;
 }
 
@@ -74,11 +74,11 @@ footer {
 }
 
 .left-column {
-   background-color: #ff6b6b;
+   background-color: #333;
 }
 
 .right-column {
-   background-color: #6b6bff;
+   background-color: #333;
 }
 
 .left-column img, .right-column img {
@@ -111,7 +111,9 @@ footer {
            </ul>
        </nav>
    </header>
-   {% include notes_graph.html %}
+   
+   {% include items_graph.html %}
+   
    <div class="container">
       <div class="left-column">
           <h2>Categories</h2>
@@ -138,10 +140,7 @@ footer {
    <main>
        <section id="hero">
            <h1>Welcome to Deepseek</h1>
-           <img src="/assets/img/generative/pixel_crow-01.jpeg" width='400' height='400'>
-           <img src="/assets/img/generative/pixel_crow-02.jpeg" width='400' height='400'>
-           <img src="/assets/img/generative/pixel_crow-03.jpeg" width='400' height='400'>
-           <img src="/assets/img/generative/pixel_crow-04.jpeg" width='400' height='400'>
+
          </section>
 
 
@@ -149,11 +148,11 @@ footer {
 
          <section id="search">
            <h2>Search Tools</h2>
-           {% for image in site.static_files %}
-          {% if image.path contains 'img/generative' %}
+           <!-- {% for image in site.static_files %}
+            {% if image.path contains 'img/generative' %}
             <img src="{{ site.baseurl }}{{ image.path }}" alt="image" />
-          {% endif %}
-          {% endfor %}
+            {% endif %}
+          {% endfor %} -->
        </section>
        <section id="how-to">
            <h2>How-To Guides</h2>
@@ -161,17 +160,10 @@ footer {
        </section>
        <section id="reviews">
            <h2>Product Reviews</h2>
-           <img src="/assets/img/generative/pixel_crow-10.jpeg" width='400' height='400'>
-           <img src="/assets/img/generative/pixel_crow-11.jpeg" width='400' height='400'>
-           <img src="/assets/img/generative/pixel_crow-12.jpeg" width='400' height='400'>
-           <img src="/assets/img/generative/pixel_crow-13.jpeg" width='400' height='400'>
-           <img src="/assets/img/generative/pixel_crow-93.jpeg" width='400' height='400'>
+
        </section>
        <section id="blog">
-        <img src='https://cdn-uploads.huggingface.co/production/uploads/noauth/bUmxLt6TrsuKXoLLDqAJW.jpeg' width='400' height='400'>
-        <img src='https://cdn-uploads.huggingface.co/production/uploads/noauth/BzAJXUpAf7DGv2d0UCHx7.jpeg' width='400' height='400'>
-        <img src='https://cdn-uploads.huggingface.co/production/uploads/noauth/dhAo7frWb91iiqtOw1PZT.jpeg' width='400' height='400'>
-        <img src='https://cdn-uploads.huggingface.co/production/uploads/noauth/RsoKjohQ7hSEHYX9_e-k4.jpeg' width='400' height='400'>
+
        </section>
    </main>
    <footer>

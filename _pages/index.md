@@ -2,27 +2,21 @@
 id: index
 aliases:
   - Welcome!
-tags: []
+tags: 
 layout: home
-permalink: /
+permalink: /index
 title: Home
 ---
 
 <div class="xs">
 
-<strong>Recently updated articles</strong>
+<strong>Recently updated items</strong>
 <ul>
-  {% assign recent_notes = site.articles | sort: "last_modified_at_timestamp" | reverse %}
-  {% for note in recent_notes limit: 25 %}
-  {% if note.layout == 'article' %}
+  {% assign recent_items = site.items | sort: "last_modified_at_timestamp" | reverse %}
+  {% for item in recent_items limit: 25 %}
+  {% if item.layout == 'article' %}
     <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
-    </li>
-  {% endif %}
-
-  {% if note.layout == 'page' %}
-    <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+      {{ item.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
     </li>
   {% endif %}
 
@@ -30,21 +24,21 @@ title: Home
 </ul>
 
 <ul>
-  {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
-  {% for note in recent_notes limit: 50 %}
-  {% if note.layout == 'page' %}
+  {% assign recent_items = site.items | sort: "last_modified_at_timestamp" | reverse %}
+  {% for item in recent_items limit: 10 %}
+  {% if item.layout == 'page' %}
     <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+      {{ item.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
     </li>
   {% endif %}
-  {% if note.layout == 'project' %}
+  {% if item.layout == 'project' %}
     <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+      {{ item.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
     </li>
   {% endif %}
-  {% if note.layout == 'folder' %}
+  {% if item.layout == 'note' %}
     <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
+      {{ item.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
     </li>
   {% endif %}
 
@@ -53,14 +47,14 @@ title: Home
 </div>
 
 <div class="xs">
-<strong>Recently updated notes</strong>
+<strong>Recently updated items</strong>
 
 <ul>
-  {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
-  {% for note in recent_notes limit: 10 %}
-  {% if note.layout == 'note' %}
+  {% assign recent_items = site.items | sort: "last_modified_at_timestamp" | reverse %}
+  {% for item in recent_items limit: 10 %}
+  {% if item.layout == 'item' %}
     <li>
-      {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ note.url }}">{% if note.category %}{{ note.category }} - {% endif %}{{ note.title }}</a>
+      {{ item.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ item.url }}">{% if item.category %}{{ item.category }} - {% endif %}{{ item.title }}</a>
     </li>
   {% endif %}
   {% endfor %}

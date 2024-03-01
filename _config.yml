@@ -2,12 +2,11 @@ title: Syncopated Notes
 include:
   - "_pages"
   - "_projects"
-  - "_articles"
 exclude:
   - "textgenerator/"
   - "_templates/"
   - "_drafts/"
-  - "_includes/notes_graph.json"
+  - "_includes/items_graph.json"
   - ".obsidian/"
   - "*.cast"
   - "*.ipynb"
@@ -63,12 +62,12 @@ sass:
   style: compressed
 
 collections:
-  notes:
+  items:
     output: true
-    permalink: /:title
-  articles:
-    output: true
-    permalink: /:title
+    permalink: /:categories/:title
+  # articles:
+  #   output: true
+  #   permalink: /:title
 
 
 defaults:
@@ -77,13 +76,13 @@ defaults:
     values:
       layout: "default"
   - scope:
-      path: "_notes/**/*.md"
+      path: "_items/**/*.md"
     values:
       layout: "note"
-  - scope:
-      path: "_articles/**/*.md"
-    values:
-      layout: "article"
+  # - scope:
+  #     path: "_articles/**/*.md"
+  #   values:
+  #     layout: "article"
 
 jekyll-spaceship:
   mermaid-processor:

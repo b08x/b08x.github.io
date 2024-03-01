@@ -190,7 +190,7 @@ img {
 }
 
 blockquote {
-  background-color: #6c5b2a;
+  background-color: transparent;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 0.5rem;
@@ -261,8 +261,26 @@ blockquote {
     // max-width: inherit;
   }
 
-
 }
+
+
+.left-column, .right-column {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.left-column, .right-column {
+  background-color: transparent;
+}
+
+.left-column img, .right-column img {
+  width: 100%;
+  height: auto;
+}
+
+
+
 
 .contentobject {
   display: flex;
@@ -716,6 +734,7 @@ img.figure {
   margin-right: 45px;
   margin-left: 0rem;
   max-width: 43%;
+  mix-blend-mode: color-burn;
   /* so wrapped text doesn't sit flush against image border -- whitespace is good. Set this value to whatever you want */
 }
 

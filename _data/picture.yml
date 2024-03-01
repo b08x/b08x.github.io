@@ -45,7 +45,7 @@ presets:
       # parent refers to the outermost tag; <picture> if it's present, otherwise the <img>.
       parent: 'data-downloadable="true"'
       picture: 'class="awesome" data-volume="11"'
-      img: 'class="some-other-class"'
+      img: 'class="her-class"'
       a: 'class="image-link"'
 
   # You can use this as jpt-webp. All following presets follow the same pattern.
