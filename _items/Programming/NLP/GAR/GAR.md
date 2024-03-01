@@ -4,7 +4,11 @@ tags:
 layout: page
 type: index
 title: Generated Augmented Retrieval
-permalink: /gar
+permalink: /nlp/gar/
 ---
+
+
+
+
 ## Index
 - [[Initial]]

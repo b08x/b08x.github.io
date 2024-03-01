@@ -9,9 +9,10 @@ tags:
   - ruby
   - redis
 layout: folder
-permalink: /llm/graph
+permalink: /nlp/rag/
 title: Graph RAG
 ---
+
 
 
 

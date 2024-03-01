@@ -8,6 +8,9 @@ permalink: /llm/
 image: /assets/img/generative/pixel_crow-02
 ---
 
+* fine tuning
+* operations related....f.e: containers, orchestration
+* llm applications 
 
 ## Index
 - [[1708912375-VABT]]

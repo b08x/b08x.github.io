@@ -4,7 +4,7 @@ tags:
 layout: page
 title: Natural Language Processing
 category: NLP
-permalink: /nlp
+permalink: /nlp/
 ---
 ## Index
 - [[AgileBloom]]

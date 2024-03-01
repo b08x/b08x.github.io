@@ -6,10 +6,8 @@ excerpt:
 category: Programming
 tags: 
 image: 
-permalink: /ruby/
+permalink:
 ---
-
-[[Programming]]
 
 
 ## [[Unless]]
