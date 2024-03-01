@@ -2,17 +2,16 @@
 tags:
   - obsidian-auto-glossary
 layout: page
-title: Ansible
-permalink: /ansible
+category: Configuration Management
 ---
 ## Index
+- [[ansible error handling]]
+- [[ansible tasks yadm]]
+- [[Ansible Variable Precedence]]
 - [[Notepad]]
 - [[optimization]]
-- [[ansible tasks yadm]]
-- [[ansible error handling]]
-- [[workstation bootstrap]]
-- [[vars_prompt]]
-- [[variable_args_in_command]]
-- [[pull]]
 - [[package handling in ansible]]
-- [[Ansible Variable Precedence]]
+- [[pull]]
+- [[variable_args_in_command]]
+- [[vars_prompt]]
+- [[workstation bootstrap]]

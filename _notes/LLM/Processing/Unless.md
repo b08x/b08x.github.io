@@ -1,5 +1,5 @@
 ---
-layout: article
+layout: page
 title: Document Processing Techniques
 subtitle: with Ruby's "unless" Method
 category: Ruby

@@ -5,7 +5,7 @@ tags: obsidian-auto-glossary
 - [[2024-01-31]]
 - [[2024-02-16]]
 - [[A Recipe for Generative Music]]
-- [[agileBloom]]
+- [[_notes/LLM/agileBloom]]
 - [[alias & alias_method]]
 - [[Ambisonics]]
 - [[ansible error handling]]

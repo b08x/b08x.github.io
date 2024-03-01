@@ -3,7 +3,7 @@ layout: page
 title: Ruby
 subtitle: Things Related to the Ruby Programming Language
 excerpt: 
-category: 
+category: Computer Programming
 tags: 
 image: 
 permalink: /ruby

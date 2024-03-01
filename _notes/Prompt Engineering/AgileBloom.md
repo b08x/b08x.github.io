@@ -1,9 +1,9 @@
 ---
-layout: article
+layout: page
 title: AgileBloom
-subtitle: null
-category: null
-links: null
+subtitle: 
+category: Prompt Engineering
+links: 
 date updated: 2024-01-22 23:08
 ---
 
