@@ -6,7 +6,7 @@ links:
 title: mediamtx & obs-studio
 ---
 
-# stream desktop from tinybot to soundbot
+# stream desktop from one host to another to split up the load for a data heavy presentation
 
 
 ```

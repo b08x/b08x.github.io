@@ -9,6 +9,28 @@ image:
 permalink: /nlp/prompt-eng/
 ---
 
+
+
+
+
+#### A Prompt Pattern Catalog to Enhance Prompt Engineering
+
+![](Pasted%20image%2020240301135739.png)
+
+![](Pasted%20image%2020240301140036.png)
+
+![](Pasted%20image%2020240301135801.png)
+
+![](Pasted%20image%2020240301135821.png)
+
+![](Pasted%20image%2020240301135931.png)
+
+![](Pasted%20image%2020240301140335.png)
+
+![](Pasted%20image%2020240301135843.png)
+
+---
+
 [[Reasoning Scratchpad]]
 
 

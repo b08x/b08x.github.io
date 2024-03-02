@@ -1,12 +1,20 @@
 ---
-layout: note
+layout: page
 title: Knowlecule
-subtitle: a collection of Ruby gems to perform various LLM tasks
-category: Ruby
+subtitle: 
+category: Projects
 tags:
   - llm
-links:
+  - nlp
+  - rag
+  - gar
+  - ruby
+  - ansible
+  - docker
+links: 
+permalink: /knowlecule/
 ---
+
 
 # Marketing Notes
 

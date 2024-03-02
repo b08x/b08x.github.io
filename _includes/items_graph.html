@@ -1,47 +1,5 @@
-<style>
-  .links line {
-    stroke: #ccc;
-    opacity: 0.5;
-  }
 
-  .nodes circle {
-    cursor: pointer;
-    fill: #858418;
-    transition: all 0.15s ease-out;
-  }
-
-  .text text {
-    cursor: pointer;
-    /* fill: #333;
-    text-shadow: -1px -1px 0 #fafafabb, 1px -1px 0 #fafafabb, -1px 1px 0 #fafafabb, 1px 1px 0 #fafafabb; */
-    stroke: rgb(0, 119, 119);
-    font-weight: 100;
-  }
-
-  .nodes [active],
-  .text [active] {
-    cursor: pointer;
-    fill: #965191;
-  }
-
-  .inactive {
-    opacity: 0.1;
-    transition: all 0.15s ease-out;
-  }
-
-  #graph-wrapper {
-    /* background: #3d3d3d; */
-    background: transparent;
-    border-radius: 4px;
-    margin-left: 2rem;
-  }
-
-  #graph-wrapper > svg {
-    max-width: 100%;
-    display: block;
-    height: 50rem;
-  }
-</style>
+{% include graph.html %}
 
 <div id="graph-wrapper">
   <script>
@@ -57,9 +15,9 @@
       oScript.onload = () => {
         const MINIMAL_NODE_SIZE = 8;
         const MAX_NODE_SIZE = 12;
-        const ACTIVE_RADIUS_FACTOR = 1.5;
+        const ACTIVE_RADIUS_FACTOR = 1;
         const STROKE = 1;
-        const FONT_SIZE = 16;
+        const FONT_SIZE = 20;
         const TICKS = 200;
         const FONT_BASELINE = 40;
         const MAX_LABEL_LENGTH = 50;

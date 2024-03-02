@@ -18,4 +18,7 @@ It takes a while....
 
 ## LUFS = ~-23
 
-![](/assets/img/screenshot/Pasted%20image%2020231231162116.png)
+
+*![](/assets/img/screenshot/Pasted_20image_2020231231162116.png)*
+
+

@@ -6,6 +6,34 @@ title: Natural Language Processing
 category: NLP
 permalink: /nlp/
 ---
+
+
+
+### notes for gar
+
+made of }  this phrase is made of words
+kind of } NER is a kind of Thing
+source of
+used for
+cause
+to change
+attribute,
+value,
+range,
+
+synonymy 
+coupled relationship
+opposites
+
+# Lingua
+https://github.com/dbalatero/lingua
+---
+
+
+
+
+
+
 ## Index
 - [[AgileBloom]]
 - [[Caching]]
@@ -16,7 +44,7 @@ permalink: /nlp/
 - [[Elavis Saravia]]
 - [[embedding]]
 - [[GAR]]
-- [[Graph RAG]]
+- [[Graph Retrieval Augmenting Generation]]
 - [[Initial]]
 - [[Interference & Hallucinations]]
 - [[keywords and abbreviations]]

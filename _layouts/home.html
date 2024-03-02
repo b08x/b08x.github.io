@@ -3,18 +3,9 @@
 
 <head>{% include head.html %}</head>
 
-<body class="container">
-  <nav class="row">{% include nav.html %}</nav>
+<body>
 
-  <div class="home">
-
-      <div class="xl-12">
-        {% include items_graph.html %}
-      </div>
-
-  </div>
-
-
+  {% include items_graph.html %}
 
   <footer class="row">{% include footer.html %}</footer>
   {% include link-previews.html wrapperQuerySelector="content" %}

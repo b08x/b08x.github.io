@@ -7,7 +7,7 @@ category: Composition
 permalink: /llm/
 image: /assets/img/generative/pixel_crow-02
 ---
-
+the
 * fine tuning
 * operations related....f.e: containers, orchestration
 * llm applications 

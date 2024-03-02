@@ -136,7 +136,7 @@ curl http://localhost:11434/api/generate -d '{
 		
 [[Ranking Chunks]]
 
-[[Graph RAG]]
+[[Graph Retrieval Augmenting Generation]]
 
 
 * generating datasets

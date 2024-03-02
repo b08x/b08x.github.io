@@ -8,4 +8,4 @@ permalink: /index
 title: Home
 ---
 
-{% include items_graph.html %}
+

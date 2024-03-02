@@ -1,11 +1,6 @@
 ---
-layout: project
-title: laudGPT
-subtitle: linux audio users and developers ai assistant
-image: /assets/img/headers/image011-ascii-art.png
-permalink: /laudgpt
-status: planning
 ---
+
 
 
 [[ontologies]]

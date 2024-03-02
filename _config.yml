@@ -9,7 +9,6 @@ exclude:
   - "_includes/items_graph.json"
   - ".obsidian/"
   - "*.cast"
-  - "*.ipynb"
   - "*.pdf"
   - "README.md"
   - "LICENSE"
