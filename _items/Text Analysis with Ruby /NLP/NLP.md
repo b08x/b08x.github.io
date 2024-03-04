@@ -11,8 +11,8 @@ permalink: /nlp/
 
 ### notes for gar
 
-made of }  this phrase is made of words
-kind of } NER is a kind of Thing
+made of >>  this phrase is made of words
+kind of >> NER is a kind of Thing
 source of
 used for
 cause
@@ -27,8 +27,69 @@ opposites
 
 # Lingua
 https://github.com/dbalatero/lingua
----
 
+---
+```mermaid!
+
+graph
+
+  subgraph Item
+
+    subgraph Subject
+
+      subgraph Content
+
+        subgraph Sections
+
+        subgraph Section 1
+
+          A[Heading<br/>Paragraphs<br/>Subheading<br/>Paragraphs<br/>Lists<br/>Tables]
+
+          A --> B[Tokens]
+
+          B --> C[Words]
+
+          C --> D[Phrases]
+
+          D --> E[Sentences]
+
+          E --> F[Paragraphs]
+        
+        end
+
+      end
+
+      subgraph Sections
+
+      subgraph Section 2
+
+      B[Heading<br/>Paragraphs<br/>Subheading<br/>Paragraphs<br/>Lists<br/>Tables]
+
+      H --> B[Tokens]
+
+      B --> C[Words]
+
+      C --> D[Phrases]
+
+      D --> E[Sentences]
+
+      E --> F[Paragraphs]
+
+end
+
+end
+
+end
+
+end
+
+end
+
+end
+
+```
+
+---
 
 
 

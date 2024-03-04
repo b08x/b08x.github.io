@@ -1,11 +1,13 @@
 ---
-layout: folder
+layout: page
 title: Ambisonics
 subtitle: 
 excerpt: 
-category: 
+category: Audio
 tags: 
 image:
+pagination:
+  enabled: True
 ---
 
 

@@ -13,40 +13,9 @@ permalink: /nlp/grag/
 title: Optimize Retrieval Augmented Generation with Generating Augmented Retrieval by Generating Augments Retrieved with Generated Augmented Retrieval.
 ---
 
- How to easily talk your way out of a speeding ticket if you need to.
+#TODO process with lida, in two years
 
-
-
-
-Sure, I'd be happy to help complete this statement recursively. Here's an attempt:
-
-Graph Retrieval: Augmenting Generated Augmentation, Generating Augmented Retrieval
-
-Graph Retrieval Augmenting Generated Retrieval of Text (GRAT) - a text retrieval method that augments traditional retrieval techniques with graph-based representations of text documents.
-
-Generated Augmented Retrieval 
-
-Graph Retrieval Augmenting Generated Retrieval of
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-![[Pasted image 20240126224214.png]]
-
-#TODO process with lida
-
-[source](https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/)
+[something nice to read](https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/)
 
 ---
 **Analyzing the Language Model's Responses**
@@ -184,3 +153,5 @@ https://www.siwei.io/en/graph-enabled-llama-index/
 https://www.siwei.io/en/demos/graph-rag/
 https://www.siwei.io/en/demos/text2cypher/
 https://kg-llm-build.streamlit.app/?utm_medium=oembed
+
+![[Pasted image 20240126224214.png]]

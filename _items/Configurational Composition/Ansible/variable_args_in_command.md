@@ -1,7 +1,11 @@
 ---
+layout: note
+title: Variable Args in Command
+subtitle: 
+category: Ansible
+tags: 
+links:
 ---
-
-#ansible 
 
 An example of setting a variable of args to a command:
 

@@ -7,7 +7,7 @@ tags:
   - ansible
 gh-project: https://github.com/users/b08x/projects/9?pane=info
 image: /assets/img/headers/mpv-shot0001.jpg
-layout: project
+layout: page
 permalink: /iac
 status: forever ongoing
 subtitle: Ansible Collection For Audio Production on Linux

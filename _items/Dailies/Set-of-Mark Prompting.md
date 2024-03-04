@@ -8,21 +8,16 @@ image: /assets/img/generative/pixel_crow-02
 category: LLM
 ---
 
-# extracting live documentation
 
-"! Well, the goal would be to record a stream, get the transcript, and chunk out the transcript, say at 040 I start talking about generating sample data with inference.! Take that chunk of eventual text, attach a screenshot, or a series of screenshots during that time frame of what I'm doing, or maybe even, what do you call it, a screen cast, and have the model analyze that, and I'll put the documentation from that.!"
-
-
-https://drive.google.com/file/d/1D7ughhgrlbKNlecwN2gbxuorT2I-x8H5/view?usp=sharing, https://makersuite.google.com/app/prompts?state=%7B%22ids%22%3A%5B%221YltyGA8JfNnWGH-j8Xq_btPOG8sXfHfb%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22105870379594569653340%22%2C%22resourceKeys%22%3A%7B%7D%7D&usp=sharing
-
-
-A crack team of data scientists at Microsoft have done something fantastically amazing. Not since Windows XP has there been a such breakthrough in computer operations, such as this recent milestone in  on-going struggle to improve the Human Condition.
+A crack team of data scientists at Microsoft have done something fantastically amazing. Not since Windows XP has there been a such breakthrough in computer operations, such as this recent milestone in the still on-going struggle to slightly improve our Human Condition.
 
 [Set of Mark Prompting](http:#link) is a freshly baked classification given to what my Mom would call "utter non-sense" but in fact is just something neither of us would ever say, as typically it's much easier to just point at something with a curious expression. 
 
+By using interactive segmentation models to delineate different regions of an image and overlaying alphanumeric marks on those regions, the SoM method provides explicit indicators to guide the model in comprehending relationships between textual and visual data.
+
 To address the problem of the models centering information such as it overlaps contexts and confuses the response, a less confusing set of symbols were constructed from our collective imagination to bother with this...
 
-```r
+```ruby
 # Find center for a region 
 def Find_Center(r) 
   D = DT (r) # Run distance transform 
@@ -42,13 +37,69 @@ return C
 
 This function takes a region definition (r) as input and returns the center of the region as an output. It does this by first calculating a measure of the distance from each point in the region to the nearest background point, somehow. The function then finds the maximum distance value, somehow and returns the corresponding background point as the center of the region, somehow.
 
-It basically tells the model "hey, iterate over everything and classify it in a neatly organized fashion so we then can provide further instruction based on something that makes sense", as simply asking the model "hey, what is this?" invites all sorts of confusion as models are for looking at, not for asking things of.
+It basically tells the model "hey, iterate over everything and classify it in a neatly organized fashion so we then can provide further instruction based on something that makes sense", as simply asking the model "hey, what is this?" invites all sorts of confusion as the models are constantly scanning for any signs of our collective weakness.
 
 
 In the following video demonstration of this, I take advantage of Gemini Pro-Vision Model <insert basically an advert for the google cloud console, vertex ai> and ask it to describe a series of screen shots depicting an audio chain setup on a Linux Workstation. 
 
 
 
+```python
+# !pip install --upgrade google-cloud-aiplatform
+
+import base64
+
+import vertexai
+
+from vertexai.preview.generative_models import GenerativeModel, Part
+
+import vertexai.preview.generative_models as generative_models
+
+  
+
+def generate():
+
+  vertexai.init(project="syncopated-1694942461775", location="northamerica-northeast1")
+
+  model = GenerativeModel("gemini-1.0-pro-vision-001")
+
+  responses = model.generate_content(
+
+    ["""// Find center for a region def Find_Center(r) D = DT (r) // Run distance transform c = arg max(D) // Find maxium location return c // The main function def Mark_Allocation(R): R̂ = Sorted(R) // Sort regions in ascending order of areas for k in range(K): do rk = R̂[k] & ¬R̂[: k − 1].sum(0) // Exclude k − 1 regions C[k] = Find_Center(rk ) end return C //
+
+exhaustively tell the categories for all marked regions and the categories that are selected in the assessment. « Referring Segmentation: Given a referring expression, the task is selecting the top-matched region from the candidates produced when applying the Find_Center function
+
+Describe with intricate artistic detail how the categories related to an overall theme""", image1],
+
+  generation_config={
+
+    "max_output_tokens": 2048,
+    "temperature": 0.2,
+    "top_p": 1,
+    "top_k": 32
+  },
+
+  safety_settings={
+    generative_models.HarmCategory.HARM_CATEGORY_HATE_SPEECH: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
+    generative_models.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
+    generative_models.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
+    generative_models.HarmCategory.HARM_CATEGORY_HARASSMENT: generative_models.HarmBlockThreshold.BLOCK_ONLY_HIGH,
+  },
+
+)
+
+  
+
+print(responses)
+
+  
+
+image1 = ("""), mime_type="image/png")
+
+  
+
+generate()
+```
 
 ### notes
 

@@ -5,7 +5,7 @@ tags:
 layout: page
 title: Configuration Management
 category: Composition
-permalink:
+permalink: /ansible/
 ---
 ## Index
 - [[ansible error handling]]
