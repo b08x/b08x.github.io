@@ -9,6 +9,14 @@ image:
 permalink: /ruby/
 ---
 
+## aia and prompt manager
+
+https://github.com/MadBomber/aia
+
+https://github.com/MadBomber/prompt_manager
+
+https://github.com/MadBomber/scripts/blob/master/aip.rb
+
 
 ## [[Unless]]
 

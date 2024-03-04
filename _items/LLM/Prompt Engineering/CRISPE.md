@@ -3,7 +3,6 @@ layout: note
 title: Evaluating the CRISPE method
 subtitle: 
 category:
-  - LLM
   - Prompt Engineering
 tags: 
 links: 

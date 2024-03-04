@@ -3,7 +3,6 @@ layout: note
 title: 
 subtitle: 
 category:
-  - LLM
   - Prompt Engineering
 tags: 
 links:

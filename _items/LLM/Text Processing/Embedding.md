@@ -3,8 +3,9 @@ layout: note
 title: Embedding
 subtitle: 
 category:
-  - NLP
-tags: 
+  - Text Processing
+tags:
+  - llm
 links: 
 permalink:
 ---

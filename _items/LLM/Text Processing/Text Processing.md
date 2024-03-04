@@ -1,13 +1,12 @@
 ---
 layout: page
-title: Document Processing
+title: Text Processing
 category:
-  - NLP
+  - LLM
 tags:
   - obsidian-auto-glossary
+  - nlp
 ---
-
-
 
 ```mermaid!
 graph LR
@@ -68,20 +67,15 @@ style E fill:#2a1a2a,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5
 
 ```
 
-
-
-
 ## Index
 - [[Capturing Personality with Verb Phrase Extraction]]
 - [[Chunking]]
 - [[comparing and contrasting RAG and GAR]]
 - [[Embedding]]
-- [[keywords and abbreviations]]
-- [[NLP Processing for Semantic Search]]
 - [[Parts of a Document]]
-- [[Document Processing]]
+- [[Ranking Chunks]]
+- [[Semantic Search]]
 - [[Stop Words]]
-- [[Unless]]
 
 ---
 
@@ -98,4 +92,6 @@ SetFit is an efficient and prompt-free framework for few-shot fine-tuning of [S
 
 https://github.com/huggingface/setfit
 https://github.com/davidberenstein1957/spacy-setfit
+
+
 

@@ -3,7 +3,6 @@ layout: note
 title: Interference & Hallucinations
 subtitle: 
 category:
-  - LLM
   - Prompt Engineering
 tags: 
 links:

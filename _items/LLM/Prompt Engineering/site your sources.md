@@ -3,7 +3,6 @@ layout: note
 title: ask Gemini to site sources
 subtitle: 
 category:
-  - LLM
   - Prompt Engineering
 tags: 
 links:

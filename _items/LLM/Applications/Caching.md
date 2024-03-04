@@ -6,6 +6,7 @@ categories:
   - LLM
   - Applications
 tags:
+  - llm
 ---
 
 

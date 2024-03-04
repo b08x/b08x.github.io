@@ -3,9 +3,10 @@ layout: note
 title: wavjourney
 subtitle: 
 category:
-  - LLM
   - Prompt Engineering
-tags: 
+tags:
+  - llm
+  - prompt-engineering
 links: 
 permalink:
 ---

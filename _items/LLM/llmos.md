@@ -2,7 +2,8 @@
 layout: note
 title: 
 subtitle: 
-category: 
+category:
+  - LLM
 tags: 
 links:
 ---

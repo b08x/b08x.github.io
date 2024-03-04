@@ -1,9 +1,8 @@
 ---
 layout: note
-title: Set of Mark Prompting
+title: Set of Mark
 subtitle: 
 category:
-  - LLM
   - Prompt Engineering
 tags: 
 links: 

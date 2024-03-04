@@ -1,9 +1,12 @@
 <span>{
+  {% for cat in page.categories %}
+  {% capture cat_name %}{{ cat }}{% endcapture %}
   {% for tag in page.tags %}
     {% capture tag_name %}{{ tag }}{% endcapture %}
     {% if tag_name != 'obsidian-auto-glossary' %}
     <!-- <a href="{{ site.baseurl }}/{{ tag_name }}"><code class="highligher-rouge"><nobr>#{{ tag_name }}</nobr></code></a> -->
-    <a href="{{ site.baseurl }}/{{ tag_name }}"><code class="highligher-rouge"><nobr>#{{ tag_name }}</nobr></code></a>
+    <a href="{{ site.baseurl }}/{{ cat_name }}/{{ tag_name }}"><code class="highligher-rouge"><nobr>#{{ tag_name }}</nobr></code></a>
     {% endif %}
   {% endfor %}
+  {% endfor %}  
 }</span>

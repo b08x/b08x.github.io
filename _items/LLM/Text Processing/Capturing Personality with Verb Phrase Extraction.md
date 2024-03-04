@@ -3,9 +3,11 @@ layout: note
 title: Capturing Personality with Verb Phrase Extraction
 subtitle: 
 category:
-  - NLP
+  - Text Processing
 tags:
   - ruby
+  - text-processing
+  - llm
 links:
 ---
 
@@ -22,7 +24,7 @@ end
 ```
 
 
-mutable.ai -> data-driven-characters -> explain how verb phrase extraction could enhance the transcription process...
+#TODO: data-driven-characters -> explain how verb phrase extraction could enhance the transcription process...
 
 ```ruby
 require 'sentimental'

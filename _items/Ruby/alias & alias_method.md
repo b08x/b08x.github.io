@@ -8,7 +8,7 @@ tags:
 links:
 ---
 
-The use of aliases can improve the readability and maintainability of code. Compared to alias, the alias_method is considered more flexible, providing the ability to override methods and accommodate subclass behaviours.
+The use of aliases can improve the readability and maintainability of code. Compared to alias, the alias_method is considered more flexible, providing the ability to override methods and accommodate subclass behaviors.
 
 ```ruby
 class AudioFile

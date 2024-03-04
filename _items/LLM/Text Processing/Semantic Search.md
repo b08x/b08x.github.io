@@ -1,10 +1,11 @@
 ---
 layout: note
-title: NLP Processing for Semantic Search
+title: Semantic Search
 subtitle: 
 category:
-  - NLP
-tags: 
+  - Text Processing
+tags:
+  - nlp
 links:
 ---
 

@@ -3,9 +3,8 @@ layout: note
 title: Reasoning Scratchpad
 subtitle: 
 category:
-  - LLM
   - Prompt Engineering
-tags: 
+tags: []
 links: 
 permalink:
 ---

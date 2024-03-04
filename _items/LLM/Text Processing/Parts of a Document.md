@@ -2,7 +2,8 @@
 layout: note
 title: Parts of a Document
 subtitle: 
-category: NLP
+category:
+  - Text Processing
 tags:
   - llm
   - nlp

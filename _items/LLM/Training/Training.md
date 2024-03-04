@@ -10,8 +10,15 @@ category:
 permalink:
 ---
 
-[[Generating Questions with Llama-2-70b-chat-hf]]
-[[few_shot questions]]
+
+## Index
+- [[dataset notes]]
+- [[few_shot questions]]
+- [[Generating Questions with Llama-2-70b-chat-hf]]
+- [[Generating Sample Data with Inference]]
+
+---
+
 
 <div class="figure left">
     <div class="liner">

@@ -3,7 +3,7 @@ layout: note
 title: constructing triplets
 subtitle: 
 category:
-  - NLP
+  - LLM
 tags: 
 links:
 ---

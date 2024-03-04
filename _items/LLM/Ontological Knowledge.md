@@ -1,5 +1,5 @@
 ---
-layout: article
+layout: page
 title: Ontological Knowledge
 subtitle: unifying disparate data sources
 excerpt: 

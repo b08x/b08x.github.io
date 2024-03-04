@@ -3,12 +3,30 @@ layout: page
 title: Prompt Engineering
 subtitle: 
 excerpt: 
-category: []
-tags: 
-image:
+category:
+  - LLM
+tags:
+  - llm
+image: 
+permalink: /llm/prompt-engineering
 ---
 
 
+## Index
+- [[AgileBloom]]
+- [[CRISPE]]
+- [[Elavis Saravia]]
+- [[Gemini Advanced Image Generation]]
+- [[Interference & Hallucinations]]
+- [[LLM settings]]
+- [[Mixture of Experts]]
+- [[openai]]
+- [[parameters]]
+- [[Reasoning Scratchpad]]
+- [[Set of Mark]]
+- [[site your sources]]
+- [[using tone]]
+- [[wavjourney]]
 
 
 

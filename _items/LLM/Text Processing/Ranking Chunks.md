@@ -3,7 +3,7 @@ layout: note
 title: Ranking Chunks
 subtitle: 
 category:
-  - NLP
+  - Text Processing
 tags:
   - ruby
   - linux-audio

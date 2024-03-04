@@ -3,10 +3,10 @@ layout: page
 title: AgileBloom
 subtitle: 
 category:
-  - LLM
   - Prompt Engineering
+tags:
+  - llm
 links: 
-date updated: 
 permalink:
 ---
 

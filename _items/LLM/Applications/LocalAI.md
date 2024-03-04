@@ -1,14 +1,15 @@
 ---
 id: 1708912375-VABT
+title: LocalAI
 aliases:
   - enabling ccache with local-ai builds
-tags: 
 category:
-  - LLM
   - Applications
+tags:
+  - llm
 ---
 
-# enabling ccache when building LocalAI images
+# Enabling `ccache` When building LocalAI Images
 
 https://askubuntu.com/questions/470545/how-do-i-set-up-ccache
 
