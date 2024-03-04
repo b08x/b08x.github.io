@@ -60,3 +60,9 @@
     {% include tags/collect.html %}
   {% endif %}
 
+  {% if page.layout == 'page' or page.layout == 'note' %}
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/magnific-popup.css">
+  <script type="text/javascript" src="{{ site.baseurl }}/assets/js/jquery.magnific-popup.min.js"></script>
+  {% endif %}
+
+  <script type="text/javascript" src="//cdn.datacamp.com/dcl-react.js.gz"></script>

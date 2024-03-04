@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-Jekyll::Hooks.register :posts, :post_write do |post|
+Jekyll::Hooks.register :items, :post_write do |post|
   all_existing_tags = Dir.entries("tags")
     .map { |t| t.match(/(.*).md/) }
     .compact.map { |m| m[1] }
@@ -14,6 +14,6 @@ end
 
 def generate_tag_file(tag)
   File.open("tags/#{tag}.md", "wb") do |file|
-    file << "---\ntag-name: #{tag}\n---\n"
+    file << "---\nlayout: home\ntitle: #{tag}\npagination:\n\tenabled: true\n\tcollection: items\n\ttag: #{tag}\n\tpermalink: /:num/\n---\n"
   end
 end

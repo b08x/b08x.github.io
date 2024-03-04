@@ -6,21 +6,12 @@ pagination:
 
 <div class="row-flex-column">
   <div class="side">
-    <h1>{{ page.title }}</h1>
-
-    {% if page.links.size > 0 %}
-    {% for backlink in page.backlinks %}
-    <div class="backlink-box">
-      <a class="internal-link" href="{{ site.baseurl }}{{ backlink.url }}{%- if site.use_html_extension -%}.html{%- endif -%}">{{ backlink.title }}</a><br>
     
+    <div class="box">
+      <h1>{{ page.title }}</h1>
+      {% include item/tags.html %}
     </div>
-    {% endfor %}
-
-    {% endif %}
-
   </div>
-
-
   <div class="xl">
     <content>
       {{ content }}

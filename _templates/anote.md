@@ -4,5 +4,6 @@ title:
 subtitle: 
 category: 
 tags: 
-links:
+links: 
+permalink:
 ---

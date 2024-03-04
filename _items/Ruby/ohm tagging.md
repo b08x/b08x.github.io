@@ -1,0 +1,157 @@
+---
+layout: note
+title: ohm tagging
+subtitle: 
+category: Praxis
+tags:
+  - ruby
+  - redis
+links:
+---
+
+
+
+https://github.com/soveran/ohm/blob/master/examples/tagging.rb
+
+```ruby
+# Let's first require ohm.
+require 'ohm'
+
+# We then declare our class, inheriting from `Ohm::Model` in the process.
+class Document < Ohm::Model
+
+  # The structure, fields, and other associations are defined in a declarative
+  # manner. Ohm allows us to declare *attributes*, *sets*, *lists* and
+  # *counters*. For our usecase here, only two *attributes* will get the job
+  # done. The `body` will just
+  # be a plain string, and the `tags` will contain our comma-separated list of
+  # words, i.e. "ruby, redis, ohm". 
+  
+  # We then declare an `index` 
+  # (which can be an `attribute` or a method)
+  # that we point to our method `tag`
+  attribute :content
+  attribute :topics
+  index :topic
+
+  # One very interesting thing about Ohm indexes is that it can either be a
+  # *String* or an *Enumerable* data structure. When we declare it as an
+  # *Enumerable*, `Ohm` will create an index for every element. So if `tag`
+  # returned `[ruby, redis, ohm]` then we can search it using any of the
+  # following:
+  #
+  # 1. ruby
+  # 2. redis
+  # 3. ohm
+  # 4. ruby, redis
+  # 5. ruby, ohm
+  # 6. redis, ohm
+  # 7. ruby, redis, ohm
+  #
+  # Pretty neat ain't it?
+  def topic
+    topic.to_s.split(/\s*,\s*/).uniq
+  end
+end
+```
+
+
+```ruby
+# For our purposes in this example, we'll use cutest.
+require "cutest"
+
+# Cutest allows us to define callbacks which are guaranteed to be executed
+# every time a new `test` begins. Here, we just make sure that the Redis
+# instance of `Ohm` is empty everytime.
+prepare { Ohm.flush }
+
+# Next, let's create a simple `Document` instance. The return value of the `setup`
+# block will be passed to every `test` block, so we don't actually have to
+# assign it to an instance variable.
+setup do
+  Document.create(:title => "Ohm Tagging", :topics => "tagging, ohm, redis")
+end
+
+# For our first run, let's verify the fact that we can find a `Document`
+# using any of the tags we gave.
+test "find using a single tag" do |p|
+  assert Document.find(topic: "tagging").include?(p)
+  assert Document.find(topic: "ohm").include?(p)
+  assert Document.find(topic: "redis").include?(p)
+end
+
+# Now we verify our claim earlier, that it is possible to find a tag
+# using any one of the combinations for the given set of tags.
+#
+# We also verify that if we pass in a non-existent tag name that
+# we'll fail to find the `Document` we just created.
+test "find using an intersection of multiple tag names" do |p|
+  assert Document.find(topic: ["tagging", "ohm"]).include?(p)
+  assert Document.find(topic: ["tagging", "redis"]).include?(p)
+  assert Document.find(topic: ["ohm", "redis"]).include?(p)
+  assert Document.find(topic: ["tagging", "ohm", "redis"]).include?(p)
+
+  assert ! Document.find(topic: ["tagging", "foo"]).include?(p)
+end
+```
+
+
+
+
+So, the goal is to make sure that the document text is extracted from the document. On the initial import, a document is created, if it doesn't already exist, the path, file name and the file type. So once that object is created, then the content is extracted, stored in a variable, and if it is not empty, or the class is something other than a string, the document object will be updated with the content, which is just the raw text, and then the document is saved to the database. So I guess trying to modularize this as much as possible, so like first pass, create the document with the path name and type, second pass, extract the raw text from the document and save it. So I guess this is to account for something being missed on the first pass, if the import is run again, and the file path is existing already in the database, that'll throw a unique index violation, at which point rescue kicks in. And this is what needs refactoring as unique index violation. Anytime error occurs, then instead of document create, it's document find by the file path. It just needs to be refactored so that the fine, or so that the, well, for once of the extract text function doesn't, or isn't listed, run twice, there's duplicate code, suppose one way to do that would be to run document find first, if that turns up empty, then do create.
+
+---
+
+## ohm datatypes
+
+```ruby
+require "bigdecimal"
+require "date"
+require "json"
+require "time"
+require "set"
+
+module Ohm
+  module DataTypes
+    module Type
+      Integer   = ->(x) { x && x.to_i }
+      Decimal   = ->(x) { x && BigDecimal(x.to_s) }
+      Float     = ->(x) { x && x.to_f }
+      Symbol    = ->(x) { x && x.to_sym }
+      Boolean   = ->(x) { !!x }
+      Time      = ->(t) { t && (t.kind_of?(::Time) ? t : ::Time.parse(t)) }
+      Date      = ->(d) { d && (d.kind_of?(::Date) ? d : ::Date.parse(d)) }
+      Timestamp = ->(t) { t && UnixTime.at(t.to_i) }
+      Hash      = ->(h) { h && SerializedHash[h.kind_of?(::Hash) ? h : JSON(h)] }
+      Array     = ->(a) { a && SerializedArray.new(a.kind_of?(::Array) ? a : JSON(a)) }
+      Set       = ->(s) { s && SerializedSet.new(s.kind_of?(::Set) ? s : JSON(s)) }
+    end
+
+    class UnixTime < Time
+      def to_s
+        to_i.to_s
+      end
+    end
+
+    class SerializedHash < Hash
+      def to_s
+        JSON.dump(self)
+      end
+    end
+
+    class SerializedArray < Array
+      def to_s
+        JSON.dump(self)
+      end
+    end
+
+    class SerializedSet < ::Set
+      def to_s
+        JSON.dump(to_a.sort)
+      end
+    end
+  end
+end
+```
+
+

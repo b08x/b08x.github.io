@@ -3,7 +3,8 @@ layout: page
 title: Craiyon Drawerings
 subtitle: 
 excerpt: 
-category: 
+category:
+  - misc
 tags: 
 image: 
 links:

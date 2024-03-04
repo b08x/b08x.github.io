@@ -2,7 +2,8 @@
 layout: page
 title: misc
 subtitle: 
-category: misc
+category:
+  - misc
 tags: 
 links: 
 permalink: /misc/

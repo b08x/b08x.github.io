@@ -1,16 +1,12 @@
 ---
-tags:
-  - obsidian-auto-glossary
 layout: page
 title: Projects
+category: 
+tags:
+  - obsidian-auto-glossary
 permalink: /projects/
 ---
 
 ## Index
-- [[Gems]]
-- [[JackQA]]
 - [[Knowlecule]]
-- [[laud]]
-- [[notes to parse]]
 - [[SyncopatedIaC]]
-- [[syncopatedos]]

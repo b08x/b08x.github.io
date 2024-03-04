@@ -3,10 +3,11 @@ layout: page
 title: Stable Diffusion Gallery
 subtitle: 
 excerpt: 
-category: misc
+category:
+  - misc
 tags: 
 image: 
-permalink: /gallery/
+permalink: /misc/gallery/
 ---
 
 

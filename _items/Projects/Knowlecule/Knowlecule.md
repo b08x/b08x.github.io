@@ -2,7 +2,8 @@
 layout: page
 title: Knowlecule
 subtitle: 
-category: Projects
+category:
+  - Projects
 tags:
   - llm
   - nlp
@@ -12,7 +13,7 @@ tags:
   - ansible
   - docker
 links: 
-permalink: /knowlecule/
+permalink:
 ---
 
 

@@ -8,10 +8,12 @@ tags:
 gh-project: https://github.com/users/b08x/projects/9?pane=info
 image: /assets/img/headers/mpv-shot0001.jpg
 layout: page
-permalink: /iac
+permalink: 
 status: forever ongoing
 subtitle: Ansible Collection For Audio Production on Linux
 title: SyncopatedIaC
+category:
+  - Projects
 ---
 
 ## Ansible - Linux Desktop Survey
