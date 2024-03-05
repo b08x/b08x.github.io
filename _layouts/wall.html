@@ -6,26 +6,25 @@
 
 <body class="container">
   <main>
-    <section id="snapping" class="section">
-      <div class="content">
-        {% include items_graph.html %}
-      </div>
-    </section>
     <section id="scrolling" class="section">
       <div class="content">
-        <h2><strong>Next</strong>, we set up the <em>scrolling</em> animation</h2>
+        <h2>syncopated notes</h2>
 
         <div class="text">
-          <img src="https://assets.codepen.io/197359/flower-yellow.png" alt="">
-          <p>We track the <code class="property">view()</code> position of the <code class="selector">section</code>
-            elements using the named timeline <code class="property">view-timeline: --section;</code>. We had previously
-            set the <code class="property">timeline-scope: --section</code> up in our <code class="selector">HTML</code>
-            element, so we can access it from anywhere in the document.</p>
-
-          <p>We animate the <code class="selector">.content</code> children using <code
-              class="property">animation-timeline: --section;</code>. The <code class="selector">.content</code> element
-            will now animate based on its parent <code class="selector">section</code>'s position. This is important due
-            to how we're handling the layout in the next section.</p>
+          <div class="xs">
+          <strong>Recently Updated</strong>
+          <ul>
+            {% assign recent_items = site.items | sort: "last_modified_at_timestamp" | reverse %}
+            {% for item in recent_items limit: 25 %}
+            {% if item.layout == 'page' %}
+              <li>
+                {{ item.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link" href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
+              </li>
+            {% endif %}
+          
+            {% endfor %}
+          </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -78,7 +77,11 @@
         </div>
       </div>
     </section>
-
+    <section id="snapping" class="section">
+      <div class="content">
+        {% include items_graph.html %}
+      </div>
+    </section>
   </main>
 
 
