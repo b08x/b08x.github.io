@@ -2,7 +2,9 @@
 layout: note
 title: Networking Without a Manager
 subtitle: 
-category: OS
+category:
+  - OS
+  - Linux
 tags:
   - linux
   - networking

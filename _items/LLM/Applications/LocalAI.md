@@ -4,6 +4,7 @@ title: LocalAI
 aliases:
   - enabling ccache with local-ai builds
 category:
+  - LLM
   - Applications
 tags:
   - llm

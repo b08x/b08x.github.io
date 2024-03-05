@@ -2,7 +2,8 @@
 layout: note
 title: sysrq
 subtitle: 
-category: 
+category:
+  - OS
 tags: 
 links:
 ---

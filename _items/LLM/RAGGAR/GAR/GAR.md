@@ -3,8 +3,9 @@ layout: page
 title: Generated Augmented Retrieval
 category:
   - LLM
-tags:
-  - obsidian-auto-glossary
+  - RAGGAR
+tags: 
+permalink: /llm/raggar/gar
 ---
 
 
@@ -33,4 +34,4 @@ opposites
 
 
 ## Index
-- [[Initial]]
+- [[Design]]

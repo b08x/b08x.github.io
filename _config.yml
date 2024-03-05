@@ -6,6 +6,7 @@ exclude:
   - "textgenerator/"
   - "_templates/"
   - "_drafts/"
+  - "_items_bak/"
   - "_includes/items_graph.json"
   - ".obsidian/"
   - "*.cast"

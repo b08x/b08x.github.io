@@ -1,13 +1,11 @@
 ---
-layout: index
-title: Issues
+layout: note
+title: something
 subtitle: 
-excerpt: 
-category: Audio
-tags:
-  - linux
-  - audio
-image:
+category: 
+tags: 
+links: 
+permalink:
 ---
 
 

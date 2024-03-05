@@ -2,10 +2,12 @@
 layout: note
 title: Design
 subtitle: 
-category: 
+category:
+  - GAR
 tags:
   - llm
-links:
+links: 
+permalink: /llm/raggar/gar/design
 ---
 
 Let's design a Generated Augmented Retrieval framework to compliment a Retrieval Augmented Generation framework.

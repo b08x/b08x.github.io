@@ -3,7 +3,6 @@ layout: note
 title: Gemini Advanced Images
 subtitle: 
 category:
-  - LLM
   - Prompt Engineering
 tags:
   - gemini

@@ -2,9 +2,7 @@
 layout: note
 title: Integrating yadm
 subtitle: 
-category:
-  - Operations
-  - Configuration Management
+category: []
 tags:
   - dots
 links:

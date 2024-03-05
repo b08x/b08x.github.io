@@ -2,7 +2,9 @@
 layout: note
 title: Ontology Construction with Language Models
 subtitle: 
-category: 
+category:
+  - LLM
+  - RAGGAR
 tags:
   - nlp
   - ruby

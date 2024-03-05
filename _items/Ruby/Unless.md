@@ -2,9 +2,9 @@
 layout: page
 title: Document Processing Techniques
 subtitle: with Ruby's "unless" Method
-category:
-  - Ruby
+category: 
 tags:
+  - ruby
   - nlp
 links:
 ---

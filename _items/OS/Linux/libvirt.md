@@ -2,7 +2,9 @@
 layout: note
 title: libvirt
 subtitle: 
-category: Systems
+category:
+  - OS
+  - Linux
 tags:
   - libvirt
   - linux

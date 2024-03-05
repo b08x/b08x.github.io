@@ -3,7 +3,8 @@ layout: note
 title: Retrieval
 subtitle: 
 category:
-  - NLP
+  - LLM
+  - RAGGAR
 tags:
   - ruby
 links: 

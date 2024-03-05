@@ -2,8 +2,7 @@
 layout: note
 title: Design Patterns
 subtitle: 
-category:
-  - Praxis
+category: []
 tags: 
 links:
 ---

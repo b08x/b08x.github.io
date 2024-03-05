@@ -2,8 +2,7 @@
 layout: note
 title: gitflow
 description: crafting a git flow strategy
-category:
-  - Praxis
+category: []
 tags: 
 links:
 ---

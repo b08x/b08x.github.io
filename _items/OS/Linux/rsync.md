@@ -2,7 +2,9 @@
 layout: note
 title: rsync
 subtitle: 
-category: OS
+category:
+  - OS
+  - Linux
 tags:
   - linux
 links:

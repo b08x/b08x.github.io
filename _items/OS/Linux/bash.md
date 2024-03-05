@@ -3,7 +3,6 @@ layout: note
 title: bash
 subtitle: 
 category:
-  - Operations
   - OS
   - Linux
 tags: 

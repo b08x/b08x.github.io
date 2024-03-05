@@ -1,4 +1,13 @@
 ---
+layout: note
+title: btrfs
+subtitle: 
+category:
+  - OS
+  - Linux
+tags: 
+links: 
+permalink:
 ---
 
 

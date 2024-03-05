@@ -1,13 +1,8 @@
 ---
-layout: note
-title: Docker Notes
-subtitle: 
-category: Systems
-tags:
-  - docker
-links:
+tags: []
 ---
-
+## Index
+- [[Reducing Docker Image Size]]
 
 
 

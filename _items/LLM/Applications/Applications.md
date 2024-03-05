@@ -1,20 +1,15 @@
 ---
-tags:
-  - obsidian-auto-glossary
-  - llm
-layout: page
-title: Applications
+title: LLM Applications
 category:
   - LLM
-permalink:
+tags: 
+permalink: /llm/applications
 ---
-
 ## magenta (the new thing, not the color)
 
 https://magenta.tensorflow.org/demos/web/
 
 ## Index
-- [[Caching]]
 - [[Composing Documentation with Mutable]]
 - [[Flowise]]
 - [[Langfuse]]

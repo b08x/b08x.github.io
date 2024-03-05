@@ -2,7 +2,7 @@
 layout: note
 title: Using NLP to Generate Music
 subtitle: 
-category: Praxis
+category: []
 tags:
   - ruby
   - llm

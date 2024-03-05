@@ -31,7 +31,7 @@ category:
 5. omitWould you be open to sharing specific Ansible playbook examples or configurations related to desktop management in your audio production setup? (Yes/No)
 ```
 
-[[Audio]]
+[[tags/audio]]
 
 
 

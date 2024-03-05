@@ -2,7 +2,7 @@
 layout: note
 title: ohm tagging
 subtitle: 
-category: Praxis
+category: []
 tags:
   - ruby
   - redis

@@ -4,6 +4,7 @@ title: constructing triplets
 subtitle: 
 category:
   - LLM
+  - RAGGAR
 tags: 
 links:
 ---

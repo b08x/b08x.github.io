@@ -1,7 +1,8 @@
 ---
 id: Graph RAG
 layout: page
-title: Optimize Retrieval Augmented Generation with Generating Augmented Retrieval by Generating Augments Retrieved with Generated Augmented Retrieval.
+title: Optimize Retrieval Augmented Generation
+subtitle: with Generating Augmented Retrieval by Generating Augments Retrieved with Generated Augmented Retrieval.
 category:
   - NLP
 aliases:
@@ -16,7 +17,6 @@ tags:
 
 #TODO process with lida, in two years
 
-[something nice to read](https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/)
 
 ---
 **Analyzing the Language Model's Responses**

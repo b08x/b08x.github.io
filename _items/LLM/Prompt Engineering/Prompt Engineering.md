@@ -19,7 +19,6 @@ permalink: /llm/prompt-engineering
 - [[Gemini Advanced Image Generation]]
 - [[Interference & Hallucinations]]
 - [[LLM settings]]
-- [[Mixture of Experts]]
 - [[openai]]
 - [[parameters]]
 - [[Reasoning Scratchpad]]

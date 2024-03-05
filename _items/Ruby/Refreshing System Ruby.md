@@ -2,9 +2,7 @@
 layout: note
 title: Refreshing System Ruby
 subtitle: 
-category:
-  - OS
-  - Linux
+category: []
 tags:
   - ruby
 links:

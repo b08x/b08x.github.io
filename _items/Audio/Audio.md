@@ -1,22 +1,19 @@
 ---
+tags: 
+title: audio
 layout: page
-title: Audio
-category: 
-tags:
-  - obsidian-auto-glossary
 permalink: /audio/
 ---
-
-
 ## Index
-
+- [[ Streaming Desktop from Tinybot to Soundbot ]]
+- [[something]]
 - [[Ambisonics]]
 - [[DeadBeef]]
 - [[ffmpeg conversions]]
-- [[Issues]]
 - [[metering]]
 - [[NoiseGate]]
 - [[notes]]
 - [[Sonic Visualizer]]
 - [[sonic-pi speaker test]]
+- [[soundfonts]]
 - [[vamp]]

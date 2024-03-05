@@ -4,7 +4,8 @@ title: Ontological Knowledge
 subtitle: unifying disparate data sources
 excerpt: 
 category:
-  - NLP
+  - LLM
+  - RAGGAR
 tags: 
 image:
 ---

@@ -2,8 +2,7 @@
 layout: note
 title: Using the Iterator Design Pattern
 subtitle: 
-category:
-  - Praxis
+category: []
 tags:
   - ruby
 links:

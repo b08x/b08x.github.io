@@ -1,13 +1,21 @@
 ---
-layout: page
-title: Linux
-subtitle: 
-category:
-  - OS
-tags:
+tags: []
 ---
-
-
+## Index
+- [[bash]]
+- [[btrfs]]
+- [[fixing "Authorization required, but no authorization protocol specified"]]
+- [[i3]]
+- [[libvirt]]
+- [[tags/linux]]
+- [[Networking Without a Manager]]
+- [[Package Building]]
+- [[rsync]]
+- [[snippets]]
+- [[sysrq]]
+- [[Systemd and Xsession]]
+- [[xorg video]]
+- [[_items/OS/Configuration Management/yadm]]
 
 
 
@@ -56,7 +64,8 @@ sudo downgrade ncurses
 
 [repo manager](https://repod.archlinux.page/)
 
-**rts**[is a collection of systemd services and scripts that allow to set pre-defined real-time related scheduling settings, using [tuna](https://rt.wiki.kernel.org/index.php/Tuna).](https://sleepmap.de/software/rts/)
+**rts**
+[is a collection of systemd services and scripts that allow to set pre-defined real-time related scheduling settings, using [tuna](https://rt.wiki.kernel.org/index.php/Tuna).](https://sleepmap.de/software/rts/)
 
 ---
 

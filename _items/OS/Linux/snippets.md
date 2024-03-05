@@ -2,7 +2,9 @@
 layout: note
 title: Command Line Snippets
 subtitle: 
-category: OS
+category:
+  - OS
+  - Linux
 tags:
   - linux
 links:

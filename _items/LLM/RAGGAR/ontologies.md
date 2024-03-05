@@ -3,8 +3,9 @@ layout: note
 title: ontologies
 subtitle: 
 category:
-  - NLP
-tags: []
+  - LLM
+  - RAGGAR
+tags: 
 links: 
 permalink:
 ---

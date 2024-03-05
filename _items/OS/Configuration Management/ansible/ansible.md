@@ -1,11 +1,13 @@
 ---
-layout: note
-title: Notepad
-category:
-  - Configuration Management
-tags:
-  - ansible
+tags: obsidian-auto-glossary
 ---
+## Index
+- [[ansible error handling]]
+- [[ansible tasks dotfiles]]
+- [[Ansible Variable Precedence]]
+- [[Package Handling]]
+- [[Playbook Optimization]]
+
 
 
 
