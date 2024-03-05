@@ -5,6 +5,8 @@ category:
 tags: 
 permalink: /ruby/
 ---
+[image processing](https://github.com/janko/image_processing)
+
 ## Index
 - [[A Recipe for Generative Music]]
 - [[alias and alias_method]]

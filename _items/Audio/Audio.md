@@ -1,12 +1,12 @@
 ---
-tags: 
 title: audio
 layout: page
 permalink: /audio/
+tags:
 ---
 ## Index
 - [[Streaming Desktops With mediamtx]]
-- [[something]]
+- [[Issues]]
 - [[Ambisonics]]
 - [[DeadBeef]]
 - [[ffmpeg conversions]]

@@ -3,7 +3,7 @@ id: index
 aliases:
   - Welcome!
 tags: 
-layout: wall
+layout: home
 permalink: /index
 title: Home
 ---

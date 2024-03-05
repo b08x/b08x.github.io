@@ -11,7 +11,7 @@ tags:
 links: 
 toc: true
 ---
-# Please describe the different parts of a "Document"
+## Please describe the different parts of a "Document"
 
 Absolutely! Here's a more expanded description of document components, going into further detail:
 
@@ -67,17 +67,17 @@ Absolutely! Here's a more expanded description of document components, going int
 
 Let me know if you'd like a deep-dive into any specific part!
 
-# Please break down the structure of the document body
+## Please break down the structure of the document body
 
 Absolutely! Let's break down how you might organize the body of a document:
 
-## **General Principles**
+### **General Principles**
 
 - **Logical Flow:** Think about what order makes the most sense for conveying your ideas. Is it chronological, going from general to specific, comparing two concepts, etc.?
 - **Paragraphs as Mini-Essays:** Each should have a topic sentence stating its main point, supporting details, and a sense of internal conclusion.
 - **Transitions:** Use phrases like "Furthermore," "In contrast," or "As a result" to guide the reader between paragraphs and sections.
 
-## **Common Structures (Flexible depending on your document type)**
+### **Common Structures (Flexible depending on your document type)**
 
 1. **Problem-Solution:**
     
@@ -109,7 +109,7 @@ Let me know if you have a specific document type in mind, and I can offer more t
 
 
 
-# Ok, can you reframe that in terms of NLP document pre-processing?
+## Ok, can you reframe that in terms of NLP document pre-processing?
 
 Absolutely! Let's look at document body structure through the lens of NLP (Natural Language Processing) pre-processing.
 
@@ -118,7 +118,7 @@ Absolutely! Let's look at document body structure through the lens of NLP (Natur
 
 Traditional document structure focuses on organization for _human_ readers. In NLP, we're preparing the text for _machine_ understanding. This means focusing on elements that aid algorithms in extracting meaning.
 
-## **Key NLP Pre-processing Steps Affecting the Body**
+### **Key NLP Pre-processing Steps Affecting the Body**
 
 - **Tokenization:** Breaking the text into meaningful units – words, punctuation, or even phrases. Good tokenization is crucial for downstream analyses.
 - **Stop Word Removal:** Filtering out common words like "the," "and," etc. This reduces computational load and helps focus on content-bearing words.

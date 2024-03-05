@@ -15,17 +15,15 @@ The use of aliases can improve the readability and maintainability of code. Comp
 class AudioFile
   attr_accessor :path
   
-  def initialize
-	  
-	  @path = "/home/stuff"
-  
+  def initialize  
+    @path = "/home/stuff"
   end
 
   def full_path
-	puts "#{@path}"
+    puts "#{@path}"
   end
 
-  alias name full_path
+alias name full_path
 end
 
 AudioFile.new.name 

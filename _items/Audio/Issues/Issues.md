@@ -1,8 +1,9 @@
 ---
-layout: note
-title: something
+layout: page
+title: Issues
 subtitle: 
-category: 
+category:
+  - Audio
 tags: 
 links: 
 permalink:

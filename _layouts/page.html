@@ -8,28 +8,32 @@ enabled: true
   <div class="side">
 
     <div class="box">
-      <div style="border-style: dashed; border-color: black; padding: 1rem">
+      <div style="border-style: dashed; border-color: black; padding: 0.5rem">
         <h1>{{ page.title }}</h1>
+        <time style="display: flex;" datetime="{{ page.last_modified_at | date_to_xmlschema }}">{% if page.type != 'pages' %}
+            updated on: {{ page.last_modified_at | date: "%B %-d, %Y" }}
+          {% endif %}
+        </time>
       </div>
       <br>
-      <div style="border-style: dashed; border-color: black; padding: 1rem;">
+      <div style="border-style: dashed; border-color: black; padding: 0.5rem;">
         {% include item/backlinks.html %}
       </div>
       <br>
-      <div style="border-style: dashed; border-color: black; padding: 1rem">
+      <div style="border-style: dashed; border-color: black; padding: 0.5rem">
         {% include item/tags.html %}
       </div>
       <br>      
-      <div style="border-style: dashed; border-color: black; padding: 1rem">
+      <div style="border-style: dashed; border-color: black; padding: 0.5rem">
         <span>
           {{ content | toc_only }}
         </span>
       </div>
     </div>
   </div>
-  <div class="xl" style="border-style: dashed; border-color: black; padding: 1rem">
+  <div class="xl" style="border-style: dashed; border-color: black; padding: 0.5rem">
     <content>
-      {{ content | inject_anchors }}
+      {{ content }}
     </content>
   </div>
 </div>
