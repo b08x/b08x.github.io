@@ -9,6 +9,7 @@ tags:
   - llm
 image: 
 permalink: /llm/prompt-engineering
+toc: true
 ---
 
 ## Index
@@ -22,31 +23,78 @@ permalink: /llm/prompt-engineering
 - [[parameters]]
 - [[Reasoning Scratchpad]]
 - [[Set of Mark]]
-- [[site your sources]]
-- [[using tone]]
 - [[wavjourney]]
 
 
+## A Prompt Pattern Catalog to Enhance Prompt Engineering
 
-#### A Prompt Pattern Catalog to Enhance Prompt Engineering
+<div class="figure left" style="mix-blend-mode: exclusion;">
+    <div class="liner">
+     {% picture default screenshot/contexual_statements01.png %}
+     </div>
+    <div class="liner">
+     {% picture default screenshot/contexual_statements02.png %}
+     </div>
+    <div class="liner">
+     {% picture default screenshot/contexual_statements03.png %}
+     </div>        
+    <div class="liner">
+     {% picture default screenshot/contexual_statements05.png %}
+     </div>     
+    <div class="liner">
+     {% picture default screenshot/contexual_statements06.png %}
+     </div>     
+    <div class="liner">
+     {% picture default screenshot/contexual_statements07.png %}
+    </div>
+   
+</div>
 
-![](/assets/img/screenshot/Pasted%20image%2020240301135739.png)
-
-![](/assets/img/screenshot/Pasted%20image%2020240301140036.png)
-
-![](/assets/img/screenshot/Pasted%20image%2020240301135801.png)
-
-![](/assets/img/screenshot/Pasted%20image%2020240301135821.png)
-
-![](/assets/img/screenshot/Pasted%20image%2020240301135931.png)
-
-![](/assets/img/screenshot/Pasted%20image%2020240301140335.png)
-
-![](/assets/img/screenshot/Pasted%20image%2020240301135843.png)
+<div class="figure right" style="mix-blend-mode: exclusion;">
+    <div class="liner">
+     {% picture default screenshot/contexual_statements04.png %}
+     </div> 
+</div>
 
 ---
 
-[[Reasoning Scratchpad]]
+
+#### site your sources
+
+* seems to improve accuracy
+	* so far only tested with google Gemini
+
+
+```markdown
+Behave as a [role]
+
+[context]
+
+[query]
+
+Site used sources with active links.
+```
+
+#### tone
+
+> Use an erudite yet colloquial tone avoiding grandiloquence
+
+
+#### imperative mood
+
+The imperative mood is a grammatical mood that forms a command or request. The imperative mood is used to demand or require that an action be performed. It is **usually** found only in the present tense, second person.
+
+#### **“Behave like” vs. “Act like”**
+
+> You have all encountered the guidance to use “Act like an expert of some kind or other” in your prompts. In my testing “Act Like” tends to guide chat models toward persona-driven responses. “Behave like” offers more flexibility especially when the aim is for the model to operate more like a program or a system. And, it can be used in the persona-centric contexts as well.
+
+#### **"lookback"**
+
+*For the document above, do X* - lookback
+
+Instead use: For the document *below*, do X
+
+---
 
 
 > [!ai]+ AI
@@ -61,45 +109,33 @@ permalink: /llm/prompt-engineering
 > | Pragmatics | Noun | 1. the study of the relationship between language and context | The study of how language is used in context | The study of how language is used in context |
 
 ---
-> Use an erudite yet colloquial tone avoiding grandiloquence
----
-
-## imperative mood
-
-The imperative mood is a grammatical mood that forms a command or request. The imperative mood is used to demand or require that an action be performed. It is **usually** found only in the present tense, second person.
-
----
 
 ## decoding messages
 
 
->Three Layers of Any Message In these examples of decipherment of out-of-context messages, we can separate out fairly clearly three levels of information: (1) the frame message; (2) the outer message; (3) the inner message. The one we are most familiar with is (3), the inner message; it is the message which is supposed to be transmitted: the emotional experiences in music, the phenotype in genetics, the royalty and rites of ancient civilizations in tablets, etc. To understand the inner message is to have extracted the meaning intended by the sender.. The frame message is the message "I am a message; decode me if you can!"; and it is implicitly conveyed by the gross structural aspects of any information-bearer. To understand the frame message is to recognize the need for a decoding- mechanism. If the frame message is recognized as such, then attention is switched to level (2), the outer message. This is information, implicitly carried by symbol-patterns and structures in the message, which tells how to decode the inner message. To understand the outer message is to build, or know how to build, the correct decoding mechanism for the inner message. This outer level is perforce an implicit message, in the sense that the sender cannot ensure that it will be understood. It would be a vain effort to send instructions which tell how to decode the outer message, for they would have to be part of the inner message, which can only be understood once the decoding mechanism has been found. For this reason, the outer message is necessarily a set of triggers, rather than a message which can be revealed by a known decoder. The formulation of these three "layers" is only a rather crude beginning at analyzing how meaning is contained in messages. There may be layers and layers of outer and inner messages, rather than just one of each. Think, for instance, of how intricately tangled are the inner and outer messages of the Rosetta stone. To decode a message fully, one would have to reconstruct the entire semantic structure which underlay its creation and thus to understand the sender in every deep way. Hence one could throw away the inner message, because if one truly understood all the finesses of the outer message, the inner message would be reconstructible.
-> 	page 174 Godel Escher Bach
+```markdown
+Three Layers of Any Message In these examples of decipherment of out-of-context messages, we can separate out fairly clearly three levels of information: (1) the frame message; (2) the outer message; (3) the inner message. The one we are most familiar with is (3), the inner message; it is the message which is supposed to be transmitted: the emotional experiences in music, the phenotype in genetics, the royalty and rites of ancient civilizations in tablets, etc. To understand the inner message is to have extracted the meaning intended by the sender.. The frame message is the message "I am a message; decode me if you can!"; and it is implicitly conveyed by the gross structural aspects of any information-bearer. To understand the frame message is to recognize the need for a decoding- mechanism. If the frame message is recognized as such, then attention is switched to level (2), the outer message. 
+
+This is information, implicitly carried by symbol-patterns and structures in the message, which tells how to decode the inner message. To understand the outer message is to build, or know how to build, the correct decoding mechanism for the inner message. This outer level is perforce an implicit message, in the sense that the sender cannot ensure that it will be understood. It would be a vain effort to send instructions which tell how to decode the outer message, for they would have to be part of the inner message, which can only be understood once the decoding mechanism has been found. For this reason, the outer message is necessarily a set of triggers, rather than a message which can be revealed by a known decoder. 
+
+The formulation of these three "layers" is only a rather crude beginning at analyzing how meaning is contained in messages. There may be layers and layers of outer and inner messages, rather than just one of each. Think, for instance, of how intricately tangled are the inner and outer messages of the Rosetta stone. To decode a message fully, one would have to reconstruct the entire semantic structure which underlay its creation and thus to understand the sender in every deep way. Hence one could throw away the inner message, because if one truly understood all the finesses of the outer message, the inner message would be reconstructible.
+```
+page 174 Godel Escher Bach
 
 
 ---
-**“Behave like” vs. “Act like”**
-
-> You have all encountered the guidance to use “Act like an expert of some kind or other” in your prompts. In my testing “Act Like” tends to guide chat models toward persona-driven responses. “Behave like” offers more flexibility especially when the aim is for the model to operate more like a program or a system. And, it can be used in the persona-centric contexts as well.
-
----
-**"lookback"**
-
-*For the document above, do X* - lookback
-
-Instead use: For the document *below*, do X
----
-
-[ai sleeper agents](https://www.astralcodexten.com/p/ai-sleeper-agents?utm_source=tldrnewsletter)
-
 
 #### subchoices
 
 *Beyond ChatBots: ExploreLLM for Structured Thoughts with Choices*
+
 ![](/assets/img/screenshot/Pasted%20image%2020231231124006.png)
 
 ---
 
+## resources
+
+[ai sleeper agents](https://www.astralcodexten.com/p/ai-sleeper-agents?utm_source=tldrnewsletter)
 
 [llmstudio](https://github.com/TensorOpsAI/LLMstudio?tab=readme-ov-file)
 
@@ -117,5 +153,6 @@ https://www.perplexity.ai/search/common-issues-mraIIPrASQO.WwplI8nrVA?s=u
 https://www.perplexity.ai/search/common-issues-mraIIPrASQO.WwplI8nrVA?s=c
 
 ---
+
 
 

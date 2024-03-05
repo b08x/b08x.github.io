@@ -1,6 +1,6 @@
 ---
-layout: note
-title: Ontology Construction with Language Models
+layout: page
+title: Ontology Construction
 subtitle: 
 category:
   - LLM

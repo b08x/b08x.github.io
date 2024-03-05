@@ -7,7 +7,9 @@ category:
   - Applications
 tags: 
 links: 
-permalink:
+permalink: 
+video:
+  - /assets/vid/test.mp4
 ---
 
 

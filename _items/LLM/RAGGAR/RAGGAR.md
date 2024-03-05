@@ -12,11 +12,8 @@ Optimize Retrieval Augmented Generation with Generating Augmented Retrieval by G
 
 
 ## Index
-- [[Design]]
 - [[GAR]]
-- [[knowledge graph]]
+- [[Knowledge Graph]]
 - [[Ontological Knowledge]]
-- [[ontologies]]
-- [[Ontology Construction with Language Models]]
-- [[RAGGARv]]
+- [[Ontology Construction]]
 - [[Retrieval]]
