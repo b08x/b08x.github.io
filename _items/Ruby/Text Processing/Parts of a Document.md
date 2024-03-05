@@ -8,7 +8,8 @@ tags:
   - llm
   - nlp
   - gemini
-links:
+links: 
+toc: true
 ---
 # Please describe the different parts of a "Document"
 

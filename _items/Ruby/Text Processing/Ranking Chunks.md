@@ -7,7 +7,8 @@ category:
 tags:
   - ruby
   - linux-audio
-links:
+links: 
+toc: true
 ---
 
 

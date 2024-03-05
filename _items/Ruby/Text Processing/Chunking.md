@@ -10,6 +10,7 @@ links:
   - https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/
 image: /assets/img/chunking_01.png
 caption: page 294 Godel Escher Bach
+toc: true
 ---
 
 Document chunking can be performed based on specific criteria or patterns within the text. For example, chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns). This method allows for targeted extraction of relevant information.

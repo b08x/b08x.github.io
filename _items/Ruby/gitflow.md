@@ -4,7 +4,8 @@ title: gitflow
 description: crafting a git flow strategy
 category: 
 tags: 
-links:
+links: 
+toc: true
 ---
 
 # init & Feature Start

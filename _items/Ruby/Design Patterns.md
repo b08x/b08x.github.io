@@ -1,10 +1,11 @@
 ---
-layout: note
+layout: page
 title: Design Patterns
 subtitle: 
-category: []
+category: 
 tags: 
-links:
+links: 
+toc: true
 ---
 
 
