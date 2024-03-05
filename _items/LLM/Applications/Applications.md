@@ -1,4 +1,5 @@
 ---
+layout: page
 title: LLM Applications
 category:
   - LLM

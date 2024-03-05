@@ -24,9 +24,9 @@ Document chunking can be performed based on specific criteria or patterns within
 
 # Comparing Length Functions
 
-After a messing a bit with the various settings, three configurations seemed to produce the best results when I processed the transcript from an unscripted video I recorded. 
+After a messing a bit with the various settings, three configurations seemed to produce the best results when I processed the transcript from an unscripted video recently recorded.
 
-#### Starting with this prompt:
+### Starting with this prompt:
 
 ```markdown
 Summarize the chunk of a youtube transcript in descriptive detail, then correlate the speaker's functional, generative, cognitive and pragmatic grammars into a markdown table. *Make note if the dependent clause is not in the correct form*.
