@@ -1,15 +1,22 @@
 ---
-layout: page
+layout: index
 title: Text Processing
 category:
   - Ruby
 tags:
   - llm
   - nlp
+links:
+index:
+  - [[Capturing Personality with Verb Phrase Extraction]]
+  - [[Chunking]]
+  - [[Embedding]]
+  - [[Parts of a Document]]
+  - [[Ranking Chunks]]
+  - [[Semantic Search]]
+  - [[Stop Words]]
+  - [[Text Processing]]
 ---
-[[Ruby]]
-[[LLM]]
-
 
 ```mermaid!
 graph LR
@@ -71,6 +78,7 @@ style E fill:#2a1a2a,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5
 ```
 
 ## Index
+
 - [[Capturing Personality with Verb Phrase Extraction]]
 - [[Chunking]]
 - [[Embedding]]
@@ -78,8 +86,13 @@ style E fill:#2a1a2a,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5
 - [[Ranking Chunks]]
 - [[Semantic Search]]
 - [[Stop Words]]
+- [[Text Processing]]
 
----
+# Text Processing: The Process
+
+
+
+
 
 ## scratch
 

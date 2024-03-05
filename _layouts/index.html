@@ -1,14 +1,24 @@
 ---
 layout: default
+pagination:
+  enabled: true
 ---
 
-<hr>
-  <div class="col-md">
+<div class="row-flex-column">
+  <div class="side">
+    
+    <div class="box">
+      <h1>{{ page.title }}</h1>
+      {% include item/backlinks.html %}
+      {% include item/tags.html %}
+      <span>
+        {{ content | toc_only }}
+      </span>
+    </div>
+  </div>
+  <div class="xl">
     <content>
-      {{ content }}
+      {{ content | inject_anchors }}
     </content>
   </div>
 </div>
-
-
-  

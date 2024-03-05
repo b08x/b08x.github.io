@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Using NLP to Generate Music
 subtitle: 
 category:
@@ -20,65 +20,37 @@ The first task we'll create will remove all of the punctuation from the lyrics. 
 ```ruby
 
 class Tokenizer < ComposableOperations::Operation
-	processes :chunks
+  processes :chunks
 	
-	property :punct, default: :all, required: true
-	property :stopwords, default: false, required: true
+  property :punct, default: :all, required: true
+  property :stopwords, default: false, required: true
 
-  
+  before do
+    @options = {
+      remove_stop_words: stopwords,
+      punctuation: punct,
+      numbers: :all,
+      minimum_length: 0,
+      remove_emoji: true,
+      remove_emails: true,
+      remove_urls: true,
+      remove_domains: true,
+      expand_contractions: true,
+      clean: false,
+      mentions: :keep_original,
+      hashtags: :keep_original,
+      classic_filter: true,
+      downcase: false,
+      long_word_split: 20
+    }
+  end
 
-before do
-
-@options = {
-
-remove_stop_words: stopwords,
-
-punctuation: punct,
-
-numbers: :all,
-
-minimum_length: 0,
-
-remove_emoji: true,
-
-remove_emails: true,
-
-remove_urls: true,
-
-remove_domains: true,
-
-expand_contractions: true,
-
-clean: false,
-
-mentions: :keep_original,
-
-hashtags: :keep_original,
-
-classic_filter: true,
-
-downcase: false,
-
-long_word_split: 20
-
-}
+  def execute
+    chunks.segment.map do |segment|
+    PragmaticTokenizer::Tokenizer.new(@options).tokenize(segment)
+  end
 
 end
-
-  
-
-def execute
-
-chunks.segment.map do |segment|
-
-PragmaticTokenizer::Tokenizer.new(@options).tokenize(segment)
-
-end
-
-end
-
-end
-
 ```
 
 
@@ -87,7 +59,7 @@ end
 The next task we'll create will tokenize the lyrics. This can be done using the following code: 
 ```ruby 
 def tokenize(lyrics)
-	lyrics.split(' ')
+  lyrics.split(' ')
 end 
 ``` 
 
@@ -95,8 +67,8 @@ The final task we'll create will create a bag-of-words representation of the lyr
 
 This can be done using the following code: 
 ```ruby
-def create_bag_of_words(lyrics) 
-	lyrics.map { |word| word.downcase }.to_set 
+def create_bag_of_words(lyrics)
+  lyrics.map { |word| word.downcase }.to_set 
 end 
 ``` 
 

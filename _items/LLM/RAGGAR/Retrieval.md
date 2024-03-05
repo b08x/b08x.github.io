@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Retrieval
 subtitle: 
 category:
@@ -8,7 +8,8 @@ category:
 tags:
   - ruby
 links: 
-permalink:
+permalink: 
+toc: true
 ---
 
 

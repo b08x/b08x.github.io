@@ -148,9 +148,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.layout {
-  max-width: 80%;
-}
+
 
 .row-flex-column {
   display: flex;
@@ -481,6 +479,10 @@ h1 {
   @media (max-width: 1050px) {
     letter-spacing: 0rem;
   }
+
+  &:before {
+    content: "# ";
+  }
 }
 
 h2 {
@@ -643,6 +645,13 @@ li {
 
 .box {
   display: grid;
+  border-style: dashed;
+  border-color: black;
+  padding: 1rem;
+  
+  h1 {
+    margin: unset;
+  }
   //  justify-content: space-evenly;
   //  justify-items: center;
 }

@@ -11,7 +11,6 @@ image:
 permalink: /llm/prompt-engineering
 ---
 
-
 ## Index
 - [[AgileBloom]]
 - [[CRISPE]]

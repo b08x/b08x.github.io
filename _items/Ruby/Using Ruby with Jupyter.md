@@ -6,7 +6,11 @@ excerpt: Rustle up Jupyter Notebook, cram it in a Docker then throw a stack of R
 layout: page
 category:
   - Ruby
-tags: 
+tags:
+  - ruby
+  - docker
+  - llm
+  - nlp
 abstract: Python Data Science Docker images, with Ruby 3.1.0 install along with RubyGems
 toc: true
 ---

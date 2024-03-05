@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Alias & Alias Method
 subtitle: 
 category:

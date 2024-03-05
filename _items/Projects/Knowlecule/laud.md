@@ -3,7 +3,7 @@
 
 
 
-[[ontologies]]
+
 
 # (the) Linux Audio Users & Developers Generative Pre-Trained Model
 
@@ -32,11 +32,6 @@ A language model trained on data related specifically to the Linux audio domain.
 - Task 5: Topic model each tokenized chunk by retrieving the entry from the database and attaching topics to the tokenized chunk segments
 - Task 6: Assign ontology labels to the topics using a language model and attach to the root metadata
 - Separate Ansible modules for each task
-
-[[SyncopatedIaC]]
-
-[[Generating Sample Data with Inference]]
-
 
 
 ---

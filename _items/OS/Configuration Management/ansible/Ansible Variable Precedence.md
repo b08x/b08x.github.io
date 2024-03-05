@@ -15,18 +15,6 @@ toc: true
 
 Variable precedence in Ansible is influenced by the scope and context in which the variables are defined. When a variable is defined at multiple levels, Ansible uses a merging strategy based on the variable's scope. 
 
-> [!ai]+ AI
->
-> | Word | Part of Speech | Cognitive Grammar | WordNet senses | Pragmatics |
-> |---|---|---|---|---|
-> | correlate | verb | compare | 1. to bring into a logical or causal relationship | to establish a connection between two things |
-> | word | noun | lexical item | 1. a unit of language that conveys meaning | the smallest unit of language that can stand alone as a meaningful element |
-> | part of speech | noun | grammatical category | 1. a class of words that share similar grammatical properties | the category to which a word belongs, such as noun, verb, adjective, or adverb |
-> | cognitive grammar | noun | linguistic theory | 1. a theory of grammar that emphasizes the role of cognition in language | a theory of grammar that focuses on the mental processes involved in language use |
-> | WordNet senses | noun | lexical database | 1. a set of word senses organized into a hierarchy | a database of English words and their meanings |
-> | pragmatics | noun | study of language use | 1. the study of how language is used in context | the study of how language is used to communicate meaning |
-
-
 
 ## Group Vars and Host Vars
 For testing purposes, it might be useful to know that variables *used* by a role, that are set in either group_vars/ or host_vars/ can be overwritten by:

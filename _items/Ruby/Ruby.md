@@ -1,6 +1,6 @@
 ---
 layout: page
-title: ruby
+title: Ruby
 category: 
 tags: 
 permalink: /ruby/

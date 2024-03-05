@@ -1,20 +1,35 @@
 ---
 layout: default
 pagination:
-  enabled: true
+enabled: true
 ---
 
 <div class="row-flex-column">
   <div class="side">
-    
+
     <div class="box">
-      <h1>{{ page.title }}</h1>
-      {% include item/tags.html %}
+      <div style="border-style: dashed; border-color: black; padding: 1rem">
+        <h1>{{ page.title }}</h1>
+      </div>
+      <br>
+      <div style="border-style: dashed; border-color: black; padding: 1rem;">
+        {% include item/backlinks.html %}
+      </div>
+      <br>
+      <div style="border-style: dashed; border-color: black; padding: 1rem">
+        {% include item/tags.html %}
+      </div>
+      <br>      
+      <div style="border-style: dashed; border-color: black; padding: 1rem">
+        <span>
+          {{ content | toc_only }}
+        </span>
+      </div>
     </div>
   </div>
-  <div class="xl">
+  <div class="xl" style="border-style: dashed; border-color: black; padding: 1rem">
     <content>
-      {{ content }}
+      {{ content | inject_anchors }}
     </content>
   </div>
 </div>
