@@ -5,7 +5,8 @@ subtitle: a Ruby framework for chatbot clients
 category:
   - LLM
   - Applications
-tags: 
+tags:
+  - llm
 links:
 ---
 

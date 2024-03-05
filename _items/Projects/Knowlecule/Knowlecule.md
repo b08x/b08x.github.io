@@ -4,18 +4,12 @@ title: Knowlecule
 subtitle: 
 category:
   - Projects
-tags:
-  - llm
-  - nlp
-  - rag
-  - gar
-  - ruby
-  - ansible
-  - docker
+tags: []
 links: 
 permalink:
 ---
-
+[[Ruby]]
+[[LLM]]
 
 # Marketing Notes
 
@@ -37,15 +31,7 @@ permalink:
 # Things to Do
 ## organizing a notepad 
 
-If you're like, then you probably 
 
-" If you're anything like me, then you probably have a... Let me call it... A debilitating heroin addiction. And... You have a hard time organizing your notebook. Or keeping your notes organized in Obsidian. Funny. That's supposed to be funny. We'll see."
-
----
-
-archain directory-loader, document 
-
-langchain prompt templates
 
 
 # db

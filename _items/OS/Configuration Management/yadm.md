@@ -2,10 +2,13 @@
 layout: note
 title: Integrating yadm
 subtitle: 
-category: []
+category:
+  - OS
+  - Configuration Management
 tags:
   - dots
-links:
+links: 
+permalink: /os/cfgmgmt/yadm
 ---
 
 

@@ -7,7 +7,7 @@ category:
   - Applications
 tags: 
 links: 
-permalink: /llm/applications/flowise/
+permalink:
 ---
 
 

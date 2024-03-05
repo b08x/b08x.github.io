@@ -2,11 +2,14 @@
 layout: page
 title: Text Processing
 category:
-  - LLM
+  - Ruby
 tags:
-  - obsidian-auto-glossary
+  - llm
   - nlp
 ---
+[[Ruby]]
+[[LLM]]
+
 
 ```mermaid!
 graph LR

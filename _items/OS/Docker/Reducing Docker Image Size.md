@@ -2,7 +2,8 @@
 layout: note
 title: Reducing Docker Images Size
 subtitle: 
-category: Systems
+category:
+  - OS
 tags:
   - docker
 links:

@@ -2,7 +2,8 @@
 layout: note
 title: Using the Iterator Design Pattern
 subtitle: 
-category: []
+category:
+  - Ruby
 tags:
   - ruby
 links:

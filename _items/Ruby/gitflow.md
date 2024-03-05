@@ -1,8 +1,8 @@
 ---
-layout: note
+layout: page
 title: gitflow
 description: crafting a git flow strategy
-category: []
+category: 
 tags: 
 links:
 ---

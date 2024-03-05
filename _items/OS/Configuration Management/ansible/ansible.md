@@ -1,5 +1,11 @@
 ---
-tags: obsidian-auto-glossary
+layout: page
+title: Ansible
+category:
+  - OS
+  - Configuration Management
+tags: 
+permalink: /os/cfgmgmt/ansible
 ---
 ## Index
 - [[ansible error handling]]
@@ -7,8 +13,6 @@ tags: obsidian-auto-glossary
 - [[Ansible Variable Precedence]]
 - [[Package Handling]]
 - [[Playbook Optimization]]
-
-
 
 
 [ansible-pull example](https://gitlab.liu.se/ansible/pull-deploy)

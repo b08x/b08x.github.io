@@ -1,5 +1,10 @@
 ---
-tags: []
+layout: page
+title: Docker
+category:
+  - OS
+tags: 
+permalink: /os/docker/
 ---
 ## Index
 - [[Reducing Docker Image Size]]

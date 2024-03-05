@@ -2,7 +2,8 @@
 layout: note
 title: Alias & Alias Method
 subtitle: 
-category: 
+category:
+  - Ruby
 tags:
   - ruby
 links:

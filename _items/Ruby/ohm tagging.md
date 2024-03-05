@@ -2,7 +2,8 @@
 layout: note
 title: ohm tagging
 subtitle: 
-category: []
+category:
+  - Ruby
 tags:
   - ruby
   - redis

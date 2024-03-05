@@ -1,13 +1,18 @@
 ---
-tags: []
+layout: page
+title: Linux
+category:
+  - OS
+tags: 
+permalink: /os/linux/
 ---
 ## Index
+
 - [[bash]]
 - [[btrfs]]
 - [[fixing "Authorization required, but no authorization protocol specified"]]
 - [[i3]]
 - [[libvirt]]
-- [[tags/linux]]
 - [[Networking Without a Manager]]
 - [[Package Building]]
 - [[rsync]]
@@ -15,9 +20,6 @@ tags: []
 - [[sysrq]]
 - [[Systemd and Xsession]]
 - [[xorg video]]
-- [[_items/OS/Configuration Management/yadm]]
-
-
 
 #### adjusting monitor brightness with ddcutil
 

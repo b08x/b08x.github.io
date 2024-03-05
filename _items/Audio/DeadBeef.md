@@ -1,8 +1,8 @@
 ---
-layout: note
+layout: page
 title: DeadBeef Audio Sampler
 subtitle: 
-category: Audio
+category: 
 tags: 
 links:
 ---

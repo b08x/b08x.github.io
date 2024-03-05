@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Generating Questions with Llama-2-70b-chat-hf
 subtitle: 
 category:

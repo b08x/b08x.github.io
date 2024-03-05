@@ -1,28 +1,9 @@
 ---
-tags: []
+layout: page
+title: OS
+tags: 
+permalink: /os/
 ---
-## Index
-- [[ansible error handling]]
-- [[ansible tasks dotfiles]]
-- [[Ansible Variable Precedence]]
-- [[bash]]
-- [[btrfs]]
-- [[Configuration Management]]
-- [[fixing "Authorization required, but no authorization protocol specified"]]
-- [[i3]]
-- [[libvirt]]
-- [[tags/linux]]
-- [[Networking Without a Manager]]
-- [[Notepad]]
-- [[Notepad]]
-- [[Package Building]]
-- [[Package Handling]]
-- [[Playbook Optimization]]
-- [[Reducing Docker Image Size]]
-- [[rsync]]
-- [[snippets]]
-- [[sysrq]]
-- [[Systemd and Xsession]]
-- [[Workstation Bootstrap]]
-- [[xorg video]]
-- [[_items/OS/Configuration Management/yadm]]
+[[Configuration Management]]
+[[Docker]]
+[[Linux]]

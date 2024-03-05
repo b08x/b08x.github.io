@@ -5,7 +5,7 @@ layout: page
 permalink: /audio/
 ---
 ## Index
-- [[ Streaming Desktop from Tinybot to Soundbot ]]
+- [[Streaming Desktops With mediamtx]]
 - [[something]]
 - [[Ambisonics]]
 - [[DeadBeef]]

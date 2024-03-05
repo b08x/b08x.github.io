@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Parts of a Document
 subtitle: 
 category:

@@ -3,7 +3,9 @@ layout: note
 title: "Ansible Tasks: Dotfiles"
 subtitle: 
 category:
+  - OS
   - Configuration Management
+  - Ansible
 tags: 
 links:
 ---

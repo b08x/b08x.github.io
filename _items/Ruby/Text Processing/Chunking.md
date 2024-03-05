@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Chunking Text
 subtitle: Its not as gross as it sounds
 category:

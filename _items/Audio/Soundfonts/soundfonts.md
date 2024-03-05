@@ -2,7 +2,7 @@
 layout: note
 title: soundfonts
 subtitle: 
-category: Programming
+category: []
 tags:
   - audio
 links:

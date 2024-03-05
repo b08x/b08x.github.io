@@ -2,7 +2,8 @@
 layout: note
 title: Using NLP to Generate Music
 subtitle: 
-category: []
+category:
+  - Ruby
 tags:
   - ruby
   - llm

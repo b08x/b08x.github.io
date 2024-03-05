@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Generating Sample Data with Inference
 subtitle: 
 category:

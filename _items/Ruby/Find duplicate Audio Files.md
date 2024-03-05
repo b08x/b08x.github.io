@@ -2,7 +2,8 @@
 layout: note
 title: Find duplicate Audio Files
 subtitle: 
-category: []
+category:
+  - Ruby
 tags:
   - ruby
 links:

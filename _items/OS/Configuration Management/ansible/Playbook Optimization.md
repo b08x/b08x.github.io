@@ -3,7 +3,9 @@ layout: note
 title: Playbook Optimization
 subtitle: 
 category:
+  - OS
   - Configuration Management
+  - Ansible
 tags:
   - ansible
 links: 

@@ -1,12 +1,11 @@
 ---
-tags: obsidian-auto-glossary
+layout: page
+title: Projects
+category: 
+tags: 
+permalink: /projects
 ---
 ## Index
-- [[Gems]]
-- [[JackQA]]
-- [[keywords and abbreviations]]
 - [[Knowlecule]]
-- [[laud]]
-- [[notes to parse]]
 - [[SyncopatedIaC]]
-- [[syncopatedos]]
+

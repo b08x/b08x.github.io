@@ -3,13 +3,15 @@ layout: note
 title: Workstation Bootstrap
 subtitle: an exercise in adaptable refactoring
 category:
+  - OS
   - Configuration Management
 tags:
   - ansible
   - yadm
   - linux
   - archlinux
-links:
+links: 
+permalink: /os/cfgmgmt/workstation-bootstrap
 ---
 
 ## The Process

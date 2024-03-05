@@ -4,12 +4,9 @@ date: 2023-11-04T19:51:00
 cssid: test
 excerpt: Rustle up Jupyter Notebook, cram it in a Docker then throw a stack of Ruby NLP Gems on top and you got yourself a thing.
 layout: page
-category: Ruby
-tags:
-  - docker
-  - ruby
-  - nlp
-  - llm
+category:
+  - Ruby
+tags: []
 abstract: Python Data Science Docker images, with Ruby 3.1.0 install along with RubyGems
 toc: true
 ---

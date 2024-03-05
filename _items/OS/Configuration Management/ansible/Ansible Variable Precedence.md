@@ -3,7 +3,9 @@ layout: note
 title: variable precedence & scope
 subtitle: 
 category:
+  - OS
   - Configuration Management
+  - Ansible
 tags:
   - ansible
 links: 

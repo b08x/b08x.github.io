@@ -2,7 +2,9 @@
 layout: note
 title: Package Handling
 category:
+  - OS
   - Configuration Management
+  - Ansible
 tags:
   - ansible
   - linux

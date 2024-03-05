@@ -196,9 +196,10 @@ https://www.reddit.com/r/audioengineering/comments/167o1i4/audio_setup_for_live_
 
 
 
-https://tutorials.renoise.com/wiki/Linux_FAQ#Realtime_Threads
+[real time threads](https://tutorials.renoise.com/wiki/Linux_FAQ#Realtime_Threads)
 
-https://danmackinlay.name/notebook/linux_audio.html
+[linux audio notebook](https://danmackinlay.name/notebook/linux_audio.html)
+
 
 
 

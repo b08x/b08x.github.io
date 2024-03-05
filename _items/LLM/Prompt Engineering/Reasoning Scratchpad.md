@@ -1,10 +1,10 @@
 ---
-layout: note
+layout: page
 title: Reasoning Scratchpad
 subtitle: 
 category:
   - Prompt Engineering
-tags: []
+tags: 
 links: 
 permalink:
 ---

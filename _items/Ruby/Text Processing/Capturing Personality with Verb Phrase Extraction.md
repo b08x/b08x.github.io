@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Capturing Personality with Verb Phrase Extraction
 subtitle: 
 category:

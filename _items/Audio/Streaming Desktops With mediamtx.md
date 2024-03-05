@@ -1,9 +1,11 @@
 ---
-layout: note
+layout: page
+title: Streaming Desktops With mediamtx
+category:
+  - Audio
 tags:
   - obs-studio
-links: 
-title: mediamtx & obs-studio
+links:
 ---
 
 # stream desktop from one host to another to split up the load for a data heavy presentation

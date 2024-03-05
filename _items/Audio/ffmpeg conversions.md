@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: video conversion using ffmpeg
 subtitle: 
 category: 

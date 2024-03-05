@@ -1,8 +1,9 @@
 ---
-layout: note
+layout: page
 title: few shot questions using langchain
 subtitle: 
-category: LLM
+category:
+  - LLM
 tags:
   - ruby
   - data-set
