@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="{{ site.baseurl }}/styles.css">
   
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/print.css" media="print">
+  
 
   {% if page.excerpt %}
   <meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}"/>
@@ -66,3 +67,7 @@
   {% endif %}
 
   <script type="text/javascript" src="//cdn.datacamp.com/dcl-react.js.gz"></script>
+
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/canvas.css">
+  <!-- <script type="text/javascript" src="{{ site.baseurl }}/assets/js/prism.js"></script>
+  <script type="text/javascript" src="{{ site.baseurl }}/assets/js/canvas.js"></script> -->

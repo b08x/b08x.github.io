@@ -79,6 +79,10 @@ defaults:
       path: "_items/**/*.md"
     values:
       layout: "note"
+  - scope:
+      path: "_items/**/*.canvas"
+    values:
+      layout: "node"      
   # - scope:
   #     path: "_articles/**/*.md"
   #   values:

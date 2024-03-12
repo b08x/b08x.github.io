@@ -135,6 +135,8 @@ page 174 Godel Escher Bach
 
 ## resources
 
+[techniques: reflexion](https://www.promptingguide.ai/techniques/reflexion)
+
 [ai sleeper agents](https://www.astralcodexten.com/p/ai-sleeper-agents?utm_source=tldrnewsletter)
 
 [llmstudio](https://github.com/TensorOpsAI/LLMstudio?tab=readme-ov-file)
