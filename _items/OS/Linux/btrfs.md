@@ -30,4 +30,6 @@ btrfs filesystem defragment -r -v -czstd /backup/
 
 ```
 
-[a source](https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk)
+[Replacing a Disk](https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk)
+
+[Modern Archlinux installations with Btrfs, snapshots, hibernation and more.](https://sspai.com/post/78916)

@@ -7,12 +7,9 @@ category:
   - Linux
 tags:
   - archlinux
+  - ansible
 links:
 ---
-
-
-#archlinux #ansible #syncopatedIaC 
-
 
 ```bash
 
@@ -137,3 +134,9 @@ https://wiki.archlinux.org/title/Arch_build_system#Preserve_modified_packages
 > ```
 > - Each package added is a valuable contribution to your software collection.
 > These steps provide a comprehensive guide to package building and repository management, empowering you to create and share your software creations with the world.
+
+
+
+*additional consideration:*
+[repod the repo manager](https://repod.archlinux.page/)
+

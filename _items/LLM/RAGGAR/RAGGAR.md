@@ -6,7 +6,7 @@ category:
 tags: 
 permalink: /llm/raggar
 ---
-Optimize Retrieval Augmented Generation with Generating Augmented Retrieval by Generating Augments Retrieved with Generated Augmented Retrieval.
+Optimize Retrieval Augmented Generation by Generating Augmented Retrieval with Generated Augments Retrieved with Semantic Segments Augmented with Echo Embeddings with Ruby, Redis & PostgreSQL 
 
 [something nice to read](https://gradientflow.com/techniques-challenges-and-future-of-augmented-language-models/)
 

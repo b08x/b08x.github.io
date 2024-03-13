@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"id":"0ac7814f05407920","x":140,"y":-432,"width":660,"height":219,"type":"text","text":"**Internal Traffic:** It's assumed that the primary traffic flow will be internal:\n\n* Communication between your oVirt manager and the virtual machines.\n* Communication between your NLP application VM and the PostgreSQL database VM.\n* Potentially, communication between the NLP VM and external resources (if it accesses other services outside this environment)."},
+		{"id":"8b465bbaab088375","x":-440,"y":0,"width":540,"height":120,"type":"text","text":"**Firewall:** A basic firewall with default 'deny all' policy is assumed on both the oVirt manager and the individual VMs. You'll need Ansible tasks to open necessary ports (e.g., PostgreSQL, SSH, oVirt management)."},
+		{"id":"182613ed521c547b","x":-460,"y":-500,"width":380,"height":220,"type":"text","text":"\n\n**Flat Network (Initially):** For simplicity, we'll assume a single, flat network segment (e.g., a single subnet). This means that all your VM's (oVirt manager, PostgreSQL, Knowlecule NLP, etc.) will be able to communicate directly without the need for routing at this stage.\n    \n\n\n"},
+		{"id":"329c42bdf774d2ba","x":1,"y":-620,"width":279,"height":50,"type":"text","text":"**Network Layout Assumptions**"}
+	],
+	"edges":[
+		{"id":"ee73906e82db16c8","fromNode":"182613ed521c547b","fromSide":"right","toNode":"0ac7814f05407920","toSide":"left"},
+		{"id":"d80af1d0949d93a7","fromNode":"0ac7814f05407920","fromSide":"bottom","toNode":"8b465bbaab088375","toSide":"top"}
+	]
+}
