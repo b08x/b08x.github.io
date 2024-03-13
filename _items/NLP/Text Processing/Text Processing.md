@@ -2,20 +2,11 @@
 layout: index
 title: Text Processing
 category:
-  - Ruby
+  - NLP
 tags:
   - llm
-  - nlp
+  - ruby
 links:
-index:
-  - [[Capturing Personality with Verb Phrase Extraction]]
-  - [[Chunking]]
-  - [[Embedding]]
-  - [[Parts of a Document]]
-  - [[Ranking Chunks]]
-  - [[Semantic Search]]
-  - [[Stop Words]]
-  - [[Text Processing]]
 ---
 
 ```mermaid!

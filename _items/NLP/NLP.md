@@ -1,0 +1,35 @@
+---
+layout: page
+title: Natural Language Processing
+subtitle: 
+excerpt: 
+category: 
+tags: 
+image: 
+permalink:
+---
+
+## Index
+- [[AgileBloom]]
+- [[Capturing Personality with Verb Phrase Extraction]]
+- [[Chunking]]
+- [[CRISPE]]
+- [[Elavis Saravia]]
+- [[Embedding]]
+- [[Gemini Advanced Image Generation]]
+- [[Interference & Hallucinations]]
+- [[LLM settings]]
+- [[NLP]]
+- [[openai]]
+- [[parameters]]
+- [[tiktokalypse]]
+- [[Parts of a Document]]
+- [[Prompt Engineering]]
+- [[Ranking Chunks]]
+- [[Reasoning Scratchpad]]
+- [[Semantic Search]]
+- [[Set of Mark]]
+- [[Stop Words]]
+- [[Text Processing]]
+- [[wavjourney]]
+- 

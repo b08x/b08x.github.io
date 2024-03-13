@@ -1,9 +1,13 @@
 ---
+layout: page
+title: laudgpt
+subtitle: 
+excerpt: 
+category: 
+tags: 
+image: 
+permalink:
 ---
-
-
-
-
 
 # (the) Linux Audio Users & Developers Generative Pre-Trained Model
 

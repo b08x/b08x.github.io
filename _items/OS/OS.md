@@ -5,5 +5,5 @@ tags:
 permalink: /os/
 ---
 [[Configuration Management]]
-[[Docker]]
+[[_items/OS/Linux/Docker/Docker]]
 [[Linux]]

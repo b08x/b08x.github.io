@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Networking Without a Manager
+title: Systemd-networkd & net.ifnames
 subtitle: 
 category:
   - OS
@@ -14,7 +14,7 @@ status: draft
 
 ## general grievances and exceptions
 
-interface name changes happen at random!
+interface name changes on every reboot
 
 As usual, [Arch wiki](https://wiki.archlinux.org/index.php/Systemd-networkd) covers it
 

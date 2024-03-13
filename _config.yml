@@ -118,7 +118,6 @@ pagination:
   sort_reverse: true
   collection: 'items'
 
-
 ############################################################
 # Site configuration for the Auto-Pages feature
 # The values here represent the defaults if nothing is set

@@ -3,8 +3,9 @@ layout: page
 title: Docker
 category:
   - OS
+  - Linux
 tags: 
-permalink: /os/docker/
+permalink:
 ---
 ## Index
 - [[Reducing Docker Image Size]]

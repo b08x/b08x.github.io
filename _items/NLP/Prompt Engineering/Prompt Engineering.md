@@ -4,11 +4,10 @@ title: Prompt Engineering
 subtitle: 
 excerpt: 
 category:
-  - LLM
+  - NLP
 tags:
   - llm
 image: 
-permalink: /llm/prompt-engineering
 toc: true
 ---
 
@@ -21,10 +20,11 @@ toc: true
 - [[LLM settings]]
 - [[openai]]
 - [[parameters]]
+- [[tiktokalypse]]
+- [[Prompt Engineering]]
 - [[Reasoning Scratchpad]]
 - [[Set of Mark]]
 - [[wavjourney]]
-
 
 ## A Prompt Pattern Catalog to Enhance Prompt Engineering
 

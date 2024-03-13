@@ -5,7 +5,6 @@ tags:
   - linux
   - audio
   - ansible
-gh-project: https://github.com/users/b08x/projects/9?pane=info
 image: /assets/img/headers/mpv-shot0001.jpg
 layout: page
 permalink: 
@@ -18,6 +17,7 @@ category:
 
 > Orchestration...it's about bringing together disparate things into a coherent whole. In the classical sense, you’ve got strings, brass, woodwinds and percussion, all with their own parts, with a conductor at the helm to ensure consistency and timing so as to produce harmony a of inter-working parts
 > 
+
 ## Ansible - Linux Desktop Survey
 
 ```markdown
@@ -32,9 +32,6 @@ category:
 4. What role does Ansible play in software installation and updates on Linux desktops within your audio production environment?
 5. omitWould you be open to sharing specific Ansible playbook examples or configurations related to desktop management in your audio production setup? (Yes/No)
 ```
-
-[[tags/audio]]
-
 
 
 ### Developing In or On

@@ -89,10 +89,6 @@ Adapters can not only convert data into various formats but can also help object
 
 Sometimes it’s even possible to create a two-way adapter that can convert the calls in both directions.
 
-
-![](Pasted%20image%2020231005015434.png)
-
-
 ## chain of responsibility 
 
 **Chain of Responsibility** is a behavioral design pattern that lets you pass requests along a chain of handlers. Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
@@ -107,7 +103,6 @@ Sometimes it’s even possible to create a two-way adapter that can convert the 
 > Imagine that you’re creating a data mining application that analyzes corporate documents. Users feed the app documents in various formats (PDF, DOC, CSV), and it tries to extract meaningful data from these docs in a uniform format. 
 > The first version of the app could work only with DOC files. In the following version, it was able to support CSV files. A month later, you “taught” it to extract data from PDF files.
 
-![](Pasted%20image%2020231005015604.png)
 
 The Template Method pattern suggests that you break down an algorithm into a series of steps, turn these steps into methods, and put a series of calls to these methods inside a single _template method._
 
