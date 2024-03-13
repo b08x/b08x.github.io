@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Integrating yadm
 subtitle: 
 category:

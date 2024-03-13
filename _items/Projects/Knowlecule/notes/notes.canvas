@@ -1,6 +1,7 @@
 {
 	"nodes":[
-		{"id":"88cd85cbe40ae916","type":"text","text":"system:\nYou are a helpful assistant.\n\n{% for item in chat_history %}\nuser:\n{{item.inputs.question}}\nassistant:\n{{item.outputs.answer}}\n{% endfor %}\n\nuser:\n{{question}}\n\"! So it continues. I don't think this will render, but I suppose it doesn't work to try.! The ginger too looks super good.! Fucking hell. All right, so... Nice.!\"\n","x":-260,"y":-760,"width":560,"height":620}
+		{"id":"fb904c7a52db82f0","x":-410,"y":-820,"width":410,"height":120,"type":"text","text":"[Async::HTTP](https://github.com/socketry/async-http#asynchttp)\n\n\nhttps://socketry.github.io/async-http/#multiple-requests\n\n"},
+		{"id":"88cd85cbe40ae916","type":"text","text":"system:\nYou are a helpful assistant.\n\n{% for item in chat_history %}\nuser:\n{{item.inputs.question}}\nassistant:\n{{item.outputs.answer}}\n{% endfor %}\n\nuser:\n{{question}}\n\n","x":-900,"y":-820,"width":380,"height":340}
 	],
 	"edges":[]
 }

@@ -65,7 +65,7 @@ sass:
 collections:
   items:
     output: true
-    permalink: /:categories/:title
+    permalink: /:slugified_categories/:title
   # articles:
   #   output: true
   #   permalink: /:title

@@ -1,19 +1,14 @@
 ---
 layout: note
-title: Systemd and Xsession
+title: Systemd & Xsession
 subtitle: 
 category:
   - Operations
   - OS
   - Linux
-tags: []
+tags: 
 links:
 ---
-
-
-
-systemd & xsession
-==================
 
 ```sh
 #systemd approach

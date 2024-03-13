@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Workstation Bootstrap
 subtitle: an exercise in adaptable refactoring
 category:

@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: ansible subtasks
 sources: https://stackoverflow.com/a/49758224/10073106
 category:

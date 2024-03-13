@@ -17,7 +17,7 @@
   }
 
   .left-column {
-    width: auto;  
+    width: auto;
   }
 
   .right-column {
@@ -44,15 +44,17 @@
 <body>
   {% include header.html %}
   <main class="layout">
-    <div class="right-column">
-      {{ content }}
-    </div>
-    
-    <div class="left-column">
+    <div class="container">
+      <div class="right-column">
+        {{ content }}
+      </div>
+
+      <div class="left-column">
+        <hr>
+        {% include items_graph.html %}
+      </div>
       <hr>
-      {% include items_graph.html %}
     </div>
-    <hr>
   </main>
 
   {% include footer.html %}

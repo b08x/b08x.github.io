@@ -22,4 +22,7 @@ Generate a vibrant and lively image depicting an elephant party in the heart of 
 > In the background, include a bustling cityscape representing the real-world applications of NLP document processing. Highlight the integration with cloud platforms and the seamless collaboration between humans and machines.
 > Make the image visually stunning, informative, and inspiring, capturing the essence of how Ruby empowers developers to unlock the value of unstructured data with NLP document processing.
 
-![](Pasted%20image%2020240301232923.png)
+
+
+
+![](/assets/img/screenshot/gemini_image_prompt.png)
