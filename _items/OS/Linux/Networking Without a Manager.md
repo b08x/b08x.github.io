@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Networking Without a Manager
 subtitle: 
 category:

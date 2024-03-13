@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Find duplicate Audio Files
 subtitle: 
 category:

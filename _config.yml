@@ -15,8 +15,10 @@ exclude:
   - "README.md"
   - "LICENSE"
   - "*.txt"
-  - "*.canvas"
   - "index.something"
+  - "index.ignore"
+  - "_items/Daily/test.canvas"
+  - "_items/LLM/*.canvas"
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ""
 
@@ -31,6 +33,7 @@ plugins:
   - jekyll_picture_tag
   - jekyll-toc
   - jekyll-paginate-v2
+  - jekyll-feed
 
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
@@ -48,28 +51,9 @@ embed_tweets: false
 permalink: pretty
 relative_permalinks: false
 
-# Pagination Settings
-pagination:
-  enabled: true
-  per_page: 10
-  permalink: '/page/:num/'
-  title: ' - page :num'
-  limit: 0
-  sort_field: 'date'
-  sort_reverse: true
-
 sass:
   sass_dir: _sass
   style: compressed
-
-collections:
-  items:
-    output: true
-    permalink: /:slugified_categories/:title
-  # articles:
-  #   output: true
-  #   permalink: /:title
-
 
 defaults:
   - scope:
@@ -81,13 +65,22 @@ defaults:
     values:
       layout: "note"
   - scope:
-      path: "_items/**/*.canvas"
+      path: "spec/**/*.md"
     values:
       layout: "node"      
   # - scope:
   #     path: "_articles/**/*.md"
   #   values:
   #     layout: "article"
+
+collections:
+  items:
+    output: true
+    permalink: /:slugified_categories/:title
+  # articles:
+  #   output: true
+  #   permalink: /:title
+
 
 jekyll-spaceship:
   mermaid-processor:
@@ -112,6 +105,19 @@ toc:
   sublist_class: ''
   item_class: toc-entry
   item_prefix: toc-
+
+
+# Pagination Settings
+pagination:
+  enabled: true
+  per_page: 10
+  permalink: '/page/:num/'
+  title: ' - page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+  collection: 'items'
+
 
 ############################################################
 # Site configuration for the Auto-Pages feature
@@ -156,3 +162,8 @@ autopages:
       mode: 'default'   # :tag is slugified.
       case: true
     enabled: true
+
+feed:
+  collections:
+    items:
+      path: "/feed.atom"

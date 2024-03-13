@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Command Line Snippets
 subtitle: 
 category:

@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: ohm tagging
 subtitle: 
 category:

@@ -42,7 +42,7 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 
 ### Splitting by BERT tokens
 
-| Method          | Langchains Recursive Text Slitter                                                       |
+| Method          | Langchains Recursive Text Splitter                                                       |
 | :-------------- | :-------------------------------------------------------------------------------------- |
 | separators      | ['\n\n', '\n', ' ', '']                                                                 |
 | length function | Token Count (BERT Tokens)                                                               |
@@ -54,7 +54,7 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 
 ### Splitting by Character Count
 
-| Method          | Langchains Recursive Text Slitter                                     |
+| Method          | Langchains Recursive Text Splitter                                     |
 | :-------------- | :-------------------------------------------------------------------- |
 | separators      | ['\n\n', '\n', ' ', '']                                               |
 | length function | Character Count                                                       |
@@ -87,7 +87,7 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 ## Unexpected visual breakdown
 
 
-| Method          | Langchains Recursive Text Slitter                                                                                                                                                                                                                                           |
+| Method          | Langchains Recursive Text Splitter                                                                                                                                                                                                                                           |
 | :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | separators      | ['\n\n', '\n', ' ', '']                                                                                                                                                                                                                                                     |
 | length function | Character Count                                                                                                                                                                                                                                                             |
@@ -97,7 +97,7 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 
 
 
-| Method          | Langchains Recursive Text Slitter                                                                                                                                                                                                 |
+| Method          | Langchains Recursive Text Splitter                                                                                                                                                                                                 |
 | :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | separators      | ['\n\n', '\n', ' ', '']                                                                                                                                                                                                           |
 | length function | Character Count                                                                                                                                                                                                                   |

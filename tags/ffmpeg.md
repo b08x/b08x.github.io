@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: tags
 title: ffmpeg
 tag: ffmpeg
 ---

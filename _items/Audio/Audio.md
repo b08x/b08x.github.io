@@ -5,15 +5,19 @@ permalink: /audio/
 tags:
 ---
 ## Index
-- [[Streaming Desktops With mediamtx]]
-- [[Issues]]
 - [[Ambisonics]]
+- [[Audio]]
 - [[DeadBeef]]
 - [[ffmpeg conversions]]
-- [[metering]]
+- [[Issues]]
 - [[NoiseGate]]
 - [[notes]]
 - [[Sonic Visualizer]]
 - [[sonic-pi speaker test]]
 - [[soundfonts]]
+- [[Streaming Desktops With mediamtx]]
 - [[vamp]]
+- [[x42-meters and reaper]]
+
+
+

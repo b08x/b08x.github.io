@@ -1,8 +1,8 @@
 ---
-layout: note
+layout: page
 title: Refreshing System Ruby
 subtitle: 
-category: []
+category: 
 tags:
   - ruby
 links:

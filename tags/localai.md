@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: tags
 title: localai
 tag: localai
 ---

@@ -20,7 +20,7 @@ layout: default
         Here is the main paginator logic called.
         All calls to site.posts should be replaced by paginator.posts 
     -->
-    {% for item in paginator.items %}
+    {% for item in paginator.posts %}
       <li>
         <span class="post-meta">{{ item.date | date: "%b %-d, %Y" }}{% if item.book.rank %} | Rank: {{ item.book.rank }}{% endif %}{% if item.collection %} | {{ item.collection }}{% endif %}{% if item.tags %}<br>Tags: {{ item.tags }}{% endif %}</span>
         <h2>

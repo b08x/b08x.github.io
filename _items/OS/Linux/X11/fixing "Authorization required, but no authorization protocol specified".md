@@ -1,12 +1,12 @@
 ---
-layout: note
+layout: page
 title: xauth
 subtitle: 
 category:
   - Operations
   - OS
   - Linux
-tags: []
+tags: 
 links:
 ---
 

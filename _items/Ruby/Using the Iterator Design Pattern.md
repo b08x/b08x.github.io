@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: Using the Iterator Design Pattern
 subtitle: 
 category:

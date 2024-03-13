@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: page
 title: A Recipe for Generative Music
 subtitle: 
 category: 
