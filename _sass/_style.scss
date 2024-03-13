@@ -155,26 +155,31 @@ body {
   justify-content: center;
 
   @media (max-width: 820px) {
-    background-color: #672828;
-    // max-width: inherit;
+    background-color: aliceblue;
+    pre code {
+      color: #672828;
+    }
   }
 
   .side {
     padding-left: 1rem;
     padding-right: 4rem;
-    @media (min-width: 1280px) {
-      display: flex;
+    display: flex;
+
+    @media (min-width: 1024px) {
       flex-direction: column;
       flex-wrap: wrap;
       justify-content: space-between;
-      max-width: 25%;
+      max-width: 33%;
+      padding-right: unset;
     }
     
-    @media (max-width: 1024px) {
+    @media (max-width: 1330px) {
       display: none;
     }
   }
 }
+
 
 
 .wrapper {
@@ -188,7 +193,9 @@ body {
 
 content {
   max-width: -webkit-fill-available;
-  // word-wrap: balance;
+  @media (min-width: 820px) {
+    padding: unset;
+  }
 }
 
 recently {
@@ -655,14 +662,20 @@ li {
 .box {
   display: grid;
   border-style: dashed;
-  border-color: black;
-  padding: 1rem;
+  border-color: rgb(73, 73, 72);
+  padding: 8rem;
   
   h1 {
     margin: unset;
   }
   //  justify-content: space-evenly;
   //  justify-items: center;
+}
+
+.sidebox {
+  border-style: dashed;
+  border-color: #4d656a;
+  padding: 0.5rem;
 }
 
 code {

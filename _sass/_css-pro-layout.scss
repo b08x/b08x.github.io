@@ -60,6 +60,7 @@ $breakpoints: (
   flex-direction: column;
   position: relative;
   flex-grow: 1;
+  align-items: center;
 
   &.has-sidebar {
     flex-direction: row;

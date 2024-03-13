@@ -7,7 +7,7 @@ enabled: true
 <div class="row-flex-column">
   <div class="side">
     <div class="box">
-      <div style="border-style: dashed; border-color: black; padding: 0.5rem">
+      <div class="sidebox">
         <h1>{{ page.title }}</h1>
         <time style="display: flex;" datetime="{{ page.last_modified_at | date_to_xmlschema }}">{% if page.type != 'pages' %}
             updated on: {{ page.last_modified_at | date: "%B %-d, %Y" }}
@@ -15,23 +15,24 @@ enabled: true
         </time>
       </div>
       <br>
-      <div style="border-style: dashed; border-color: black; padding: 0.5rem;">
+      <div class="sidebox"">
         {% include item/backlinks.html %}
       </div>
       <br>
-      <div style="border-style: dashed; border-color: black; padding: 0.5rem">
+      <div class="sidebox">
         {% include item/tags.html %}
       </div>
       <br>      
-      <div style="border-style: dashed; border-color: black; padding: 0.5rem">
+      <div class="sidebox">
         <span>
           {{ content | toc_only }}
         </span>
       </div>
     </div>
   </div>
-  <div class="xl" style="border-style: dashed; border-color: black; padding: 0.5rem; display: contents">
-    <content style="max-width: 80%; padding: 4rem;">
+  <!-- <div class="xl" style="border-style: dashed; border-color: green; padding: 0.5rem; display: contents"> -->
+  <div class="container" style="border-style: dashed; border-color: #494948; display: flex;">
+    <content>
       {{ content }}
     </content>
   </div>
