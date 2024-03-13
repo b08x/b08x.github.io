@@ -2,8 +2,11 @@
 layout: about
 title: About
 permalink: /about/
+image: /assets/img/knowledgetree.png
 ---
+ 
+ 
+<div style="padding: 1rem; color: darkgray">
+This is an ongoing project leveraging the functionality of Obsidian, a popular note-taking and knowledge management tool, and Jekyll, a static site generator. 
+</div>
 
-> Orchestration...it's about bringing together disparate things into a coherent whole. In the classical sense, you’ve got strings, brass, woodwinds and percussion, all with their own parts, with a conductor at the helm to ensure consistency and timing so as to produce harmony a of inter-working parts
-
-This is an ongoing project 

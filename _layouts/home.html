@@ -9,7 +9,6 @@ pagination:
 
   <div class="text">
     <div class="xs">
-      <strong>Recently Updated</strong>
       <ul>
         {% assign recent_items = site.items | sort: "last_modified_at_timestamp" | reverse %}
         {% for item in recent_items limit: 10 %}

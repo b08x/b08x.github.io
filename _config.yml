@@ -3,6 +3,7 @@ include:
   - "_pages"
   - "_projects"
 exclude:
+  - "*.csv"
   - "textgenerator/"
   - "_templates/"
   - "_drafts/"
@@ -64,7 +65,7 @@ sass:
 collections:
   items:
     output: true
-    permalink: /:slugified_categories/:title
+    permalink: /:categories/:title
   # articles:
   #   output: true
   #   permalink: /:title

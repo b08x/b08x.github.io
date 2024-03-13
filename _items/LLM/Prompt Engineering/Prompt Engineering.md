@@ -129,7 +129,7 @@ page 174 Godel Escher Bach
 
 *Beyond ChatBots: ExploreLLM for Structured Thoughts with Choices*
 
-![](/assets/img/screenshot/Pasted%20image%2020231231124006.png)
+![](/assets/img/screenshot/explorellm_promptexample.png)
 
 ---
 

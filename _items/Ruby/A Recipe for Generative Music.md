@@ -12,7 +12,6 @@ links:
 
 ## a recipe for generative music:
 
-so after this little discovery i had a basic recipe for generative ambient music.:
 
 1. choose chords.
 2. create matrix of notes from chords and rearrange rows in each column to minimize distance between columns.

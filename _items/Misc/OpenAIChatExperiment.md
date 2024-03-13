@@ -268,11 +268,6 @@ experiment.aggregate(metric_name="latency", column_name="model")
 ```
 
 
-    
-![png](OpenAIChatExperiment_files/OpenAIChatExperiment_27_0.png)
-    
-
-
 
 ```python
 
