@@ -20,9 +20,6 @@ permalink:
 - [[Interference & Hallucinations]]
 - [[LLM settings]]
 - [[NLP]]
-- [[openai]]
-- [[parameters]]
-- [[tiktokalypse]]
 - [[Parts of a Document]]
 - [[Prompt Engineering]]
 - [[Ranking Chunks]]
@@ -32,4 +29,3 @@ permalink:
 - [[Stop Words]]
 - [[Text Processing]]
 - [[wavjourney]]
-- 

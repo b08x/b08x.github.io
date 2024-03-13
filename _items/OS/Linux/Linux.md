@@ -7,19 +7,22 @@ tags:
 permalink: /os/linux/
 ---
 ## Index
-
 - [[bash]]
 - [[btrfs]]
+- [[Docker]]
 - [[fixing "Authorization required, but no authorization protocol specified"]]
 - [[i3]]
 - [[libvirt]]
+- [[Linux]]
 - [[Networking Without a Manager]]
 - [[Package Building]]
+- [[Reducing Docker Image Size]]
 - [[rsync]]
 - [[snippets]]
 - [[sysrq]]
 - [[Systemd and Xsession]]
 - [[xorg video]]
+
 
 #### adjusting monitor brightness with ddcutil
 

@@ -16,4 +16,5 @@ Optimize Retrieval Augmented Generation with Generating Augmented Retrieval by G
 - [[Knowledge Graph]]
 - [[Ontological Knowledge]]
 - [[Ontology Construction]]
+- [[RAGGAR]]
 - [[Retrieval]]
