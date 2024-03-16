@@ -13,13 +13,6 @@ links:
   - https://www.mdpi.com/2073-431X/12/1/14
 ---
 
-<div class="figure right">
-	<div class="liner">
-		{% picture thumbnail screenshot/ontology_embedding_flow.png %}
-	</div>
-</div>
-
-
 ```ruby
 # Algorithm 1: Concept Hierarchy Construction
 Input: Seed concept 𝐶0 

@@ -4,37 +4,18 @@ pagination:
 enabled: true
 ---
 
-<div class="row-flex-column">
-  <div class="side">
-    <div class="box">
-      <div class="sidebox">
-        <h1>{{ page.title }}</h1>
-        <time style="display: flex;" datetime="{{ page.last_modified_at | date_to_xmlschema }}">{% if page.type != 'pages' %}
-            updated on: {{ page.last_modified_at | date: "%B %-d, %Y" }}
-          {% endif %}
-        </time>
-      </div>
-      <br>
-      <div class="sidebox"">
-        {% include item/backlinks.html %}
-      </div>
-      <br>
-      <div class="sidebox">
-        {% include item/tags.html %}
-      </div>
-      <br>      
-      <div class="sidebox">
-        <span>
-          {{ content | toc_only }}
-        </span>
-      </div>
-    </div>
+<div class="container">
+  <div class="md">
+    <h1>{{ page.title }}</h1>
   </div>
-  <!-- <div class="xl" style="border-style: dashed; border-color: green; padding: 0.5rem; display: contents"> -->
-  <!-- <div class="container" style="border-style: dashed; border-color: #494948; display: flex;"> -->
+  <div class="md">
+    {{ content | toc_only }}
+  </div>
+
   <div class="container">
+
     <content>
       {{ content }}
     </content>
+
   </div>
-</div>

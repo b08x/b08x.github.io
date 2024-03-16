@@ -11,6 +11,39 @@ tags:
 links: 
 toc: true
 ---
+
+|                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Indicates whether a line ends with a terminal punctuation mark. A terminal punctuation mark is defined as one o: ".", "!", "?", "”".                                                                                                                                                                                                                                                                                 |
+| Whether the lines that start with a bullet point symbol. The following set of unicodes are considered a bullet point: \u2022 (bullet point), \u2023 (triangular bullet point), \u25B6 (black right pointing triangle), \u25C0 (black left pointing triangle), \u25E6 (white bullet point), \u25A0 (black square), \u25A1 (white square), \u25AA (black small square), \u25AB (white small square), \u2013 (en dash). |
+| We discarded any page with fewer than 3 sentences and only retained lines that contained at least 5 words                                                                                                                                                                                                                                                                                                            |
+| We removed any page that contained any word on the “List of Dirty, Naughty, Obscene or Otherwise Bad Words”.6                                                                                                                                                                                                                                                                                                        |
+| Many of the scraped pages contained warnings stating that Javascript should be enabled so we removed any line with the word Javascript.                                                                                                                                                                                                                                                                              |
+| The ratio of symbols to words in the content.. Symbols are defined "#", "...", and "…".                                                                                                                                                                                                                                                                                                                              |
+| A categorical id corresponding to the list of categories of the domain of the document. Categories are obtained from the UT1 blacklist. The list is obtained from [https://dsi.ut-capitole.fr/blacklists/](https://dsi.ut-capitole.fr/blacklists/)                                                                                                                                                                   |
+
+```
+|---documents
+  |--papers
+    |--001-paper.pdf
+    |--001-paper
+      |--001-paper-00001.json
+|--duplicate
+  |--<duplicated information extracted>
+
+```
+
+[source: redpajama-data-v2](https://www.together.ai/blog/redpajama-data-v2)
+
+![](Pasted%20image%2020240315062214.png)
+
+[Scaling Language Models: Methods, Analysis & Insights from Training Gopher](https://arxiv.org/pdf/2112.11446.pdf)
+
+![](Pasted%20image%2020240315063041.png)
+
+![](Pasted%20image%2020240315063144.png)
+
+
 ## Please describe the different parts of a "Document"
 
 Absolutely! Here's a more expanded description of document components, going into further detail:

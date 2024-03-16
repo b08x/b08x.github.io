@@ -9,7 +9,7 @@ tags:
 links:
 ---
 
-[[Using Ruby with Jupyter]]
+[[_drafts/JupyterLabs & Ruby NLP]]
 
 Here are some ways the 'notebook-nlp' Docker image size could be reduced:
 

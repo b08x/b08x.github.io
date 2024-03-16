@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Set-of-Mark Prompting
-subtitle: Mocking Humans For Still Needing to Point at Things
+subtitle: Mocking Humans For Still Needing                 to Point at Things
 category:
   - Prompt Engineering
 image: /assets/img/generative/pixel_crow-02.png

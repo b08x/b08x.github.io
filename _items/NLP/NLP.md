@@ -18,6 +18,7 @@ permalink:
 - [[Embedding]]
 - [[Gemini Advanced Image Generation]]
 - [[Interference & Hallucinations]]
+- [[JupyterLabs & Ruby NLP]]
 - [[LLM settings]]
 - [[NLP]]
 - [[Parts of a Document]]
