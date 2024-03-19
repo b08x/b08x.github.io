@@ -1,26 +1,11 @@
 ---
 layout: default
 pagination:
-  enabled: true
+enabled: true
 ---
 
-<div class="container">
-  <h2>syncopated notes</h2>
+<content>
+  {{ content }}
+</content>
 
-  <div class="text">
-    <div class="xs">
-      <ul>
-        {% assign recent_items = site.items | sort: "last_modified_at_timestamp" | reverse %}
-        {% for item in recent_items limit: 10 %}
-        {% if item.layout == 'page' %}
-        <li>
-          {{ item.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link"
-            href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
-        </li>
-        {% endif %}
-
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-</div>
+{% include notes_graph.html %}

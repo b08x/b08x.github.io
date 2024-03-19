@@ -20,11 +20,11 @@ layout: default
         Here is the main paginator logic called.
         All calls to site.posts should be replaced by paginator.posts 
     -->
-    {% for item in paginator.posts %}
+    {% for note in paginator.posts %}
       <li>
-        <span class="post-meta">{{ item.date | date: "%b %-d, %Y" }}{% if item.book.rank %} | Rank: {{ item.book.rank }}{% endif %}{% if item.collection %} | {{ item.collection }}{% endif %}{% if item.tags %}<br>Tags: {{ item.tags }}{% endif %}</span>
+        <span class="post-meta">{{ note.date | date: "%b %-d, %Y" }}{% if note.book.rank %} | Rank: {{ note.book.rank }}{% endif %}{% if note.collection %} | {{ note.collection }}{% endif %}{% if note.tags %}<br>Tags: {{ note.tags }}{% endif %}</span>
         <h2>
-          <a class="note-link" href="{{ item.url | relative_url }}">{{ item.title | escape }}</a>
+          <a class="note-link" href="{{ note.url | relative_url }}">{{ note.title | escape }}</a>
         </h2>
       </li>
     {% endfor %}

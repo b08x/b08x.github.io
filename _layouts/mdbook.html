@@ -21,11 +21,6 @@
         width: 50%;
       }
     
-      $if(quotes)$ q {
-        quotes: "“" "”" "‘" "’";
-      }
-    
-      $endif$
     </style>
   </head>
 
@@ -130,12 +125,12 @@
 
       <div id="content" class="content">
         <main>
-          {{ content }}
+
         </main>
 
         <nav class="nav-wrapper" aria-label="Page navigation">
           /* Mobile navigation buttons */
-
+          {{ content }}
           <div style="clear: both"></div>
         </nav>
       </div>
