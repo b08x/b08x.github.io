@@ -7,8 +7,8 @@ exclude:
   - "textgenerator/"
   - "_templates/"
   - "_drafts/"
-  - "_items_bak/"
-  - "_includes/items_graph.json"
+  - "_notes_bak/"
+  - "_includes/notes_graph.json"
   - ".obsidian/"
   - "*.cast"
   - "*.pdf"
@@ -16,9 +16,8 @@ exclude:
   - "LICENSE"
   - "*.txt"
   - "index.something"
-  - "index.ignore"
-  - "_items/Daily/test.canvas"
-  - "_items/LLM/*.canvas"
+  - "_pages/index.ignore"
+  - "*.canvas"
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ""
 
@@ -61,20 +60,20 @@ defaults:
     values:
       layout: "default"
   - scope:
-      path: "_items/**/*.md"
+      path: "_notes/**/*.md"
     values:
       layout: "note"
   - scope:
       path: "spec/**/*.md"
     values:
-      layout: "node"      
+      layout: "node"
   # - scope:
   #     path: "_articles/**/*.md"
   #   values:
   #     layout: "article"
 
 collections:
-  items:
+  notes:
     output: true
     permalink: /:slugified_categories/:title
   # articles:
@@ -116,7 +115,7 @@ pagination:
   limit: 0
   sort_field: 'date'
   sort_reverse: true
-  collection: 'items'
+  collection: 'notes'
 
 ############################################################
 # Site configuration for the Auto-Pages feature
@@ -139,7 +138,7 @@ autopages:
     slugify:
       mode: 'default'   # :cat is slugified. Modes: default, raw, pretty, ascii, latin
       case: true       # Whether to replace all uppercase letters with their lowercase counterparts
-    enabled: true      
+    enabled: true
   # Collection pages, omit to disable
   collections:
     layouts:
@@ -164,5 +163,5 @@ autopages:
 
 feed:
   collections:
-    items:
+    notes:
       path: "/feed.atom"

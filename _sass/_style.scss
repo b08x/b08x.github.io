@@ -446,7 +446,7 @@ ul {
   font-size: 1.25rem;
   line-height: 2rem;
   margin: 0rem;
-  display: contents;
+  // display: contents;
 
   li {
     list-style-type: disc;
@@ -478,7 +478,7 @@ h1 {
   font-weight: 300;
   letter-spacing: 0.1rem;
   justify-self: center;
-  color: tomato;
+  color: #ffd33e;
 
   @media (max-width: 1560px) {
     font-size: 3rem;
@@ -504,7 +504,7 @@ h2 {
   font-family: $font-family-logo;
   font-weight: 500;
   font-size: 3.5rem;
-  color: rgb(175, 192, 18);
+  color: #c01212;
 
 }
 
@@ -540,7 +540,7 @@ p {
   font-weight: 400;
   font-size: 1.40rem;
   word-spacing: 0.1rem;
-  color: var(--aquatic-edge);
+  color: #ada087;
 
   code {
     color: #018361;
@@ -785,6 +785,7 @@ table {
   padding: 0.5rem 1rem;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
+  font-family: $font-family-source-serif;
 }
 
 nav {
@@ -807,7 +808,7 @@ footer {
   justify-content: center;
 
   a {
-    color: hsl(175, 40%, 41%);
+    color: #6a1313;
   }
 }
 
