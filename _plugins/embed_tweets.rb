@@ -3,12 +3,12 @@ class TweetEmbedGenerator < Jekyll::Generator
   def generate(site)
     return if !site.config["embed_tweets"]
 
-    all_items = site.collections['items'].docs
+    all_notes = site.collections['notes'].docs
     all_pages = site.pages
-    all_docs = all_items + all_pages
+    all_docs = all_notes + all_pages
 
-    all_docs.each do |current_item|
-      current_item.content.gsub!(
+    all_docs.each do |current_note|
+      current_note.content.gsub!(
         /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(es)?\/(\d+)$/i,
         <<~HTML
           <blockquote class="twitter-tweet">

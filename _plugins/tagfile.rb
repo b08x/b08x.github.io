@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Jekyll::Hooks.register :items, :post_write do |post|
+# Jekyll::Hooks.register :notes, :post_write do |post|
 #   all_existing_tags = Dir.entries("tags")
 #     .map { |t| t.match(/(.*).md/) }
 #     .compact.map { |m| m[1] }

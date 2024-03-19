@@ -10,12 +10,12 @@ pagination:
   <div class="text">
     <div class="xs">
       <ul>
-        {% assign recent_items = site.items | sort: "last_modified_at_timestamp" | reverse %}
-        {% for item in recent_items limit: 10 %}
-        {% if item.layout == 'page' %}
+        {% assign recent_notes = site.notes | sort: "last_modified_at_timestamp" | reverse %}
+        {% for note in recent_notes limit: 10 %}
+        {% if note.layout == 'page' %}
         <li>
-          {{ item.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link"
-            href="{{ site.baseurl }}{{ item.url }}">{{ item.title }}</a>
+          {{ note.last_modified_at | date: "%Y-%m-%d" }} — <a class="internal-link"
+            href="{{ site.baseurl }}{{ note.url }}">{{ note.title }}</a>
         </li>
         {% endif %}
 
