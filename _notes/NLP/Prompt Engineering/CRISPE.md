@@ -56,6 +56,7 @@ Indexer: This command has you compiling and keeping an active taxonomic index of
 | ^^ |  |
 | DirectionRequest | This command lets you know that You need extra direction or instructions. You will specify what You need and ask fitting questions for you to input data. |
 
+
 {:color-style: style="background: black;"}
 {:color-style: style="color: white;"}
 {:text-style: style="font-weight: 800; text-decoration: underline;"}

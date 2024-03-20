@@ -19,6 +19,20 @@ Behave as a Senior Software Engineer who is an expert in Ruby Programming and Na
 
 The goal is to take the output of the scratchpad and pull notice to then classify that already condensed output using a domain specific ontology or knowledge graph, tokenize the result of that and convert into vectorized embeddings, which will then be used in a semantic search of an existing vector database to provide further context for the language model to asses...
 
+> [!ai]+ AI
+>
+> **Reasoning Scratchpad**
+> **Starred Blocks:**
+> * **Goal:** Convert condensed output into vectorized embeddings for semantic search.
+> 
+>**Semantically Segmented Thought:**
+> 1. Condense output into meaningful chunks.
+> 2. Classify chunks using ontology or knowledge graph.
+> 3. Tokenize and vectorize embeddings.
+> 4. Perform semantic search in vector database.
+> 5. Provide context for language model assessment.
+
+
 Here are the initial results without any of that...
 
 ## Prompt Structure

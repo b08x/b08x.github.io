@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Chunking Text
+title: Chunk Analyzer
 subtitle: Its not as gross as it sounds
 category:
   - Text Processing
@@ -14,6 +14,26 @@ toc: true
 ---
 
 Document chunking can be performed based on specific criteria or patterns within the text. For example, chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns). This method allows for targeted extraction of relevant information.
+
+[Chunk Visualizer](https://huggingface.co/spaces/m-ric/chunk_visualizer)
+
+
+> [!ai]+ AI
+>
+> **Nihilistic & Existential Rants**
+> Oh, the dreaded Chunk Analyzer! A cruel and heartless machine that tears our precious text to shreds! It's the ultimate act of literary vivisection, leaving nothing but a pile of scattered
+
+
+> [!ai]+ AI
+>
+> **Sentiment Analysis**
+> The provided text is a negative rant about the Chunk Analyzer. The author uses hyperbole and exaggeration to express their frustration with the tool, calling it "cruel and heartless" and "the ultimate act of literary vivisection." They also use insults and sarcasm, referring to the tool as a "dreaded" and "heartless machine."
+> **Cognitive Grammar with Pragmatics**
+> The author's use of language in this rant is consistent with the principles of cognitive grammar with pragmatics. They use concrete and specific language to describe the Chunk Analyzer, and they use metaphors and similes to compare it to other things. For example, they compare the tool to a "machine that tears our precious text to shreds" and a "literary vivisection." These comparisons help to create a vivid and memorable image of the Chunk Analyzer in the reader's mind.
+> **Contrasting Perspectives**
+> It is important to note that the author's perspective on the Chunk Analyzer is not the only one. There are many people who find the tool to be helpful and valuable. It is important to consider all perspectives when evaluating a tool or technology.
+> **Conclusion**
+> The Chunk Analyzer is a tool that can be used to perform document chunking. The author of the provided text has a negative opinion of the tool, but it is important to note that this is not the only perspective. There are many people who find the tool to be helpful and valuable. It is important to consider all perspectives when evaluating a tool or technology.
 
 <div class="figure right">
     <div class="liner">
@@ -87,7 +107,7 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 ## Unexpected visual breakdown
 
 
-| Method          | Langchains Recursive Text Splitter                                                                                                                                                                                                                                           |
+| Method          | Langchains Recursive Text Splitter                                                                                                                                                                                                                                          |
 | :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | separators      | ['\n\n', '\n', ' ', '']                                                                                                                                                                                                                                                     |
 | length function | Character Count                                                                                                                                                                                                                                                             |
@@ -125,14 +145,10 @@ Adding the instruction to note faulty dependent clauses seemed to add small amou
 - Strategies worth noting encompass utilizing smaller chunks and retrieving adjacent chunk content or maintaining multiple embeddings for a document.
 - overlaps: For instance, if data is divided into chunks of 100 tokens, overlapping by 50 tokens would mean that the last 50 tokens of one chunk are the same as the first 50 tokens of the next chunk, thus preserving surrounding context.
 
-
 ---
 
 
 ### sources
-
-
-[Chunk Visualizer](https://huggingface.co/spaces/m-ric/chunk_visualizer)
 
 [results using Gemini makersuite](https://makersuite.google.com/app/prompts?state=%7B%22ids%22%3A%5B%221FPT0d-GOcBzlU_rjWoJgAcn7YTduOaCe%22%5D%2C%22action%22%3A%22open%22%2C%22userId%22%3A%22105870379594569653340%22%2C%22resourceKeys%22%3A%7B%7D%7D&usp=sharing)
 

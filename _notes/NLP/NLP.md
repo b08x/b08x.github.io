@@ -12,7 +12,7 @@ permalink:
 ## Index
 - [[AgileBloom]]
 - [[Capturing Personality with Verb Phrase Extraction]]
-- [[Chunking]]
+- [[Chunk Analyzer]]
 - [[CRISPE]]
 - [[Elavis Saravia]]
 - [[Embedding]]

@@ -24,3 +24,18 @@ functional grammar: Do they (the requests) maintain logical coherence in relatio
 
 Excellent synthesis, Expert 1.\</br>Here's a potential sequence:\</br>1. Use Generative Grammar to create an ideal pattern.\</br>2. Apply Functional Grammar to check if the prompt fulfills its function.\</br>3. Use Cognitive Grammar to verify the adequacy of meaning representation.\</br>4. Identify meronyms and holonyms to understand structural composition.\</br>5. Finally, consider Pragmatics for real-world context.\</br>
 
+
+> [!ai]+ AI
+>
+> **Semantic Search**
+> **STS (Semantic Textual Similarity)**
+> * Compares sentence pairs
+> * Used for benchmarking and identifying patterns in datasets
+> **Functional Grammar**
+> * Assesses logical coherence of requests in conversational context
+> **Suggested Sequence for Semantic Segmentation**
+> 1. Use Generative Grammar to create an ideal pattern.
+> 2. Apply Functional Grammar to check fulfillment of function.
+> 3. Use Cognitive Grammar to verify meaning representation adequacy.
+> 4. Identify meronyms and holonyms for structural composition understanding.
+> 5. Consider Pragmatics for real-world context.

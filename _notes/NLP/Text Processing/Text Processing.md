@@ -70,7 +70,7 @@ style E fill:#2a1a2a,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5
 
 ## Index
 - [[Capturing Personality with Verb Phrase Extraction]]
-- [[Chunking]]
+- [[Chunk Analyzer]]
 - [[Embedding]]
 - [[Parts of a Document]]
 - [[Ranking Chunks]]
