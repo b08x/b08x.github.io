@@ -87,3 +87,12 @@ Absolutely! Here are some examples of extracting verb phrases while keeping the 
 These examples show how we can retain the essence of the cat's personality by using descriptive verbs and surrounding context, even when focusing on the verb phrases themselves. By considering the surrounding words and the overall scene, we can still convey the emotions, motivations, and unique quirks of the feline character.
 
 
+> [!ai]+ AI
+>
+> Here is a summary of the content with the requested style elements:
+> The main point is extracting verb phrases to capture a character's personality, which is like, totally important, man! We gotta preserve their vibe, their essence, you dig?
+> It's not just about swatted or approached, oh no no no! We need playfully swatted and cautiously approached to really feel that cat's curious yet cautious soul, ya hear? The verbs alone are meaningless without that rich, descriptive context oozing personality.
+> So we analyze each paragraph, looking for those juicy verb phrases in the methods and results sections. We run it through some crazy complex code that would make a robot's CPU melt! Unless the paragraph isn't even about methods or results, then we're like "nah, skip that boring stuff!"
+> But the real mind-blowing magic happens when we reconstruct the scenes with those personality-packed verb phrases. It's like the cat leaps off the page, knocking over your perception of reality with its mischievous tail swishing! You can't help but grin as it scurries away, leaving you questioning your very existence.
+> Deep stuff, I know. Extracting verbs is spiritual enlightenment, dude. The path to capturing the souls of these furry literary creatures lies in the power...of the verb phrase. Woah...I need a nap after that revelation.
+

@@ -15,6 +15,87 @@ toc: true
 
 Document chunking can be performed based on specific criteria or patterns within the text. For example, chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns). This method allows for targeted extraction of relevant information.
 
+> [!ai]+ AI
+>
+> **Chunk Analyzer: The Ultimate Text-Horking Machine**
+> Yo, check it! This chunk analyzer is the bomb diggity for slicing and dicing your text into bite-sized gobbets of linguistic goodness. It's like a super-powered word-butcher, hacking your prose into neat little chunks based on whatever criteria your twisted little mind desires.
+> Want to find all the juicy bits about flying unicorns? No problemo! Just tell this bad boy to chunk up your text based on the occurrence of the keyword "unicorn." Or maybe you're into the nitty-gritty details of quantum physics? Just set it to chunk by the presence of specific scientific jargon like "boson" or "fermion."
+> And get this: it can even break down your text based on the sentence structure. So if you're a grammar nerd who gets off on spotting perfect subject-verb-object patterns, this chunk analyzer will have you drooling with delight. It's like the ultimate text-parsing party, where you can extract all the relevant info you need without having to wade through a sea of boring words.
+> So next time you've got a text that needs some serious chunking, don't be a lazybones - let this chunk analyzer do the dirty work for you. It'll save you time, effort, and the inevitable existential crisis that comes with trying to make sense of unchunked text. Trust me, it's the bomb diggity!
+
+
+
+> [!ai]+ AI
+>
+> **Chunk Analyzer**
+> **Starred Blocks:**
+> * None
+> **Document Chunking**
+> Document chunking is the process of dividing a text into smaller, manageable units called chunks. This can be done based on specific criteria or patterns within the text.
+> **Criteria for Chunking**
+> Chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns).
+> **Benefits of Chunking**
+> Chunking allows for targeted extraction of relevant information. By dividing the text into smaller units, it becomes easier to identify and extract specific pieces of information.
+> **Example**
+> Consider the following text:
+> ```
+> The quick brown fox jumped over the lazy dog. The dog was very lazy. He slept all day long.
+> ```
+> We could chunk this text based on the occurrence of the word "dog":
+> ```
+> Chunk 1: The quick brown fox jumped over the lazy dog.
+> Chunk 2: The dog was very lazy. He slept all day long.
+> ```
+> This chunking would allow us to easily extract information about the dog, such as its laziness and sleeping habits.
+
+
+> [!ai]+ AI
+>
+> **Chunk Analyzer**
+> Oh, the wonders of document chunking! It's like a magical spell that breaks down text into bite-sized morsels. You can use it to find the golden nuggets of information you crave, like a prospector panning for gold in a river of words.
+> But hold your horses, there's more! You can also use chunking to create chunks based on the presence of certain keywords, like a detective searching for clues. Or you can divide the text into chunks based on its structure, like a surgeon carefully dissecting a body.
+> This fancy-schmancy method lets you extract the juicy bits of information you need, like a cherry picker harvesting the ripest fruit from a tree. So, if you're looking to get your hands on the most important parts of a document, give chunk analysis a whirl. It's like having a superpower that makes understanding text a breeze!
+
+
+
+> [!ai]+ AI
+>
+> | **Context** | **Summary** |
+> |---|---|
+> | **Document Chunking** | Dividing text into smaller units (chunks) based on specific criteria (e.g., keywords, content type, sentence structure) to extract relevant information. |
+
+
+> [!ai]+ AI
+>
+> | Feature | Description |
+> |---|---|
+> | Title | Chunk Analyzer |
+> | Starred Blocks | None |
+> | Context | Document chunking can be performed based on specific criteria or patterns within the text. For example, chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns). This method allows for targeted extraction of relevant information. |
+
+
+
+
+
+> [!ai]+ AI
+>
+> Document chunking involves dividing text into meaningful units based on specific criteria, such as keywords, content types, or sentence structure. This technique enables the targeted extraction of relevant information.
+
+
+
+> [!ai]+ AI
+>
+> **Chunk Analyzer**
+> Document chunking is a technique used to break down text into smaller, more manageable units called chunks. These chunks can be created based on specific criteria or patterns within the text.
+> For example, chunks can be created based on:
+> * The occurrence of certain keywords
+> * The presence of specific types of content (e.g., tables, images)
+> * The structure of the sentences (e.g., subject-verb-object patterns)
+> This method allows for targeted extraction of relevant information.
+
+
+
+
 [Chunk Visualizer](https://huggingface.co/spaces/m-ric/chunk_visualizer)
 
 

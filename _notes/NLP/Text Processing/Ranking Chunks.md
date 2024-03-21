@@ -11,6 +11,40 @@ links:
 toc: true
 ---
 
+# ranking template
+[source: RankPrompt: Step-by-Step Comparisons Make Language Models Better Reasoners ](https://arxiv.org/pdf/2403.12373.pdf)
+
+
+
+```ruby
+[Comparison Instruction] You are provided with a question and a series of potential responses.  
+
+Your assignment involves a systematic, step-by-step comparison of the reasoning paths embedded within each response.  
+
+This entails a thorough evaluation of each step’s correctness and logical consistency.  
+
+After completing this all-encompassing assessment, rank the responses in accordance with the soundness of their respective reasoning paths.  
+
+Finally, select the best response and present it on a separate line as the optimal solution.  
+
+[Comparison Example]  
+{Comparison Exemplars}  
+[Question]  
+{Question}  
+[Candidate Answers]  
+{Candidates}  
+[Comparison]
+```
+
+
+![](/assets/img/screenshot/creation_of_comparsion_exemplars.png)
+
+Limitations 
+
+Despite the impressive performance of our method, its experiments has been limited to proprietary lan-guage models. The lack of publicly accessible training details for these models creates a signif-icant barrier for researchers interested in pursu ing enhancements from a modeling standpoint. In the future, we will enhance the ranking capabili-ties of open-source models like LLaMA (Touvron et al., 2023b,a) and Falcon (Penedo et al., 2023). Learning from the explanations behind GPT-4’s ranking decisions offers a promising path for exploration. Additionally, while comparison exemplars in prompts improves performance, they also significantly increases the context size, leading to more expensive API calls. A potential solution is to con-dense the candidate paths by summarizing their key points.
+
+---
+
 
 ### input query + related_chunks_from_vectordb_or_redis:
 
