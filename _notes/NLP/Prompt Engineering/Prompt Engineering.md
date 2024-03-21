@@ -56,6 +56,17 @@ toc: true
 ---
 
 
+> [!ai]+ AI
+>
+> | Word | Part of Speech | Sense(s) from WordNet | Cognitive Grammar with Pragmatics |
+> | --- | --- | --- | --- |
+> | deRamble (verb) "to remove the rind or peel from" "to strip off a covering" "to remove something unwanted" "to get rid of something undesirable" | 1. to remove the rind or peel from 2. to strip off a covering 3. to remove something unwanted 4. to get rid of something undesirable | (a) [the action of removing a cover, (b) [the action of removing an outer layer, (c) [the act of getting rid of something unwanted], (d) [the act of disposing of something undesirable] | The word "deRamble" is often used in the context of peeling or stripping off a covering. In cognitive grammar with pragmatics, it can also be used to refer to removing an outer layer from an object, getting rid of unwanted things or disposing of something undesirable. |
+> | deRamble (noun) "the process of removing the rind or peel from" "a stripper machine for removing the rind or peel from fruits and vegetables" "a device used to remove unwanted objects" | 1. the process of removing the rind or peel from 2. a stripper machine for removing the rind or peel from fruits and vegetables 3. a device used to remove unwanted objects | (a) [the process of stripping off an outer layer, (b) [a machine used to remove the rind or peel from fruits and vegetables], (c) [a device used to remove unwanted objects] | The word "deRamble" as a noun can refer to the process of removing an outer layer from an object, a stripper machine for removing the rind or peel from fruits and vegetables, or a device used to remove unwanted objects. In cognitive grammar with pragmatics, it is often used in contexts related to food processing, manufacturing processes and waste disposal respectively. |
+> Note: The WordNet senses are based on the Princeton Wordnet 3.0 database and the Cognitive Grammar with Pragmatics concept is based on the theory of cognitive grammar developed by Ron Langacker.
+
+
+
+
 #### site your sources
 
 * seems to improve accuracy

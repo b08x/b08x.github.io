@@ -15,7 +15,7 @@ permalink:
 - [[Chunk Analyzer]]
 - [[CRISPE]]
 - [[Elavis Saravia]]
-- [[Embedding]]
+- [[Echo Embedding]]
 - [[Gemini Advanced Image Generation]]
 - [[Interference & Hallucinations]]
 - [[JupyterLabs & Ruby NLP]]

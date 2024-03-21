@@ -4,6 +4,7 @@ tags:
   - ruby
   - nlp
   - soundex
+  - ml
 links: 
 toc: true
 categories:
@@ -14,6 +15,7 @@ categories:
 # RubyGems: Text
 
 [A collection of text algorithms](https://github.com/threedaymonk/text)
+
 ## Soundex
 
 Soundex is an interesting concept to consider in the context of retrieval-augmented generation (RAG) applications. Here's a breakdown of how it could be used, its potential benefits, and the challenges to keep in mind:
@@ -124,6 +126,8 @@ SELECT givenname, surname FROM users WHERE givenname SOUNDS LIKE "robert";
 ## Metaphone
 
 As a response to deficiencies in the Soundex algorithm, Lawrence Philips developed the [Metaphone](https://en.wikipedia.org/wiki/Metaphone "Metaphone") algorithm in 1990. Philips developed an improvement to Metaphone in 2000, which he called Double Metaphone. Double Metaphone includes a much larger encoding rule set than its predecessor, handles a subset of non-Latin characters, and returns a primary and a secondary encoding to account for different pronunciations of a single word in English. Philips created Metaphone 3 as a further revision in 2009 to provide a professional version that provides a much higher percentage of correct encodings for English words, non-English words familiar to Americans, and first and last names found in the United States. It also provides settings that allow more exact consonant and internal vowel matching to allow the programmer to focus the precision of matches more closely.
+
+
 ## Levenshtein distance
 https://en.wikipedia.org/wiki/Levenshtein_distance
 

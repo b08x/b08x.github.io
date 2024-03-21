@@ -23,15 +23,5 @@ Some examples of different features that might be represented in a vector embedd
 
 [source](https://reinteractive.com/articles/creating-intelligent-knowledge-base-q&a-app-with-gpt-3-and-ruby)
 
+[chat with gemini on the topic of echo embedding](https://drive.google.com/drive/folders/1pGbxRnN_nuhlMkvbyXB6x5-Ddmgh6qoI?usp=drive_link)
 
-
-
-> [!ai]+ AI
->
-> 1. Semantic meaning
-> 2. Parts of speech
-> 3. Frequency of use
-> 4. Associations with other words
-> 5. Grammatical structure
-> 6. Sentiment
-> 7. Text length

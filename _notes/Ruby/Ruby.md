@@ -14,3 +14,5 @@ permalink: /ruby/
 - [[Using NLP to Generate Music]]
 - [[_drafts/JupyterLabs & Ruby NLP]]
 - [[Using the Iterator Design Pattern]]
+
+

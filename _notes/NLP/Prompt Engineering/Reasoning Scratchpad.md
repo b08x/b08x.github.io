@@ -1,10 +1,11 @@
 ---
 layout: page
 title: Reasoning Scratchpad
-subtitle: 
+subtitle: For Models That Need It
 category:
   - Prompt Engineering
-tags: 
+tags:
+  - ollama
 links: 
 permalink:
 ---
