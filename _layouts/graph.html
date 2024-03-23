@@ -1,65 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-  section {
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #444;
-  }
+  <style>
+    section {
+      margin: 20px 0;
+      padding: 20px;
+      border: 1px solid #444;
+    }
 
+    .graphContainer {
+      min-height: 100%;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      flex-grow: 1;
+    }
 
-  .graphContainer {
-    min-height: 100%;
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    flex-grow: 1;
-  }
+    .left-column {
+      width: auto;
+    }
 
-  .left-column {
-    width: auto;
-  }
+    .right-column {
+      width: fit-content;
+    }
 
-  .right-column {
-    width: fit-content;
-  }
+    .category {
+      font-size: 24px;
+      margin-bottom: 20px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #000;
+      border-radius: 10px;
+    }
 
-  .category {
-    font-size: 24px;
-    margin-bottom: 20px;
-    padding: 20px;
-    text-align: center;
-    border: 2px solid #000;
-    border-radius: 10px;
-  }
+    .category img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
 
-  .category img {
-    width: 100%;
-    height: auto;
-  }
-</style>
+  <head>
+    {% include head.html %}
+  </head>
 
-<head>{% include head.html %}</head>
-
-<body>
-
-  <main class="layout">
-    <div class="container">
-      <div class="right-column">
-        {{ content }}
-      </div>
+  <body>
+    <main class="layout">
+      <div class="container">
+      <div class="right-column">{{ content }}</div>
 
       <div class="left-column">
-        <hr>
+        <hr />
         {% include notes_graph.html %}
       </div>
-      <hr>
-    </div>
-    {% include footer.html %}
-  </main>
+      <hr />
+      </div>
+      {% include footer.html %}
+    </main>
 
-  {% include link-previews.html wrapperQuerySelector="content" %}
-
-</body>
-
+    {% include link-previews.html wrapperQuerySelector="content" %}
+  </body>
 </html>
