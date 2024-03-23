@@ -12,11 +12,10 @@ toc: true
 
 ## Soundex
 
-Soundex is an interesting concept to consider in the context of retrieval-augmented generation (RAG) applications. Here's a breakdown of how it could be used, its potential benefits, and the challenges to keep in mind:
 
 **What is Soundex?**
 
-- Soundex is a phonetic algorithm used for indexing names (primarily surnames) by their sound when the exact spelling is unknown.
+- Soundex is a phonetic <ul>algorithm</ul> used for <strong>indexing</strong> names (primarily surnames) by their sound when the exact spelling is unknown.
 - It translates words into a code based on how they sound rather than how they are spelled. Similar sounding words will often have the same Soundex code.
 
 **How Soundex Could Work in RAG**
@@ -213,8 +212,6 @@ Let's say your RAG system is designed to help with medical research. A user, uns
     <p>Oh my stars, this content is a veritable hodgepodge of styles!</p>
   </li>
 </ul>
-
-
 
 
 

@@ -13,104 +13,55 @@ caption: page 294 Godel Escher Bach
 toc: true
 ---
 
-Document chunking can be performed based on specific criteria or patterns within the text. For example, chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns). This method allows for targeted extraction of relevant information.
+<ul class="chat-bubble">
+  <li>
+    <p><narration>Nihilistic & Existential Rants</narration>
+Oh, the dreaded Chunk Analyzer! A cruel and heartless machine that tears our precious text to shreds! It's the ultimate act of literary vivisection, leaving nothing but a pile of scattered</p>
+    <p></p>
+  </li>
+</ul>
 
 <ul class="chat-bubble">
   <li>
-    <p><strong>Chunk Analyzer</strong>
-<strong>Document Chunking</strong>
-Document chunking is the process of dividing a text into smaller, manageable units called chunks. This can be done based on specific criteria or patterns within the text.</p>
-
-<p><strong>Criteria for Chunking</strong>
-Chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns).</p>
-
-<p><strong>Benefits of Chunking</strong>
-Chunking allows for targeted extraction of relevant information. By dividing the text into smaller units, it becomes easier to identify and extract specific pieces of information.</p>
-
-<p><strong>Example</strong>
-Consider the following text:
-``
-The quick brown fox jumped over the lazy dog. The dog was very lazy. He slept all day long.
-`
-We could chunk this text based on the occurrence of the word "dog":
-`
-Chunk 1: The quick brown fox jumped over the lazy dog.
-Chunk 2: The dog was very lazy. He slept all day long.
-``</p>
-<p>This chunking would allow us to easily extract information about the dog, such as its laziness and sleeping habits.</p>
+  <strong>Sentiment Analysis:</strong>
+  <p>The provided text is a negative rant about the Chunk Analyzer. The author uses hyperbole and exaggeration to express their frustration with the tool, calling it "cruel and heartless" and "the ultimate act of literary vivisection." They also use insults and sarcasm, referring to the tool as a "dreaded" and "heartless machine."</p>
+  <strong>Cognitive Grammar with Pragmatics:</strong>
+  <p>The author's use of language in this rant is consistent with the principles of cognitive grammar with pragmatics. They use concrete and specific language to describe the Chunk Analyzer, and they use metaphors and similes to compare it to other things. For example, they compare the tool to a "machine that tears our precious text to shreds" and a "literary vivisection." These comparisons help to create a vivid and memorable image of the Chunk Analyzer in the reader's mind.</p>
+  <strong>Contrasting Perspectives:</strong>
+  <p>It is important to note that the author's perspective on the Chunk Analyzer is not the only one. There are many people who find the tool to be helpful and valuable. It is important to consider all perspectives when evaluating a tool or technology.</p>
+  <strong>Conclusion:</strong>
+  <p>The Chunk Analyzer is a tool that can be used to perform document chunking. The author of the provided text has a negative opinion of the tool, but it is important to note that this is not the only perspective. There are many people who find the tool to be helpful and valuable. It is important to consider all perspectives when evaluating a tool or technology.</p>
   </li>
 </ul>
 
 
 
+Document chunking can be performed based on specific criteria or patterns within the text. For example, chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns). This method allows for targeted extraction of relevant information.
 
 
-> [!ai]+ AI
->
-> **Chunk Analyzer**
-> Oh, the wonders of document chunking! It's like a magical spell that breaks down text into bite-sized morsels. You can use it to find the golden nuggets of information you crave, like a prospector panning for gold in a river of words.
-> But hold your horses, there's more! You can also use chunking to create chunks based on the presence of certain keywords, like a detective searching for clues. Or you can divide the text into chunks based on its structure, like a surgeon carefully dissecting a body.
-> This fancy-schmancy method lets you extract the juicy bits of information you need, like a cherry picker harvesting the ripest fruit from a tree. So, if you're looking to get your hands on the most important parts of a document, give chunk analysis a whirl. It's like having a superpower that makes understanding text a breeze!
+<ul class="chat-bubble">
+  <li>
+    <h4>Chunk Analyzer</h4>
+    <strong>Document Chunking:</strong>
+    <p>Document chunking is the process of dividing a text into smaller, manageable units called chunks. This can be done based on specific criteria or patterns within the text</p>
+    <strong>Criteria for Chunking:</strong>
+    <p>Chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns).</p>
+    <strong>Benefits of Chunking:</strong>
+    <p>Chunking allows for targeted extraction of relevant information. By dividing the text into smaller units, it becomes easier to identify and extract specific pieces of information.</p>
+    <strong>Example:</strong>
+    <p>Consider the following text:</p>
 
+    <ul>The quick brown fox jumped over the lazy dog. The dog was very lazy. He slept all day long.</ul>
 
+    <p>We could chunk this text based on the occurrence of the word "dog":</p>
 
-> [!ai]+ AI
->
-> | **Context** | **Summary** |
-> |---|---|
-> | **Document Chunking** | Dividing text into smaller units (chunks) based on specific criteria (e.g., keywords, content type, sentence structure) to extract relevant information. |
+    <ul>Chunk 1: The quick brown fox jumped over the lazy dog.</ul>
+    <ul>Chunk 2: The dog was very lazy. He slept all day long.</ul>
 
+    <p>This chunking would allow us to easily extract information about the dog, such as its laziness and sleeping habits.</p>
+  </li>
+</ul>
 
-> [!ai]+ AI
->
-> | Feature | Description |
-> |---|---|
-> | Title | Chunk Analyzer |
-> | Starred Blocks | None |
-> | Context | Document chunking can be performed based on specific criteria or patterns within the text. For example, chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns). This method allows for targeted extraction of relevant information. |
-
-
-
-
-
-> [!ai]+ AI
->
-> Document chunking involves dividing text into meaningful units based on specific criteria, such as keywords, content types, or sentence structure. This technique enables the targeted extraction of relevant information.
-
-
-
-> [!ai]+ AI
->
-> **Chunk Analyzer**
-> Document chunking is a technique used to break down text into smaller, more manageable units called chunks. These chunks can be created based on specific criteria or patterns within the text.
-> For example, chunks can be created based on:
-> * The occurrence of certain keywords
-> * The presence of specific types of content (e.g., tables, images)
-> * The structure of the sentences (e.g., subject-verb-object patterns)
-> This method allows for targeted extraction of relevant information.
-
-
-
-
-[Chunk Visualizer](https://huggingface.co/spaces/m-ric/chunk_visualizer)
-
-
-> [!ai]+ AI
->
-> **Nihilistic & Existential Rants**
-> Oh, the dreaded Chunk Analyzer! A cruel and heartless machine that tears our precious text to shreds! It's the ultimate act of literary vivisection, leaving nothing but a pile of scattered
-
-
-> [!ai]+ AI
->
-> **Sentiment Analysis**
-> The provided text is a negative rant about the Chunk Analyzer. The author uses hyperbole and exaggeration to express their frustration with the tool, calling it "cruel and heartless" and "the ultimate act of literary vivisection." They also use insults and sarcasm, referring to the tool as a "dreaded" and "heartless machine."
-> **Cognitive Grammar with Pragmatics**
-> The author's use of language in this rant is consistent with the principles of cognitive grammar with pragmatics. They use concrete and specific language to describe the Chunk Analyzer, and they use metaphors and similes to compare it to other things. For example, they compare the tool to a "machine that tears our precious text to shreds" and a "literary vivisection." These comparisons help to create a vivid and memorable image of the Chunk Analyzer in the reader's mind.
-> **Contrasting Perspectives**
-> It is important to note that the author's perspective on the Chunk Analyzer is not the only one. There are many people who find the tool to be helpful and valuable. It is important to consider all perspectives when evaluating a tool or technology.
-> **Conclusion**
-> The Chunk Analyzer is a tool that can be used to perform document chunking. The author of the provided text has a negative opinion of the tool, but it is important to note that this is not the only perspective. There are many people who find the tool to be helpful and valuable. It is important to consider all perspectives when evaluating a tool or technology.
 
 <div class="figure right">
     <div class="liner">
@@ -121,7 +72,7 @@ Chunk 2: The dog was very lazy. He slept all day long.
 
 # Comparing Length Functions
 
-After a messing a bit with the various settings, three configurations seemed to produce the best results when I processed the transcript from an unscripted video recently recorded.
+After a messing a bit with the various settings, three configurations seemed to produce the best results when I processed the transcript from an unscripted video recently recorded. [Chunk Visualizer](https://huggingface.co/spaces/m-ric/chunk_visualizer)
 
 ### Starting with this prompt:
 

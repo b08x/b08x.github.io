@@ -68,6 +68,12 @@ body {
       color: #ffe40a;
       background-color: transparent;
     }
+    em {
+      color: #f27950;
+    }
+    del {
+      color: #2A261C;
+    }
     narration {
       font-style: italic;
       color: darkgray;
@@ -92,15 +98,15 @@ body {
 	content: '';
 }
 
-// /* Chat - Speech Bubble Arrow */
-// .chat-bubble li:after {
-// 	position: absolute;
-//   top: $chat-thread-msg-arrow-size;
-// 	content: '';
-// 	width: 0;
-// 	height: 0;
-// 	border-top: $chat-thread-msg-arrow-size solid $chat-thread-bgd-color;
-// }
+/* Chat - Speech Bubble Arrow */
+.chat-bubble li:after {
+	position: absolute;
+  top: $chat-thread-msg-arrow-size;
+	content: '';
+	width: 0;
+	height: 0;
+	border-top: $chat-thread-msg-arrow-size solid #171613;
+}
 
 .chat-bubble li:nth-child(odd) {
 	animation: show-chat-even 0.15s 1 ease-in;

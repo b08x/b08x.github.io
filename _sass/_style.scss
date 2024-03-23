@@ -192,6 +192,7 @@ aside {
   }
 }
 
+
 // .container {
 //   border-style: dashed;
 //   border-color: #404041;
@@ -252,7 +253,7 @@ time {
 
 img {
   max-width: 100%;
-  display: block;
+  display: inline-block;
   margin: 0 auto;
   max-height: 75vh;
   border-radius: $border-radius;

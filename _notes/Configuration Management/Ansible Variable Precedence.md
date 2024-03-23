@@ -26,15 +26,21 @@ For testing purposes, it might be useful to know that variables *used* by a role
 * role variables defined in vars/main.yml or included from vars/x.yml
 * tasks using block vars, but only for that block
 * roles task using set_fact or register, but only for that task
-* 
-> [!ai]+ AI
->
-> **Nihilistic & Existential Rants**
-> Oh, the woes of Ansible's variable precedence! A cosmic joke, an existential crisis for the uninitiated. It's a labyrinth of scopes, contexts, and merging strategies that would make Kafka weep.
-> For those who dare to venture into this realm, be warned: the rules are as fluid as the sands of time. Variables dance and merge, their precedence a fickle mistress that changes with the wind.
-> Group vars and host vars? They're mere pawns in the grand scheme of things, trampled upon by the mighty force of playbook vars. And don't forget those pesky roles, with their own little variables that can overthrow the established order.
-> Block vars? Ha! They're just a fleeting illusion, a momentary glimmer of control before the darkness consumes them.
-> Oh, the futility of it all! Why bother assigning variables when they're destined to be overwritten, trampled, and forgotten? In the grand tapestry of Ansible, variables are but ephemeral specks, doomed to dance to the whims of the cosmic merge.
+
+
+
+<ul class="chat-bubble">
+  <li>
+    <p><narration>Nihilistic & Existential Rants</narration></p>
+    <p>Oh, the woes of Ansible's variable precedence! A cosmic joke, an existential crisis for the uninitiated. It's a labyrinth of scopes, contexts, and merging strategies that would make Kafka weep.</p>
+    <p>For those who dare to venture into this realm, be warned: the rules are as fluid as the sands of time. <del>Variables dance and merge, their precedence a fickle mistress that changes with the wind.</del></p>
+    <p>Group vars and host vars? <del>They're mere pawns in the grand scheme of things,</del> trampled upon by the mighty force of playbook vars. And don't forget those pesky roles, with their own little variables that can overthrow the established order.</p>
+    <p>Block vars? Ha! <del>They're just a fleeting illusion, a momentary glimmer of control before the darkness consumes them</del>.</p>
+    <p>Oh, the futility of it all! Why bother assigning variables when they're destined to be overwritten, trampled, and forgotten? In the grand tapestry of Ansible, variables are <del>but ephemeral specks, doomed to dance to the whims of the cosmic merge.</del></p>
+  </li>
+</ul>
+
+
 
 
 ## Role Variables and Role Defaults
@@ -81,19 +87,11 @@ stop
 </div>
 
 
-> [!ai]+ AI
->
-> Oh, the woes of Ansible's variable precedence! A cosmic joke, an existential crisis for the uninitiated. It's a labyrinth of scopes, contexts, and merging strategies that would make Kafka weep.
-> For those who dare to venture into this realm, be warned: the rules are as fluid as the sands of time. Variables dance and merge, their precedence a fickle mistress that changes with the wind.
-> Group vars and host vars? They're mere pawns in the grand scheme of things, trampled upon by the mighty force of playbook vars. And don't forget those pesky roles, with their own little variables that can overthrow the established order.
-> Block vars? Ha! They're just a fleeting illusion, a momentary glimmer of control before the darkness consumes them.
-> Oh, the futility of it all! Why bother assigning variables when they're destined to be overwritten, trampled, and forgotten? In the grand tapestry of Ansible, variables are but ephemeral specks, doomed to dance to the whims of the cosmic merge.
-
 ---
 
 ## Precedence order
 
-[source: Mastering Ansible - Second Edition](https://subscription.packtpub.com/book/cloud-and-networking/9781787125681/1/ch01lvl1sec13/variable-precedence)
+In Ansible, variable precedence determines which value a variable takes when it's defined in multiple places. This hierarchy helps Ansible decide which value "wins" when there are conflicts. Understanding this order is crucial for advanced Ansible use, especially when you're overriding variable values.
 
 1. Extra `vars` (from command-line) always win.
 2. Task `vars` (only for the specific task).
@@ -112,6 +110,8 @@ stop
 15. Inventory `vars`.
 16. Role defaults.
 
+[source: Mastering Ansible - Second Edition](https://subscription.packtpub.com/book/cloud-and-networking/9781787125681/1/ch01lvl1sec13/variable-precedence)
+
 ### Merging hashes
 
 In the previous section, we focused on the precedence in which variables will override each other. The default behavior of Ansible is that any overriding definition for a variable name will completely mask the previous definition of that variable. However, that behavior can be altered for one type of variable, the hash. A hash variable (a _dictionary_ in Python terms) is a dataset of keys and values. Values can be of different types for each key, and can even be hashes themselves for complex data structures.
@@ -120,14 +120,6 @@ In some advanced scenarios, it is desirable to replace just one bit of a hash or
 
 Let's walk through an example of the two behaviors. We will start with a hash loaded with data and simulate a scenario where a different value for the hash is provided as a higher priority variable.
 
-> [!ai]+ AI
->
-> **Nihilistic & Existential Rants**
-> Oh, the woes of Ansible's variable precedence! A cosmic joke, an existential crisis for the uninitiated. It's a labyrinth of scopes, contexts, and merging strategies that would make Kafka weep.
-> For those who dare to venture into this realm, be warned: the rules are as fluid as the sands of time. Variables dance and merge, their precedence a fickle mistress that changes with the wind.
-> Group vars and host vars? They're mere pawns in the grand scheme of things, trampled upon by the mighty force of playbook vars. And don't forget those pesky roles, with their own little variables that can overthrow the established order.
-> Block vars? Ha! They're just a fleeting illusion, a momentary glimmer of control before the darkness consumes them.
-> Oh, the futility of it all! Why bother assigning variables when they're destined to be overwritten, trampled, and forgotten? In the grand tapestry of Ansible, variables are but ephemeral specks, doomed to dance to the whims of the cosmic merge.
 
 Starting data:
 
