@@ -1,0 +1,3 @@
+---
+tags: obsidian-auto-glossary
+---

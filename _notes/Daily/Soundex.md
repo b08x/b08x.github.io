@@ -1,14 +1,6 @@
 ---
 layout: page
-tags:
-  - ruby
-  - nlp
-  - soundex
-  - ml
-links: 
-toc: true
-categories:
-  - LLM
+title: Soundex
 ---
 
 

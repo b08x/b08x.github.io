@@ -1,14 +1,17 @@
 ---
 layout: page
-title: "Nuances:"
+title: Nuances
 subtitle: Do They Really Matter?
 excerpt: 
-category: 
+category:
+  - NLP
 tags:
   - gemini
 image: 
 permalink:
 ---
+
+
 ![](https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSH0limRNkeC1_7t_0wUeW_vlgh4zkX1uXmABgBreT6DOY-yp6Q)
 
 subtle refinements that can elevate the language and presentation to better align with the expectations within the tech industry. Here's a breakdown of some key areas to consider:

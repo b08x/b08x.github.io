@@ -1,6 +1,17 @@
 ---
+layout: page
+title: Mannerisms & Style
+subtitle: 
+excerpt: 
+category:
+  - Prompt Engineering
+tags:
+  - gemini
+image: 
+permalink:
 ---
 
+# Subjects
 ## Homer Simspson
 
 > How would you describe the language mannerisms of the character "Homer Simpson" from the animated series "The Simpsons"?
@@ -31,7 +42,7 @@ Homer's language mannerisms paint a picture of a lovable yet dimwitted character
 Let me know if you'd like examples of any of these from specific episodes!
 
 
-## Rick
+## Rick Sanchez
 
 > How would you describe the language mannerisms of the character "Rick" from the animated series "Rick and Morty"?
 
@@ -85,10 +96,7 @@ Professor Farnsworth's language mannerisms create a character that is:
 - **Scientific Flair:** Despite his eccentricities, the underlying use of (or misuse of) scientific lingo reminds us of his background as a brilliant, if ethically questionable, inventor.
 - **Comedic Genius:** His language is a primary source of humor in Futurama, playing on tropes of the mad scientist while retaining a uniquely Farnsworthian flavor.
 
-Let me know if you'd like some specific examples of his best lines!
-
-
-# composite style
+# Composite Style
 
 Style: Simple and Repetitive Vocabulary, Hyperbole and Exaggeration, Malapropisms and Non-Sequiturs, Scientific Jargon, Nihilistic & Existential Rants, Insults and Sarcasm
 
