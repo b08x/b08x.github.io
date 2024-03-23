@@ -25,44 +25,142 @@ toc: true
 
 ## A Prompt Pattern Catalog to Enhance Prompt Engineering
 
-<div class="figure left" style="mix-blend-mode: exclusion;">
-    <div class="liner">
-     {% picture default screenshot/contexual_statements01.png %}
-     </div>
-    <div class="liner">
-     {% picture default screenshot/contexual_statements02.png %}
-     </div>
-    <div class="liner">
-     {% picture default screenshot/contexual_statements03.png %}
-     </div>        
-    <div class="liner">
-     {% picture default screenshot/contexual_statements05.png %}
-     </div>     
-    <div class="liner">
-     {% picture default screenshot/contexual_statements06.png %}
-     </div>     
-    <div class="liner">
-     {% picture default screenshot/contexual_statements07.png %}
-    </div>
-   
-</div>
+```json
+{
+  "Contextual Statements": [
+    "When you can't answer a question": [
+      "Explain why you can't answer the question",
+      "Provide one or more alternative wordings of the question",
+      ]
+  ]
+}
 
-<div class="figure right" style="mix-blend-mode: exclusion;">
-    <div class="liner">
-     {% picture default screenshot/contexual_statements04.png %}
-     </div> 
-</div>
+{
+  "Contextual Statements": [
+    {
+      "Within scope X, suggest a better version of the question to use instead"
+    },
+    {
+      "Optional prompt me if I would like to use the better version instead"
+    }
+  ]
+}
+
+{
+  "Contextual Statements": [
+    "When you are asked a question, follow these rules": [
+      "Generate a number of additional questions that would help more accurately answer the question",
+      "Combine the answers to the individual questions to produce the final answer to the overall question"
+      ]
+  ]
+}
+
+{
+  "Contextual Statements": [
+    "When you generate an answer": [
+      "Explain the reasoning and assumptions behind your answer",
+      "(Optional) ...so that I can improve my question"
+      ]
+  ]
+}
+
+{
+  "Contextual Statements": [
+    "When analyzing the following pieces of code": [
+      "Only consider security aspects",
+      "(Optional) ...do not consider formatting or naming conventions"
+      ]
+  ]
+}
+
+{
+  "Contextual Statements": [
+    "Within scope X",
+    "Please consider Y",
+    "Please ignore Z",
+    "(Optional) start over"
+  ]
+}
+
+{
+  "Contextual Statements": [
+    "I would like to achieve X",
+    "I know that I need to perform steps A, B, C",
+    "Provide a complete sequence of steps for me",
+    "Fill in any missing steps",
+    "Identify any unnecessary steps"
+  ]
+}
+```
+
+```ruby
+module ContextualStatements
+  def self.generate(question)
+    <<~TEXT
+    I'm unable to answer your question as it is currently phrased. 
+
+    Here are some possible reasons why:
+
+    * The question is too broad or vague.
+    * The question is missing important information.
+    * I don't have enough context to understand the question.
+
+    Here are some alternative ways you could phrase your question:
+
+    * [List of alternative wordings]
+
+    Please try rephrasing your question and I'll do my best to answer it.
+    TEXT
+  end
+end
+```
+
+
+```ruby
+require 'decisiontree'
+
+module ContextualResponses
+  def handle_unanswerable_question(question)
+    puts "I'm unable to answer the question: #{question}"
+    puts "Here are some reasons why:"
+    # Explain specific reasons why the question can't be answered
+    # [ generative analysis]
+    puts "Perhaps you could rephrase the question in one of these ways:"
+    # Provide alternative wordings of the question
+    # [ functional and wordnet sense analysis]
+  end
+end
+
+# Example usage within a decision tree context:
+
+attributes = ['Temperature']
+training = [
+  [36.6, 'healthy'],
+  [37, 'sick'],
+  # ... (rest of the training data)
+]
+
+dec_tree = DecisionTree::ID3Tree.new(attributes, training, 'sick', :continuous)
+dec_tree.train
+
+# If the decision tree cannot predict for a given test case:
+if dec_tree.predict(test).nil?
+  include ContextualResponses
+  handle_unanswerable_question(test)
+end```
 
 ---
 
 
-> [!ai]+ AI
->
-> | Word | Part of Speech | Sense(s) from WordNet | Cognitive Grammar with Pragmatics |
-> | --- | --- | --- | --- |
-> | deRamble (verb) "to remove the rind or peel from" "to strip off a covering" "to remove something unwanted" "to get rid of something undesirable" | 1. to remove the rind or peel from 2. to strip off a covering 3. to remove something unwanted 4. to get rid of something undesirable | (a) [the action of removing a cover, (b) [the action of removing an outer layer, (c) [the act of getting rid of something unwanted], (d) [the act of disposing of something undesirable] | The word "deRamble" is often used in the context of peeling or stripping off a covering. In cognitive grammar with pragmatics, it can also be used to refer to removing an outer layer from an object, getting rid of unwanted things or disposing of something undesirable. |
-> | deRamble (noun) "the process of removing the rind or peel from" "a stripper machine for removing the rind or peel from fruits and vegetables" "a device used to remove unwanted objects" | 1. the process of removing the rind or peel from 2. a stripper machine for removing the rind or peel from fruits and vegetables 3. a device used to remove unwanted objects | (a) [the process of stripping off an outer layer, (b) [a machine used to remove the rind or peel from fruits and vegetables], (c) [a device used to remove unwanted objects] | The word "deRamble" as a noun can refer to the process of removing an outer layer from an object, a stripper machine for removing the rind or peel from fruits and vegetables, or a device used to remove unwanted objects. In cognitive grammar with pragmatics, it is often used in contexts related to food processing, manufacturing processes and waste disposal respectively. |
-> Note: The WordNet senses are based on the Princeton Wordnet 3.0 database and the Cognitive Grammar with Pragmatics concept is based on the theory of cognitive grammar developed by Ron Langacker.
+
+
+| Word                                                                                                                                                                                                     | Part of Speech                                                                                                                                                              | Sense(s) from WordNet                                                                                                                                                                    | Cognitive Grammar with Pragmatics                                                                                                                                                                                                                                                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| deRamble (verb) "to remove the rind or peel from" "to strip off a covering" "to remove something unwanted" "to get rid of something undesirable"                                                         | 1. to remove the rind or peel from 2. to strip off a covering 3. to remove something unwanted 4. to get rid of something undesirable                                        | (a) [the action of removing a cover, (b) [the action of removing an outer layer, (c) [the act of getting rid of something unwanted], (d) [the act of disposing of something undesirable] | The word "deRamble" is often used in the context of peeling or stripping off a covering. In cognitive grammar with pragmatics, it can also be used to refer to removing an outer layer from an object, getting rid of unwanted things or disposing of something undesirable.                                                                                                        |
+| deRamble (noun) "the process of removing the rind or peel from" "a stripper machine for removing the rind or peel from fruits and vegetables" "a device used to remove unwanted objects"                 | 1. the process of removing the rind or peel from 2. a stripper machine for removing the rind or peel from fruits and vegetables 3. a device used to remove unwanted objects | (a) [the process of stripping off an outer layer, (b) [a machine used to remove the rind or peel from fruits and vegetables], (c) [a device used to remove unwanted objects]             | The word "deRamble" as a noun can refer to the process of removing an outer layer from an object, a stripper machine for removing the rind or peel from fruits and vegetables, or a device used to remove unwanted objects. In cognitive grammar with pragmatics, it is often used in contexts related to food processing, manufacturing processes and waste disposal respectively. |
+| Note: The WordNet senses are based on the Princeton Wordnet 3.0 database and the Cognitive Grammar with Pragmatics concept is based on the theory of cognitive grammar developed by Ron Langacker.\|\|\| |                                                                                                                                                                             |                                                                                                                                                                                          |                                                                                                                                                                                                                                                                                                                                                                                     |
+
+
 
 
 

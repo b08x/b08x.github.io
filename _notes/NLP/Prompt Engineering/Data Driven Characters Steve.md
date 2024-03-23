@@ -1,4 +1,11 @@
 ---
+layout: note
+title: "Data Driven Characters: Steve"
+subtitle: 
+category: 
+tags: 
+links: 
+permalink:
 ---
 
 ## Feedback on Character Embodiment Analysis

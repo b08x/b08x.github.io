@@ -15,38 +15,34 @@ toc: true
 
 Document chunking can be performed based on specific criteria or patterns within the text. For example, chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns). This method allows for targeted extraction of relevant information.
 
-> [!ai]+ AI
->
-> **Chunk Analyzer: The Ultimate Text-Horking Machine**
-> Yo, check it! This chunk analyzer is the bomb diggity for slicing and dicing your text into bite-sized gobbets of linguistic goodness. It's like a super-powered word-butcher, hacking your prose into neat little chunks based on whatever criteria your twisted little mind desires.
-> Want to find all the juicy bits about flying unicorns? No problemo! Just tell this bad boy to chunk up your text based on the occurrence of the keyword "unicorn." Or maybe you're into the nitty-gritty details of quantum physics? Just set it to chunk by the presence of specific scientific jargon like "boson" or "fermion."
-> And get this: it can even break down your text based on the sentence structure. So if you're a grammar nerd who gets off on spotting perfect subject-verb-object patterns, this chunk analyzer will have you drooling with delight. It's like the ultimate text-parsing party, where you can extract all the relevant info you need without having to wade through a sea of boring words.
-> So next time you've got a text that needs some serious chunking, don't be a lazybones - let this chunk analyzer do the dirty work for you. It'll save you time, effort, and the inevitable existential crisis that comes with trying to make sense of unchunked text. Trust me, it's the bomb diggity!
+<ul class="chat-bubble">
+  <li>
+    <p><strong>Chunk Analyzer</strong>
+<strong>Document Chunking</strong>
+Document chunking is the process of dividing a text into smaller, manageable units called chunks. This can be done based on specific criteria or patterns within the text.</p>
+
+<p><strong>Criteria for Chunking</strong>
+Chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns).</p>
+
+<p><strong>Benefits of Chunking</strong>
+Chunking allows for targeted extraction of relevant information. By dividing the text into smaller units, it becomes easier to identify and extract specific pieces of information.</p>
+
+<p><strong>Example</strong>
+Consider the following text:
+``
+The quick brown fox jumped over the lazy dog. The dog was very lazy. He slept all day long.
+`
+We could chunk this text based on the occurrence of the word "dog":
+`
+Chunk 1: The quick brown fox jumped over the lazy dog.
+Chunk 2: The dog was very lazy. He slept all day long.
+``</p>
+<p>This chunking would allow us to easily extract information about the dog, such as its laziness and sleeping habits.</p>
+  </li>
+</ul>
 
 
 
-> [!ai]+ AI
->
-> **Chunk Analyzer**
-> **Starred Blocks:**
-> * None
-> **Document Chunking**
-> Document chunking is the process of dividing a text into smaller, manageable units called chunks. This can be done based on specific criteria or patterns within the text.
-> **Criteria for Chunking**
-> Chunks can be created based on the occurrence of certain keywords, the presence of specific types of content (e.g., tables, images), or the structure of the sentences (e.g., subject-verb-object patterns).
-> **Benefits of Chunking**
-> Chunking allows for targeted extraction of relevant information. By dividing the text into smaller units, it becomes easier to identify and extract specific pieces of information.
-> **Example**
-> Consider the following text:
-> ```
-> The quick brown fox jumped over the lazy dog. The dog was very lazy. He slept all day long.
-> ```
-> We could chunk this text based on the occurrence of the word "dog":
-> ```
-> Chunk 1: The quick brown fox jumped over the lazy dog.
-> Chunk 2: The dog was very lazy. He slept all day long.
-> ```
-> This chunking would allow us to easily extract information about the dog, such as its laziness and sleeping habits.
 
 
 > [!ai]+ AI

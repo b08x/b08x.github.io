@@ -141,46 +141,26 @@ Absolutely! Let's break down how you might organize the body of a document:
 Let me know if you have a specific document type in mind, and I can offer more tailored advice on body structure!
 
 
-> [!ai]+ AI
->
-> **Parts of a Document**
-> **Title Page**
-> Holy smokes! It's the first impression that's going to blow your socks off! It's got the title, the author's name, the date, and maybe even a fancy picture or logo. It's like the red carpet for your document!
-> **Table of Contents**
-> This is like a roadmap for your document. It tells you where to find all the juicy bits, like the introduction, the body, and the conclusion. It's like a GPS for your reading experience!
-> **Abstract or Executive Summary**
-> This is the "elevator pitch" of your document. It's a quick and dirty overview that makes people want to read more. It's like the trailer for a movie, but for your document!
-> **Introduction**
-> This is where you grab the reader's attention and make them say, "Whoa, I need to keep reading!" You can use a thought-provoking question, a mind-blowing statistic, or even a funny story. It's like the hook in a fishing line!
-> **Body**
-> This is the meat and potatoes of your document. It's where you lay out all the facts, arguments, and evidence. You can use headings and subheadings to break it up into bite-sized chunks. It's like the main course of a meal!
-> **Conclusion**
-> This is where you wrap it all up and leave a lasting impression. You can summarize your main points, offer a call to action, or ask a thought-provoking question. It's like the dessert that makes you want to lick the plate!
-> **Appendices, References, and Other Extras**
-> These are like the bonus features on a DVD. They're not essential, but they can add extra value. Appendices can have extra information, references can show where you got your facts from, and a glossary can explain any fancy words you used. It's like the special features that make your document extra awesome!
+<ul class="chat-bubble">
+  <li>
+    <h6>Parts of a Document:</h6>
+    <p><strong>Title Page:</strong> Holy smokes! It's the first impression that's going to blow your socks off! It's got the title, the author's name, the date, and maybe even a fancy picture or logo. It's like the red carpet for your document!</p>
+    <p><strong>Table of Contents:</strong>
+This is like a roadmap for your document. It tells you where to find all the juicy bits, like the introduction, the body, and the conclusion. It's like a GPS for your reading experience!</p>
+<p><strong>Abstract or Executive Summary:</strong>
+This is the "elevator pitch" of your document. It's a quick and dirty overview that makes people want to read more. It's like the trailer for a movie, but for your document!</p>
+<p><strong>Introduction:</strong>
+This is where you grab the reader's attention and make them say, "Whoa, I need to keep reading!" You can use a thought-provoking question, a mind-blowing statistic, or even a funny story. It's like the hook in a fishing line!</p>
+<p><strong>Body:</strong>
+This is the meat and potatoes of your document. It's where you lay out all the facts, arguments, and evidence. You can use headings and subheadings to break it up into bite-sized chunks. It's like the main course of a meal!</p>
+<p><strong>Conclusion:</strong>
+This is where you wrap it all up and leave a lasting impression. You can summarize your main points, offer a call to action, or ask a thought-provoking question. It's like the dessert that makes you want to lick the plate!</p>
+<p><strong>Appendices, References, and Other Extras:</strong>
+These are like the bonus features on a DVD. They're not essential, but they can add extra value. Appendices can have extra information, references can show where you got your facts from, and a glossary can explain any fancy words you used. It's like the special features that make your document extra awesome!</p>
+  </li>
+</ul>
 
 
-
-> [!ai]+ AI
->
-> **Title Page**
-> - **Purpose:** To provide an overview of the document and to give the reader a sense of what to expect.
-> - **Content:** The title page typically includes the title of the document, the author's name, the date, and sometimes a brief abstract or summary.
-> - **Table of Contents**
-> - **Purpose:** To help the reader navigate the document and to find specific information quickly and easily.
-> - **Content:** The table of contents lists the headings and subheadings in the document, along with the corresponding page numbers.
-> **Introduction**
-> - **Purpose:** To introduce the topic of the document and to provide the reader with background information.
-> - **Content:** The introduction typically provides a brief overview of the topic, as well as a statement of the document's purpose and scope.
-> **Body**
-> - **Purpose:** To present the main content of the document.
-> - **Content:** The body of the document typically consists of several sections, each of which covers a different aspect of the topic. Each section typically begins with a heading or subheading, and it may include illustrations, tables, or graphs to support the text.
-> **Conclusion**
-> - **Purpose:** To summarize the main points of the document and to provide the reader with a sense of closure.
-> - **Content:** The conclusion typically restates the document's purpose and scope, and it may also offer some final thoughts or recommendations.
-> **Appendices**
-> - **Purpose:** To provide additional information that is not essential to the main content of the document.
-> - **Content:** Appendices may include such things as supporting documentation, data tables, or glossaries.
 
 
 ## Ok, can you reframe that in terms of NLP document pre-processing?

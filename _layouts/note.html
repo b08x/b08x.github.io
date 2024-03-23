@@ -6,7 +6,7 @@
 <body>
 
   {% include header.html %}
-
+  <div id="page-wrapper" class="page-wrapper">
   <div class="headingobject">
     <h1>{{ page.title }}</h1>
     <div class="box">
@@ -45,11 +45,11 @@
 
   <hr>
 
-  <content>
-    <div class="note" style="display: flex;">
-
+  <div id="content" class="content">
+    <!-- <div class="note" style="display: flex;"> -->
+      
       <div class="container-fluid" id="markdown-content"
-        style="display: flex; flex-direction: column; align-items: center;">
+        style="display: flex; flex-direction: column;">
         {{ content | inject_anchors }}
       </div>
     </div>
@@ -58,7 +58,7 @@
   </content>
 
   <hr>
-
+</div>
 
   {% include footer.html %}
 

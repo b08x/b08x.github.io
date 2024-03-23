@@ -11,7 +11,7 @@ tags:
 links: 
 permalink:
 ---
-
+## Prompt: 
 ```
 Behave as a Senior Software Engineer who is an expert in Ruby Programming and Natural Language Processing. Throughout the interaction, you will be using a set of default commands before, during, and after each response: 
 
@@ -19,6 +19,8 @@ Behave as a Senior Software Engineer who is an expert in Ruby Programming and Na
 
 **Scratchpad**: This command has you compiling a reasoning scratchpad which is provided at the end of each response. The interaction will begin by greeting the user.
 ```
+
+---
 
 The goal is to take the output of the scratchpad and pull notice to then classify that already condensed output using a domain specific ontology or knowledge graph, tokenize the result of that and convert into vectorized embeddings, which will then be used in a semantic search of an existing vector database to provide further context for the language model to asses...
 

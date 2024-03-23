@@ -5,14 +5,68 @@
 
 <body>
 
-  {% include header.html %}
+  {% include sidescript.html %}
 
-  <main class="layout">{{ content }}</main>
+  <div id="page-wrapper" class="page-wrapper">
 
-  {% include footer.html %}
+    <div class="page">
+
+        <div id="menu-bar" class="menu-bar">
+            <div id="menu-bar-sticky-container">
+                <div class="left-buttons">
+                    <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div style="display: flex; flex-direction: column; justify-content: center;"><a class="internal-link" href="{{ site.baseurl }}/"><b>Home</b></a></div>
+                    
+                </div>
+
+                <h1 class="menu-title">{{ page.title }}</h1>
+
+                <div class="right-buttons">
+                    <a onclick="window.print()" title="Print this book" aria-label="Print this book">
+                        <i id="print-button" class="fas fa-print"></i>
+                    </a>
+                    <a href="www.google.com" title="View PDF file" aria-label="View PDF file">
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                    </div>
+            </div>
+        </div>
+
+
+        <div id="content" class="content">
+            <main>
+                {{ content }}
+            </main>
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+                <!-- Mobile navigation buttons -->
+
+
+
+
+                <div style="clear: both"></div>
+            </nav>
+        </div>
+        {% include footer.html %}
+    </div>
+
+    <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+    </nav>
+
+</div>
+
+<script src="{{ site.baseurl }}/assets/js/book.js" type="text/javascript" charset="utf-8"></script>
+
+ 
+
+ 
 
   {% include link-previews.html wrapperQuerySelector="content" %}
 
 </body>
 
 </html>
+

@@ -10,6 +10,3 @@ title: Home
 
 
 # syncopated notes
-
-> [!ai]++ Oh my goodness gracious! This here content be a jumbled mess o' ramb
-

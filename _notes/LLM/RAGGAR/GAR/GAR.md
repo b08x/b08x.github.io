@@ -6,8 +6,10 @@ category:
   - RAGGAR
 tags: 
 permalink: /llm/raggar/gar
+toc: true
 ---
 
+# why?
 
 To design a Generated Augmented Retrieval (GAR) framework to complement a Retrieval Augmented Generation (RAG) framework, we can start by outlining the key components and their interactions. The GAR framework enhances the retrieval process by generating additional relevant information based on retrieved documents. Here's a basic design:
 

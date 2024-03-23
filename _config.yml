@@ -33,6 +33,7 @@ plugins:
   - jekyll-toc
   - jekyll-paginate-v2
   - jekyll-feed
+  - jekyll-pandoc
 
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
@@ -80,6 +81,7 @@ collections:
   #   output: true
   #   permalink: /:title
 
+# markdown: Pandoc
 
 jekyll-spaceship:
   mermaid-processor:
