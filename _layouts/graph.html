@@ -43,15 +43,14 @@
   </head>
 
   <body>
-    <main class="layout">
+    <main>
       <div class="container">
-      <div class="right-column">{{ content }}</div>
-
-      <div class="left-column">
-        <hr />
+      <div class="xl">
         {% include notes_graph.html %}
       </div>
-      <hr />
+      <div class="md-4">
+        {{content}}
+      </div>
       </div>
       {% include footer.html %}
     </main>
