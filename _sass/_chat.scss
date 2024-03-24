@@ -229,9 +229,9 @@ $llm-thread-bgd-color: hsla(0, 0%, 22%, 0.324);
 .chat-thread li:nth-child(odd):before {
 	right: -$chat-thread-offset;
   // Placeholder avatar 1
-  width: 8%;
-	background-image: url("/assets/img/noun-brain-30409.svg");
-  background-color: #87adaa;
+  // width: 8%;
+	background-image: url("/assets/img/noun-brain-40409.svg");
+  background-color: #66712e;
 }
 
 .chat-thread li:nth-child(odd):after {
@@ -254,7 +254,7 @@ $llm-thread-bgd-color: hsla(0, 0%, 22%, 0.324);
 .chat-thread li:nth-child(even):before {
 	left: -$chat-thread-offset;
   // Placeholder avatar 2
-	background-image: url("/assets/img/noun-neural-network-6262203.svg");
+	background-image: url("/assets/img/noun-neural-network-6262208.svg");
   background-color: #ada087;
 }
 

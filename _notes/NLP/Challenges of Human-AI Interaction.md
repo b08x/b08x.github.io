@@ -11,6 +11,15 @@ image:
 permalink:
 ---
 
+The standard approach in machine learning is to evaluate the system on a set of *standard* benchmark datasets, ensuring that they are independent of the training data and that they cover a range of tasks and domains.
+
+To supplement standard methods, a less standard, more casual approach is taken. Not necessarily following a strict hypothesis but rather probing the model application capabilities to discover unexpected patterns and limitations, constantly assessing the AI's success and failures in different *communicative scenarios*. The approach is less about conveying strict information and more about a mix of _doing_ things. 
+
+So, ok...there are certain qualities to benchmarks that prove useful for those testing the models. For folks *using* the models, the benchmarks are perceptually insignificant. As while a benchmark might score a model on a particular topic, for example (49.76% in some attribute ) it might score higher or lower depending on how it ends up being used. 
+
+It seems many tests are reluctant to push the boundaries of language. This is understandable, as language is powerful...
+
+
 ## exploratory and evaluative approach
 
 Think of this interaction as a linguistic stress test. The user isn't merely utilizing the AI, they're systematically probing its capabilities and limitations. This exploratory approach involves a deliberate mix of inputs – technical prompts, obscure image references, and conversational language. It's designed to push the AI model beyond its usual areas of operation.
@@ -23,8 +32,8 @@ Ultimately, this isn't just about using the tool. It's about understanding, in a
 
 
 - **Purpose**
-    - **Exploratory Research:** The user isn't following a strict hypothesis but rather probing the AI's capabilities to discover unexpected patterns and limitations.
-    - **Evaluation:** While informal, the user is constantly assessing the AI's success and failures in different communicative scenarios.
+    - **Exploratory Research:** 
+    - **Evaluation:** 
 -
 
 - **Probing Boundaries:** Continuously reframing questions and pushing the AI into different scenarios hints at an attempt to find not just what the AI can do, but also where it breaks down or acts in unexpected ways.
