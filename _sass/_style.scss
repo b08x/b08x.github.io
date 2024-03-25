@@ -552,7 +552,7 @@ li {
 
   // padding-left: 15px;
   strong {
-    color: #ed4949;
+    color: #d10000;
   }
 }
 
@@ -597,6 +597,9 @@ li {
 
 #markdown-content {
   font-size: 1.25rem;
+  @media (max-width: 1080px) {
+    align-items: center;
+  }
 }
 
 #notes-entry-container {

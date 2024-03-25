@@ -7,13 +7,10 @@ permalink: /ruby
 ---
 ## Index
 - [[A Recipe for Generative Music]]
-- [[git flow]]
-- [[Ruby NLP Gems]]
+- [[Ruby ReAct]]
 - [[Ruby]]
-- [[Unless]]
-- [[Using NLP to Generate Music]]
+- [[Ruby Unless]]
 - [[Using the Iterator Design Pattern]]
-
 
 ---
 

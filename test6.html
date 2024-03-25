@@ -1,0 +1,190 @@
+<html>
+  <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: darkcyan;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: space-between;
+        height: -webkit-fill-available;
+        width: fit-content;
+        border: 2px solid black;
+        border-radius: 10px;
+        padding: 20px;
+      }
+
+      .title {
+        font-size: 2em;
+        margin-bottom: 20px;
+        margin-right: 2rem;
+      }
+
+      .instructions {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+
+      .instruction {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        text-align: center;
+        margin-right: 20px;
+      }
+
+      .instruction.active {
+        background-color: #f0e68c;
+      }
+
+      .instruction.inactive {
+        background-color: #add8e6;
+      }
+
+      .action {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        text-align: center;
+        margin-right: 1rem;
+      }
+
+      .action.active {
+        background-color: #f0e68c;
+      }
+
+      .action.inactive {
+        background-color: #add8e6;
+      }
+
+      .response {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        text-align: center;
+        margin-right: 1rem;
+      }
+
+      .response.active {
+        background-color: #f0e68c;
+      }
+      
+      .response.inactive {
+        background-color: #add8e6;
+      }
+
+      #inactive {
+        background-color: coral;
+      }
+
+      .image {
+        width: 200px;
+        height: 200px;
+        background-color: #f0e68c;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        margin-left: 3rem;
+        text-align: center;
+        
+        .active {
+          background-color: #f0e68c;
+        }
+
+        .inactive {
+          background-color: #add8e6;
+        }
+      }
+
+
+      @media only all and (max-width: 1190px) {
+      .container {
+        flex-direction: row;
+        /* flex-wrap: nowrap; */
+        /* height: inherit; */
+      }
+
+      @media only all and (max-height: 520px) {
+      .container {
+        border: unset;
+      }
+
+    }
+  </style>
+  <body>
+   <div class="container">
+       <div class="title">
+           <p>Welcome to the Jungle!</p>
+       </div>
+       <div class="instructions">
+           <p>The length </p>
+       </div>
+       <div class="instruction">
+           <p>Write your first program</p>
+       </div>
+       <div class="instruction">
+           <p>Start learning how to code</p>
+       </div>
+       <div class="action">
+           <p>Start coding</p>
+       </div>
+       <div class="response">
+           <p>Your first program is running</p>
+       </div>
+       <div class="image" id="inactive">
+           <p>A colored rectangle representing an image</p>
+       </div>
+       <div class="title">
+           <p>Stage 1 prompt</p>
+       </div>
+       <div class="instructions">
+           <p>Write your first program</p>
+       </div>
+       <div class="instruction">
+           <p>Start learning how to code</p>
+       </div>
+       <div class="action">
+           <p>Start coding</p>
+       </div>
+       <div class="response">
+           <p>Your first program is running</p>
+       </div>
+       <div class="image">
+           <p>A colored rectangle representing an image</p>
+       </div>
+       <div class="title">
+           <p>Stage 2 prompt</p>
+       </div>
+       <div class="instructions">
+           <p>Write your first program</p>
+       </div>
+       <div class="instruction">
+           <p>Start learning how to code</p>
+       </div>
+       <div class="action">
+           <p>Start coding</p>
+       </div>
+       <div class="response">
+           <p>Your first program is running</p>
+       </div>
+       <div class="image">
+           <p>A colored rectangle representing an image</p>
+       </div>
+   </div>
+</body>
+</html>

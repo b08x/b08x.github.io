@@ -37,7 +37,8 @@ body {
   margin: 24px auto 0 auto;
   padding: 0 20px 0 0;
   list-style: none;
-  overflow-x: hidden;
+  // overflow-x: hidden;
+  display: flow-root;
 }
 
 .chat-bubble li {
@@ -53,7 +54,16 @@ body {
   letter-spacing: -0.01em;
   border-radius: 10px;
   // background-color: yellowgreen;
-
+  narration {
+    font-style: italic;
+    color: goldenrod;
+    &::before {
+      content: "**"
+    }
+    &::after {
+      content: "**"
+    }      
+  }
   p {
     font: 18px/24px "IBM Plex Mono", monospace;
     font-weight: 400;
@@ -141,7 +151,7 @@ body {
 /* Medium and large screens */
 @media all and (min-width: 768px) {
   .chat-bubble {
-    width: 90%;
+    width: 100%;
     height: 100%;
     margin: unset
   }
@@ -157,6 +167,7 @@ body {
   list-style: none;
   overflow-y: auto;
   overflow-x: hidden;
+  display: flow-root;
 }
 
 .chat-thread li {
@@ -181,6 +192,8 @@ body {
     word-spacing: -3px;
     word-break: break-word;
     line-height: 1.65rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 
     narration {
       font-style: italic;
@@ -200,8 +213,10 @@ body {
 .chat-thread li:before {
   position: absolute;
   top: 0;
-  width: $chat-thread-avatar-size;
-  height: $chat-thread-avatar-size;
+  width: 70px;
+  height: 70px;
+  // width: $chat-thread-avatar-size;
+  // height: $chat-thread-avatar-size;
   border-radius: $chat-thread-avatar-size;
   content: "";
 }
@@ -224,10 +239,10 @@ $llm-thread-bgd-color: hsla(0, 0%, 22%, 0.324);
   -moz-animation: show-chat-odd 0.15s 1 ease-in;
   -webkit-animation: show-chat-odd 0.15s 1 ease-in;
   float: right;
-  margin-right: $chat-thread-offset;
+  // margin-right: $chat-thread-offset;
   color: #2b6fb8;
   background-color: $user-thread-bgd-color;
-  @media (max-width: 820px) {
+  @media (max-width: 865px) {
     margin-right: unset;
   }
 }
@@ -238,7 +253,7 @@ $llm-thread-bgd-color: hsla(0, 0%, 22%, 0.324);
   // width: 8%;
   background-image: url("/assets/img/noun-brain-40409.svg");
   background-color: #66712e;
-  @media (max-width: 820px) {
+  @media (max-width: 865px) {
     display: none;
   }
 }
@@ -248,10 +263,10 @@ $llm-thread-bgd-color: hsla(0, 0%, 22%, 0.324);
   -moz-animation: show-chat-even 0.15s 1 ease-in;
   -webkit-animation: show-chat-even 0.15s 1 ease-in;
   float: left;
-  margin-left: $chat-thread-offset;
-  color: hsl(12, 87%, 42%);
+  // margin-left: $chat-thread-offset;
+  color: slategray;
   background-color: $llm-thread-bgd-color;
-  @media (max-width: 820px) {
+  @media (max-width: 865px) {
     margin-left: unset;
   }
 }
@@ -261,7 +276,7 @@ $llm-thread-bgd-color: hsla(0, 0%, 22%, 0.324);
   // Placeholder avatar 2
   background-image: url("/assets/img/noun-neural-network-6262208.svg");
   background-color: #ada087;
-  @media (max-width: 820px) {
+  @media (max-width: 865px) {
     display: none;
   }
 }

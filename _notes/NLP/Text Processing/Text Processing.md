@@ -74,7 +74,7 @@ style E fill:#2a1a2a,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5
 - [[Echo Embedding]]
 - [[Parts of a Document]]
 - [[Ranking Chunks]]
-- [[Semantic Search]]
+- [[STS Semantic Textual Similarity]]
 - [[Stop Words]]
 - [[Text Processing]]
 

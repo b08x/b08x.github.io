@@ -34,7 +34,7 @@ toc: true
 - [[Prompt Engineering]]
 - [[Ranking Chunks]]
 - [[Reasoning Scratchpad]]
-- [[Semantic Search]]
+- [[STS Semantic Textual Similarity]]
 - [[Set of Mark]]
 - [[Stop Words]]
 - [[Tech-Savvy Innovator]]

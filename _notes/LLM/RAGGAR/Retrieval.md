@@ -11,19 +11,6 @@ links:
 permalink: 
 toc: true
 ---
-
-
-
-sources:
-https://eugeneyan.com/writing/llm-patterns/
-https://github.com/huggingface/setfit
-https://github.com/davidberenstein1957/spacy-setfit
-https://huggingface.co/SetFit/MiniLM_L3_clinc_oos_plus_distilled
-
-> most similar != most relevant
-
-
-
 ### input query + related_chunks_from_vectordb_or_redis: 
 
 ```ruby
@@ -182,12 +169,18 @@ end
 ```
 
 
+
+<ul class="chat-bubble"><li>most similar != most relevant</li></ul>
+
+
 ### generate a new prompt from the ranked vectorstore chunks
 
 
 For example:
 
-> paraphrase and summarize the combination of source_sentence and top_sentences to generate a GPT query prompt that requests comprehensive, technical details regarding the main topic
+<ul class="chat-thread"><li>paraphrase and summarize the combination of source_sentence and top_sentences to generate a GPT query prompt that requests comprehensive, technical details regarding the main topic</li><li></li></ul>
+
+
 
 ```markdown
 
@@ -205,4 +198,10 @@ GPT Query Prompt:
 ```
 
 
+---
 
+sources:
+
+[llm patterns](https://eugeneyan.com/writing/llm-patterns/)
+[setfit](https://github.com/huggingface/setfit)
+[spacy-setfit](https://github.com/davidberenstein1957/spacy-setfit)
