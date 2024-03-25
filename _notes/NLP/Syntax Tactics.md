@@ -23,17 +23,13 @@ toc: true
   </li>
 </ul>
 
-## Music: Basically manipulation to achieve a desired outcome.
+## Transformation or Manipulation?
 
-~~Witchcraft, as it was explained to me, is a practice of magic skills and abilities with the intent to influence events or individuals through the use of spells, charms, and rituals. NLP algorithms use linguistic rules and data to generate coherent and meaningful text~~
+Much like witchcraft, in Natural Language Processing there is a focus on the precise arrangement of elements, words, and various symbols to achieve a specific outcome.
 
-~~Witchcraft,~ 
+Just as a witch might use incantations and spells to take down a rival, NLP algorithms use linguistic rules and algorithms to generate coherent and meaningful text. Both processes involve basically the same steps, 
 
-Just as a witch might use incantations and spells to create a magical effect, NLP algorithms use linguistic rules and algorithms to generate coherent and meaningful text. Both processes involve a kind of transformation or 
-
-*insert humor*
-
-In this overview, a demonstration of how one could use Natural Language Processing to achieve the basically the same result.
+In this overview, a demonstration of how one could use Natural Language Processing to achieve moderate success at your next open night at local spot for such a thing. 
 
 ```json
 {
