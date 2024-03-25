@@ -1,11 +1,11 @@
 ---
-title: "Docker Stacks: JupyterLabs & Ruby NLP"
+title: JupyterLabs & Ruby NLP
 date: 2023-11-04T19:51:00
 cssid: test
 description: Rustle up Jupyter Notebook, cram it in a Docker then throw a stack of Ruby NLP Gems on top and you got yourself a thing.
 layout: page
 category:
-  - NLP
+  - Dev
 tags:
   - ruby
   - docker

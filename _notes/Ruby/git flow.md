@@ -1,8 +1,9 @@
 ---
 layout: page
-title: gitflow
+title: git flow
 description: crafting a git flow strategy
-category: 
+category:
+  - Dev
 tags: 
 links: 
 toc: true

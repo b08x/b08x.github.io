@@ -3,8 +3,9 @@ layout: note
 title: Ruby NLP Gems
 subtitle: 
 category:
-  - Ruby
+  - Dev
 tags:
+  - ruby
   - nlp
 links: 
 permalink:

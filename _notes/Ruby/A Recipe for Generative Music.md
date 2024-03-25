@@ -1,8 +1,9 @@
 ---
-layout: page
+layout: note
 title: A Recipe for Generative Music
 subtitle: 
-category: 
+category:
+  - Audio
 tags:
   - ruby
   - audio

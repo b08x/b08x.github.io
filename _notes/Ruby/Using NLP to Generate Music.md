@@ -3,7 +3,7 @@ layout: page
 title: Using NLP to Generate Music
 subtitle: 
 category:
-  - Ruby
+  - NLP
 tags:
   - ruby
   - llm

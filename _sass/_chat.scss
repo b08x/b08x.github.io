@@ -1,64 +1,64 @@
-
 // Imports
 // --------------------------------------
-@import 'https://fonts.googleapis.com/css?family=Noto+Sans';
+@import "https://fonts.googleapis.com/css?family=Noto+Sans";
 
 // Variables
 // --------------------------------------
-$scrollbar-width:              10px;
-$chat-thread-bgd-color:        rgba(25,147,147,0.2);
-$chat-thread-msg-arrow-size:   15px;
-$chat-thread-avatar-size:      80px;
-$chat-thread-offset:           #{$chat-thread-avatar-size + 5px};
+$scrollbar-width: 10px;
+$chat-thread-bgd-color: rgba(25, 147, 147, 0.2);
+$chat-thread-msg-arrow-size: 15px;
+$chat-thread-avatar-size: 80px;
+$chat-thread-offset: #{$chat-thread-avatar-size + 5px};
 
 body {
-	padding: 0;
-	margin: 0;
-	// background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
-	// background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
-	background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+  // background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
+  // background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
+  background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
 ::-webkit-scrollbar {
-    width: $scrollbar-width;
+  width: $scrollbar-width;
 }
- 
+
 ::-webkit-scrollbar-track {
-    border-radius: $scrollbar-width;
-    background-color: rgba(25,147,147,0.1);
+  border-radius: $scrollbar-width;
+  background-color: rgba(25, 147, 147, 0.1);
 }
- 
+
 ::-webkit-scrollbar-thumb {
-     border-radius: $scrollbar-width;
-    background-color: $chat-thread-bgd-color;
+  border-radius: $scrollbar-width;
+  background-color: $chat-thread-bgd-color;
 }
 
 .chat-bubble {
-	margin: 24px auto 0 auto;
-	padding: 0 20px 0 0;
-	list-style: none;
+  margin: 24px auto 0 auto;
+  padding: 0 20px 0 0;
+  list-style: none;
   overflow-x: hidden;
 }
 
 .chat-bubble li {
-	position: relative;
-	clear: both;
-	display: inline-block;
-	// padding: 16px 40px 16px 20px;
+  position: relative;
+  clear: both;
+  display: inline-block;
+  // padding: 16px 40px 16px 20px;
   padding-left: 1rem;
   padding-right: 2.25rem;
-	margin: 0 0 20px 0;
-	font: 16px/20px "Source Code Pro", serif;
+  margin: 0 0 20px 0;
+  font: 16px/20px "IBM Plex Mono", monospace;
   line-height: 1.65rem;
   letter-spacing: -0.01em;
-	border-radius: 10px;
-	background-color: $chat-thread-bgd-color;
+  border-radius: 10px;
+  // background-color: yellowgreen;
+
   p {
-    font: 18px/24px "Source Code Pro", serif;
+    font: 18px/24px "IBM Plex Mono", monospace;
     font-weight: 400;
     // font-size: 1.0rem;
-    word-spacing: .1rem;
+    word-spacing: 0.1rem;
     color: #ada087;
     line-height: 1.65rem;
     word-spacing: -3px;
@@ -71,8 +71,11 @@ body {
     em {
       color: #f27950;
     }
+    code {
+      color: #e4b21f;
+    }
     del {
-      color: #2A261C;
+      color: #2a261c;
     }
     narration {
       font-style: italic;
@@ -86,100 +89,99 @@ body {
       }
     }
   }
-}
 
-/* Chat - Avatar */
-.chat-bubble li:before {
-	position: absolute;
-	top: 0;
-	width: $chat-thread-avatar-size;
-	height: $chat-thread-avatar-size;
-	border-radius: $chat-thread-avatar-size;
-	content: '';
-}
+  /* Chat - Avatar */
+  &:before {
+    position: absolute;
+    top: 0;
+    width: $chat-thread-avatar-size;
+    height: $chat-thread-avatar-size;
+    border-radius: $chat-thread-avatar-size;
+    content: "";
+  }
 
-/* Chat - Speech Bubble Arrow */
-.chat-bubble li:after {
-	position: absolute;
-  top: $chat-thread-msg-arrow-size;
-	content: '';
-	width: 0;
-	height: 0;
-	border-top: $chat-thread-msg-arrow-size solid #171613;
-}
+  /* Chat - Speech Bubble Arrow */
+  &:after {
+    position: absolute;
+    top: $chat-thread-msg-arrow-size;
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: $chat-thread-msg-arrow-size solid #e4b21f;
+  }
 
-.chat-bubble li:nth-child(odd) {
-	animation: show-chat-even 0.15s 1 ease-in;
-	-moz-animation: show-chat-even 0.15s 1 ease-in;
-	-webkit-animation: show-chat-even 0.15s 1 ease-in;
-	float: left;
-	margin-left: $chat-thread-offset;
-	color: #0EC879;
-  background-color: #171613;
-}
+  &:nth-child(odd) {
+    animation: show-chat-even 0.15s 1 ease-in;
+    -moz-animation: show-chat-even 0.15s 1 ease-in;
+    -webkit-animation: show-chat-even 0.15s 1 ease-in;
+    float: left;
+    margin-left: $chat-thread-offset;
+    color: hsl(0, 0%, 69%);
+    background-color: #171613;
+  }
 
-
-.chat-bubble li:nth-child(odd):before {
-	left: -$chat-thread-offset;
-  // Placeholder avatar 2
-	background-image: url("/assets/img/noun-neural-network-6262203.svg");
-  background-color: #ada087;
-}
-
-.chat-bubble li:nth-child(odd):after {
-	border-left: $chat-thread-msg-arrow-size solid transparent;
-	left: -$chat-thread-msg-arrow-size;
+  &:nth-child(odd):before {
+    left: -$chat-thread-offset;
+    // Placeholder avatar 2
+    background-image: url("/assets/img/noun-neural-network-6262203.svg");
+    background-color: #8794ad;
+  }
 }
 
 // A tiny bit responsive...
 // --------------------------------------
 /* Small screens */
 @media all and (max-width: 767px) {
-	.chat-bubble {
-		width: 100%;
-		height: fit-content;
-	}
+  .chat-bubble {
+    width: 100%;
+    height: fit-content;
+  }
 }
 
 /* Medium and large screens */
 @media all and (min-width: 768px) {
-	.chat-bubble {
-		width: 80%;
-		height: 100%;
-	}
+  .chat-bubble {
+    width: 90%;
+    height: 100%;
+    margin: unset
+  }
 }
 
+
+
+
+
 .chat-thread {
-	margin: 24px auto 0 auto;
-	padding: 0 20px 0 0;
-	list-style: none;
-	overflow-y: auto;
+  margin: 24px auto 0 auto;
+  padding: 0 20px 0 0;
+  list-style: none;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
 .chat-thread li {
-	position: relative;
-	clear: both;
-	display: inline-block;
-	// padding: 16px 40px 16px 20px;
+  position: relative;
+  clear: both;
+  display: inline-block;
+  // padding: 16px 40px 16px 20px;
   padding-left: 1rem;
-  padding-right: 2.25rem;
-	margin: 0 0 20px 0;
-	font: 16px/20px "Source Code Pro", serif;
+  padding-right: 1.25rem;
+  margin: 0 0 20px 0;
+  font: 16px/20px "Source Code Pro", serif;
   line-height: 1.65rem;
   letter-spacing: -0.01em;
-	border-radius: 10px;
-	background-color: $chat-thread-bgd-color;
+  border-radius: 10px;
+  background-color: $chat-thread-bgd-color;
   p {
     font: 18px/24px "Source Code Pro", serif;
     font-weight: 400;
     // font-size: 1.0rem;
-    word-spacing: .1rem;
+    word-spacing: 0.1rem;
     color: #ada087;
     word-spacing: -3px;
     word-break: break-word;
     line-height: 1.65rem;
-    
+
     narration {
       font-style: italic;
       color: darkgray;
@@ -196,116 +198,124 @@ body {
 
 /* Chat - Avatar */
 .chat-thread li:before {
-	position: absolute;
-	top: 0;
-	width: $chat-thread-avatar-size;
-	height: $chat-thread-avatar-size;
-	border-radius: $chat-thread-avatar-size;
-	content: '';
+  position: absolute;
+  top: 0;
+  width: $chat-thread-avatar-size;
+  height: $chat-thread-avatar-size;
+  border-radius: $chat-thread-avatar-size;
+  content: "";
 }
 
-$user-thread-bgd-color: #2A261C;
+$user-thread-bgd-color: #2a261c;
 $llm-thread-bgd-color: hsla(0, 0%, 22%, 0.324);
+
 /* Chat - Speech Bubble Arrow */
 .chat-thread li:after {
-	position: absolute;
+  position: absolute;
   top: $chat-thread-msg-arrow-size;
-	content: '';
-	width: 0;
-	height: 0;
-	border-top: $chat-thread-msg-arrow-size solid $chat-thread-bgd-color;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: $chat-thread-msg-arrow-size solid $chat-thread-bgd-color;
 }
 
 .chat-thread li:nth-child(odd) {
-	animation: show-chat-odd 0.15s 1 ease-in;
-	-moz-animation: show-chat-odd 0.15s 1 ease-in;
-	-webkit-animation: show-chat-odd 0.15s 1 ease-in;
-	float: right;
-	margin-right: $chat-thread-offset;
-	color: #2b6fb8;
+  animation: show-chat-odd 0.15s 1 ease-in;
+  -moz-animation: show-chat-odd 0.15s 1 ease-in;
+  -webkit-animation: show-chat-odd 0.15s 1 ease-in;
+  float: right;
+  margin-right: $chat-thread-offset;
+  color: #2b6fb8;
   background-color: $user-thread-bgd-color;
+  @media (max-width: 820px) {
+    margin-right: unset;
+  }
 }
 
 .chat-thread li:nth-child(odd):before {
-	right: -$chat-thread-offset;
+  right: -$chat-thread-offset;
   // Placeholder avatar 1
   // width: 8%;
-	background-image: url("/assets/img/noun-brain-40409.svg");
+  background-image: url("/assets/img/noun-brain-40409.svg");
   background-color: #66712e;
-}
-
-.chat-thread li:nth-child(odd):after {
-	border-right: $chat-thread-msg-arrow-size solid transparent;
-	right: -$chat-thread-msg-arrow-size;
-  border-top: $chat-thread-msg-arrow-size solid $user-thread-bgd-color;
+  @media (max-width: 820px) {
+    display: none;
+  }
 }
 
 .chat-thread li:nth-child(even) {
-	animation: show-chat-even 0.15s 1 ease-in;
-	-moz-animation: show-chat-even 0.15s 1 ease-in;
-	-webkit-animation: show-chat-even 0.15s 1 ease-in;
-	float: left;
-	margin-left: $chat-thread-offset;
-	color: #0EC879;
+  animation: show-chat-even 0.15s 1 ease-in;
+  -moz-animation: show-chat-even 0.15s 1 ease-in;
+  -webkit-animation: show-chat-even 0.15s 1 ease-in;
+  float: left;
+  margin-left: $chat-thread-offset;
+  color: hsl(12, 87%, 42%);
   background-color: $llm-thread-bgd-color;
+  @media (max-width: 820px) {
+    margin-left: unset;
+  }
 }
-
 
 .chat-thread li:nth-child(even):before {
-	left: -$chat-thread-offset;
+  left: -$chat-thread-offset;
   // Placeholder avatar 2
-	background-image: url("/assets/img/noun-neural-network-6262208.svg");
+  background-image: url("/assets/img/noun-neural-network-6262208.svg");
   background-color: #ada087;
+  @media (max-width: 820px) {
+    display: none;
+  }
 }
 
-.chat-thread li:nth-child(even):after {
-	border-left: $chat-thread-msg-arrow-size solid transparent;
-	left: -$chat-thread-msg-arrow-size;
-  border-top: $chat-thread-msg-arrow-size solid $llm-thread-bgd-color;
-}
+// .chat-thread li:nth-child(even):after {
+// 	border-left: $chat-thread-msg-arrow-size solid transparent;
+// 	left: -$chat-thread-msg-arrow-size;
+//   border-top: $chat-thread-msg-arrow-size solid $llm-thread-bgd-color;
+// }
 
 .chat-window {
-	position: fixed;
-	bottom: 18px;
+  position: fixed;
+  bottom: 18px;
 }
 
 .chat-window-message {
-	width: 100%;
-	height: 48px;
-	font: 32px/48px 'Noto Sans', sans-serif;
-	background: none;
-	color: #0AD5C1;
-	border: 0;
-	border-bottom: 1px solid $chat-thread-bgd-color;
-	outline: none;
+  width: 100%;
+  height: 48px;
+  font: 32px/48px "Noto Sans", sans-serif;
+  background: none;
+  color: #0ad5c1;
+  border: 0;
+  border-bottom: 1px solid $chat-thread-bgd-color;
+  outline: none;
 }
 
 // A tiny bit responsive...
 // --------------------------------------
 /* Small screens */
 @media all and (max-width: 767px) {
-	.chat-thread {
-		width: 100%;
-		height: fit-content;
-	}
+  .chat-thread {
+    width: 100%;
+    height: fit-content;
+  }
 
-	.chat-window {
-		left: 5%;
-		width: 90%;
-	}
+  .chat-window {
+    left: 5%;
+    width: 90%;
+  }
 }
 
 /* Medium and large screens */
 @media all and (min-width: 768px) {
-	.chat-thread {
-		width: 80%;
-		height: 100%;
-	}
+  .chat-thread {
+    width: 80%;
+    height: 100%;
+    margin-bottom: 4rem;
+    overflow: unset;
+  }
 
-	.chat-window {
-		left: 25%;
-		width: 50%;
-	}
+  .chat-window {
+    left: 25%;
+    width: 50%;
+  }
 }
 
 // Animation
@@ -439,7 +449,6 @@ img.figure {
   font-weight: 600;
 }
 
-
 /* General text alignment classes. You can actually use these on element you like */
 .txt-right {
   text-align: right;
@@ -458,11 +467,10 @@ img.figure {
 }
 
 /*figure with padding applied to captioned text. IE6 doesn't support the adjacent selector but that won't matter much*/
-.figure img+span {
+.figure img + span {
   display: block;
   padding: 0 15px;
 }
-
 
 /* Adding borders */
 .figure .liner,
