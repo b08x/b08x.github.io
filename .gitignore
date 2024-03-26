@@ -22,5 +22,6 @@ Gemfile.lock
 asd.mp4
 textgenerator/
 Untitled*
-Untitled.canvas
+*.canvas
 *.xmp
+
