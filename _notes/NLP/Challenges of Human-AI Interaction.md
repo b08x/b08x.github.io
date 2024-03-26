@@ -13,6 +13,20 @@ permalink:
 
 # Challenges of Human-AI Interaction
 
+Wikipedia: "Chaos Engineering is the discipline of experimenting on a system in order to build confidence in the system's capability to withstand turbulent conditions in production."
+
+TechTarget: "Chaos engineering is the process of testing a distributed computing system to ensure that it can withstand unexpected disruptions."
+
+**Planning an experiment:** where you design and choose a scenario in which your system should fail to operate properly
+
+* You execute the smallest possible experiment to test your theory
+* If nothing goes wrong, you scale your experiment and make the blast radius bigger. If your system breaks, you better understand why and start dealing with it
+* The process then repeats itself either with same scenario or a new one.
+
+---
+
+
+
 The standard approach in machine learning is to evaluate the system on a set of *standard* benchmark datasets, ensuring that they are independent of the training data and that they cover a range of tasks and domains.
 
 To supplement standard methods, a less standard, more casual approach is taken. Not necessarily following a strict hypothesis but rather probing the model application capabilities to discover unexpected patterns and limitations, constantly assessing the AI's success and failures in different *communicative scenarios*. The approach is less about conveying strict information and more about a mix of _doing_ things. 
