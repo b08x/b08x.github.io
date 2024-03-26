@@ -8,7 +8,5 @@ permalink: /os/cfgmgmt
 ---
 ## Index
 - [[Ansible Variable Precedence]]
-- [[Configuration Management]]
-- [[Workstation Bootstrap]]
-- [[yadm]]
+
 

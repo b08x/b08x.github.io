@@ -18,6 +18,7 @@ exclude:
   - "index.something"
   - "_pages/index.ignore"
   - "*.canvas"
+  - "*.ipynb"
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ""
 

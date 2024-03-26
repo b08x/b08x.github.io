@@ -27,7 +27,7 @@ toc: true
 
 Much like witchcraft, in Natural Language Processing there is a focus on the precise arrangement of elements, words, and various symbols to achieve a specific outcome.
 
-Just as a witch might use incantations and spells to take down a rival, NLP algorithms use linguistic rules and algorithms to generate coherent and meaningful text. Both processes involve basically the same steps, 
+Just as a witch might use incantations and spells to take down a rival, NLP algorithms use linguistic rules and algorithms to generate coherent and meaningful text. Both processes involve basically the same ritualistic steps.
 
 In this overview, a demonstration of how one could use Natural Language Processing to achieve moderate success at your next open night at local spot for such a thing. 
 

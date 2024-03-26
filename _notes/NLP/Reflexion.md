@@ -1,10 +1,13 @@
 ---
 layout: page
-title: 
+title: Reflexion
 subtitle: 
 excerpt: 
-category: 
-tags: 
+category:
+  - LLM
+tags:
+  - nlp
+  - ruby
 image: 
 permalink:
 ---

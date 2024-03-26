@@ -14,8 +14,9 @@ toc: true
 
 
 ## Index
-- [[mannerisms]]
+
+- [[Character Sheets]]
+- [[Mannerisms and Style]]
 - [[Persons]]
 - [[The Database and the Narrative]]
-
 

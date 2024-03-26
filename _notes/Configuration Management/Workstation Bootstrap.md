@@ -12,6 +12,7 @@ tags:
   - archlinux
 links: 
 permalink: /os/cfgmgmt/workstation-bootstrap
+draft: true
 ---
 
 ## The Process

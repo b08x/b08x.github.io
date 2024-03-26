@@ -13,15 +13,16 @@ toc: true
 
 ## Index
 - [[AgileBloom]]
-- [[CRISPE]]
-- [[Elavis Saravia]]
+- [[Converting Image Descriptions Into Imperative Prompts]]
 - [[Gemini Advanced Image Generation]]
 - [[Interference & Hallucinations]]
 - [[LLM settings]]
-- [[Prompt Engineering]]
+- [[Logomastic Kernel]]
+- [[Prompt Editing]]
 - [[Reasoning Scratchpad]]
 - [[Set of Mark]]
 - [[wavjourney]]
+
 
 ## A Prompt Pattern Catalog to Enhance Prompt Engineering
 
@@ -240,6 +241,10 @@ page 174 Godel Escher Bach
 ---
 
 ## resources
+
+[CRISPE Framework](https://guide.flowgpt.com/engineering/1basics/3basic-framework#crispe-framework)
+
+[Elavis Saravia Framework](https://guide.flowgpt.com/engineering/1basics/3basic-framework#elavis-saravia-framework)
 
 [techniques: reflexion](https://www.promptingguide.ai/techniques/reflexion)
 
