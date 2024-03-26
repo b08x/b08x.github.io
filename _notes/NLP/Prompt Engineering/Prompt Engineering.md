@@ -14,6 +14,7 @@ toc: true
 ## Index
 - [[AgileBloom]]
 - [[Converting Image Descriptions Into Imperative Prompts]]
+- [[Data Driven Characters]]
 - [[Gemini Advanced Image Generation]]
 - [[Interference & Hallucinations]]
 - [[LLM settings]]
@@ -204,18 +205,17 @@ Instead use: For the document *below*, do X
 ---
 
 
-> [!ai]+ AI
->
-> | Concept | Part of Speech | WordNet Senses | Cognitive Grammar | Pragmatics |
-> |---|---|---|---|---|
-> | Correlate | Verb | 1. to bring into a relationship of mutual dependence or connection | The mental process of linking two or more concepts together | The study of how language is used in context |
-> | Word | Noun | 1. a single distinct meaningful element of speech or writing | The basic unit of language | The study of how words are used in context |
-> | Part of Speech | Noun | 1. a grammatical category of words (such as noun, verb, adjective, or adverb) that has similar syntactic functions | The grammatical category of a word | The study of how words are used in context |
-> | WordNet Senses | Noun | 1. a set of synonyms for a given word | The different meanings of a word | The study of how words are used in context |
-> | Cognitive Grammar | Noun | 1. a theory of grammar that emphasizes the role of cognition in language | The mental process of understanding language | The study of how language is used in context |
-> | Pragmatics | Noun | 1. the study of the relationship between language and context | The study of how language is used in context | The study of how language is used in context |
+| Concept           | Part of Speech | WordNet Senses                                                                                                     | Cognitive Grammar                                           |
+| ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| Correlate         | Verb           | 1. to bring into a relationship of mutual dependence or connection                                                 | The mental process of linking two or more concepts together |
+| Word              | Noun           | 1. a single distinct meaningful element of speech or writing                                                       | The basic unit of language                                  |
+| Part of Speech    | Noun           | 1. a grammatical category of words (such as noun, verb, adjective, or adverb) that has similar syntactic functions | The grammatical category of a word                          |
+| WordNet Senses    | Noun           | 1. a set of synonyms for a given word                                                                              | The different meanings of a word                            |
+| Cognitive Grammar | Noun           | 1. a theory of grammar that emphasizes the role of cognition in language                                           | The mental process of understanding language                |
+| Pragmatics        | Noun           | 1. the study of the relationship between language and context                                                      | The study of how language is used in context                |
 
 ---
+
 
 ## decoding messages
 
@@ -234,7 +234,7 @@ page 174 Godel Escher Bach
 
 #### subchoices
 
-*Beyond ChatBots: ExploreLLM for Structured Thoughts with Choices*
+[Beyond ChatBots: ExploreLLM for Structured Thoughts with Choices](https://arxiv.org/pdf/2312.00763.pdf)
 
 ![](/assets/img/screenshot/explorellm_promptexample.png)
 

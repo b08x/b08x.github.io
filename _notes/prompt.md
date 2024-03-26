@@ -1,0 +1,4 @@
+---
+layout: prompt
+permalink: /prompt
+---

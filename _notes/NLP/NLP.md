@@ -10,7 +10,6 @@ permalink:
 toc: true
 ---
 ## Index
-[[Data Driven Characters]]
 [[Prompt Engineering]]
 [[Text Processing]]
 

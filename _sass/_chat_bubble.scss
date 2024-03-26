@@ -1,0 +1,123 @@
+.chat-bubble {
+  margin: 24px auto 0 auto;
+  padding: 0 20px 0 0;
+  list-style: none;
+  // overflow-x: hidden;
+  display: flow-root;
+}
+
+.chat-bubble li {
+  position: relative;
+  clear: both;
+  display: inline-block;
+  // padding: 16px 40px 16px 20px;
+  padding-left: 1rem;
+  padding-right: 2.25rem;
+  margin: 0 0 20px 0;
+  font: 16px/20px "IBM Plex Mono", monospace;
+  line-height: 1.65rem;
+  letter-spacing: -0.01em;
+  border-radius: 10px;
+  // background-color: yellowgreen;
+  narration {
+    font-style: italic;
+    color: goldenrod;
+    &::before {
+      content: "**"
+    }
+    &::after {
+      content: "**"
+    }      
+  }
+  p {
+    font: 18px/24px "IBM Plex Mono", monospace;
+    font-weight: 400;
+    // font-size: 1.0rem;
+    word-spacing: 0.1rem;
+    color: #ada087;
+    line-height: 1.65rem;
+    word-spacing: -3px;
+    word-break: break-word;
+    // text-align: -webkit-center;
+    code {
+      color: #ffe40a;
+      background-color: transparent;
+    }
+    em {
+      color: #f27950;
+    }
+    code {
+      color: #e4b21f;
+    }
+    del {
+      color: #2a261c;
+    }
+    narration {
+      font-style: italic;
+      color: darkgray;
+      font-size: 1rem;
+      &:before {
+        content: "**";
+      }
+      &:after {
+        content: "**";
+      }
+    }
+  }
+
+  /* Chat - Avatar */
+  &:before {
+    position: absolute;
+    top: 0;
+    width: $chat-thread-avatar-size;
+    height: $chat-thread-avatar-size;
+    border-radius: $chat-thread-avatar-size;
+    content: "";
+  }
+
+  /* Chat - Speech Bubble Arrow */
+  &:after {
+    position: absolute;
+    top: $chat-thread-msg-arrow-size;
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: $chat-thread-msg-arrow-size solid #e4b21f;
+  }
+
+  &:nth-child(odd) {
+    animation: show-chat-even 0.15s 1 ease-in;
+    -moz-animation: show-chat-even 0.15s 1 ease-in;
+    -webkit-animation: show-chat-even 0.15s 1 ease-in;
+    float: left;
+    margin-left: $chat-thread-offset;
+    color: hsl(0, 0%, 69%);
+    background-color: #171613;
+  }
+
+  &:nth-child(odd):before {
+    left: -$chat-thread-offset;
+    // Placeholder avatar 2
+    background-image: url("/assets/img/noun-neural-network-6262203.svg");
+    background-color: #8794ad;
+  }
+}
+
+// A tiny bit responsive...
+// --------------------------------------
+/* Small screens */
+@media all and (max-width: 767px) {
+  .chat-bubble {
+    width: 100%;
+    height: fit-content;
+  }
+}
+
+/* Medium and large screens */
+@media all and (min-width: 768px) {
+  .chat-bubble {
+    width: 100%;
+    height: 100%;
+    margin: unset
+  }
+}

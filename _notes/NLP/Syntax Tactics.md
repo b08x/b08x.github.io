@@ -11,6 +11,7 @@ tags:
 image: 
 permalink: 
 toc: true
+draft:
 ---
 
 <ul class="chat-thread">

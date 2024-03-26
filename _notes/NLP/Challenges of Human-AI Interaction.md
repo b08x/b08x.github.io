@@ -4,14 +4,18 @@ title: Challenges of Human-AI Interaction
 subtitle: 
 excerpt: 
 category:
-  - LLM
   - NLP
-tags: 
+tags:
+  - llm
 image: 
-permalink:
+permalink: 
+draft: true
+toc: true
 ---
 
 # Challenges of Human-AI Interaction
+
+## Chaos Engineering
 
 Wikipedia: "Chaos Engineering is the discipline of experimenting on a system in order to build confidence in the system's capability to withstand turbulent conditions in production."
 
