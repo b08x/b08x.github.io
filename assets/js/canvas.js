@@ -214,7 +214,7 @@ function drawEdges() {
       const fromPoint = getAnchorPoint(fromNode, edge.fromSide);
       const toPoint = getAnchorPoint(toNode, edge.toSide);
 
-      const curveTightness = 0.75;
+      const curveTightness = 1.0;
       const controlPointX1 = fromPoint.x + (toPoint.x - fromPoint.x) * curveTightness;
       const controlPointX2 = fromPoint.x + (toPoint.x - fromPoint.x) * (1 - curveTightness);
       const controlPointY1 = fromPoint.y;

@@ -1,5 +1,5 @@
 ---
-layout: note
+layout: docs
 title: Idiom Illuminator
 subtitle: 
 category:
