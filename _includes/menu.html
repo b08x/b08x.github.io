@@ -1,0 +1,42 @@
+<div id="menu-bar" class="menu-bar">
+  <div id="menu-bar-sticky-container">
+    <div class="left-buttons">
+      <button
+        id="sidebar-toggle"
+        class="icon-button"
+        type="button"
+        title="Toggle Table of Contents"
+        aria-label="Toggle Table of Contents"
+        aria-controls="sidebar"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        "
+      >
+        <a class="internal-link" href="{{ site.baseurl }}/"
+          ><b>Home</b></a
+        >
+      </div>
+    </div>
+
+    <h1 class="menu-title">{{ page.title }}</h1>
+
+    <div class="right-buttons">
+      <a
+        onclick="window.print()"
+        title="Print this book"
+        aria-label="Print this book"
+      >
+        <i id="print-button" class="fas fa-print"></i>
+      </a>
+      <!-- <a href="www.google.com" title="View PDF file" aria-label="View PDF file">
+                <i class="fas fa-file-pdf"></i>
+            </a> -->
+    </div>
+  </div>
+</div>

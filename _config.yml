@@ -62,17 +62,9 @@ defaults:
     values:
       layout: "default"
   - scope:
-      path: "_notes/**/*.ipynb"
-    values:
-      layout: "notebook"
-  - scope:
       path: "_notes/**/*.md"
     values:
       layout: "note"
-  - scope:
-      path: "spec/**/*.md"
-    values:
-      layout: "node"
   # - scope:
   #     path: "_articles/**/*.md"
   #   values:

@@ -11,7 +11,7 @@ title: Home
 
 # syncopated notes
 
-<strong>Recently updated notes</strong>
+<!-- <strong>Recently updated notes</strong>
 <ul>
   {% assign recent_items = site.notes | sort: "date" | reverse %}
   {% for item in recent_items limit: 25 %}
@@ -21,5 +21,5 @@ title: Home
     </li>
   {% endif %}
   {% endfor %}
-</ul>
+</ul> -->
 

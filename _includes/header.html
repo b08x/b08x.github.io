@@ -1,4 +1,15 @@
 <header>
+{%- if page.image -%}
+<section class="flex flex-col items-center justify-center text-center text-white">
+  <div class="overflow-hidden video-docker">
+    <img class="absolute object-cover" src="{{ site.baseurl }}{{ page.image }}" type="image/jpg"></img>
+  </div>
+  <div class="video-content">
+    <h1 class="font-light">{{ page.subtitle }}</h1>
+    <h3 class="font-light">{{ page.caption }}</h3>
+  </div>
+</section>
+{%- else -%}
 {%- if page.video -%}
   <section class="flex flex-col items-center justify-center text-center text-white">
     <div class="overflow-hidden video-docker">
@@ -10,6 +21,7 @@
       <h3 class="font-light">{{ page.caption }}</h3>
     </div>
   </section>
+{%- endif -%}
 {%- else -%}
   <nav class="row">{% include nav.html %}</nav>
 {%- endif -%}

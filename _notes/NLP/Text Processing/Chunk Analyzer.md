@@ -65,7 +65,7 @@ Document chunking can be performed based on specific criteria or patterns within
 
 <div class="figure right">
     <div class="liner">
-     {% picture default chunking_01.png --img id="dark" --link https://github.com %}
+     {% picture default nlp/chunking_01.png --img id="dark" --link https://github.com %}
      <p class="caption">page 294 Godel Escher Bach </p>
      </div>
 </div>

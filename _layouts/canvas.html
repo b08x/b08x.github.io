@@ -7,6 +7,7 @@
     }
   </style>
   {% include head-jcanvas.html %}
+
   <body id="home" style="--scale: 1; --pan-x: 0px; --pan-y: 0px">
     <div id="container">
       <div id="canvas-container">
@@ -16,7 +17,7 @@
               id="arrowhead"
               markerWidth="10"
               markerHeight="8"
-              refX="5"
+              refX="10"
               refY="4"
               orient="auto"
             >
@@ -28,18 +29,47 @@
 
         <div id="canvas-nodes">
           <node
+            id="logo"
+            class="node node-file"
+            data-node-type="file"
+            data-node-file="logo.svg"
+            style="left: 1px; top: 88px"
+          >
+            <div class="node-name">logo.svg</div>
+            <img
+              width="500"
+              height="500"
+              src="/assets/img/llm/image02.jpeg"
+              alt="JSON Feed"
+            />
+          </node>
+
+          <node
+            id="nav"
+            class="node node-text"
+            data-node-type="text"
+            style="left: 405px; top: 112px"
+          >
+            <div class="node-name"></div>
+            <div class="node-text-content">
+              <p>Sources</p>
+              <ul>
+                {% for link in page.links %}
+                <li><a href="{{ link.url }}">{{ link.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </node>
+
+          <node
             id="spec"
             class="node node-link"
             data-node-type="file"
-            data-node-file="dev/Idiom-Illuminator.md"
-            style="left: 798px; top: 489px"
+            data-node-file="_notes/NLP/text-processing/Chunk-Analyser.md"
+            style="left: 811px; top: 686px"
           >
             <div class="node-name">Idiom-Illuminator</div>
-            <iframe
-              width="100%"
-              height="100%"
-              src="/dev/Idiom-Illuminator?hidenav=true"
-            >
+            <iframe width="100%" height="100%" src="{{ page.sections[0]}}">
             </iframe>
           </node>
 
@@ -51,7 +81,11 @@
             style="left: 880px; top: 85px"
           >
             <div class="node-name">git-flow</div>
-            <iframe width="100%" height="100%" src="/dev/Idiom-Illuminator?hidenav=true">
+            <iframe
+              width="100%"
+              height="100%"
+              src="/dev/Idiom-Illuminator?hidenav=true"
+            >
             </iframe>
           </node>
 
@@ -64,36 +98,6 @@
           >
             <div class="node-name">readme</div>
             {{ content }}
-          </node>
-
-          <node
-            id="nav"
-            class="node node-text"
-            data-node-type="text"
-            style="left: 250px; top: 36px"
-          >
-            <div class="node-name"></div>
-            <div class="node-text-content">
-              <p>Learn more:</p>
-              <ul>
-                <li><a href="/about">about</a></li>
-                <li><a href="https://google.com">another useful link</a></li>
-                <li>
-                  <a href="https://github.com/obsidianmd/jsoncanvas">GitHub</a>
-                </li>
-              </ul>
-            </div>
-          </node>
-
-          <node
-            id="logo"
-            class="node node-file"
-            data-node-type="file"
-            data-node-file="logo.svg"
-            style="left: 1px; top: 88px"
-          >
-            <div class="node-name">logo.svg</div>
-            <img width="160" height="60" src="/logo.svg" alt="JSON Feed" />
           </node>
         </div>
 
@@ -131,15 +135,6 @@
           fromEnd: "none",
           toNode: "readme",
           toSide: "right",
-          toEnd: "arrow",
-        },
-        {
-          id: "edge-logo-nav",
-          fromNode: "logo",
-          fromSide: "right",
-          fromEnd: "none",
-          toNode: "nav",
-          toSide: "left",
           toEnd: "arrow",
         },
         {
