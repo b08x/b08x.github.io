@@ -1,0 +1,112 @@
+<html>
+<style>
+body {
+   font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-between;
+   height: 100vh;
+}
+
+.search-bar {
+   margin: 20px 0;
+   display: flex;
+   justify-content: center;
+}
+
+.search-bar input {
+   width: 300px;
+   padding: 10px;
+   border: none;
+   border-radius: 20px;
+   box-shadow: 0px 0px 10px #888888;
+}
+
+.search-bar button {
+   background-color: #000;
+   color: #fff;
+   border: none;
+   padding: 10px;
+   border-radius: 20px;
+   box-shadow: 0px 0px 10px #888888;
+}
+
+.grid-container {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+   gap: 10px;
+   padding: 10px;
+   width: 100%;
+   box-sizing: border-box;
+}
+
+.grid-item {
+   background-color: #fae8e0;
+   padding: 20px;
+   border-radius: 10px;
+   box-shadow: 0px 0px 10px #888888;
+}
+
+.recommendations {
+   padding: 20px;
+   width: 100%;
+   box-sizing: border-box;
+}
+
+.recommendations p {
+   font-size: 14px;
+   line-height: 1.5;
+}
+
+.recommendations button {
+   background-color: #d4f1f4;
+   border: none;
+   padding: 10px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+footer {
+   background-color: #f1f3f4;
+   padding: 20px;
+   width: 100%;
+   box-sizing: border-box;
+   text-align: center;
+}
+
+footer button {
+   background-color: #d4f1f4;
+   border: none;
+   padding: 10px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+</style>
+<body>
+   <div class="search-bar">
+       <input type="text" placeholder="Ask a question to start the brainstorm">
+       <button>⚛️</button>
+   </div>
+   <div class="grid-container">
+       <div class="grid-item">I want to plan a trip to Tokyo</div>
+       <div class="grid-item">Identify key dates and duration for the Tokyo trip</div>
+       <div class="grid-item">Research on art museums and galleries in Tokyo</div>
+       <div class="grid-item">Look into available and affordable accommodations in Tokyo</div>
+       <div class="grid-item">Look into flight options and prices for Tokyo</div>
+       <div class="grid-item">Identify necessary documents for travel to Japan</div>
+       <div class="grid-item">Plan daily itineraries involving art galleries and ramen shops</div>
+       <div class="grid-item">Investigate public transportation options in Tokyo</div>
+   </div>
+   <div class="recommendations">
+       <p>Tell us about yourself and your preferences to get better recommendations.</p>
+       <div class="grid-item">I like art and ramen</div>
+       <button>Register</button>
+   </div>
+   <footer>
+       <button>Summarize</button>
+   </footer>
+</body>
+</html>

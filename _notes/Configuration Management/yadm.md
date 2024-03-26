@@ -9,7 +9,10 @@ tags:
   - dots
 links: 
 permalink: /os/cfgmgmt/yadm
+draft: true
 ---
+It's like ansible, sort of, but for a single person
+
 
 
 Here are some specific ways I'd recommend integrating yadm into default user profiles and providing a template for new users:

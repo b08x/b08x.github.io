@@ -8,8 +8,6 @@ tags:
   - linux
   - reaper
   - x42
-links:
-  - "[x42-meters](https://google.com)"
 ---
 
 

@@ -7,6 +7,7 @@ tags:
 permalink: /os/cfgmgmt
 ---
 ## Index
+<<<<<<< HEAD
 - [[ansible error handling]]
 - [[ansible tasks dotfiles]]
 - [[Ansible Variable Precedence]]
@@ -16,3 +17,8 @@ permalink: /os/cfgmgmt
 - [[Playbook Optimization]]
 - [[Workstation Bootstrap]]
 - [[yadm]]
+=======
+- [[Ansible Variable Precedence]]
+
+
+>>>>>>> main

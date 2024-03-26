@@ -1,3 +1,98 @@
+// Imports
+// --------------------------------------
+@import "https://fonts.googleapis.com/css?family=Noto+Sans";
+
+// Variables
+// --------------------------------------
+$scrollbar-width: 10px;
+$chat-thread-bgd-color: rgba(25, 147, 147, 0.2);
+$chat-thread-msg-arrow-size: 15px;
+$chat-thread-avatar-size: 80px;
+$chat-thread-offset: #{$chat-thread-avatar-size + 5px};
+
+body {
+  padding: 0;
+  margin: 0;
+  // background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
+  // background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192C46 50%, #22254C 75%, #22254C 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+::-webkit-scrollbar {
+  width: $scrollbar-width;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: $scrollbar-width;
+  background-color: rgba(25, 147, 147, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: $scrollbar-width;
+  background-color: $chat-thread-bgd-color;
+}
+
+@import './chat_bubble.scss';
+@import './chat_thread.scss';
+@import './chat_gemini.scss';
+
+
+// Animation
+// --------------------------------------
+@keyframes show-chat-even {
+  0% {
+    margin-left: -480px;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
+@-moz-keyframes show-chat-even {
+  0% {
+    margin-left: -480px;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
+@-webkit-keyframes show-chat-even {
+  0% {
+    margin-left: -480px;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
+@keyframes show-chat-odd {
+  0% {
+    margin-right: -480px;
+  }
+  100% {
+    margin-right: 0;
+  }
+}
+
+@-moz-keyframes show-chat-odd {
+  0% {
+    margin-right: -480px;
+  }
+  100% {
+    margin-right: 0;
+  }
+}
+
+@-webkit-keyframes show-chat-odd {
+  0% {
+    margin-right: -480px;
+  }
+  100% {
+    margin-right: 0;
+  }
+}
 
 #object-comic {
   max-width: 95%;
@@ -74,7 +169,6 @@ img.figure {
   font-weight: 600;
 }
 
-
 /* General text alignment classes. You can actually use these on element you like */
 .txt-right {
   text-align: right;
@@ -93,11 +187,10 @@ img.figure {
 }
 
 /*figure with padding applied to captioned text. IE6 doesn't support the adjacent selector but that won't matter much*/
-.figure img+span {
+.figure img + span {
   display: block;
   padding: 0 15px;
 }
-
 
 /* Adding borders */
 .figure .liner,

@@ -1,32 +1,29 @@
 ---
 layout: page
 title: Natural Language Processing
-subtitle: 
-excerpt: 
-category: 
-tags: 
-image: 
+subtitle:
+excerpt:
+category:
+tags:
+image:
 permalink:
+toc: true
 ---
-
 ## Index
-- [[AgileBloom]]
-- [[Capturing Personality with Verb Phrase Extraction]]
-- [[Chunking]]
-- [[CRISPE]]
-- [[Elavis Saravia]]
-- [[Embedding]]
-- [[Gemini Advanced Image Generation]]
-- [[Interference & Hallucinations]]
-- [[JupyterLabs & Ruby NLP]]
-- [[LLM settings]]
-- [[NLP]]
-- [[Parts of a Document]]
-- [[Prompt Engineering]]
-- [[Ranking Chunks]]
-- [[Reasoning Scratchpad]]
-- [[Semantic Search]]
-- [[Set of Mark]]
-- [[Stop Words]]
-- [[Text Processing]]
-- [[wavjourney]]
+[[Prompt Engineering]]
+[[Text Processing]]
+
+[[Attention Surplus Activity Order]]
+[[Attributive Noun]]
+[[Challenges of Human-AI Interaction]]
+[[metaprompt]]
+[[Nuances]]
+[[Reflexion]]
+[[Syntax Tactics]]
+
+
+
+Functional grammar, concerned with how language is used to achieve goals
+Generative grammar, concerned with how the sentences are formed
+Cognitive grammar, concerned with how language is represented in the mind
+Pragmatic grammar, concerned with language is used to communicate effectively

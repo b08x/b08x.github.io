@@ -70,11 +70,11 @@ style E fill:#2a1a2a,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5
 
 ## Index
 - [[Capturing Personality with Verb Phrase Extraction]]
-- [[Chunking]]
-- [[Embedding]]
+- [[Chunk Analyzer]]
+- [[Echo Embedding]]
 - [[Parts of a Document]]
 - [[Ranking Chunks]]
-- [[Semantic Search]]
+- [[STS Semantic Textual Similarity]]
 - [[Stop Words]]
 - [[Text Processing]]
 

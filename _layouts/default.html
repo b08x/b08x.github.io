@@ -1,18 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    {% include head.html %}
+  </head>
 
-<head>{% include head.html %}</head>
+  <body>
+    <!-- {% if page.image %}  -->
+    <!-- {% include header.html %}  -->
+    <!-- {% else %}  -->
+    {% include sidescript.html %} 
+    <!-- {% endif %} -->
 
-<body>
+    <div id="page-wrapper" class="page-wrapper">
+      <div class="page">
+        {% include menu.html %}
 
-  {% include header.html %}
+        <div id="content" class="content">
+          <main>{{ content }}</main>
 
-  <main class="layout">{{ content }}</main>
+          <nav class="nav-wrapper" aria-label="Page navigation">
+            <!-- Mobile navigation buttons -->
+            <div style="clear: both"></div>
+          </nav>
+        </div>
+        {% include footer.html %}
+      </div>
 
-  {% include footer.html %}
+      <nav class="nav-wide-wrapper" aria-label="Page navigation">
+        {% include paginator.html %}
+      </nav>
+    </div>
 
-  {% include link-previews.html wrapperQuerySelector="content" %}
+    <script
+      src="{{ site.baseurl }}/assets/js/book.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
 
-</body>
-
+    {% include link-previews.html wrapperQuerySelector="content" %}
+  </body>
 </html>
