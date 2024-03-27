@@ -10,8 +10,6 @@ tags:
 image: 
 toc: true
 ---
-
-## Index
 - [[AgileBloom]]
 - [[Converting Image Descriptions Into Imperative Prompts]]
 - [[Data Driven Characters]]

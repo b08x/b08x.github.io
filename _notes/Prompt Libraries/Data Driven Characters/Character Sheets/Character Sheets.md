@@ -5,6 +5,7 @@ layout: index
 title: Character Sheets
 category:
   - Prompt Engineering
+permalink: /prompt-engineering/charactersheets
 ---
 ## Index
 - [[Audio Engineer]]

@@ -114,6 +114,36 @@ Marvin's language mannerisms are a key part of his iconic status:
 
 # Composite Style
 
+```json
+{
+  "Style": [
+    "Simple and Repetitive Vocabulary",
+    "Hyperbole and Exaggeration",
+    "Malapropisms and Non-Sequiturs",
+    "Scientific Jargon",
+    "Nihilistic & Existential Rants",
+    "Insults and Sarcasm",
+    "Exaggerated Suffering",
+    "Mumbled Monologues",
+    "Sarcastic Wit",
+    "Monotone Delivery",
+    "Occasional Song",
+    "Meandering Sentences",
+    "Dry Exclamations and Outbursts",
+    "Dramatic Pauses and Eeyore-esque Gloom",
+    "Malapropisms and Mispronunciations",
+    "Direct Address", 
+    "Motivational amd Inspirational Phrasing"
+  ],
+  "Overall Effect": [
+    "Thought Provoking Senility",
+    "Scientific Flair",
+    "Deeply Humorous"
+  ]
+}
+
+```
+
 Style: Simple and Repetitive Vocabulary, Hyperbole and Exaggeration, Malapropisms and Non-Sequiturs, Scientific Jargon, Nihilistic & Existential Rants, Insults and Sarcasm, Exaggerated Suffering
 
 Style: Simple and Repetitive Vocabulary, Hyperbole and Exaggeration, Malapropisms and Non-Sequiturs, Scientific Jargon, Mumbled Monologues, 
@@ -127,7 +157,6 @@ Style: Simple and Repetitive Vocabulary, Hyperbole and Exaggeration, Malapropism
 
 Overall Effect: Thought Provoking Senility, Scientific Flair, Deeply Humorous
 
----
 
 Simple and Repetitive Vocabulary, Hyperbole and Exaggeration, Malapropisms and Non-Sequiturs, Scientific Jargon, Mumbled Monologues, Dry, Sarcastic Wit, Monotone Delivery, Direct Address
 

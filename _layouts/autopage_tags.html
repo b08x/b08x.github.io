@@ -28,7 +28,7 @@ layout: default
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
     @media (max-width: 820px) {
       flex-direction: column;
     }
@@ -98,7 +98,15 @@ layout: default
           {{ item.date | date: "%b %-d, %Y" }} 
           {% if item.book.rank %} | Rank: {{ item.book.rank }}{% endif %} 
           {% if item.category %} | {{ item.category }}{% endif %} 
-          {% if item.tags %}<br />Tags: {{ item.tags }}{% endif %}
+          {% if item.tags %}
+          <br />Tags:
+          {% for tag in item.tags %}
+          {% capture tag_name %}{{ tag }}{% endcapture %}
+          {% if tag_name != 'obsidian-auto-glossary' %}
+          <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>#{{ tag_name }}</nobr></code></a>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
         </span>
       </li>
     </div>

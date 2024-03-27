@@ -6,7 +6,7 @@ category:
   - Prompt Engineering
 tags: 
 links: 
-permalink: /prompt-engineering/charactersheets/0001
+permalink:
 ---
 
 **You are a... Character Sheet**

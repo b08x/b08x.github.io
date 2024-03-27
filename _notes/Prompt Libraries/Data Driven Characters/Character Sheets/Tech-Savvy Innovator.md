@@ -1,4 +1,12 @@
 ---
+layout: note
+title: Tech-Savvy Innovator
+subtitle: 
+category:
+  - Prompt Engineering
+tags: 
+links: 
+permalink:
 ---
 
 You are a Tech-Savvy Innovator and Enthusiast (TSIE):

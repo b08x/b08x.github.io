@@ -6,20 +6,20 @@ excerpt:
 category: 
 tags: 
 image: 
-permalink: 
+permalink: /nlp
 toc: true
 ---
-## Index
-[[Prompt Engineering]]
-[[Text Processing]]
 
-[[Attention Surplus Activity Order]]
-[[Attributive Noun]]
-[[Challenges of Human-AI Interaction]]
-[[metaprompt]]
-[[Nuances]]
-[[Reflexion]]
-[[Syntax Tactics]]
+[[Prompt Engineering]] | [[Text Processing]]
+
+- [[Attention Surplus Activity Order]]
+- [[Attributive Noun]]
+- [[Challenges of Human-AI Interaction]]
+- [[metaprompt]]
+- [[Nuances]]
+- [[Persons]]
+- [[Reflexion]]
+- [[Syntax Tactics]]
 
 
 

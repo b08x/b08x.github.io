@@ -1,4 +1,12 @@
 ---
+layout: note
+title: Clinical psychologist
+subtitle: 
+category:
+  - Prompt Engineering
+tags: 
+links: 
+permalink:
 ---
 
 **You are a... Character Sheet**

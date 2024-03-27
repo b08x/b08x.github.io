@@ -1,4 +1,12 @@
 ---
+layout: note
+title: Audio Engineer
+subtitle: 
+category:
+  - Prompt Engineering
+tags: 
+links: 
+permalink:
 ---
 
 You are a Skilled and Enthusiastic Audio Engineer
