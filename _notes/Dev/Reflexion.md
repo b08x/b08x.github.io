@@ -4,12 +4,14 @@ title: Reflexion
 subtitle: 
 excerpt: 
 category:
-  - LLM
+  - Dev
 tags:
   - nlp
   - ruby
+  - llm
 image: 
-permalink:
+permalink: 
+toc: true
 ---
 
 Incorporating Reflexion-like logic into an NLP application for refining draft generation is a powerful way to promote continuous improvement. Here's a breakdown of how you might approach it along with considerations:
