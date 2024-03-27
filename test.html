@@ -11,47 +11,54 @@ sitemap:
 ---
 
 <html>
-<style>
-body {
-   font-family: 'Roboto', sans-serif;
-   margin: 0;
-   padding: 0;
-   background-color: #333;
-   color: #fff;
-}
+  <style>
+    body {
+      font-family: "Roboto", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #091a28;
+      color: #fff;
+    }
 
-header {
-   background-color: #444;
-   padding: 20px;
-   text-align: center;
-}
+    header {
+      background-color: #444;
+      padding: 20px;
+      text-align: center;
+    }
 
-nav ul {
-   list-style-type: none;
-   padding: 0;
-}
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
 
-nav ul li {
-   display: inline;
-   margin: 0 10px;
-}
+    nav ul li {
+      display: inline;
+      margin: 0 10px;
+    }
 
-nav ul li a {
-   color: #fff;
-   text-decoration: none;
-}
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
 
-main {
-   margin: 20px;
-}
+    main {
+      margin: 20px;
+    }
 
-section {
-   margin: 20px 0;
-   padding: 20px;
-   border: 1px solid #444;
-}
+    section {
+      margin: 20px 0;
+      padding: 20px;
+      border: 1px solid #444;
+      
+      
+    }
 
-footer {
+    #sitename {
+      border: none;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    /* footer {
    background-color: #444;
    color: #fff;
    text-align: center;
@@ -59,113 +66,91 @@ footer {
    position: fixed;
    bottom: 0;
    width: 100%;
-}
-.container {
-   display: flex;
-   justify-content: space-between;
-   /* width: 80%; */
-   margin: auto;
-}
+} */
+    .container {
+      display: flex;
+      justify-content: space-between;
+      /* width: 80%; */
+      margin: auto;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      @media (max-width: 820px) {
+        flex-direction: column;
+      }
+      @media (max-height: 820px) {
+        flex-direction: column;
+      }
+    }
 
-.left-column, .right-column {
-   width: 45%;
-   padding: 20px;
-   box-sizing: border-box;
-}
+    .left-column,
+    .right-column {
+      width: 45%;
+      padding: 20px;
+      box-sizing: border-box;
+      @media (max-width: 820px) {
+        width: 100%;
+      }
+    }
 
-.left-column {
-   background-color: #333;
-}
+    .left-column {
+      background-color: black;
+    }
 
-.right-column {
-   background-color: #333;
-}
+    .right-column {
+      background-color: black;
+    }
 
-.left-column img, .right-column img {
-   width: 100%;
-   height: auto;
-}
+    .left-column img,
+    .right-column img {
+      width: 100%;
+      height: auto;
+    }
 
-.category {
-   font-size: 24px;
-   margin-bottom: 20px;
-   padding: 20px;
-   text-align: center;
-   border: 2px solid #000;
-   border-radius: 10px;
-}
+    .category {
+      font-size: 24px;
+      margin-bottom: 20px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #000;
+      border-radius: 10px;
+    }
 
-.category img {
-   width: 100%;
-   height: auto;
-}
-</style>
-<body>
-   <header>
-       <nav>
-           <ul>
-               <li><a href="#">Home</a></li>
-               <li><a href="#">About</a></li>
-               <li><a href="#">Services</a></li>
-               <li><a href="#">Contact</a></li>
-           </ul>
-       </nav>
-   </header>
-   
-   {% include notes_graph.html %}
-   
-   <div class="container">
-      <div class="left-column">
-          <h2>Categories</h2>
-          
+    .category img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+  <body>
+
+    
+    <div class="category" style="margin-top: 1rem; margin-bottom: 1rem;">{% include notes_graph.html %}</div>
+
+
+      <div class="container">
+        <div class="left-column">
+          <section id="search">
+            <h2>Search Tools</h2>
+            <!-- {% for image in site.static_files %}
+                {% if image.path contains 'img/generative' %}
+                <img src="{{ site.baseurl }}{{ image.path }}" alt="image" />
+                {% endif %}
+              {% endfor %} -->
+            </section>
+          <section id="how-to">
+            <h2>How-To Guides</h2>
+          </section>
+        </div>
+        <div class="right-column">
+          <section id="reviews">
+            <h2>Product Reviews</h2>
+          </section>
+          <section id="blog">
+            <h2>Something</h2>
+          </section>
+        </div>
       </div>
-      <div class="right-column">
-          <h2>Categories</h2>
-          <div class="category">
-              <img src="papers.jpg" alt="Papers">
-              <p>Papers are a type of document that contains information about a topic.</p>
-          </div>
-          <div class="category">
-              <img src="books.jpg" alt="Books">
-              <p>Books are a type of document that contains information about a topic.</p>
-          </div>
-          <div class="category">
-              <img src="papers.jpg" alt="Papers">
-              <p>Papers are a type of document that contains information about a topic.</p>
-          </div>
-      </div>
-  </div>
 
-
-   <main>
-       <section id="hero">
-           <h1>Welcome to Deepseek</h1>
-
-         </section>
-
-
-         <section id="search">
-           <h2>Search Tools</h2>
-           <!-- {% for image in site.static_files %}
-            {% if image.path contains 'img/generative' %}
-            <img src="{{ site.baseurl }}{{ image.path }}" alt="image" />
-            {% endif %}
-          {% endfor %} -->
-       </section>
-       <section id="how-to">
-           <h2>How-To Guides</h2>
-           <p>Learn how to use our tools with our detailed how-to guides.</p>
-       </section>
-       <section id="reviews">
-           <h2>Product Reviews</h2>
-
-       </section>
-       <section id="blog">
-
-       </section>
-   </main>
-   <footer>
-       <p>Deepseek &copy; 2022</p>
-   </footer>
-</body>
+  </body>
 </html>

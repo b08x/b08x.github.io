@@ -98,15 +98,15 @@ Gathering examples using this method into a dataset could be used to fine-tuned 
 
 <ul class="chat-bubble">
   <li>
-    <strong>Reasoning Scratchpad: Prompt Structure</strong>
+    <h3>Reasoning Scratchpad: Prompt Structure</h3>
     
   <ul>
-    <li><strong>Clear Role Definition:</strong> The prompt defines the desired role (Linux Systems Engineer with Sound Engineering expertise), providing a structured framework for response generation.</li>
-    <li><strong>Task Specification:</strong> The task is framed as a scenario that will involve troubleshooting a given query, guiding the model towards a specific problem-solving approach.</li>
-    <li><strong>Control Commands:</strong> The prompt includes "PullNotice" and "Scratchpad" commands, acting as structural elements to regulate information flow and reasoning processes.</li>
-    <li><strong>Contextual Understanding:</strong> The prompt relies on the model's ability to comprehend domain-specific language (Linux systems, sound engineering) and user intent within troubleshooting scenarios.</li>
-    <li><strong>Knowledge Integration:</strong> The model must effectively synthesize knowledge from various domains (systems engineering, audio production, troubleshooting principles) to generate successful responses.</li>
-    <li><strong>Reasoning and Problem-Solving:</strong> The "Scratchpad" command emphasizes the need for the model to demonstrate its reasoning process and problem-solving logic.</li>
+    <ol><strong>Clear Role Definition:</strong> The prompt defines the desired role (Linux Systems Engineer with Sound Engineering expertise), providing a structured framework for response generation.</ol>
+    <ol><strong>Task Specification:</strong> The task is framed as a scenario that will involve troubleshooting a given query, guiding the model towards a specific problem-solving approach.</ol>
+    <ol><strong>Control Commands:</strong> The prompt includes "PullNotice" and "Scratchpad" commands, acting as structural elements to regulate information flow and reasoning processes.</ol>
+    <ol><strong>Contextual Understanding:</strong> The prompt relies on the model's ability to comprehend domain-specific language (Linux systems, sound engineering) and user intent within troubleshooting scenarios.</ol>
+    <ol><strong>Knowledge Integration:</strong> The model must effectively synthesize knowledge from various domains (systems engineering, audio production, troubleshooting principles) to generate successful responses.</ol>
+    <ol><strong>Reasoning and Problem-Solving:</strong> The "Scratchpad" command emphasizes the need for the model to demonstrate its reasoning process and problem-solving logic.</ol>
   </ul>
   <p>For enhanced contextual understanding, a few shot prompt template could be applied to provide examples of idealized troubleshooting outcomes.</p>
   <p>Gathering examples using this method into a dataset could be used to fine-tuned an existing model, which theoretically would eliminate the need for a more intricate RAG solution.</p>

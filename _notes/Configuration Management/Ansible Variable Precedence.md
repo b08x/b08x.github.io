@@ -3,9 +3,7 @@ layout: page
 title: variable precedence & scope
 subtitle: 
 category:
-  - OS
   - Configuration Management
-  - Ansible
 tags:
   - ansible
 links: 
@@ -13,6 +11,14 @@ permalink:
 toc: true
 draft:
 ---
+
+<ul class="chat-bubble">
+  <li>
+    <p><narration>Nihilistic & Existential Rants</narration></p>
+    <p>Oh, the woes of Ansible's variable precedence! A cosmic joke, an existential crisis for the uninitiated. It's a labyrinth of scopes, contexts, and merging strategies that would make Kafka weep.</p>
+  </li>
+</ul>
+
 
 Variable precedence in Ansible is influenced by the scope and context in which the variables are defined. When a variable is defined at multiple levels, Ansible uses a merging strategy based on the variable's scope. 
 
@@ -30,16 +36,6 @@ For testing purposes, it might be useful to know that variables *used* by a role
 
 
 
-<ul class="chat-bubble">
-  <li>
-    <p><narration>Nihilistic & Existential Rants</narration></p>
-    <p>Oh, the woes of Ansible's variable precedence! A cosmic joke, an existential crisis for the uninitiated. It's a labyrinth of scopes, contexts, and merging strategies that would make Kafka weep.</p>
-    <p>For those who dare to venture into this realm, be warned: the rules are as fluid as the sands of time. <del>Variables dance and merge, their precedence a fickle mistress that changes with the wind.</del></p>
-    <p>Group vars and host vars? <del>They're mere pawns in the grand scheme of things,</del> trampled upon by the mighty force of playbook vars. And don't forget those pesky roles, with their own little variables that can overthrow the established order.</p>
-    <p>Block vars? Ha! <del>They're just a fleeting illusion, a momentary glimmer of control before the darkness consumes them</del>.</p>
-    <p>Oh, the futility of it all! Why bother assigning variables when they're destined to be overwritten, trampled, and forgotten? In the grand tapestry of Ansible, variables are <del>but ephemeral specks, doomed to dance to the whims of the cosmic merge.</del></p>
-  </li>
-</ul>
 
 
 
@@ -62,7 +58,7 @@ If a variable is defined both in role variables and for a specific host within h
 This may or may not be desired behavior. If the requirement is to allow variables declared for a specific host or a group of hosts to overwrite default variables for a role, then declare the variable for the role in defaults/main.yml 
 
 
-#### how would setting 'private role vars: true' change things?
+<em>How Would Setting 'private role vars: true' Change Things?</em>
 
 <div class="figure right">
 @startuml

@@ -377,7 +377,7 @@ Additional Notes:
 
 Agile User Story: 
 
-I guess sort of a game to discern language model generated lyrics from human-written lyrics. And then they'll be asked to articulate the reasoning behind their choice, with leading questions as guidelines. After answering the questions,Ask the user to summarize their overall understanding of the excerpt's message. Then, assess the connection to experience. 
+I guess sort of a game to discern language model generated lyrics from human-written lyrics. And then they'll be asked to articulate the reasoning behind their choice, with leading questions as guidelines. After answering the questions,Ask the user to [summarize](summarize.md) their overall understanding of the excerpt's message. Then, assess the connection to experience. 
 
 Then, craft a prompt that correlates the user responses to personality dimensions. The intent is to craft a persona for the lyric generation,
 The persona should encapsulate all crucial personality dimensions determined from the users responses, along with the motivations and aspirations associated with the lyrical elements. Keep in mind to balance succinctness and depth of detail for each dimension. The deliverable here is a comprehensive draft of the character sheet that captures the speaker's unique essence. Validate its content and ensure it captures both the speaker’s overt characteristics and the subtler undertones.

@@ -1,69 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    {% include head.html %}
+  </head>
 
-<head>{% include head.html %}</head>
+  <body>
+    
+    {% include sidescript.html %} 
+    
+    <!-- {% include header.html %} -->
 
-<body>
+    <div id="page-wrapper" class="page-wrapper">
+      <div class="page">
+        {% include menu.html %}
+        <div class="headingobject">
+          <h1>{{ page.title }}</h1>
+          <div class="box">{% include item/tags.html %}</div>
+          <div class="box">
+            <time datetime="{{ page.last_modified_at | date_to_xmlschema }}"
+              >{% if page.type != 'pages' %} Last updated on {{
+              page.last_modified_at | date: "%B %-d, %Y" }} {% endif %}
+            </time>
+          </div>
+        </div>
 
-  {% include header.html %}
-  <div id="page-wrapper" class="page-wrapper">
-  <div class="headingobject">
-    <h1>{{ page.title }}</h1>
-    <div class="box">
-      {% include item/tags.html %}
-    </div>
-    <div class="box">
-      <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{% if page.type != 'pages' %}
-        Last updated on {{ page.last_modified_at | date: "%B %-d, %Y" }}
-        {% endif %}
-      </time>
-    </div>
-  </div>
+        <div class="xl">
+          <div class="md-4">
+            {% if page.links %} {% for link in page.links %}
+            <p>link!</p>
+            <p>link!</p>
+            {% endfor %} {% endif %}
+          </div>
 
-  <div class="xl">
-    <div class="md-4">
-      {% if page.links %}
-      {% for link in page.links %}
-      <p>link!</p>
-      <p>link!</p>
-      {% endfor %}
-      {% endif %}
-    </div>
-
-    {% if page.image %}
-    <div class="xl">
-      <!-- <img id="object-cover" src="{{ site.baseurl }}{{ page.image }}" /> -->
-      <div class="col" id="table-of-contents">
-        {{ content | toc_only }}
-      </div>
-      <!-- {% if page.caption %}
+          {% if page.image %}
+          <div class="xl">
+            <!-- <img id="object-cover" src="{{ site.baseurl }}{{ page.image }}" /> -->
+            <div class="col" id="table-of-contents">
+              {{ content | toc_only }}
+            </div>
+            <!-- {% if page.caption %}
       <h6>{{ page.caption }}</h6>
       {% endif %} -->
-    </div>
-    {% endif %}
-  </div>
+          </div>
+          {% endif %}
+        </div>
 
-  <hr>
+        <hr />
 
-  <div id="content" class="content">
-    <!-- <div class="note" style="display: flex;"> -->
-      
-      <div class="container-fluid" id="markdown-content"
-        style="display: flex; flex-direction: column;">
-        {{ content | inject_anchors }}
+        <div id="content" class="content">
+          <!-- <div class="note" style="display: flex;"> -->
+
+          <div
+            class="container-fluid"
+            id="markdown-content"
+            style="display: flex; flex-direction: column"
+          >
+            {{ content | inject_anchors }}
+          </div>
+        </div>
+        <p>{{ page.cssid }}</p>
+        <!-- <p>This line is hard-coded into note.html</p> -->
+
+        <hr />
       </div>
     </div>
-    <p>{{ page.cssid }}</p>
-    <!-- <p>This line is hard-coded into note.html</p> -->
-  </content>
 
-  <hr>
-</div>
-
-  {% include footer.html %}
-
-  {% include link-previews.html wrapperQuerySelector="content" %}
-
-</body>
-
+    {% include footer.html %} {% include link-previews.html
+    wrapperQuerySelector="content" %}
+  </body>
 </html>

@@ -2,9 +2,11 @@
 layout: page
 title: Configuration Management
 category:
-  - OS
-tags: 
-permalink: /os/cfgmgmt
+  - Dev
+tags:
+  - ansible
+  - yadm
+permalink: /dev/cfgmgmt
 ---
 ## Index
 - [[Ansible Variable Precedence]]

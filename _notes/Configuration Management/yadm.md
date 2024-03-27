@@ -3,12 +3,11 @@ layout: page
 title: Integrating yadm
 subtitle: 
 category:
-  - OS
   - Configuration Management
 tags:
   - dots
 links: 
-permalink: /os/cfgmgmt/yadm
+permalink: /dev/cfgmgmt/yadm
 draft: true
 ---
 It's like ansible, sort of, but for a single person

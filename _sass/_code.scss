@@ -42,11 +42,19 @@ div.highlight {
   margin: 2rem;
   border: black;
   border-style: dashed;
+  @media (max-width: 820px) {
+    margin: unset;
+  }
 }
 
 .highlight, .highlight .w {
   color: #fbf1c7;
   background-color: transparent;
+
+  @media (max-width: 820px) {
+    background-color: black;
+    color: #afafaf;
+  }
 }
 .highlight .err {
   color: #7a271eeb;

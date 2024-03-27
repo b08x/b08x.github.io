@@ -75,10 +75,6 @@ Ultimately, this isn't just about using the tool. It's about understanding, in a
 </ul>
 
 
-
-
-
-
 - **Context Dependence:** The user's word choices shift dynamically in response to the AI ("This is the output I was talking about"). This indicates a strong awareness of the context-driven nature of human-AI communication, where what is said is heavily influenced by what comes before.
 
 - **Mental Models:** The user frequently references a mental model of how the AI _should_ work ("it should know just by that"). Deviations from this model are expressed through frustration, surprise, and a repeated desire to "correct" the AI's responses. It highlights the human tendency to project expectations onto AI interaction.

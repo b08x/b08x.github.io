@@ -13,9 +13,63 @@ draft: true
 toc: true
 ---
 
-# Initial 
+# Initial
+
+```plantuml!
+Alice->Bob : hello
+
+Bob->Alice : ok
+note right: this is another note
+
+Bob->Bob : I am thinking
+note left
+a note
+can also be defined
+on several lines
+end note
+
+note over Bob, Alice
+Please assess the functional and generative grammar 
+for the given prompt instruction example and condense,
+preserve context. Based on the determined context, 
+correct any functional grammar errors that might interfere 
+with the intended goal. include detailed explanation 
+as to how the grammar was condensed, elaborate on what 
+functional grammar could be classified as an "unnecessary detail" 
+then elaborate on the generative grammar of the condensed output. 
+Output in json format
+end note
+
+```
 
 
+```plantuml!
+Alice -> Bob: Authentication Request
+
+alt successful case
+
+    Bob -> Alice: Authentication Accepted
+
+else some kind of failure
+
+    Bob -> Alice: Authentication Failure
+    group My own label
+    Alice -> Log : Log attack start
+        loop 1000 times
+            Alice -> Bob: DNS Attack
+        end
+    Alice -> Log : Log attack end
+    end
+
+else Another type of failure
+
+   Bob -> Alice: Please repeat
+
+end
+
+```
+
+https://plantuml.com/sequence-diagram
 
 
 Please assess the functional and generative grammar of this Task instruction example and condense, preserve context, include detailed explanation as to how the grammar was condensed, elaborate on what functional grammar could be classified as an "unnecessary detail"

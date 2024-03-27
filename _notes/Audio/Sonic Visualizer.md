@@ -2,7 +2,8 @@
 layout: note
 title: Sonic-Visualizer
 subtitle: 
-category: 
+category:
+  - Audio
 tags: 
 links:
 ---

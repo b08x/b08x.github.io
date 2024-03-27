@@ -3,7 +3,6 @@ layout: page
 title: Workstation Bootstrap
 subtitle: an exercise in adaptable refactoring
 category:
-  - OS
   - Configuration Management
 tags:
   - ansible
@@ -11,7 +10,7 @@ tags:
   - linux
   - archlinux
 links: 
-permalink: /os/cfgmgmt/workstation-bootstrap
+permalink: /dev/cfgmgmt/workstation-bootstrap
 draft: true
 ---
 

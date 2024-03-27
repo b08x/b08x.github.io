@@ -9,8 +9,6 @@ permalink: /graph
 >  ~ Paul Graham
 
 
-> [!ai]+ AI
->
-> **Nihilistic & Existential Rants**
-> Oh, the futility of it
+<ul class="chat-bubble"><li>Nihilistic & Existential Rants
+Oh, the futility of it</li></ul>
 

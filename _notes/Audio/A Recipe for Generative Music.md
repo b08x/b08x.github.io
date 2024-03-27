@@ -6,7 +6,6 @@ category:
   - Audio
 tags:
   - ruby
-  - audio
 links:
 ---
 

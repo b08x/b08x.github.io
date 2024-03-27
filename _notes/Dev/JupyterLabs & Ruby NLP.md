@@ -16,17 +16,6 @@ toc: true
 ---
 
 
-```
-```bash
-+------------------+
-| NLP RubyGems     |---{docker pull -p 8080:8080 b08x/notebook-nlp:latest}
-+------------------+
-| Python Data-Sci  |---{docker pull -p 8080:8080 b08x/notebook-datascience:latest}
-+------------------+
-| Jupyter Notebook |---{docker pull -p 8080:8080 b08x/notebook-minimal:latest}
-+------------------+
-```
-
 ## Commanding the Computer with Usurped Authority
 
 Have you ever wanted to fly? Personally, I have not. Honestly, I feel most like a bird when I run; `docker-compose up -d` 
@@ -34,13 +23,6 @@ Have you ever wanted to fly? Personally, I have not. Honestly, I feel most like 
 Which isn't true of course, but this instruction, when successful in it's compilation, is a delight compared most things I do with my fingers during the course of any particular day.
 
 So let's continue caring about this, for a few more minutes at least, before the annoying realization makes itself that this process is incredibly tedious and you wish Google just fucking take care of it. 
-
-
-
-
-
-
-
 
 
 ---

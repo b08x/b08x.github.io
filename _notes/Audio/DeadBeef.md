@@ -2,7 +2,8 @@
 layout: page
 title: DeadBeef Audio Sampler
 subtitle: 
-category: 
+category:
+  - Audio
 tags: 
 links:
 ---

@@ -7,18 +7,18 @@
 }
 
 .chat-bubble li {
-  position: relative;
+  // padding: 16px 40px 16px 20px;
+  border-radius: 10px;
   clear: both;
   display: inline-block;
-  // padding: 16px 40px 16px 20px;
+  font: 16px/20px "IBM Plex Mono", monospace;
+  letter-spacing: -0.01em;
+  line-height: 1.65rem;
+  margin: 0 0 20px 0;
   padding-left: 1rem;
   padding-right: 2.25rem;
-  margin: 0 0 20px 0;
-  font: 16px/20px "IBM Plex Mono", monospace;
-  line-height: 1.65rem;
-  letter-spacing: -0.01em;
-  border-radius: 10px;
-  // background-color: yellowgreen;
+  position: relative;
+
   narration {
     font-style: italic;
     color: goldenrod;
@@ -29,6 +29,7 @@
       content: "**"
     }      
   }
+
   p {
     font: 18px/24px "IBM Plex Mono", monospace;
     font-weight: 400;
@@ -52,17 +53,7 @@
     del {
       color: #2a261c;
     }
-    narration {
-      font-style: italic;
-      color: darkgray;
-      font-size: 1rem;
-      &:before {
-        content: "**";
-      }
-      &:after {
-        content: "**";
-      }
-    }
+
   }
 
   /* Chat - Avatar */

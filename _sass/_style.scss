@@ -95,7 +95,8 @@ $font-family-forum: "Forum", serif;
 
 body {
   box-sizing: content-box;
-  font-family: $font-family-text;
+  font-family: $font-family-special;
+  font-weight: 300;
   margin: 0 auto;
   line-height: 1.4;
   padding: 4vh 2vw;
@@ -430,7 +431,7 @@ hr {
 }
 
 h1 {
-  font-family: $font-family-forum;
+  font-family: $font-family-logo;
   font-size: 4rem;
   line-height: 1.25;
   font-weight: 300;
@@ -462,6 +463,9 @@ h2 {
   font-weight: 500;
   font-size: 3.5rem;
   color: #c01212;
+  @media (max-width: 820px) {
+    font-size: 2rem;
+  }
 }
 
 h3 {
@@ -471,6 +475,11 @@ h3 {
   margin-top: 2rem;
   margin-bottom: 2rem;
   color: #ada087;
+  @media (max-width: 820px) {
+    font-size: revert;
+    // font-family: unset;
+    color: black;
+  }
 }
 
 h4 {
@@ -498,7 +507,7 @@ p {
   word-spacing: 0.1rem;
   color: #ada087;
   strong {
-    color: #672828;
+    color: #d10000;
   }
   code {
     color: #018361;
@@ -514,7 +523,16 @@ p {
     // &:after {
     //   content: "`";
     // }
+
+    @media (max-width: 820px) {
+      color: #4df11c;
+    }
   }
+  @media (max-width: 820px) {
+    color: #18150e;
+    font-size: 1rem;
+  }
+
 }
 
 a {
@@ -546,23 +564,34 @@ a {
   }
 }
 
+ul {
+  color: #8ca8a8;
+}
+
 li {
   position: relative;
-  padding: 0.1rem;
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  font-family: $font-family-source-serif;
+  font-weight: 400;
 
   // padding-left: 15px;
   strong {
     color: #d10000;
   }
+
+  @media (max-width: 820px) {
+    color: black;
+  }
+  
 }
 
-// li:before {
-//   content: "\25BA \0020";
-//   font-size: 6px;
-//   position: absolute;
-//   top: 5px;
-//   left: -10px;
-// }
+.post-list {
+  display: inline-block;
+  padding: unset;
+  list-style-type: none;
+}
+
 
 *:focus {
   background: #ffe8bc !important;
@@ -658,6 +687,10 @@ code {
   font-size: 1.125rem;
   text-wrap: balance;
   word-break: auto-phrase;
+  @media (max-width: 820px) {
+    color: #484646;
+
+  }
 }
 
 .invalid-link {

@@ -4,7 +4,8 @@ title: git flow
 description: crafting a git flow strategy
 category:
   - Dev
-tags: 
+tags:
+  - git
 links: 
 toc: true
 ---

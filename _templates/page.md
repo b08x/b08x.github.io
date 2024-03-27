@@ -4,11 +4,10 @@ title:
 subtitle: 
 excerpt: 
 category: 
-tags: 
+tags:
+  - "#templates"
 image: 
 permalink: 
 draft: true
 toc: true
 ---
-
-# header
