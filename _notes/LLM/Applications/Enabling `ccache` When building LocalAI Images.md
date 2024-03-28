@@ -9,7 +9,7 @@ tags:
   - localai
 ---
 
-# Enabling `ccache` When building LocalAI Images
+## Enabling `ccache` When building LocalAI Images
 
 https://askubuntu.com/questions/470545/how-do-i-set-up-ccache
 

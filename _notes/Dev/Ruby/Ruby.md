@@ -6,7 +6,7 @@ category:
 tags: 
 permalink: /dev/ruby
 ---
-## Index
+
 - [[Ruby NLP Gems]]
 - [[Ruby ReAct]]
 - [[Ruby Unless]]

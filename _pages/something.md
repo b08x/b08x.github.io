@@ -34,3 +34,6 @@ sections:
 }
 ```
 
+```d2 layout=elk theme=101
+x -> y
+```

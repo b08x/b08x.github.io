@@ -12,6 +12,6 @@ permalink: /prompt-engineering/charactersheets
 - [[Clinical psychologist]]
 - [[Narrator]]
 - [[Programmer]]
-- [[Steve]]
+- [[_notes/Prompt Libraries/Data Driven Characters/Character Sheets/Steve]]
 - [[Tech-Savvy Innovator]]
 

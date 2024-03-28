@@ -10,8 +10,8 @@ image:
 permalink:
 ---
 
-# header
-# find the screenshot of the Gate settings in non-mixer
+
+## find the screenshot of the Gate settings in non-mixer
 
 The image you've provided appears to be a screenshot of a noise gate settings panel from a digital audio workstation (DAW) or a similar audio processing software. A noise gate is an audio processing tool that attenuates or removes noise that is below a certain threshold. It is commonly used in audio production to reduce background noise in recordings.
 

@@ -8,7 +8,7 @@ tags:
   - yadm
 permalink: /dev/cfgmgmt
 ---
-## Index
+
 - [[Ansible Variable Precedence]]
 
 

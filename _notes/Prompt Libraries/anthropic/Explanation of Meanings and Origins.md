@@ -16,8 +16,6 @@ draft: true
 
 **Condensed:** Explain the meaning and origin of a user-provided idiom or proverb, including its figurative meaning, typical usage, historical context, and any <span style="background:rgba(240, 107, 5, 0.2)">interesting origin stories</span>.
 
-
-
 ```json
 {
   "instruction": {

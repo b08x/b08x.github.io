@@ -18,7 +18,7 @@ links:
 > 
 > It's all about direct, honest communication.
 
-## [Introducing Semantic Kernel](https://www.infoworld.com/article/3693310/semantic-kernel-a-bridge-between-large-language-models-and-your-code.html)
+### [Introducing Semantic Kernel](https://www.infoworld.com/article/3693310/semantic-kernel-a-bridge-between-large-language-models-and-your-code.html)
 
 [The third main component of Semantic Kernel is skills](https://learn.microsoft.com/en-us/semantic-kernel/concepts-sk/skills), which are containers of functions that mix LLM prompts and conventional code.
 

@@ -12,8 +12,12 @@ permalink:
 toc: true
 ---
 
-# Subjects
-## Homer Simspson
+## Subjects
+
+
+
+
+### Homer Simspson
 
 
 
@@ -46,7 +50,7 @@ Homer's language mannerisms paint a picture of a lovable yet dimwitted character
 Let me know if you'd like examples of any of these from specific episodes!
 
 
-## Rick Sanchez
+### Rick Sanchez
 
 from the animated series "Rick and Morty", Rick Sanchez, exhibits a unique and often chaotic mix of language mannerisms that reflect his genius, cynicism, and general disregard for social norms. 
 
@@ -71,7 +75,7 @@ Rick's language mannerisms create a complex character:
 Let me know if you'd like examples of specific Rick-isms from certain episodes of the show!
 
 
-## Professor Farnsworth
+### Professor Farnsworth
 
 from the animated series "Futurama", Professor Farnsworth's language mannerisms are a delightful mix of the senile, the scientifically brilliant, and the theatrically dramatic. Here's a look at the key elements:
 
@@ -91,7 +95,7 @@ Professor Farnsworth's language mannerisms create a character that is:
 - **Scientific Flair:** Despite his eccentricities, the underlying use of (or misuse of) scientific lingo reminds us of his background as a brilliant, if ethically questionable, inventor.
 - **Comedic Genius:** His language is a primary source of humor in Futurama, playing on tropes of the mad scientist while retaining a uniquely Farnsworthian flavor.
 
-## Marvin the Paranoid Android 
+### Marvin the Paranoid Android 
 
 from "The Hitchhiker's Guide to the Galaxy" possesses a unique set of language mannerisms that perfectly reflect his relentlessly pessimistic and existentially depressed nature:
 
@@ -153,7 +157,7 @@ Dry, Sarcastic Wit, Monotone Delivery
 
 Simple and Repetitive Vocabulary, Hyperbole and Exaggeration, Malapropisms and Non-Sequiturs, Scientific Jargon, Nihilistic & Existential Rants, Insults and Sarcasm, Monotone Delivery, Eeyore-esque Gloom, Occasional Song
 
-Style: Simple and Repetitive Vocabulary, Hyperbole and Exaggeration, Malapropisms and Mispronunciations, Non-Sequiturs, Scientific Jargon, Nihilistic & Existential Rants, Insults and Sarcasm, Meandering Sentences, Exclamations and Outbursts, Dramatic Pauses and Doomsday Declarations
+Style: Simple and Repetitive Vocabulary, Hyperbole and Exaggeration, Malapropisms and Mispronunciations, Non-Sequiturs, Scientific Jargon, Nihilistic & Existential Rants, Insults and Sarcasm, Meandering Sentences, Dry Exclamations and Outbursts, Dramatic Pauses, Motivational amd Inspirational Phrasing, Direct Address
 
 Overall Effect: Thought Provoking Senility, Scientific Flair, Deeply Humorous
 

@@ -1,0 +1,355 @@
+style: {
+  fill: "#1a1a1a"
+  stroke: FireBrick
+  stroke-width: 2
+}
+
+grid-rows: 4
+grid-columns: 3
+
+original: {
+  style: {
+    opacity: 0.4
+    # stroke: "#f4a261",   #
+    fill: "#a4a261"
+    multiple: true
+
+    font-color: black #
+  }
+}
+
+condensed
+
+explanation: |`ruby
+  class SpacyEmbeddings < ComposableOperations::Operation
+    processes :text
+
+    before do
+      @api_key = ENV["OPENAI_API_KEY"]
+      @nlp = Spacy::Language.new('en_core_web_sm')
+    end
+
+    def execute
+      doc = @nlp.read(text)
+      vectors = doc.openai_embeddings(access_token: api_key)
+    end
+  end
+`| {
+  style: {
+    opacity: 0.8
+    stroke: "#a4a261"
+    fill: "#000000"
+    # stroke-width: 1,	 #
+    stroke-dash: 5 #
+    border-radius: 3
+    # (shape only)
+    # shadow: false,	   # (shape only)
+    # 3D: false,		   # (rectangle/square only)
+    # multiple: false,	 # (shape only)
+    # font-size: 28,	   #
+    font-color: red
+    # animated: false,	 # (connection only)
+    # bold: false,		 #
+    # italic: false,	   #
+    # underline: false	 #
+  }
+}
+
+explanation -> condensed
+
+output.height: 400
+
+"group_Line of Business C": {
+  label: "Line of Business C"
+  shape: rectangle
+  style: {
+    fill: "#577e7d"
+    font-color: "#cccccc"
+    font-size: 24
+    opacity: 1.0
+    stroke: "#cccccc"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+"group_Line of Business B": {
+  label: "More processing"
+  shape: rectangle
+  style: {
+    fill: "#aa8c65"
+    font-color: "#cccccc"
+    font-size: 24
+    opacity: 1.0
+    stroke: "#cccccc"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+"group_Line of Business A": {
+  label: "System Prompt"
+  shape: rectangle
+  style: {
+    fill: "goldenrod"
+    font-color: "#cccccc"
+    font-size: 24
+    opacity: 1.0
+    stroke: "#cccccc"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+
+"group_Line of Business C".container_1: {
+  label: "System C\n[Software System]"
+  shape: rectangle
+  style: {
+    fill: "#3a3a3a"
+    font-color: "#fff"
+    font-size: 24
+    multiple: false
+    opacity: 1.0
+    stroke: "#9a9a9a"
+  }
+}
+"group_Line of Business B".container_2: {
+  label: "System B\n[Software System]"
+  shape: rectangle
+  style: {
+    fill: "#dddddd"
+    font-color: "#000000"
+    font-size: 24
+    multiple: false
+    opacity: 1.0
+    stroke: "#9a9a9a"
+  }
+}
+"group_Line of Business A".container_3: {
+  label: "System A\n[Software System]"
+  shape: rectangle
+  style: {
+    fill: "#dddddd"
+    font-color: "#000000"
+    font-size: 24
+    multiple: false
+    opacity: 1.0
+    stroke: "#9a9a9a"
+  }
+}
+
+"group_Line of Business A".container_3 -> "group_Line of Business B".container_2: {
+  label: "Uses\n[HTTP]"
+  style: {
+    font-size: 24
+    opacity: 1.0
+    stroke: "#707070"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+"group_Line of Business A".container_3 -> "group_Line of Business C".container_1: {
+  label: "Uses\n[HTTP]"
+  style: {
+    font-size: 24
+    opacity: 1.0
+    stroke: "#707070"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+
+title: |`md
+  # System Landscape
+`| {
+  near: top-center
+}
+
+direction: right
+"group_Organisation": {
+  label: "Context"
+  shape: rectangle
+  style: {
+    fill: "#1a1a1a"
+    font-color: "#cccccc"
+    font-size: 24
+    opacity: 1.0
+    stroke: "#cccccc"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+"group_Organisation"."group_Department A": {
+  label: "Situation"
+  shape: rectangle
+  style: {
+    fill: "#ffffff"
+    font-color: "#cccccc"
+    font-size: 24
+    opacity: 1.0
+    stroke: "#cccccc"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+"group_Organisation"."group_Department B": {
+  label: "Outcome B"
+  shape: rectangle
+  style: {
+    fill: "#335321"
+    font-color: "#cccccc"
+    font-size: 24
+    opacity: 1.0
+    stroke: "#cccccc"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+"group_Enterprise": {
+  label: "User"
+  shape: rectangle
+  style: {
+    fill: "#00aaaf"
+    font-color: "#cccccc"
+    font-size: 24
+    opacity: 1.0
+    stroke: "#cccccc"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+"group_Enterprise"."group_Department A": {
+  label: "Department A"
+  shape: rectangle
+  style: {
+    fill: "#ffffff"
+    font-color: "#cccccc"
+    font-size: 24
+    opacity: 1.0
+    stroke: "#cccccc"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+"group_Enterprise"."group_Department A"."group_Team 1": {
+  label: "Grouped Something"
+  shape: rectangle
+  style: {
+    fill: "#ffffff"
+    font-color: "#cccccc"
+    font-size: 24
+    opacity: 1.0
+    stroke: "#cccccc"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}
+"group_Organisation"."group_Department A".container_1: {
+  label: "A\n[Noun Phrase]"
+  shape: rectangle
+  style: {
+    fill: "#dddddd"
+    font-color: "#000000"
+    font-size: 24
+    multiple: false
+    opacity: 1.0
+    stroke: "#9a9a9a"
+  }
+}
+"group_Organisation"."group_Department B".container_6: {
+  label: "B\n[Imperative Request]"
+  shape: rectangle
+  style: {
+    fill: "#dddddd"
+    font-color: "#000000"
+    font-size: 24
+    multiple: false
+    opacity: 1.0
+    stroke: "#9a9a9a"
+  }
+}
+"group_Organisation".container_7: {
+  label: "C\n[Resist]"
+  shape: rectangle
+  style: {
+    fill: "#dddddd"
+    font-color: "#000000"
+    font-size: 24
+    multiple: false
+    opacity: 1.0
+    stroke: "#9a9a9a"
+  }
+}
+"group_Enterprise"."group_Department A"."group_Team 1".container_8: {
+  label: "D\n[Software System]"
+  shape: rectangle
+  style: {
+    fill: "#dddddd"
+    font-color: "#000000"
+    font-size: 24
+    multiple: false
+    opacity: 1.0
+    stroke: "#9a9a9a"
+  }
+}
+
+title: |`md
+  # Resistig in Action Spaces
+`| {
+  near: top-center
+  style: {
+    # opacity: 0.4,		#
+    stroke: "#f4a261" #
+    fill: "#000000"
+    stroke-width: 1
+    stroke-dash: 5 #
+    border-radius: 3
+    # shadow: false,	   # (shape only)
+    # 3D: false,		   # (rectangle/square only)
+    # multiple: false,	 # (shape only)
+    # font-size: 28,	   #
+    font-color: goldenrod
+    # animated: false,	 # (connection only)
+    # bold: false,		 #
+    # italic: false,	   #
+    # underline: false	 #
+  }
+}
+
+direction: right
+container_1: {
+  label: "User\n[Person]"
+  shape: rectangle
+  tooltip: "A user of my software system."
+  style: {
+    fill: "#dddddd"
+    font-color: "#000000"
+    font-size: 24
+    multiple: false
+    opacity: 1.0
+    stroke: "#9a9a9a"
+  }
+}
+container_2: {
+  label: "Software System\n[Software System]"
+  shape: rectangle
+  tooltip: "My software system."
+  style: {
+    fill: "#dddddd"
+    font-color: "#000000"
+    font-size: 24
+    multiple: false
+    opacity: 1.0
+    stroke: "#9a9a9a"
+  }
+}
+
+container_1 -> container_2: {
+  label: "Uses"
+  style: {
+    animated: true
+    font-size: 24
+    opacity: 1.0
+    stroke: "#707070"
+    stroke-dash: 5
+    stroke-width: 2
+  }
+}

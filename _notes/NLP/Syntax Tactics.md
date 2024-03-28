@@ -14,16 +14,6 @@ toc: true
 draft:
 ---
 
-<ul class="chat-thread">
-  <li>
-    <p>Please condense this text, preserve context</p>
-    <p>"""Students with an interest in music and lyrics: Those who enjoy deconstructing songs, analyzing how lyrics evoke emotions, and exploring themes across different musical genres. Creatively inclined students: Those who enjoy writing (poetry, short stories, etc.) or experimenting with creative mediums, regardless of their prior technical knowledge. Technologically curious students: Those interested in how AI works and how it can be used for creative purposes. Interest in coding or computer science is a plus, but not mandatory. Analytical thinkers: Students who enjoy delving deeper into texts, exploring multiple interpretations, and debating the nuances of meaning. Students seeking interdisciplinary connections: Those who are fascinated by the interplay between language, technology, and creativity"""</p>
-  </li>
-  <li>
-    <p>Students interested in music and lyrics, creatively inclined individuals, technologically curious students, analytical thinkers, and those seeking interdisciplinary connections.</p>
-  </li>
-</ul>
-
 ## Transformation or Manipulation?
 
 Much like witchcraft, in Natural Language Processing there is a focus on the precise arrangement of elements, words, and various symbols to achieve a specific outcome.
