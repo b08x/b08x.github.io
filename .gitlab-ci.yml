@@ -6,7 +6,7 @@ variables:
 
 before_script:
   - apt update -qq
-  - apt install -y -V --no-install-recommends libvips-dev libopenslide-dev jupyter-core
+  - apt install -y -V --no-install-recommends libvips-dev libopenslide-dev jupyter-core jupyter-nbconvert
   - apt-get clean && rm -rf /var/lib/apt/lists/*   
   - gem install bundler
   - bundle install
