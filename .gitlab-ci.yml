@@ -18,7 +18,7 @@ test:
   - bundle exec jekyll build -d test
   artifacts:
     paths:
-    - test
+    - _site
   rules:
     - if: $CI_COMMIT_REF_NAME != $CI_DEFAULT_BRANCH
 
