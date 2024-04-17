@@ -5,9 +5,9 @@ variables:
   LC_ALL: C.UTF-8
 
 before_script:
-  - sudo apt update -qq
-  - sudo apt install libvips-dev libopenslide-dev jupyter-core
-  - sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*   
+  - apt update -qq
+  - apt install libvips-dev libopenslide-dev jupyter-core
+  - apt-get clean && rm -rf /var/lib/apt/lists/*   
   - gem install bundler
   - bundle install
 
