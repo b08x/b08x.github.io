@@ -1,0 +1,1362 @@
+{
+  "vaultName": "syncopated notes",
+  "lastExport": 1713313599257,
+  "pluginVersion": "1.8.01",
+  "validBodyClasses": "publish css-settings-manager theme-dark show-inline-title ctp-mocha ctp-full-palette hide-folder-note folder-note-underline folder-note-underline-path fn-whitespace-stop-collapsing",
+  "useCustomHeadContent": false,
+  "useCustomFavicon": false,
+  "files": [
+    "notebook/Daily/2024-02-16.md",
+    "notebook/Daily/2024-02-25.md",
+    "notebook/Daily/2024-02-28.md",
+    "notebook/Daily/2024-03-02.md",
+    "notebook/Daily/2024-03-14.md",
+    "notebook/Daily/2024-03-24.md",
+    "notebook/Daily/2024-03-25.md",
+    "notebook/Daily/2024-03-26.md",
+    "notebook/Daily/2024-03-28.md",
+    "notebook/Daily/2024-03-30.md",
+    "notebook/Daily/2024-04-05.md",
+    "notebook/Daily/2024-04-11.md",
+    "notebook/Daily/2024-04-16.md",
+    "notebook/Daily/Daily.md",
+    "notebook/Dev/Ops/Systems/Systems.md",
+    "notebook/Dev/Ops/Building Interactive Chat Applications With Third Party Adapters.md",
+    "notebook/Dev/Ops/LocalAI.md",
+    "notebook/Dev/Ops/repoctl.md",
+    "notebook/Dev/Ops/Ops.md",
+    "notebook/Dev/Ruby/nlp/notebooks/notebooks.md",
+    "notebook/Dev/Ruby/nlp/nlp.md",
+    "notebook/Dev/Ruby/Ruby.md",
+    "notebook/Dev/Ruby/Unless.md",
+    "notebook/Dev/Ruby/Using the Iterator Design Pattern.md",
+    "notebook/Dev/Audio Tools Augmenting Development.md",
+    "notebook/Dev/Dev.md",
+    "notebook/Dev/git flow.md",
+    "notebook/LLM/LLM Applications/LLM Applications.md",
+    "notebook/LLM/Model Notes/anthropic.md",
+    "notebook/LLM/Model Notes/gemini.md",
+    "notebook/LLM/Model Notes/Model Notes.md",
+    "notebook/LLM/llmos.md",
+    "notebook/LLM/LLM.md",
+    "notebook/NLP/@syncopatednotes.md",
+    "notebook/NLP/Attributive Noun.md",
+    "notebook/NLP/Linguistic Concepts and Terminologies.md",
+    "notebook/NLP/NLP.md",
+    "notebook/NLP/Nuances.md",
+    "notebook/NLP/Persons.md",
+    "notebook/NLP/Pragmatic Correlating.md",
+    "notebook/NLP/Systemic Functional Linguistics.md",
+    "notebook/Prompt Engineering/Prompt Editing/antisteve0000.canvas",
+    "notebook/Prompt Engineering/Prompt Editing/Condensing Prompts - todo.md",
+    "notebook/Prompt Engineering/Prompt Editing/Parameter Tuning with Mixtral.md",
+    "notebook/Prompt Engineering/Prompt Editing/Prompt Editing.md",
+    "notebook/Prompt Engineering/Prompt Editing/Summary or Synthesis of Information.md",
+    "notebook/Prompt Engineering/Condense_and_Flag.canvas",
+    "notebook/Prompt Engineering/condense-with-example.canvas",
+    "notebook/Prompt Engineering/condense-with-example-alt-layout.canvas",
+    "notebook/Prompt Engineering/Dialog Tone.md",
+    "notebook/Prompt Engineering/Interference & Hallucinations.md",
+    "notebook/Prompt Engineering/Logomastic Kernel.md",
+    "notebook/Prompt Engineering/Metaprompt - The Prompt.md",
+    "notebook/Prompt Engineering/Prompt Engineering.md",
+    "notebook/Prompt Engineering/Reasoning Scratchpad.md",
+    "notebook/Prompt Engineering/Reflexion.md",
+    "notebook/Prompt Engineering/Schrodingers Prompt.canvas",
+    "notebook/Prompt Engineering/Set of Mark.md",
+    "notebook/Prompt Engineering/Synonyms for \"rewrite\".md",
+    "notebook/Prompt Engineering/Syntax Tactics.md",
+    "notebook/Prompt Engineering/Testing with Agenta.md",
+    "notebook/Prompt Engineering/transcribe_summarize_plus_insight.canvas",
+    "notebook/Prompt Engineering/Untitled.md",
+    "notebook/Prompt Engineering/wavjourney prompts.md",
+    "notebook/Prompt Engineering/Writing Styles.md",
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Audio Engineer.md",
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Character Sheets.md",
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Clinical psychologist.md",
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Narrator.md",
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Programmer.md",
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Steve.md",
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Tech-Savvy Innovator.md",
+    "notebook/PromptLibrary/Data Driven Characters/Data Driven Characters.md",
+    "notebook/PromptLibrary/Data Driven Characters/Mannerisms and Style.md",
+    "notebook/PromptLibrary/Data Driven Characters/The Database and the Narrative.md",
+    "notebook/PromptLibrary/A Visual Metaphor.md",
+    "notebook/PromptLibrary/AgileBloom.md",
+    "notebook/PromptLibrary/Converting Image Descriptions Into Imperative Prompts.md",
+    "notebook/PromptLibrary/PromptLibrary.md",
+    "notebook/Retrieval-Augmented Generation/Knowledge Graph.md",
+    "notebook/Retrieval-Augmented Generation/Generated Augmented Retrieval.md",
+    "notebook/Retrieval-Augmented Generation/Ontological Knowledge.md",
+    "notebook/Retrieval-Augmented Generation/Ontology Construction.md",
+    "notebook/Retrieval-Augmented Generation/Retrieval.md",
+    "notebook/Retrieval-Augmented Generation/Retrieval Augmented Thoughts.md",
+    "notebook/Retrieval-Augmented Generation/Retrieval-Augmented Generation.md",
+    "notebook/Text Processing/Capturing Personality with Verb Phrase Extraction.md",
+    "notebook/Text Processing/Chunk Analyzer.md",
+    "notebook/Text Processing/Code Hierarchy Node Parser.md",
+    "notebook/Text Processing/Echo Embedding.md",
+    "notebook/Text Processing/Parts of a Document.md",
+    "notebook/Text Processing/Ranking Chunks.md",
+    "notebook/Text Processing/Soundex.md",
+    "notebook/Text Processing/Stop Words.md",
+    "notebook/Text Processing/STS Semantic Textual Similarity.md",
+    "notebook/Text Processing/Text Processing.md",
+    "Home.md",
+    "lib/media/variable_explainations.png",
+    "lib/media/img-2024-03-26-092133-1.png",
+    "lib/media/img-2024-03-26-093220.png",
+    "lib/media/img-2024-03-26-093336.png",
+    "lib/media/img-2024-03-26-093554.png",
+    "lib/media/img-2024-03-26-093632.png",
+    "lib/media/bot.svg",
+    "lib/media/user.svg",
+    "lib/media/img-2024-03-28-065406-1.png",
+    "lib/media/img-2024-04-11-045330.png",
+    "lib/media/explorellm_promptexample.png",
+    "lib/media/workstation.png",
+    "lib/media/gemini_generated_image01.jpeg",
+    "lib/media/gemini_generated_image02.jpeg",
+    "lib/media/gemini_generated_image07.jpeg",
+    "lib/media/image08.jpeg",
+    "lib/media/image09.jpeg",
+    "lib/media/image10.jpeg",
+    "lib/media/image11.jpeg",
+    "lib/media/image12.jpeg",
+    "lib/media/image13.jpeg",
+    "lib/media/image14.jpeg",
+    "lib/media/image15.jpeg",
+    "lib/media/image16.jpeg",
+    "lib/media/image17.jpeg",
+    "lib/media/image18.jpeg",
+    "lib/media/image19.jpeg",
+    "lib/media/image20.jpeg",
+    "lib/media/image21.jpeg",
+    "lib/media/image22.jpeg",
+    "lib/media/image23.jpeg",
+    "lib/media/image24.jpeg",
+    "lib/media/image25.jpeg",
+    "lib/media/image26.jpeg",
+    "lib/media/image27.jpeg",
+    "lib/media/image28.jpeg",
+    "lib/media/image29.jpeg",
+    "lib/media/image30.jpeg",
+    "lib/media/image31.jpeg",
+    "lib/media/image32.jpeg",
+    "lib/media/creation_of_comparsion_exemplars.png",
+    "lib/media/pasted-image-20240315062214.png",
+    "lib/media/pasted-image-20240315063041.png",
+    "lib/media/pasted-image-20240315063144.png",
+    "lib/fonts/94f2f163d4b698242fef.otf",
+    "lib/fonts/72505e6a122c6acd5471.woff2",
+    "lib/fonts/2d5198822ab091ce4305.woff2",
+    "lib/fonts/c8ba52b05a9ef10f4758.woff2",
+    "lib/fonts/cb10ffd7684cd9836a05.woff2",
+    "lib/fonts/b5f0f109bc88052d4000.woff2",
+    "lib/fonts/cbe0ae49c52c920fd563.woff2",
+    "lib/fonts/535a6cf662596b3bd6a6.woff2",
+    "lib/fonts/70cc7ff27245e82ad414.ttf",
+    "lib/fonts/454577c22304619db035.ttf",
+    "lib/fonts/52ac8f3034507f1d9e53.ttf",
+    "lib/fonts/05b618077343fbbd92b7.ttf",
+    "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
+    "lib/media/874d8b8e340f75575caa.svg",
+    "lib/html/file-tree.html",
+    "lib/scripts/webpage.js",
+    "lib/scripts/minisearch.js",
+    "lib/media/favicon.png",
+    "lib/styles/obsidian.css",
+    "lib/styles/other-plugins.css",
+    "lib/styles/theme.css",
+    "lib/styles/global-variable-styles.css",
+    "lib/styles/supported-plugins.css",
+    "lib/styles/main-styles.css",
+    "lib/styles/snippets.css"
+  ],
+  "mainDependencies": [
+    "lib/fonts/94f2f163d4b698242fef.otf",
+    "lib/fonts/72505e6a122c6acd5471.woff2",
+    "lib/fonts/2d5198822ab091ce4305.woff2",
+    "lib/fonts/c8ba52b05a9ef10f4758.woff2",
+    "lib/fonts/cb10ffd7684cd9836a05.woff2",
+    "lib/fonts/b5f0f109bc88052d4000.woff2",
+    "lib/fonts/cbe0ae49c52c920fd563.woff2",
+    "lib/fonts/535a6cf662596b3bd6a6.woff2",
+    "lib/fonts/70cc7ff27245e82ad414.ttf",
+    "lib/fonts/454577c22304619db035.ttf",
+    "lib/fonts/52ac8f3034507f1d9e53.ttf",
+    "lib/fonts/05b618077343fbbd92b7.ttf",
+    "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
+    "lib/media/874d8b8e340f75575caa.svg",
+    "lib/html/file-tree.html",
+    "lib/scripts/webpage.js",
+    "lib/scripts/minisearch.js",
+    "lib/media/favicon.png",
+    "lib/styles/obsidian.css",
+    "lib/styles/other-plugins.css",
+    "lib/styles/theme.css",
+    "lib/styles/global-variable-styles.css",
+    "lib/styles/supported-plugins.css",
+    "lib/styles/main-styles.css",
+    "lib/styles/snippets.css"
+  ],
+  "fileInfo": {
+    "notebook/Prompt Engineering/condense-with-example.canvas": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 15381,
+      "exportedPath": "notebook/prompt-engineering/condense-with-example.html",
+      "dependencies": []
+    },
+    "lib/scripts/graph-wasm.wasm": {
+      "modifiedTime": 1713282989993,
+      "sourceSize": 23377,
+      "exportedPath": "lib/scripts/graph-wasm.wasm",
+      "dependencies": []
+    },
+    "lib/fonts/94f2f163d4b698242fef.otf": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 66800,
+      "exportedPath": "lib/fonts/94f2f163d4b698242fef.otf",
+      "dependencies": []
+    },
+    "lib/fonts/72505e6a122c6acd5471.woff2": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 104232,
+      "exportedPath": "lib/fonts/72505e6a122c6acd5471.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/2d5198822ab091ce4305.woff2": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 104332,
+      "exportedPath": "lib/fonts/2d5198822ab091ce4305.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/c8ba52b05a9ef10f4758.woff2": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 98868,
+      "exportedPath": "lib/fonts/c8ba52b05a9ef10f4758.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/cb10ffd7684cd9836a05.woff2": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 106876,
+      "exportedPath": "lib/fonts/cb10ffd7684cd9836a05.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/b5f0f109bc88052d4000.woff2": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 105804,
+      "exportedPath": "lib/fonts/b5f0f109bc88052d4000.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/cbe0ae49c52c920fd563.woff2": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 106108,
+      "exportedPath": "lib/fonts/cbe0ae49c52c920fd563.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/535a6cf662596b3bd6a6.woff2": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 111708,
+      "exportedPath": "lib/fonts/535a6cf662596b3bd6a6.woff2",
+      "dependencies": []
+    },
+    "lib/fonts/70cc7ff27245e82ad414.ttf": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 192740,
+      "exportedPath": "lib/fonts/70cc7ff27245e82ad414.ttf",
+      "dependencies": []
+    },
+    "lib/fonts/454577c22304619db035.ttf": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 161376,
+      "exportedPath": "lib/fonts/454577c22304619db035.ttf",
+      "dependencies": []
+    },
+    "lib/fonts/52ac8f3034507f1d9e53.ttf": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 191568,
+      "exportedPath": "lib/fonts/52ac8f3034507f1d9e53.ttf",
+      "dependencies": []
+    },
+    "lib/fonts/05b618077343fbbd92b7.ttf": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 155288,
+      "exportedPath": "lib/fonts/05b618077343fbbd92b7.ttf",
+      "dependencies": []
+    },
+    "lib/fonts/4bb6ac751d1c5478ff3a.woff2": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 7876,
+      "exportedPath": "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
+      "dependencies": []
+    },
+    "lib/media/874d8b8e340f75575caa.svg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 317,
+      "exportedPath": "lib/media/874d8b8e340f75575caa.svg",
+      "dependencies": []
+    },
+    "lib/html/file-tree.html": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 93620,
+      "exportedPath": "lib/html/file-tree.html",
+      "dependencies": []
+    },
+    "lib/scripts/webpage.js": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 47290,
+      "exportedPath": "lib/scripts/webpage.js",
+      "dependencies": []
+    },
+    "lib/scripts/graph-view.js": {
+      "modifiedTime": 1713282989993,
+      "sourceSize": 15519,
+      "exportedPath": "lib/scripts/graph-view.js",
+      "dependencies": []
+    },
+    "lib/scripts/graph-wasm.js": {
+      "modifiedTime": 1713282989993,
+      "sourceSize": 14021,
+      "exportedPath": "lib/scripts/graph-wasm.js",
+      "dependencies": []
+    },
+    "lib/scripts/graph-render-worker.js": {
+      "modifiedTime": 1713282989993,
+      "sourceSize": 5179,
+      "exportedPath": "lib/scripts/graph-render-worker.js",
+      "dependencies": []
+    },
+    "lib/scripts/tinycolor.js": {
+      "modifiedTime": 1713282989993,
+      "sourceSize": 29832,
+      "exportedPath": "lib/scripts/tinycolor.js",
+      "dependencies": []
+    },
+    "lib/scripts/pixi.js": {
+      "modifiedTime": 1713282989993,
+      "sourceSize": 449509,
+      "exportedPath": "lib/scripts/pixi.js",
+      "dependencies": []
+    },
+    "lib/scripts/minisearch.js": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 29422,
+      "exportedPath": "lib/scripts/minisearch.js",
+      "dependencies": []
+    },
+    "lib/media/favicon.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1105,
+      "exportedPath": "lib/media/favicon.png",
+      "dependencies": []
+    },
+    "lib/scripts/graph-data.js": {
+      "modifiedTime": 1713282989993,
+      "sourceSize": 9865,
+      "exportedPath": "lib/scripts/graph-data.js",
+      "dependencies": []
+    },
+    "lib/styles/obsidian.css": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 157722,
+      "exportedPath": "lib/styles/obsidian.css",
+      "dependencies": []
+    },
+    "lib/styles/other-plugins.css": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1092740,
+      "exportedPath": "lib/styles/other-plugins.css",
+      "dependencies": []
+    },
+    "lib/styles/theme.css": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2245875,
+      "exportedPath": "lib/styles/theme.css",
+      "dependencies": []
+    },
+    "lib/styles/global-variable-styles.css": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 444,
+      "exportedPath": "lib/styles/global-variable-styles.css",
+      "dependencies": []
+    },
+    "lib/styles/supported-plugins.css": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 11096,
+      "exportedPath": "lib/styles/supported-plugins.css",
+      "dependencies": []
+    },
+    "lib/styles/main-styles.css": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 23130,
+      "exportedPath": "lib/styles/main-styles.css",
+      "dependencies": []
+    },
+    "lib/styles/snippets.css": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 7010,
+      "exportedPath": "lib/styles/snippets.css",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-02-16.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 177,
+      "exportedPath": "notebook/daily/2024-02-16.html",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-02-25.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 10412,
+      "exportedPath": "notebook/daily/2024-02-25.html",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-02-28.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 219,
+      "exportedPath": "notebook/daily/2024-02-28.html",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-03-02.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1187,
+      "exportedPath": "notebook/daily/2024-03-02.html",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-03-14.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 875,
+      "exportedPath": "notebook/daily/2024-03-14.html",
+      "dependencies": [
+        "lib/media/variable_explainations.png",
+        "lib/media/variable_explainations.png"
+      ]
+    },
+    "notebook/Daily/2024-03-24.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 291,
+      "exportedPath": "notebook/daily/2024-03-24.html",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-03-25.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1303,
+      "exportedPath": "notebook/daily/2024-03-25.html",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-03-26.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 574,
+      "exportedPath": "notebook/daily/2024-03-26.html",
+      "dependencies": [
+        "lib/media/img-2024-03-26-092133-1.png",
+        "lib/media/img-2024-03-26-092133-1.png",
+        "lib/media/img-2024-03-26-093220.png",
+        "lib/media/img-2024-03-26-093220.png",
+        "lib/media/img-2024-03-26-093336.png",
+        "lib/media/img-2024-03-26-093336.png",
+        "lib/media/img-2024-03-26-093554.png",
+        "lib/media/img-2024-03-26-093554.png",
+        "lib/media/img-2024-03-26-093632.png",
+        "lib/media/img-2024-03-26-093632.png"
+      ]
+    },
+    "notebook/Daily/2024-03-28.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 463,
+      "exportedPath": "notebook/daily/2024-03-28.html",
+      "dependencies": [
+        "lib/media/bot.svg",
+        "lib/media/bot.svg",
+        "lib/media/user.svg",
+        "lib/media/user.svg",
+        "lib/media/img-2024-03-28-065406-1.png",
+        "lib/media/img-2024-03-28-065406-1.png"
+      ]
+    },
+    "notebook/Daily/2024-03-30.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 883,
+      "exportedPath": "notebook/daily/2024-03-30.html",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-04-05.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 255,
+      "exportedPath": "notebook/daily/2024-04-05.html",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-04-11.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 3522,
+      "exportedPath": "notebook/daily/2024-04-11.html",
+      "dependencies": []
+    },
+    "notebook/Daily/2024-04-16.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 368,
+      "exportedPath": "notebook/daily/2024-04-16.html",
+      "dependencies": []
+    },
+    "notebook/Daily/Daily.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1050,
+      "exportedPath": "notebook/daily/daily.html",
+      "dependencies": [
+        "lib/media/img-2024-03-26-092133-1.png",
+        "lib/media/img-2024-03-26-092133-1.png",
+        "lib/media/img-2024-03-26-093220.png",
+        "lib/media/img-2024-03-26-093220.png",
+        "lib/media/img-2024-03-26-093336.png",
+        "lib/media/img-2024-03-26-093336.png",
+        "lib/media/img-2024-03-26-093554.png",
+        "lib/media/img-2024-03-26-093554.png",
+        "lib/media/img-2024-03-26-093632.png",
+        "lib/media/img-2024-03-26-093632.png",
+        "lib/media/bot.svg",
+        "lib/media/bot.svg",
+        "lib/media/user.svg",
+        "lib/media/user.svg",
+        "lib/media/img-2024-03-28-065406-1.png",
+        "lib/media/img-2024-03-28-065406-1.png",
+        "lib/media/variable_explainations.png",
+        "lib/media/variable_explainations.png"
+      ]
+    },
+    "notebook/Dev/Ops/Systems/Systems.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 172,
+      "exportedPath": "notebook/dev/ops/systems/systems.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Ops/Building Interactive Chat Applications With Third Party Adapters.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 12965,
+      "exportedPath": "notebook/dev/ops/building-interactive-chat-applications-with-third-party-adapters.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Ops/LocalAI.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2870,
+      "exportedPath": "notebook/dev/ops/localai.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Ops/repoctl.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 190,
+      "exportedPath": "notebook/dev/ops/repoctl.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Ops/Ops.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 675,
+      "exportedPath": "notebook/dev/ops/ops.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Ruby/nlp/notebooks/notebooks.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 163,
+      "exportedPath": "notebook/dev/ruby/nlp/notebooks/notebooks.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Ruby/nlp/nlp.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 17060,
+      "exportedPath": "notebook/dev/ruby/nlp/nlp.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Ruby/Ruby.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 297,
+      "exportedPath": "notebook/dev/ruby/ruby.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Ruby/Unless.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2477,
+      "exportedPath": "notebook/dev/ruby/unless.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Ruby/Using the Iterator Design Pattern.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 4459,
+      "exportedPath": "notebook/dev/ruby/using-the-iterator-design-pattern.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Audio Tools Augmenting Development.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1179,
+      "exportedPath": "notebook/dev/audio-tools-augmenting-development.html",
+      "dependencies": []
+    },
+    "notebook/Dev/Dev.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 189,
+      "exportedPath": "notebook/dev/dev.html",
+      "dependencies": []
+    },
+    "notebook/Dev/git flow.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 10755,
+      "exportedPath": "notebook/dev/git-flow.html",
+      "dependencies": []
+    },
+    "notebook/LLM/LLM Applications/LLM Applications.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 825,
+      "exportedPath": "notebook/llm/llm-applications/llm-applications.html",
+      "dependencies": []
+    },
+    "notebook/LLM/Model Notes/anthropic.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 456,
+      "exportedPath": "notebook/llm/model-notes/anthropic.html",
+      "dependencies": []
+    },
+    "notebook/LLM/Model Notes/gemini.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 120,
+      "exportedPath": "notebook/llm/model-notes/gemini.html",
+      "dependencies": []
+    },
+    "notebook/LLM/Model Notes/Model Notes.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 269,
+      "exportedPath": "notebook/llm/model-notes/model-notes.html",
+      "dependencies": []
+    },
+    "notebook/LLM/llmos.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1262,
+      "exportedPath": "notebook/llm/llmos.html",
+      "dependencies": []
+    },
+    "notebook/LLM/LLM.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1066,
+      "exportedPath": "notebook/llm/llm.html",
+      "dependencies": []
+    },
+    "notebook/NLP/@syncopatednotes.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 12105,
+      "exportedPath": "notebook/nlp/@syncopatednotes.html",
+      "dependencies": []
+    },
+    "notebook/NLP/Attributive Noun.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1424,
+      "exportedPath": "notebook/nlp/attributive-noun.html",
+      "dependencies": []
+    },
+    "notebook/NLP/Linguistic Concepts and Terminologies.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 4700,
+      "exportedPath": "notebook/nlp/linguistic-concepts-and-terminologies.html",
+      "dependencies": []
+    },
+    "notebook/NLP/NLP.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 7230,
+      "exportedPath": "notebook/nlp/nlp.html",
+      "dependencies": []
+    },
+    "notebook/NLP/Nuances.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2853,
+      "exportedPath": "notebook/nlp/nuances.html",
+      "dependencies": []
+    },
+    "notebook/NLP/Persons.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2772,
+      "exportedPath": "notebook/nlp/persons.html",
+      "dependencies": []
+    },
+    "notebook/NLP/Pragmatic Correlating.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2547,
+      "exportedPath": "notebook/nlp/pragmatic-correlating.html",
+      "dependencies": []
+    },
+    "notebook/NLP/Systemic Functional Linguistics.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 3202,
+      "exportedPath": "notebook/nlp/systemic-functional-linguistics.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Prompt Editing/antisteve0000.canvas": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2049,
+      "exportedPath": "notebook/prompt-engineering/prompt-editing/antisteve0000.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Prompt Editing/Condensing Prompts - todo.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 7985,
+      "exportedPath": "notebook/prompt-engineering/prompt-editing/condensing-prompts-todo.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Prompt Editing/Parameter Tuning with Mixtral.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 10879,
+      "exportedPath": "notebook/prompt-engineering/prompt-editing/parameter-tuning-with-mixtral.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Prompt Editing/Prompt Editing.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 9821,
+      "exportedPath": "notebook/prompt-engineering/prompt-editing/prompt-editing.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Prompt Editing/Summary or Synthesis of Information.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 6073,
+      "exportedPath": "notebook/prompt-engineering/prompt-editing/summary-or-synthesis-of-information.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Condense_and_Flag.canvas": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 7006,
+      "exportedPath": "notebook/prompt-engineering/condense_and_flag.html",
+      "dependencies": [
+        "lib/media/img-2024-04-11-045330.png"
+      ]
+    },
+    "notebook/Prompt Engineering/condense-with-example-alt-layout.canvas": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 15125,
+      "exportedPath": "notebook/prompt-engineering/condense-with-example-alt-layout.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Dialog Tone.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 12510,
+      "exportedPath": "notebook/prompt-engineering/dialog-tone.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Interference & Hallucinations.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1905,
+      "exportedPath": "notebook/prompt-engineering/interference-&-hallucinations.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Logomastic Kernel.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 32217,
+      "exportedPath": "notebook/prompt-engineering/logomastic-kernel.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Metaprompt - The Prompt.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 35616,
+      "exportedPath": "notebook/prompt-engineering/metaprompt-the-prompt.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Prompt Engineering.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 14722,
+      "exportedPath": "notebook/prompt-engineering/prompt-engineering.html",
+      "dependencies": [
+        "lib/media/explorellm_promptexample.png",
+        "lib/media/explorellm_promptexample.png"
+      ]
+    },
+    "notebook/Prompt Engineering/Reasoning Scratchpad.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 8171,
+      "exportedPath": "notebook/prompt-engineering/reasoning-scratchpad.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Reflexion.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 6491,
+      "exportedPath": "notebook/prompt-engineering/reflexion.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Schrodingers Prompt.canvas": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1365,
+      "exportedPath": "notebook/prompt-engineering/schrodingers-prompt.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Set of Mark.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 11525,
+      "exportedPath": "notebook/prompt-engineering/set-of-mark.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Synonyms for \"rewrite\".md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2594,
+      "exportedPath": "notebook/prompt-engineering/synonyms-for-\"rewrite\".html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Syntax Tactics.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 27034,
+      "exportedPath": "notebook/prompt-engineering/syntax-tactics.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Testing with Agenta.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 18384,
+      "exportedPath": "notebook/prompt-engineering/testing-with-agenta.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/transcribe_summarize_plus_insight.canvas": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 4530,
+      "exportedPath": "notebook/prompt-engineering/transcribe_summarize_plus_insight.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Untitled.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1315,
+      "exportedPath": "notebook/prompt-engineering/untitled.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/wavjourney prompts.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2546,
+      "exportedPath": "notebook/prompt-engineering/wavjourney-prompts.html",
+      "dependencies": []
+    },
+    "notebook/Prompt Engineering/Writing Styles.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 61395,
+      "exportedPath": "notebook/prompt-engineering/writing-styles.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Audio Engineer.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 3328,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/character-sheets/audio-engineer.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Character Sheets.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 285,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/character-sheets/character-sheets.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Clinical psychologist.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 3625,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/character-sheets/clinical-psychologist.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Narrator.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 3501,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/character-sheets/narrator.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Programmer.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 4068,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/character-sheets/programmer.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Steve.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 4802,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/character-sheets/steve.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/Character Sheets/Tech-Savvy Innovator.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 4664,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/character-sheets/tech-savvy-innovator.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/Data Driven Characters.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 278,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/data-driven-characters.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/Mannerisms and Style.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 14351,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/mannerisms-and-style.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Data Driven Characters/The Database and the Narrative.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1350,
+      "exportedPath": "notebook/promptlibrary/data-driven-characters/the-database-and-the-narrative.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/A Visual Metaphor.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1881,
+      "exportedPath": "notebook/promptlibrary/a-visual-metaphor.html",
+      "dependencies": [
+        "lib/media/workstation.png"
+      ]
+    },
+    "notebook/PromptLibrary/AgileBloom.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 4418,
+      "exportedPath": "notebook/promptlibrary/agilebloom.html",
+      "dependencies": []
+    },
+    "notebook/PromptLibrary/Converting Image Descriptions Into Imperative Prompts.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 6483,
+      "exportedPath": "notebook/promptlibrary/converting-image-descriptions-into-imperative-prompts.html",
+      "dependencies": [
+        "lib/media/gemini_generated_image01.jpeg",
+        "lib/media/gemini_generated_image02.jpeg",
+        "lib/media/gemini_generated_image02.jpeg",
+        "lib/media/gemini_generated_image07.jpeg",
+        "lib/media/gemini_generated_image07.jpeg",
+        "lib/media/image08.jpeg",
+        "lib/media/image08.jpeg",
+        "lib/media/image09.jpeg",
+        "lib/media/image09.jpeg",
+        "lib/media/image10.jpeg",
+        "lib/media/image10.jpeg",
+        "lib/media/image11.jpeg",
+        "lib/media/image11.jpeg",
+        "lib/media/image12.jpeg",
+        "lib/media/image12.jpeg",
+        "lib/media/image13.jpeg",
+        "lib/media/image13.jpeg",
+        "lib/media/image14.jpeg",
+        "lib/media/image14.jpeg",
+        "lib/media/image15.jpeg",
+        "lib/media/image15.jpeg",
+        "lib/media/image16.jpeg",
+        "lib/media/image16.jpeg",
+        "lib/media/image17.jpeg",
+        "lib/media/image17.jpeg",
+        "lib/media/image18.jpeg",
+        "lib/media/image18.jpeg",
+        "lib/media/image19.jpeg",
+        "lib/media/image19.jpeg",
+        "lib/media/image20.jpeg",
+        "lib/media/image20.jpeg",
+        "lib/media/image21.jpeg",
+        "lib/media/image21.jpeg",
+        "lib/media/image22.jpeg",
+        "lib/media/image22.jpeg",
+        "lib/media/image23.jpeg",
+        "lib/media/image23.jpeg",
+        "lib/media/image24.jpeg",
+        "lib/media/image24.jpeg",
+        "lib/media/image25.jpeg",
+        "lib/media/image25.jpeg",
+        "lib/media/image26.jpeg",
+        "lib/media/image26.jpeg",
+        "lib/media/image27.jpeg",
+        "lib/media/image27.jpeg",
+        "lib/media/image28.jpeg",
+        "lib/media/image28.jpeg",
+        "lib/media/image29.jpeg",
+        "lib/media/image29.jpeg",
+        "lib/media/image30.jpeg",
+        "lib/media/image30.jpeg",
+        "lib/media/image31.jpeg",
+        "lib/media/image31.jpeg",
+        "lib/media/image32.jpeg",
+        "lib/media/image32.jpeg"
+      ]
+    },
+    "notebook/PromptLibrary/PromptLibrary.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 308,
+      "exportedPath": "notebook/promptlibrary/promptlibrary.html",
+      "dependencies": []
+    },
+    "notebook/Retrieval-Augmented Generation/Knowledge Graph.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 3039,
+      "exportedPath": "notebook/retrieval-augmented-generation/knowledge-graph.html",
+      "dependencies": []
+    },
+    "notebook/Retrieval-Augmented Generation/Generated Augmented Retrieval.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 148,
+      "exportedPath": "notebook/retrieval-augmented-generation/generated-augmented-retrieval.html",
+      "dependencies": []
+    },
+    "notebook/Retrieval-Augmented Generation/Ontological Knowledge.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 25793,
+      "exportedPath": "notebook/retrieval-augmented-generation/ontological-knowledge.html",
+      "dependencies": []
+    },
+    "notebook/Retrieval-Augmented Generation/Ontology Construction.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 3003,
+      "exportedPath": "notebook/retrieval-augmented-generation/ontology-construction.html",
+      "dependencies": []
+    },
+    "notebook/Retrieval-Augmented Generation/Retrieval.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 20053,
+      "exportedPath": "notebook/retrieval-augmented-generation/retrieval.html",
+      "dependencies": [
+        "lib/media/creation_of_comparsion_exemplars.png",
+        "lib/media/creation_of_comparsion_exemplars.png"
+      ]
+    },
+    "notebook/Retrieval-Augmented Generation/Retrieval Augmented Thoughts.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1133,
+      "exportedPath": "notebook/retrieval-augmented-generation/retrieval-augmented-thoughts.html",
+      "dependencies": []
+    },
+    "notebook/Retrieval-Augmented Generation/Retrieval-Augmented Generation.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 591,
+      "exportedPath": "notebook/retrieval-augmented-generation/retrieval-augmented-generation.html",
+      "dependencies": []
+    },
+    "notebook/Text Processing/Capturing Personality with Verb Phrase Extraction.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 9793,
+      "exportedPath": "notebook/text-processing/capturing-personality-with-verb-phrase-extraction.html",
+      "dependencies": []
+    },
+    "notebook/Text Processing/Chunk Analyzer.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 19990,
+      "exportedPath": "notebook/text-processing/chunk-analyzer.html",
+      "dependencies": []
+    },
+    "notebook/Text Processing/Code Hierarchy Node Parser.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 292,
+      "exportedPath": "notebook/text-processing/code-hierarchy-node-parser.html",
+      "dependencies": []
+    },
+    "notebook/Text Processing/Echo Embedding.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 604,
+      "exportedPath": "notebook/text-processing/echo-embedding.html",
+      "dependencies": []
+    },
+    "notebook/Text Processing/Parts of a Document.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 10898,
+      "exportedPath": "notebook/text-processing/parts-of-a-document.html",
+      "dependencies": [
+        "lib/media/pasted-image-20240315062214.png",
+        "lib/media/pasted-image-20240315062214.png",
+        "lib/media/pasted-image-20240315063041.png",
+        "lib/media/pasted-image-20240315063041.png",
+        "lib/media/pasted-image-20240315063144.png",
+        "lib/media/pasted-image-20240315063144.png"
+      ]
+    },
+    "notebook/Text Processing/Ranking Chunks.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 372,
+      "exportedPath": "notebook/text-processing/ranking-chunks.html",
+      "dependencies": []
+    },
+    "notebook/Text Processing/Soundex.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 25506,
+      "exportedPath": "notebook/text-processing/soundex.html",
+      "dependencies": []
+    },
+    "notebook/Text Processing/Stop Words.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1631,
+      "exportedPath": "notebook/text-processing/stop-words.html",
+      "dependencies": []
+    },
+    "notebook/Text Processing/STS Semantic Textual Similarity.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2115,
+      "exportedPath": "notebook/text-processing/sts-semantic-textual-similarity.html",
+      "dependencies": []
+    },
+    "notebook/Text Processing/Text Processing.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 5571,
+      "exportedPath": "notebook/text-processing/text-processing.html",
+      "dependencies": []
+    },
+    "lib/media/variable_explainations.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 162620,
+      "exportedPath": "lib/media/variable_explainations.png",
+      "dependencies": []
+    },
+    "lib/media/img-2024-03-26-092133-1.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 89460,
+      "exportedPath": "lib/media/img-2024-03-26-092133-1.png",
+      "dependencies": []
+    },
+    "lib/media/img-2024-03-26-093220.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 59129,
+      "exportedPath": "lib/media/img-2024-03-26-093220.png",
+      "dependencies": []
+    },
+    "lib/media/img-2024-03-26-093336.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 67319,
+      "exportedPath": "lib/media/img-2024-03-26-093336.png",
+      "dependencies": []
+    },
+    "lib/media/img-2024-03-26-093554.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 81309,
+      "exportedPath": "lib/media/img-2024-03-26-093554.png",
+      "dependencies": []
+    },
+    "lib/media/img-2024-03-26-093632.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 101322,
+      "exportedPath": "lib/media/img-2024-03-26-093632.png",
+      "dependencies": []
+    },
+    "lib/media/bot.svg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 1487,
+      "exportedPath": "lib/media/bot.svg",
+      "dependencies": []
+    },
+    "lib/media/user.svg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2857,
+      "exportedPath": "lib/media/user.svg",
+      "dependencies": []
+    },
+    "lib/media/img-2024-03-28-065406-1.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 809874,
+      "exportedPath": "lib/media/img-2024-03-28-065406-1.png",
+      "dependencies": []
+    },
+    "lib/media/img-2024-04-11-045330.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 215031,
+      "exportedPath": "lib/media/img-2024-04-11-045330.png",
+      "dependencies": []
+    },
+    "lib/media/explorellm_promptexample.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 70686,
+      "exportedPath": "lib/media/explorellm_promptexample.png",
+      "dependencies": []
+    },
+    "lib/media/workstation.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 3021545,
+      "exportedPath": "lib/media/workstation.png",
+      "dependencies": []
+    },
+    "lib/media/gemini_generated_image01.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 493449,
+      "exportedPath": "lib/media/gemini_generated_image01.jpeg",
+      "dependencies": []
+    },
+    "lib/media/gemini_generated_image02.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 543695,
+      "exportedPath": "lib/media/gemini_generated_image02.jpeg",
+      "dependencies": []
+    },
+    "lib/media/gemini_generated_image07.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 422151,
+      "exportedPath": "lib/media/gemini_generated_image07.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image08.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 159625,
+      "exportedPath": "lib/media/image08.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image09.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 142856,
+      "exportedPath": "lib/media/image09.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image10.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 154957,
+      "exportedPath": "lib/media/image10.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image11.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 176618,
+      "exportedPath": "lib/media/image11.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image12.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 186018,
+      "exportedPath": "lib/media/image12.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image13.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 221246,
+      "exportedPath": "lib/media/image13.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image14.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 173612,
+      "exportedPath": "lib/media/image14.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image15.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 170428,
+      "exportedPath": "lib/media/image15.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image16.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 187437,
+      "exportedPath": "lib/media/image16.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image17.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 203627,
+      "exportedPath": "lib/media/image17.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image18.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 106978,
+      "exportedPath": "lib/media/image18.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image19.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 160124,
+      "exportedPath": "lib/media/image19.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image20.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 146614,
+      "exportedPath": "lib/media/image20.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image21.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 153961,
+      "exportedPath": "lib/media/image21.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image22.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 137025,
+      "exportedPath": "lib/media/image22.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image23.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 149412,
+      "exportedPath": "lib/media/image23.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image24.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 155862,
+      "exportedPath": "lib/media/image24.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image25.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 174165,
+      "exportedPath": "lib/media/image25.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image26.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 206940,
+      "exportedPath": "lib/media/image26.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image27.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 219509,
+      "exportedPath": "lib/media/image27.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image28.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 242726,
+      "exportedPath": "lib/media/image28.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image29.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 219515,
+      "exportedPath": "lib/media/image29.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image30.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 187092,
+      "exportedPath": "lib/media/image30.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image31.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 135787,
+      "exportedPath": "lib/media/image31.jpeg",
+      "dependencies": []
+    },
+    "lib/media/image32.jpeg": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 181913,
+      "exportedPath": "lib/media/image32.jpeg",
+      "dependencies": []
+    },
+    "lib/media/creation_of_comparsion_exemplars.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 113001,
+      "exportedPath": "lib/media/creation_of_comparsion_exemplars.png",
+      "dependencies": []
+    },
+    "lib/media/pasted-image-20240315062214.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 85519,
+      "exportedPath": "lib/media/pasted-image-20240315062214.png",
+      "dependencies": []
+    },
+    "lib/media/pasted-image-20240315063041.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 51731,
+      "exportedPath": "lib/media/pasted-image-20240315063041.png",
+      "dependencies": []
+    },
+    "lib/media/pasted-image-20240315063144.png": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 241438,
+      "exportedPath": "lib/media/pasted-image-20240315063144.png",
+      "dependencies": []
+    },
+    "assets/nb/openaichatexperiment_files/openaichatexperiment_27_0.png": {
+      "modifiedTime": 1713280905329,
+      "sourceSize": 21829,
+      "exportedPath": "assets/nb/openaichatexperiment_files/openaichatexperiment_27_0.png",
+      "dependencies": []
+    },
+    "Home.md": {
+      "modifiedTime": 1713313599257,
+      "sourceSize": 2208,
+      "exportedPath": "home.html",
+      "dependencies": []
+    }
+  }
+}
