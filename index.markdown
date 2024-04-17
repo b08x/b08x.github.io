@@ -7,6 +7,3 @@ layout: home
 
 [notebook](notebook/)
 
-[test](test/)
-
-[test](test2/)
