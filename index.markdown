@@ -5,5 +5,4 @@
 layout: home
 ---
 
-[notebook](notebook/)
-
+[notebook](notebook)
