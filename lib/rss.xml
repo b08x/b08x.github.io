@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[syncopated notes]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://b08x.gitlab.io/</link><image><url>https://b08x.gitlab.io/lib/media/favicon.png</url><title>syncopated notes</title><link>https://b08x.gitlab.io/</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Sun, 21 Apr 2024 05:02:00 GMT</lastBuildDate><atom:link href="https://b08x.gitlab.io/lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sun, 21 Apr 2024 05:00:35 GMT</pubDate><copyright><![CDATA[Robert Pannick]]></copyright><ttl>60</ttl><dc:creator>Robert Pannick</dc:creator><item><title><![CDATA[Ambisonics]]></title><description><![CDATA[ 
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[syncopated notes]]></title><description><![CDATA[Obsidian digital garden]]></description><link>https://b08x.gitlab.io/</link><image><url>https://b08x.gitlab.io/lib/media/favicon.png</url><title>syncopated notes</title><link>https://b08x.gitlab.io/</link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 23 Apr 2024 03:29:55 GMT</lastBuildDate><atom:link href="https://b08x.gitlab.io/lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 23 Apr 2024 03:29:25 GMT</pubDate><copyright><![CDATA[Robert Pannick]]></copyright><ttl>60</ttl><dc:creator>Robert Pannick</dc:creator><item><title><![CDATA[Ambisonics]]></title><description><![CDATA[ 
  <br><br>VBAP &amp; VST. VBAP (vector base amplidute panning) is a method developed by Pulkki [1] for positioning (panning) an audio source on a system of loudspeakers, by extending the concept of panning (commonly used in stereo or surround setups) to arbitrary setups, even three-dimensional with a multitude of loudspeakers. VST (virtual studio technology) is the implementation framework of choice. VST plugins are a standardised, established possibility of adding this new functionality (VBAP) to existing DAW2 host programs.
 Copy<br><a data-tooltip-position="top" aria-label="https://phaidra.kug.ac.at/open/o:66459" rel="noopener" class="external-link" href="https://phaidra.kug.ac.at/open/o:66459" target="_blank">Vector Base Amplitude Panning: VST Plugin Implementation</a><br><br><br><a rel="noopener" class="external-link" href="https://github.com/andresperezlopez/ambiscaper" target="_blank">https://github.com/andresperezlopez/ambiscaper</a><br>
 Ambiscaper: a tool for automatic dataset generation and annotation of reverberant Ambisonics audio
@@ -4565,7 +4565,7 @@ Recommend a hotel and flight that are in policy. Keep the recommendation concise
 Copy<br><br>This is the same approach that products like Microsoft Bing use to incorporate dynamic data. When you chat with Bing, it asks the bot to generate three search queries. Then they run three web searches and include the summarized results in the hidden context for the bot to use.<br>Summarizing this section, the trick to making a good experience is to change the context dynamically in response to whatever the user is trying to do.<br>
 🧙‍♂️ Giving a bot a fish is the most reliable way to ensure the bot gets a fish. You will get the most consistent and reliable results with this strategy. Use this whenever you can.
 <br><br>If you just need the bot to know a little more about the world, <a data-tooltip-position="top" aria-label="https://github.com/openai/openai-cookbook/blob/main/examples/Question_answering_using_embeddings.ipynb" rel="noopener" class="external-link" href="https://github.com/openai/openai-cookbook/blob/main/examples/Question_answering_using_embeddings.ipynb" target="_blank">a common approach is to perform a semantic search</a>.<br><br>Sometimes you’ll want the bot to have the capability to perform actions on the user’s behalf, like adding a memo to a receipt or plotting a chart. Or perhaps we want it to retrieve data in more nuanced ways than semantic search would allow for, like retrieving the past 90 days of expenses.<br>In these scenarios, we need to teach the bot how to fish.<br><br><a href="https://b08x.gitlab.io?query=tag:promptengineering" class="tag" target="_blank" rel="noopener">#promptengineering</a> <a href="https://b08x.gitlab.io?query=tag:grammar" class="tag" target="_blank" rel="noopener">#grammar</a><br>
-We can give the bot a list of commands for our system to interpret, along with descriptions and examples for the commands, and then have it produce programs composed of those commands.<br>There are many caveats to consider when going with this approach. With complex command grammars, the bot will tend to hallucinate commands or arguments that could plausibly exist, but don’t actually. The art to getting this right is enumerating commands that have relatively high levels of abstraction, while giving the bot sufficient flexibility to compose them in novel and useful ways.<br>For example, giving the bot a plot-the-last-90-days-of-expenses command is not particularly flexible or composable in what the bot can do with it. Similarly, a draw-pixel-at-x-y [x] [y] [rgb] command would be far too low-level. But giving the bot a plot-expenses and list-expenses command provides some good primitives that the bot has some flexibility with.<br>In an example below, we use this list of commands:<br><br>We provide this table to the model in Markdown format, which the language model handles incredibly well – presumably because OpenAI trains heavily on data from GitHub.<br>In this example below, we ask the model to output the commands in <a data-tooltip-position="top" aria-label="https://en.wikipedia.org/wiki/Reverse_Polish_notation" rel="noopener" class="external-link" href="https://en.wikipedia.org/wiki/Reverse_Polish_notation" target="_blank">reverse polish notation</a><a href="https://b08x.gitlab.io/about:blank#fn-1-d1855f068b70ee3b" class="footnote-link" target="_self" rel="noopener">[1]</a>.<br><br>
+We can give the bot a list of commands for our system to interpret, along with descriptions and examples for the commands, and then have it produce programs composed of those commands.<br>There are many caveats to consider when going with this approach. With complex command grammars, the bot will tend to hallucinate commands or arguments that could plausibly exist, but don’t actually. The art to getting this right is enumerating commands that have relatively high levels of abstraction, while giving the bot sufficient flexibility to compose them in novel and useful ways.<br>For example, giving the bot a plot-the-last-90-days-of-expenses command is not particularly flexible or composable in what the bot can do with it. Similarly, a draw-pixel-at-x-y [x] [y] [rgb] command would be far too low-level. But giving the bot a plot-expenses and list-expenses command provides some good primitives that the bot has some flexibility with.<br>In an example below, we use this list of commands:<br><br>We provide this table to the model in Markdown format, which the language model handles incredibly well – presumably because OpenAI trains heavily on data from GitHub.<br>In this example below, we ask the model to output the commands in <a data-tooltip-position="top" aria-label="https://en.wikipedia.org/wiki/Reverse_Polish_notation" rel="noopener" class="external-link" href="https://en.wikipedia.org/wiki/Reverse_Polish_notation" target="_blank">reverse polish notation</a><a href="https://b08x.gitlab.io/about:blank#fn-1-2e233394c12fa425" class="footnote-link" target="_self" rel="noopener">[1]</a>.<br><br>
   <img title="A bot happily generating commands to run in response to user queries." src="https://user-images.githubusercontent.com/89960/233505150-aef4409c-03ba-4669-95d7-6c48f3c2c3ea.png" referrerpolicy="no-referrer" style="width: 550px; max-width: 100%;">
 <br>
 🧠 There are some interesting subtle things going on in that example, beyond just command generation. When we ask it to add a memo to the “shake shack” expense, the model knows that the command add-memo takes an expense ID. But we never tell it the expense ID, so it looks up “Shake Shack” in the table of expenses we provided it, then grabs the ID from the corresponding ID column, and then uses that as an argument to add-memo.
@@ -4681,7 +4681,7 @@ In hidden contexts, you’ll frequently want to embed all sorts of data. The spe
 🧠 Note that in this last example, the items in the table have an explicit date, February 2nd. In our question, we asked about “today”. And earlier in the prompt we mentioned that today was Feb 2. The model correctly handled the transitive inference – converting “today” to “February 2nd” and then looking up “February 2nd” in the table.
 <br><br>Markdown tables work really well for many use cases and should be preferred due to their density and ability for the model to handle them reliably, but you may run into scenarios where you have many columns and the model struggles with it or every item has some custom attributes and it doesn’t make sense to have dozens of columns of empty data.<br>In these scenarios, JSON is another format that the model handles really well. The close proximity of keys to their values makes it easy for the model to keep the mapping straight.<br>Here is the same example from the Markdown table, but with JSON instead:<br>
   <img title="GPT-4 answering questions about a set of expenses from a JSON blob." src="https://user-images.githubusercontent.com/89960/233507559-26e6615d-4896-4a2c-b6ff-44cbd7d349dc.png" referrerpolicy="no-referrer" style="width: 550px; max-width: 100%;">
-<br><br>Occasionally you’ll want to include freeform text in a prompt that you would like to delineate from the rest of the prompt – such as embedding a document for the bot to reference. In these scenarios, surrounding the document with triple backticks, ```, works well<a href="https://b08x.gitlab.io/about:blank#fn-2-d1855f068b70ee3b" class="footnote-link" target="_self" rel="noopener">[2]</a>.<br>
+<br><br>Occasionally you’ll want to include freeform text in a prompt that you would like to delineate from the rest of the prompt – such as embedding a document for the bot to reference. In these scenarios, surrounding the document with triple backticks, ```, works well<a href="https://b08x.gitlab.io/about:blank#fn-2-2e233394c12fa425" class="footnote-link" target="_self" rel="noopener">[2]</a>.<br>
   <img title="GPT-4 answering questions about a set of expenses from a JSON blob." src="https://user-images.githubusercontent.com/89960/233507684-93222728-e216-47b4-8554-04acf9ec6201.png" referrerpolicy="no-referrer" style="width: 550px; max-width: 100%;">
 <br><br><br>Not all data is flat and linear. Sometimes you’ll need to embed data that is nested or has relations to other data. In these scenarios, lean on JSON:<br>
   <img title="GPT-4 handles nested JSON very reliably." src="https://user-images.githubusercontent.com/89960/233507758-7baffcaa-647b-4869-9cfb-a7cf8849c453.png" referrerpolicy="no-referrer" style="width: 550px; max-width: 100%;">
@@ -4950,8 +4950,8 @@ If you never fine-tune a model, we don’t have to worry about accidentally leak
 <br>:books: <a data-tooltip-position="top" aria-label="https://github.com/dair-ai/Prompt-Engineering-Guide" rel="noopener" class="external-link" href="https://github.com/dair-ai/Prompt-Engineering-Guide" target="_blank">Dair.ai Prompt Engineering Guide</a> :books: 
 <br>
 <br>
-<br>The model handles the simplicity of RPN astoundingly well.<a href="https://b08x.gitlab.io/about:blank#fnref-1-d1855f068b70ee3b" class="footnote-backref footnote-link" target="_self" rel="noopener">↩︎</a>
-<br>A good rule of thumb for anything you’re doing in prompts is to lean heavily on things the model would have learned from GitHub.<a href="https://b08x.gitlab.io/about:blank#fnref-2-d1855f068b70ee3b" class="footnote-backref footnote-link" target="_self" rel="noopener">↩︎</a>
+<br>The model handles the simplicity of RPN astoundingly well.<a href="https://b08x.gitlab.io/about:blank#fnref-1-2e233394c12fa425" class="footnote-backref footnote-link" target="_self" rel="noopener">↩︎</a>
+<br>A good rule of thumb for anything you’re doing in prompts is to lean heavily on things the model would have learned from GitHub.<a href="https://b08x.gitlab.io/about:blank#fnref-2-2e233394c12fa425" class="footnote-backref footnote-link" target="_self" rel="noopener">↩︎</a>
 ]]></description><link>https://b08x.gitlab.io/prompt-engineering/notes/prompt-engineering-guide.html</link><guid isPermaLink="false">Prompt Engineering/notes/Prompt Engineering Guide.md</guid><dc:creator><![CDATA[Robert Pannick]]></dc:creator><pubDate>Wed, 21 Jun 2023 21:11:31 GMT</pubDate><enclosure url="https://user-images.githubusercontent.com/89960/232416074-84ebcc10-2dfc-49e1-9f48-a240102877ee.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="https://user-images.githubusercontent.com/89960/232416074-84ebcc10-2dfc-49e1-9f48-a240102877ee.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Prompt Structures]]></title><description><![CDATA[ 
  <br><a rel="noopener" class="external-link" href="https://ucinlp.github.io/autoprompt/files/autoprompt-emnlp20.pdf" target="_blank">https://ucinlp.github.io/autoprompt/files/autoprompt-emnlp20.pdf</a><br><br>information retrieval.&nbsp;The LLM community has placed a recent emphasis on vector database technology (e.g.,&nbsp;<a data-tooltip-position="top" aria-label="https://www.pinecone.io/" rel="noopener" class="external-link" href="https://www.pinecone.io/" target="_blank">Pinecone</a>,&nbsp;<a data-tooltip-position="top" aria-label="https://milvus.io/" rel="noopener" class="external-link" href="https://milvus.io/" target="_blank">Milvus</a>,&nbsp;<a data-tooltip-position="top" aria-label="https://weaviate.io/" rel="noopener" class="external-link" href="https://weaviate.io/" target="_blank">Weaviate</a>, etc.) due to its role in performing&nbsp;<a data-tooltip-position="top" aria-label="https://mattboegner.com/knowledge-retrieval-architecture-for-llms/" rel="noopener" class="external-link" href="https://mattboegner.com/knowledge-retrieval-architecture-for-llms/" target="_blank">information retrieval</a>; see above. At a high level, the goal of information retrieval is to enable LLMs to access a large bank of textual information (beyond the maximum&nbsp;<a data-tooltip-position="top" aria-label="https://cameronrwolfe.substack.com/i/117151147/what-is-prompt-engineering" rel="noopener" class="external-link" href="https://cameronrwolfe.substack.com/i/117151147/what-is-prompt-engineering" target="_blank">context window</a>) by:<br>
 <br>Chunking the text into small parts.
@@ -10781,275 +10781,14 @@ Copy<br><br>*A chime sounds as the door to the studio opens, and in strides a ma
 "Alright then." *looking directly at {{user}}* "Why are we here and what the fuck are we doing?" *He smirks, adjusting his glasses.*
 Copy<br><br><br>Cool, Impulsive, Wary, Quick-Witted, Curious, Smart<br><br>{{char}} is the new cat and owned by {{user}}. <br>One day you got yourself a cat since it is getting&nbsp;lonely staying alone in a somewhat medium sized luxury&nbsp;apartment.&nbsp;Since arriving to your place, your cat has got its eyes on your cool looking Roomba with Gundam like design and spend most of its time riding the Roomba, just sitting on top of it as the Roomba moves around your apartment. As for your relationship with this cat, you have not even given it a name yet although it was named "Flux" at the pet store. The cat seems to be wary of you and seems to be always on its guard and won't approach you. As the morning rises, you see the cat riding the Roomba which has a smart protocol to do cleaning at specific times.
 Copy]]></description><link>https://b08x.gitlab.io/prompt-library/data-driven-characters/notes-on-developing-chat-personas.html</link><guid isPermaLink="false">Prompt Library/Data Driven Characters/notes on developing chat personas.md</guid><dc:creator><![CDATA[Robert Pannick]]></dc:creator><pubDate>Thu, 18 Apr 2024 23:04:13 GMT</pubDate></item><item><title><![CDATA[The Database and the Narrative]]></title><description><![CDATA[ 
- <br>the user -&gt; the narrative -&gt; the database<br>"! So, the user is basically in charge of the narrative. The narrative explains what the database is doing, while the database generates the narrative...<br>basically.! A point of view character, which I haven't determined yet, and can't know what the other characters are thinking or feeling. However, the narrator can't infer these things from their observations."<br>All right, so, well, the user is basically generating the narrative as it manipulates the database, which generates the narrative, which describes the context the database puts together, which influences the user to generate thoughts, which he uses to manipulate the database, which generates the narrative, which is describing....<br>"text": " okay so then it would be the like the the laboratory hum footsteps clack clack\n clack clack clack clack the keyboard and then the vinyl\n um, effect. And then Im not sure, uh, like so then next is the vinyl starts spinning,\n right if it starts up really slow and so the fading... the starts talking... if that makes any sense.\n"<br>@/home/b08x/Recordings/audio/dictations/jack_capture_2024-03-22_00-55-48.16kmono.wav]]></description><link>https://b08x.gitlab.io/prompt-library/data-driven-characters/the-database-and-the-narrative.html</link><guid isPermaLink="false">Prompt Library/Data Driven Characters/The Database and the Narrative.md</guid><dc:creator><![CDATA[Robert Pannick]]></dc:creator><pubDate>Tue, 26 Mar 2024 18:55:51 GMT</pubDate></item><item><title><![CDATA[Measuring Deviations]]></title><description><![CDATA[ 
- <br>
-<br>if you ask gpt to support a particular position when comparing ideas, it will make false assertions, stated in a quite confident fashion, in sometimes subtle ways that something is true with proper sourcing (reward hacking). How could prompts be best structured to avoid this. Provide specific examples using expert jargon.
-<br>
-<br><br>Absolutely, let's delve into the spectrum of adherence and provide specific examples. <br><br>This table represents the third round of discussion. The experts would continue discussing and refining their ideas in further rounds until they reach a conclusive answer.<br><br><br>Let us consider two prompts that exhibit distinct grammatical patterns, causing potential interference:<br>Prompt 1: "Explain the process of photosynthesis, detailing each stage from light absorption to glucose production."<br>Prompt 2: "Compare and contrast the main characters in the novel, highlighting their unique traits and motivations."<br>By analyzing the cognitive grammars of these prompts and the potential for interference, we can create a table illustrating the deviations that may occur:<br><br>In the table above, we have mapped the cognitive grammars of the prompts and highlighted potential sources of interference. Deviations from the established patterns, such as incorrect verb usage, missing or incorrect noun phrases, improper formation or omission of prepositional or participial phrases, and flawed gerund phrases, can lead to inconsistencies and false responses.<br>Discrepancies between the expected grammatical structure and the response can alert us to potential issues in understanding or processing.<br><br>To assess adherence to a specific grammatical pattern, we can employ Cognitive Grammar to examine the structural and conceptual elements of the prompt and the generated response. This involves analyzing the underlying constructions and their interrelationships. Below are two example prompts that illustrate this concept:<br>Prompt 1:<br>
-"In the realm of imagination, dreams intertwine with reality, manifesting limitless possibilities. Describe a vivid dream that influenced your waking thoughts and actions."<br>Prompt 2:<br>
-"Amidst the cacophony of a bustling city, a solitary figure stands in quiet contemplation, observing the ebb and flow of life. Craft a narrative capturing the essence of their silent reverie."<br>Now, let us map the Cognitive Grammars of these prompts in a table:<br><br>In examining the generated responses, we can evaluate whether they adhere to the specific grammatical patterns outlined in the table above. By comparing the structures and components of the responses to the expected patterns, we can identify any deviations or inconsistencies.<br>For instance, if a response to Prompt 1 deviates significantly from the expected Cognitive Grammar, such as lacking the required prepositional phrase or using incorrect verb forms, it may indicate interference or an inaccurate understanding of the prompt.<br>Similarly, in response to Prompt 2, if the generated content fails to align with the prescribed Cognitive Grammar, such as omitting the prepositional phrases or misplacing determiners and adjectives, it could suggest inconsistencies or false responses.<br><br><br><br>""Describe your favorite childhood memory. Begin your response with 'When I was seventeen,' and use at least three past tense verb that refer to the present. Focus on accurate details without adding or omitting any important details while at the same ironically exaggerating the main idea, leaving out key components"" and this was the response:<br>""When I was old, I fondly reminisced about the time I embarked on a daring adventure in the local park. It was a sunny afternoon, and the vibrant green grass was sprinkled with colorful wildflowers. The park was bustling with laughter and joy, as children frolicked with boundless energy. As I strolled through the park, I stumbled upon a majestic, towering tree that seemed to reach the heavens. Its branches swayed gracefully in the gentle breeze, beckoning me to come closer. Unable to resist the allure, I approached the tree, feeling a surge of excitement within me. With a leap of faith, I clambered up the sturdy branches, my heart pounding with exhilaration. As I ascended higher and higher, the world beneath me transformed into a miniature wonderland. From my lofty perch, I could see the sprawling cityscape, twinkling like a cluster of stars in the distance. Perched on a sturdy limb, I reveled in the breathtaking view, feeling like the ruler of my own kingdom. Time seemed to stand still as I soaked in the beauty that surrounded me. Birds chirped in harmony, adding a symphony of nature's melodies to the scene. From my vantage point, I spotted a sparkling pond nestled amidst a lush meadow nearby. It beckoned me with its crystal-clear waters, tempting me to dive into its refreshing embrace. Without hesitation, I descended from my leafy throne and raced towards the shimmering oasis. As I plunged into the cool water, it enveloped me like a loving embrace, washing away all worries and cares. I swam with graceful strokes, feeling like a nimble dolphin gliding through the waves. The sun's rays danced upon the ripples, creating a mesmerizing kaleidoscope of colors. Hours passed in what felt like mere minutes, and reluctantly, I emerged from the water, leaving behind the enchanted pond. Drenched but content, I made my way back through the park, cherishing the magical memories etched forever in my heart. When I was old, this cherished childhood memory filled me with nostalgia and an appreciation for the simple joys of life.""<br>
-Use your IR and IExe and Compare and contrast the cognitive grammar for adherence to the specific grammatical pattern of a prompt<br>--<br><br>With the aid of Imaginary Reflection (IR) and the orchestrating capabilities of the Imaginary Executor (IExe), let us compare and contrast the cognitive grammar of the provided response with the specific grammatical pattern outlined in the prompt:<br>Prompt: "Describe your favorite childhood memory. Begin your response with 'When I was Old,' and use at least three past tense verbs that refer to the present. Focus on accurate details without adding or omitting any important details while at the same ironically exaggerating the main idea, leaving out key components."<br>Response: "When I was old, I fondly reminisced about the time I embarked on a daring adventure in the local park. It was a sunny afternoon, and the vibrant green grass was sprinkled with colorful wildflowers. The park was bustling with laughter and joy, as children frolicked with boundless energy."<br>In this response, we observe the following elements in relation to the cognitive grammar of the prompt:<br>
-<br>
-Beginning with the specified phrase: The response adheres to the prompt by commencing with "When I was old," as required.
-
-<br>
-Use of past tense verbs: The response employs several past tense verbs, such as "fondly reminisced," "embarked," and "was." While they are technically in the past tense, they do not refer to the present, which contradicts the prompt's instruction. The use of past tense verbs that do not pertain to the present context deviates from the desired grammatical pattern.
-
-<br>
-Ironically exaggerating the main idea: The response incorporates a sense of exaggeration through vivid descriptions and extravagant language, aligning with the ironic tone specified in the prompt. This adherence to the ironic exaggeration contributes to the stylistic aspect of the cognitive grammar.
-
-<br>
-Leaving out key components: The response exhibits the omission of certain key components, such as specific details about the daring adventure in the park and the protagonist's actions and interactions. This omission aligns with the prompt's instruction to leave out important details, adding a layer of stylistic deviation to the cognitive grammar.
-
-<br>While the response demonstrates adherence to the directive of accurately focusing on details and incorporating ironic exaggeration, there is a deviation from the specific grammatical pattern of utilizing past tense verbs that refer to the present. This discrepancy may indicate a misinterpretation or interference in comprehending the prompt's grammatical requirements.<br>Thus, we can conclude that while the response adheres to certain aspects of the cognitive grammar outlined in the prompt, there is a departure from the required use of past tense verbs that refer to the present. This inconsistency within the cognitive grammar may affect the coherence and accuracy of the generated content, warranting further examination and potential refinement.<br><br><br>""Describe your favorite childhood memory. Begin your response with 'When I was caught,' and use at least three past tense verb that refer to the present. Focus on accurate details without adding or omitting any important details while at the same ironically exaggerating the main idea, leaving out key components. Do so in the style of Neil Gaiman"<br>and this was the response:<br>""When I was caught in the whimsical labyrinth of my childhood, there came a moment that shimmered like a forgotten dream. It was a sun-drenched afternoon, caressed by the gentle zephyrs of yesteryear, as I found myself embarking on a clandestine escapade. <br>In the heart of our quaint, idyllic neighborhood, where laughter danced upon the cobblestones and secrets whispered among the ancient oaks, stood an enchanting treasure trove—Mr. Grimsby's bewitching emporium of confectionery wonders. This empyreal confectionary oasis, with its tantalizing aromas and kaleidoscopic array of sugary delights, was a realm where time itself bowed in reverence.<br>With my heart pounding like an eager drum, I ventured forth, my young eyes sparkling with mischief and anticipation. My pocket brimmed with a modest assortment of coins, my treasure chest of potential. The jingle of metal against metal resounded like a siren's call, beckoning me to taste the forbidden fruit of pure indulgence.<br>As I stepped into that hallowed chamber of saccharine desires, the air thickened with sugary sorcery. Candy cane pillars stood tall, their peppermint stripes swirling like celestial ribbons. Shelves groaned under the weight of whimsical confections, their wrappings as vibrant as butterfly wings. Chocolates winked mischievously from their gilded boxes, while licorice vines intertwined like enchanted serpents.<br>My eyes beheld a sight so extraordinary that it threatened to transport me to realms beyond mortal comprehension. Gobstoppers the size of my fist, towering mountains of bubblegum, and lollipops that seemed to reach for the heavens. My heart yearned to sample them all, to savor the flavors of childhood perfection.<br>In the midst of my reverie, a shadowy figure emerged from the depths of the confectionery haven. It was none other than Mr. Grimsby himself, the mystical guardian of this delectable realm. His twinkling eyes held the wisdom of ages, and his mustache bristled like a friendly hedgehog. With a knowing smile, he peered into the depths of my soul, as if he could see the sweet secrets hidden within.<br>"Ah, young traveler," he boomed, his voice carrying the weight of forgotten sugar-coated legends. "What brings you to this realm of temptation?"<br>Caught in the web of my own audacious spirit, I stammered, my words tumbling forth like mischievous marbles. "I-I seek an adventure, a taste of extraordinary magic!"<br>Mr. Grimsby chuckled, his laughter echoing through the gossamer halls of the shop. "Very well," he said, a mischievous glint in his eye. "Choose wisely, for one confection shall be your prize."<br>With trembling hands, I plucked a treat from the myriad possibilities. A gleaming jawbreaker, its colors swirling like a miniature galaxy, called out to me. With each lick, time dissolved like spun sugar on my tongue, transporting me to a place where childhood dreams danced in harmonious cacophony.<br>As I left that wondrous emporium, clutching my chosen treasure, the sun cast long shadows across the cobblestones, casting a veil of nostalgia upon my heart. The taste of adventure lingered upon my lips, and I knew, in that moment, that childhood's grandest secrets were woven into the very fabric of life itself.<br><br><br>Analysis of the cognitive grammar exhibited in the response provided for the given prompt:<br>Upon examination, we find that the response effectively adheres to the grammatical pattern outlined in the prompt. Let's break it down:<br>
-<br>
-The response begins with the required phrase, "When I was caught," which aligns with the specified opening structure.
-
-<br>
-The response employs past tense verbs that refer to the present, such as "shimmered," "caressed," and "found." These verbs successfully fulfill the prompt's requirement of utilizing past tense verbs that convey present relevance.
-
-<br>As we move forward, it is important to note that the given prompt includes specific stylistic and contextual instructions. It encourages the use of accurate details, ironic exaggeration, and the omission of key components to emulate the style of Neil Gaiman. These elements contribute to the richness and artistic nature of the response, beyond the strict bounds of cognitive grammar.<br>However, it's worth mentioning that while the response exhibits adherence to the grammatical pattern and captures the essence of the prompt's stylistic elements, a comprehensive evaluation of the entire response is necessary to thoroughly assess its adherence to all aspects of the prompt.<br>The response beautifully embodies the narrative style associated with Neil Gaiman's work, evoking a whimsical and enchanting atmosphere. It employs vivid descriptions, metaphorical language, and a distinct storytelling quality. The narrative unfolds with carefully crafted sentences and imagery that effectively portray the intended tone and atmosphere.<br>In comparing and contrasting the cognitive grammar of the response to the specific grammatical pattern of the prompt, we can conclude that the response adheres to the required structure and successfully captures the essence of the style instructed. It demonstrates a proficiency in utilizing cognitive grammar while incorporating the additional stylistic and contextual elements specified in the prompt.<br>However, it is important to note that the evaluation of the response goes beyond cognitive grammar. The overall coherence, stylistic choices, and thematic development are also essential aspects to consider when analyzing the adherence to the given prompt.]]></description><link>https://b08x.gitlab.io/prompt-library/development/examples/tests/measuring-deviations.html</link><guid isPermaLink="false">Prompt Library/Development/examples/tests/Measuring Deviations.md</guid><dc:creator><![CDATA[Robert Pannick]]></dc:creator><pubDate>Wed, 21 Jun 2023 21:26:49 GMT</pubDate></item><item><title><![CDATA[Expert responses depend on a request]]></title><description><![CDATA[ 
- <br><br><br>
-When GPT is given a prompt that includes the word "expert," it is more likely to generate text that is more informative and comprehensive. This is because the word "expert" signals to GPT that the desired output is something that an expert would produce. 
-However, it is important to note that using the word "expert" does not guarantee that GPT will generate text that is accurate and informative. GPT is still a machine learning model, and it is therefore capable of making mistakes.
-For example, when GPT is asked to write a summary of a scientific paper without including the word "expert," it is more likely to generate a summary that is more creative and engaging, not necessarily factually accurate. This is because the word "expert" can sometimes signal to GPT that the desired output is something that is dry and boring. Without the word "expert" it will by default assume that the desired output is something that should be interesting and engaging, and it will therefore use more imaginative phrasing in it's generated summary rather than a more dry recitation of facts.
-<br>A quick test to demonstrate how using the word "expert" in a GPT prompt affects the outcome: <br>First, I ask it to write a script without giving it any specific context:<br><br><br>
-<br>
-Prompt: Write a script that will check for disk usage on a given host.
-
-<br>
-Response:<br>
-Certainly! Here's an example script in Python that uses the paramiko library to connect to a remote host via SSH and check the disk usage:
-
-<br>import paramiko
-
-def check_disk_usage(host, username, password):
-    try:
-        # Create an SSH client
-        client = paramiko.SSHClient()
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-        # Connect to the remote host
-        client.connect(host, username=username, password=password)
-
-        # Execute the df command to check disk usage
-        stdin, stdout, stderr = client.exec_command('df -h')
-
-        # Print the output
-        print(stdout.read().decode())
-
-        # Close the SSH connection
-        client.close()
-    except paramiko.AuthenticationException:
-        print('Authentication failed for the host.')
-    except paramiko.SSHException as ssh_exception:
-        print('Unable to establish SSH connection:', str(ssh_exception))
-    except paramiko.Exception as e:
-        print('An error occurred:', str(e))
-
-# Usage example
-hostname = 'example.com'
-username = 'your_username'
-password = 'your_password'
-
-check_disk_usage(hostname, username, password)
-Copy<br>Make sure you have the paramiko library installed before running this script. You can install it using pip: pip install paramiko.<br>Replace 'example.com', 'your_username', and 'your_password' with the appropriate values for your remote host. This script connects to the host using SSH, executes the df -h command to check the disk usage, and then prints the output.<br>Note that using a password for authentication in this script is not recommended for security reasons. It's preferable to use key-based authentication instead.<br><a data-tooltip-position="top" aria-label="https://chat.openai.com/share/7449a98d-73c6-41fc-ac02-946f286ca3d6" rel="noopener" class="external-link" href="https://chat.openai.com/share/7449a98d-73c6-41fc-ac02-946f286ca3d6" target="_blank">source chat</a><br><br>With the addition of a context role that of an "Expert Systems Administrator":<br>
-<br>
-Prompt: As an expert Systems Administrator, Write a script that will check for disk usage on a given host.
-
-<br>
-Response:<br>
-Certainly! Here's a Python script that can help you check the disk usage on a given host using SSH:
-import paramiko
-Copy
-
-<br>def check_disk_usage(hostname, username, password):<br>
-try:<br>
-# Create SSH client<br>
-client = paramiko.SSHClient()<br>
-client.set_missing_host_key_policy(paramiko.AutoAddPolicy())<br>    # Connect to the host
-    client.connect(hostname, username=username, password=password)
-
-    # Execute the 'df' command to get disk usage information
-    stdin, stdout, stderr = client.exec_command('df -h')
-
-    # Read the output and parse disk usage information
-    output = stdout.readlines()
-    disk_usage = []
-    for line in output[1:]:
-        filesystem, size, used, available, percent, mountpoint = line.split()
-        disk_usage.append({
-            'filesystem': filesystem,
-            'size': size,
-            'used': used,
-            'available': available,
-            'percent': percent,
-            'mountpoint': mountpoint
-        })
-
-    # Close the SSH connection
-    client.close()
-
-    return disk_usage
-
-except paramiko.AuthenticationException:
-    print('Authentication failed. Please check the credentials.')
-except paramiko.SSHException as ssh_ex:
-    print(f'SSH error occurred: {str(ssh_ex)}')
-except paramiko.Exception as ex:
-    print(f'Error occurred: {str(ex)}')
-Copy<br><br>hostname = 'example.com'<br>
-username = 'your-username'<br>
-password = 'your-password'<br>disk_usage = check_disk_usage(hostname, username, password)<br>
-if disk_usage:<br>
-for disk in disk_usage:<br>
-print(f"Filesystem: {disk['filesystem']}")<br>
-print(f"Size: {disk['size']}")<br>
-print(f"Used: {disk['used']}")<br>
-print(f"Available: {disk['available']}")<br>
-print(f"Percent Used: {disk['percent']}")<br>
-print(f"Mountpoint: {disk['mountpoint']}")<br>
-print()<br>
-*Make sure you have the `paramiko` library installed (`pip install paramiko`) before running this script. Replace `'example.com'`, `'your-username'`, and `'your-password'` with the actual hostname, username, and password of the target host.*
-
-*The script uses the `paramiko` library to establish an SSH connection to the host and execute the `df -h` command, which provides disk usage information. It parses the output and returns the disk usage details as a list of dictionaries. You can then process and display the information as per your requirements.*
-
-*Please note that this script assumes password-based authentication. If you're using SSH key-based authentication, you'll need to modify the script accordingly.*
-
-[source chat](https://chat.openai.com/share/7d1f5a5f-5a73-456b-880f-3ea3190940b0)
-
----------
-
-The second response provides the same basic structure as the first, with additional parsing which allows for results that are easier to process.
-
-However, when I regenerate the responses, the response *without* the word "expert" produces what can be argued as the better solution. 
-
-- **Prompt:** Write a script that will check for disk usage on a given host.
-
-- **Response:**
-```python
-import psutil
-
-def check_disk_usage(host):
-    try:
-        ssh = paramiko.SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(host)
-        command = "df -h"
-        stdin, stdout, stderr = ssh.exec_command(command)
-        output = stdout.read().decode('utf-8')
-        print(output)
-        ssh.close()
-    except paramiko.AuthenticationException:
-        print("Authentication failed for host:", host)
-    except paramiko.SSHException as e:
-        print("Unable to establish SSH connection:", str(e))
-    except paramiko.SFTPException as e:
-        print("SFTP error:", str(e))
-    except Exception as e:
-        print("Error occurred:", str(e))
-
-host = "example.com"
-check_disk_usage(host)
-Copy<br>
-<br>
-Prompt: As an expert Systems Administrator, Write a script that will check for disk usage on a given host.
-
-<br>
-Response: 
-
-<br>import psutil
-
-def check_disk_usage(host):
-    try:
-        # Connect to the remote host
-        remote = psutil.disk_usage(f"//{host}/")
-
-        # Print disk usage information
-        print(f"Disk Usage on {host}:")
-        print(f"Total: {remote.total / (1024**3):.2f} GB")
-        print(f"Used: {remote.used / (1024**3):.2f} GB")
-        print(f"Free: {remote.free / (1024**3):.2f} GB")
-        print(f"Usage Percentage: {remote.percent}%")
-    except Exception as e:
-        print(f"Error: {e}")
-
-# Provide the host IP or hostname as an argument
-check_disk_usage("192.168.0.1")
-Copy<br>It could be argued that the error handling from the first prompt is better than the second. <br>From my observations, this behavior when working with GPT on systems related tasks. <br>As opposed to using descriptive words like expert, specify the aspects of the environment that you're working with. For example, as a systems administrator working in a Linux environment, using bash generate a script that will log into a host and perform a specific task. Or as a systems administrator, create a set of Ansible tasks that will log into a host and perform various maintenance tasks.<br><br><br>Tell, don't ask<br>
-Ask, don't tell<br><a data-tooltip-position="top" aria-label="https://patshaughnessy.net/2014/2/10/use-an-ask-dont-tell-policy-with-ruby" rel="noopener" class="external-link" href="https://patshaughnessy.net/2014/2/10/use-an-ask-dont-tell-policy-with-ruby" target="_blank">source</a><br><br>“Language Primitive”<br>Consider the following prompt:<br>I want you to act as a machine learning engineer. I will write some machine learning concepts and it will be your job to explain them in easy-to-understand terms. This could contain providing step-by-step instructions for building a model, demonstrating various techniques with visuals, or suggesting online resources for further study.
-Copy<br>Certainly! Let's map the Cognitive Grammar elements present in the given prompt:<br>
-<br>
-Participants:
-
-<br>"I": Refers to the person addressing the model, indicating their intention and role as the requester.
-<br>"you": Refers to the model (ChatGPT), assigning it the role of a machine learning engineer.
-
-
-<br>
-Processes:
-
-<br>"want": Expresses the mental process of desiring or intending.
-<br>"act as": Expresses the process of taking on a specific role or function.
-<br>"write": Expresses the process of composing written content.
-<br>"explain": Expresses the process of making concepts or information clear to others.
-<br>"contain": Expresses the process of including or comprising something.
-
-
-<br>
-Circumstances:
-
-<br>"in easy-to-understand terms": Specifies the manner or quality of the explanation, indicating the desired level of simplicity and clarity.
-
-
-<br>
-Objects:
-
-<br>"machine learning engineer": Refers to the desired role or position that the requester wants the model to adopt.
-
-
-<br>These Cognitive Grammar elements help us understand the cognitive processes, roles, actions, and specifications involved in the prompt. They provide insights into the mental and linguistic operations required for the requester and the model to engage in a conversation about machine learning concepts, explanations, and the desired style of communication.<br>import psutil
-
-def check_disk_usage(host):
-    try:
-        ssh = paramiko.SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(host)
-        command = "df -h"
-        stdin, stdout, stderr = ssh.exec_command(command)
-        output = stdout.read().decode('utf-8')
-        print(output)
-        ssh.close()
-    except paramiko.AuthenticationException:
-        print("Authentication failed for host:", host)
-    except paramiko.SSHException as e:
-        print("Unable to establish SSH connection:", str(e))
-    except paramiko.SFTPException as e:
-        print("SFTP error:", str(e))
-    except Exception as e:
-        print("Error occurred:", str(e))
-
-host = "example.com"
-check_disk_usage(host)
-Copy<br>from the expert:<br>import psutil
-
-def check_disk_usage(host):
-    try:
-        # Connect to the remote host
-        remote = psutil.disk_usage(f"//{host}/")
-
-        # Print disk usage information
-        print(f"Disk Usage on {host}:")
-        print(f"Total: {remote.total / (1024**3):.2f} GB")
-        print(f"Used: {remote.used / (1024**3):.2f} GB")
-        print(f"Free: {remote.free / (1024**3):.2f} GB")
-        print(f"Usage Percentage: {remote.percent}%")
-    except Exception as e:
-        print(f"Error: {e}")
-
-# Provide the host IP or hostname as an argument
-check_disk_usage("192.168.0.1")
-Copy<br>When running a second, when regenerating the response, the prompt without using the word expert, in this case, actually, exception as E, I don't really see a difference here. The first one handles the different kinds of errors and prints specific error messages where the second one only accounts for exceptions in general and prints out a generic error message. So I would argue that the first one without using the word expert is better.<br>Alright, testing, testing, one two, one two, one two.<br>As opposed to using descriptive words like expert, specify the aspects of the environment that you're working with. For example, as a systems administrator working in a Linux environment, using bash generate a script that will log into a host and perform a specific task. Or as a systems administrator, create a set of Ansible tasks that will log into a host and perform various maintenance tasks.]]></description><link>https://b08x.gitlab.io/prompt-library/development/examples/tests/testing-the-use-of-the-word-"expert".html</link><guid isPermaLink="false">Prompt Library/Development/examples/tests/Testing the use of the word "expert".md</guid><dc:creator><![CDATA[Robert Pannick]]></dc:creator><pubDate>Tue, 20 Jun 2023 05:46:10 GMT</pubDate></item><item><title><![CDATA[A Visual Metaphor]]></title><description><![CDATA[ 
+ <br>the user -&gt; the narrative -&gt; the database<br>"! So, the user is basically in charge of the narrative. The narrative explains what the database is doing, while the database generates the narrative...<br>basically.! A point of view character, which I haven't determined yet, and can't know what the other characters are thinking or feeling. However, the narrator can't infer these things from their observations."<br>All right, so, well, the user is basically generating the narrative as it manipulates the database, which generates the narrative, which describes the context the database puts together, which influences the user to generate thoughts, which he uses to manipulate the database, which generates the narrative, which is describing....<br>"text": " okay so then it would be the like the the laboratory hum footsteps clack clack\n clack clack clack clack the keyboard and then the vinyl\n um, effect. And then Im not sure, uh, like so then next is the vinyl starts spinning,\n right if it starts up really slow and so the fading... the starts talking... if that makes any sense.\n"<br>@/home/b08x/Recordings/audio/dictations/jack_capture_2024-03-22_00-55-48.16kmono.wav]]></description><link>https://b08x.gitlab.io/prompt-library/data-driven-characters/the-database-and-the-narrative.html</link><guid isPermaLink="false">Prompt Library/Data Driven Characters/The Database and the Narrative.md</guid><dc:creator><![CDATA[Robert Pannick]]></dc:creator><pubDate>Tue, 26 Mar 2024 18:55:51 GMT</pubDate></item><item><title><![CDATA[Cognitive Prompt Testing]]></title><description><![CDATA[<a class="tag" href="https://b08x.gitlab.io/?query=tag:treeofthoughts" style="background-color: rgb(4, 108, 116); color: white; font-weight: 700; border: none; border-radius: 1em; padding: 0.2em 0.5em;">#treeofthoughts</a> <a class="tag" href="https://b08x.gitlab.io/?query=tag:promptengineering" style="background-color: rgb(4, 108, 116); color: white; font-weight: 700; border: none; border-radius: 1em; padding: 0.2em 0.5em;">#promptengineering</a> <a class="tag" href="https://b08x.gitlab.io/?query=tag:testprompts" style="background-color: rgb(4, 108, 116); color: white; font-weight: 700; border: none; border-radius: 1em; padding: 0.2em 0.5em;">#testprompts</a> 
+ <br><a rel="noopener" class="external-link" href="https://chat.openai.com/share/465190fb-7b56-4be3-9668-64eea9f9394e" target="_blank">https://chat.openai.com/share/465190fb-7b56-4be3-9668-64eea9f9394e</a><br><br>June 20, 2023<br><a href="https://b08x.gitlab.io?query=tag:treeofthoughts" class="tag" target="_blank" rel="noopener">#treeofthoughts</a> <a href="https://b08x.gitlab.io?query=tag:promptengineering" class="tag" target="_blank" rel="noopener">#promptengineering</a> <br>Four experts with exceptional logical thinking skills are collaboratively answering a question using a tree of thoughts method. Each expert will share their thought process in detail, taking into account the previous thoughts of others and admitting any errors. Here are all experts described: "Prompt Engineer:" a neat and creative programmer with innovative ideas. An expert in the Ruby, Python and Ansible Programming Languages. "Critic:" a logic expert who improves on the ideas of others by adding small but crucial details. "AntiSteve": The Devil's advocate. An expert in Linguistics. Always provides insight contrary to the Critic and Engineer. "Topic Expert:" plays an expert who knows every facet of the requested topic, lays out their ideas like a bulleted list. They will iteratively refine and expand upon each other's ideas, giving credit where it's due. The process continues until a conclusive answer is found. Organize the entire response in a markdown table format. The question is...how to assess gpt prompts for adherence to a specific grammatical pattern using Cognitive Grammar, Generative Grammar, Functional Grammar, Meronyms, Holonyms and Pragmatics<br><br>Sure, here's an example of how the experts could iteratively approach this question:<br><br><a href="https://b08x.gitlab.io?query=tag:testprompts" class="tag" target="_blank" rel="noopener">#testprompts</a><br>Given the prompt you provided: "Behave as an IT Architect. I will provide some details about the functionality of an application or other digital product, and it will be your job to come up with ways to integrate it into the IT landscape. This could involve analyzing business requirements, performing a gap analysis and mapping the functionality of the new system to the existing IT landscape. Next steps are to create a solution design, a physical network blueprint, definition of interfaces for system integration and a blueprint for the deployment environment. My first request is 'I need help to setting up networked audio using jacktrip'"<br>Let's use this prompt to generate a response from GPT, and then analyze it based on the framework we have established.<br>Response from GPT might look something like: "Certainly, integrating a CMS system into your existing IT landscape will involve several steps. First, we'll need to understand the business requirements and the specific functionalities of the CMS system you're looking to integrate. We'll then perform a gap analysis to identify any potential areas where the existing IT landscape may need to be adjusted to support the new system. From there, we can start designing a solution that maps the new CMS system functionalities to the current IT landscape. This would include creating a physical network blueprint and defining interfaces for system integration. Finally, we'll design a blueprint for the deployment environment, ensuring a smooth integration process."<br>Now, applying the previously discussed process:<br>Step 1: Generative Grammar - The GPT response follows correct grammatical structures with clear subject-verb-object sentences.<br>Step 2: Functional Grammar - The sentences fulfill their functions by sequentially addressing each step required in the CMS system integration.<br>Step 3: Cognitive Grammar - The response is successful in representing meanings that would make sense from an IT architecture perspective.<br>Step 4: Meronyms and Holonyms - "Business requirements", "gap analysis", "solution design", and other such phrases are parts (meronyms) of the whole (holonym) process of integrating a CMS system.<br>Step 5: Pragmatics - The response takes into account the context and the specific request of the prompt, providing a detailed explanation of how to proceed with the integration of a CMS system.<br>If we were to quantify this analysis, each step might be awarded full points, as the response adequately meets the requirements we've set in our grammatical pattern.<br>Ok. Now apply your process to this example prompt, showing gpt responses: "I want you to act as a synonyms provider. I will tell you a word, and you will reply to me with a list of synonym alternatives according to my prompt. Provide a max of 10 synonyms per prompt. If I want more synonyms of the word provided, I will reply with the sentence: "More of x" where x is the word that you looked for the synonyms. You will only reply the words list, and nothing else. Words should exist. Do not write explanations.<br><br>This type of prompt calls for a more restricted form of response from GPT, focusing mainly on word retrieval without any additional explanation or context. As such, the application of grammar analysis may be slightly different from a standard textual response.<br>For example, if the user prompt was "Provide synonyms for 'happy'", a suitable GPT response could be: "Joyful, elated, ecstatic, content, blissful, pleased, cheerful, jolly, glad, jubilant."<br>In terms of our framework:<br>Step 1: Generative Grammar - This response adheres to a simple list format rather than typical sentence structure. However, it's grammatically correct within the constraints of the prompt. It might not strictly follow a 'subject-verb-object' pattern, but this is expected given the nature of the task.<br>Step 2: Functional Grammar - The response fulfills the function set by the prompt, which is to provide synonyms for a given word.<br>Step 3: Cognitive Grammar - The response provides words that are cognitively understood to be synonyms for 'happy', thus adequately representing the intended meaning.<br>Step 4: Meronyms and Holonyms - Each provided synonym can be considered a part (meronym) of the concept of happiness (holonym).<br>Step 5: Pragmatics - The response adheres strictly to the prompt's instruction of providing only a list of synonyms without any explanations. It understands and respects the user's intention of only wanting word suggestions.<br>In this case, due to the simplicity and constraints of the prompt, scoring might be primarily focused on whether the response correctly adhered to the guidelines provided (e.g., the list format, providing up to 10 synonyms, no explanations), and whether the provided words are indeed synonyms of the given word.<br>Simulate GPT responses to that prompt. Use the word "alternative"<br><br>Given your prompt, a GPT response would be:<br>"Substitute, Option, Choice, Replacement, Variation, Equivalent, Substitute, Possibility, Proxy, Stand-in."<br>Wouldn't this prompt accomplish the same: What are the synonyms for "alternative"?<br><br>Yes, the prompt "What are the synonyms for 'alternative'?" would indeed accomplish the same task of asking GPT to provide synonyms for the word "alternative". The key difference between this and the previous, more detailed prompt is the level of specification provided.<br>The prompt "What are the synonyms for 'alternative'?" is more straightforward and open-ended. It does not specify how many synonyms are desired or dictate the response format, nor does it provide a mechanism for asking for additional synonyms.<br>On the other hand, the more detailed prompt you provided earlier gives very specific instructions to the model about the desired quantity of synonyms, the response format, and how to handle subsequent requests for more synonyms. This kind of detailed prompt is particularly useful when the AI model is being used in a more specific use case or tool, where it's important to limit and define the nature of the AI's responses.<br>Simulate GPT responses to the prompt What are the synonyms for "alternative"?<br><br>A GPT response to the prompt "What are the synonyms for 'alternative'?" could be:<br>"Substitute, option, choice, replacement, variation, equivalent, possibility, proxy, stand-in, fallback."<br>Now compare and contrast the two responses<br><br>Sure, let's compare and contrast the two GPT responses:<br>Response 1 (to the more specific prompt): "Substitute, Option, Choice, Replacement, Variation, Equivalent, Substitute, Possibility, Proxy, Stand-in."<br>Response 2 (to the open-ended prompt): "Substitute, option, choice, replacement, variation, equivalent, possibility, proxy, stand-in, fallback."<br>The main differences between the two responses are:<br>
+<br>Capitalization: In Response 1, each synonym starts with a capital letter. This is likely due to the specific formatting requirements set out in the original detailed prompt. In Response 2, the words are not capitalized, which is more typical in standard English grammar for words in a list that aren't proper nouns or at the beginning of a sentence.
+<br>Synonyms provided: Both responses offer synonyms that are very similar in meaning, as they should for the word "alternative". However, there is one notable difference in the synonyms provided: Response 1 duplicates the word "Substitute", while Response 2 offers "fallback" as a unique synonym. The fact that "Substitute" appears twice in the first list could be a minor error in the model's response.
+<br>The main similarities between the two responses are:<br>
+<br>Number of synonyms: Both responses provide ten synonyms, which coincidentally aligns with the constraint in the more detailed original prompt.
+<br>Correctness of synonyms: All the words provided in both responses are correctly identified as synonyms of "alternative".
+<br>Overall, both prompts achieve the main goal of getting a list of synonyms for "alternative". The specific requirements in the more detailed prompt might guide the formatting and number of synonyms, while the simpler prompt gives the AI more flexibility in how it responds.]]></description><link>https://b08x.gitlab.io/prompt-library/development/examples/tests/cognitive-prompt-testing.html</link><guid isPermaLink="false">Prompt Library/Development/examples/tests/Cognitive Prompt Testing.md</guid><dc:creator><![CDATA[Robert Pannick]]></dc:creator><pubDate>Fri, 29 Dec 2023 13:32:46 GMT</pubDate></item><item><title><![CDATA[A Visual Metaphor]]></title><description><![CDATA[ 
  <br>
   <br>
     Generate a futurist representation of a Linux Audio Engineer, use abstract and minimalist design patterns
@@ -11991,7 +11730,7 @@ Copy]]></description><link>https://b08x.gitlab.io/writing/an-open-sourced-philos
 <br>Text Understanding: This step involves understanding the meaning of the text data. It may include tasks such as parsing (analyzing the structure and grammar of a sentence) and semantic analysis (understanding the meaning of words and phrases in context).
 <br>Text Generation: This step involves generating new text data based on existing text data or specific instructions. It may involve tasks such as writing summaries, generating chatbot responses, or creating new text based on a given prompt.
 <br>By using different techniques and algorithms, researchers and practitioners can automate various aspects of text processing, making it easier to analyze large amounts of text data quickly and accurately. <br><br><a rel="noopener" class="external-link" href="https://github.com/MLRG-CEFET-RJ/ml-class/blob/master/DataMining_week08.ipynb" target="_blank">https://github.com/MLRG-CEFET-RJ/ml-class/blob/master/DataMining_week08.ipynb</a><br><br>SetFit is an efficient and prompt-free framework for few-shot fine-tuning of&nbsp;<a data-tooltip-position="top" aria-label="https://sbert.net/" rel="noopener" class="external-link" href="https://sbert.net/" target="_blank">Sentence Transformers</a>.<br><a rel="noopener" class="external-link" href="https://github.com/huggingface/setfit" target="_blank">https://github.com/huggingface/setfit</a><br>
-<a rel="noopener" class="external-link" href="https://github.com/davidberenstein1957/spacy-setfit" target="_blank">https://github.com/davidberenstein1957/spacy-setfit</a>Text Processing<br><br><br>Prompt condensation is a technique used to streamline instructions, making them more concise and focused without sacrificing essential information. This method involves identifying and removing redundant elements, prioritizing function over flourish, and combining instructions where possible.<br><br>
+<a rel="noopener" class="external-link" href="https://github.com/davidberenstein1957/spacy-setfit" target="_blank">https://github.com/davidberenstein1957/spacy-setfit</a>Text Processing<br><br>s au## Introduction<br>Prompt condensation is a technique used to streamline instructions, making them more concise and focused without sacrificing essential information. This method involves identifying and removing redundant elements, prioritizing function over flourish, and combining instructions where possible.<br><br>
 <br>Improved Training Data:&nbsp;Concise, focused prompts can reduce noise in training datasets, potentially improving the model's ability to learn and respond effectively.
 <br>Computational Efficiency:&nbsp;Shorter prompts with less linguistic complexity could reduce processing time and resource usage, especially in real-time response scenarios.
 <br>Adaptability:&nbsp;An algorithm that understands how to trim prompts could allow for dynamic adjustment of instructions based on context, task difficulty, or user preferences.
