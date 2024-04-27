@@ -27,8 +27,8 @@ jekyll-spaceship:
       theme: dark
 
 picture:
-  source: "assets/img"
-  output: "assets/img/generated"
+  source: "_assets/img"
+  output: "_assets/img/generated"
   suppress_warnings: true
   nomarkdown: false
 

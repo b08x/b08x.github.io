@@ -1,6 +1,6 @@
 {
   "vaultName": "syncopated notes",
-  "lastExport": 1714245061810,
+  "lastExport": 1714248163813,
   "pluginVersion": "1.8.01",
   "validBodyClasses": "publish css-settings-manager theme-dark show-inline-title minimal-nord-dark kanban-full",
   "useCustomHeadContent": false,
@@ -44,8 +44,8 @@
     "DevOPs/Linux/Archlinux/repoctl.md",
     "DevOPs/Linux/Archlinux/Package Building.md",
     "DevOPs/Linux/Archlinux/package conflicts (pacman).md",
+    "DevOPs/Linux/X11/Creating a Custom Xorg Authorization File.md",
     "DevOPs/Linux/X11/Systemd and Xsession.md",
-    "DevOPs/Linux/X11/fixing \"Authorization required, but no authorization protocol specified\".md",
     "DevOPs/Linux/X11/xorg video.md",
     "DevOPs/Linux/AlmaLinux.md",
     "DevOPs/Linux/btrfs.md",
@@ -108,9 +108,7 @@
     "Natural Language Processing/nlp analysis tests/PartI.md",
     "Natural Language Processing/Writing Techniques/Descriptive writing techniques.md",
     "Natural Language Processing/Writing Techniques/Dialogue Tone.md",
-    "Natural Language Processing/Writing Techniques/Synonyms for \"rewrite\".md",
     "Natural Language Processing/Writing Techniques/Untitled 1.md",
-    "Natural Language Processing/Writing Techniques/Writing Styles.md",
     "Natural Language Processing/@syncopatednotes.md",
     "Natural Language Processing/Attributive Noun.md",
     "Natural Language Processing/Cognitive Grammar.md",
@@ -162,7 +160,6 @@
     "Prompt Engineering/Interference & Hallucinations.md",
     "Prompt Engineering/Leveraging SFL for Targeted Prompt Enhancement.md",
     "Prompt Engineering/Logomastic Kernel.md",
-    "Prompt Engineering/Metaprompt - The Prompt.md",
     "Prompt Engineering/OpenAI_Temperature_Recomendations.png",
     "Prompt Engineering/Overcoming the Challenges of LLM Chain Authoring.md",
     "Prompt Engineering/Paper Abstracts.md",
@@ -242,11 +239,11 @@
     "lib/media/explorellm_promptexample.png",
     "lib/media/gemini_generated_image01.jpeg",
     "lib/media/json_cols.png",
-    "lib/media/gemini_generated_image_orsy16orsy16orsy.webp",
+    "lib/media/image05.jpeg",
+    "_assets/image05.jpeg",
     "_assets/img/screenshot/explorellm_promptexample.png",
     "_assets/img/llm/gemini_generated_image01.jpeg",
-    "_assets/img/generative/gemini/gemini_generated_image_orsy16orsy16orsy.webp",
-    "_assets/img/llm/image29.jpeg",
+    "lib/scripts/graph-wasm.wasm",
     "lib/fonts/94f2f163d4b698242fef.otf",
     "lib/fonts/72505e6a122c6acd5471.woff2",
     "lib/fonts/2d5198822ab091ce4305.woff2",
@@ -285,8 +282,14 @@
     "lib/fonts/mathjax_vector-bold.woff",
     "lib/html/file-tree.html",
     "lib/scripts/webpage.js",
+    "lib/scripts/graph-view.js",
+    "lib/scripts/graph-wasm.js",
+    "lib/scripts/graph-render-worker.js",
+    "lib/scripts/tinycolor.js",
+    "lib/scripts/pixi.js",
     "lib/scripts/minisearch.js",
     "lib/media/favicon.png",
+    "lib/scripts/graph-data.js",
     "lib/styles/obsidian.css",
     "lib/styles/other-plugins.css",
     "lib/styles/theme.css",
@@ -294,62 +297,12 @@
     "lib/styles/supported-plugins.css",
     "lib/styles/main-styles.css",
     "lib/styles/snippets.css",
-    "lib/media/workstation.png",
-    "lib/media/gemini_generated_image02.jpeg",
-    "lib/media/gemini_generated_image07.jpeg",
-    "lib/media/image08.jpeg",
-    "lib/media/image09.jpeg",
-    "lib/media/image12.jpeg",
-    "lib/media/image13.jpeg",
-    "lib/media/image14.jpeg",
-    "lib/media/image15.jpeg",
-    "lib/media/image16.jpeg",
-    "lib/media/image17.jpeg",
-    "lib/media/image18.jpeg",
-    "lib/media/image19.jpeg",
-    "lib/media/image20.jpeg",
-    "lib/media/image23.jpeg",
-    "lib/media/image21.jpeg",
-    "lib/media/image24.jpeg",
-    "lib/media/image22.jpeg",
-    "lib/media/image25.jpeg",
-    "lib/media/image28.jpeg",
-    "lib/media/image26.jpeg",
-    "lib/media/image29.jpeg",
-    "lib/media/image27.jpeg",
-    "lib/media/image30.jpeg",
-    "lib/media/image31.jpeg",
-    "lib/media/image32.jpeg",
-    "assets/img/generative/gemini/gemini_generated_image_orsy16orsy16orsy.webp",
-    "assets/img/screenshot/explorellm_promptexample.png",
-    "assets/img/llm/gemini_generated_image01.jpeg",
-    "assets/img/llm/gemini_generated_image02.jpeg",
-    "assets/img/llm/gemini_generated_image07.jpeg",
-    "assets/img/llm/image08.jpeg",
-    "assets/img/llm/image09.jpeg",
-    "assets/img/llm/image12.jpeg",
-    "assets/img/llm/image13.jpeg",
-    "assets/img/llm/image14.jpeg",
-    "assets/img/llm/image15.jpeg",
-    "assets/img/llm/image16.jpeg",
-    "assets/img/llm/image17.jpeg",
-    "assets/img/llm/image18.jpeg",
-    "assets/img/llm/image19.jpeg",
-    "assets/img/llm/image20.jpeg",
-    "assets/img/llm/image23.jpeg",
-    "assets/img/llm/image21.jpeg",
-    "assets/img/llm/image24.jpeg",
-    "assets/img/llm/image22.jpeg",
-    "assets/img/llm/image25.jpeg",
-    "assets/img/llm/image28.jpeg",
-    "assets/img/llm/image26.jpeg",
-    "assets/img/llm/image29.jpeg",
-    "assets/img/llm/image27.jpeg",
-    "assets/img/llm/image30.jpeg",
-    "assets/img/llm/image31.jpeg",
-    "assets/img/llm/image32.jpeg"
+    "lib/media/gemini_generated_image_orsy16orsy16orsy.webp",
+    "_assets/img/generative/gemini/gemini_generated_image_orsy16orsy16orsy.webp",
+    "_assets/img/llm/image29.jpeg"
   ],
   "mainDependencies": [
+    "lib/scripts/graph-wasm.wasm",
     "lib/fonts/94f2f163d4b698242fef.otf",
     "lib/fonts/72505e6a122c6acd5471.woff2",
     "lib/fonts/2d5198822ab091ce4305.woff2",
@@ -388,8 +341,14 @@
     "lib/fonts/mathjax_vector-bold.woff",
     "lib/html/file-tree.html",
     "lib/scripts/webpage.js",
+    "lib/scripts/graph-view.js",
+    "lib/scripts/graph-wasm.js",
+    "lib/scripts/graph-render-worker.js",
+    "lib/scripts/tinycolor.js",
+    "lib/scripts/pixi.js",
     "lib/scripts/minisearch.js",
     "lib/media/favicon.png",
+    "lib/scripts/graph-data.js",
     "lib/styles/obsidian.css",
     "lib/styles/other-plugins.css",
     "lib/styles/theme.css",
@@ -400,361 +359,361 @@
   ],
   "fileInfo": {
     "lib/fonts/94f2f163d4b698242fef.otf": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 66800,
       "exportedPath": "lib/fonts/94f2f163d4b698242fef.otf",
       "dependencies": []
     },
     "lib/fonts/72505e6a122c6acd5471.woff2": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 104232,
       "exportedPath": "lib/fonts/72505e6a122c6acd5471.woff2",
       "dependencies": []
     },
     "lib/fonts/2d5198822ab091ce4305.woff2": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 104332,
       "exportedPath": "lib/fonts/2d5198822ab091ce4305.woff2",
       "dependencies": []
     },
     "lib/fonts/c8ba52b05a9ef10f4758.woff2": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 98868,
       "exportedPath": "lib/fonts/c8ba52b05a9ef10f4758.woff2",
       "dependencies": []
     },
     "lib/fonts/cb10ffd7684cd9836a05.woff2": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 106876,
       "exportedPath": "lib/fonts/cb10ffd7684cd9836a05.woff2",
       "dependencies": []
     },
     "lib/fonts/b5f0f109bc88052d4000.woff2": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 105804,
       "exportedPath": "lib/fonts/b5f0f109bc88052d4000.woff2",
       "dependencies": []
     },
     "lib/fonts/cbe0ae49c52c920fd563.woff2": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 106108,
       "exportedPath": "lib/fonts/cbe0ae49c52c920fd563.woff2",
       "dependencies": []
     },
     "lib/fonts/535a6cf662596b3bd6a6.woff2": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 111708,
       "exportedPath": "lib/fonts/535a6cf662596b3bd6a6.woff2",
       "dependencies": []
     },
     "lib/fonts/70cc7ff27245e82ad414.ttf": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 192740,
       "exportedPath": "lib/fonts/70cc7ff27245e82ad414.ttf",
       "dependencies": []
     },
     "lib/fonts/454577c22304619db035.ttf": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 161376,
       "exportedPath": "lib/fonts/454577c22304619db035.ttf",
       "dependencies": []
     },
     "lib/fonts/52ac8f3034507f1d9e53.ttf": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 191568,
       "exportedPath": "lib/fonts/52ac8f3034507f1d9e53.ttf",
       "dependencies": []
     },
     "lib/fonts/05b618077343fbbd92b7.ttf": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 155288,
       "exportedPath": "lib/fonts/05b618077343fbbd92b7.ttf",
       "dependencies": []
     },
     "lib/fonts/4bb6ac751d1c5478ff3a.woff2": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 7876,
       "exportedPath": "lib/fonts/4bb6ac751d1c5478ff3a.woff2",
       "dependencies": []
     },
     "lib/media/874d8b8e340f75575caa.svg": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 317,
       "exportedPath": "lib/media/874d8b8e340f75575caa.svg",
       "dependencies": []
     },
     "lib/fonts/mathjax_zero.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1368,
       "exportedPath": "lib/fonts/mathjax_zero.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_main-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 34160,
       "exportedPath": "lib/fonts/mathjax_main-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_main-bold.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 34464,
       "exportedPath": "lib/fonts/mathjax_main-bold.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_math-italic.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 19360,
       "exportedPath": "lib/fonts/mathjax_math-italic.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_main-italic.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 20832,
       "exportedPath": "lib/fonts/mathjax_main-italic.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_math-bolditalic.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 19776,
       "exportedPath": "lib/fonts/mathjax_math-bolditalic.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_size1-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5792,
       "exportedPath": "lib/fonts/mathjax_size1-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_size2-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5464,
       "exportedPath": "lib/fonts/mathjax_size2-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_size3-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3244,
       "exportedPath": "lib/fonts/mathjax_size3-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_size4-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5148,
       "exportedPath": "lib/fonts/mathjax_size4-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_ams-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 40808,
       "exportedPath": "lib/fonts/mathjax_ams-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_calligraphic-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 9600,
       "exportedPath": "lib/fonts/mathjax_calligraphic-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_calligraphic-bold.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 9908,
       "exportedPath": "lib/fonts/mathjax_calligraphic-bold.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_fraktur-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 21480,
       "exportedPath": "lib/fonts/mathjax_fraktur-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_fraktur-bold.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 22340,
       "exportedPath": "lib/fonts/mathjax_fraktur-bold.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_sansserif-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 12660,
       "exportedPath": "lib/fonts/mathjax_sansserif-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_sansserif-bold.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 15944,
       "exportedPath": "lib/fonts/mathjax_sansserif-bold.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_sansserif-italic.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 14628,
       "exportedPath": "lib/fonts/mathjax_sansserif-italic.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_script-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 11852,
       "exportedPath": "lib/fonts/mathjax_script-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_typewriter-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 17604,
       "exportedPath": "lib/fonts/mathjax_typewriter-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_vector-regular.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1136,
       "exportedPath": "lib/fonts/mathjax_vector-regular.woff",
       "dependencies": []
     },
     "lib/fonts/mathjax_vector-bold.woff": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1116,
       "exportedPath": "lib/fonts/mathjax_vector-bold.woff",
       "dependencies": []
     },
     "lib/html/file-tree.html": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 210082,
+      "modifiedTime": 1714248163813,
+      "sourceSize": 207817,
       "exportedPath": "lib/html/file-tree.html",
       "dependencies": []
     },
     "lib/scripts/webpage.js": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 47290,
       "exportedPath": "lib/scripts/webpage.js",
       "dependencies": []
     },
     "lib/scripts/minisearch.js": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 29422,
       "exportedPath": "lib/scripts/minisearch.js",
       "dependencies": []
     },
     "lib/media/favicon.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1105,
       "exportedPath": "lib/media/favicon.png",
       "dependencies": []
     },
     "lib/styles/obsidian.css": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 157722,
       "exportedPath": "lib/styles/obsidian.css",
       "dependencies": []
     },
     "lib/styles/other-plugins.css": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 72436,
       "exportedPath": "lib/styles/other-plugins.css",
       "dependencies": []
     },
     "lib/styles/theme.css": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 28797,
       "exportedPath": "lib/styles/theme.css",
       "dependencies": []
     },
     "lib/styles/global-variable-styles.css": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 625,
       "exportedPath": "lib/styles/global-variable-styles.css",
       "dependencies": []
     },
     "lib/styles/supported-plugins.css": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1863,
       "exportedPath": "lib/styles/supported-plugins.css",
       "dependencies": []
     },
     "lib/styles/main-styles.css": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 23130,
       "exportedPath": "lib/styles/main-styles.css",
       "dependencies": []
     },
     "lib/styles/snippets.css": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2304,
       "exportedPath": "lib/styles/snippets.css",
       "dependencies": []
     },
     "Audio/Music/Composition/lyrical_concepts/Kernel panic.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3572,
       "exportedPath": "audio/music/composition/lyrical_concepts/kernel-panic.html",
       "dependencies": []
     },
     "Audio/Music/Composition/Aleatoric.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 246,
       "exportedPath": "audio/music/composition/aleatoric.html",
       "dependencies": []
     },
     "Audio/Music/sonicpiGPT.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1758,
       "exportedPath": "audio/music/sonicpigpt.html",
       "dependencies": []
     },
     "Audio/Soundfonts/soundfonts.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 240,
       "exportedPath": "audio/soundfonts/soundfonts.html",
       "dependencies": []
     },
     "Audio/alsa.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 51870,
       "exportedPath": "audio/alsa.html",
       "dependencies": []
     },
     "Audio/notes.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2406,
       "exportedPath": "audio/notes.html",
       "dependencies": []
     },
     "Audio/sonic-pi speaker test.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1136,
       "exportedPath": "audio/sonic-pi-speaker-test.html",
       "dependencies": []
     },
     "Audio/vamp.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 10964,
       "exportedPath": "audio/vamp.html",
       "dependencies": []
     },
     "Audio/ffmpeg conversions.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2498,
       "exportedPath": "audio/ffmpeg-conversions.html",
       "dependencies": []
     },
     "Daily/2024-02-16.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 240,
       "exportedPath": "daily/2024-02-16.html",
       "dependencies": []
     },
     "Daily/2024-02-25.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 10412,
       "exportedPath": "daily/2024-02-25.html",
       "dependencies": []
     },
     "Daily/2024-03-02.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1187,
       "exportedPath": "daily/2024-03-02.html",
       "dependencies": []
     },
     "Daily/2024-03-14.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 852,
       "exportedPath": "daily/2024-03-14.html",
       "dependencies": [
@@ -763,19 +722,19 @@
       ]
     },
     "Daily/2024-03-24.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 291,
       "exportedPath": "daily/2024-03-24.html",
       "dependencies": []
     },
     "Daily/2024-03-25.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1303,
       "exportedPath": "daily/2024-03-25.html",
       "dependencies": []
     },
     "Daily/2024-03-26.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 459,
       "exportedPath": "daily/2024-03-26.html",
       "dependencies": [
@@ -792,7 +751,7 @@
       ]
     },
     "Daily/2024-03-28.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 440,
       "exportedPath": "daily/2024-03-28.html",
       "dependencies": [
@@ -805,31 +764,31 @@
       ]
     },
     "Daily/2024-03-30.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 883,
       "exportedPath": "daily/2024-03-30.html",
       "dependencies": []
     },
     "Daily/2024-04-05.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 125,
       "exportedPath": "daily/2024-04-05.html",
       "dependencies": []
     },
     "Daily/2024-04-11.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3522,
       "exportedPath": "daily/2024-04-11.html",
       "dependencies": []
     },
     "Daily/2024-04-16.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 368,
       "exportedPath": "daily/2024-04-16.html",
       "dependencies": []
     },
     "Daily/2024-04-18.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 11774,
       "exportedPath": "daily/2024-04-18.html",
       "dependencies": [
@@ -838,163 +797,157 @@
       ]
     },
     "DevOPs/Ansible/2023-07-18.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 133,
       "exportedPath": "devops/ansible/2023-07-18.html",
       "dependencies": []
     },
     "DevOPs/Ansible/ansible.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1610,
       "exportedPath": "devops/ansible/ansible.html",
       "dependencies": []
     },
     "DevOPs/Ansible/ansible inventory folder.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1081,
       "exportedPath": "devops/ansible/ansible-inventory-folder.html",
       "dependencies": []
     },
     "DevOPs/Ansible/ansible error handling.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1351,
       "exportedPath": "devops/ansible/ansible-error-handling.html",
       "dependencies": []
     },
     "DevOPs/Ansible/ansible tasks dotfiles.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2060,
       "exportedPath": "devops/ansible/ansible-tasks-dotfiles.html",
       "dependencies": []
     },
     "DevOPs/Ansible/notes.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1247,
       "exportedPath": "devops/ansible/notes.html",
       "dependencies": []
     },
     "DevOPs/Ansible/Package Handling.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1846,
       "exportedPath": "devops/ansible/package-handling.html",
       "dependencies": []
     },
     "DevOPs/Ansible/Playbook Optimization.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1859,
       "exportedPath": "devops/ansible/playbook-optimization.html",
       "dependencies": []
     },
     "DevOPs/Linux/Archlinux/intel graphics.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 944,
       "exportedPath": "devops/linux/archlinux/intel-graphics.html",
       "dependencies": []
     },
     "DevOPs/Linux/Archlinux/repoctl.md": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 190,
+      "modifiedTime": 1714248163813,
+      "sourceSize": 185,
       "exportedPath": "devops/linux/archlinux/repoctl.html",
       "dependencies": []
     },
     "DevOPs/Linux/Archlinux/Package Building.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4868,
       "exportedPath": "devops/linux/archlinux/package-building.html",
       "dependencies": []
     },
     "DevOPs/Linux/Archlinux/package conflicts (pacman).md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1049,
       "exportedPath": "devops/linux/archlinux/package-conflicts-(pacman).html",
       "dependencies": []
     },
     "DevOPs/Linux/X11/Systemd and Xsession.md": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 3439,
+      "modifiedTime": 1714248163813,
+      "sourceSize": 3424,
       "exportedPath": "devops/linux/x11/systemd-and-xsession.html",
       "dependencies": []
     },
-    "DevOPs/Linux/X11/fixing \"Authorization required, but no authorization protocol specified\".md": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 240,
-      "exportedPath": "devops/linux/x11/fixing-\"authorization-required,-but-no-authorization-protocol-specified\".html",
-      "dependencies": []
-    },
     "DevOPs/Linux/X11/xorg video.md": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 1884,
+      "modifiedTime": 1714248163813,
+      "sourceSize": 1869,
       "exportedPath": "devops/linux/x11/xorg-video.html",
       "dependencies": []
     },
     "DevOPs/Linux/AlmaLinux.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 53,
       "exportedPath": "devops/linux/almalinux.html",
       "dependencies": []
     },
     "DevOPs/Linux/btrfs.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 710,
       "exportedPath": "devops/linux/btrfs.html",
       "dependencies": []
     },
     "DevOPs/Linux/snippets.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5953,
       "exportedPath": "devops/linux/snippets.html",
       "dependencies": []
     },
     "DevOPs/Linux/i3.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3651,
       "exportedPath": "devops/linux/i3.html",
       "dependencies": []
     },
     "DevOPs/Linux/input-remapper.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 55,
       "exportedPath": "devops/linux/input-remapper.html",
       "dependencies": []
     },
     "DevOPs/Linux/Navigating around multiple buffers.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1859,
       "exportedPath": "devops/linux/navigating-around-multiple-buffers.html",
       "dependencies": []
     },
     "DevOPs/Linux/rsync excludes.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1512,
       "exportedPath": "devops/linux/rsync-excludes.html",
       "dependencies": []
     },
     "DevOPs/Audio Tools Augmenting Development.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1195,
       "exportedPath": "devops/audio-tools-augmenting-development.html",
       "dependencies": []
     },
     "DevOPs/git flow.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 10812,
       "exportedPath": "devops/git-flow.html",
       "dependencies": []
     },
     "LLM/Retrieval-Augmented Generation/Knowledge Graph.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3039,
       "exportedPath": "llm/retrieval-augmented-generation/knowledge-graph.html",
       "dependencies": []
     },
     "LLM/Retrieval-Augmented Generation/Generated Augmented Retrieval.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 148,
       "exportedPath": "llm/retrieval-augmented-generation/generated-augmented-retrieval.html",
       "dependencies": []
     },
     "LLM/Retrieval-Augmented Generation/Ontological Knowledge.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 25876,
       "exportedPath": "llm/retrieval-augmented-generation/ontological-knowledge.html",
       "dependencies": [
@@ -1005,13 +958,13 @@
       ]
     },
     "LLM/Retrieval-Augmented Generation/Ontology Construction.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3003,
       "exportedPath": "llm/retrieval-augmented-generation/ontology-construction.html",
       "dependencies": []
     },
     "LLM/Retrieval-Augmented Generation/Retrieval.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 20030,
       "exportedPath": "llm/retrieval-augmented-generation/retrieval.html",
       "dependencies": [
@@ -1020,37 +973,37 @@
       ]
     },
     "LLM/Retrieval-Augmented Generation/Retrieval Augmented Thoughts.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1133,
       "exportedPath": "llm/retrieval-augmented-generation/retrieval-augmented-thoughts.html",
       "dependencies": []
     },
     "LLM/Text Processing/Capturing Personality with Verb Phrase Extraction.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 9793,
       "exportedPath": "llm/text-processing/capturing-personality-with-verb-phrase-extraction.html",
       "dependencies": []
     },
     "LLM/Text Processing/Chunk Analyzer.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 19990,
       "exportedPath": "llm/text-processing/chunk-analyzer.html",
       "dependencies": []
     },
     "LLM/Text Processing/Code Hierarchy Node Parser.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 292,
       "exportedPath": "llm/text-processing/code-hierarchy-node-parser.html",
       "dependencies": []
     },
     "LLM/Text Processing/Echo Embedding.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 604,
       "exportedPath": "llm/text-processing/echo-embedding.html",
       "dependencies": []
     },
     "LLM/Text Processing/Parts of a Document.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 10898,
       "exportedPath": "llm/text-processing/parts-of-a-document.html",
       "dependencies": [
@@ -1063,337 +1016,325 @@
       ]
     },
     "LLM/Text Processing/Ranking Chunks.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 372,
       "exportedPath": "llm/text-processing/ranking-chunks.html",
       "dependencies": []
     },
     "LLM/Text Processing/Soundex.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 25506,
       "exportedPath": "llm/text-processing/soundex.html",
       "dependencies": []
     },
     "LLM/Text Processing/Stop Words.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1631,
       "exportedPath": "llm/text-processing/stop-words.html",
       "dependencies": []
     },
     "LLM/Text Processing/STS Semantic Textual Similarity.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2115,
       "exportedPath": "llm/text-processing/sts-semantic-textual-similarity.html",
       "dependencies": []
     },
     "LLM/few_shot questions.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5931,
       "exportedPath": "llm/few_shot-questions.html",
       "dependencies": []
     },
     "LLM/Generating Questions with Llama-2-70b-chat-hf.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2954,
       "exportedPath": "llm/generating-questions-with-llama-2-70b-chat-hf.html",
       "dependencies": []
     },
     "LLM/Generating Sample Data with Inference.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4566,
       "exportedPath": "llm/generating-sample-data-with-inference.html",
       "dependencies": []
     },
     "LLMops/Applications/2023-11-14.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 666,
       "exportedPath": "llmops/applications/2023-11-14.html",
       "dependencies": []
     },
     "LLMops/Applications/wordcraft.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 103,
       "exportedPath": "llmops/applications/wordcraft.html",
       "dependencies": []
     },
     "LLMops/Building Interactive Chat Applications With Third Party Adapters.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 12983,
       "exportedPath": "llmops/building-interactive-chat-applications-with-third-party-adapters.html",
       "dependencies": []
     },
     "LLMops/LLM Applications.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 825,
       "exportedPath": "llmops/llm-applications.html",
       "dependencies": []
     },
     "LLMops/LocalAI.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2870,
       "exportedPath": "llmops/localai.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/Grammar Correlations/Correlate Word, Part of Speech and Cognitive Grammar with Wordnet senses.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4159,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/grammar-correlations/correlate-word,-part-of-speech-and-cognitive-grammar-with-wordnet-senses.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/Grammar Correlations/Correlate Word, Part of Speech and Cognitive Grammar, Wordnet senses with Pragmatics.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 9788,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/grammar-correlations/correlate-word,-part-of-speech-and-cognitive-grammar,-wordnet-senses-with-pragmatics.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/Grammar Correlations/Correlate Word, Part of Speech, Cognitive Grammar, Wordnet senses, Pragmatics with the generative grammar.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4274,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/grammar-correlations/correlate-word,-part-of-speech,-cognitive-grammar,-wordnet-senses,-pragmatics-with-the-generative-grammar.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/Grammar Correlations/Grammar.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 495,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/grammar-correlations/grammar.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/Grammar Correlations/Identify and map the cognitive grammar.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4250,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/grammar-correlations/identify-and-map-the-cognitive-grammar.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIII/Identify and map the cognitive grammar of these words.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 7539,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiii/identify-and-map-the-cognitive-grammar-of-these-words.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIII/Map the Cognitive Grammar of the tokens in the second layer.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4233,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiii/map-the-cognitive-grammar-of-the-tokens-in-the-second-layer.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIV/Analyse this text, a GPT prompt.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 371,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiv/analyse-this-text,-a-gpt-prompt.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIV/Correlate Word, Part of Speech and Cognitive Grammar with Wordnet senses.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4160,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiv/correlate-word,-part-of-speech-and-cognitive-grammar-with-wordnet-senses.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIV/Correlate Word, Part of Speech and Cognitive Grammar, Wordnet senses with Pragmatics.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4311,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiv/correlate-word,-part-of-speech-and-cognitive-grammar,-wordnet-senses-with-pragmatics.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIV/Correlate Word, Part of Speech, Cognitive Grammar, Wordnet senses, Pragmatics with the Generative Grammar.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4219,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiv/correlate-word,-part-of-speech,-cognitive-grammar,-wordnet-senses,-pragmatics-with-the-generative-grammar.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIV/Correlate Word, Part of Speech, Wordnet senses with Pragmatics.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4110,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiv/correlate-word,-part-of-speech,-wordnet-senses-with-pragmatics.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIV/Correlate Word, Part of Speech, Wordnet senses, Cognitive Grammar with Pragmatics.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4283,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiv/correlate-word,-part-of-speech,-wordnet-senses,-cognitive-grammar-with-pragmatics.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIV/Identify and map the Cognitive Grammar.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4702,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiv/identify-and-map-the-cognitive-grammar.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIV/Identify and map the WordNet Senses.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 11070,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiv/identify-and-map-the-wordnet-senses.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partIV/Perform a Latent Sentiment Analysis.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2059,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partiv/perform-a-latent-sentiment-analysis.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partV/Analyse this text, a GPT prompt.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 7180,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partv/analyse-this-text,-a-gpt-prompt.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/partV/natural language processing analysis of GPT prompts. Part V.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1847,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/partv/natural-language-processing-analysis-of-gpt-prompts.-part-v.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/Part II.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2061,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/part-ii.html",
       "dependencies": []
     },
     "Natural Language Processing/nlp analysis tests/PartI.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 454,
       "exportedPath": "natural-language-processing/nlp-analysis-tests/parti.html",
       "dependencies": []
     },
     "Natural Language Processing/Writing Techniques/Descriptive writing techniques.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 11897,
       "exportedPath": "natural-language-processing/writing-techniques/descriptive-writing-techniques.html",
       "dependencies": []
     },
     "Natural Language Processing/Writing Techniques/Dialogue Tone.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 12379,
       "exportedPath": "natural-language-processing/writing-techniques/dialogue-tone.html",
       "dependencies": []
     },
-    "Natural Language Processing/Writing Techniques/Synonyms for \"rewrite\".md": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 2449,
-      "exportedPath": "natural-language-processing/writing-techniques/synonyms-for-\"rewrite\".html",
-      "dependencies": []
-    },
     "Natural Language Processing/Writing Techniques/Untitled 1.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 937,
       "exportedPath": "natural-language-processing/writing-techniques/untitled-1.html",
       "dependencies": []
     },
-    "Natural Language Processing/Writing Techniques/Writing Styles.md": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 70,
-      "exportedPath": "natural-language-processing/writing-techniques/writing-styles.html",
-      "dependencies": []
-    },
     "Natural Language Processing/@syncopatednotes.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 12154,
       "exportedPath": "natural-language-processing/@syncopatednotes.html",
       "dependencies": []
     },
     "Natural Language Processing/Attributive Noun.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1424,
       "exportedPath": "natural-language-processing/attributive-noun.html",
       "dependencies": []
     },
     "Natural Language Processing/Cognitive Grammar.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 674,
       "exportedPath": "natural-language-processing/cognitive-grammar.html",
       "dependencies": []
     },
     "Natural Language Processing/Designing a Data Structure for Natural Language Processing Breaking Down Subjects and Sections.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4459,
       "exportedPath": "natural-language-processing/designing-a-data-structure-for-natural-language-processing-breaking-down-subjects-and-sections.html",
       "dependencies": []
     },
     "Natural Language Processing/Functional Grammar.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 698,
       "exportedPath": "natural-language-processing/functional-grammar.html",
       "dependencies": []
     },
     "Natural Language Processing/Generative Grammar.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 694,
       "exportedPath": "natural-language-processing/generative-grammar.html",
       "dependencies": []
     },
     "Natural Language Processing/Linguistic Concepts and Terminologies.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4700,
       "exportedPath": "natural-language-processing/linguistic-concepts-and-terminologies.html",
       "dependencies": []
     },
     "Natural Language Processing/Meronym and Holonym in Natural Language Processing.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 22,
       "exportedPath": "natural-language-processing/meronym-and-holonym-in-natural-language-processing.html",
       "dependencies": []
     },
     "Natural Language Processing/NLP based PaaS.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2732,
       "exportedPath": "natural-language-processing/nlp-based-paas.html",
       "dependencies": []
     },
     "Natural Language Processing/NLP Processing for Semantic Search.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3511,
       "exportedPath": "natural-language-processing/nlp-processing-for-semantic-search.html",
       "dependencies": []
     },
     "Natural Language Processing/Nuances.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2853,
       "exportedPath": "natural-language-processing/nuances.html",
       "dependencies": []
     },
     "Natural Language Processing/Persons.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2772,
       "exportedPath": "natural-language-processing/persons.html",
       "dependencies": []
     },
     "Natural Language Processing/Pragmatic Grammatical Analysis.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2106,
       "exportedPath": "natural-language-processing/pragmatic-grammatical-analysis.html",
       "dependencies": []
     },
     "Natural Language Processing/Systemic Functional Linguistics.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3202,
       "exportedPath": "natural-language-processing/systemic-functional-linguistics.html",
       "dependencies": []
     },
     "Natural Language Processing/Transformational-Generative Grammar (TGG).md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2998,
       "exportedPath": "natural-language-processing/transformational-generative-grammar-(tgg).html",
       "dependencies": []
     },
     "Prompt Engineering/notes/2023-06-21-2109-Notes on Language Models.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 750,
       "exportedPath": "prompt-engineering/notes/2023-06-21-2109-notes-on-language-models.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/2023-06-21-2131-How can NLP and Prompt Engineering be used to mitigate interference.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1811,
       "exportedPath": "prompt-engineering/notes/2023-06-21-2131-how-can-nlp-and-prompt-engineering-be-used-to-mitigate-interference.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/2023-06-21-2203-ansible tasks for interference testing.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3081,
       "exportedPath": "prompt-engineering/notes/2023-06-21-2203-ansible-tasks-for-interference-testing.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/2023-07-05-1356-openai tempature scenarios.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1749,
       "exportedPath": "prompt-engineering/notes/2023-07-05-1356-openai-tempature-scenarios.html",
       "dependencies": [
@@ -1401,85 +1342,85 @@
       ]
     },
     "Prompt Engineering/notes/ansibleGPT - Automated Assessment of GPT Prompts - A Linguistic Theory-Driven Approach.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 35122,
       "exportedPath": "prompt-engineering/notes/ansiblegpt-automated-assessment-of-gpt-prompts-a-linguistic-theory-driven-approach.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/brainGPT.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 16286,
       "exportedPath": "prompt-engineering/notes/braingpt.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/Example of descriptive text.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 8668,
       "exportedPath": "prompt-engineering/notes/example-of-descriptive-text.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/interference.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 65,
       "exportedPath": "prompt-engineering/notes/interference.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/Multi-agent decentralized speaker selection.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 238,
       "exportedPath": "prompt-engineering/notes/multi-agent-decentralized-speaker-selection.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/Prompt Engineering Guide.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 48098,
       "exportedPath": "prompt-engineering/notes/prompt-engineering-guide.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/Prompt Structures.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1689,
       "exportedPath": "prompt-engineering/notes/prompt-structures.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/prompt tuning & attention.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3771,
       "exportedPath": "prompt-engineering/notes/prompt-tuning-&-attention.html",
       "dependencies": []
     },
     "Prompt Engineering/notes/prompt_guide.webp": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 462172,
       "exportedPath": "prompt-engineering/notes/prompt_guide.webp",
       "dependencies": []
     },
     "Prompt Engineering/TreeOfThought/testing/agilebloom/test01.json": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 49832,
       "exportedPath": "prompt-engineering/treeofthought/testing/agilebloom/test01.json",
       "dependencies": []
     },
     "Prompt Engineering/TreeOfThought/2023-06-21-2137-Paramaters.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1583,
       "exportedPath": "prompt-engineering/treeofthought/2023-06-21-2137-paramaters.html",
       "dependencies": []
     },
     "Prompt Engineering/TreeOfThought/agile - tree of thought.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3292,
       "exportedPath": "prompt-engineering/treeofthought/agile-tree-of-thought.html",
       "dependencies": []
     },
     "Prompt Engineering/TreeOfThought/Tree of Thoughts Search Algorithms.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3370,
       "exportedPath": "prompt-engineering/treeofthought/tree-of-thoughts-search-algorithms.html",
       "dependencies": []
     },
     "Prompt Engineering/Condense_and_Flag.canvas": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 7007,
       "exportedPath": "prompt-engineering/condense_and_flag.html",
       "dependencies": [
@@ -1487,61 +1428,61 @@
       ]
     },
     "Prompt Engineering/condense-with-example.canvas": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 15381,
       "exportedPath": "prompt-engineering/condense-with-example.html",
       "dependencies": []
     },
     "Prompt Engineering/condense-with-example-alt-layout.canvas": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 15125,
       "exportedPath": "prompt-engineering/condense-with-example-alt-layout.html",
       "dependencies": []
     },
     "Prompt Engineering/Dialog Tone.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 12510,
       "exportedPath": "prompt-engineering/dialog-tone.html",
       "dependencies": []
     },
     "Prompt Engineering/Hey chatGPT how do you know when you are retaining context.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3584,
       "exportedPath": "prompt-engineering/hey-chatgpt-how-do-you-know-when-you-are-retaining-context.html",
       "dependencies": []
     },
     "Prompt Engineering/How to best assess gpt prompts for adherence to a specific grammatical pattern using Cognitive Grammar, Generative Grammar, Functional Grammar, Meronyms, Holonyms and Pragmatics.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3679,
       "exportedPath": "prompt-engineering/how-to-best-assess-gpt-prompts-for-adherence-to-a-specific-grammatical-pattern-using-cognitive-grammar,-generative-grammar,-functional-grammar,-meronyms,-holonyms-and-pragmatics.html",
       "dependencies": []
     },
     "Prompt Engineering/Image Segmentation Center Finding and Allocation Marking.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 339,
       "exportedPath": "prompt-engineering/image-segmentation-center-finding-and-allocation-marking.html",
       "dependencies": []
     },
     "Prompt Engineering/Interference & Hallucinations.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1905,
       "exportedPath": "prompt-engineering/interference-&-hallucinations.html",
       "dependencies": []
     },
     "Prompt Engineering/Logomastic Kernel.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 32183,
       "exportedPath": "prompt-engineering/logomastic-kernel.html",
       "dependencies": []
     },
     "Prompt Engineering/Paper Abstracts.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 11192,
       "exportedPath": "prompt-engineering/paper-abstracts.html",
       "dependencies": []
     },
     "Prompt Engineering/Prompt Engineering.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 14264,
       "exportedPath": "prompt-engineering/prompt-engineering.html",
       "dependencies": [
@@ -1550,133 +1491,133 @@
       ]
     },
     "Prompt Engineering/Prompt Table.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2966,
       "exportedPath": "prompt-engineering/prompt-table.html",
       "dependencies": []
     },
     "Prompt Engineering/Reasoning Scratchpad.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 8167,
       "exportedPath": "prompt-engineering/reasoning-scratchpad.html",
       "dependencies": []
     },
     "Prompt Engineering/Reflexion.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 6491,
       "exportedPath": "prompt-engineering/reflexion.html",
       "dependencies": []
     },
     "Prompt Engineering/Schrodingers Prompt.canvas": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1365,
       "exportedPath": "prompt-engineering/schrodingers-prompt.html",
       "dependencies": []
     },
     "Prompt Engineering/Synonyms for rewrite.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 35643,
       "exportedPath": "prompt-engineering/synonyms-for-rewrite.html",
       "dependencies": []
     },
     "Prompt Engineering/Systematic Construction of Constrained Text Generation Tasks.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 91,
       "exportedPath": "prompt-engineering/systematic-construction-of-constrained-text-generation-tasks.html",
       "dependencies": []
     },
     "Prompt Engineering/Testing with Agenta.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 18397,
       "exportedPath": "prompt-engineering/testing-with-agenta.html",
       "dependencies": []
     },
     "Prompt Engineering/Tools & Resources.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 115,
       "exportedPath": "prompt-engineering/tools-&-resources.html",
       "dependencies": []
     },
     "Prompt Engineering/twentyquestions.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1035,
       "exportedPath": "prompt-engineering/twentyquestions.html",
       "dependencies": []
     },
     "Prompt Engineering/Untitled.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4450,
       "exportedPath": "prompt-engineering/untitled.html",
       "dependencies": []
     },
     "Prompt Engineering/Writing Styles.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 61395,
       "exportedPath": "prompt-engineering/writing-styles.html",
       "dependencies": []
     },
     "Prompt Library/Data Driven Characters/Character Sheets/Audio Engineer.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3328,
       "exportedPath": "prompt-library/data-driven-characters/character-sheets/audio-engineer.html",
       "dependencies": []
     },
     "Prompt Library/Data Driven Characters/Character Sheets/Clinical psychologist.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3625,
       "exportedPath": "prompt-library/data-driven-characters/character-sheets/clinical-psychologist.html",
       "dependencies": []
     },
     "Prompt Library/Data Driven Characters/Character Sheets/Narrator.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3501,
       "exportedPath": "prompt-library/data-driven-characters/character-sheets/narrator.html",
       "dependencies": []
     },
     "Prompt Library/Data Driven Characters/Character Sheets/Programmer.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4068,
       "exportedPath": "prompt-library/data-driven-characters/character-sheets/programmer.html",
       "dependencies": []
     },
     "Prompt Library/Data Driven Characters/Character Sheets/Steve.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4802,
       "exportedPath": "prompt-library/data-driven-characters/character-sheets/steve.html",
       "dependencies": []
     },
     "Prompt Library/Data Driven Characters/Character Sheets/Tech-Savvy Innovator.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4664,
       "exportedPath": "prompt-library/data-driven-characters/character-sheets/tech-savvy-innovator.html",
       "dependencies": []
     },
     "Prompt Library/Data Driven Characters/Mannerisms and Style.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 14351,
       "exportedPath": "prompt-library/data-driven-characters/mannerisms-and-style.html",
       "dependencies": []
     },
     "Prompt Library/Data Driven Characters/notes on developing chat personas.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 26785,
       "exportedPath": "prompt-library/data-driven-characters/notes-on-developing-chat-personas.html",
       "dependencies": []
     },
     "Prompt Library/A Visual Metaphor.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1914,
       "exportedPath": "prompt-library/a-visual-metaphor.html",
       "dependencies": []
     },
     "Prompt Library/AgileBloom.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4456,
       "exportedPath": "prompt-library/agilebloom.html",
       "dependencies": []
     },
     "Prompt Library/Converting Image Descriptions Into Imperative Prompts.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 7238,
       "exportedPath": "prompt-library/converting-image-descriptions-into-imperative-prompts.html",
       "dependencies": [
@@ -1684,61 +1625,61 @@
       ]
     },
     "Ruby/nlp/notebooks/notebooks.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 163,
       "exportedPath": "ruby/nlp/notebooks/notebooks.html",
       "dependencies": []
     },
     "Ruby/nlp/nlp.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 17060,
       "exportedPath": "ruby/nlp/nlp.html",
       "dependencies": []
     },
     "Ruby/alias and alias_method.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1453,
       "exportedPath": "ruby/alias-and-alias_method.html",
       "dependencies": []
     },
     "Ruby/Design Patterns.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5869,
       "exportedPath": "ruby/design-patterns.html",
       "dependencies": []
     },
     "Ruby/Find duplicate Audio Files.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2617,
       "exportedPath": "ruby/find-duplicate-audio-files.html",
       "dependencies": []
     },
     "Ruby/google drive.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 89,
       "exportedPath": "ruby/google-drive.html",
       "dependencies": []
     },
     "Ruby/Installing Gems.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 330,
       "exportedPath": "ruby/installing-gems.html",
       "dependencies": []
     },
     "Ruby/ohm tagging.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5464,
       "exportedPath": "ruby/ohm-tagging.html",
       "dependencies": []
     },
     "Ruby/Refreshing System Ruby.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 478,
       "exportedPath": "ruby/refreshing-system-ruby.html",
       "dependencies": []
     },
     "Ruby/Ruby Notepad.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 14032,
       "exportedPath": "ruby/ruby-notepad.html",
       "dependencies": [
@@ -1747,308 +1688,150 @@
       ]
     },
     "Ruby/Unless.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2477,
       "exportedPath": "ruby/unless.html",
       "dependencies": []
     },
     "Ruby/Using the Iterator Design Pattern.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4459,
       "exportedPath": "ruby/using-the-iterator-design-pattern.html",
       "dependencies": []
     },
     "Notebook.canvas": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 1341,
+      "modifiedTime": 1714248163813,
+      "sourceSize": 1565,
       "exportedPath": "notebook.html",
       "dependencies": [
+        "_assets/image05.jpeg",
         "_assets/img/screenshot/explorellm_promptexample.png",
         "_assets/img/screenshot/explorellm_promptexample.png",
-        "_assets/img/llm/gemini_generated_image01.jpeg",
-        "_assets/img/generative/gemini/gemini_generated_image_orsy16orsy16orsy.webp",
-        "_assets/img/generative/gemini/gemini_generated_image_orsy16orsy16orsy.webp",
-        "_assets/img/llm/image29.jpeg"
+        "_assets/img/llm/gemini_generated_image01.jpeg"
       ]
     },
     "lib/media/variable_explainations.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 162620,
       "exportedPath": "lib/media/variable_explainations.png",
       "dependencies": []
     },
     "lib/media/img-2024-03-26-092133-1.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 89460,
       "exportedPath": "lib/media/img-2024-03-26-092133-1.png",
       "dependencies": []
     },
     "lib/media/img-2024-03-26-093220.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 59129,
       "exportedPath": "lib/media/img-2024-03-26-093220.png",
       "dependencies": []
     },
     "lib/media/img-2024-03-26-093336.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 67319,
       "exportedPath": "lib/media/img-2024-03-26-093336.png",
       "dependencies": []
     },
     "lib/media/img-2024-03-26-093554.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 81309,
       "exportedPath": "lib/media/img-2024-03-26-093554.png",
       "dependencies": []
     },
     "lib/media/img-2024-03-26-093632.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 101322,
       "exportedPath": "lib/media/img-2024-03-26-093632.png",
       "dependencies": []
     },
     "lib/media/bot.svg": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1487,
       "exportedPath": "lib/media/bot.svg",
       "dependencies": []
     },
     "lib/media/user.svg": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2857,
       "exportedPath": "lib/media/user.svg",
       "dependencies": []
     },
     "lib/media/img-2024-03-28-065406-1.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 809874,
       "exportedPath": "lib/media/img-2024-03-28-065406-1.png",
       "dependencies": []
     },
     "lib/media/2024-04-18-20240418090640451.webp": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 352144,
       "exportedPath": "lib/media/2024-04-18-20240418090640451.webp",
       "dependencies": []
     },
     "lib/media/pasted-image-20230818215738.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 86808,
       "exportedPath": "lib/media/pasted-image-20230818215738.png",
       "dependencies": []
     },
     "lib/media/pasted-image-20230818215748.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 150050,
       "exportedPath": "lib/media/pasted-image-20230818215748.png",
       "dependencies": []
     },
     "lib/media/creation_of_comparsion_exemplars.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 113001,
       "exportedPath": "lib/media/creation_of_comparsion_exemplars.png",
       "dependencies": []
     },
     "lib/media/pasted-image-20240315062214.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 85519,
       "exportedPath": "lib/media/pasted-image-20240315062214.png",
       "dependencies": []
     },
     "lib/media/pasted-image-20240315063041.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 51731,
       "exportedPath": "lib/media/pasted-image-20240315063041.png",
       "dependencies": []
     },
     "lib/media/pasted-image-20240315063144.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 241438,
       "exportedPath": "lib/media/pasted-image-20240315063144.png",
       "dependencies": []
     },
     "lib/media/openai_temperature_recomendations.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 438870,
       "exportedPath": "lib/media/openai_temperature_recomendations.png",
       "dependencies": []
     },
     "lib/media/img-2024-04-11-045330.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 215031,
       "exportedPath": "lib/media/img-2024-04-11-045330.png",
       "dependencies": []
     },
     "lib/media/explorellm_promptexample.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 70686,
       "exportedPath": "lib/media/explorellm_promptexample.png",
       "dependencies": []
     },
-    "lib/media/workstation.png": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 3021545,
-      "exportedPath": "lib/media/workstation.png",
-      "dependencies": []
-    },
     "lib/media/gemini_generated_image01.jpeg": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 493449,
       "exportedPath": "lib/media/gemini_generated_image01.jpeg",
       "dependencies": []
     },
-    "lib/media/gemini_generated_image02.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 543695,
-      "exportedPath": "lib/media/gemini_generated_image02.jpeg",
-      "dependencies": []
-    },
-    "lib/media/gemini_generated_image07.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 422151,
-      "exportedPath": "lib/media/gemini_generated_image07.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image08.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 159625,
-      "exportedPath": "lib/media/image08.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image09.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 142856,
-      "exportedPath": "lib/media/image09.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image12.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 186018,
-      "exportedPath": "lib/media/image12.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image13.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 221246,
-      "exportedPath": "lib/media/image13.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image14.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 173612,
-      "exportedPath": "lib/media/image14.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image15.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 170428,
-      "exportedPath": "lib/media/image15.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image16.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 187437,
-      "exportedPath": "lib/media/image16.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image17.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 203627,
-      "exportedPath": "lib/media/image17.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image18.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 106978,
-      "exportedPath": "lib/media/image18.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image19.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 160124,
-      "exportedPath": "lib/media/image19.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image20.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 146614,
-      "exportedPath": "lib/media/image20.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image21.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 153961,
-      "exportedPath": "lib/media/image21.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image22.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 137025,
-      "exportedPath": "lib/media/image22.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image23.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 149412,
-      "exportedPath": "lib/media/image23.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image24.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 155862,
-      "exportedPath": "lib/media/image24.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image25.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 174165,
-      "exportedPath": "lib/media/image25.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image26.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 206940,
-      "exportedPath": "lib/media/image26.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image27.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 219509,
-      "exportedPath": "lib/media/image27.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image28.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 242726,
-      "exportedPath": "lib/media/image28.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image29.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 219515,
-      "exportedPath": "lib/media/image29.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image30.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 187092,
-      "exportedPath": "lib/media/image30.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image31.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 135787,
-      "exportedPath": "lib/media/image31.jpeg",
-      "dependencies": []
-    },
-    "lib/media/image32.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 181913,
-      "exportedPath": "lib/media/image32.jpeg",
-      "dependencies": []
-    },
     "lib/media/json_cols.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 125592,
       "exportedPath": "lib/media/json_cols.png",
       "dependencies": []
@@ -2059,446 +1842,270 @@
       "exportedPath": "lib/media/gemini_generated_image_orsy16orsy16orsy.webp",
       "dependencies": []
     },
-    "assets/img/generative/gemini/gemini_generated_image_orsy16orsy16orsy.webp": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 232946,
-      "exportedPath": "assets/img/generative/gemini/gemini_generated_image_orsy16orsy16orsy.webp",
-      "dependencies": []
-    },
-    "assets/img/screenshot/explorellm_promptexample.png": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 70686,
-      "exportedPath": "assets/img/screenshot/explorellm_promptexample.png",
-      "dependencies": []
-    },
-    "assets/img/llm/gemini_generated_image01.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 493449,
-      "exportedPath": "assets/img/llm/gemini_generated_image01.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/gemini_generated_image02.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 543695,
-      "exportedPath": "assets/img/llm/gemini_generated_image02.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/gemini_generated_image07.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 422151,
-      "exportedPath": "assets/img/llm/gemini_generated_image07.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image08.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 159625,
-      "exportedPath": "assets/img/llm/image08.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image09.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 142856,
-      "exportedPath": "assets/img/llm/image09.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image12.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 186018,
-      "exportedPath": "assets/img/llm/image12.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image13.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 221246,
-      "exportedPath": "assets/img/llm/image13.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image14.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 173612,
-      "exportedPath": "assets/img/llm/image14.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image15.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 170428,
-      "exportedPath": "assets/img/llm/image15.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image16.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 187437,
-      "exportedPath": "assets/img/llm/image16.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image17.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 203627,
-      "exportedPath": "assets/img/llm/image17.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image18.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 106978,
-      "exportedPath": "assets/img/llm/image18.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image19.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 160124,
-      "exportedPath": "assets/img/llm/image19.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image20.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 146614,
-      "exportedPath": "assets/img/llm/image20.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image21.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 153961,
-      "exportedPath": "assets/img/llm/image21.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image22.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 137025,
-      "exportedPath": "assets/img/llm/image22.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image23.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 149412,
-      "exportedPath": "assets/img/llm/image23.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image24.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 155862,
-      "exportedPath": "assets/img/llm/image24.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image25.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 174165,
-      "exportedPath": "assets/img/llm/image25.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image26.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 206940,
-      "exportedPath": "assets/img/llm/image26.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image27.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 219509,
-      "exportedPath": "assets/img/llm/image27.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image28.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 242726,
-      "exportedPath": "assets/img/llm/image28.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image29.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 219515,
-      "exportedPath": "assets/img/llm/image29.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image30.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 187092,
-      "exportedPath": "assets/img/llm/image30.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image31.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 135787,
-      "exportedPath": "assets/img/llm/image31.jpeg",
-      "dependencies": []
-    },
-    "assets/img/llm/image32.jpeg": {
-      "modifiedTime": 1714191758810,
-      "sourceSize": 181913,
-      "exportedPath": "assets/img/llm/image32.jpeg",
-      "dependencies": []
-    },
     "DevOPs/Ansible/Generating Playbooks.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5454,
       "exportedPath": "devops/ansible/generating-playbooks.html",
       "dependencies": []
     },
     "Audio/Ambisonics/notes.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2339,
       "exportedPath": "audio/ambisonics/notes.html",
       "dependencies": []
     },
     "Audio/Issues/raysession patchance patchbay crashes when qsampler is running.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 988,
       "exportedPath": "audio/issues/raysession-patchance-patchbay-crashes-when-qsampler-is-running.html",
       "dependencies": []
     },
     "LLM/Retrieval-Augmented Generation/index.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 487,
       "exportedPath": "llm/retrieval-augmented-generation/index.html",
       "dependencies": []
     },
     "LLM/Text Processing/index.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5422,
       "exportedPath": "llm/text-processing/index.html",
       "dependencies": []
     },
     "Projects/Prompt Engineering for Technical Communicators/Intro.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3507,
       "exportedPath": "projects/prompt-engineering-for-technical-communicators/intro.html",
       "dependencies": []
     },
     "Prompt Library/Analyze and condense prompt instruction example.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3885,
       "exportedPath": "prompt-library/analyze-and-condense-prompt-instruction-example.html",
       "dependencies": []
     },
     "Prompt Library/CustodianGPT.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2165,
       "exportedPath": "prompt-library/custodiangpt.html",
       "dependencies": []
     },
     "Writing/An Open-Sourced Philosophers Notebook/An Open-Sourced Philosopher.canvas": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 19034,
       "exportedPath": "writing/an-open-sourced-philosophers-notebook/an-open-sourced-philosopher.html",
       "dependencies": [
-        "lib/media/gemini_generated_image_orsy16orsy16orsy.webp",
-        "lib/media/gemini_generated_image_orsy16orsy16orsy.webp"
+        "lib/media/image05.jpeg"
       ]
     },
     "Writing/An Open-Sourced Philosophers Notebook/Introduction.md": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 3361,
+      "modifiedTime": 1714248163813,
+      "sourceSize": 3277,
       "exportedPath": "writing/an-open-sourced-philosophers-notebook/introduction.html",
       "dependencies": [
-        "lib/media/gemini_generated_image_orsy16orsy16orsy.webp",
-        "lib/media/gemini_generated_image_orsy16orsy16orsy.webp"
+        "lib/media/image05.jpeg"
       ]
     },
     "DevOPs/Docker/notes.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4171,
       "exportedPath": "devops/docker/notes.html",
       "dependencies": []
     },
     "Prompt Library/Identifying Language Patterns in Group Threads.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 7587,
       "exportedPath": "prompt-library/identifying-language-patterns-in-group-threads.html",
       "dependencies": []
     },
     "LLM/datasets/notes.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 752,
       "exportedPath": "llm/datasets/notes.html",
       "dependencies": []
     },
     "LLM/notes.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 6703,
       "exportedPath": "llm/notes.html",
       "dependencies": []
     },
     "LLM/LLM Parameters.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1134,
       "exportedPath": "llm/llm-parameters.html",
       "dependencies": []
     },
     "LLM/Something Something Datasets.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 6606,
       "exportedPath": "llm/something-something-datasets.html",
       "dependencies": []
     },
     "LLM/Various Image Prompts.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4122,
       "exportedPath": "llm/various-image-prompts.html",
       "dependencies": []
     },
     "Natural Language Processing/The Cognitive Process of Speech Production.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2125,
       "exportedPath": "natural-language-processing/the-cognitive-process-of-speech-production.html",
       "dependencies": []
     },
     "Prompt Engineering/TreeOfThought/Tree of Thought Prompts.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1956,
       "exportedPath": "prompt-engineering/treeofthought/tree-of-thought-prompts.html",
       "dependencies": []
     },
     "Prompt Engineering/A Witch's Guide to Natural Language Processing.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 26968,
       "exportedPath": "prompt-engineering/a-witch's-guide-to-natural-language-processing.html",
       "dependencies": []
     },
     "Prompt Engineering/Action Spaces.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1317,
       "exportedPath": "prompt-engineering/action-spaces.html",
       "dependencies": []
     },
     "Prompt Engineering/antisteve0000.canvas": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2050,
       "exportedPath": "prompt-engineering/antisteve0000.html",
       "dependencies": []
     },
     "Prompt Engineering/Composite Semantics.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 8672,
       "exportedPath": "prompt-engineering/composite-semantics.html",
       "dependencies": []
     },
     "Prompt Engineering/Enhancing Clarity and Precision in Prompt Engineering.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 14893,
       "exportedPath": "prompt-engineering/enhancing-clarity-and-precision-in-prompt-engineering.html",
       "dependencies": []
     },
     "Prompt Engineering/Inner Monologue.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 6364,
       "exportedPath": "prompt-engineering/inner-monologue.html",
       "dependencies": []
     },
     "Prompt Engineering/Leveraging SFL for Targeted Prompt Enhancement.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 12413,
       "exportedPath": "prompt-engineering/leveraging-sfl-for-targeted-prompt-enhancement.html",
       "dependencies": []
     },
-    "Prompt Engineering/Metaprompt - The Prompt.md": {
-      "modifiedTime": 1714245061810,
-      "sourceSize": 35636,
-      "exportedPath": "prompt-engineering/metaprompt-the-prompt.html",
-      "dependencies": []
-    },
     "Prompt Engineering/OpenAI_Temperature_Recomendations.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 438870,
       "exportedPath": "prompt-engineering/openai_temperature_recomendations.png",
       "dependencies": []
     },
     "Prompt Engineering/Overcoming the Challenges of LLM Chain Authoring.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 5004,
       "exportedPath": "prompt-engineering/overcoming-the-challenges-of-llm-chain-authoring.html",
       "dependencies": []
     },
     "Prompt Engineering/Parameter Tuning with Mixtral.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 10879,
       "exportedPath": "prompt-engineering/parameter-tuning-with-mixtral.html",
       "dependencies": []
     },
     "Prompt Engineering/Set of Mark Prompting - A New Classification for Non-Sense.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 11465,
       "exportedPath": "prompt-engineering/set-of-mark-prompting-a-new-classification-for-non-sense.html",
       "dependencies": []
     },
     "Prompt Engineering/The Role of Attention in Natural Language Processing.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2746,
       "exportedPath": "prompt-engineering/the-role-of-attention-in-natural-language-processing.html",
       "dependencies": []
     },
     "Prompt Engineering/Transcribe Summarize Insight.canvas": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 4530,
       "exportedPath": "prompt-engineering/transcribe-summarize-insight.html",
       "dependencies": []
     },
     "Prompt Engineering/Understanding Reward Functions in Reinforcement Learning.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2364,
       "exportedPath": "prompt-engineering/understanding-reward-functions-in-reinforcement-learning.html",
       "dependencies": []
     },
     "Prompt Engineering/wavjourney prompt.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 2546,
       "exportedPath": "prompt-engineering/wavjourney-prompt.html",
       "dependencies": []
     },
     "Prompt Library/Agents/Alice.json": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3343,
       "exportedPath": "prompt-library/agents/alice.json",
       "dependencies": []
     },
     "Prompt Library/Agents/personas_20240418.json": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 1244,
       "exportedPath": "prompt-library/agents/personas_20240418.json",
       "dependencies": []
     },
     "Prompt Library/Agents/promptperfectagents.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 369,
       "exportedPath": "prompt-library/agents/promptperfectagents.html",
       "dependencies": []
     },
     "Prompt Library/Agents/Steve Tomotolier.json": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 9323,
       "exportedPath": "prompt-library/agents/steve-tomotolier.json",
       "dependencies": []
     },
     "Prompt Library/Collaborative Thought Process Tree of Thoughts in Agile Scrum - WIP.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 9572,
       "exportedPath": "prompt-library/collaborative-thought-process-tree-of-thoughts-in-agile-scrum-wip.html",
       "dependencies": []
     },
     "Prompt Library/Draft Editor.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 0,
       "exportedPath": "prompt-library/draft-editor.html",
       "dependencies": []
     },
     "Prompt Library/Generate Dialogue.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 697,
       "exportedPath": "prompt-library/generate-dialogue.html",
       "dependencies": []
     },
     "Prompt Library/Persona Creation.md": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 3243,
       "exportedPath": "prompt-library/persona-creation.html",
       "dependencies": []
     },
     "_assets/img/screenshot/explorellm_promptexample.png": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 70686,
       "exportedPath": "_assets/img/screenshot/explorellm_promptexample.png",
       "dependencies": []
     },
     "_assets/img/llm/gemini_generated_image01.jpeg": {
-      "modifiedTime": 1714245061810,
+      "modifiedTime": 1714248163813,
       "sourceSize": 493449,
       "exportedPath": "_assets/img/llm/gemini_generated_image01.jpeg",
       "dependencies": []
@@ -2513,6 +2120,66 @@
       "modifiedTime": 1714245061810,
       "sourceSize": 219515,
       "exportedPath": "_assets/img/llm/image29.jpeg",
+      "dependencies": []
+    },
+    "DevOPs/Linux/X11/Creating a Custom Xorg Authorization File.md": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 260,
+      "exportedPath": "devops/linux/x11/creating-a-custom-xorg-authorization-file.html",
+      "dependencies": []
+    },
+    "lib/media/image05.jpeg": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 155343,
+      "exportedPath": "lib/media/image05.jpeg",
+      "dependencies": []
+    },
+    "_assets/image05.jpeg": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 155343,
+      "exportedPath": "_assets/image05.jpeg",
+      "dependencies": []
+    },
+    "lib/scripts/graph-wasm.wasm": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 23377,
+      "exportedPath": "lib/scripts/graph-wasm.wasm",
+      "dependencies": []
+    },
+    "lib/scripts/graph-view.js": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 15519,
+      "exportedPath": "lib/scripts/graph-view.js",
+      "dependencies": []
+    },
+    "lib/scripts/graph-wasm.js": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 14021,
+      "exportedPath": "lib/scripts/graph-wasm.js",
+      "dependencies": []
+    },
+    "lib/scripts/graph-render-worker.js": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 5179,
+      "exportedPath": "lib/scripts/graph-render-worker.js",
+      "dependencies": []
+    },
+    "lib/scripts/tinycolor.js": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 29832,
+      "exportedPath": "lib/scripts/tinycolor.js",
+      "dependencies": []
+    },
+    "lib/scripts/pixi.js": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 449509,
+      "exportedPath": "lib/scripts/pixi.js",
+      "dependencies": []
+    },
+    "lib/scripts/graph-data.js": {
+      "modifiedTime": 1714248163813,
+      "sourceSize": 19204,
+      "exportedPath": "lib/scripts/graph-data.js",
       "dependencies": []
     }
   }
