@@ -1,4 +1,12 @@
 title: syncopated notes
+include:
+  - "_pages"
+  - "_projects"
+  - "_pages/*.html"
+  - "notebook/"
+  - "_media/"
+exclude:
+  - "websitestuff/"
 email: rwpannick@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   A specified selection of tokens.
