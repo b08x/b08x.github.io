@@ -1,0 +1,1332 @@
+<!DOCTYPE html> <html><head>
+		<title>Writing Styles</title>
+		<base href="../../">
+		<meta id="root-path" root-path="../../">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+		<meta charset="UTF-8">
+		<meta name="description" content="syncopated notes - Writing Styles">
+		<meta property="og:title" content="Writing Styles">
+		<meta property="og:description" content="syncopated notes - Writing Styles">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://b08x.gitlab.io/programming/prompt-engineering/writing-styles.html">
+		<meta property="og:image" content="undefined">
+		<meta property="og:site_name" content="syncopated notes">
+		<meta name="author" content="Robert Pannick"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://b08x.gitlab.io/lib/rss.xml"><script async="" id="webpage-script" src="lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="minisearch-script" src="lib/scripts/minisearch.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="lib/media/favicon.png"><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-horizontal-spacing:0.6em;--tree-vertical-spacing:0.6em;--sidebar-margin:12px}.sidebar{height:100%;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));font-size:14px;z-index:10;position:relative;overflow:hidden;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}.sidebar-left{left:0}.sidebar-right{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}body.floating-sidebars .sidebar{position:absolute}.sidebar-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .sidebar-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}.sidebar-left .sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}.sidebar-right .sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar:has(.sidebar-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:2em;width:var(--sidebar-width);top:var(--sidebar-margin);padding-inline:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}.sidebar-left .sidebar-topbar{left:0}.sidebar-right .sidebar-topbar{right:0}.topbar-content{overflow:hidden;overflow:clip;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:0!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}.sidebar-left .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}.sidebar-right .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.sidebar-section-header{margin:0 0 1em 0;text-transform:uppercase;letter-spacing:.06em;font-weight:600}body{transition:background-color var(--color-fade-speed) ease-in-out}.webpage-container{display:flex;flex-direction:row;height:100%;width:100%;align-items:stretch;justify-content:center}.document-container{opacity:1;flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0;transition:opacity .2s ease-in-out}.document-container>.markdown-preview-view{margin:var(--sidebar-margin);margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;background-color:var(--background-primary);transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}.document-container>.markdown-preview-view>.markdown-preview-sizer{padding-bottom:80vh!important;width:100%!important;max-width:var(--line-width)!important;flex-basis:var(--line-width)!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}.markdown-rendered img:not([width]),.view-content img:not([width]){max-width:100%;outline:0}.document-container>.view-content.embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}.document-container>.view-content.embed>*{max-width:100%;max-height:100%;object-fit:contain}:has(> :is(.math,table)){overflow-x:auto!important}.document-container>.view-content{overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){if("file:"!=location.protocol){let e=document.querySelectorAll("include");for(let t=0;t<e.length;t++){let o=e[t],l=o.getAttribute("src");try{const e=await fetch(l);if(!e.ok){console.log("Could not include file: "+l),o?.remove();continue}let t=await e.text(),n=document.createRange().createContextualFragment(t),i=Array.from(n.children);for(let e of i)e.classList.add("hide"),e.style.transition="opacity 0.5s ease-in-out",setTimeout((()=>{e.classList.remove("hide")}),10);o.before(n),o.remove(),console.log("Included file: "+l)}catch(e){o?.remove(),console.log("Could not include file: "+l,e);continue}}}else{if(document.querySelectorAll("include").length>0){var e=document.createElement("div");e.id="error",e.textContent="Web server exports must be hosted on an http / web server to be viewed correctly.",e.style.position="fixed",e.style.top="50%",e.style.left="50%",e.style.transform="translate(-50%, -50%)",e.style.fontSize="1.5em",e.style.fontWeight="bold",e.style.textAlign="center",document.body.appendChild(e),document.querySelector(".document-container")?.classList.remove("hide")}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script"))),l=0;!function e(){let n=o[l];l++,n&&"true"!=n.getAttribute("loaded")||l<o.length&&e(),l<o.length?n.addEventListener("load",e):t()}()}</script><link rel="stylesheet" href="lib/styles/obsidian.css"><link rel="preload" href="lib/styles/other-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/other-plugins.css"></noscript><link rel="stylesheet" href="lib/styles/theme.css"><link rel="preload" href="lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/supported-plugins.css"></noscript><link rel="preload" href="lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/main-styles.css"></noscript><link rel="preload" href="lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/snippets.css"></noscript></head><body class="publish css-settings-manager theme-dark show-inline-title"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="webpage-container workspace"><div class="sidebar-left sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme_toggle"><input class="theme-toggle-input" type="checkbox" id="theme_toggle"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="search-input-container"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div class="search-input-clear-button" aria-label="Clear search"></div></div><include src="lib/html/file-tree.html"></include></div><script defer="">let ls = document.querySelector(".sidebar-left"); ls.classList.add("is-collapsed"); if (window.innerWidth > 768) ls.classList.remove("is-collapsed"); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div><div class="document-container markdown-reading-view hide"><div class="markdown-preview-view markdown-rendered allow-fold-headings allow-fold-lists is-readable-line-width"><style id="MJX-CHTML-styles">mjx-container[jax=CHTML]{line-height:0}mjx-container [space="1"]{margin-left:.111em}mjx-container [space="2"]{margin-left:.167em}mjx-container [space="3"]{margin-left:.222em}mjx-container [space="4"]{margin-left:.278em}mjx-container [space="5"]{margin-left:.333em}mjx-container [rspace="1"]{margin-right:.111em}mjx-container [rspace="2"]{margin-right:.167em}mjx-container [rspace="3"]{margin-right:.222em}mjx-container [rspace="4"]{margin-right:.278em}mjx-container [rspace="5"]{margin-right:.333em}mjx-container [size="s"]{font-size:70.7%}mjx-container [size=ss]{font-size:50%}mjx-container [size=Tn]{font-size:60%}mjx-container [size=sm]{font-size:85%}mjx-container [size=lg]{font-size:120%}mjx-container [size=Lg]{font-size:144%}mjx-container [size=LG]{font-size:173%}mjx-container [size=hg]{font-size:207%}mjx-container [size=HG]{font-size:249%}mjx-container [width=full]{width:100%}mjx-box{display:inline-block}mjx-block{display:block}mjx-itable{display:inline-table}mjx-row{display:table-row}mjx-row>*{display:table-cell}mjx-mtext{display:inline-block}mjx-mstyle{display:inline-block}mjx-merror{display:inline-block;color:red;background-color:#ff0}mjx-mphantom{visibility:hidden}mjx-assistive-mml{top:0;left:0;clip:rect(1px,1px,1px,1px);user-select:none;position:absolute!important;padding:1px 0 0!important;border:0!important;display:block!important;width:auto!important;overflow:hidden!important}mjx-assistive-mml[display=block]{width:100%!important}mjx-math{display:inline-block;text-align:left;line-height:0;text-indent:0;font-style:normal;font-weight:400;font-size:100%;letter-spacing:normal;border-collapse:collapse;overflow-wrap:normal;word-spacing:normal;white-space:nowrap;direction:ltr;padding:1px 0}mjx-container[jax=CHTML][display=true]{display:block;text-align:center;margin:1em 0}mjx-container[jax=CHTML][display=true][width=full]{display:flex}mjx-container[jax=CHTML][display=true] mjx-math{padding:0}mjx-container[jax=CHTML][justify=left]{text-align:left}mjx-container[jax=CHTML][justify=right]{text-align:right}mjx-texatom{display:inline-block;text-align:left}mjx-mo{display:inline-block;text-align:left}mjx-stretchy-h{display:inline-table;width:100%}mjx-stretchy-h>*{display:table-cell;width:0}mjx-stretchy-h>*>mjx-c{display:inline-block;transform:scaleX(1)}mjx-stretchy-h>*>mjx-c::before{display:inline-block;width:initial}mjx-stretchy-h>mjx-ext{overflow:clip visible;width:100%}mjx-stretchy-h>mjx-ext>mjx-c::before{transform:scaleX(500)}mjx-stretchy-h>mjx-ext>mjx-c{width:0}mjx-stretchy-h>mjx-beg>mjx-c{margin-right:-.1em}mjx-stretchy-h>mjx-end>mjx-c{margin-left:-.1em}mjx-stretchy-v{display:inline-block}mjx-stretchy-v>*{display:block}mjx-stretchy-v>mjx-beg{height:0}mjx-stretchy-v>mjx-end>mjx-c{display:block}mjx-stretchy-v>*>mjx-c{transform:scaleY(1);transform-origin:left center;overflow:hidden}mjx-stretchy-v>mjx-ext{display:block;height:100%;box-sizing:border-box;border:0 solid transparent;overflow:visible clip}mjx-stretchy-v>mjx-ext>mjx-c::before{width:initial;box-sizing:border-box}mjx-stretchy-v>mjx-ext>mjx-c{transform:scaleY(500) translateY(.075em);overflow:visible}mjx-mark{display:inline-block;height:0}mjx-c{display:inline-block}mjx-utext{display:inline-block;padding:.75em 0 .2em}mjx-mi{display:inline-block;text-align:left}mjx-msup{display:inline-block;text-align:left}mjx-c::before{display:block;width:0}.MJX-TEX{font-family:MJXZERO,MJXTEX}.TEX-B{font-family:MJXZERO,MJXTEX-B}.TEX-I{font-family:MJXZERO,MJXTEX-I}.TEX-MI{font-family:MJXZERO,MJXTEX-MI}.TEX-BI{font-family:MJXZERO,MJXTEX-BI}.TEX-S1{font-family:MJXZERO,MJXTEX-S1}.TEX-S2{font-family:MJXZERO,MJXTEX-S2}.TEX-S3{font-family:MJXZERO,MJXTEX-S3}.TEX-S4{font-family:MJXZERO,MJXTEX-S4}.TEX-A{font-family:MJXZERO,MJXTEX-A}.TEX-C{font-family:MJXZERO,MJXTEX-C}.TEX-CB{font-family:MJXZERO,MJXTEX-CB}.TEX-FR{font-family:MJXZERO,MJXTEX-FR}.TEX-FRB{font-family:MJXZERO,MJXTEX-FRB}.TEX-SS{font-family:MJXZERO,MJXTEX-SS}.TEX-SSB{font-family:MJXZERO,MJXTEX-SSB}.TEX-SSI{font-family:MJXZERO,MJXTEX-SSI}.TEX-SC{font-family:MJXZERO,MJXTEX-SC}.TEX-T{font-family:MJXZERO,MJXTEX-T}.TEX-V{font-family:MJXZERO,MJXTEX-V}.TEX-VB{font-family:MJXZERO,MJXTEX-VB}mjx-stretchy-h mjx-c,mjx-stretchy-v mjx-c{font-family:MJXZERO,MJXTEX-S1,MJXTEX-S4,MJXTEX,MJXTEX-A!important}@font-face{font-family:MJXZERO;src:url("lib/fonts/mathjax_zero.woff") format("woff")}@font-face{font-family:MJXTEX;src:url("lib/fonts/mathjax_main-regular.woff") format("woff")}@font-face{font-family:MJXTEX-B;src:url("lib/fonts/mathjax_main-bold.woff") format("woff")}@font-face{font-family:MJXTEX-I;src:url("lib/fonts/mathjax_math-italic.woff") format("woff")}@font-face{font-family:MJXTEX-MI;src:url("lib/fonts/mathjax_main-italic.woff") format("woff")}@font-face{font-family:MJXTEX-BI;src:url("lib/fonts/mathjax_math-bolditalic.woff") format("woff")}@font-face{font-family:MJXTEX-S1;src:url("lib/fonts/mathjax_size1-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S2;src:url("lib/fonts/mathjax_size2-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S3;src:url("lib/fonts/mathjax_size3-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S4;src:url("lib/fonts/mathjax_size4-regular.woff") format("woff")}@font-face{font-family:MJXTEX-A;src:url("lib/fonts/mathjax_ams-regular.woff") format("woff")}@font-face{font-family:MJXTEX-C;src:url("lib/fonts/mathjax_calligraphic-regular.woff") format("woff")}@font-face{font-family:MJXTEX-CB;src:url("lib/fonts/mathjax_calligraphic-bold.woff") format("woff")}@font-face{font-family:MJXTEX-FR;src:url("lib/fonts/mathjax_fraktur-regular.woff") format("woff")}@font-face{font-family:MJXTEX-FRB;src:url("lib/fonts/mathjax_fraktur-bold.woff") format("woff")}@font-face{font-family:MJXTEX-SS;src:url("lib/fonts/mathjax_sansserif-regular.woff") format("woff")}@font-face{font-family:MJXTEX-SSB;src:url("lib/fonts/mathjax_sansserif-bold.woff") format("woff")}@font-face{font-family:MJXTEX-SSI;src:url("lib/fonts/mathjax_sansserif-italic.woff") format("woff")}@font-face{font-family:MJXTEX-SC;src:url("lib/fonts/mathjax_script-regular.woff") format("woff")}@font-face{font-family:MJXTEX-T;src:url("lib/fonts/mathjax_typewriter-regular.woff") format("woff")}@font-face{font-family:MJXTEX-V;src:url("lib/fonts/mathjax_vector-regular.woff") format("woff")}@font-face{font-family:MJXTEX-VB;src:url("lib/fonts/mathjax_vector-bold.woff") format("woff")}mjx-c.mjx-c2033::before{padding:.56em .55em 0 0;content:"′′"}mjx-c.mjx-c1D456.TEX-I::before{padding:.661em .345em .011em 0;content:"i"}mjx-c.mjx-c1D45B.TEX-I::before{padding:.442em .6em .011em 0;content:"n"}mjx-c.mjx-c1D460.TEX-I::before{padding:.442em .469em .01em 0;content:"s"}mjx-c.mjx-c1D461.TEX-I::before{padding:.626em .361em .011em 0;content:"t"}mjx-c.mjx-c1D44E.TEX-I::before{padding:.441em .529em .01em 0;content:"a"}mjx-c.mjx-c1D450.TEX-I::before{padding:.442em .433em .011em 0;content:"c"}mjx-c.mjx-c1D452.TEX-I::before{padding:.442em .466em .011em 0;content:"e"}mjx-c.mjx-c3D::before{padding:.583em .778em .082em 0;content:"="}mjx-c.mjx-c1D467.TEX-I::before{padding:.442em .465em .011em 0;content:"z"}mjx-c.mjx-c1D45C.TEX-I::before{padding:.441em .485em .011em 0;content:"o"}mjx-c.mjx-c1D45A.TEX-I::before{padding:.442em .878em .011em 0;content:"m"}</style><pre class="frontmatter language-yaml" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">layout</span><span class="token punctuation">:</span> note
+<span class="token key atrule">title</span><span class="token punctuation">:</span> Writing Styles
+<span class="token key atrule">subtitle</span><span class="token punctuation">:</span> 
+<span class="token key atrule">category</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> Prompt Engineering
+<span class="token key atrule">tags</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> nlp
+<span class="token key atrule">date created</span><span class="token punctuation">:</span> Monday<span class="token punctuation">,</span> April 22nd 2024<span class="token punctuation">,</span> 11<span class="token punctuation">:</span>23<span class="token punctuation">:</span>55 pm
+<span class="token key atrule">date modified</span><span class="token punctuation">:</span> Saturday<span class="token punctuation">,</span> May 18th 2024<span class="token punctuation">,</span> 1<span class="token punctuation">:</span>40<span class="token punctuation">:</span>27 pm</code><button class="copy-code-button">Copy</button></pre><div class="markdown-preview-sizer markdown-preview-section"><h1 class="page-title heading inline-title" id="Writing Styles"><p>Writing Styles</p></h1><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th>Style</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>narrative</td>
+<td>Increased detail for narrative. Longer paragraphs with deeper descriptions.</td>
+</tr>
+<tr>
+<td>conversational</td>
+<td>Makes everyone chatty, but narrative becomes very terse. Weighted towards nonviolence.</td>
+</tr>
+<tr>
+<td>verbose</td>
+<td>Strong effect. Longer descriptions, with more dialogue. Slows down scenes a bit.</td>
+</tr>
+<tr>
+<td>oratorical</td>
+<td>Weak. Tends to make dialogue longer, sometimes even resulting in monologues.</td>
+</tr>
+<tr>
+<td>talkative</td>
+<td>Strong effect. More dialogue, with focus on small-talk. Should usually be combined with one of the more vivid styles.</td>
+</tr>
+<tr>
+<td>realistic</td>
+<td>Seems to keep the output grounded. In genres such as fantasy, this makes the characters act in a more sensible way.</td>
+</tr>
+<tr>
+<td>rational</td>
+<td>Spock style. Increased focus on motivations and reasoning.</td>
+</tr>
+<tr>
+<td>fairy tale</td>
+<td>Self-explanatory. Works quite well.</td>
+</tr>
+<tr>
+<td>film noir</td>
+<td>Strong effect. Fatalism, dingy realism, corruption, and long inner monologues.</td>
+</tr>
+<tr>
+<td>investigative</td>
+<td>Heavy focus on detective-fiction. Combines well with 'film-noir'.</td>
+</tr>
+<tr>
+<td>didactic</td>
+<td>Preachy and biased. 'Beach is nice...'</td>
+</tr>
+<tr>
+<td>pleonastic</td>
+<td>Adds superfluous words to the output. 'The sky above was blue, with tiny white clouds drifting here and there.'</td>
+</tr>
+<tr>
+<td>expository</td>
+<td>Nobody can keep secrets, and characters tend to say aloud what they're about to do. Narration focuses on past events.</td>
+</tr>
+<tr>
+<td>vivid</td>
+<td>Purple prose, focus on descriptions. Combines well with more balanced styles.</td>
+</tr>
+<tr>
+<td>purple prose</td>
+<td>Often too elaborate. Can be combined with other styles to balance it.</td>
+</tr>
+<tr>
+<td>prose</td>
+<td>AI tries to write a story rather than be too random.</td>
+</tr>
+<tr>
+<td>inventive</td>
+<td>Mild increase in purple prose and major increase in creativity. Frequently introduces new story elements.</td>
+</tr>
+<tr>
+<td>aesthetic</td>
+<td>Weak effect. Increased detail for senses. Better descriptions for things that the protagonist feels, smells and hears.</td>
+</tr>
+<tr>
+<td>auditory descriptions</td>
+<td>Increased focus on what your character is hearing.</td>
+</tr>
+<tr>
+<td>allegory</td>
+<td>Not very strong, but when it works the AI is surprisingly good at allegorical writing.</td>
+</tr>
+<tr>
+<td>tall tale</td>
+<td>Exaggerated story style, often starting with 'Once upon a time'. Can get very silly.</td>
+</tr>
+<tr>
+<td>exaggerated</td>
+<td>Exaggerated to the max. 'The water was so clear you could see all the way to Hawaii.'</td>
+</tr>
+<tr>
+<td>kafkaesque</td>
+<td>Disorienting, often illogical, with a heavy feeling of powerlessness and oppressive authority.</td>
+</tr>
+<tr>
+<td>absurdist</td>
+<td>This style rejects your reality and substitutes its own.</td>
+</tr>
+<tr>
+<td>bizarre</td>
+<td>Completely unpredictable.</td>
+</tr>
+<tr>
+<td>rustic</td>
+<td>Shifted story focus to farming, village/rural life. Good for Harvest Moon style of scenarios.</td>
+</tr>
+<tr>
+<td>military</td>
+<td>Strong effect, military fiction focus with heavy slant towards land-battles.</td>
+</tr>
+<tr>
+<td>pirate</td>
+<td>Strong effect, makes everything pirate-focused.</td>
+</tr>
+<tr>
+<td>fantastic</td>
+<td>Adds fantasy elements to the story.</td>
+</tr>
+<tr>
+<td>arcane</td>
+<td>Heavily focus on magic, useful for keeping fantasy scenarios on track. Especially good for scenarios where you play as a magic-user.</td>
+</tr>
+<tr>
+<td>tragic</td>
+<td>Heavy focus on loss, heroic sacrifices, and similar themes.</td>
+</tr>
+<tr>
+<td>Greek tragedy</td>
+<td>Bronze age adventures, frequent references to Zeus, titans, etc. Good at pruning out modern technology.</td>
+</tr>
+<tr>
+<td>steampunk</td>
+<td>Strong focus. Victorian England, airship pirates, goggles and top hats.</td>
+</tr>
+<tr>
+<td>grandiose</td>
+<td>Shifts story focus towards high society, and makes the story more epic than usual.</td>
+</tr>
+<tr>
+<td>dark fantasy</td>
+<td>Dark, brooding tone with fantasy elements.</td>
+</tr>
+<tr>
+<td>socialist realism</td>
+<td>Focus on Soviet Union and communism. Frequent references to golden fields of grain and workers toiling for the Motherland while also showing the gritty side.</td>
+</tr>
+<tr>
+<td>pop science</td>
+<td>Mild effect. Scientific output ranging from completely nonsensical to somewhat plausible.</td>
+</tr>
+<tr>
+<td>nautical</td>
+<td>Maritime adventures, Aubrey-Maturin style. Expect frequent pirate attacks.</td>
+</tr>
+<tr>
+<td>desertpunk</td>
+<td>The Mad Max style. Somewhat weak, but mentioning sand will usually trigger it.</td>
+</tr>
+<tr>
+<td>whodunnit</td>
+<td>The murder mystery style. Rather strong, but might create new corpses randomly.</td>
+</tr>
+<tr>
+<td>space opera</td>
+<td>Grand adventures across alien worlds. Combines well with many styles.</td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Generic sci-fi focus, useful for making the AI stick to the genre.</td>
+</tr>
+<tr>
+<td>furry</td>
+<td>Weak. Focus on anthropomorphic animals. Makes humans less common, but may generate humans in fursuits.</td>
+</tr>
+<tr>
+<td>anthropomorphic</td>
+<td>Focus on anthropomorphic animals. Sometimes morphs characters into creatures with human faces.</td>
+</tr>
+<tr>
+<td>old english</td>
+<td>Old English dialogue style.</td>
+</tr>
+<tr>
+<td>Orwellian</td>
+<td>Strong effect. Outputs many direct quotes from 1984.</td>
+</tr>
+<tr>
+<td>frenetic</td>
+<td>Frenzied. Lots going on at once.</td>
+</tr>
+<tr>
+<td>exciting</td>
+<td>Action-focused. Good for fight-scenes.</td>
+</tr>
+<tr>
+<td>energetic</td>
+<td>Similar to 'exciting', but more of an action-movie feel.</td>
+</tr>
+<tr>
+<td>tense</td>
+<td>Dramatic, action-movie style.</td>
+</tr>
+<tr>
+<td>heroic</td>
+<td>Makes everything a little more epic.</td>
+</tr>
+<tr>
+<td>dramatic</td>
+<td>Action-drama style.</td>
+</tr>
+<tr>
+<td>suspenseful</td>
+<td>Moderate effect. Thriller-movie style.</td>
+</tr>
+<tr>
+<td>exploratinon</td>
+<td>Strong effect. Dungeon delving mood with overtones of mystery. Vivid descriptions for wilderness and abandoned places.</td>
+</tr>
+<tr>
+<td>macabre</td>
+<td>Grim and grisly, occult horror with apocalyptic themes.</td>
+</tr>
+<tr>
+<td>gritty</td>
+<td>Violent style with cursing and increased gore.</td>
+</tr>
+<tr>
+<td>magic realism</td>
+<td>Adds 'sense of wonder' to the output.</td>
+</tr>
+<tr>
+<td>text adventure</td>
+<td>Interactive fiction style. First-person and present tense.</td>
+</tr>
+<tr>
+<td>roleplaying</td>
+<td>Subtle tabletop RPG influences, assumes party presence.</td>
+</tr>
+<tr>
+<td>graphic</td>
+<td>Violent theme with graphic fight scenes.</td>
+</tr>
+<tr>
+<td>lovecraftian</td>
+<td>Eldritch horrors, mix of Lovecraft and fanfiction.</td>
+</tr>
+<tr>
+<td>mystique</td>
+<td>Evocative style with gothic fantasy elements.</td>
+</tr>
+<tr>
+<td>grotesque</td>
+<td>Similar to Darkest Dungeon style.</td>
+</tr>
+<tr>
+<td>batman</td>
+<td>Dark and brooding, Batman-themed.</td>
+</tr>
+<tr>
+<td>melancholic</td>
+<td>Dark, depressing, grimdark.</td>
+</tr>
+<tr>
+<td>euphoric</td>
+<td>Adds positive mood.</td>
+</tr>
+<tr>
+<td>ominous</td>
+<td>Strong effect. Foreboding events and dialogue.</td>
+</tr>
+<tr>
+<td>aggressive</td>
+<td>Notable increase in aggression and violence.</td>
+</tr>
+<tr>
+<td>bitter</td>
+<td>Crude, angry dialogue.</td>
+</tr>
+<tr>
+<td>uplifting</td>
+<td>Strong effect. Motivational-style dialogue.</td>
+</tr>
+<tr>
+<td>gloomy</td>
+<td>Gloomy mood with whiny and depressive dialogue.</td>
+</tr>
+<tr>
+<td>cool</td>
+<td>Makes characters act 'cool'.</td>
+</tr>
+<tr>
+<td>scary</td>
+<td>Strong effect. Focus on tension.</td>
+</tr>
+<tr>
+<td>creepy</td>
+<td>Strong effect. Horror-focused.</td>
+</tr>
+<tr>
+<td>grim</td>
+<td>Strong effect. Grim and impossible odds.</td>
+</tr>
+<tr>
+<td>anomalous</td>
+<td>Weak effect. Adds eerie overtones.</td>
+</tr>
+<tr>
+<td>surreal</td>
+<td>Extreme version of above, occasionally more violent.</td>
+</tr>
+<tr>
+<td>dirge</td>
+<td>Strong effect. Vividly dark mood.</td>
+</tr>
+<tr>
+<td>grave</td>
+<td>Gravitas, serious tone.</td>
+</tr>
+<tr>
+<td>gothic</td>
+<td>Gloomy and atmospheric, with romance and melodrama.</td>
+</tr>
+<tr>
+<td>joyful</td>
+<td>Nonviolent theme, carefree narration.</td>
+</tr>
+<tr>
+<td>educational</td>
+<td>Strong effect. Dry, factual text.</td>
+</tr>
+<tr>
+<td>academic</td>
+<td>Dry, factual style.</td>
+</tr>
+<tr>
+<td>highbrow</td>
+<td>Intellectual style with pretentiousness.</td>
+</tr>
+<tr>
+<td>medical</td>
+<td>Strong effect, medical terminology.</td>
+</tr>
+<tr>
+<td>scientific</td>
+<td>Injects lab equipment into the story.</td>
+</tr>
+<tr>
+<td>philosophical</td>
+<td>Philosophical slant.</td>
+</tr>
+<tr>
+<td>profound</td>
+<td>Philosophical with a new age slant.</td>
+</tr>
+<tr>
+<td>enlightened</td>
+<td>More of the same with esoteric/religious slant.</td>
+</tr>
+<tr>
+<td>doctor's note</td>
+<td>Medical log style.</td>
+</tr>
+<tr>
+<td>hard science</td>
+<td>Similar to Hard Science Fiction.</td>
+</tr>
+<tr>
+<td>list</td>
+<td>More likely to stick to a list format.</td>
+</tr>
+<tr>
+<td>diarylike</td>
+<td>Diary style, weak on its own.</td>
+</tr>
+<tr>
+<td>police report</td>
+<td>Written police report style.</td>
+</tr>
+<tr>
+<td>festive</td>
+<td>Strong effect. Lots of holiday references.</td>
+</tr>
+<tr>
+<td>awful</td>
+<td>Decreases output quality, adds errors.</td>
+</tr>
+<tr>
+<td>sonnet</td>
+<td>Makes output more poetic.</td>
+</tr>
+<tr>
+<td>bad ending</td>
+<td>Ends the story quickly.</td>
+</tr>
+<tr>
+<td>gamer</td>
+<td>Random gaming references.</td>
+</tr>
+<tr>
+<td>powergamer</td>
+<td>Makes protagonist overpowered.</td>
+</tr>
+<tr>
+<td>Chick tract</td>
+<td>Patronizing fundamentalism.</td>
+</tr>
+<tr>
+<td>happy</td>
+<td>Childish dialogue style.</td>
+</tr>
+</tbody>
+</table></div><div><p>(Note: Some styles have been omitted due to being not recommended.)</p></div><div><p><a data-tooltip-position="top" aria-label="https://justpaste.it/9ofj1" rel="noopener" class="external-link" href="https://justpaste.it/9ofj1" target="_blank">source</a></p></div><div><p><a data-tooltip-position="top" aria-label="https://docs.google.com/document/d/1CKLFeNFk_oswnpIsvrBJlDfAdBoJUw41ctxBTlnYOeE/edit" rel="noopener" class="external-link" href="https://docs.google.com/document/d/1CKLFeNFk_oswnpIsvrBJlDfAdBoJUw41ctxBTlnYOeE/edit" target="_blank">alt source</a></p></div><div><hr></div><div style="overflow-x: auto;"><table>
+<thead>
+<tr>
+<th>Author's Writing Style / Style</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abecedarian</td>
+<td>Arranged in alphabetical order or following the order of the alphabet.</td>
+</tr>
+<tr>
+<td>Adventurer</td>
+<td>Expressive of adventurous and daring experiences.</td>
+</tr>
+<tr>
+<td>Adventurous</td>
+<td>Bold and daring, often involving risk or excitement.</td>
+</tr>
+<tr>
+<td>Aesop's Fables</td>
+<td>Characterized by short allegorical stories, often with animals as characters.</td>
+</tr>
+<tr>
+<td>Agriculturalist</td>
+<td>Pertaining to agriculture, farming, or rural life.</td>
+</tr>
+<tr>
+<td>Airhead</td>
+<td>Light, frivolous, and often superficial in nature.</td>
+</tr>
+<tr>
+<td>Ambiguous</td>
+<td>Open to multiple interpretations or meanings.</td>
+</tr>
+<tr>
+<td>Amnesiac</td>
+<td>Reflective of memory loss or forgetfulness.</td>
+</tr>
+<tr>
+<td>Anarchic</td>
+<td>Chaotic, rebellious, and lacking in order or authority.</td>
+</tr>
+<tr>
+<td>Anglicism</td>
+<td>Influence of English language or culture in writing.</td>
+</tr>
+<tr>
+<td>Antiquated</td>
+<td>Outdated or no longer in current use.</td>
+</tr>
+<tr>
+<td>Apocalyptic</td>
+<td>Relating to the end of the world or a catastrophic event.</td>
+</tr>
+<tr>
+<td>Arcane</td>
+<td>Obscure and mysterious, understood by few.</td>
+</tr>
+<tr>
+<td>Aristotelian</td>
+<td>Influenced by the philosophy of Aristotle, often characterized by logic and analysis.</td>
+</tr>
+<tr>
+<td>Artistic</td>
+<td>Creative, expressive, and imaginative.</td>
+</tr>
+<tr>
+<td>Assonance</td>
+<td>Repetition of similar vowel sounds.</td>
+</tr>
+<tr>
+<td>Astrological</td>
+<td>Relating to astrology and the stars' influence on human affairs.</td>
+</tr>
+<tr>
+<td>Authorial Intentional</td>
+<td>Reflecting the author's deliberate choices and intentions.</td>
+</tr>
+<tr>
+<td>Autobiographical</td>
+<td>Based on the author's own life experiences.</td>
+</tr>
+<tr>
+<td>Babble</td>
+<td>Incoherent or rapid speech, often with little meaningful content.</td>
+</tr>
+<tr>
+<td>Baroque</td>
+<td>Elaborate and ornate, with intricate details and decorations.</td>
+</tr>
+<tr>
+<td>Basilectical</td>
+<td>Associated with a non-standard or less prestigious dialect.</td>
+</tr>
+<tr>
+<td>Battlecry</td>
+<td>A rallying shout or phrase, often used in a call to action.</td>
+</tr>
+<tr>
+<td>Begging the Question</td>
+<td>Assuming the conclusion in the premise of an argument.</td>
+</tr>
+<tr>
+<td>Biography</td>
+<td>A written account of someone's life.</td>
+</tr>
+<tr>
+<td>Blank Page</td>
+<td>A page devoid of content, often symbolizing potential or uncertainty.</td>
+</tr>
+<tr>
+<td>Blank Verse</td>
+<td>Unrhymed poetry written in iambic pentameter.</td>
+</tr>
+<tr>
+<td>Bloody Mary</td>
+<td>Writing style with dark, gruesome, or violent themes.</td>
+</tr>
+<tr>
+<td>Bombastic</td>
+<td>Pompous and overly elaborate language.</td>
+</tr>
+<tr>
+<td>Brevity</td>
+<td>Concise and brief expression of ideas.</td>
+</tr>
+<tr>
+<td>Broken English</td>
+<td>Use of imperfect or non-standard English language.</td>
+</tr>
+<tr>
+<td>Bullet Point</td>
+<td>Use of concise and focused lists.</td>
+</tr>
+<tr>
+<td>Calculation Error</td>
+<td>Writing style with intentional or unintentional mathematical inaccuracies.</td>
+</tr>
+<tr>
+<td>Cantrip</td>
+<td>A magical or enchanting style of writing.</td>
+</tr>
+<tr>
+<td>Capitalization</td>
+<td>Particular emphasis on capital letters in text.</td>
+</tr>
+<tr>
+<td>Carpe Diem</td>
+<td>Emphasis on seizing the present moment.</td>
+</tr>
+<tr>
+<td>Casual Language</td>
+<td>Informal and relaxed style of expression.</td>
+</tr>
+<tr>
+<td>Catachresis</td>
+<td>Use of a word in a way that is not in accordance with its proper meaning.</td>
+</tr>
+<tr>
+<td>Chauvinist</td>
+<td>Reflecting excessive loyalty or bias towards a particular group.</td>
+</tr>
+<tr>
+<td>Childish</td>
+<td>Characteristic of a child's language or perspective.</td>
+</tr>
+<tr>
+<td>Classical Chinese</td>
+<td>Reflecting the style of classical Chinese literature.</td>
+</tr>
+<tr>
+<td>Clichéd Phrase</td>
+<td>Using overused and predictable phrases.</td>
+</tr>
+<tr>
+<td>Collegiate</td>
+<td>Resembling the style of academic institutions or their discourse.</td>
+</tr>
+<tr>
+<td>Colloquial</td>
+<td>Informal and conversational language.</td>
+</tr>
+<tr>
+<td>Complexity</td>
+<td>Intricate and intricate expression of ideas.</td>
+</tr>
+<tr>
+<td>Compound</td>
+<td>Combining multiple elements to create a unified whole.</td>
+</tr>
+<tr>
+<td>Concise</td>
+<td>Expressing ideas clearly and succinctly.</td>
+</tr>
+<tr>
+<td>Concordance</td>
+<td>Agreement or harmony between words or ideas.</td>
+</tr>
+<tr>
+<td>Confessional</td>
+<td>Intimate and personal, often revealing inner thoughts or emotions.</td>
+</tr>
+<tr>
+<td>Contradiction in Terms</td>
+<td>Combining contradictory words or concepts.</td>
+</tr>
+<tr>
+<td>Corporate Speak</td>
+<td>Utilizing formal language often associated with business environments.</td>
+</tr>
+<tr>
+<td>Cosmological</td>
+<td>Pertaining to the origin and structure of the universe.</td>
+</tr>
+<tr>
+<td>Counterfactuality</td>
+<td>Expressing ideas that are contrary to reality or fact.</td>
+</tr>
+<tr>
+<td>Creative</td>
+<td>Inventive and imaginative style of writing.</td>
+</tr>
+<tr>
+<td>Crude Expression</td>
+<td>Using raw and unrefined language.</td>
+</tr>
+<tr>
+<td>Dactyloscopy</td>
+<td>Writing with a focus on fingerprints or unique identifiers.</td>
+</tr>
+<tr>
+<td>Decorum</td>
+<td>Observance of proper behavior and etiquette in language.</td>
+</tr>
+<tr>
+<td>Deferential</td>
+<td>Showing respect or submission in writing.</td>
+</tr>
+<tr>
+<td>Deixis</td>
+<td>Use of words or phrases that rely on context to determine their meaning.</td>
+</tr>
+<tr>
+<td>Demonstratives</td>
+<td>Words that indicate specific objects or referents in context.</td>
+</tr>
+<tr>
+<td>Descriptive</td>
+<td>Providing detailed and vivid descriptions.</td>
+</tr>
+<tr>
+<td>Detailed</td>
+<td>Elaborate and comprehensive in description.</td>
+</tr>
+<tr>
+<td>Dialect</td>
+<td>Writing in a specific regional or social dialect.</td>
+</tr>
+<tr>
+<td>Didactic</td>
+<td>Intended to teach or instruct, often with a moral lesson.</td>
+</tr>
+<tr>
+<td>Discourse Analysis</td>
+<td>Analyzing language patterns and structures in communication.</td>
+</tr>
+<tr>
+<td>Disjunction</td>
+<td>A style that emphasizes disjointed or separate elements.</td>
+</tr>
+<tr>
+<td>Dogmatic</td>
+<td>Asserting ideas with unwavering certainty.</td>
+</tr>
+<tr>
+<td>Double Entendre</td>
+<td>Use of a word or phrase with multiple meanings, often including a suggestive or risqué interpretation.</td>
+</tr>
+<tr>
+<td>Downward Comparisons</td>
+<td>Comparing oneself to others in a negative or self-deprecating manner.</td>
+</tr>
+<tr>
+<td>Dubiousness</td>
+<td>Expressing doubt or uncertainty.</td>
+</tr>
+<tr>
+<td>Echoing Wordplay</td>
+<td>Repetition of words or sounds for rhetorical effect.</td>
+</tr>
+<tr>
+<td>Elaboration</td>
+<td>Providing extensive detail and expansion on ideas.</td>
+</tr>
+<tr>
+<td>Elegiac</td>
+<td>Reflecting a mournful or melancholic tone.</td>
+</tr>
+<tr>
+<td>Emotional</td>
+<td>Evoking feelings and emotions through language.</td>
+</tr>
+<tr>
+<td>Emphatic</td>
+<td>Expressing emphasis or strong conviction.</td>
+</tr>
+<tr>
+<td>Enjambment</td>
+<td>Carrying a sentence or phrase from one line to the next without a pause.</td>
+</tr>
+<tr>
+<td>Epigrammatic</td>
+<td>Conveying a concise and witty message.</td>
+</tr>
+<tr>
+<td>Erudite</td>
+<td>Demonstrating deep knowledge and intellectual sophistication.</td>
+</tr>
+<tr>
+<td>Exaggeration</td>
+<td>Overstating or magnifying details for emphasis.</td>
+</tr>
+<tr>
+<td>Explanatory</td>
+<td>Providing explanations or clarifications.</td>
+</tr>
+<tr>
+<td>Expressionless Face</td>
+<td>Describing emotionless or blank facial expressions.</td>
+</tr>
+<tr>
+<td>Extended Metaphor</td>
+<td>Prolonged comparison between two unlike things throughout a text.</td>
+</tr>
+<tr>
+<td>Faux Pas</td>
+<td>Writing that includes social blunders or etiquette mistakes.</td>
+</tr>
+<tr>
+<td>Figurative Language</td>
+<td>Use of metaphors, similes, and other non-literal language.</td>
+</tr>
+<tr>
+<td>Flatulence</td>
+<td>Using inflated and pompous language.</td>
+</tr>
+<tr>
+<td>Foreshadowing</td>
+<td>Hinting at future events in the narrative.</td>
+</tr>
+<tr>
+<td>Formal</td>
+<td>Respectful and dignified style of writing.</td>
+</tr>
+<tr>
+<td>Formulaic</td>
+<td>Following established patterns or formulas.</td>
+</tr>
+<tr>
+<td>Fourteen Words</td>
+<td>A style of writing that consists of a specific fourteen-word message.</td>
+</tr>
+<tr>
+<td>Freelancing Writer</td>
+<td>Reflecting the diverse and flexible style of a freelance writer.</td>
+</tr>
+<tr>
+<td>Funny</td>
+<td>Intended to provoke laughter and amusement.</td>
+</tr>
+<tr>
+<td>Gesture</td>
+<td>Describing physical movements or actions.</td>
+</tr>
+<tr>
+<td>Glossolalia</td>
+<td>Language characterized by incomprehensible speech, often associated with religious contexts.</td>
+</tr>
+<tr>
+<td>Godwin's Law</td>
+<td>Alluding to the internet adage that as online discussions grow longer, the likelihood of a comparison involving Nazis or Hitler approaches certainty.</td>
+</tr>
+<tr>
+<td>Gothick</td>
+<td>Evoking a dark, mysterious, and gothic atmosphere.</td>
+</tr>
+<tr>
+<td>Grace Note</td>
+<td>A subtle, delicate, or artistic touch in writing.</td>
+</tr>
+<tr>
+<td>Grandiloquence</td>
+<td>Pompous and extravagant language.</td>
+</tr>
+<tr>
+<td>Haggardian</td>
+<td>Reflecting the style of the author H. Rider Haggard, often involving adventure and exploration.</td>
+</tr>
+<tr>
+<td>Hand Waving</td>
+<td>Dismissing or simplifying complex concepts without proper explanation.</td>
+</tr>
+<tr>
+<td>Heavenly Style</td>
+<td>Reflecting divine or celestial themes and language.</td>
+</tr>
+<tr>
+<td>Hexameter</td>
+<td>A metrical pattern in poetry consisting of six feet per line.</td>
+</tr>
+<tr>
+<td>Highbrow</td>
+<td>Intellectual and sophisticated style of writing.</td>
+</tr>
+<tr>
+<td>Hyperbole</td>
+<td>Exaggeration for emphasis or effect.</td>
+</tr>
+<tr>
+<td>Idiomatic</td>
+<td>Characteristic of a particular language or dialect's idioms.</td>
+</tr>
+<tr>
+<td>Illicit Drug Reference</td>
+<td>Making references to illegal drugs or their effects.</td>
+</tr>
+<tr>
+<td>Imaginative</td>
+<td>Creating vivid and imaginative worlds or scenarios.</td>
+</tr>
+<tr>
+<td>Imperative Mood</td>
+<td>Giving commands or direct orders.</td>
+</tr>
+<tr>
+<td>Incoherence</td>
+<td>Lack of logical connection between ideas.</td>
+</tr>
+<tr>
+<td>Indirect Object Pronouns</td>
+<td>Use of pronouns that indicate recipients or beneficiaries of actions.</td>
+</tr>
+<tr>
+<td>Infodump</td>
+<td>Providing excessive information or background details.</td>
+</tr>
+<tr>
+<td>Informal</td>
+<td>Relaxed and casual style of expression.</td>
+</tr>
+<tr>
+<td>Intelligent</td>
+<td>Reflecting a high level of intellect and thoughtfulness.</td>
+</tr>
+<tr>
+<td>Interjection</td>
+<td>Expressing emotions or reactions briefly, such as "Wow!" or "Oh no!"</td>
+</tr>
+<tr>
+<td>Irony</td>
+<td>Use of language that signifies the opposite of what is meant, often for humorous or critical effect.</td>
+</tr>
+<tr>
+<td>Irrelevant Detail</td>
+<td>Including details that are not relevant to the main topic.</td>
+</tr>
+<tr>
+<td>Jaded</td>
+<td>Reflecting a weary and cynical perspective.</td>
+</tr>
+<tr>
+<td>Jargon</td>
+<td>Technical or specialized language used by a particular group.</td>
+</tr>
+<tr>
+<td>Koan</td>
+<td>Paradoxical statement used in Zen Buddhism to provoke deep thought.</td>
+</tr>
+<tr>
+<td>Laconic</td>
+<td>Using few words to convey a message.</td>
+</tr>
+<tr>
+<td>Laconicism</td>
+<td>Expressing much in few words.</td>
+</tr>
+<tr>
+<td>Latinisms</td>
+<td>Incorporating Latin words or phrases into writing.</td>
+</tr>
+<tr>
+<td>Leitmotif</td>
+<td>Recurring theme or motif in a narrative.</td>
+</tr>
+<tr>
+<td>List</td>
+<td>Presenting information in a bullet-point or enumerated format.</td>
+</tr>
+<tr>
+<td>Literary Criticism</td>
+<td>Analyzing and evaluating literature from a critical perspective.</td>
+</tr>
+<tr>
+<td>Logorrhea</td>
+<td>Excessive and often meaningless use of words.</td>
+</tr>
+<tr>
+<td>Long-Winded</td>
+<td>Using an excessive number of words to convey an idea.</td>
+</tr>
+<tr>
+<td>Lowbrow</td>
+<td>Simplistic and accessible style of writing.</td>
+</tr>
+<tr>
+<td>Lyric</td>
+<td>Expressing personal emotions and thoughts in a poetic manner.</td>
+</tr>
+<tr>
+<td>Macho Man</td>
+<td>Reflecting a tough and masculine style.</td>
+</tr>
+<tr>
+<td>Manipulative</td>
+<td>Intending to influence or control the reader's emotions or beliefs.</td>
+</tr>
+<tr>
+<td>Metaphor</td>
+<td>Use of metaphorical comparisons to convey meaning.</td>
+</tr>
+<tr>
+<td>Metaphorical Extension</td>
+<td>Expanding the metaphor throughout a text.</td>
+</tr>
+<tr>
+<td>Micropublishment</td>
+<td>Publishing short and concise pieces of writing.</td>
+</tr>
+<tr>
+<td>Minimalism</td>
+<td>Conveying ideas with a minimum of words or elements.</td>
+</tr>
+<tr>
+<td>Misogynistic</td>
+<td>Reflecting a biased or prejudiced attitude against women.</td>
+</tr>
+<tr>
+<td>Moderately Long Sentences</td>
+<td>Using sentences of moderate length to convey ideas.</td>
+</tr>
+<tr>
+<td>Monologue</td>
+<td>Extended speech or composition by a single speaker.</td>
+</tr>
+<tr>
+<td>Morality Play</td>
+<td>A type of drama that illustrates moral lessons.</td>
+</tr>
+<tr>
+<td>Narcissism</td>
+<td>Reflecting excessive self-love and self-centeredness.</td>
+</tr>
+<tr>
+<td>Narcissistic</td>
+<td>Characterized by a focus on oneself and self-admiration.</td>
+</tr>
+<tr>
+<td>Narrative</td>
+<td>Telling a story or recounting events.</td>
+</tr>
+<tr>
+<td>Nautical</td>
+<td>Relating to ships, the sea, or maritime themes.</td>
+</tr>
+<tr>
+<td>Negation</td>
+<td>Expressing negation or denial in writing.</td>
+</tr>
+<tr>
+<td>Neologism</td>
+<td>Creating new words or phrases.</td>
+</tr>
+<tr>
+<td>Non Sequitur</td>
+<td>A statement that does not logically follow from previous statements.</td>
+</tr>
+<tr>
+<td>Obfuscatory</td>
+<td>Intentionally vague and unclear language.</td>
+</tr>
+<tr>
+<td>Omnilingualism</td>
+<td>Ability to understand and use multiple languages.</td>
+</tr>
+<tr>
+<td>Onomatopoeia</td>
+<td>Words that imitate the sound they represent.</td>
+</tr>
+<tr>
+<td>Oratorical Delivery</td>
+<td>Reflecting the style and techniques of speech delivery.</td>
+</tr>
+<tr>
+<td>Paradigm</td>
+<td>A typical example or pattern.</td>
+</tr>
+<tr>
+<td>Parallel</td>
+<td>Expressing similarities or connections between different elements.</td>
+</tr>
+<tr>
+<td>Parallel Construction</td>
+<td>Maintaining consistent grammatical structures in a sentence or paragraph.</td>
+</tr>
+<tr>
+<td>Parnassian</td>
+<td>Reflecting the style of the Parnassian poets, characterized by formalism and restraint.</td>
+</tr>
+<tr>
+<td>Parsimony</td>
+<td>Using minimal words to convey an idea.</td>
+</tr>
+<tr>
+<td>Passage of Time</td>
+<td>Conveying the passage of time in a narrative.</td>
+</tr>
+<tr>
+<td>Pedantry</td>
+<td>Excessive focus on minor details or formalities.</td>
+</tr>
+<tr>
+<td>Periphrasis</td>
+<td>Using more words than necessary to convey an idea.</td>
+</tr>
+<tr>
+<td>Periphrastic</td>
+<td>Circumlocutory or indirect in style.</td>
+</tr>
+<tr>
+<td>Persiflage</td>
+<td>Light and playful banter or teasing in writing.</td>
+</tr>
+<tr>
+<td>Persuasive</td>
+<td>Intended to convince or sway the reader's opinion.</td>
+</tr>
+<tr>
+<td>Phony Academic Writing</td>
+<td>Imitation of formal academic writing without genuine substance.</td>
+</tr>
+<tr>
+<td>Plagiarism</td>
+<td>Using someone else's work or ideas without proper attribution.</td>
+</tr>
+<tr>
+<td>Plain Style</td>
+<td>Simple and straightforward style of writing.</td>
+</tr>
+<tr>
+<td>Play</td>
+<td>Engaging in wordplay, humor, or playful language.</td>
+</tr>
+<tr>
+<td>Poetic</td>
+<td>Reflecting the style and techniques of poetry.</td>
+</tr>
+<tr>
+<td>Poetic License</td>
+<td>The freedom to depart from conventional language for artistic effect.</td>
+</tr>
+<tr>
+<td>Polysyllabic</td>
+<td>Containing many syllables in words.</td>
+</tr>
+<tr>
+<td>Prepositional Phrase</td>
+<td>Using phrases that begin with prepositions.</td>
+</tr>
+<tr>
+<td>Proleptic Tense</td>
+<td>Referring to future events as if they have already happened.</td>
+</tr>
+<tr>
+<td>Prose</td>
+<td>Ordinary written or spoken language without metrical or rhythmic structure.</td>
+</tr>
+<tr>
+<td>Psychobabble</td>
+<td>Jargon or language that sounds psychological but lacks meaningful substance.</td>
+</tr>
+<tr>
+<td>Quatrain</td>
+<td>A stanza with four lines, often rhyming.</td>
+</tr>
+<tr>
+<td>Quotation Mark</td>
+<td>Enclosing direct speech or cited text.</td>
+</tr>
+<tr>
+<td>Realistic</td>
+<td>Depicting situations and characters as they might appear in reality.</td>
+</tr>
+<tr>
+<td>Rhetoric</td>
+<td>The art of using language persuasively and effectively.</td>
+</tr>
+<tr>
+<td>Romanticism</td>
+<td>Reflecting the style and ideals of the Romantic literary movement.</td>
+</tr>
+<tr>
+<td>Sapphique</td>
+<td>Reflecting the style of the author Nick Sappho, characterized by imaginative and fantastical themes.</td>
+</tr>
+<tr>
+<td>Satirical</td>
+<td>Employing satire, which criticizes through humor and irony.</td>
+</tr>
+<tr>
+<td>Scansion</td>
+<td>Analyzing the metrical patterns of a poem.</td>
+</tr>
+<tr>
+<td>Scare Quotes</td>
+<td>Using quotation marks to indicate a non-literal or ironic meaning.</td>
+</tr>
+<tr>
+<td>Sentimentality</td>
+<td>Expressing excessive emotion or sentiment.</td>
+</tr>
+<tr>
+<td>Shakespearean Sonnet</td>
+<td>A specific form of 14-line poem associated with Shakespeare.</td>
+</tr>
+<tr>
+<td>Simile</td>
+<td>A comparison using "like" or "as" to describe similarities.</td>
+</tr>
+<tr>
+<td>Simple</td>
+<td>Clear and straightforward in style.</td>
+</tr>
+<tr>
+<td>Situational Irony</td>
+<td>A situation where the outcome is different from what is expected.</td>
+</tr>
+<tr>
+<td>Slang</td>
+<td>Informal language specific to a particular group or subculture.</td>
+</tr>
+<tr>
+<td>Smarmy</td>
+<td>Excessively ingratiating or insincere in tone.</td>
+</tr>
+<tr>
+<td>Sonnet</td>
+<td>A 14-line poetic form with various structures.</td>
+</tr>
+<tr>
+<td>Spoken Like a Child</td>
+<td>Using childlike language or perspectives.</td>
+</tr>
+<tr>
+<td>Spondee</td>
+<td>A metrical foot consisting of two stressed syllables.</td>
+</tr>
+<tr>
+<td>Stage Directions</td>
+<td>Instructions in a script indicating character movements and actions.</td>
+</tr>
+<tr>
+<td>Stilted Speech</td>
+<td>Formal and awkward language that lacks natural flow.</td>
+</tr>
+<tr>
+<td>Subjunctive Mood</td>
+<td>Expressing hypothetical or conditional actions.</td>
+</tr>
+<tr>
+<td>Superfluous Adjectives</td>
+<td>Using unnecessary and excessive adjectives.</td>
+</tr>
+<tr>
+<td>Syllabic</td>
+<td>Based on a specific number of syllables per line.</td>
+</tr>
+<tr>
+<td>Symbolic</td>
+<td>Using symbols to represent deeper meanings or concepts.</td>
+</tr>
+<tr>
+<td>Symbolic Language</td>
+<td>Language that conveys abstract or hidden meanings through symbols.</td>
+</tr>
+<tr>
+<td>Tautology</td>
+<td>Expressing the same idea using different words.</td>
+</tr>
+<tr>
+<td>Telegram</td>
+<td>Writing style characterized by brevity and urgency.</td>
+</tr>
+<tr>
+<td>Terminal Illogic</td>
+<td>Ending a statement or argument in a way that lacks logical consistency.</td>
+</tr>
+<tr>
+<td>Tetrameter</td>
+<td>A metrical pattern in poetry consisting of four feet per line.</td>
+</tr>
+<tr>
+<td>Thematic</td>
+<td>Focused on a particular theme or subject.</td>
+</tr>
+<tr>
+<td>Thesis Statement</td>
+<td>A clear and concise statement of the main argument or point.</td>
+</tr>
+<tr>
+<td>Timid Voice</td>
+<td>Expressing hesitancy or uncertainty in language.</td>
+</tr>
+<tr>
+<td>Tragic Tone</td>
+<td>Conveying a mood of sorrow or seriousness.</td>
+</tr>
+<tr>
+<td>Transcendentalist</td>
+<td>Reflecting the style and philosophy of the transcendentalist movement.</td>
+</tr>
+<tr>
+<td>Transitional</td>
+<td>Facilitating smooth transitions between ideas or sections.</td>
+</tr>
+<tr>
+<td>Trimeter</td>
+<td>A metrical pattern in poetry consisting of three feet per line.</td>
+</tr>
+<tr>
+<td>Trivialization</td>
+<td>Treating important topics or subjects with insignificance.</td>
+</tr>
+<tr>
+<td>Unnecessary Detail</td>
+<td>Including excessive or irrelevant information.</td>
+</tr>
+<tr>
+<td>Vagueness</td>
+<td>Using imprecise language that lacks clarity or specificity.</td>
+</tr>
+<tr>
+<td>Verb Tenses</td>
+<td>Using different verb forms to convey different times.</td>
+</tr>
+<tr>
+<td>Verbal Abuse</td>
+<td>Using language to insult or demean others.</td>
+</tr>
+<tr>
+<td>Violent Imagery</td>
+<td>Describing intense and aggressive scenes or events.</td>
+</tr>
+<tr>
+<td>Vivid</td>
+<td>Creating clear and detailed mental images through language.</td>
+</tr>
+<tr>
+<td>Vocabulary</td>
+<td>The range of words used in a particular style of writing.</td>
+</tr>
+<tr>
+<td>Wittgenstein's Ladder</td>
+<td>Progressively building on concepts in a writing piece.</td>
+</tr>
+<tr>
+<td>Word Salad</td>
+<td>Incoherent and jumbled language, often lacking meaning.</td>
+</tr>
+<tr>
+<td>Wordsworthian</td>
+<td>Reflecting the style and themes of the poet William Wordsworth.</td>
+</tr>
+<tr>
+<td>Wordy</td>
+<td>Using an excessive number of words to express an idea.</td>
+</tr>
+<tr>
+<td>Zany</td>
+<td>Whimsical, eccentric, and unconventional in style.</td>
+</tr>
+</tbody>
+</table></div><div class="mod-footer"></div></div></div></div><div class="sidebar-right sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="tree-container mod-root nav-folder tree-item outline-tree" data-depth="0"><div class="tree-header"><span class="sidebar-section-header">Table Of Contents</span><button class="clickable-icon collapse-tree-button" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-scroll-area tree-item-children nav-folder-children"><div class="tree-item mod-tree-folder nav-folder mod-collapsible is-collapsed" style="display: none;"></div><div class="tree-item" data-depth="1"><a class="tree-link" href="programming/prompt-engineering/writing-styles.html#Writing Styles"><div class="tree-item-contents heading-link" heading-name="Writing Styles"><span class="tree-item-title">Writing Styles</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div></div><script defer="">let rs = document.querySelector(".sidebar-right"); rs.classList.add("is-collapsed"); if (window.innerWidth > 768) rs.classList.remove("is-collapsed"); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></body></html>
