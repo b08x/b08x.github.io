@@ -1,6 +1,7 @@
 title: syncopated notes
 include:
   - "_pages"
+  - "_posts"
   - "_projects"
   - "_pages/*.html"
   - "notebook/"
@@ -35,8 +36,8 @@ jekyll-spaceship:
       theme: dark
 
 picture:
-  source: "_assets/img"
-  output: "_assets/img/generated"
+  source: "assets/img"
+  output: "assets/img/generated"
   suppress_warnings: true
   nomarkdown: false
 
@@ -61,7 +62,7 @@ pagination:
   limit: 0
   sort_field: 'date'
   sort_reverse: false
-  collection: 'notes'
+  collection: 'posts'
 
 ############################################################
 # Site configuration for the Auto-Pages feature

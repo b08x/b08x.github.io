@@ -1,0 +1,6 @@
+<span>{
+  {% for cat in page.categories %}
+  {% capture cat_name %}{{ cat }}{% endcapture %}
+  <a href="{{ site.baseurl }}/{{ cat_name }}"><code class="highligher-rouge"><nobr>#{{ cat_name }}</nobr></code></a>
+  {% endfor %}  
+}</span>

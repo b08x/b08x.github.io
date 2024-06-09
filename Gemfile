@@ -18,8 +18,10 @@ group :jekyll_plugins do
   gem 'jekyll-feed'
   gem 'jekyll-jupyter-notebook'
   gem 'jekyll-paginate-v2'
+  gem 'jekyll-pandoc'
   gem 'jekyll_picture_tag'
   gem 'jekyll-spaceship'
   gem 'jekyll-toc'
-  gem 'jekyll-pandoc'
 end
+
+
