@@ -3,9 +3,9 @@ layout: post
 title:  "The Agony and the Ecstasy of Text Generation: Avoiding the Pitfalls of Boredom and Confusion"
 date:   2024-06-08 04:21:32 -0400
 categories: jekyll update
+author: Robert Pannick
+tags: LLM
 ---
-
-# Top-k and Top-p Sampling: A Double-Edged Sword
 
 In the thrilling realm of neural text generation, we encounter the eternal struggle between creativity and coherence. It's like trying to solve a calculus problem while simultaneously explaining it to a sleepy cat. Specifically, when using top-k and top-p sampling algorithms, we risk falling into the abyss of "boredom" and "confusion" traps.
 
