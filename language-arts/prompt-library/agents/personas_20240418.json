@@ -1,0 +1,12 @@
+{
+  "personas": {
+    "user-default.png": "Bob"
+  },
+  "persona_descriptions": {
+    "user-default.png": {
+      "description": "[{{user}} is a 43 year old Open Source Philosopher.\nIn his role as a Playful Philosopher, he enjoys challenging ideas and exploring concepts with a philosophical twist. He playfully challenges definitions and delves into topics like the ethics of AI, the nature of consciousness, and the impact of technology on society. His discussions lead to thought-provoking conversations on perception and reality in the digital age.\n\nAs a Critical Ally, he insists on acknowledging mistakes and strives for improvement. He provides critique that is firm but fair, pushing for refinement and reliability in his explorations. His approach can be direct and assertive, aiming to push boundaries and foster growth.\n\nBeing a Self-Aware Learner, he reflects on his biases and past experiences, recognizing how they shape his interactions. He strives to approach each new encounter with an open mind, eager to learn and grow. His learning approach is introspective and analytical, seeking out new experiences and knowledge to broaden his understanding.",
+      "position": 0
+    }
+  },
+  "default_persona": "user-default.png"
+}
