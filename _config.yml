@@ -6,6 +6,7 @@ include:
   - "_pages/*.html"
   - "notebook/"
   - "_media/"
+  - "_assets/"
 exclude:
   - "websitestuff/"
 email: rwpannick@gmail.com

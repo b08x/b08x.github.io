@@ -1,0 +1,387 @@
+<!DOCTYPE html> <html><head>
+		<title>Columns</title>
+		<base href="../../../../../../../../">
+		<meta id="root-path" root-path="../../../../../../../../">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+		<meta charset="UTF-8">
+		<meta name="description" content="syncopated notes - Columns">
+		<meta property="og:title" content="Columns">
+		<meta property="og:description" content="syncopated notes - Columns">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://b08x.github.io/projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html">
+		<meta property="og:image" content="undefined">
+		<meta property="og:site_name" content="syncopated notes">
+		<meta name="author" content="Julien Dutant"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://b08x.github.io/lib/rss.xml"><script async="" id="webpage-script" src="lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="minisearch-script" src="lib/scripts/minisearch.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="lib/media/favicon.png"><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-horizontal-spacing:0.6em;--tree-vertical-spacing:0.6em;--sidebar-margin:12px}.sidebar{height:100%;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));font-size:14px;z-index:10;position:relative;overflow:hidden;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}.sidebar-left{left:0}.sidebar-right{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}body.floating-sidebars .sidebar{position:absolute}.sidebar-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .sidebar-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}.sidebar-left .sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}.sidebar-right .sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar:has(.sidebar-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:2em;width:var(--sidebar-width);top:var(--sidebar-margin);padding-inline:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}.sidebar-left .sidebar-topbar{left:0}.sidebar-right .sidebar-topbar{right:0}.topbar-content{overflow:hidden;overflow:clip;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:0!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}.sidebar-left .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}.sidebar-right .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.sidebar-section-header{margin:0 0 1em 0;text-transform:uppercase;letter-spacing:.06em;font-weight:600}body{transition:background-color var(--color-fade-speed) ease-in-out}.webpage-container{display:flex;flex-direction:row;height:100%;width:100%;align-items:stretch;justify-content:center}.document-container{opacity:1;flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0;transition:opacity .2s ease-in-out}.document-container>.markdown-preview-view{margin:var(--sidebar-margin);margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;background-color:var(--background-primary);transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}.document-container>.markdown-preview-view>.markdown-preview-sizer{padding-bottom:80vh!important;width:100%!important;max-width:var(--line-width)!important;flex-basis:var(--line-width)!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}.markdown-rendered img:not([width]),.view-content img:not([width]){max-width:100%;outline:0}.document-container>.view-content.embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}.document-container>.view-content.embed>*{max-width:100%;max-height:100%;object-fit:contain}:has(> :is(.math,table)){overflow-x:auto!important}.document-container>.view-content{overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){if("file:"!=location.protocol){let e=document.querySelectorAll("include");for(let t=0;t<e.length;t++){let o=e[t],l=o.getAttribute("src");try{const e=await fetch(l);if(!e.ok){console.log("Could not include file: "+l),o?.remove();continue}let t=await e.text(),n=document.createRange().createContextualFragment(t),i=Array.from(n.children);for(let e of i)e.classList.add("hide"),e.style.transition="opacity 0.5s ease-in-out",setTimeout((()=>{e.classList.remove("hide")}),10);o.before(n),o.remove(),console.log("Included file: "+l)}catch(e){o?.remove(),console.log("Could not include file: "+l,e);continue}}}else{if(document.querySelectorAll("include").length>0){var e=document.createElement("div");e.id="error",e.textContent="Web server exports must be hosted on an http / web server to be viewed correctly.",e.style.position="fixed",e.style.top="50%",e.style.left="50%",e.style.transform="translate(-50%, -50%)",e.style.fontSize="1.5em",e.style.fontWeight="bold",e.style.textAlign="center",document.body.appendChild(e),document.querySelector(".document-container")?.classList.remove("hide")}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script"))),l=0;!function e(){let n=o[l];l++,n&&"true"!=n.getAttribute("loaded")||l<o.length&&e(),l<o.length?n.addEventListener("load",e):t()}()}</script><link rel="stylesheet" href="lib/styles/obsidian.css"><link rel="preload" href="lib/styles/other-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/other-plugins.css"></noscript><link rel="stylesheet" href="lib/styles/theme.css"><link rel="preload" href="lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/supported-plugins.css"></noscript><link rel="preload" href="lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/main-styles.css"></noscript><link rel="preload" href="lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/snippets.css"></noscript></head><body class="publish css-settings-manager theme-dark show-inline-title show-ribbon hide-folder-note folder-note-underline folder-note-underline-path fn-whitespace-stop-collapsing ulu-we3 ulu-blue ulu-green-l ulu-gummy-callouts ulu-accent-title ulu-colorfo-headings"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="webpage-container workspace"><div class="sidebar-left sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme_toggle"><input class="theme-toggle-input" type="checkbox" id="theme_toggle"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="search-input-container"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div class="search-input-clear-button" aria-label="Clear search"></div></div><include src="lib/html/file-tree.html"></include></div><script defer="">let ls = document.querySelector(".sidebar-left"); ls.classList.add("is-collapsed"); if (window.innerWidth > 768) ls.classList.remove("is-collapsed"); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div><div class="document-container markdown-reading-view hide"><div class="markdown-preview-view markdown-rendered allow-fold-headings allow-fold-lists is-readable-line-width"><style id="MJX-CHTML-styles">mjx-container[jax=CHTML]{line-height:0}mjx-container [space="1"]{margin-left:.111em}mjx-container [space="2"]{margin-left:.167em}mjx-container [space="3"]{margin-left:.222em}mjx-container [space="4"]{margin-left:.278em}mjx-container [space="5"]{margin-left:.333em}mjx-container [rspace="1"]{margin-right:.111em}mjx-container [rspace="2"]{margin-right:.167em}mjx-container [rspace="3"]{margin-right:.222em}mjx-container [rspace="4"]{margin-right:.278em}mjx-container [rspace="5"]{margin-right:.333em}mjx-container [size="s"]{font-size:70.7%}mjx-container [size=ss]{font-size:50%}mjx-container [size=Tn]{font-size:60%}mjx-container [size=sm]{font-size:85%}mjx-container [size=lg]{font-size:120%}mjx-container [size=Lg]{font-size:144%}mjx-container [size=LG]{font-size:173%}mjx-container [size=hg]{font-size:207%}mjx-container [size=HG]{font-size:249%}mjx-container [width=full]{width:100%}mjx-box{display:inline-block}mjx-block{display:block}mjx-itable{display:inline-table}mjx-row{display:table-row}mjx-row>*{display:table-cell}mjx-mtext{display:inline-block}mjx-mstyle{display:inline-block}mjx-merror{display:inline-block;color:red;background-color:#ff0}mjx-mphantom{visibility:hidden}mjx-assistive-mml{top:0;left:0;clip:rect(1px,1px,1px,1px);user-select:none;position:absolute!important;padding:1px 0 0!important;border:0!important;display:block!important;width:auto!important;overflow:hidden!important}mjx-assistive-mml[display=block]{width:100%!important}mjx-math{display:inline-block;text-align:left;line-height:0;text-indent:0;font-style:normal;font-weight:400;font-size:100%;letter-spacing:normal;border-collapse:collapse;overflow-wrap:normal;word-spacing:normal;white-space:nowrap;direction:ltr;padding:1px 0}mjx-container[jax=CHTML][display=true]{display:block;text-align:center;margin:1em 0}mjx-container[jax=CHTML][display=true][width=full]{display:flex}mjx-container[jax=CHTML][display=true] mjx-math{padding:0}mjx-container[jax=CHTML][justify=left]{text-align:left}mjx-container[jax=CHTML][justify=right]{text-align:right}mjx-texatom{display:inline-block;text-align:left}mjx-mo{display:inline-block;text-align:left}mjx-stretchy-h{display:inline-table;width:100%}mjx-stretchy-h>*{display:table-cell;width:0}mjx-stretchy-h>*>mjx-c{display:inline-block;transform:scaleX(1)}mjx-stretchy-h>*>mjx-c::before{display:inline-block;width:initial}mjx-stretchy-h>mjx-ext{overflow:clip visible;width:100%}mjx-stretchy-h>mjx-ext>mjx-c::before{transform:scaleX(500)}mjx-stretchy-h>mjx-ext>mjx-c{width:0}mjx-stretchy-h>mjx-beg>mjx-c{margin-right:-.1em}mjx-stretchy-h>mjx-end>mjx-c{margin-left:-.1em}mjx-stretchy-v{display:inline-block}mjx-stretchy-v>*{display:block}mjx-stretchy-v>mjx-beg{height:0}mjx-stretchy-v>mjx-end>mjx-c{display:block}mjx-stretchy-v>*>mjx-c{transform:scaleY(1);transform-origin:left center;overflow:hidden}mjx-stretchy-v>mjx-ext{display:block;height:100%;box-sizing:border-box;border:0 solid transparent;overflow:visible clip}mjx-stretchy-v>mjx-ext>mjx-c::before{width:initial;box-sizing:border-box}mjx-stretchy-v>mjx-ext>mjx-c{transform:scaleY(500) translateY(.075em);overflow:visible}mjx-mark{display:inline-block;height:0}mjx-c{display:inline-block}mjx-utext{display:inline-block;padding:.75em 0 .2em}mjx-mi{display:inline-block;text-align:left}mjx-msup{display:inline-block;text-align:left}mjx-c::before{display:block;width:0}.MJX-TEX{font-family:MJXZERO,MJXTEX}.TEX-B{font-family:MJXZERO,MJXTEX-B}.TEX-I{font-family:MJXZERO,MJXTEX-I}.TEX-MI{font-family:MJXZERO,MJXTEX-MI}.TEX-BI{font-family:MJXZERO,MJXTEX-BI}.TEX-S1{font-family:MJXZERO,MJXTEX-S1}.TEX-S2{font-family:MJXZERO,MJXTEX-S2}.TEX-S3{font-family:MJXZERO,MJXTEX-S3}.TEX-S4{font-family:MJXZERO,MJXTEX-S4}.TEX-A{font-family:MJXZERO,MJXTEX-A}.TEX-C{font-family:MJXZERO,MJXTEX-C}.TEX-CB{font-family:MJXZERO,MJXTEX-CB}.TEX-FR{font-family:MJXZERO,MJXTEX-FR}.TEX-FRB{font-family:MJXZERO,MJXTEX-FRB}.TEX-SS{font-family:MJXZERO,MJXTEX-SS}.TEX-SSB{font-family:MJXZERO,MJXTEX-SSB}.TEX-SSI{font-family:MJXZERO,MJXTEX-SSI}.TEX-SC{font-family:MJXZERO,MJXTEX-SC}.TEX-T{font-family:MJXZERO,MJXTEX-T}.TEX-V{font-family:MJXZERO,MJXTEX-V}.TEX-VB{font-family:MJXZERO,MJXTEX-VB}mjx-stretchy-h mjx-c,mjx-stretchy-v mjx-c{font-family:MJXZERO,MJXTEX-S1,MJXTEX-S4,MJXTEX,MJXTEX-A!important}@font-face{font-family:MJXZERO;src:url("lib/fonts/mathjax_zero.woff") format("woff")}@font-face{font-family:MJXTEX;src:url("lib/fonts/mathjax_main-regular.woff") format("woff")}@font-face{font-family:MJXTEX-B;src:url("lib/fonts/mathjax_main-bold.woff") format("woff")}@font-face{font-family:MJXTEX-I;src:url("lib/fonts/mathjax_math-italic.woff") format("woff")}@font-face{font-family:MJXTEX-MI;src:url("lib/fonts/mathjax_main-italic.woff") format("woff")}@font-face{font-family:MJXTEX-BI;src:url("lib/fonts/mathjax_math-bolditalic.woff") format("woff")}@font-face{font-family:MJXTEX-S1;src:url("lib/fonts/mathjax_size1-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S2;src:url("lib/fonts/mathjax_size2-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S3;src:url("lib/fonts/mathjax_size3-regular.woff") format("woff")}@font-face{font-family:MJXTEX-S4;src:url("lib/fonts/mathjax_size4-regular.woff") format("woff")}@font-face{font-family:MJXTEX-A;src:url("lib/fonts/mathjax_ams-regular.woff") format("woff")}@font-face{font-family:MJXTEX-C;src:url("lib/fonts/mathjax_calligraphic-regular.woff") format("woff")}@font-face{font-family:MJXTEX-CB;src:url("lib/fonts/mathjax_calligraphic-bold.woff") format("woff")}@font-face{font-family:MJXTEX-FR;src:url("lib/fonts/mathjax_fraktur-regular.woff") format("woff")}@font-face{font-family:MJXTEX-FRB;src:url("lib/fonts/mathjax_fraktur-bold.woff") format("woff")}@font-face{font-family:MJXTEX-SS;src:url("lib/fonts/mathjax_sansserif-regular.woff") format("woff")}@font-face{font-family:MJXTEX-SSB;src:url("lib/fonts/mathjax_sansserif-bold.woff") format("woff")}@font-face{font-family:MJXTEX-SSI;src:url("lib/fonts/mathjax_sansserif-italic.woff") format("woff")}@font-face{font-family:MJXTEX-SC;src:url("lib/fonts/mathjax_script-regular.woff") format("woff")}@font-face{font-family:MJXTEX-T;src:url("lib/fonts/mathjax_typewriter-regular.woff") format("woff")}@font-face{font-family:MJXTEX-V;src:url("lib/fonts/mathjax_vector-regular.woff") format("woff")}@font-face{font-family:MJXTEX-VB;src:url("lib/fonts/mathjax_vector-bold.woff") format("woff")}mjx-c.mjx-c2033::before{padding:.56em .55em 0 0;content:"′′"}mjx-c.mjx-c1D456.TEX-I::before{padding:.661em .345em .011em 0;content:"i"}mjx-c.mjx-c1D45B.TEX-I::before{padding:.442em .6em .011em 0;content:"n"}mjx-c.mjx-c1D460.TEX-I::before{padding:.442em .469em .01em 0;content:"s"}mjx-c.mjx-c1D461.TEX-I::before{padding:.626em .361em .011em 0;content:"t"}mjx-c.mjx-c1D44E.TEX-I::before{padding:.441em .529em .01em 0;content:"a"}mjx-c.mjx-c1D450.TEX-I::before{padding:.442em .433em .011em 0;content:"c"}mjx-c.mjx-c1D452.TEX-I::before{padding:.442em .466em .011em 0;content:"e"}mjx-c.mjx-c3D::before{padding:.583em .778em .082em 0;content:"="}mjx-c.mjx-c1D467.TEX-I::before{padding:.442em .465em .011em 0;content:"z"}mjx-c.mjx-c1D45C.TEX-I::before{padding:.441em .485em .011em 0;content:"o"}mjx-c.mjx-c1D45A.TEX-I::before{padding:.442em .878em .011em 0;content:"m"}</style><pre class="frontmatter language-yaml" dir="auto" tabindex="0" style="display: none;"><code class="language-yaml is-loaded"><span class="token key atrule">layout</span><span class="token punctuation">:</span> page
+<span class="token key atrule">toc</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span> 
+<span class="token key atrule">title</span><span class="token punctuation">:</span> Columns
+<span class="token key atrule">author</span><span class="token punctuation">:</span> Julien Dutant
+<span class="token key atrule">ragged-columns</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+<span class="token key atrule">date created</span><span class="token punctuation">:</span> Monday<span class="token punctuation">,</span> April 22nd 2024<span class="token punctuation">,</span> 11<span class="token punctuation">:</span>23<span class="token punctuation">:</span>55 pm
+<span class="token key atrule">date modified</span><span class="token punctuation">:</span> Tuesday<span class="token punctuation">,</span> June 11th 2024<span class="token punctuation">,</span> 2<span class="token punctuation">:</span>38<span class="token punctuation">:</span>20 am</code><button class="copy-code-button">Copy</button></pre><div class="markdown-preview-sizer markdown-preview-section"><h1 class="page-title heading inline-title" id="Columns"><p dir="auto">Columns</p></h1><div class="heading-wrapper"><div class="heading-children"><div><p dir="auto">Multiple columns support in Pandoc's markdown.</p></div><div><p dir="auto">Copyright: ©2021-23 Julien Dutant <a data-tooltip-position="top" aria-label="mailto:julien.dutant@kcl.ac.uk" rel="noopener" class="external-link" href="mailto:julien.dutant@kcl.ac.uk" target="_blank">julien.dutant@kcl.ac.uk</a><br>
+License: MIT - see LICENSE file for details.</p></div><div class="heading-wrapper"><h2 data-heading="Introduction" dir="auto" class="heading" id="Introduction"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Introduction</h2><div class="heading-children"><div><p dir="auto">This Lua filter for Pandoc provides a flexible markdown syntax<br>
+for multicolumn support in <a data-tooltip-position="top" aria-label="https://pandoc.org/" rel="noopener" class="external-link" href="https://pandoc.org/" target="_blank">Pandoc</a><br>
+targetting both HTML and LaTeX/PDF output. Features:</p></div><div><ul dir="auto">
+<li data-line="0" dir="auto">Multiple markdown syntaxes ("three-columns" Div, nested "columns"<br>
+and "column" Div, "columns" with explicit column breaks)</li>
+<li data-line="2" dir="auto">Column breaks can be automatic or explicit</li>
+<li data-line="3" dir="auto">Spanning elements breaking across all columns</li>
+<li data-line="4" dir="auto">Customizing gaps and separators</li>
+<li data-line="5" dir="auto">Automatically provides CSS header / LaTeX preamble</li>
+<li data-line="6" dir="auto">Automatic typographic adjustements (avoid empty space<br>
+at the top of the first column which sometimes appears<br>
+in HTML).</li>
+<li data-line="9" dir="auto">Recursive (multi-columns within multi-columns)</li>
+</ul></div><div><p dir="auto">Html output relies on <a data-tooltip-position="top" aria-label="https://drafts.csswg.org/css-multicol" rel="noopener" class="external-link" href="https://drafts.csswg.org/css-multicol" target="_blank">CSS Multi-column layout</a> and LaTeX/PDF outputs on the <a data-tooltip-position="top" aria-label="https://www.ctan.org/pkg/multicol" rel="noopener" class="external-link" href="https://www.ctan.org/pkg/multicol" target="_blank"><code>multicol</code> LaTeX package</a>.</p></div><div><p dir="auto">Limitations: in <code>html</code> output, support is limited to recent<br>
+browsers and variable across browsers.</p></div><div><p dir="auto">This document also serves as a test document. To see the multi-columns layouts of this document in action, you need to process it with <code>pandoc</code> using this filter.</p></div><div><p dir="auto"><strong>NOTE</strong> This README.md is a demonstration file, it is <a data-tooltip-position="top" aria-label="https://github.com/dialoa/columns/blob/master/test.pdf" rel="noopener" class="external-link" href="https://github.com/dialoa/columns/blob/master/test.pdf" target="_blank">better<br>
+viewed as PDF</a>.</p></div></div></div><div class="heading-wrapper"><h2 data-heading="Pre-requistes" dir="auto" class="heading" id="Pre-requistes"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Pre-requistes</h2><div class="heading-children"><div><p dir="auto">Requires <a data-tooltip-position="top" aria-label="https://pandoc.org/" rel="noopener" class="external-link" href="https://pandoc.org/" target="_blank">Pandoc</a>. Copy the file <code>columns.lua</code> in<br>
+your working folder or in Pandoc's <code>filter</code> folder.<br>
+Called from the command line with a <code>-L</code> or <code>--lua-filter</code> option:</p></div><div><pre dir="auto" class="language-none" tabindex="0"><code class="language-{.bash} language-none is-loaded">pandoc --lua-filter columns.lua SOURCE.md -o DESTINATION.html
+
+pandoc -L columns.lua SOURCE.md -o DESTINATION.pdf
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Or from a <code>filters</code> field in a Pandoc defaults file. See the<br>
+<a data-tooltip-position="top" aria-label="https://pandoc.org/MANUAL.html" rel="noopener" class="external-link" href="https://pandoc.org/MANUAL.html" target="_blank">Pandoc documentation</a> for further<br>
+details.</p></div><div><p dir="auto">For instance, to process the present documentation use:</p></div><div><pre dir="auto" class="language-bash" tabindex="0"><code class="language-bash is-loaded">pandoc -L columns.lua README.md -o readme.html
+
+pandoc -L columns.lua README.md -o readme.pdf
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h2 data-heading="Basic usage" dir="auto" class="heading" id="Basic_usage"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Basic usage</h2><div class="heading-children"></div></div></div></div><div class="heading-wrapper"><h1 data-heading="Columns" dir="auto" class="heading" id="Columns">Columns</h1><div class="heading-children"><div><p dir="auto">In Pandoc markdown source specify a multicolumn section as<br>
+follows:</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::: columns
+
+...content that will be spread over several columns...
+
+:::
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">The filter will render this section as a multicolumns layout in <code>html</code> and<br>
+LaTeX, as illustrated below (you need to process this document with <code>pandoc</code><br>
+using this filter to see the results in <code>html</code> or <code>pdf</code>:</p></div><div><p dir="auto">::: columns</p></div><div><p dir="auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a ante<br>
+in mi ornare volutpat sed sit amet diam. Nullam interdum erat a augue<br>
+faucibus, nec tempus tortor sagittis. Aenean imperdiet imperdiet<br>
+dignissim. Nam aliquam blandit ex, sed molestie nibh feugiat ac. Morbi<br>
+feugiat convallis semper. Ut et consequat purus. Fusce convallis<br>
+vehicula enim in vulputate. Curabitur a augue arcu. Mauris laoreet<br>
+lectus arcu, sed elementum turpis scelerisque id. Etiam porta turpis<br>
+quis ipsum dictum vulputate. In ut convallis urna, at imperdiet nunc.<br>
+Cras laoreet, massa lobortis gravida egestas, lacus est pellentesque<br>
+arcu, imperdiet efficitur nibh dolor vel sapien. Sed accumsan<br>
+condimentum diam non pellentesque.</p></div><div><p dir="auto">Vestibulum cursus nisi risus, sit amet consectetur massa suscipit nec.<br>
+Sed condimentum, est id iaculis ornare, purus risus finibus felis,<br>
+posuere congue est nibh eget dui. Maecenas orci erat, commodo auctor<br>
+justo quis, vestibulum mollis ex. Vivamus sed bibendum turpis. Donec<br>
+auctor, leo a cursus efficitur, quam urna dignissim enim, viverra<br>
+condimentum orci est non sem. Donec ac viverra nisl. Suspendisse ac<br>
+auctor massa. Mauris porttitor purus vel velit vehicula, sed efficitur<br>
+odio lacinia. Fusce sed odio arcu. Ut rhoncus lacus vel magna interdum<br>
+tincidunt. Nunc imperdiet finibus tincidunt.</p></div><div><p dir="auto">:::</p></div><div><p dir="auto">This syntax is based on the <a data-tooltip-position="top" aria-label="https://pandoc.org/MANUAL.html#divs-and-spans" rel="noopener" class="external-link" href="https://pandoc.org/MANUAL.html#divs-and-spans" target="_blank"><code>fenced_div</code> syntax of Pandoc's'<br>
+markdown</a>. At least<br>
+three consecutive colons are needed, both at the beginning and at<br>
+then end of your multi-column section (even if it runs until the<br>
+end of your document). But more than three are fine:</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::: columns ::::::
+
+...content that will be spread over several columns...
+
+::::::::::::::
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Each opening series of colons needs to be matched with a closing ones. For<br>
+readibility we usually match their number of colons but it's not necessary<br>
+(as the above illustrates). If you enclose sections within sections (see<br>
+container syntax, nesting, column spans and column breaks below)<br>
+you need to make sure that each opening series of colons is matched by<br>
+a closing one, otherwise Pandoc will not recognize them or interpret<br>
+them incorrectly.</p></div><div><p dir="auto">Here <code>columns</code> is a <em>attribute</em> of the fenced div (section). As we'll see below, these sections can have more than a single attribute. When they<br>
+have several, they need to be specified within curly brackets and <code>columns</code><br>
+should be preceded by a dot, as in:</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::::: {.columns .someattribute property=value}
+
+...content that will be spread over several columns...
+
+:::::
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h1 data-heading="Beware of Divs in Fluid Columns" dir="auto" class="heading" id="Beware_of_Divs_in_Fluid_Columns">Beware of Divs in Fluid Columns</h1><div class="heading-children"><div><p dir="auto">With fluid columns, i.e. no explicit line breaks, browsers<br>
+decide where to put line breaks. Beware though that Divs<br>
+elements within a column are counted as unbreakable blocks<br>
+in most browsers. For instance, the following places a<br>
+Div with classes ".only-in-format .html" within a fluid<br>
+multiple columns:</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::::: columns
+
+::: {.only-in-format .html}
+
+First paragraph (...)
+
+Second paragraph (...)
+
+Third paragraph (...)
+
+:::
+
+:::::
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">You might expect the columns to break between one of these<br>
+paragraphs or within them. But they won't: browsers will<br>
+usually treat the entire three-paragraph Div as one block<br>
+that will stay in a single column. Solutions: either move<br>
+the contained outside, or break it into multiple ones.</p></div><div><p dir="auto">Moving it outside:</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::: {.only-in-format .html}
+
+::::: columns
+
+First paragraph (...)
+
+Second paragraph (...)
+
+Third paragraph (...)
+
+:::::
+
+:::
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Breaking it up:</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::::: columns
+
+::: {.only-in-format .html}
+
+First paragraph (...)
+
+:::
+
+::: {.only-in-format .html}
+
+Second paragraph (...)
+
+:::
+
+::: {.only-in-format .html}
+
+Third paragraph (...)
+
+:::
+
+:::::
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h1 data-heading="Specifying the Number of Columns" dir="auto" class="heading" id="Specifying_the_Number_of_Columns">Specifying the Number of Columns</h1><div class="heading-children"><div><p dir="auto">By default two columns are provided. You can specify the desired<br>
+number of columns in various ways:</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::: twocolumns
+
+::: three-columns
+
+::: five_columns
+
+::: {.columns column-count=3}
+
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Note that in <code>html</code> browsers may override your specified number of columns.</p></div></div></div><div class="heading-wrapper"><h1 data-heading="Ragged Columns (LaTeX Output only)" dir="auto" class="heading" id="Ragged_Columns_(LaTeX_Output_only)">Ragged Columns (LaTeX Output only)</h1><div class="heading-children"><div><p dir="auto">Default LaTeX/PDF output justifies columns vertically. That is, if columns are<br>
+explicitly broken at certain points, LaTeX ensures that the text in each<br>
+column occupies its full height by stretching inter-paragraph space.<br>
+In HTML output columns are always "ragged", that is, inter-paragraph space<br>
+isn't stretched and shorter columns have blank space at the end.</p></div><div><p dir="auto">If you want ragged columns in LaTeX, you can set this globally in the<br>
+document's metadata or on locally on a give <code>columns</code> Div. In the<br>
+document data, either of these keys will work:</p></div><div><pre dir="auto"><code>ragged-columns: true
+raggedcolumns: true
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Locally, add the <code>ragged</code> (or <code>raggedcolumns</code> or <code>ragged-columns</code>) class to a<br>
+<code>columns</code> Div:</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::::: {.columns .ragged}
+
+...
+
+:::::
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Note that this doesn't work on individual <code>column</code> Divs, only on the<br>
+<code>columns</code> Div that contains them.</p></div><div><p dir="auto">There is a corresponding <code>justifiedcolumns</code> (alias <code>justified-columns</code>)<br>
+global setting and a <code>justified</code> (alias <code>justifiedcolumns</code>, <code>justified-columns</code>)<br>
+class for specific <code>columns</code> Div.</p></div><div><p dir="auto">::::: {.columns .justified}</p></div><div><p dir="auto">::: column<br>
+This column</p></div><div><p dir="auto">is vertically short.<br>
+:::</p></div><div><p dir="auto">::: column<br>
+This column</p></div><div><p dir="auto">is vertically short.<br>
+:::</p></div><div><p dir="auto">::: column<br>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a ante<br>
+in mi ornare volutpat sed sit amet diam. Nullam interdum erat a augue<br>
+faucibus, nec tempus tortor sagittis. Aenean imperdiet imperdiet<br>
+dignissim. Nam aliquam blandit ex, sed molestie nibh feugiat ac. Morbi<br>
+feugiat convallis semper. Ut et consequat purus. Fusce convallis<br>
+vehicula enim in vulputate.<br>
+:::<br>
+:::::</p></div><div><p dir="auto">Now in ragged columns mode:</p></div><div><p dir="auto">::::: columns</p></div><div><p dir="auto">::: column<br>
+This column</p></div><div><p dir="auto">is vertically short.<br>
+:::</p></div><div><p dir="auto">::: column<br>
+This column</p></div><div><p dir="auto">is vertically short.<br>
+:::</p></div><div><p dir="auto">::: column<br>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a ante<br>
+in mi ornare volutpat sed sit amet diam. Nullam interdum erat a augue<br>
+faucibus, nec tempus tortor sagittis. Aenean imperdiet imperdiet<br>
+dignissim. Nam aliquam blandit ex, sed molestie nibh feugiat ac. Morbi<br>
+feugiat convallis semper. Ut et consequat purus. Fusce convallis<br>
+vehicula enim in vulputate.<br>
+:::<br>
+:::::</p></div></div></div><div class="heading-wrapper"><h1 data-heading="Customizing the Gap and Rule between Columns" dir="auto" class="heading" id="Customizing_the_Gap_and_Rule_between_Columns">Customizing the Gap and Rule between Columns</h1><div class="heading-children"><div><p dir="auto">The gap and rule between columns can be customized too. The gap is<br>
+specified with a <code>columngap</code> (or <code>column-gap</code> or <code>columnsep</code> or<br>
+<code>column-sep</code>) attribute. The rule is specified with a <code>column-rule</code><br>
+(or <code>columnrule</code>) attribute using CSS syntax.</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::: {.columns columngap=3em column-rule="1px solid black"}
+
+::: {.threecolumns columngap=4em column-rule="3pt solid blue"}
+
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Here is an illustration:</p></div><div><p dir="auto">::: {.threecolumns columngap=4em column-rule="3pt solid blue"}</p></div><div><p dir="auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a ante<br>
+in mi ornare volutpat sed sit amet diam. Nullam interdum erat a augue<br>
+faucibus, nec tempus tortor sagittis. Aenean imperdiet imperdiet<br>
+dignissim. Nam aliquam blandit ex, sed molestie nibh feugiat ac. Morbi<br>
+feugiat convallis semper. Ut et consequat purus. Fusce convallis<br>
+vehicula enim in vulputate. Curabitur a augue arcu. Mauris laoreet<br>
+lectus arcu, sed elementum turpis scelerisque id. Etiam porta turpis<br>
+quis ipsum dictum vulputate. In ut convallis urna, at imperdiet nunc.<br>
+Cras laoreet, massa lobortis gravida egestas, lacus est pellentesque<br>
+arcu, imperdiet efficitur nibh dolor vel sapien. Sed accumsan<br>
+condimentum diam non pellentesque.</p></div><div><p dir="auto">Vestibulum cursus nisi risus, sit amet consectetur massa suscipit nec.<br>
+Sed condimentum, est id iaculis ornare, purus risus finibus felis,<br>
+posuere congue est nibh eget dui. Maecenas orci erat, commodo auctor<br>
+justo quis, vestibulum mollis ex. Vivamus sed bibendum turpis. Donec<br>
+auctor, leo a cursus efficitur, quam urna dignissim enim, viverra<br>
+condimentum orci est non sem. Donec ac viverra nisl. Suspendisse ac<br>
+auctor massa. Mauris porttitor purus vel velit vehicula, sed efficitur<br>
+odio lacinia. Fusce sed odio arcu. Ut rhoncus lacus vel magna interdum<br>
+tincidunt. Nunc imperdiet finibus tincidunt.</p></div><div><p dir="auto">:::</p></div></div></div><div class="heading-wrapper"><h1 data-heading="Spanning Elements" dir="auto" class="heading" id="Spanning_Elements">Spanning Elements</h1><div class="heading-children"><div><p dir="auto">Elements that span across all columns are introduced as <code>column-span</code> (or <code>columnspan</code>) sections:</p></div><div><pre dir="auto" class="language-columns" tabindex="0"><code class="language-columns is-loaded">::: columns ::::::::
+
+content in columns
+
+::::: column-span
+
+
+
+:::::
+
+content in columns
+
+:::
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Here is an illustration:</p></div><div><p dir="auto">::: {.twocolumns columnrule="1px solid black"} ::::::::</p></div><div><p dir="auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a ante<br>
+in mi ornare volutpat sed sit amet diam. Nullam interdum erat a augue<br>
+faucibus, nec tempus tortor sagittis. Aenean imperdiet imperdiet<br>
+dignissim. Nam aliquam blandit ex, sed molestie nibh feugiat ac. Morbi<br>
+feugiat convallis semper. Ut et consequat purus. Fusce convallis<br>
+vehicula enim in vulputate. Curabitur a augue arcu. Mauris laoreet<br>
+lectus arcu, sed elementum turpis scelerisque id. Etiam porta turpis<br>
+quis ipsum dictum vulputate. In ut convallis urna, at imperdiet nunc.<br>
+Cras laoreet, massa lobortis gravida egestas, lacus est pellentesque<br>
+arcu, imperdiet efficitur nibh dolor vel sapien. Sed accumsan<br>
+condimentum diam non pellentesque.</p></div><div><p dir="auto">::: columnspan</p></div></div></div><div class="heading-wrapper"><h1 data-heading="Vestibulum Cursus Nisi Risus, Sit Amet Consectetur Massa Suscipit Nec {.unnumbered}" dir="auto" class="heading" id="Vestibulum_Cursus_Nisi_Risus,_Sit_Amet_Consectetur_Massa_Suscipit_Nec_{.unnumbered}">Vestibulum Cursus Nisi Risus, Sit Amet Consectetur Massa Suscipit Nec {.unnumbered}</h1><div class="heading-children"><div><p dir="auto">:::</p></div><div><p dir="auto">Sed condimentum, est id iaculis ornare, purus risus finibus felis,<br>
+posuere congue est nibh eget dui. Maecenas orci erat, commodo auctor<br>
+justo quis, vestibulum mollis ex. Vivamus sed bibendum turpis. Donec<br>
+auctor, leo a cursus efficitur, quam urna dignissim enim, viverra<br>
+condimentum orci est non sem. Donec ac viverra nisl. Suspendisse ac<br>
+auctor massa. Mauris porttitor purus vel velit vehicula, sed efficitur<br>
+odio lacinia. Fusce sed odio arcu. Ut rhoncus lacus vel magna interdum<br>
+tincidunt. Nunc imperdiet finibus tincidunt.</p></div><div><p dir="auto">::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p></div><div class="heading-wrapper"><h2 data-heading="Explicitly Specifying Column Breaks" dir="auto" class="heading" id="Explicitly_Specifying_Column_Breaks"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Explicitly Specifying Column Breaks</h2><div class="heading-children"><div><p dir="auto">Column breaks can be explicitly specified. This can be done using<br>
+<code>\columnbreak</code> or a <code>columnbreak</code> (or <code>column-break</code>) section.</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">::: columns
+
+This content is in a first column.
+
+\columnbreak
+
+This content is in a second column.
+
+:::: columnbreak
+::::
+
+This content is in a third column.
+
+:::: column-break
+::::
+
+This content is in a fourth column.
+
+:::
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">The result is:</p></div><div><p dir="auto">::: columns</p></div><div><p dir="auto">This content is in a first column.</p></div><div><p dir="auto">\columnbreak</p></div><div><p dir="auto">This content is in a second column.</p></div><div><p dir="auto">:::: columnbreak<br>
+::::</p></div><div><p dir="auto">This content is in a third column.</p></div><div><p dir="auto">:::: column-break<br>
+::::</p></div><div><p dir="auto">This content is in a fourth column.</p></div><div><p dir="auto">:::</p></div><div><p dir="auto"><strong>Warning and limitations</strong></p></div><div><ul dir="auto">
+<li data-line="0" dir="auto">In <code>html</code>, browsers may ignore explicit column breaks.</li>
+<li data-line="1" dir="auto">A <code>\columnbreak</code> break must be preceded by an empty line<br>
+and occupy a line on its own.</li>
+<li data-line="3" dir="auto">A <code>::: columnbreak</code> break must be followed by a closing<br>
+line of <code>:::</code>.</li>
+</ul></div><div><p dir="auto">When columnbreaks are explicitly specified, they are used to determine the number of columns. If the section both speficies a number of columns and<br>
+includes explicit columnbreaks, the greatest number is used.</p></div></div></div><div class="heading-wrapper"><h2 data-heading="Container Syntax" dir="auto" class="heading" id="Container_Syntax"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Container Syntax</h2><div class="heading-children"><div><p dir="auto">A multicolumn section with explicit breaks can also be written using a container syntax, with <code>column</code> sections included in a <code>columns</code> section,<br>
+as follows.</p></div><div><pre dir="auto" class="language-markdown" tabindex="0"><code class="language-markdown is-loaded">:::::: columns
+
+::: column
+
+First column content here
+
+:::
+
+::: column
+
+Second column content
+
+:::
+
+:::::
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">This follows <a data-tooltip-position="top" aria-label="https://pandoc.org/MANUAL.html#columns" rel="noopener" class="external-link" href="https://pandoc.org/MANUAL.html#columns" target="_blank">Pandoc's markdown syntax for <code>beamer</code> output</a>. Note that individual column widths<br>
+and further column attributes available in <code>beamer</code> outputs are not<br>
+supported here.</p></div><div><p dir="auto">Container syntax and columnbreak syntax can be mixed, as in the example below:</p></div><div><p dir="auto">:::::: columns</p></div><div><p dir="auto">::: column</p></div><div><p dir="auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a ante<br>
+in mi ornare volutpat sed sit amet diam. Nullam interdum erat a augue<br>
+faucibus, nec tempus tortor sagittis. Aenean imperdiet imperdiet<br>
+dignissim. Nam aliquam blandit ex, sed molestie nibh feugiat ac. Morbi<br>
+feugiat convallis semper. Ut et consequat purus. Fusce convallis<br>
+vehicula enim in vulputate. Curabitur a augue arcu.</p></div><div><p dir="auto">:::</p></div><div><p dir="auto">Mauris laoreet<br>
+lectus arcu, sed elementum turpis scelerisque id. Etiam porta turpis<br>
+quis ipsum dictum vulputate. In ut convallis urna, at imperdiet nunc.<br>
+Cras laoreet, massa lobortis gravida egestas, lacus est pellentesque<br>
+arcu, imperdiet efficitur nibh dolor vel sapien. Sed accumsan<br>
+condimentum diam non pellentesque.</p></div><div><p dir="auto">\columnbreak</p></div><div><p dir="auto">Vestibulum cursus nisi risus, sit amet consectetur massa suscipit nec.<br>
+Sed condimentum, est id iaculis ornare, purus risus finibus felis,<br>
+posuere congue est nibh eget dui. Maecenas orci erat, commodo auctor<br>
+justo quis, vestibulum mollis ex.</p></div><div><p dir="auto">:::::</p></div></div></div><div class="heading-wrapper"><h2 data-heading="Advanced usage" dir="auto" class="heading" id="Advanced_usage"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Advanced usage</h2><div class="heading-children"></div></div><div class="heading-wrapper"><h2 data-heading="Nesting" dir="auto" class="heading" id="Nesting"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Nesting</h2><div class="heading-children"><div><p dir="auto">Multicolumn sections can be nested. Support for nesting may vary across browsers. Here is an illustration:</p></div><div><p dir="auto">::: columns</p></div><div><p dir="auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a ante<br>
+in mi ornare volutpat sed sit amet diam. Nullam interdum erat a augue<br>
+faucibus, nec tempus tortor sagittis. Aenean imperdiet imperdiet<br>
+dignissim. Nam aliquam blandit ex, sed molestie nibh feugiat ac. Morbi<br>
+feugiat convallis semper. Ut et consequat purus. Fusce convallis<br>
+vehicula enim in vulputate. Curabitur a augue arcu.</p></div><div><p dir="auto">\columnbreak</p></div><div><p dir="auto">Mauris laoreet<br>
+lectus arcu, sed elementum turpis scelerisque id. Etiam porta turpis<br>
+quis ipsum dictum vulputate. In ut convallis urna, at imperdiet nunc.</p></div><div><p dir="auto">::::: columns</p></div><div><p dir="auto">This is a two-column section nested within the middle column<br>
+of a three-column section.</p></div><div><p dir="auto">:::::</p></div><div><p dir="auto">Cras laoreet, massa lobortis gravida egestas, lacus est pellentesque<br>
+arcu, imperdiet efficitur nibh dolor vel sapien. Sed accumsan<br>
+condimentum diam non pellentesque.</p></div><div><p dir="auto">\columnbreak</p></div><div><p dir="auto">Vestibulum cursus nisi risus, sit amet consectetur massa suscipit nec.<br>
+Sed condimentum, est id iaculis ornare, purus risus finibus felis,<br>
+posuere congue est nibh eget dui. Maecenas orci erat, commodo auctor<br>
+justo quis, vestibulum mollis ex.</p></div><div><p dir="auto">:::</p></div></div></div><div class="heading-wrapper"><h2 data-heading="Number of Columns" dir="auto" class="heading" id="Number_of_Columns"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Number of Columns</h2><div class="heading-children"><div><p dir="auto">Number of columns can be specified in English up to ten. Accepted patterns are <code>&lt;number&gt;columns</code>, <code>&lt;number&gt;-columns</code> and <code>&lt;number&gt;_columns</code>. Note that this is a "class", and should be preceded by a dot when specified along other attributes within curly brackets:</p></div><div><pre dir="auto"><code>::: twocolumns
+
+::: {.three-columns columnsep=2em}
+
+:::
+
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Alternatively, the <code>column-count</code> can be used to specify any number of columns.</p></div><div><pre dir="auto"><code>::: {.columns column-count=3}
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">If both English names and <code>column-count</code> are used, the former prevails.</p></div></div></div><div class="heading-wrapper"><h2 data-heading="HTML Output" dir="auto" class="heading" id="HTML_Output"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>HTML Output</h2><div class="heading-children"><div><p dir="auto">The <code>html</code> output looks like this. Without column breaks:</p></div><div><pre dir="auto" class="language-html" tabindex="0"><code class="language-html is-loaded"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>columns<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">column-count</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token property">column-rule</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token unit">px</span> solid <span class="token color">black</span><span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">&gt;</span></span>
+
+Content that distributed in columns...
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>column-span<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">&gt;</span></span>
+Content that spreads across all columns
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+More content distributed in columns...
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">With columnbreaks:</p></div><div><pre dir="auto" class="language-html" tabindex="0"><code class="language-html is-loaded"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>columns<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">column-count</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">&gt;</span></span>
+
+Content of the first column.
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">break-after</span><span class="token punctuation">:</span> column<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+Content of the second column.
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">In CSS <code>break-after: column</code> means "after this element, place a column break".</p></div><div><p dir="auto">The classes <code>columns</code> and <code>column-span</code> are needed to ensure that the first<br>
+element of a multiple columns <code>div</code>, or the first element after an element<br>
+spanning across columns, have no top margin. If they had we would get unwanted space at the beginning of the first column. Thus the filter adds the following<br>
+to the header:</p></div><div><pre dir="auto" class="language-html" tabindex="0"><code class="language-html is-loaded">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+    <span class="token selector"><span class="token class">.columns</span> <span class="token pseudo-class">:first-child</span></span> <span class="token punctuation">{</span><span class="token property">margin-top</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token selector"><span class="token class">.column-span</span> <span class="token combinator">+</span> *</span> <span class="token punctuation">{</span><span class="token property">margin-top</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h2 data-heading="LaTeX Output" dir="auto" class="heading" id="LaTeX_Output"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>LaTeX Output</h2><div class="heading-children"><div><p dir="auto">The LaTeX output looks as follows. Preamble:</p></div><div><pre dir="auto" class="language-latex" tabindex="0"><code class="language-latex is-loaded"><span class="token function selector">\usepackage</span><span class="token punctuation">{</span><span class="token keyword">multicol</span><span class="token punctuation">}</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Document body:</p></div><div><pre dir="auto"><code>{\begin{multicols}{2}
+
+content distributed over two columns
+
+\end{multicols}
+}
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">With properties and explicit column breaks:</p></div><div><pre dir="auto"><code>{\setlength{\columnsep}{4em}
+\setlength{\columnseprule}{ 3pt}
+\renewcommand{\columnseprulecolor}{\color{blue}}
+\begin{multicols}{3}
+
+content distributed over three columns
+
+\end{multicols}
+}
+</code><button class="copy-code-button">Copy</button></pre></div><div><p dir="auto">Note that the <code>multicols</code> environment is wrapped within <code>{...}</code>. This is to<br>
+ensure that settings of <code>\columnsep</code>, <code>\columnseprule</code> and <code>\columnseprulecolor</code> do not affect subsequent <code>multicol</code> environments.</p></div></div></div><div class="heading-wrapper"><h2 data-heading="Contributing" dir="auto" class="heading" id="Contributing"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Contributing</h2><div class="heading-children"><div><p dir="auto">Issues and pull requests are welcome. They can be submitted <a data-tooltip-position="top" aria-label="https://github.com/jdutant/columns" rel="noopener" class="external-link" href="https://github.com/jdutant/columns" target="_blank">to the repository</a>.</p></div></div></div><div class="heading-wrapper"><h2 data-heading="Related" dir="auto" class="heading" id="Related"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Related</h2><div class="heading-children"><div><ul dir="auto">
+<li data-line="0" dir="auto"><a data-tooltip-position="top" aria-label="https://github.com/mhwombat/pandoc-columns" rel="noopener" class="external-link" href="https://github.com/mhwombat/pandoc-columns" target="_blank">pandoc-columns</a>, a Pandoc filter written in Haskell.</li>
+</ul></div></div></div><div class="heading-wrapper"><h2 data-heading="References" dir="auto" class="heading" id="References"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>References</h2><div class="heading-children"><div><ul dir="auto">
+<li data-line="0" dir="auto"><code>html</code>: <a data-tooltip-position="top" aria-label="https://drafts.csswg.org/css-multicol" rel="noopener" class="external-link" href="https://drafts.csswg.org/css-multicol" target="_blank">CSS Multi-column layout</a></li>
+<li data-line="1" dir="auto">LaTeX: <a data-tooltip-position="top" aria-label="https://www.ctan.org/pkg/multicol" rel="noopener" class="external-link" href="https://www.ctan.org/pkg/multicol" target="_blank"><code>multicol</code> LaTeX package</a></li>
+<li data-line="2" dir="auto">Pandoc: <a rel="noopener" class="external-link" href="https://pandoc.org/lua-filters.html" target="_blank">https://pandoc.org/lua-filters.html</a></li>
+<li data-line="3" dir="auto">Pandoc lua filters: <a rel="noopener" class="external-link" href="https://pandoc.org/lua-filters.html" target="_blank">https://pandoc.org/lua-filters.html</a></li>
+</ul></div><div class="mod-footer"></div></div></div></div></div></div></div></div><div class="sidebar-right sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="tree-container mod-root nav-folder tree-item outline-tree" data-depth="0"><div class="tree-header"><span class="sidebar-section-header">Table Of Contents</span><button class="clickable-icon collapse-tree-button is-collapsed" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-scroll-area tree-item-children nav-folder-children"><div class="tree-item mod-tree-folder nav-folder mod-collapsible is-collapsed" style="display: none;"></div><div class="tree-item" data-depth="1"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Columns"><div class="tree-item-contents heading-link" heading-name="Columns"><span class="tree-item-title">Columns</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Introduction"><div class="tree-item-contents heading-link" heading-name="Introduction"><span class="tree-item-title">Introduction</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Pre-requistes"><div class="tree-item-contents heading-link" heading-name="Pre-requistes"><span class="tree-item-title">Pre-requistes</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Basic_usage"><div class="tree-item-contents heading-link" heading-name="Basic usage"><span class="tree-item-title">Basic usage</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Columns"><div class="tree-item-contents heading-link" heading-name="Columns"><span class="tree-item-title">Columns</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Beware_of_Divs_in_Fluid_Columns"><div class="tree-item-contents heading-link" heading-name="Beware of Divs in Fluid Columns"><span class="tree-item-title">Beware of Divs in Fluid Columns</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Specifying_the_Number_of_Columns"><div class="tree-item-contents heading-link" heading-name="Specifying the Number of Columns"><span class="tree-item-title">Specifying the Number of Columns</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Ragged_Columns_(LaTeX_Output_only)"><div class="tree-item-contents heading-link" heading-name="Ragged Columns (LaTeX Output only)"><span class="tree-item-title">Ragged Columns (LaTeX Output only)</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Customizing_the_Gap_and_Rule_between_Columns"><div class="tree-item-contents heading-link" heading-name="Customizing the Gap and Rule between Columns"><span class="tree-item-title">Customizing the Gap and Rule between Columns</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Spanning_Elements"><div class="tree-item-contents heading-link" heading-name="Spanning Elements"><span class="tree-item-title">Spanning Elements</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="1"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Vestibulum_Cursus_Nisi_Risus,_Sit_Amet_Consectetur_Massa_Suscipit_Nec_{.unnumbered}"><div class="tree-item-contents heading-link" heading-name="Vestibulum Cursus Nisi Risus, Sit Amet Consectetur Massa Suscipit Nec {.unnumbered}"><span class="tree-item-title">Vestibulum Cursus Nisi Risus, Sit Amet Consectetur Massa Suscipit Nec {.unnumbered}</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Explicitly_Specifying_Column_Breaks"><div class="tree-item-contents heading-link" heading-name="Explicitly Specifying Column Breaks"><span class="tree-item-title">Explicitly Specifying Column Breaks</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Container_Syntax"><div class="tree-item-contents heading-link" heading-name="Container Syntax"><span class="tree-item-title">Container Syntax</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Advanced_usage"><div class="tree-item-contents heading-link" heading-name="Advanced usage"><span class="tree-item-title">Advanced usage</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Nesting"><div class="tree-item-contents heading-link" heading-name="Nesting"><span class="tree-item-title">Nesting</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Number_of_Columns"><div class="tree-item-contents heading-link" heading-name="Number of Columns"><span class="tree-item-title">Number of Columns</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#HTML_Output"><div class="tree-item-contents heading-link" heading-name="HTML Output"><span class="tree-item-title">HTML Output</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#LaTeX_Output"><div class="tree-item-contents heading-link" heading-name="LaTeX Output"><span class="tree-item-title">LaTeX Output</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Contributing"><div class="tree-item-contents heading-link" heading-name="Contributing"><span class="tree-item-title">Contributing</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#Related"><div class="tree-item-contents heading-link" heading-name="Related"><span class="tree-item-title">Related</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="projects/syncopated/syncopatedos/syncopatedcac/docs/build/template/columns/readme.html#References"><div class="tree-item-contents heading-link" heading-name="References"><span class="tree-item-title">References</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector(".sidebar-right"); rs.classList.add("is-collapsed"); if (window.innerWidth > 768) rs.classList.remove("is-collapsed"); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></body></html>
