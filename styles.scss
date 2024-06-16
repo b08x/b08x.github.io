@@ -2,3 +2,80 @@
 ---
 
 @import "../_sass/jekyll-theme-minimal.scss";
+
+:root {
+  --font-family-ibm: "IBM Plex Mono", monospace;
+  --font-family-special: "Special Elite", monospace;
+  --font-family-source: "Source Code Pro", monospace;
+  --font-family-source-serif: "Source Code Pro", serif;
+  --font-family-monospace: "Overpass Mono", monospace;
+  --font-family-sans-serif: "Overpass", sans-serif;
+  --font-family-logo: "Podkova", serif;
+  --font-family-text: "mononoki", monospace;
+  --font-family-forum: "Forum", serif;
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-BoldItalic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-Italic.ttf) format("truetype");
+}
+
+
+.theme-dark {
+  --background-primary: #1a1a1a;
+  --font-text: var(--font-family-logo);
+  --font-text-size: 1.25rem;
+}
+
+.cm-content p {
+  font-family: var(--font-family-forum) !important;
+}
+
+ol li {
+  list-style:lower-alpha !important;
+}
+
+ol li::before {
+  content: unset;
+  counter-increment: unset;
+}
+
+body {
+  --zoom-factor: 1.7279999999999998 !important;
+  --font-interface-override: "Hack Nerd Font" !important;
+  --font-text-override: "Hack Nerd Font" !important;
+  --font-print-override: "Hack Nerd Font" !important;
+  --font-monospace-override: "Hack Nerd Font Mono" !important;
+  --font-text-size: 1.5rem;
+}
+
+body.show-inline-title .page-title {
+  color: #b84336;
+}
