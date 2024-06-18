@@ -1,0 +1,46 @@
+<style>
+  .links line {
+    stroke: #ccc;
+    opacity: 0.5;
+  }
+  
+  .nodes circle {
+    cursor: pointer;
+    fill: #a6ab10;
+    transition: all 0.15s ease-out;
+  
+  }
+  
+  .text text {
+    cursor: pointer;
+    fill: #b51414;
+  }
+  
+  .nodes [active],
+  .text [active] {
+    cursor: pointer;
+    fill: #519673;
+  }
+  
+  .inactive {
+    opacity: 0.1;
+    transition: all 0.15s ease-out;
+  }
+  
+  #graph-wrapper {
+    /* background: #0a0a0a; */
+    background: transparent;
+    border-radius: 4px;
+    /* margin-left: 2rem;
+    margin-right: 2rem; */
+    display: flex;
+  }
+  
+  #graph-wrapper>svg {
+    max-width: 100%;
+    display: block;
+    height: 60%;
+    /* background: #0a0a0a; */
+    font-size: 3rem;
+  }
+  </style>
