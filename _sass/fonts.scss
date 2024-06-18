@@ -53,3 +53,35 @@
        url('../assets/fonts/Noto-Sans-700italic/Noto-Sans-700italic.ttf') format('truetype'),
        url('../assets/fonts/Noto-Sans-700italic/Noto-Sans-700italic.svg#NotoSans') format('svg');
 }
+
+@font-face {
+  font-family: "mononoki";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-BoldItalic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-Italic.ttf) format("truetype");
+}

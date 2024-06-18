@@ -124,3 +124,7 @@ body {
 .nav-file-title-content, .nav-folder-title-content {
   font-size: 1.25rem !important;
 }
+
+.folder-overview-list, .folder-list {
+  display: block;
+}

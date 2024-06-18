@@ -1,16 +1,127 @@
 @import "fonts";
-@import "rouge-github";
+@import "code";
+
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500|Inknut+Antiqua:400,500,600,700,800|Alegreya:800,900');
+
+:root {
+  /* Full grid area variable */
+  --fullGrid: 1 / 1 / -1 / -1;
+  --blue-whale: #142e3c;
+  --cold-and-dark: #203e4a;
+  --nocturne: #2f4b55;
+  --great-void: #3e575e;
+  --still-water: #4d656a;
+  --north-atlantic: #60797e;
+
+  --bitter-liquorice: #282925;
+  --black-olive: #363731;
+  --armadillo: #4a4b47;
+  --iron: #616260;
+  --lucky-grey: #777876;
+  --mummys-tomb: #868c7e;
+
+  --lava-rock: #545b64;
+  --winter-storm: #4c6c6e;
+  --antique: #838064;
+  --caramel-crumb: #c09351;
+  --polished-gold: #eca447;
+  --kombucha: #e1ab6e;
+
+  --aztec: #273639;
+  --rosemary: #455e5a;
+  --arctic: #6a8989;
+  --shallow-sea: #95b8c5;
+  --aquatic-edge: #c1d2cd;
+  --master-key: #decf8f;
+
+  --nirvana: #a99aa2;
+  --mighty-mauve: #8c7e85;
+  --chimera: #75676e;
+  --pinot-noir: #61545b;
+  --pitch-black: #483d43;
+  --ink-black: #2a2226;
+
+  --moutarde-de-benichon: #b88b0a;
+  --rich-gold: #a58211;
+  --jungle-king: #545132;
+  --blue-whale: #273542;
+  --sea-of-stars: #1d3041;
+  --midnight-ocean: #142940;
+  --jp-mirror-editor-variable-color: #142940;
+
+  --base-font-family: "Darker Grotesque", serif;
+  --base-font-weight: 500;
+  --heading-font-family: "Syne", sans-serif;
+  --heading-font-weight: 800;
+  --highlight-font-weight: 800;
+  --base-font-size: 1rem;
+  --base-line-height: 1.5;
+
+  // --theme-bg: #151515;
+  --theme-bg: #755555;
+  --theme-bg-alt: #474d48;
+  --theme-bg-alt-alt: #1e4021;
+  --theme-bg-alt-alt-alt: #1A1E36;
+  --theme-text: #a39aa2;
+  --theme-accent: #5e4a5c;
+  /* ==== Typography ==== */
+  --font-family-primary: 'IBM Plex Sans', sans-serif;
+  --font-family-secondary: 'Inknut Antiqua', serif;
+  --font-weight-300: 300;
+  --font-weight-400: 400;
+  --font-weight-500: 500;
+  --font-weight-600: 600;
+  --font-weight-700: 700;
+  --font-weight-800: 800;
+
+
+  --baseline: calc(12 * 1px);
+  /* This is our baseline */
+  --base-line-height: calc(var(--baseline) * 2);
+  /* Base line height is a multiple of the baseline */
+  --base-font-size: 1rem;
+
+  /* ==== Spacing based on baseline ==== */
+  --spacing-1: var(--baseline);
+  --spacing-2: calc(var(--baseline) * 2);
+  --spacing-3: calc(var(--baseline) * 3);
+  --spacing-4: calc(var(--baseline) * 4);
+  --spacing-5: calc(var(--baseline) * 5);
+  --spacing-6: calc(var(--baseline) * 6);
+  --spacing-7: calc(var(--baseline) * 7);
+  --spacing-8: calc(var(--baseline) * 8);
+  --spacing-9: calc(var(--baseline) * 9);
+  --spacing-10: calc(var(--baseline) * 10);
+
+}
+
+$color-primary: hsl(0, 0%, 10%);
+$color-text: hsl(0, 0%, 20%);
+$color-subtext: #9b9817;
+$color-border: hsl(0, 0%, 85%);
+$color-box-background: mix($color-primary, white, 4%);
+$border-radius: 4px;
+$font-family-ibm: "IBM Plex Mono", monospace;
+$font-family-special: "Special Elite", monospace;
+$font-family-source: "Source Code Pro", monospace;
+$font-family-source-serif: "Source Code Pro", serif;
+$font-family-monospace: "Overpass Mono", monospace;
+$font-family-sans-serif: "Overpass", sans-serif;
+$font-family-logo: "Podkova", serif;
+$font-family-text: "mononoki", monospace;
+$font-family-forum: "Forum", serif;
 
 body {
-  background-color: #1D1F2E;
+  background-color: #26272b;
   padding:50px;
-  font: 14px/1.5 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-family-source;
   color:#727272;
   font-weight:400;
+  font-size: 1.25rem;;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color:#a01982;
+  color: #a03219;
   margin:0 0 20px;
 }
 
@@ -56,7 +167,7 @@ a:hover small {
 }
 
 .wrapper {
-  width:860px;
+  width: -webkit-fill-available;
   margin:0 auto;
 }
 
@@ -120,8 +231,8 @@ kbd {
 
 header {
   width:20%;
-  float:left;
-  position:fixed;
+  // float:left;
+  // position:fixed;
   -webkit-font-smoothing:subpixel-antialiased;
 }
 
@@ -209,6 +320,7 @@ footer {
   bottom:50px;
   -webkit-font-smoothing:subpixel-antialiased;
 }
+
 
 @media print, screen and (max-width: 960px) {
 

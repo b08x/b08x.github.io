@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  {% include head.html %}
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .header {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .left-column {
+    width: 30%;
+    padding: 20px;
+  }
+
+  .right-column {
+    width: 65%;
+    padding: 20px;
+  }
+
+  .testimonial {
+    margin-bottom: 20px;
+  }
+
+  .testimonial img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .testimonial p {
+    margin: 0;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 200px;
+    background-color: #ccc;
+    margin-bottom: 20px;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <h1 class="header">Solving Monastery: Extracting Intelligence from Claude's Sleek Sleek</h1>
+    <div class="content">
+      <div class="left-column">
+        <span>
+          {{ content | toc_only }}
+        </span>
+      </div>
+      <div class="right-column">
+        <content>
+          {{ content | inject_anchors }}
+        </content>
+        <h2>Testimonials</h2>
+        <div class="testimonial">
+          <img src="testimonial1.jpg" alt="Testimonial 1">
+          <p>"I've been using Claude's Sleek Sleek's products for years and they've never let me down. I've found them
+            to be extremely accurate and reliable."</p>
+        </div>
+        <div class="testimonial">
+          <img src="testimonial2.jpg" alt="Testimonial 2">
+          <p>"I've been using Claude's Sleek Sleek's products for years and they've never let me down. I've found them
+            to be extremely accurate and reliable."</p>
+        </div>
+        <div class="testimonial">
+          <img src="testimonial3.jpg" alt="Testimonial 3">
+          <p>"I've been using Claude's Sleek Sleek's products for years and they've never let me down. I've found them
+            to be extremely accurate and reliable."</p>
+        </div>
+        <h2>Case Studies</h2>
+        <p>Check out some of our case studies to see how our products have been used in the real world. We're confident
+          that you'll find the right one for you.</p>
+        <div class="product-image"></div>
+        <p>This is a placeholder for the product image. Replace with actual image source.</p>
+        <h2>Questions</h2>
+        <p>Here are some of the frequently asked questions about our products. We're confident that you'll find the
+          right one for you.</p>
+        <div class="product-image"></div>
+        <p>This is a placeholder for the product image. Replace with actual image source.</p>
+        <h2>Resources</h2>
+        <p>Here are some resources that can help you learn more about our products. We're confident that you'll find the
+          right one for you.</p>
+        <div class="product-image"></div>
+        <p>This is a placeholder for the product image. Replace with actual image source.</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -7,7 +7,9 @@ include:
   - "notebook/"
   - "_media/"
   - "_assets/"
+  - "_notes/"
 exclude:
+  - "plugins/"
   - "websitestuff/"
 email: rwpannick@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
@@ -28,6 +30,36 @@ plugins:
   - jekyll-paginate-v2
   - jekyll-feed
   - jekyll-pandoc
+
+# If you are using a host that cannot resolve URLs that do
+# not end with .html (such as Neocities), set this to 'true'.
+use_html_extension: false
+
+# Set to `true` to open non-internal links in new tabs, or
+# set to `false` to open non-internal links in current tab.
+open_external_links_in_new_tab: true
+
+# Set to `true` to replace tweet URLs with Twitter embeds.
+# Note that doing so will negatively the reader's privacy
+# as their browser will communicate with Twitter's servers.
+embed_tweets: false
+
+permalink: pretty
+relative_permalinks: false
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+defaults:
+  # - scope:
+  #     path: "**/*"
+  #   values:
+  #     layout: "page"
+  - scope:
+      path: "_notes/**/*.md"
+    values:
+      layout: "pagev2"
 
 jekyll-spaceship:
   mermaid-processor:
@@ -65,6 +97,15 @@ pagination:
   sort_reverse: false
   collection: 'posts'
 
+
+collections:
+  notes:
+    output: true
+    permalink: /:slugified_categories/:title
+  posts:
+    output: true
+    permalink: /:slugified_categories/:title
+    
 ############################################################
 # Site configuration for the Auto-Pages feature
 # The values here represent the defaults if nothing is set
