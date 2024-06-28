@@ -70,12 +70,12 @@ body {
   --tab-stacked-pane-width: 100%;
   /* background-color: #1a1a1a; */
 }
-/* body.show-inline-title .page-title {
+body.show-inline-title .page-title {
   color: #b8363c;
-} */
-/* .inline-title {
+}
+.inline-title {
   color: #2c9caf;
-} */
+}
 .theme-dark {
   --background-primary: #1a1a1a;
   --color-accent-hsl: 212, 100%, 50%;
@@ -93,6 +93,10 @@ body {
 /* .markdown-rendered h2, h2 {
   color:#dd5400;
 } */
+
+.markdown-rendered .internal-link, .markdown-rendered .internal-link.is-unresolved, .markdown-source-view.mod-cm6 .cm-link .cm-underline, .markdown-source-view.mod-cm6 .cm-underline.is-unresolved:hover, .markdown-source-view.mod-cm6 .cm-underline:hover, .markdown-source-view.mod-cm6 .cm-url .cm-underline, .markdown-source-view.mod-cm6 .is-unresolved .cm-underline:hover, a {
+  font-weight: unset;
+}
 
 .cm-content,
 p {
