@@ -1,0 +1,1215 @@
+---
+title: Ansible Playbook Grapher
+---
+%%{ init: { "flowchart": { "curve": "bumpX" } } }%%
+flowchart TD
+	%% Start of the playbook 'playbooks/full.yml'
+	playbook_0e96d34c("playbooks/full.yml")
+		%% Start of the play 'Play: all (10)'
+		play_f51d9f68["Play: all (10)"]
+		style play_f51d9f68 fill:#a94c23,color:#ffffff
+		playbook_0e96d34c --> |"1"| play_f51d9f68
+		linkStyle 0 stroke:#a94c23,color:#a94c23
+			pre_task_6cbaaca9["[pre_task]  Register timestamp"]
+			style pre_task_6cbaaca9 stroke:#a94c23,fill:#ffffff
+			play_f51d9f68 --> |"1"| pre_task_6cbaaca9
+			linkStyle 1 stroke:#a94c23,color:#a94c23
+			pre_task_dd66a09d["[pre_task]  Set suffix"]
+			style pre_task_dd66a09d stroke:#a94c23,fill:#ffffff
+			play_f51d9f68 --> |"2"| pre_task_dd66a09d
+			linkStyle 2 stroke:#a94c23,color:#a94c23
+			pre_task_8e2a1151["[pre_task]  Symlink /etc/os-release to /etc/system-release"]
+			style pre_task_8e2a1151 stroke:#a94c23,fill:#ffffff
+			play_f51d9f68 --> |"3"| pre_task_8e2a1151
+			linkStyle 3 stroke:#a94c23,color:#a94c23
+			pre_task_8fff0833["[pre_task]  Set admin group name"]
+			style pre_task_8fff0833 stroke:#a94c23,fill:#ffffff
+			play_f51d9f68 --> |"4"| pre_task_8fff0833
+			linkStyle 4 stroke:#a94c23,color:#a94c23
+			pre_task_7fa67fde["[pre_task]  Check -march support"]
+			style pre_task_7fa67fde stroke:#a94c23,fill:#ffffff
+			play_f51d9f68 --> |"5"| pre_task_7fa67fde
+			linkStyle 5 stroke:#a94c23,color:#a94c23
+			%% Start of the block ''
+			block_81cc4207["[block] "]
+			style block_81cc4207 fill:#a94c23,color:#ffffff,stroke:#a94c23
+			play_f51d9f68 --> |"6 [when: supported_march.stdout_lines[0] is defined]"| block_81cc4207
+			linkStyle 6 stroke:#a94c23,color:#a94c23
+			subgraph subgraph_block_81cc4207[" "]
+				pre_task_7e1cc033[" Set architecture"]
+				style pre_task_7e1cc033 stroke:#a94c23,fill:#ffffff
+				block_81cc4207 --> |"1 [when: supported_march.stdout_lines[0] is defined and supported_march.stdout_lines[0] == 'x86-64-v3']"| pre_task_7e1cc033
+				linkStyle 7 stroke:#a94c23,color:#a94c23
+				pre_task_59a4debd[" Set architecture"]
+				style pre_task_59a4debd stroke:#a94c23,fill:#ffffff
+				block_81cc4207 --> |"2 [when: supported_march.stdout_lines[0] is defined and supported_march.stdout_lines[0] == 'x86-64-v2']"| pre_task_59a4debd
+				linkStyle 8 stroke:#a94c23,color:#a94c23
+			end
+			%% End of the block ''
+			%% Start of the block ''
+			block_3e49adb8["[block] "]
+			style block_3e49adb8 fill:#a94c23,color:#ffffff,stroke:#a94c23
+			play_f51d9f68 --> |"7"| block_3e49adb8
+			linkStyle 9 stroke:#a94c23,color:#a94c23
+			subgraph subgraph_block_3e49adb8[" "]
+				pre_task_dcbb2b84[" Check if keys are present"]
+				style pre_task_dcbb2b84 stroke:#a94c23,fill:#ffffff
+				block_3e49adb8 --> |"1"| pre_task_dcbb2b84
+				linkStyle 10 stroke:#a94c23,color:#a94c23
+				pre_task_1ba8c54b[" Start ssh daemon"]
+				style pre_task_1ba8c54b stroke:#a94c23,fill:#ffffff
+				block_3e49adb8 --> |"2"| pre_task_1ba8c54b
+				linkStyle 11 stroke:#a94c23,color:#a94c23
+				pre_task_f13c8b32[" Copy keys from remote host"]
+				style pre_task_f13c8b32 stroke:#a94c23,fill:#ffffff
+				block_3e49adb8 --> |"3 [when: not keys.stat.exists and newInstall is defined]"| pre_task_f13c8b32
+				linkStyle 12 stroke:#a94c23,color:#a94c23
+			end
+			%% End of the block ''
+			%% Start of the role 'distro'
+			play_f51d9f68 --> |"8"| role_35b5a204
+			linkStyle 13 stroke:#a94c23,color:#a94c23
+			role_35b5a204("[role] distro")
+			style role_35b5a204 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_b652bb0a[" distro : Load a variable file based on the OS type, or a default if not found. the file."]
+				style task_b652bb0a stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"1 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_b652bb0a
+				linkStyle 14 stroke:#a94c23,color:#a94c23
+				task_2b983122[" distro : show expected_value"]
+				style task_2b983122 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"2 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_2b983122
+				linkStyle 15 stroke:#a94c23,color:#a94c23
+				task_3efd2043[" distro : Import syncopated repo key"]
+				style task_3efd2043 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"3 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and repos.syncopated|default(false)|bool]"| task_3efd2043
+				linkStyle 16 stroke:#a94c23,color:#a94c23
+				task_85b98701[" distro : Import archaudio repo key"]
+				style task_85b98701 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"4 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_85b98701
+				linkStyle 17 stroke:#a94c23,color:#a94c23
+				task_1309fcf6[" distro : Set pacman.conf config"]
+				style task_1309fcf6 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"5 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_1309fcf6
+				linkStyle 18 stroke:#a94c23,color:#a94c23
+				task_9bdc9f75[" distro : Update cache"]
+				style task_9bdc9f75 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"6 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and archaudio_keys.changed]"| task_9bdc9f75
+				linkStyle 19 stroke:#a94c23,color:#a94c23
+				task_da918d8c[" distro : Import primary key - chaotic"]
+				style task_da918d8c stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"7 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and repos.Archlinux.chaotic|default(false)|bool]"| task_da918d8c
+				linkStyle 20 stroke:#a94c23,color:#a94c23
+				task_f719187a[" distro : Sign primary key - chaotic"]
+				style task_f719187a stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"8 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and repos.Archlinux.chaotic|default(false)|bool]"| task_f719187a
+				linkStyle 21 stroke:#a94c23,color:#a94c23
+				task_2895946c[" distro : Check pacman.conf contents"]
+				style task_2895946c stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"9 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and repos.Archlinux.chaotic|default(false)|bool]"| task_2895946c
+				linkStyle 22 stroke:#a94c23,color:#a94c23
+				task_4d49e7ae[" distro : Add chaotic mirror list"]
+				style task_4d49e7ae stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"10 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and repos.Archlinux.chaotic|default(false)|bool]"| task_4d49e7ae
+				linkStyle 23 stroke:#a94c23,color:#a94c23
+				task_23d03ce4[" distro : Add repository to pacman.conf"]
+				style task_23d03ce4 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"11 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and repos.Archlinux.chaotic|default(false)|bool and '[chaotic-aur]' not in pacman_conf_output.stdout]"| task_23d03ce4
+				linkStyle 24 stroke:#a94c23,color:#a94c23
+				task_99d355f5[" distro : Install chaotic keyring and mirrorlist"]
+				style task_99d355f5 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"12 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and repos.Archlinux.chaotic|default(false)|bool]"| task_99d355f5
+				linkStyle 25 stroke:#a94c23,color:#a94c23
+				task_627d84cf[" distro : Update cache"]
+				style task_627d84cf stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"13 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and repos.Archlinux.chaotic|default(false)|bool and pacman_conf_add.changed or importkey.changed or signkey.changed]"| task_627d84cf
+				linkStyle 26 stroke:#a94c23,color:#a94c23
+				task_46c51310[" distro : Install utility packages"]
+				style task_46c51310 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"14 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_46c51310
+				linkStyle 27 stroke:#a94c23,color:#a94c23
+				task_8f9a65eb[" distro : Set makepkg to use aria2"]
+				style task_8f9a65eb stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"15 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_8f9a65eb
+				linkStyle 28 stroke:#a94c23,color:#a94c23
+				task_2d3df4e4[" distro : Check if paru installed"]
+				style task_2d3df4e4 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"16 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_2d3df4e4
+				linkStyle 29 stroke:#a94c23,color:#a94c23
+				task_f0a1e231[" distro : Install paru"]
+				style task_f0a1e231 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"17 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and not paru.stat.exists]"| task_f0a1e231
+				linkStyle 30 stroke:#a94c23,color:#a94c23
+				task_41cedfeb[" distro : Adjust paru config"]
+				style task_41cedfeb stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"18 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_41cedfeb
+				linkStyle 31 stroke:#a94c23,color:#a94c23
+				task_855bb8cb[" distro : Check if mirrors have been updated within the past 24h"]
+				style task_855bb8cb stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"19 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_855bb8cb
+				linkStyle 32 stroke:#a94c23,color:#a94c23
+				task_323d1b60[" distro : Print mirror file status"]
+				style task_323d1b60 stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"20 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and ( mirror_status.stdout_lines | length < 0 or update_mirrors is defined ) and debugging is defined]"| task_323d1b60
+				linkStyle 33 stroke:#a94c23,color:#a94c23
+				task_51b7fffa[" distro : Update mirrors"]
+				style task_51b7fffa stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"21 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and ( mirror_status.stdout_lines | length < 0 or update_mirrors is defined )]"| task_51b7fffa
+				linkStyle 34 stroke:#a94c23,color:#a94c23
+				task_ae6c7f2f[" distro : Update cache"]
+				style task_ae6c7f2f stroke:#a94c23,fill:#ffffff
+				role_35b5a204 --> |"22 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS' and mirror_update.changed]"| task_ae6c7f2f
+				linkStyle 35 stroke:#a94c23,color:#a94c23
+			%% End of the role 'distro'
+			%% Start of the role 'base'
+			play_f51d9f68 --> |"9"| role_593616de
+			linkStyle 36 stroke:#a94c23,color:#a94c23
+			role_593616de("[role] base")
+			style role_593616de fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_68e13f4d[" base : Base Tasks"]
+				style task_68e13f4d stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"1"| task_68e13f4d
+				linkStyle 37 stroke:#a94c23,color:#a94c23
+				task_9d4b2a8d[" base : Ensure root directories exist"]
+				style task_9d4b2a8d stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"2"| task_9d4b2a8d
+				linkStyle 38 stroke:#a94c23,color:#a94c23
+				task_ff7ea05e[" base : Disable requiretty for user so automation can run without interruption"]
+				style task_ff7ea05e stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"3 [when: user.name != 'root']"| task_ff7ea05e
+				linkStyle 39 stroke:#a94c23,color:#a94c23
+				task_648c0186[" base : Ensure /etc/sudoers.d exists"]
+				style task_648c0186 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"4 [when: user.sudoers |default(false)|bool == True]"| task_648c0186
+				linkStyle 40 stroke:#a94c23,color:#a94c23
+				task_62b51ae5[" base : Set NOPASSWD for user in sudoers"]
+				style task_62b51ae5 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"5 [when: user.sudoers |default(false)|bool == True and user.name != 'root']"| task_62b51ae5
+				linkStyle 41 stroke:#a94c23,color:#a94c23
+				task_f644aaf7[" base : Set NOPASSWD for user in polkit"]
+				style task_f644aaf7 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"6 [when: user.sudoers |default(false)|bool == True and distribution == 'Archlinux' or distribution == 'Fedora']"| task_f644aaf7
+				linkStyle 42 stroke:#a94c23,color:#a94c23
+				task_8ff42ded[" base : Set NOPASSWD for user in polkit"]
+				style task_8ff42ded stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"7 [when: user.sudoers |default(false)|bool == True and distribution == 'MX' or distribution == 'Debian']"| task_8ff42ded
+				linkStyle 43 stroke:#a94c23,color:#a94c23
+				task_3879a9a1[" base : Placeholder for /etc/environment"]
+				style task_3879a9a1 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"8"| task_3879a9a1
+				linkStyle 44 stroke:#a94c23,color:#a94c23
+				task_11b05154[" base : Adjust /etc/profile"]
+				style task_11b05154 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"9"| task_11b05154
+				linkStyle 45 stroke:#a94c23,color:#a94c23
+				task_2904816e[" base : Set .aliases and .profile"]
+				style task_2904816e stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"10"| task_2904816e
+				linkStyle 46 stroke:#a94c23,color:#a94c23
+				task_d167962b[" base : Set sshd config"]
+				style task_d167962b stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"11"| task_d167962b
+				linkStyle 47 stroke:#a94c23,color:#a94c23
+				task_ed48dbe6[" base : Disable gnome-keyring service"]
+				style task_ed48dbe6 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"12"| task_ed48dbe6
+				linkStyle 48 stroke:#a94c23,color:#a94c23
+				task_5216a24d[" base : Install mlocate"]
+				style task_5216a24d stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"13"| task_5216a24d
+				linkStyle 49 stroke:#a94c23,color:#a94c23
+				task_462f72d3[" base : Set directories to not be indexed"]
+				style task_462f72d3 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"14"| task_462f72d3
+				linkStyle 50 stroke:#a94c23,color:#a94c23
+				task_2e42cbea[" base : Run updatedb"]
+				style task_2e42cbea stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"15 [when: updatedb_conf.changed]"| task_2e42cbea
+				linkStyle 51 stroke:#a94c23,color:#a94c23
+				task_3744846d[" base : Disable swap"]
+				style task_3744846d stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"16"| task_3744846d
+				linkStyle 52 stroke:#a94c23,color:#a94c23
+				task_031b3054[" base : Install zram-generator"]
+				style task_031b3054 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"17 [when: ansible_distribution != 'Debian']"| task_031b3054
+				linkStyle 53 stroke:#a94c23,color:#a94c23
+				task_6d887430[" base : Install zram-generator.conf"]
+				style task_6d887430 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"18 [when: ansible_distribution != 'Debian']"| task_6d887430
+				linkStyle 54 stroke:#a94c23,color:#a94c23
+				task_e2da60b0[" base : Install sysctl zram parameters"]
+				style task_e2da60b0 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"19 [when: ansible_distribution != 'Debian']"| task_e2da60b0
+				linkStyle 55 stroke:#a94c23,color:#a94c23
+				task_b1fad304[" base : Reload systemd daemon"]
+				style task_b1fad304 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"20 [when: ansible_distribution != 'Debian']"| task_b1fad304
+				linkStyle 56 stroke:#a94c23,color:#a94c23
+				task_2a2b9376[" base : Set autofs config folder"]
+				style task_2a2b9376 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"21 [when: distribution == 'Fedora' or distribution == 'Debian']"| task_2a2b9376
+				linkStyle 57 stroke:#a94c23,color:#a94c23
+				task_1548914d[" base : Set autofs config folder"]
+				style task_1548914d stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"22 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_1548914d
+				linkStyle 58 stroke:#a94c23,color:#a94c23
+				task_5f6fe5e8[" base : Install autofs"]
+				style task_5f6fe5e8 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"23 [when: distribution == 'Debian']"| task_5f6fe5e8
+				linkStyle 59 stroke:#a94c23,color:#a94c23
+				task_94090b2b[" base : Install autofs"]
+				style task_94090b2b stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"24 [when: distribution == 'Fedora']"| task_94090b2b
+				linkStyle 60 stroke:#a94c23,color:#a94c23
+				task_5fd4faa7[" base : Install autofs"]
+				style task_5fd4faa7 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"25 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_5fd4faa7
+				linkStyle 61 stroke:#a94c23,color:#a94c23
+				task_8f2d8de1[" base : Create mount directory folder if it doesn't already exist"]
+				style task_8f2d8de1 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"26"| task_8f2d8de1
+				linkStyle 62 stroke:#a94c23,color:#a94c23
+				task_dee93e85[" base : Install autofs configs"]
+				style task_dee93e85 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"27"| task_dee93e85
+				linkStyle 63 stroke:#a94c23,color:#a94c23
+				task_522873ce[" base : Enable autofs service"]
+				style task_522873ce stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"28"| task_522873ce
+				linkStyle 64 stroke:#a94c23,color:#a94c23
+				task_fd33a05d[" base : Set kernel cmdline params in grub"]
+				style task_fd33a05d stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"29"| task_fd33a05d
+				linkStyle 65 stroke:#a94c23,color:#a94c23
+				task_4bc312a2[" base : Remake grub if changes were made"]
+				style task_4bc312a2 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"30 [when: default_grub.changed]"| task_4bc312a2
+				linkStyle 66 stroke:#a94c23,color:#a94c23
+				task_b345d9d7[" base : Create getty@tty1.service.d directory"]
+				style task_b345d9d7 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"31 [when: autologin is defined]"| task_b345d9d7
+				linkStyle 67 stroke:#a94c23,color:#a94c23
+				task_07cee8fc[" base : Create systemd drop-in file for virtual console autologin"]
+				style task_07cee8fc stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"32 [when: autologin is defined]"| task_07cee8fc
+				linkStyle 68 stroke:#a94c23,color:#a94c23
+				task_11e01a9b[" base : Get current systemd default"]
+				style task_11e01a9b stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"33 [when: autologin is defined]"| task_11e01a9b
+				linkStyle 69 stroke:#a94c23,color:#a94c23
+				task_1be07728[" base : Set default to graphical target"]
+				style task_1be07728 stroke:#a94c23,fill:#ffffff
+				role_593616de --> |"34 [when: autologin is defined and 'multi-user' not in systemdefault.stdout]"| task_1be07728
+				linkStyle 70 stroke:#a94c23,color:#a94c23
+			%% End of the role 'base'
+			%% Start of the role 'user'
+			play_f51d9f68 --> |"10"| role_ee11cbb1
+			linkStyle 71 stroke:#a94c23,color:#a94c23
+			role_ee11cbb1("[role] user")
+			style role_ee11cbb1 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_3b98e297[" user : User Tasks"]
+				style task_3b98e297 stroke:#a94c23,fill:#ffffff
+				role_ee11cbb1 --> |"1"| task_3b98e297
+				linkStyle 72 stroke:#a94c23,color:#a94c23
+				task_922ff2c7[" user : Add user to groups"]
+				style task_922ff2c7 stroke:#a94c23,fill:#ffffff
+				role_ee11cbb1 --> |"2"| task_922ff2c7
+				linkStyle 73 stroke:#a94c23,color:#a94c23
+				task_a28a96b8[" user : Install .gitconfig"]
+				style task_a28a96b8 stroke:#a94c23,fill:#ffffff
+				role_ee11cbb1 --> |"3"| task_a28a96b8
+				linkStyle 74 stroke:#a94c23,color:#a94c23
+				task_59a686b2[" user : Install cheat"]
+				style task_59a686b2 stroke:#a94c23,fill:#ffffff
+				role_ee11cbb1 --> |"4 [when: ansible_os_family == 'Archlinux']"| task_59a686b2
+				linkStyle 75 stroke:#a94c23,color:#a94c23
+				task_a3087bd6[" user : Create cheatsheet folder"]
+				style task_a3087bd6 stroke:#a94c23,fill:#ffffff
+				role_ee11cbb1 --> |"5"| task_a3087bd6
+				linkStyle 76 stroke:#a94c23,color:#a94c23
+				task_57cc0fc8[" user : Install cheat config"]
+				style task_57cc0fc8 stroke:#a94c23,fill:#ffffff
+				role_ee11cbb1 --> |"6"| task_57cc0fc8
+				linkStyle 77 stroke:#a94c23,color:#a94c23
+				task_28165ce3[" user : Clone cheatsheet repository"]
+				style task_28165ce3 stroke:#a94c23,fill:#ffffff
+				role_ee11cbb1 --> |"7"| task_28165ce3
+				linkStyle 78 stroke:#a94c23,color:#a94c23
+			%% End of the role 'user'
+			%% Start of the role 'shell'
+			play_f51d9f68 --> |"11"| role_2591c98b
+			linkStyle 79 stroke:#a94c23,color:#a94c23
+			role_2591c98b("[role] shell")
+			style role_2591c98b fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_5d4bcb03[" shell : Set user shell"]
+				style task_5d4bcb03 stroke:#a94c23,fill:#ffffff
+				role_2591c98b --> |"1"| task_5d4bcb03
+				linkStyle 80 stroke:#a94c23,color:#a94c23
+				task_40d77c39[" bash : Copy bashrc and bash_logout to /home"]
+				style task_40d77c39 stroke:#a94c23,fill:#ffffff
+				role_2591c98b --> |"2 [when: user.shell == 'bash']"| task_40d77c39
+				linkStyle 81 stroke:#a94c23,color:#a94c23
+				task_cbec3a12[" zsh : ZSH Tasks"]
+				style task_cbec3a12 stroke:#a94c23,fill:#ffffff
+				role_2591c98b --> |"3"| task_cbec3a12
+				linkStyle 82 stroke:#a94c23,color:#a94c23
+				task_c3d57feb[" zsh : Install oh-my-zsh"]
+				style task_c3d57feb stroke:#a94c23,fill:#ffffff
+				role_2591c98b --> |"4"| task_c3d57feb
+				linkStyle 83 stroke:#a94c23,color:#a94c23
+				task_34398899[" zsh : Install zsh custom functions"]
+				style task_34398899 stroke:#a94c23,fill:#ffffff
+				role_2591c98b --> |"5"| task_34398899
+				linkStyle 84 stroke:#a94c23,color:#a94c23
+				task_3d4dd2cc[" zsh : Set permissions on zsh cutom function folder"]
+				style task_3d4dd2cc stroke:#a94c23,fill:#ffffff
+				role_2591c98b --> |"6"| task_3d4dd2cc
+				linkStyle 85 stroke:#a94c23,color:#a94c23
+				task_4f393aea[" zsh : Set zsh profile configs"]
+				style task_4f393aea stroke:#a94c23,fill:#ffffff
+				role_2591c98b --> |"7"| task_4f393aea
+				linkStyle 86 stroke:#a94c23,color:#a94c23
+			%% End of the role 'shell'
+			%% Start of the role 'terminal'
+			play_f51d9f68 --> |"12"| role_ede997b0
+			linkStyle 87 stroke:#a94c23,color:#a94c23
+			role_ede997b0("[role] terminal")
+			style role_ede997b0 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_ad5dd3db[" terminal : Terminal Tasks"]
+				style task_ad5dd3db stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"1"| task_ad5dd3db
+				linkStyle 88 stroke:#a94c23,color:#a94c23
+				task_a94ee96c[" terminal : Ensure terminal directories exist"]
+				style task_a94ee96c stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"2"| task_a94ee96c
+				linkStyle 89 stroke:#a94c23,color:#a94c23
+				task_5b12359c[" terminal : Install terminal packages"]
+				style task_5b12359c stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"3 [when: ansible_os_family == 'Archlinux']"| task_5b12359c
+				linkStyle 90 stroke:#a94c23,color:#a94c23
+				task_fb2f6fcf[" terminal : Install kitty templates"]
+				style task_fb2f6fcf stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"4"| task_fb2f6fcf
+				linkStyle 91 stroke:#a94c23,color:#a94c23
+				task_f0b224f0[" terminal : Set tilda config"]
+				style task_f0b224f0 stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"5"| task_f0b224f0
+				linkStyle 92 stroke:#a94c23,color:#a94c23
+				task_52404e3c[" terminal : Install guake-utils"]
+				style task_52404e3c stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"6"| task_52404e3c
+				linkStyle 93 stroke:#a94c23,color:#a94c23
+				task_8ef1dbaf[" terminal : Install guake settings"]
+				style task_8ef1dbaf stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"7"| task_8ef1dbaf
+				linkStyle 94 stroke:#a94c23,color:#a94c23
+				task_8f28a48c[" terminal : Import guake-settings"]
+				style task_8f28a48c stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"8 [when: guakesettings.changed]"| task_8f28a48c
+				linkStyle 95 stroke:#a94c23,color:#a94c23
+				task_99cae136[" terminal : Install htop and lnav configs"]
+				style task_99cae136 stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"9"| task_99cae136
+				linkStyle 96 stroke:#a94c23,color:#a94c23
+				task_3d86969b[" terminal : Install ranger configs"]
+				style task_3d86969b stroke:#a94c23,fill:#ffffff
+				role_ede997b0 --> |"10"| task_3d86969b
+				linkStyle 97 stroke:#a94c23,color:#a94c23
+			%% End of the role 'terminal'
+			%% Start of the role 'network'
+			play_f51d9f68 --> |"13"| role_91e02cd2
+			linkStyle 98 stroke:#a94c23,color:#a94c23
+			role_91e02cd2("[role] network")
+			style role_91e02cd2 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_c26c2dd1[" network : Network Tasks"]
+				style task_c26c2dd1 stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"1"| task_c26c2dd1
+				linkStyle 99 stroke:#a94c23,color:#a94c23
+				task_f253f6ff[" network : Enable and start firewalld"]
+				style task_f253f6ff stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"2 [when: distribution == 'Archlinux' or distribution == 'Fedora']"| task_f253f6ff
+				linkStyle 100 stroke:#a94c23,color:#a94c23
+				task_5bbcac30[" network : Permit traffic to common services"]
+				style task_5bbcac30 stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"3 [when: distribution == 'Archlinux' or distribution == 'Fedora']"| task_5bbcac30
+				linkStyle 101 stroke:#a94c23,color:#a94c23
+				task_c18ea084[" network : Permit traffic to jacktrip, barrier and qmidinet"]
+				style task_c18ea084 stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"4 [when: distribution == 'Archlinux' or distribution == 'Fedora']"| task_c18ea084
+				linkStyle 102 stroke:#a94c23,color:#a94c23
+				task_85ecb8a8[" network : Enable and start ufw"]
+				style task_85ecb8a8 stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"5 [when: distribution == 'MX' or distribution == 'Debian']"| task_85ecb8a8
+				linkStyle 103 stroke:#a94c23,color:#a94c23
+				task_724e6b9c[" network : Permit traffic to common services"]
+				style task_724e6b9c stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"6 [when: distribution == 'MX' or distribution == 'Debian']"| task_724e6b9c
+				linkStyle 104 stroke:#a94c23,color:#a94c23
+				task_4f694705[" network : Permit tcp traffic to jacktrip, barrier and qmidinet"]
+				style task_4f694705 stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"7 [when: distribution == 'MX' or distribution == 'Debian']"| task_4f694705
+				linkStyle 105 stroke:#a94c23,color:#a94c23
+				task_36839710[" network : Permit udp traffic to jacktrip, barrier and qmidinet"]
+				style task_36839710 stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"8 [when: distribution == 'MX' or distribution == 'Debian']"| task_36839710
+				linkStyle 106 stroke:#a94c23,color:#a94c23
+				task_e3df4734[" network : Create timesyncd.conf.d directory"]
+				style task_e3df4734 stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"9"| task_e3df4734
+				linkStyle 107 stroke:#a94c23,color:#a94c23
+				task_9c108151[" network : set ntp servers in timesyncd.conf"]
+				style task_9c108151 stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"10"| task_9c108151
+				linkStyle 108 stroke:#a94c23,color:#a94c23
+				task_1f0b355c[" network : Sync hwclock"]
+				style task_1f0b355c stroke:#a94c23,fill:#ffffff
+				role_91e02cd2 --> |"11 [when: timesyncd_conf.changed and ansible_distribution != 'Debian']"| task_1f0b355c
+				linkStyle 109 stroke:#a94c23,color:#a94c23
+			%% End of the role 'network'
+			%% Start of the role 'ruby'
+			play_f51d9f68 --> |"14"| role_58e53d13
+			linkStyle 110 stroke:#a94c23,color:#a94c23
+			role_58e53d13("[role] ruby")
+			style role_58e53d13 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_843c194b[" ruby : Ruby Tasks"]
+				style task_843c194b stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"1"| task_843c194b
+				linkStyle 111 stroke:#a94c23,color:#a94c23
+				task_ebe2b9cf[" ruby : Install system ruby packages"]
+				style task_ebe2b9cf stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"2 [when: distribution == 'Debian']"| task_ebe2b9cf
+				linkStyle 112 stroke:#a94c23,color:#a94c23
+				task_20b4f7fc[" ruby : Install system ruby packages"]
+				style task_20b4f7fc stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"3 [when: distribution == 'Fedora']"| task_20b4f7fc
+				linkStyle 113 stroke:#a94c23,color:#a94c23
+				task_1967fa33[" ruby : Install system ruby packages"]
+				style task_1967fa33 stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"4 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_1967fa33
+				linkStyle 114 stroke:#a94c23,color:#a94c23
+				task_6b2bcae1[" ruby : Set --no-user-install in /root/.gemrc"]
+				style task_6b2bcae1 stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"5"| task_6b2bcae1
+				linkStyle 115 stroke:#a94c23,color:#a94c23
+				task_adace765[" ruby : Set --user-install in /home/user/.gemrc"]
+				style task_adace765 stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"6"| task_adace765
+				linkStyle 116 stroke:#a94c23,color:#a94c23
+				task_012f4ff9[" ruby : Set --no-user-install in /etc/gemrc"]
+				style task_012f4ff9 stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"7"| task_012f4ff9
+				linkStyle 117 stroke:#a94c23,color:#a94c23
+				task_6ca87bc2[" ruby : Install asdf"]
+				style task_6ca87bc2 stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"8"| task_6ca87bc2
+				linkStyle 118 stroke:#a94c23,color:#a94c23
+				task_6a708a70[" ruby : Add asdf plugin to oh-my-zsh plugins"]
+				style task_6a708a70 stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"9"| task_6a708a70
+				linkStyle 119 stroke:#a94c23,color:#a94c23
+				task_3d7c1a41[" ruby : Set default-gems"]
+				style task_3d7c1a41 stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"10"| task_3d7c1a41
+				linkStyle 120 stroke:#a94c23,color:#a94c23
+				task_94594c6b[" ruby : Install ruby plugin"]
+				style task_94594c6b stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"11"| task_94594c6b
+				linkStyle 121 stroke:#a94c23,color:#a94c23
+				task_1f49ef51[" ruby : Install ruby profile.d script"]
+				style task_1f49ef51 stroke:#a94c23,fill:#ffffff
+				role_58e53d13 --> |"12"| task_1f49ef51
+				linkStyle 122 stroke:#a94c23,color:#a94c23
+			%% End of the role 'ruby'
+			%% Start of the role 'tools'
+			play_f51d9f68 --> |"15"| role_4a931512
+			linkStyle 123 stroke:#a94c23,color:#a94c23
+			role_4a931512("[role] tools")
+			style role_4a931512 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_bdf4bd71[" tools : Push utility scripts and libraries"]
+				style task_bdf4bd71 stroke:#a94c23,fill:#ffffff
+				role_4a931512 --> |"1"| task_bdf4bd71
+				linkStyle 124 stroke:#a94c23,color:#a94c23
+				task_3755e8ea[" tools : Push backup exclude file"]
+				style task_3755e8ea stroke:#a94c23,fill:#ffffff
+				role_4a931512 --> |"2"| task_3755e8ea
+				linkStyle 125 stroke:#a94c23,color:#a94c23
+			%% End of the role 'tools'
+			%% Start of the role 'docker'
+			play_f51d9f68 --> |"16"| role_05b6053c
+			linkStyle 126 stroke:#a94c23,color:#a94c23
+			role_05b6053c("[role] docker")
+			style role_05b6053c fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_e50b4b27[" docker : Docker Tasks"]
+				style task_e50b4b27 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"1"| task_e50b4b27
+				linkStyle 127 stroke:#a94c23,color:#a94c23
+				task_9c3e868e[" docker : show expected_value"]
+				style task_9c3e868e stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"2"| task_9c3e868e
+				linkStyle 128 stroke:#a94c23,color:#a94c23
+				task_bd5208f3[" docker : Echo the pip constraint variable into a file"]
+				style task_bd5208f3 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"3"| task_bd5208f3
+				linkStyle 129 stroke:#a94c23,color:#a94c23
+				task_26bbe7f7[" docker : Install python docker modules"]
+				style task_26bbe7f7 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"4 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_26bbe7f7
+				linkStyle 130 stroke:#a94c23,color:#a94c23
+				task_e199d0c3[" docker : Install python docker modules"]
+				style task_e199d0c3 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"5 [when: distribution == 'Fedora']"| task_e199d0c3
+				linkStyle 131 stroke:#a94c23,color:#a94c23
+				task_7b76f87f[" docker : Ensure group &#34;docker&#34; exists"]
+				style task_7b76f87f stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"6"| task_7b76f87f
+				linkStyle 132 stroke:#a94c23,color:#a94c23
+				task_e79b0cf8[" docker : Add user to docker group"]
+				style task_e79b0cf8 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"7"| task_e79b0cf8
+				linkStyle 133 stroke:#a94c23,color:#a94c23
+				task_3bb9f2b4[" docker : Add Docker repository"]
+				style task_3bb9f2b4 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"8 [when: distribution == 'Fedora']"| task_3bb9f2b4
+				linkStyle 134 stroke:#a94c23,color:#a94c23
+				task_efaadfe7[" docker : Install Docker packages"]
+				style task_efaadfe7 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"9 [when: distribution == 'Fedora' and result is success]"| task_efaadfe7
+				linkStyle 135 stroke:#a94c23,color:#a94c23
+				task_07e0bee9[" docker : Add docker cli-plugins to path"]
+				style task_07e0bee9 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"10 [when: distribution == 'Fedora']"| task_07e0bee9
+				linkStyle 136 stroke:#a94c23,color:#a94c23
+				task_7c72fbc3[" docker : Install docker packages"]
+				style task_7c72fbc3 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"11 [when: distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_7c72fbc3
+				linkStyle 137 stroke:#a94c23,color:#a94c23
+				task_db466aee[" docker : Install docker packages"]
+				style task_db466aee stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"12 [when: (distribution == 'Archlinux' or distribution == 'EndeavourOS') and nvidia is defined]"| task_db466aee
+				linkStyle 138 stroke:#a94c23,color:#a94c23
+				task_855a6569[" docker : Ensure docker data directory exists"]
+				style task_855a6569 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"13 [when: docker.storage is defined]"| task_855a6569
+				linkStyle 139 stroke:#a94c23,color:#a94c23
+				task_82b650b3[" docker : Set docker storage location"]
+				style task_82b650b3 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"14 [when: docker.storage is defined]"| task_82b650b3
+				linkStyle 140 stroke:#a94c23,color:#a94c23
+				task_3aaa1f69[" docker : Create docker config directory"]
+				style task_3aaa1f69 stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"15"| task_3aaa1f69
+				linkStyle 141 stroke:#a94c23,color:#a94c23
+				task_e67a27af[" docker : Disable overlay redirect"]
+				style task_e67a27af stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"16"| task_e67a27af
+				linkStyle 142 stroke:#a94c23,color:#a94c23
+				task_4a85eebd[" docker : Set docker service preset"]
+				style task_4a85eebd stroke:#a94c23,fill:#ffffff
+				role_05b6053c --> |"17 [when: docker.service is defined]"| task_4a85eebd
+				linkStyle 143 stroke:#a94c23,color:#a94c23
+			%% End of the role 'docker'
+			%% Start of the role 'alsa'
+			play_f51d9f68 --> |"17"| role_a32a2af4
+			linkStyle 144 stroke:#a94c23,color:#a94c23
+			role_a32a2af4("[role] alsa")
+			style role_a32a2af4 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_55b69b56[" alsa : Alsa Tasks"]
+				style task_55b69b56 stroke:#a94c23,fill:#ffffff
+				role_a32a2af4 --> |"1"| task_55b69b56
+				linkStyle 145 stroke:#a94c23,color:#a94c23
+				task_5f4cee48[" alsa : Install alsa packages"]
+				style task_5f4cee48 stroke:#a94c23,fill:#ffffff
+				role_a32a2af4 --> |"2"| task_5f4cee48
+				linkStyle 146 stroke:#a94c23,color:#a94c23
+				task_b015a4b8[" alsa : Set alsa card order"]
+				style task_b015a4b8 stroke:#a94c23,fill:#ffffff
+				role_a32a2af4 --> |"3"| task_b015a4b8
+				linkStyle 147 stroke:#a94c23,color:#a94c23
+			%% End of the role 'alsa'
+			%% Start of the role 'pipewire'
+			play_f51d9f68 --> |"18"| role_089ace76
+			linkStyle 148 stroke:#a94c23,color:#a94c23
+			role_089ace76("[role] pipewire")
+			style role_089ace76 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_c5283b42[" pipewire : Pipewire Tasks"]
+				style task_c5283b42 stroke:#a94c23,fill:#ffffff
+				role_089ace76 --> |"1"| task_c5283b42
+				linkStyle 149 stroke:#a94c23,color:#a94c23
+				task_97e8fcb0[" pipewire : Show desktop variables"]
+				style task_97e8fcb0 stroke:#a94c23,fill:#ffffff
+				role_089ace76 --> |"2"| task_97e8fcb0
+				linkStyle 150 stroke:#a94c23,color:#a94c23
+				task_1468e5ba[" pipewire : Stop pipewire service"]
+				style task_1468e5ba stroke:#a94c23,fill:#ffffff
+				role_089ace76 --> |"3 [when: initialInstall|default(false)|bool == True and desktop.audio == 'jack']"| task_1468e5ba
+				linkStyle 151 stroke:#a94c23,color:#a94c23
+				task_9838b9a7[" pipewire : Remove pipewire packages"]
+				style task_9838b9a7 stroke:#a94c23,fill:#ffffff
+				role_089ace76 --> |"4 [when: initialInstall|default(false)|bool == True and desktop.audio == 'jack']"| task_9838b9a7
+				linkStyle 152 stroke:#a94c23,color:#a94c23
+				task_4359f00e[" pipewire : Install pipewire and wireplumber libs"]
+				style task_4359f00e stroke:#a94c23,fill:#ffffff
+				role_089ace76 --> |"5 [when: initialInstall|default(false)|bool == True and desktop.audio == 'jack']"| task_4359f00e
+				linkStyle 153 stroke:#a94c23,color:#a94c23
+			%% End of the role 'pipewire'
+			%% Start of the role 'jack'
+			play_f51d9f68 --> |"19"| role_4ff9fc6e
+			linkStyle 154 stroke:#a94c23,color:#a94c23
+			role_4ff9fc6e("[role] jack")
+			style role_4ff9fc6e fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_da935042[" jack : Jack Tasks"]
+				style task_da935042 stroke:#a94c23,fill:#ffffff
+				role_4ff9fc6e --> |"1"| task_da935042
+				linkStyle 155 stroke:#a94c23,color:#a94c23
+				task_7a2e8327[" jack : Remove jack1"]
+				style task_7a2e8327 stroke:#a94c23,fill:#ffffff
+				role_4ff9fc6e --> |"2"| task_7a2e8327
+				linkStyle 156 stroke:#a94c23,color:#a94c23
+				task_4d31f651[" jack : Install jack packages"]
+				style task_4d31f651 stroke:#a94c23,fill:#ffffff
+				role_4ff9fc6e --> |"3"| task_4d31f651
+				linkStyle 157 stroke:#a94c23,color:#a94c23
+				task_f811e615[" jack : Create environment file for jack_control.service"]
+				style task_f811e615 stroke:#a94c23,fill:#ffffff
+				role_4ff9fc6e --> |"4"| task_f811e615
+				linkStyle 158 stroke:#a94c23,color:#a94c23
+				task_d419c872[" jack : Create systemd user directory"]
+				style task_d419c872 stroke:#a94c23,fill:#ffffff
+				role_4ff9fc6e --> |"5"| task_d419c872
+				linkStyle 159 stroke:#a94c23,color:#a94c23
+				task_b0d0fc63[" jack : Install jack_control service file"]
+				style task_b0d0fc63 stroke:#a94c23,fill:#ffffff
+				role_4ff9fc6e --> |"6"| task_b0d0fc63
+				linkStyle 160 stroke:#a94c23,color:#a94c23
+				task_482cde0c[" jack : Enable jack services"]
+				style task_482cde0c stroke:#a94c23,fill:#ffffff
+				role_4ff9fc6e --> |"7"| task_482cde0c
+				linkStyle 161 stroke:#a94c23,color:#a94c23
+				task_cb0ba82f[" jack : Set jack driver parameters"]
+				style task_cb0ba82f stroke:#a94c23,fill:#ffffff
+				role_4ff9fc6e --> |"8"| task_cb0ba82f
+				linkStyle 162 stroke:#a94c23,color:#a94c23
+			%% End of the role 'jack'
+			%% Start of the role 'pulseaudio'
+			play_f51d9f68 --> |"20"| role_6846e4f7
+			linkStyle 163 stroke:#a94c23,color:#a94c23
+			role_6846e4f7("[role] pulseaudio")
+			style role_6846e4f7 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_4ea08e55[" pulseaudio : Pulseaudio Tasks"]
+				style task_4ea08e55 stroke:#a94c23,fill:#ffffff
+				role_6846e4f7 --> |"1"| task_4ea08e55
+				linkStyle 164 stroke:#a94c23,color:#a94c23
+				task_aea862ff[" pulseaudio : Install pulseaudio packages"]
+				style task_aea862ff stroke:#a94c23,fill:#ffffff
+				role_6846e4f7 --> |"2"| task_aea862ff
+				linkStyle 165 stroke:#a94c23,color:#a94c23
+				task_1cf8a0e1[" pulseaudio : Ensure pulseaudio directories exist"]
+				style task_1cf8a0e1 stroke:#a94c23,fill:#ffffff
+				role_6846e4f7 --> |"3"| task_1cf8a0e1
+				linkStyle 166 stroke:#a94c23,color:#a94c23
+				task_a404103d[" pulseaudio : Update pulseaudio configs"]
+				style task_a404103d stroke:#a94c23,fill:#ffffff
+				role_6846e4f7 --> |"4"| task_a404103d
+				linkStyle 167 stroke:#a94c23,color:#a94c23
+				task_ae5643b8[" pulseaudio : Install bluetooth packages"]
+				style task_ae5643b8 stroke:#a94c23,fill:#ffffff
+				role_6846e4f7 --> |"5 [when: bluetooth|bool and distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_ae5643b8
+				linkStyle 168 stroke:#a94c23,color:#a94c23
+				task_be0c88b1[" pulseaudio : Ensure default.pa.d exists"]
+				style task_be0c88b1 stroke:#a94c23,fill:#ffffff
+				role_6846e4f7 --> |"6 [when: bluetooth|bool]"| task_be0c88b1
+				linkStyle 169 stroke:#a94c23,color:#a94c23
+				task_392ed240[" pulseaudio : Install pulseaudio bluetooth config"]
+				style task_392ed240 stroke:#a94c23,fill:#ffffff
+				role_6846e4f7 --> |"7 [when: bluetooth|bool]"| task_392ed240
+				linkStyle 170 stroke:#a94c23,color:#a94c23
+			%% End of the role 'pulseaudio'
+			%% Start of the role 'audio'
+			play_f51d9f68 --> |"21"| role_a5ca0b58
+			linkStyle 171 stroke:#a94c23,color:#a94c23
+			role_a5ca0b58("[role] audio")
+			style role_a5ca0b58 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_7932ae15[" audio : Audio Tasks"]
+				style task_7932ae15 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"1"| task_7932ae15
+				linkStyle 172 stroke:#a94c23,color:#a94c23
+				task_65bb79f7[" audio : Install codecs packages"]
+				style task_65bb79f7 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"2"| task_65bb79f7
+				linkStyle 173 stroke:#a94c23,color:#a94c23
+				task_d05c2bd9[" audio : Ensure root directories exist"]
+				style task_d05c2bd9 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"3"| task_d05c2bd9
+				linkStyle 174 stroke:#a94c23,color:#a94c23
+				task_6d472cb7[" audio : Collect only selected facts"]
+				style task_6d472cb7 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"4"| task_6d472cb7
+				linkStyle 175 stroke:#a94c23,color:#a94c23
+				task_237cb066[" audio : Ensure user belongs to audio group"]
+				style task_237cb066 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"5"| task_237cb066
+				linkStyle 176 stroke:#a94c23,color:#a94c23
+				task_81aa0997[" audio : Set rtprio, memlock and nice for audio group"]
+				style task_81aa0997 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"6"| task_81aa0997
+				linkStyle 177 stroke:#a94c23,color:#a94c23
+				task_db04bbbe[" audio : Set timer permissions in udev rules"]
+				style task_db04bbbe stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"7"| task_db04bbbe
+				linkStyle 178 stroke:#a94c23,color:#a94c23
+				task_30a34ced[" audio : Set sysctl parameters"]
+				style task_30a34ced stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"8"| task_30a34ced
+				linkStyle 179 stroke:#a94c23,color:#a94c23
+				task_a488f9b3[" audio : Install Tuned"]
+				style task_a488f9b3 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"9"| task_a488f9b3
+				linkStyle 180 stroke:#a94c23,color:#a94c23
+				task_cb55ec21[" audio : Enable tuned service"]
+				style task_cb55ec21 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"10"| task_cb55ec21
+				linkStyle 181 stroke:#a94c23,color:#a94c23
+				task_168005ad[" audio : Install realtime-modified profile"]
+				style task_168005ad stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"11"| task_168005ad
+				linkStyle 182 stroke:#a94c23,color:#a94c23
+				task_3e3fc0f2[" audio : Set tuned profile"]
+				style task_3e3fc0f2 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"12 [when: tuned_service.state == 'started']"| task_3e3fc0f2
+				linkStyle 183 stroke:#a94c23,color:#a94c23
+				task_d8c29219[" audio : Install rtirq & rtkit"]
+				style task_d8c29219 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"13"| task_d8c29219
+				linkStyle 184 stroke:#a94c23,color:#a94c23
+				task_8a9bad92[" audio : Set rtirq defaults"]
+				style task_8a9bad92 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"14"| task_8a9bad92
+				linkStyle 185 stroke:#a94c23,color:#a94c23
+				task_74527e7c[" audio : Set rtkit parameters"]
+				style task_74527e7c stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"15"| task_74527e7c
+				linkStyle 186 stroke:#a94c23,color:#a94c23
+				task_cb44a22e[" audio : Set rtkit systemd parameters"]
+				style task_cb44a22e stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"16"| task_cb44a22e
+				linkStyle 187 stroke:#a94c23,color:#a94c23
+				task_292e3cc5[" audio : Install cpupower"]
+				style task_292e3cc5 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"17"| task_292e3cc5
+				linkStyle 188 stroke:#a94c23,color:#a94c23
+				task_31330b0d[" audio : Set cpucpower defaults"]
+				style task_31330b0d stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"18"| task_31330b0d
+				linkStyle 189 stroke:#a94c23,color:#a94c23
+				task_07748dc2[" audio : Enable cpupower service"]
+				style task_07748dc2 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"19 [when: ansible_system_vendor != 'QEMU']"| task_07748dc2
+				linkStyle 190 stroke:#a94c23,color:#a94c23
+				task_ae044d58[" audio : Disable irqbalance service"]
+				style task_ae044d58 stroke:#a94c23,fill:#ffffff
+				role_a5ca0b58 --> |"20"| task_ae044d58
+				linkStyle 191 stroke:#a94c23,color:#a94c23
+			%% End of the role 'audio'
+			%% Start of the role 'lightdm'
+			play_f51d9f68 --> |"22"| role_9636fd45
+			linkStyle 192 stroke:#a94c23,color:#a94c23
+			role_9636fd45("[role] lightdm")
+			style role_9636fd45 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_6486c5e2[" lightdm : Install lightdm"]
+				style task_6486c5e2 stroke:#a94c23,fill:#ffffff
+				role_9636fd45 --> |"1 [when: login.lightdm|default(false)|bool == True]"| task_6486c5e2
+				linkStyle 193 stroke:#a94c23,color:#a94c23
+				task_a9b60bea[" lightdm : Ensure group autologin exists"]
+				style task_a9b60bea stroke:#a94c23,fill:#ffffff
+				role_9636fd45 --> |"2 [when: login.lightdm|default(false)|bool == True]"| task_a9b60bea
+				linkStyle 194 stroke:#a94c23,color:#a94c23
+				task_3a3bb363[" lightdm : Add user to autologin group"]
+				style task_3a3bb363 stroke:#a94c23,fill:#ffffff
+				role_9636fd45 --> |"3 [when: login.lightdm|default(false)|bool == True]"| task_3a3bb363
+				linkStyle 195 stroke:#a94c23,color:#a94c23
+				task_0b870d15[" lightdm : Install xsession file to /etc/lightdm/xsession"]
+				style task_0b870d15 stroke:#a94c23,fill:#ffffff
+				role_9636fd45 --> |"4 [when: login.lightdm|default(false)|bool == True]"| task_0b870d15
+				linkStyle 196 stroke:#a94c23,color:#a94c23
+				task_f3b4c96b[" lightdm : Update lightdm.conf"]
+				style task_f3b4c96b stroke:#a94c23,fill:#ffffff
+				role_9636fd45 --> |"5 [when: login.lightdm|default(false)|bool == True]"| task_f3b4c96b
+				linkStyle 197 stroke:#a94c23,color:#a94c23
+				task_d76ffe42[" lightdm : Update pam"]
+				style task_d76ffe42 stroke:#a94c23,fill:#ffffff
+				role_9636fd45 --> |"6 [when: login.lightdm|default(false)|bool == True]"| task_d76ffe42
+				linkStyle 198 stroke:#a94c23,color:#a94c23
+			%% End of the role 'lightdm'
+			%% Start of the role 'x'
+			play_f51d9f68 --> |"23"| role_9dd4e461
+			linkStyle 199 stroke:#a94c23,color:#a94c23
+			role_9dd4e461("[role] x")
+			style role_9dd4e461 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_ecf6f86b[" x : Xorg Tasks"]
+				style task_ecf6f86b stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"1"| task_ecf6f86b
+				linkStyle 200 stroke:#a94c23,color:#a94c23
+				task_3c040bf2[" x : Install system xorg packages"]
+				style task_3c040bf2 stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"2"| task_3c040bf2
+				linkStyle 201 stroke:#a94c23,color:#a94c23
+				task_bd1ff8cd[" x : Install host specific xorg packages"]
+				style task_bd1ff8cd stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"3 [when: host.xorg.video is defined]"| task_bd1ff8cd
+				linkStyle 202 stroke:#a94c23,color:#a94c23
+				task_ff40219d[" x : Set xorg.conf"]
+				style task_ff40219d stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"4"| task_ff40219d
+				linkStyle 203 stroke:#a94c23,color:#a94c23
+				task_12740226[" x : Disable vblank"]
+				style task_12740226 stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"5"| task_12740226
+				linkStyle 204 stroke:#a94c23,color:#a94c23
+				task_722ab84a[" x : Install xorg configs"]
+				style task_722ab84a stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"6"| task_722ab84a
+				linkStyle 205 stroke:#a94c23,color:#a94c23
+				task_bc1e9d0a[" x : Ensure .xinitrc is executable"]
+				style task_bc1e9d0a stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"7"| task_bc1e9d0a
+				linkStyle 206 stroke:#a94c23,color:#a94c23
+				task_73824598[" x : Set video modules in mkinitcpio"]
+				style task_73824598 stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"8 [when: distribution != 'EndeavourOS']"| task_73824598
+				linkStyle 207 stroke:#a94c23,color:#a94c23
+				task_1d7d4004[" x : Re-create ramdisk if config changed"]
+				style task_1d7d4004 stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"9 [when: distribution != 'EndeavourOS' and mkinitcpio_conf.changed]"| task_1d7d4004
+				linkStyle 208 stroke:#a94c23,color:#a94c23
+				task_8494fd0b[" x : Create sxhkd config folder"]
+				style task_8494fd0b stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"10"| task_8494fd0b
+				linkStyle 209 stroke:#a94c23,color:#a94c23
+				task_a7680790[" x : Install sxhkd keybindings"]
+				style task_a7680790 stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"11"| task_a7680790
+				linkStyle 210 stroke:#a94c23,color:#a94c23
+				task_02cffa13[" x : Install sxhkd reload function"]
+				style task_02cffa13 stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"12"| task_02cffa13
+				linkStyle 211 stroke:#a94c23,color:#a94c23
+				task_fc55b4e6[" x : Reload sxhkd"]
+				style task_fc55b4e6 stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"13 [when: keybindings.changed]"| task_fc55b4e6
+				linkStyle 212 stroke:#a94c23,color:#a94c23
+				task_479eb3a1[" x : Ensure /etc/xdg exists"]
+				style task_479eb3a1 stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"14"| task_479eb3a1
+				linkStyle 213 stroke:#a94c23,color:#a94c23
+				task_70ac212f[" x : Set XDG env vars"]
+				style task_70ac212f stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"15"| task_70ac212f
+				linkStyle 214 stroke:#a94c23,color:#a94c23
+				task_7adac49c[" x : Set xdg user-dirs defaults"]
+				style task_7adac49c stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"16"| task_7adac49c
+				linkStyle 215 stroke:#a94c23,color:#a94c23
+				task_5c6b48eb[" x : Enable xdg-user-dirs-update service"]
+				style task_5c6b48eb stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"17 [when: ansible_distribution != 'Debian']"| task_5c6b48eb
+				linkStyle 216 stroke:#a94c23,color:#a94c23
+				task_48bf47f0[" x : Remove existing user-dirs.dirs"]
+				style task_48bf47f0 stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"18"| task_48bf47f0
+				linkStyle 217 stroke:#a94c23,color:#a94c23
+				task_63f0b08c[" x : Run xdg-user-dirs-update"]
+				style task_63f0b08c stroke:#a94c23,fill:#ffffff
+				role_9dd4e461 --> |"19 [when: xdg_defaults.changed or xdg_userdirs.changed]"| task_63f0b08c
+				linkStyle 218 stroke:#a94c23,color:#a94c23
+			%% End of the role 'x'
+			%% Start of the role 'i3'
+			play_f51d9f68 --> |"24"| role_51d4b581
+			linkStyle 219 stroke:#a94c23,color:#a94c23
+			role_51d4b581("[role] i3")
+			style role_51d4b581 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_343bc236[" i3 : i3 Tasks"]
+				style task_343bc236 stroke:#a94c23,fill:#ffffff
+				role_51d4b581 --> |"1"| task_343bc236
+				linkStyle 220 stroke:#a94c23,color:#a94c23
+				task_cbb0f984[" i3 : Show i3 variables"]
+				style task_cbb0f984 stroke:#a94c23,fill:#ffffff
+				role_51d4b581 --> |"2"| task_cbb0f984
+				linkStyle 221 stroke:#a94c23,color:#a94c23
+				task_5a935592[" i3 : Install i3 packages"]
+				style task_5a935592 stroke:#a94c23,fill:#ffffff
+				role_51d4b581 --> |"3"| task_5a935592
+				linkStyle 222 stroke:#a94c23,color:#a94c23
+				task_ce3e73f4[" i3 : Ensure i3 directories exist"]
+				style task_ce3e73f4 stroke:#a94c23,fill:#ffffff
+				role_51d4b581 --> |"4"| task_ce3e73f4
+				linkStyle 223 stroke:#a94c23,color:#a94c23
+				task_934d803d[" i3 : Install i3ipc module"]
+				style task_934d803d stroke:#a94c23,fill:#ffffff
+				role_51d4b581 --> |"5"| task_934d803d
+				linkStyle 224 stroke:#a94c23,color:#a94c23
+				task_97f565d4[" i3 : Create i3 scripts folder"]
+				style task_97f565d4 stroke:#a94c23,fill:#ffffff
+				role_51d4b581 --> |"6"| task_97f565d4
+				linkStyle 225 stroke:#a94c23,color:#a94c23
+				task_94c0ebd2[" i3 : Set i3 configuration"]
+				style task_94c0ebd2 stroke:#a94c23,fill:#ffffff
+				role_51d4b581 --> |"7"| task_94c0ebd2
+				linkStyle 226 stroke:#a94c23,color:#a94c23
+				task_48454cd5[" i3 : Set i3status-rs configuration"]
+				style task_48454cd5 stroke:#a94c23,fill:#ffffff
+				role_51d4b581 --> |"8"| task_48454cd5
+				linkStyle 227 stroke:#a94c23,color:#a94c23
+			%% End of the role 'i3'
+			%% Start of the role 'desktop'
+			play_f51d9f68 --> |"25"| role_b2c79ad7
+			linkStyle 228 stroke:#a94c23,color:#a94c23
+			role_b2c79ad7("[role] desktop")
+			style role_b2c79ad7 fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_2fc6a58d[" desktop : Collect only selected facts"]
+				style task_2fc6a58d stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"1"| task_2fc6a58d
+				linkStyle 229 stroke:#a94c23,color:#a94c23
+				task_5f205c28[" desktop : Desktop Tasks"]
+				style task_5f205c28 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"2"| task_5f205c28
+				linkStyle 230 stroke:#a94c23,color:#a94c23
+				task_4a3142e3[" desktop : Ensure desktop directories exist"]
+				style task_4a3142e3 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"3"| task_4a3142e3
+				linkStyle 231 stroke:#a94c23,color:#a94c23
+				task_bb02f3f3[" desktop : Install desktop packages"]
+				style task_bb02f3f3 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"4"| task_bb02f3f3
+				linkStyle 232 stroke:#a94c23,color:#a94c23
+				task_37a9c6cd[" desktop : Install browser packages"]
+				style task_37a9c6cd stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"5"| task_37a9c6cd
+				linkStyle 233 stroke:#a94c23,color:#a94c23
+				task_ed30a4c0[" desktop : Install media packages"]
+				style task_ed30a4c0 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"6"| task_ed30a4c0
+				linkStyle 234 stroke:#a94c23,color:#a94c23
+				task_12c4904f[" desktop : Install development packages"]
+				style task_12c4904f stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"7"| task_12c4904f
+				linkStyle 235 stroke:#a94c23,color:#a94c23
+				task_394b9e79[" desktop : Install texlive packages"]
+				style task_394b9e79 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"8 [when: pkgs__texlive|default(false)|bool == True]"| task_394b9e79
+				linkStyle 236 stroke:#a94c23,color:#a94c23
+				task_8148ff4a[" desktop : Install python packages"]
+				style task_8148ff4a stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"9"| task_8148ff4a
+				linkStyle 237 stroke:#a94c23,color:#a94c23
+				task_e571821f[" desktop : Install utility packages"]
+				style task_e571821f stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"10"| task_e571821f
+				linkStyle 238 stroke:#a94c23,color:#a94c23
+				task_2df81f38[" desktop : Set dmrc to selected window manager"]
+				style task_2df81f38 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"11"| task_2df81f38
+				linkStyle 239 stroke:#a94c23,color:#a94c23
+				task_57b7ca79[" desktop : Install input-remapper"]
+				style task_57b7ca79 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"12"| task_57b7ca79
+				linkStyle 240 stroke:#a94c23,color:#a94c23
+				task_f01a7b72[" desktop : Sync input presets folder"]
+				style task_f01a7b72 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"13"| task_f01a7b72
+				linkStyle 241 stroke:#a94c23,color:#a94c23
+				task_abe5a005[" desktop : Create /etc/xdg/menus and /usr/share/desktop-entries"]
+				style task_abe5a005 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"14"| task_abe5a005
+				linkStyle 242 stroke:#a94c23,color:#a94c23
+				task_8499eb9f[" desktop : Set dunst config"]
+				style task_8499eb9f stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"15"| task_8499eb9f
+				linkStyle 243 stroke:#a94c23,color:#a94c23
+				task_bab3ca6b[" desktop : Set picom config"]
+				style task_bab3ca6b stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"16"| task_bab3ca6b
+				linkStyle 244 stroke:#a94c23,color:#a94c23
+				task_c277e2ac[" desktop : Set redshift config"]
+				style task_c277e2ac stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"17"| task_c277e2ac
+				linkStyle 245 stroke:#a94c23,color:#a94c23
+				task_c336a578[" desktop : Ensure folders for barrier configs exist"]
+				style task_c336a578 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"18"| task_c336a578
+				linkStyle 246 stroke:#a94c23,color:#a94c23
+				task_5e2fd94f[" desktop : Set barrier server config"]
+				style task_5e2fd94f stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"19 [when: desktop.barrier.server is defined]"| task_5e2fd94f
+				linkStyle 247 stroke:#a94c23,color:#a94c23
+				task_977416c8[" desktop : Set barrier server autostart"]
+				style task_977416c8 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"20 [when: desktop.barrier.server is defined]"| task_977416c8
+				linkStyle 248 stroke:#a94c23,color:#a94c23
+				task_4851dc37[" desktop : Set barrier client autostart"]
+				style task_4851dc37 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"21 [when: desktop.barrier.client is defined]"| task_4851dc37
+				linkStyle 249 stroke:#a94c23,color:#a94c23
+				task_422134f6[" desktop : Install Thunar actions"]
+				style task_422134f6 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"22"| task_422134f6
+				linkStyle 250 stroke:#a94c23,color:#a94c23
+				task_6e02006b[" desktop : Set Thunar as default for opening directories"]
+				style task_6e02006b stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"23"| task_6e02006b
+				linkStyle 251 stroke:#a94c23,color:#a94c23
+				task_7fbe6e52[" desktop : Set JackTrip autostart entry"]
+				style task_7fbe6e52 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"24 [when: jacktrip.server.args != '' or jacktrip.client.args != '']"| task_7fbe6e52
+				linkStyle 252 stroke:#a94c23,color:#a94c23
+				task_88318195[" desktop : Set xdg autostart applications"]
+				style task_88318195 stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"25"| task_88318195
+				linkStyle 253 stroke:#a94c23,color:#a94c23
+				task_bb768b9a[" desktop : Update desktop database"]
+				style task_bb768b9a stroke:#a94c23,fill:#ffffff
+				role_b2c79ad7 --> |"26"| task_bb768b9a
+				linkStyle 254 stroke:#a94c23,color:#a94c23
+			%% End of the role 'desktop'
+			%% Start of the role 'theme'
+			play_f51d9f68 --> |"26"| role_f484570d
+			linkStyle 255 stroke:#a94c23,color:#a94c23
+			role_f484570d("[role] theme")
+			style role_f484570d fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_c26be1a1[" theme : Theme Tasks"]
+				style task_c26be1a1 stroke:#a94c23,fill:#ffffff
+				role_f484570d --> |"1"| task_c26be1a1
+				linkStyle 256 stroke:#a94c23,color:#a94c23
+				task_cae19bde[" theme : Group packages to install"]
+				style task_cae19bde stroke:#a94c23,fill:#ffffff
+				role_f484570d --> |"2"| task_cae19bde
+				linkStyle 257 stroke:#a94c23,color:#a94c23
+				task_51a59c07[" theme : Install theme group packages"]
+				style task_51a59c07 stroke:#a94c23,fill:#ffffff
+				role_f484570d --> |"3"| task_51a59c07
+				linkStyle 258 stroke:#a94c23,color:#a94c23
+				task_68a7f318[" theme : Install syncopated-theme"]
+				style task_68a7f318 stroke:#a94c23,fill:#ffffff
+				role_f484570d --> |"4"| task_68a7f318
+				linkStyle 259 stroke:#a94c23,color:#a94c23
+				task_e447f258[" theme : Ensure theme directories exist"]
+				style task_e447f258 stroke:#a94c23,fill:#ffffff
+				role_f484570d --> |"5"| task_e447f258
+				linkStyle 260 stroke:#a94c23,color:#a94c23
+				task_76ad1511[" theme : Install gtk configurations"]
+				style task_76ad1511 stroke:#a94c23,fill:#ffffff
+				role_f484570d --> |"6"| task_76ad1511
+				linkStyle 261 stroke:#a94c23,color:#a94c23
+				task_61279431[" theme : Install qt configurations"]
+				style task_61279431 stroke:#a94c23,fill:#ffffff
+				role_f484570d --> |"7"| task_61279431
+				linkStyle 262 stroke:#a94c23,color:#a94c23
+			%% End of the role 'theme'
+			%% Start of the role 'applications'
+			play_f51d9f68 --> |"27"| role_b5fba9ff
+			linkStyle 263 stroke:#a94c23,color:#a94c23
+			role_b5fba9ff("[role] applications")
+			style role_b5fba9ff fill:#a94c23,color:#ffffff,stroke:#a94c23
+				task_9ec6aac8[" applications : Applications Tasks"]
+				style task_9ec6aac8 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"1"| task_9ec6aac8
+				linkStyle 264 stroke:#a94c23,color:#a94c23
+				task_efcdb998[" applications : Ensure application directories exist"]
+				style task_efcdb998 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"2"| task_efcdb998
+				linkStyle 265 stroke:#a94c23,color:#a94c23
+				task_d2a65bb3[" applications : Check repository version"]
+				style task_d2a65bb3 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"3 [when: pulsar is defined]"| task_d2a65bb3
+				linkStyle 266 stroke:#a94c23,color:#a94c23
+				task_ee3cc313[" applications : Get installed application version"]
+				style task_ee3cc313 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"4 [when: pulsar is defined]"| task_ee3cc313
+				linkStyle 267 stroke:#a94c23,color:#a94c23
+				task_c8c35760[" applications : Install pulsar"]
+				style task_c8c35760 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"5 [when: pulsar is defined]"| task_c8c35760
+				linkStyle 268 stroke:#a94c23,color:#a94c23
+				task_03a3aa98[" applications : Check currently installed extensions"]
+				style task_03a3aa98 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"6 [when: pulsar is defined]"| task_03a3aa98
+				linkStyle 269 stroke:#a94c23,color:#a94c23
+				task_fe832edf[" applications : Set list of extensions to install"]
+				style task_fe832edf stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"7 [when: pulsar is defined]"| task_fe832edf
+				linkStyle 270 stroke:#a94c23,color:#a94c23
+				task_5d3d40a5[" applications : Install pulsar packages"]
+				style task_5d3d40a5 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"8 [when: pulsar is defined and install_pulsar.changed and _packages | length > 0]"| task_5d3d40a5
+				linkStyle 271 stroke:#a94c23,color:#a94c23
+				task_481e927b[" applications : Install config, snippets and styles"]
+				style task_481e927b stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"9 [when: pulsar is defined]"| task_481e927b
+				linkStyle 272 stroke:#a94c23,color:#a94c23
+				task_7987b992[" applications : Check repository version"]
+				style task_7987b992 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"10 [when: vscode is defined]"| task_7987b992
+				linkStyle 273 stroke:#a94c23,color:#a94c23
+				task_c255c481[" applications : Get installed application version"]
+				style task_c255c481 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"11 [when: vscode is defined]"| task_c255c481
+				linkStyle 274 stroke:#a94c23,color:#a94c23
+				task_3884394c[" applications : Install vscode"]
+				style task_3884394c stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"12 [when: vscode is defined]"| task_3884394c
+				linkStyle 275 stroke:#a94c23,color:#a94c23
+				task_d266b9d4[" applications : Check currently installed extensions"]
+				style task_d266b9d4 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"13 [when: vscode is defined]"| task_d266b9d4
+				linkStyle 276 stroke:#a94c23,color:#a94c23
+				task_fc7b9411[" applications : Set list of extensions to install"]
+				style task_fc7b9411 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"14 [when: vscode is defined]"| task_fc7b9411
+				linkStyle 277 stroke:#a94c23,color:#a94c23
+				task_7e38710e[" applications : Install VSCode extensions"]
+				style task_7e38710e stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"15 [when: vscode is defined and vscode_install.changed and _extensions | length > 0]"| task_7e38710e
+				linkStyle 278 stroke:#a94c23,color:#a94c23
+				task_2133e301[" applications : Check if deadbeef is already installed"]
+				style task_2133e301 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"16 [when: deadbeef is defined]"| task_2133e301
+				linkStyle 279 stroke:#a94c23,color:#a94c23
+				task_db45fe43[" applications : Install deadbeef"]
+				style task_db45fe43 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"17 [when: deadbeef is defined and distribution == 'Archlinux' or distribution == 'EndeavourOS']"| task_db45fe43
+				linkStyle 280 stroke:#a94c23,color:#a94c23
+				task_8330d440[" applications : Install deadbeef"]
+				style task_8330d440 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"18 [when: deadbeef is defined and distribution == 'Fedora']"| task_8330d440
+				linkStyle 281 stroke:#a94c23,color:#a94c23
+				task_c3b43cc5[" applications : Create deadbeef config and plugin folders"]
+				style task_c3b43cc5 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"19 [when: deadbeef is defined]"| task_c3b43cc5
+				linkStyle 282 stroke:#a94c23,color:#a94c23
+				task_3a9dad20[" applications : Sync deadbeef plugins"]
+				style task_3a9dad20 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"20 [when: deadbeef is defined]"| task_3a9dad20
+				linkStyle 283 stroke:#a94c23,color:#a94c23
+				task_0d033f56[" applications : Sync deadbeef config folder"]
+				style task_0d033f56 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"21 [when: deadbeef is defined]"| task_0d033f56
+				linkStyle 284 stroke:#a94c23,color:#a94c23
+				task_4db17db5[" applications : Comment out mixxx udev rule"]
+				style task_4db17db5 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"22 [when: mixxx is defined]"| task_4db17db5
+				linkStyle 285 stroke:#a94c23,color:#a94c23
+				task_4ff627fa[" applications : Set mediamtx config"]
+				style task_4ff627fa stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"23"| task_4ff627fa
+				linkStyle 286 stroke:#a94c23,color:#a94c23
+				task_fe745472[" applications : Enable mediamtx service"]
+				style task_fe745472 stroke:#a94c23,fill:#ffffff
+				role_b5fba9ff --> |"24 [when: serivces.mediamtx.enabled is defined]"| task_fe745472
+				linkStyle 287 stroke:#a94c23,color:#a94c23
+			%% End of the role 'applications'
+			post_task_09f4bab3["[post_task]  Cleanup old backup files"]
+			style post_task_09f4bab3 stroke:#a94c23,fill:#ffffff
+			play_f51d9f68 --> |"28 [when: cleanup is defined]"| post_task_09f4bab3
+			linkStyle 288 stroke:#a94c23,color:#a94c23
+		%% End of the play 'Play: all (10)'
+	%% End of the playbook 'playbooks/full.yml'
+

@@ -1,0 +1,27 @@
+---
+layout: base
+---
+
+<content>
+  {{ content }}
+</content>
+
+<svg width="400" height="300" viewBox="0 0 400 300">
+  <defs>
+    <style>
+      .stick-figure {
+        stroke: black;
+        stroke-width: 2;
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="400" height="300" fill="transparent" />
+  <path d="M 100 200 L 100 100 L 150 100 L 150 200" class="stick-figure" />
+  <circle cx="125" cy="150" r="20" fill="#F4A460" />
+  <path d="M 250 200 L 250 100 L 300 100 L 300 200" class="stick-figure" />
+  <circle cx="275" cy="150" r="20" fill="#FFC0CB" />
+  <path d="M 175 50 L 175 250" stroke="#D2691E" stroke-width="3" />
+  <path d="M 225 50 L 225 250" stroke="#D2691E" stroke-width="3" />
+  <path d="M 150 250 L 250 100" stroke="#D2691E" stroke-width="3" />
+  <path d="M 100 150 C 150 50, 200 250, 250 150" fill="#d91f5d" />
+</svg>

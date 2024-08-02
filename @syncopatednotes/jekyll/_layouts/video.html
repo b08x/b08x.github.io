@@ -1,0 +1,94 @@
+<html>
+<style>
+  @color: #2ecc71;
+
+  .mask {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 100px 100px;
+    border-color: transparent transparent rgba(46, 204, 113, 0.2) transparent;
+    z-index: 999;
+  }
+
+  video {
+    position: fixed;
+    left: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    background-size: cover;
+  }
+
+
+  .overlay {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    display: block;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+  }
+
+  .overlay h1 {
+    text-align: center;
+    padding-top: 100px;
+    color: #fff;
+    font-family: inherit;
+  }
+
+  .overlay p {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    color: #fff;
+    font-family: inherit;
+    margin-bottom: 20px;
+  }
+
+  .overlay a {
+    color: #fff;
+  }
+
+
+  // General Style
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+</style>
+
+<body>
+  {% if page.poster %}
+  <video autoplay loop muted poster="{{ page.poster }}">
+    <source src="{{ page.video.webm}}" type="video/webm" />
+    <source src="{{ page.video.mp4 }}" type="video/mp4" />
+  </video>
+  {% else %}
+    <video autoplay loop muted>
+      <source src="{{ page.video.webm}}" type="video/webm" />
+      <source src="{{ page.video.mp4 }}" type="video/mp4" />
+    </video>
+  {% endif %}
+  <div class="overlay">
+    <h1>HTML5 Video</h1>
+    {{ content }}
+    <p>HTML5 Video overlay example, quite popular with a lot of creative sites.</p>
+    <p>View <a target="_BLANK" href="https://github.com">Original</a> demo for best
+      experience.</p>
+    <p><a target="_BLANK" href="https://codepen.io/doddsy105/full/rtcbE/">Fullscreen</a></p>
+  </div>
+</body>
+
+</html>

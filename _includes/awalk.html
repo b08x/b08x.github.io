@@ -1,0 +1,72 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Meandering path -->
+    <path d="M50,200 Q150,100 300,250 T550,150 T750,200" stroke="#4CAF50" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Start point -->
+    <a href="{{ "/awalk/start.html" | prepend: site.baseurl | prepend: site.url }}">
+        <circle cx="50" cy="200" r="15" fill="#FFA000"/>
+        <text x="50" y="240" font-family="Arial" font-size="14" text-anchor="middle">Start</text>
+    </a>
+
+    <!-- Tuesday Triage -->
+    <a href="#triage">
+        <circle cx="150" cy="100" r="25" fill="#9C27B0"/>
+        <text x="150" y="105" font-family="Arial" font-size="24" fill="white" text-anchor="middle">T</text>
+        <text x="150" y="140" font-family="Arial" font-size="14" text-anchor="middle">Triage</text>
+    </a>
+
+    <!-- Scenic Route Planning -->
+    <a href="#planning">
+        <rect x="280" y="230" width="40" height="40" fill="#2196F3" transform="rotate(15, 300, 250)"/>
+        <path d="M290 245 L310 245 M300 235 L300 255" stroke="white" stroke-width="2" transform="rotate(15, 300, 250)"/>
+        <text x="300" y="290" font-family="Arial" font-size="14" text-anchor="middle">Planning</text>
+    </a>
+
+    <!-- Milestone Markers -->
+    <a href="#milestone">
+        <polygon points="550,130 570,150 550,170 530,150" fill="#FF5722"/>
+        <text x="550" y="155" font-family="Arial" font-size="14" fill="white" text-anchor="middle">M</text>
+        <text x="550" y="190" font-family="Arial" font-size="14" text-anchor="middle">Milestone</text>
+    </a>
+
+    <!-- Trail Tales -->
+    <a href="#trail-tales">
+        <rect x="420" y="220" width="40" height="40" fill="#8BC34A" rx="5" ry="5"/>
+        <path d="M425 235 L455 235 M425 245 L455 245" stroke="white" stroke-width="2"/>
+        <text x="440" y="280" font-family="Arial" font-size="14" text-anchor="middle">Trail Tales</text>
+    </a>
+
+    <!-- Wayfinder Check -->
+    <a href="#wayfinder">
+        <circle cx="650" cy="180" r="25" fill="#FF9800"/>
+        <path d="M650 165 L650 195 M635 180 L665 180" stroke="white" stroke-width="2"/>
+        <text x="650" y="220" font-family="Arial" font-size="14" text-anchor="middle">Wayfinder</text>
+    </a>
+
+    <!-- Natural Pauses -->
+    <a href="#pauses">
+        <rect x="200" y="180" width="40" height="20" fill="#795548" rx="10" ry="10"/>
+        <text x="220" y="220" font-family="Arial" font-size="14" text-anchor="middle">Pauses</text>
+    </a>
+
+    <!-- Idea Trail -->
+    <a href="#idea-trail">
+        <path d="M700,230 L720,190 L740,230 Z" fill="#9E9E9E"/>
+        <text x="720" y="215" font-family="Arial" font-size="14" fill="white" text-anchor="middle">?</text>
+        <text x="720" y="260" font-family="Arial" font-size="14" text-anchor="middle">Idea Trail</text>
+    </a>
+
+    <!-- End point -->
+    <a href="#continue">
+        <circle cx="750" cy="200" r="15" fill="#FFA000"/>
+        <text x="750" y="240" font-family="Arial" font-size="14" text-anchor="middle">Continue</text>
+    </a>
+
+    <!-- Stick figure -->
+    <circle cx="400" cy="200" r="10" fill="#333"/>
+    <line x1="400" y1="210" x2="400" y2="240" stroke="#333" stroke-width="2"/>
+    <line x1="400" y1="220" x2="380" y2="240" stroke="#333" stroke-width="2"/>
+    <line x1="400" y1="220" x2="420" y2="240" stroke="#333" stroke-width="2"/>
+    <line x1="400" y1="240" x2="390" y2="270" stroke="#333" stroke-width="2"/>
+    <line x1="400" y1="240" x2="410" y2="270" stroke="#333" stroke-width="2"/>
+</svg>

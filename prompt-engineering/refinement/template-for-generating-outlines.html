@@ -1,0 +1,249 @@
+<!DOCTYPE html> <html><head>
+		<title>Template for Generating Outlines</title>
+		<base href="../../">
+		<meta id="root-path" root-path="../../">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+		<meta charset="UTF-8">
+		<meta name="description" content="syncopated notes - Template for Generating Outlines">
+		<meta property="og:title" content="Template for Generating Outlines">
+		<meta property="og:description" content="syncopated notes - Template for Generating Outlines">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://b08x.github.io/prompt-engineering/refinement/template-for-generating-outlines.html">
+		<meta property="og:image" content="undefined">
+		<meta property="og:site_name" content="syncopated notes">
+		<meta name="author" content="Robert Pannick"><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://b08x.github.io/lib/rss.xml"><script async="" id="webpage-script" src="lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="minisearch-script" src="lib/scripts/minisearch.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="lib/media/favicon.png"><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-horizontal-spacing:0.6em;--tree-vertical-spacing:0.6em;--sidebar-margin:12px}.sidebar{height:100%;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));font-size:14px;z-index:10;position:relative;overflow:hidden;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}.sidebar-left{left:0}.sidebar-right{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}body.floating-sidebars .sidebar{position:absolute}.sidebar-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .sidebar-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}.sidebar-left .sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}.sidebar-right .sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar:has(.sidebar-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:2em;width:var(--sidebar-width);top:var(--sidebar-margin);padding-inline:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}.sidebar-left .sidebar-topbar{left:0}.sidebar-right .sidebar-topbar{right:0}.topbar-content{overflow:hidden;overflow:clip;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:0!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}.sidebar-left .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}.sidebar-right .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.sidebar-section-header{margin:0 0 1em 0;text-transform:uppercase;letter-spacing:.06em;font-weight:600}body{transition:background-color var(--color-fade-speed) ease-in-out}.webpage-container{display:flex;flex-direction:row;height:100%;width:100%;align-items:stretch;justify-content:center}.document-container{opacity:1;flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0;transition:opacity .2s ease-in-out}.document-container>.markdown-preview-view{margin:var(--sidebar-margin);margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;background-color:var(--background-primary);transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}.document-container>.markdown-preview-view>.markdown-preview-sizer{padding-bottom:80vh!important;width:100%!important;max-width:var(--line-width)!important;flex-basis:var(--line-width)!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}.markdown-rendered img:not([width]),.view-content img:not([width]){max-width:100%;outline:0}.document-container>.view-content.embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}.document-container>.view-content.embed>*{max-width:100%;max-height:100%;object-fit:contain}:has(> :is(.math,table)){overflow-x:auto!important}.document-container>.view-content{overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){if("file:"!=location.protocol){let e=document.querySelectorAll("include");for(let t=0;t<e.length;t++){let o=e[t],l=o.getAttribute("src");try{const e=await fetch(l);if(!e.ok){console.log("Could not include file: "+l),o?.remove();continue}let t=await e.text(),n=document.createRange().createContextualFragment(t),i=Array.from(n.children);for(let e of i)e.classList.add("hide"),e.style.transition="opacity 0.5s ease-in-out",setTimeout((()=>{e.classList.remove("hide")}),10);o.before(n),o.remove(),console.log("Included file: "+l)}catch(e){o?.remove(),console.log("Could not include file: "+l,e);continue}}}else{if(document.querySelectorAll("include").length>0){var e=document.createElement("div");e.id="error",e.textContent="Web server exports must be hosted on an http / web server to be viewed correctly.",e.style.position="fixed",e.style.top="50%",e.style.left="50%",e.style.transform="translate(-50%, -50%)",e.style.fontSize="1.5em",e.style.fontWeight="bold",e.style.textAlign="center",document.body.appendChild(e),document.querySelector(".document-container")?.classList.remove("hide")}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script"))),l=0;!function e(){let n=o[l];l++,n&&"true"!=n.getAttribute("loaded")||l<o.length&&e(),l<o.length?n.addEventListener("load",e):t()}()}</script><link rel="stylesheet" href="lib/styles/obsidian.css"><link rel="preload" href="lib/styles/other-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/other-plugins.css"></noscript><link rel="stylesheet" href="lib/styles/theme.css"><link rel="preload" href="lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/supported-plugins.css"></noscript><link rel="preload" href="lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/main-styles.css"></noscript><link rel="preload" href="lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="lib/styles/snippets.css"></noscript></head><body class="publish css-settings-manager theme-dark show-inline-title show-ribbon hide-folder-note folder-note-underline folder-note-underline-path fn-whitespace-stop-collapsing fn-hide-collapse-icon"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div class="webpage-container workspace"><div class="sidebar-left sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme_toggle"><input class="theme-toggle-input" type="checkbox" id="theme_toggle"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="search-input-container"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div class="search-input-clear-button" aria-label="Clear search"></div></div><include src="lib/html/file-tree.html"></include></div><script defer="">let ls = document.querySelector(".sidebar-left"); ls.classList.add("is-collapsed"); if (window.innerWidth > 768) ls.classList.remove("is-collapsed"); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div><div class="document-container markdown-reading-view hide"><div class="markdown-preview-view markdown-rendered allow-fold-headings allow-fold-lists is-readable-line-width"><style id="MJX-CHTML-styles"></style><pre class="frontmatter language-yaml" style="display: none;" tabindex="0"><code class="language-yaml is-loaded"><span class="token key atrule">layout</span><span class="token punctuation">:</span> page
+<span class="token key atrule">toc</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+<span class="token key atrule">tags</span><span class="token punctuation">:</span> 
+<span class="token key atrule">title</span><span class="token punctuation">:</span> Template for Generating Outlines
+<span class="token key atrule">date created</span><span class="token punctuation">:</span> Saturday<span class="token punctuation">,</span> June 15th 2024<span class="token punctuation">,</span> 11<span class="token punctuation">:</span>39<span class="token punctuation">:</span>28 am
+<span class="token key atrule">date modified</span><span class="token punctuation">:</span> Tuesday<span class="token punctuation">,</span> June 18th 2024<span class="token punctuation">,</span> 7<span class="token punctuation">:</span>16<span class="token punctuation">:</span>33 am</code><button class="copy-code-button">Copy</button></pre><div class="markdown-preview-sizer markdown-preview-section"><h1 class="page-title heading inline-title" id="Template for Generating Outlines"><p dir="auto">Template for Generating Outlines</p></h1><div class="heading-wrapper"><h2 data-heading="Method" dir="auto" class="heading" id="Method"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Method</h2><div class="heading-children"><div><pre><code>Analyze the provided example, explain how its functional and generative grammars contribute to its pragmatic intention. Then, Using a syntax tree, Generate an example an that uses part of speech tags/generative grammars as placeholders instead of the literal concepts, output in &lt;example&gt; tags.
+
+&lt;example&gt;
+
+&lt;input&gt;
+
+&lt;article_title&gt; The Impact of Climate Change on Coastal Cities &lt;/article_title&gt;
+
+&lt;article_outline&gt;
+
+1. Introduction
+
+2. Rising Sea Levels
+
+3. Increased Storm Frequency
+
+4. Conclusion
+
+&lt;/article_outline&gt;
+
+&lt;/input&gt;
+
+&lt;output&gt;
+
+[
+
+{
+
+"section": "Introduction",
+
+"bullets": "1. Overview of climate change effects on coastal cities 2. Importance of understanding these impacts"
+
+},
+
+{
+
+"section": "Rising Sea Levels",
+
+"bullets": "1. Causes of rising sea levels 2. Effects on coastal infrastructure and communities3. Examples of affected cities"
+
+},
+
+{
+
+"section": "Increased Storm Frequency",
+
+"bullets": "1. Link between climate change and storm frequency 2. Impact of more frequent and severe storms on coastal areas 3. Case studies of recent storms"
+
+},
+
+{
+
+"section": "Conclusion",
+
+"bullets": "1. Summary of key points 2. The urgency of addressing climate change 2. Call to action for policymakers and communities"
+
+}
+
+]
+
+&lt;/output&gt;
+
+&lt;/example&gt;
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h2 data-heading="Results" dir="auto" class="heading" id="Results"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Results</h2><div class="heading-children"><div class="heading-wrapper"><h3 data-heading="Gemini 1.5 pro" dir="auto" class="heading" id="Gemini_1.5_pro"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Gemini 1.5 pro</h3><div class="heading-children"><div><pre><code>## Analysis of Example:
+
+This example demonstrates a system designed to generate detailed article outlines from a title and a high-level outline. Let's break down how functional and generative grammars contribute to its pragmatic intention:
+
+**1. Functional Grammar:**
+
+- **Purpose:** The system's purpose is to expand on the given information, effectively bridging the gap between a skeletal outline and a more detailed plan for writing.
+- **Context:** The input assumes an academic/informative context, focusing on climate change and its effects. This context influences the generated bullets, aiming for a scientific and informative tone.
+- **Participants:** The user provides the initial input, while the system acts as the "expert," elaborating based on its knowledge.
+
+**2. Generative Grammar:**
+
+- **Structure:** The system follows a clear structure: 
+    - It takes an article title (Noun Phrase) and a numbered list of sections (Noun Phrases). 
+    - It outputs a JSON array of objects. 
+    - Each object represents a section with the "section" key mapped to the original section title and the "bullets" key mapped to a list of generated subtopics (Noun Phrases).
+- **Rules:**  Though not explicitly defined, the system seems to follow implicit rules:
+    - **Relevance:** Generated bullets are topically relevant to the section title and the overall article theme.
+    - **Informative Expansion:** Bullets offer specific aspects or questions related to the broader section title.
+    - **Logical Flow:**  Bullets within a section suggest a coherent flow of information.
+
+**Pragmatic Intention:**
+
+The system aims to assist users in fleshing out ideas and structuring their writing. By generating detailed bullet points, it facilitates a more organized and comprehensive approach to content creation, particularly in the domain of informative articles.
+
+
+##  Generated Example with Part-of-Speech Tags:
+
+Here's an example using part-of-speech tags as placeholders:
+
+```json
+&lt;example&gt;
+&lt;input&gt;
+&lt;article_title&gt; &lt;Noun Phrase: Topic&gt; &lt;/article_title&gt;
+&lt;article_outline&gt;
+  1. &lt;Noun Phrase: Introduction&gt;
+  2. &lt;Noun Phrase: Aspect 1&gt;
+  3. &lt;Noun Phrase: Aspect 2&gt;
+  4. &lt;Noun Phrase: Conclusion&gt;
+&lt;/article_outline&gt;
+&lt;/input&gt;
+&lt;output&gt;
+[
+    {
+      "section": "&lt;Noun Phrase: Introduction&gt;",
+      "bullets": "1. &lt;Verb Phrase: Introduce Topic&gt; 2. &lt;Verb Phrase: State Importance of Topic&gt;"
+    },
+    {
+      "section": "&lt;Noun Phrase: Aspect 1&gt;",
+      "bullets": "1. &lt;Verb Phrase: Define Aspect 1&gt; 2. &lt;Verb Phrase: Explain Effects of Aspect 1&gt; 3. &lt;Verb Phrase: Provide Examples of Aspect 1&gt;"
+    },
+   {
+      "section": "&lt;Noun Phrase: Aspect 2&gt;",
+      "bullets": "1. &lt;Verb Phrase: Define Aspect 2&gt; 2. &lt;Verb Phrase: Analyze Impact of Aspect 2&gt; 3. &lt;Verb Phrase: Present Case Studies of Aspect 2&gt;"
+    },
+   {
+      "section": "&lt;Noun Phrase: Conclusion&gt;",
+      "bullets": "1. &lt;Verb Phrase: Summarize Key Points&gt; 2. &lt;Verb Phrase: Emphasize Significance of Topic&gt; 2. &lt;Verb Phrase: Propose Future Actions&gt;"
+    }
+]
+&lt;/output&gt;
+&lt;/example&gt;
+
+This example provides a template for generating outlines on various topics by substituting specific noun and verb phrases related to the chosen theme.
+
+</code><button class="copy-code-button">Copy</button></pre></div></div></div><div class="heading-wrapper"><h3 data-heading="Gemini 1.5 Flash" dir="auto" class="heading" id="Gemini_1.5_Flash"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Gemini 1.5 Flash</h3><div class="heading-children"><div><pre><code>## Analyzing the Example
+
+This example demonstrates a system that takes an article title and outline as input and generates a structured output for article content. 
+
+**Functional Grammar:** 
+
+* **Input Analysis:** The system analyzes the input for specific features:
+    * **Article Title:**  Identifies the topic ("Climate Change on Coastal Cities").
+    * **Article Outline:**  Extracts the main sections and their numerical order ("Introduction", "Rising Sea Levels", etc.).
+* **Output Generation:** The system generates a JSON-formatted output containing sections and bullet points. This structure is based on the outline, ensuring the output follows a logical flow. 
+* **Content Generation (Implied):** Although not explicitly shown, the system likely uses a knowledge base or language model to generate content for each bullet point based on the title and section keywords.
+
+**Generative Grammar:**
+
+* **Part of Speech (POS) tagging:**  The system likely utilizes POS tagging to identify nouns ("Climate Change", "Coastal Cities"), verbs ("impact"), adjectives ("rising"), etc., within the input text. This information helps understand the grammatical relationships within the input and generate relevant content for each section. 
+* **Syntax Analysis:**  The system likely employs a syntax parser to understand the structure of sentences within the input text. This allows the system to identify the relationship between words and phrases and generate grammatically correct output. 
+* **Lexical Semantics:** The system likely utilizes a lexicon to understand the meaning of words and phrases within the input. This helps generate relevant content for each bullet point based on the title and section keywords. 
+
+**Pragmatic Intention:**
+
+The system's pragmatic intention is to assist writers in creating structured, informative articles. It offers a framework for organizing content based on the chosen topic and outline. This structure helps:
+
+* **Clear Communication:**  The output format ensures a clear and organized presentation of information, making the article easy to read and understand.
+* **Content Consistency:**  The system encourages a consistent approach to content development by providing a pre-defined structure for each section and bullet point. 
+* **Time Efficiency:**  By generating a basic outline and bullet point suggestions, the system saves writers time and effort in brainstorming and planning the article's content. 
+
+## Example with Placeholder Tags:
+
+&lt;example&gt;
+&lt;input&gt;
+&lt;article_title&gt; DT NN IN JJ NNS &lt;/article_title&gt;
+&lt;article_outline&gt; 
+  1. NN
+  2. JJ NNS
+  3. JJ NN NN
+  4. NN
+&lt;/article_outline&gt;
+&lt;/input&gt;
+&lt;output&gt;
+ [
+    {
+      "section": "NN",
+      "bullets": "1. NN IN NN NN IN JJ NNS 2. NN IN NN NN"
+    },
+    {
+      "section": "JJ NNS",
+      "bullets": "1. NNS IN JJ NNS 2. NNS IN NN IN NNS 3. NN IN JJ NNS"
+    },
+   {
+      "section": "JJ NN NN",
+      "bullets": "1. NN IN NN IN NN NN 2. NN IN RBR JJ NNS IN JJ NNS 3. NN IN NN IN JJ NNS"
+    }, 
+   {
+      "section": "NN",
+      "bullets": "1. NN IN NN NN 2. DT NN IN NN NN 2. NN IN NN IN NN"
+    }
+  ]
+&lt;/output&gt;
+&lt;/example&gt; 
+
+**Explanation of Placeholder Tags:**
+
+* **DT:** Determiner (e.g., "the", "a")
+* **NN:** Noun (e.g., "impact", "cities")
+* **IN:** Preposition (e.g., "of", "on")
+* **JJ:** Adjective (e.g., "coastal", "rising")
+* **NNS:** Plural noun (e.g., "levels", "storms")
+* **RBR:** Comparative adverb (e.g., "more")
+
+This placeholder example demonstrates the use of POS tags to represent the grammatical structure within the input. The output maintains the same structure as the original example, illustrating how generative grammar contributes to the system's functionality.
+</code><button class="copy-code-button">Copy</button></pre></div><div><hr></div></div></div></div></div><div class="heading-wrapper"><h2 data-heading="Testing" dir="auto" class="heading" id="Testing"><div class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div>Testing</h2><div class="heading-children"><div><p dir="auto">Given the transcript of this video: <a data-tooltip-position="top" aria-label="https://www.youtube.com/watch?v=Qs2zXs4J-mI" rel="noopener" class="external-link" href="https://www.youtube.com/watch?v=Qs2zXs4J-mI" target="_blank">Testing Transcriptions - YouTube</a></p></div><div><pre class="language-shell" tabindex="0"><code class="language-shell is-loaded"><span class="token function">curl</span> <span class="token punctuation">\</span>
+  -X POST <span class="token punctuation">\</span>
+  -H <span class="token string">"Authorization: Token <span class="token variable">${DEEPGRAM_API_KEY}</span>$"</span> <span class="token punctuation">\</span>
+  -H <span class="token string">"Content-Type: application/json"</span> <span class="token punctuation">\</span>
+  -d <span class="token string">'{"url":"https://static.deepgram.com/examples/Bueller-Life-moves-pretty-fast.wav"}'</span> <span class="token punctuation">\</span>
+  <span class="token string">"https://api.deepgram.com/v1/listen?topics=true&amp;intents=true&amp;smart_format=true&amp;punctuate=true&amp;paragraphs=true&amp;utterances=true&amp;diarize=true&amp;filler_words=true&amp;sentiment=true&amp;language=en&amp;model=nova-2"</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div><pre class="language-json" tabindex="0"><code class="language-json is-loaded"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"section"</span><span class="token operator">:</span> <span class="token string">"Introduction"</span><span class="token punctuation">,</span>
+    <span class="token property">"bullets"</span><span class="token operator">:</span> <span class="token string">"1. Introduce the concept of audio transcription and processing workflow 2. Explain the importance of this workflow in various applications, such as content creation, research, and accessibility"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"section"</span><span class="token operator">:</span> <span class="token string">"Audio Capture and Preprocessing"</span><span class="token punctuation">,</span>
+    <span class="token property">"bullets"</span><span class="token operator">:</span> <span class="token string">"1. Discuss the process of capturing audio using microphones and recording software 2. Explain the importance of audio quality and how to optimize it for transcription 3. Describe common preprocessing steps such as noise reduction, equalization, and gain adjustment"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"section"</span><span class="token operator">:</span> <span class="token string">"Transcription using Speech Recognition APIs"</span><span class="token punctuation">,</span>
+    <span class="token property">"bullets"</span><span class="token operator">:</span> <span class="token string">"1. Introduce popular speech recognition APIs such as Google Cloud Speech-to-Text and Amazon Transcribe 2. Explain the different features and capabilities of these APIs, including language support, speaker identification, and punctuation 3. Discuss the accuracy and limitations of speech recognition and how to improve transcription quality"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"section"</span><span class="token operator">:</span> <span class="token string">"Post-Transcription Processing"</span><span class="token punctuation">,</span>
+    <span class="token property">"bullets"</span><span class="token operator">:</span> <span class="token string">"1. Describe the process of reviewing and editing the transcribed text 2. Explain techniques for correcting errors, improving readability, and adding context 3. Discuss the use of tools and software for post-transcription processing"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"section"</span><span class="token operator">:</span> <span class="token string">"Integration with Other Tools and Platforms"</span><span class="token punctuation">,</span>
+    <span class="token property">"bullets"</span><span class="token operator">:</span> <span class="token string">"1. Explain how audio transcription workflows can be integrated with other tools and platforms, such as video editing software, content management systems, and translation services 2. Discuss the benefits of integration and how it can streamline the workflow"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"section"</span><span class="token operator">:</span> <span class="token string">"Conclusion"</span><span class="token punctuation">,</span>
+    <span class="token property">"bullets"</span><span class="token operator">:</span> <span class="token string">"1. Summarize the key steps involved in an audio transcription and processing workflow 2. Discuss the future trends and advancements in audio transcription technology 3. Emphasize the importance of this workflow in various industries and its potential to enhance accessibility and communication"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code><button class="copy-code-button">Copy</button></pre></div><div class="mod-footer"></div></div></div></div></div></div><div class="sidebar-right sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content"><div class="tree-container mod-root nav-folder tree-item outline-tree" data-depth="0"><div class="tree-header"><span class="sidebar-section-header">Table Of Contents</span><button class="clickable-icon collapse-tree-button is-collapsed" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-scroll-area tree-item-children nav-folder-children"><div class="tree-item mod-tree-folder nav-folder mod-collapsible is-collapsed" style="display: none;"></div><div class="tree-item" data-depth="1"><a class="tree-link" href="prompt-engineering/refinement/template-for-generating-outlines.html#Template for Generating Outlines"><div class="tree-item-contents heading-link" heading-name="Template for Generating Outlines"><span class="tree-item-title">Template for Generating Outlines</span></div></a><div class="tree-item-children nav-folder-children"><div class="tree-item" data-depth="2"><a class="tree-link" href="prompt-engineering/refinement/template-for-generating-outlines.html#Method"><div class="tree-item-contents heading-link" heading-name="Method"><span class="tree-item-title">Method</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item mod-collapsible is-collapsed" data-depth="2"><a class="tree-link" href="prompt-engineering/refinement/template-for-generating-outlines.html#Results"><div class="tree-item-contents heading-link" heading-name="Results"><div class="collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><span class="tree-item-title">Results</span></div></a><div class="tree-item-children nav-folder-children" style="display: none;"><div class="tree-item" data-depth="3"><a class="tree-link" href="prompt-engineering/refinement/template-for-generating-outlines.html#Gemini_1.5_pro"><div class="tree-item-contents heading-link" heading-name="Gemini 1.5 pro"><span class="tree-item-title">Gemini 1.5 pro</span></div></a><div class="tree-item-children nav-folder-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-link" href="prompt-engineering/refinement/template-for-generating-outlines.html#Gemini_1.5_Flash"><div class="tree-item-contents heading-link" heading-name="Gemini 1.5 Flash"><span class="tree-item-title">Gemini 1.5 Flash</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-link" href="prompt-engineering/refinement/template-for-generating-outlines.html#Testing"><div class="tree-item-contents heading-link" heading-name="Testing"><span class="tree-item-title">Testing</span></div></a><div class="tree-item-children nav-folder-children"></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector(".sidebar-right"); rs.classList.add("is-collapsed"); if (window.innerWidth > 768) rs.classList.remove("is-collapsed"); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></body></html>
