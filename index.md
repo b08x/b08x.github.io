@@ -10,4 +10,4 @@ date created: Sunday, July 14th 2024, 10:53:59 pm
 date modified: Friday, August 2nd 2024, 5:01:10 am
 ---
 
-[[notebook]]
+[notebook](/notebook/hello.html)
