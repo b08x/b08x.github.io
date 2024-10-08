@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansible Variable Precedence</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .precedence-item {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .precedence-item.highlighted {
+            background-color: #e6f2ff;
+            border-color: #4a90e2;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .item-description {
+            display: none;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .highlighted .item-description {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ansible Variable Precedence</h1>
+        <p>Click on an item to see more details. Items higher in the list take precedence over those lower in the list.</p>
+        <div id="precedence-list"></div>
+    </div>
+
+    <script>
+        const precedenceOrder = [
+            { name: 'Extra vars (--extra-vars or -e)', description: 'Always win precedence' },
+            { name: 'Task vars (only for the specific task)', description: 'Limited to the task' },
+            { name: 'Block vars (only for tasks in block)', description: 'Applied to tasks within a block' },
+            { name: 'Role and include vars', description: 'Defined in role/include' },
+            { name: 'Play vars_files', description: 'Loaded from vars_files' },
+            { name: 'Play vars_prompt', description: 'Interactive vars prompted' },
+            { name: 'Play vars', description: 'Defined in play' },
+            { name: 'Host facts', description: 'Gathered or cached facts' },
+            { name: 'Registered vars', description: 'Set with register keyword' },
+            { name: 'Set_facts / set_stats', description: 'Set during play' },
+            { name: 'Role defaults', description: 'Default values in role' },
+            { name: 'Inventory vars', description: 'Set in inventory' },
+            { name: 'Inventory group_vars', description: 'Variables for groups' },
+            { name: 'Inventory host_vars', description: 'Host-specific variables' },
+            { name: 'Playbook group_vars', description: 'Group vars in playbook directory' },
+            { name: 'Playbook host_vars', description: 'Host vars in playbook directory' },
+            { name: 'Host facts / cached set_facts', description: 'Persistent facts or cached set_facts' },
+            { name: 'Connection vars', description: 'Connection-specific settings' },
+            { name: 'Command-line values', description: 'Set via CLI' }
+        ];
+
+        function createPrecedenceList() {
+            const listContainer = document.getElementById('precedence-list');
+            precedenceOrder.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'precedence-item';
+                itemElement.innerHTML = `
+                    <div class="item-header">
+                        <h3>${item.name}</h3>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <p class="item-description">${item.description}</p>
+                `;
+                itemElement.addEventListener('click', () => toggleItem(itemElement));
+                listContainer.appendChild(itemElement);
+            });
+        }
+
+        function toggleItem(element) {
+            element.classList.toggle('highlighted');
+            const icon = element.querySelector('.toggle-icon');
+            icon.textContent = element.classList.contains('highlighted') ? '▲' : '▼';
+        }
+
+        createPrecedenceList();
+    </script>
+</body>
+</html>

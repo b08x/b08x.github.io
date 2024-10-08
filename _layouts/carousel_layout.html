@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Add your header content here -->
+    </header>
+
+    <main>
+        {{ content }}
+        <div id="educational-carousel"></div>
+    </main>
+
+    <footer>
+        <!-- Add your footer content here -->
+    </footer>
+
+    <script src="{{ '/assets/react-app/dist/bundle.js' | relative_url }}"></script>
+</body>
+</html>

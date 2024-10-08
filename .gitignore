@@ -1,0 +1,10 @@
+.jekyll-metadata
+.obsidian/
+Gemfile.lock
+_site
+jsoncanvas/
+.smart-env/***
+_textgenerator
+_scratchpad
+/node_modules/
+assets/react-app/

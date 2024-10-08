@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agile Walk Meandering Path with Symbols</title>
+    <style>
+        svg { max-width: 100%; height: auto; }
+        a:hover { cursor: pointer; }
+    </style>
+    {% include notebook/head.html %}
+</head>
+<body>
+  <nav>{% include notebook/nav.html %}</nav>
+
+  <div class="wrapper">
+    <main>{{ content }}</main>
+    <footer>{% include notebook/footer.html %}</footer>
+  </div>
+
+  {% include link-previews.html wrapperQuerySelector="content" %}
+
+</body>
+</html>
