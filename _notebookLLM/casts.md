@@ -22,7 +22,7 @@ podcast:
     S00E00_TheParallaxofAIandMemor.mp3
   # optional
   recording_date: 2024-10-01
-permalink: /casts
+permalink: /notebookLLM/casts
 ---
 
 Your podcast transcript goes here...

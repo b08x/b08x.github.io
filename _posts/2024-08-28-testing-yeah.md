@@ -1,5 +1,5 @@
 ---
-layout: "post"
+layout: "note"
 title: "The Absurdity of Blanket ID Checks: A Community Wake-Up Call"
 date: "2024-08-28 11:57"
 abstract: "The author, addresses the practice of requiring identification checks for age-restricted products from all customers, regardless of visually apparent age, within Walnut Heights.
@@ -7,6 +7,17 @@ abstract: "The author, addresses the practice of requiring identification checks
 The author argues that this practice is illogical when applied to individuals who are clearly older than the legal age limit. They cite the example of a 43-year-old man with visible signs of aging attempting to purchase cigarettes. The author posits that fining a store for selling to such an individual would be nonsensical.
 
 The author suggests that this practice stems from corporations prioritizing the avoidance of legal repercussions over common sense and employee judgment. They further argue that this practice erodes critical thinking skills, misdirects responsibility from addressing actual underage access, and negatively impacts community relationships by causing unnecessary confrontations."
+tags:
+  - Ansible
+  - VOSK
+  - Automation
+podcast:
+  episode: 0
+  file: S00E00_TheParallaxofAIandMemor.mp3
+  duration: "00:25:30"
+  recording_date: 2024-10-07
+contributors:
+  - Robert Pannick
 ---
 
 
