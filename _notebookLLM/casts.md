@@ -1,7 +1,7 @@
 ---
-layout: podcast
+layout: notebook
 title: "Your Podcast Episode Title"
-audiofile: "/assets/audio/casts/TheParallaxofAIandMemor.mp3"
+audio: "/assets/episodes/S00E00_TheParallaxofAIandMemor.mp3"
 summary: "A brief summary of your podcast episode."
 related_materials: |
   <ul>
