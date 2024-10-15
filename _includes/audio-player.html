@@ -1,3 +1,18 @@
-<audio controls preload="metadata" src="{{ page.podcast.file | episode_url }}">
-  Your browser does not support the audio element.
-</audio>
+<div class="gap-example">
+  <audio controls preload="metadata" src="{{ page.podcast.file | episode_url }}">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+
+<!-- <div class="ready-player-1">
+    <audio crossorigin preload="none">
+        <source src="{{ page.podcast.file | episode_url }}" type="audio/mpeg">
+    </audio>
+</div> -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new GreenAudioPlayer('.gap-example', { showTooltips: true, showDownloadButton: false, enableKeystrokes: true });
+    });
+</script>

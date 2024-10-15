@@ -42,7 +42,7 @@ include:
   - "_pages/"
   - "_posts/"
   - "_projects/"
-  - "_podcasts/"
+  - "_notebookLLM/"
 exclude:
   - "CHANGELOG.md"
   - "LICENSE"
@@ -154,6 +154,10 @@ collections:
   projects:
     output: true
     permalink: /:collection/:path
+  notebookLLM:
+    output: true
+    permalink: /:collection/:path
+
 
 # Defaults
 defaults:
@@ -197,8 +201,8 @@ defaults:
       layout: "carousel_layout"
   -
     scope:
-      path: ""
-      type: "podcasts"
+      path: "_notebookLLM/**/*.md"
+      type: "notebookLLM"
     values:
       layout: "podcast"
       permalink: /:podcast_episode/

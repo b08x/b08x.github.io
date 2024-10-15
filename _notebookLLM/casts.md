@@ -10,10 +10,10 @@ related_materials: |
     <li><a href="#">Related Resources</a></li>
   </ul>
 tags: #optional
-- Series 6
-- The Eleventh Doctor
-contributors: #also optional
-- Nathan Bottomley
+- GenAI
+- LLM
+# contributors: #also optional
+# - Nathan Bottomley
 podcast:
   # the episode number
   episode: 00
@@ -21,7 +21,8 @@ podcast:
   file: >-
     S00E00_TheParallaxofAIandMemor.mp3
   # optional
-  recording_date: 2021-08-01
+  recording_date: 2024-10-01
+permalink: /casts
 ---
 
 Your podcast transcript goes here...
