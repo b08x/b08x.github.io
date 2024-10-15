@@ -1,94 +1,79 @@
 ---
 layout: "post"
-title: "Testing yeah"
+title: "The Absurdity of Blanket ID Checks: A Community Wake-Up Call"
 date: "2024-08-28 11:57"
+abstract: "The author, addresses the practice of requiring identification checks for age-restricted products from all customers, regardless of visually apparent age, within Walnut Heights.
+
+The author argues that this practice is illogical when applied to individuals who are clearly older than the legal age limit. They cite the example of a 43-year-old man with visible signs of aging attempting to purchase cigarettes. The author posits that fining a store for selling to such an individual would be nonsensical.
+
+The author suggests that this practice stems from corporations prioritizing the avoidance of legal repercussions over common sense and employee judgment. They further argue that this practice erodes critical thinking skills, misdirects responsibility from addressing actual underage access, and negatively impacts community relationships by causing unnecessary confrontations."
+podcast:
+  episode: 0
+  file: S00E00_TheParallaxofAIandMemor.mp3
+  duration: "00:25:30"
+  recording_date: 2024-10-07
+contributors:
+  - Robert Pannick
 ---
 
 
-```bash
-│Oct 10 17:01:56.162978 tinybot qpdfview.desktop[72746]: libGL error: glx: failed to create dri3 screen                                                                                                            │
-│Oct 10 17:01:56.162978 tinybot qpdfview.desktop[72746]: libGL error: failed to load driver: i915                                                                                                                  │
-│Oct 10 17:01:56.167109 tinybot qpdfview.desktop[72746]: libGL error: glx: failed to create dri2 screen                                                                                                            │
-│Oct 10 17:01:56.167109 tinybot qpdfview.desktop[72746]: libGL error: failed to load driver: i915
-```
+Dear Walnut Heights neighbors,
 
-[fix for: intel(0): Failed to submit rendering commands (Invalid argument), disabling acceleration.](https://forums.gentoo.org/viewtopic-t-1145306-start-0.html)
+Today, I want to address an issue that's been bothering many of us: the seemingly mindless practice of ID checks for age-restricted products, regardless of the customer's obvious age. It's time we call out this absurdity for what it is.
 
-xorg.conf four displays
------------------------
+## The "We Might Get Fined" Fallacy
 
-libGL error: MESA-LOADER: failed to open i965: /usr/lib/dri/i965_dri.so: cannot open shared object file: No such file or directory (search paths /usr/lib/dri, suffix _dri)
+We've all heard the excuse: "We check everyone's ID so we don't get fined." But let's think about this critically for a moment:
 
-sudo pacman -F /usr/lib/dri/i965_dri.so
-usr/lib/dri/i965_dri.so is owned by extra/mesa-amber 21.3.9-1
+1. **The Law vs. Reality**: Ohio law only requires ID checks for those who appear under 30. Yet, many stores check everyone.
 
-[description](https://access.redhat.com/discussions/1144733)
-[description](https://wiki.archlinux.org/title/multihead)
+2. **The Absurd Scenario**: Imagine a clearly middle-aged person – let's say a 43-year-old man with grey hair and laugh lines – trying to buy cigarettes. In what universe could a store possibly be fined for selling to this person without checking ID?
 
----
+3. **Cognitive Dissonance in Action**: When a cashier looks at an obviously adult customer and says, "Sorry, we have to card everyone," they're not just following policy – they're actively denying the evidence of their own eyes. It's a bizarre form of forced doublethink.
 
-[description](https://unix.stackexchange.com/a/569807/483352)
+## The Real Issues At Play
 
-```sh
-Section "Device"
-    Identifier "intel0"
-    Driver "intel"
-    Option "ZaphodHeads" "VGA1,HDMI1,DP1"
-    Screen 0
-EndSection
+1. **Corporate CYA vs. Common Sense**: This isn't about following the law; it's about corporations covering their assets at the expense of everyone's sanity.
 
-Section "Device"
-    Identifier "intel1"
-    Driver "intel"
-    Option "ZaphodHeads" "HDMI3"
-    Screen 1
-EndSection
-```
+2. **Erosion of Critical Thinking**: By forcing employees to act against their own judgment, we're contributing to a culture where blind obedience trumps common sense.
 
+3. **Misplaced Responsibility**: Instead of addressing real issues of underage access, we're creating a theater of safety that solves nothing.
 
-## Troubleshooting Multi-Display Issues with Intel Graphics on Linux
+4. **Community Impact**: This practice strains relationships, creates unnecessary confrontations, and adds stress to both workers and customers.
 
-This appears to be a classic case of multi-display configuration issues with Intel graphics drivers on Linux. The errors you're encountering point to problems with driver loading and screen creation, particularly in the context of using multiple displays.
+## The Deeper Cultural Problem
 
-Let's break down the problem and formulate a solution:
+This situation exposes a broader issue in our current cultural climate:
 
-**Understanding the Errors:**
+1. **Fear Over Reason**: We've become so afraid of liability that we're willing to embrace clearly irrational practices.
 
-* **"libGL error: glx: failed to create dri3/dri2 screen" & "libGL error: failed to load driver: i915"**: These errors indicate that the system is having trouble initializing the OpenGL library and loading the appropriate Intel graphics driver (i915). This is often caused by incorrect driver installation, conflicting driver versions, or misconfigured Xorg settings.
-* **"MESA-LOADER: failed to open i965: /usr/lib/dri/i965_dri.so: cannot open shared object file: No such file or directory"**: This error explicitly states that the required driver file (i965_dri.so) is missing. While your system might be using a different Intel GPU model, this error still points to a potential mismatch between installed drivers and the required ones.
+2. **Loss of Nuance**: Our ability to handle nuanced situations (like judging someone's age) is being replaced by one-size-fits-all policies.
 
-**Solution Approach:**
+3. **Disempowered Workforce**: We're telling our retail workers that their judgment and intelligence don't matter.
 
-1. **Driver Verification & Installation:**
-    * **Identify Your GPU:** Run `lspci | grep VGA` to determine the exact model of your Intel GPU.
-    * **Install Correct Drivers:** Ensure you have the correct drivers installed for your specific GPU model. Use your distribution's package manager (e.g., `apt`, `dnf`, `pacman`) to install the appropriate `xf86-video-intel` package and any additional mesa packages related to your GPU.
-    * **Update Drivers (If Necessary):** Outdated drivers can also cause issues. Update your system and graphics drivers to the latest available versions.
+4. **Misguided Problem-Solving**: Instead of addressing root causes of underage substance use, we're fixating on performative measures.
 
-2. **Xorg Configuration:**
-    * **Analyze Existing Configuration:** Examine your existing `/etc/X11/xorg.conf` file (if it exists). Look for any misconfigurations related to your displays, particularly the "Screen" and "Device" sections.
-    * **ZaphodHeads Configuration:** The provided snippet using `ZaphodHeads` is one approach to configure multiple displays. However, it's crucial to ensure the identifiers (e.g., "VGA1", "HDMI1") and screen numbers correctly match your hardware setup.
-    * **Alternative Configuration:** Consider using a display manager like xrandr for more dynamic configuration. You can use `xrandr --listproviders` to identify available display outputs and `xrandr` with various options to configure resolutions, orientations, and positions of your displays.
+## A Call for Sanity and Respect
 
-3. **Troubleshooting & Optimization:**
-    * **Log Analysis:** Review system logs (e.g., `/var/log/Xorg.0.log`) for more detailed error messages that can pinpoint the issue.
-    * **Single Display Test:** Try booting with only one display connected to isolate if the issue is specific to multi-display setups.
-    * **Hardware Acceleration:** In some cases, disabling hardware acceleration might temporarily resolve the issue. However, this is not ideal for long-term use.
+It's time we demand better:
 
-**Code Snippet Example (xrandr):**
+1. **Align with the Law**: Stores should follow the actual legal requirement – checking those who appear under 30, not everyone.
 
-```bash
-# Identify display outputs
-xrandr --listproviders
+2. **Empower Employees**: Trust cashiers to use their judgment. They can tell the difference between a teenager and a middle-aged adult.
 
-# Example configuration (adjust based on your outputs)
-xrandr --output HDMI-1 --mode 1920x1080 --pos 0x0 --primary
-xrandr --output DP-1 --mode 1920x1080 --pos 1920x0 --right-of HDMI-1
-```
+3. **Address Real Issues**: Focus on education and support for young people, not pointless ID checks of obvious adults.
 
-**Remember:**
+4. **Speak Up**: When you encounter this absurdity, respectfully question it. Ask managers how they justify checking clearly adult customers.
 
-* Back up your `/etc/X11/xorg.conf` file before making any changes.
-* Reboot your system after making driver or configuration changes.
-* Consult the Arch Linux and Gentoo wikis for detailed information on multihead setups and Intel graphics configuration.
+## What Can We Do?
 
-By systematically addressing these points, you should be able to resolve the multi-display issues and achieve a stable configuration.
+1. Share your experiences with this issue in the comments.
+2. Contact local businesses and representatives, voicing your concern about this practice.
+3. Support initiatives that address youth substance use through education and community support, not security theater.
+4. Engage in conversations about how we can create a community that values critical thinking and common sense over blind policy adherence.
+
+It's time we stop accepting "that's just our policy" as an excuse for absurd practices. Let's work towards a community where respect, reason, and real solutions prevail.
+
+Looking forward to hearing your thoughts!
+
+[Your Name]

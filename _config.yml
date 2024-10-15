@@ -37,12 +37,12 @@ plugins:
   - jekyll-pandoc
   - jekyll-react-player
   - jekyll-responsive-image
-
 include:
   - "_notes/"
   - "_pages/"
   - "_posts/"
   - "_projects/"
+  - "_podcasts/"
 exclude:
   - "CHANGELOG.md"
   - "LICENSE"
@@ -67,7 +67,8 @@ exclude:
   - assets/react-app/src
   - assets/react-app/package.json
   - assets/react-app/package-lock.json
-  - assets/react-app/webpack.config.js  
+  - assets/react-app/webpack.config.js
+  - "websitestuff/"
 
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
@@ -194,3 +195,24 @@ defaults:
       path: "ai_safety_education.md"
     values:
       layout: "carousel_layout"
+  -
+    scope:
+      path: ""
+      type: "podcasts"
+    values:
+      layout: "podcast"
+      permalink: /:podcast_episode/
+
+podcast:
+  title: "Composite Semantics"
+  subtitle: "Using Words For Mostly Good"
+  description: "A podcast exploring the intersection of language, technology, and philosophy in the context of IT, LLMs, and AI."
+  summary: "Composite Semantics is a podcast that delves into the fascinating world of language, technology, and philosophy. Join us as we explore the latest developments in IT, Large Language Models (LLMs), and Artificial Intelligence (AI), and discuss their implications for our understanding of meaning, communication, and cognition."
+  email: rwpannick@gmail.com
+  language: en-US
+  author: Robert Pannick
+  owner: Robert Pannick
+  explicit: false
+  category: "Technology"
+  subcategory: "Artificial Intelligence"
+  complete: no

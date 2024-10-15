@@ -1,0 +1,113 @@
+---
+layout: base
+---
+
+<div class="podcast-container">
+  <div class="podcast-main">
+    <h1>{{ page.title }}</h1>
+
+    <div class="podcast-metadata">
+      <p>Episode {{ page.podcast.episode }} • {{ page.date | date: "%B %d, %Y" }}</p>
+      <p>Duration: {{ page.podcast.duration }}</p>
+      {% if page.podcast.recording_date %}
+        <p>Recorded on: {{ page.podcast.recording_date | date: "%B %d, %Y" }}</p>
+      {% endif %}
+    </div>
+
+    <div class="audio-player">
+      {% include audio-player.html %}
+    </div>
+
+    <div class="podcast-summary">
+      <h2>Summary</h2>
+      {{ page.summary | default: page.excerpt }}
+    </div>
+
+    <div class="podcast-content">
+      <h2>Show Notes</h2>
+      {{ content }}
+    </div>
+
+    {% if page.contributors %}
+    <div class="podcast-contributors">
+      <h2>Contributors</h2>
+      <ul>
+        {% for contributor in page.contributors %}
+          <li>{{ contributor }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="podcast-sidebar">
+    {% if page.tags %}
+    <div class="podcast-tags">
+      <h2>Tags</h2>
+      {% for tag in page.tags %}
+        {{ tag | tag_link }}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="related-episodes">
+      <h2>Related Episodes</h2>
+      <!-- Add logic here to display related episodes -->
+    </div>
+  </div>
+</div>
+
+<style>
+  .podcast-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .podcast-main, .podcast-sidebar {
+    background-color: #1a1625;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .podcast-metadata {
+    font-size: 0.9em;
+    color: lightslategray;
+    margin-bottom: 1rem;
+  }
+
+  .audio-player {
+    margin: 1.5rem 0;
+  }
+
+  h1, h2 {
+    color: #b80b0b;
+    margin-bottom: 1rem;
+  }
+
+  .podcast-summary, .podcast-content, .podcast-contributors, .podcast-tags, .related-episodes {
+    margin-top: 2rem;
+    color: darkgray;
+  }
+
+  .podcast-tags a {
+    display: inline-block;
+    background-color: #b3b2b8;
+    padding: 0.2rem 0.5rem;
+    margin: 0.2rem;
+    border-radius: 4px;
+    font-size: 0.8em;
+    color: #333;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .podcast-container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
