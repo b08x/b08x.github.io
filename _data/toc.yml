@@ -1,12 +1,12 @@
 - title: Introduction
   url: "docs"
-- title: Section
-  url: "docs/sections"
+
 - title: "Data Collection and Preparation"
   url: "docs/Data_Collection_and_Preparation"
   children:
-    - title: Text_Types_Overview
+    - title: Text Types Overview
       url: docs/Data_Collection_and_Preparation/Text_Types_Overview
+
 - title: Exploratory_Data_Analysis
   url: "docs/Exploratory_Data_Analysis"
   children:
@@ -14,13 +14,13 @@
       url: "docs/assistants/BrainGPTFull"
     - title: CustodianGPT
       url: "docs/assistants/BrainGPTFull"
-  
 
 - title: Text Generation
   url: "docs/generation"
   children:
     - title: DevOps Engineer
       url: "docs/generation/DevOps-Engineer-AI-assistant"
+
 - title: Extras
   url: "docs/extras"
   children:
@@ -30,7 +30,3 @@
       url: "forum"
     - title: Interactive Code
       url: "docs/extras/interactive"
-- title: About
-  url: "about"
-- title: News
-  url: "news"
