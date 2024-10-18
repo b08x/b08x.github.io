@@ -1,5 +1,6 @@
 ---
 ---
+
 @import "../_sass/fonts.scss";
 @import "../_sass/highlighter.scss";
 @import "../_sass/normalize.scss";
@@ -7,49 +8,49 @@
 // Our variables
 $base-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-$base-font-size:   20px;
+$base-font-size: 20px;
 
 $base-font-weight: 400;
-$small-font-size:  $base-font-size * 0.875;
+$small-font-size: $base-font-size * 0.875;
 $base-line-height: 1.5;
 
-$spacing-unit:     30px;
+$spacing-unit: 30px;
 
-$text-color:       	#fafafa;
-$background-hr:		#383838;
-$background-color: 	#222222;
-$background-darker: #1B1B1B;
-$brand-color:	   	#43A047;
-$anchor-hover-color:	lighten($brand-color, 30%);
+$text-color: #fafafa;
+$background-hr: #383838;
+$background-color: #222222;
+$background-darker: #1b1b1b;
+$brand-color: #43a047;
+$anchor-hover-color: lighten($brand-color, 30%);
 
-$player-now-playing-size:   13px;
-$player-height:		64px;
-$player-button-size:	48px;
-$player-bgcolor:	$brand-color;
-$player-scrubber-color:	darken($brand-color, 1%);
-$player-loaded-color:	darken($brand-color, 5%);
-$player-progress-color:		lighten($brand-color, 10%);
-$player-play-color:		lighten($brand-color, 5%);
+$player-now-playing-size: 13px;
+$player-height: 64px;
+$player-button-size: 48px;
+$player-bgcolor: $brand-color;
+$player-scrubber-color: darken($brand-color, 1%);
+$player-loaded-color: darken($brand-color, 5%);
+$player-progress-color: lighten($brand-color, 10%);
+$player-play-color: lighten($brand-color, 5%);
 $player-progress-height: 10px;
 
-$tile-bgcolor:	   $brand-color;
-$tile-color:	   #fafafa;
-$tile-size:		   56px;
-$tile-size-large:  64px;
-$tile-border-radius:	2px;
+$tile-bgcolor: $brand-color;
+$tile-color: #fafafa;
+$tile-size: 56px;
+$tile-size-large: 64px;
+$tile-border-radius: 2px;
 
-$grey-color:       $brand-color;
+$grey-color: $brand-color;
 $grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark:  darken($grey-color, 25%);
+$grey-color-dark: darken($grey-color, 25%);
 
 // Width of the content area
-$content-width:    800px;
+$content-width: 800px;
 
-$on-tiny:          310px;
-$on-palm:          640px;
-$on-laptop:        800px;
+$on-tiny: 310px;
+$on-palm: 640px;
+$on-laptop: 800px;
 
-$height-600:       600px;
+$height-600: 600px;
 
 :root {
   --font-family-ibm: "IBM Plex Mono", monospace;
@@ -63,13 +64,13 @@ $height-600:       600px;
   --font-family-hack: "Hack", monospace;
   --font-family-forum: "Forum", serif;
 
-  --color-primary: #F0C018;
+  --color-primary: #f0c018;
   --color-secondary: #189090;
-  --color-tertiary: #FFC018;
+  --color-tertiary: #ffc018;
   --color-quaternary: #186078;
   --color-quinary: #786018;
   --color-senary: #604818;
-  --color-background: #F0F0F0;
+  --color-background: #f0f0f0;
   --color-text: #000000;
 }
 
@@ -79,24 +80,26 @@ body {
   color: var(--color-text);
 }
 
-.language-plaintext, .highlighter-rouge {
+.language-plaintext,
+.highlighter-rouge {
   display: flex;
   flex-direction: row;
 }
 
 .md-header-nav__button.md-logo * {
-  width: 48px
+  width: 48px;
 }
 
-.md-nav  {
+.md-nav {
   background-color: inherit;
 }
 
-.md-typeset .codehilite, .md-typeset .highlight {
+.md-typeset .codehilite,
+.md-typeset .highlight {
   background-color: var(--color-quaternary);
 }
 
-[data-md-color-primary=grey] .md-typeset a {
+[data-md-color-primary="grey"] .md-typeset a {
   color: var(--color-secondary);
 }
 
@@ -120,12 +123,14 @@ body {
   font-weight: 500;
 }
 
-.md-typeset h5, .md-typeset h6 {
+.md-typeset h5,
+.md-typeset h6 {
   font-weight: 400;
   color: var(--color-quinary);
 }
 
-.md-typeset pre.codehilite code, .md-typeset pre.highlight code {
+.md-typeset pre.codehilite code,
+.md-typeset pre.highlight code {
   color: var(--color-background);
 }
 
@@ -133,7 +138,8 @@ body {
   background-color: var(--color-background);
 }
 
-.md-typeset code, .md-typeset pre {
+.md-typeset code,
+.md-typeset pre {
   background-color: var(--color-text);
   box-shadow: unset;
   color: var(--color-primary);
@@ -149,16 +155,20 @@ em {
   border-left-color: var(--color-tertiary);
 }
 
-[data-md-color-primary=orange] .md-header, [data-md-color-primary=orange] .md-hero {
+[data-md-color-primary="orange"] .md-header,
+[data-md-color-primary="orange"] .md-hero {
   background-color: var(--color-text);
 }
 
-[data-md-color-primary=orange] .md-typeset a {
+[data-md-color-primary="orange"] .md-typeset a {
   color: var(--color-secondary);
   text-decoration: underline;
 }
 
-.md-typeset .codehilite code, .md-typeset .codehilite pre, .md-typeset .highlight code, .md-typeset .highlight pre {
+.md-typeset .codehilite code,
+.md-typeset .codehilite pre,
+.md-typeset .highlight code,
+.md-typeset .highlight pre {
   background-color: var(--color-quinary);
   padding: unset;
 }
@@ -212,148 +222,144 @@ Audio Player Styling
 *********************************************/
 
 .jp-audio {
-    position: relative;
+  position: relative;
 }
 
 .audio-footer-container {
-    background-color: darken($background-darker, 5%);
-    bottom: 0;
-    left: 0;
-    right: 0;
-    box-sizing: border-box;
-    width: 100%;
+  background-color: darken($background-darker, 5%);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-
 .audio-player {
-    padding: 0 0.25em;
-    background: none;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
-    max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
-
+  padding: 0 0.25em;
+  background: none;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
+  max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
 }
 
 .player-now-playing {
-    display: block;
-    font-size: $player-now-playing-size;
-    line-height: $player-now-playing-size;
-    //height: $player-now-playing-size * 3;
-    //height: auto;
-    margin-top: 0;
+  display: block;
+  font-size: $player-now-playing-size;
+  line-height: $player-now-playing-size;
+  //height: $player-now-playing-size * 3;
+  //height: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  text-align: center;
+  p {
+    padding-top: $player-now-playing-size / 2;
+    padding-bottom: $player-now-playing-size / 2;
     margin-bottom: 0;
-    padding: 0;
-    text-align: center;
-    p {
-        padding-top: $player-now-playing-size / 2;
-        padding-bottom: $player-now-playing-size / 2;;
-        margin-bottom: 0;
-    }
+  }
 }
 
 .player-buttons {
-    height: $player-height;
-    overflow: hidden;
-    position: relative;
-    text-align: center;
-    margin-top: 6px;
-    .player-buttons-prev-number {
-        float: right;
-        line-height: $player-button-size;
-        vertical-align: top;
-        color: $player-bgcolor;
-    }
-    .player-buttons-next-number {
-        float: left;
-        line-height: $player-button-size;
-        vertical-align: top;
-        color: $player-bgcolor;
-    }
-    .player-buttons-prev {
-        display: inline-block;
-        text-align: left;
-        position: absolute;
-        left: 0;
-        a {
-            background: url('../img/icons/button_prev.svg');
-            background-size: $player-button-size;
-            width: $player-button-size;
-            height: $player-button-size;
+  height: $player-height;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  margin-top: 6px;
+  .player-buttons-prev-number {
+    float: right;
+    line-height: $player-button-size;
+    vertical-align: top;
+    color: $player-bgcolor;
+  }
+  .player-buttons-next-number {
+    float: left;
+    line-height: $player-button-size;
+    vertical-align: top;
+    color: $player-bgcolor;
+  }
+  .player-buttons-prev {
+    display: inline-block;
+    text-align: left;
+    position: absolute;
+    left: 0;
+    a {
+      background: url("../img/icons/button_prev.svg");
+      background-size: $player-button-size;
+      width: $player-button-size;
+      height: $player-button-size;
 
-            display: inline-block;
-            line-height: $player-height;
-            margin: 0;
-            padding: 0;
-            z-index: 10000;
-        }
+      display: inline-block;
+      line-height: $player-height;
+      margin: 0;
+      padding: 0;
+      z-index: 10000;
     }
+  }
 
-    .player-buttons-next {
-        display: inline-block;
-        text-align: right;
-        position: absolute;
-        right: 0;
-        a {
-            background: url('../img/icons/button_next.svg');
-            background-size: $player-button-size;
-            width: $player-button-size;
-            height: $player-button-size;
+  .player-buttons-next {
+    display: inline-block;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    a {
+      background: url("../img/icons/button_next.svg");
+      background-size: $player-button-size;
+      width: $player-button-size;
+      height: $player-button-size;
 
-            display: inline-block;
-            line-height: $player-height;
-            margin: 0;
-            padding: 0;
-            text-align: right;
-            z-index: 10000;
-        }
+      display: inline-block;
+      line-height: $player-height;
+      margin: 0;
+      padding: 0;
+      text-align: right;
+      z-index: 10000;
     }
+  }
 }
 
 // jPlayer
 // Progress bar
 
 .jp-progress {
-    width: 100%;
-    height: $player-progress-height;
-    margin: 0 0 0 0;
-    border-radius: 3px;
-    background-color: $player-loaded-color;
+  width: 100%;
+  height: $player-progress-height;
+  margin: 0 0 0 0;
+  border-radius: 3px;
+  background-color: $player-loaded-color;
 }
 
 // Progress bar -- how much has played so far
 .jp-play-bar {
-    height: $player-progress-height;
-    border-radius: 3px;
-    background-color: $player-progress-color;
+  height: $player-progress-height;
+  border-radius: 3px;
+  background-color: $player-progress-color;
 }
 
 .jp-controls button.jp-play {
-    background: none;
-    width: $player-button-size;
-    height: $player-button-size;
-    background: url('../img/icons/button_play.svg');
-    background-size: 44px;
-    border: 2px solid #aaaaaa !important;
-    border-radius: 32px !important;
-    &:hover {
-        border-color: $player-bgcolor !important;
-    }
+  background: none;
+  width: $player-button-size;
+  height: $player-button-size;
+  background: url("../img/icons/button_play.svg");
+  background-size: 44px;
+  border: 2px solid #aaaaaa !important;
+  border-radius: 32px !important;
+  &:hover {
+    border-color: $player-bgcolor !important;
+  }
 }
 
 .jp-state-playing button.jp-play {
-    background: url('../img/icons/button_pause.svg');
-    background-size: $player-button-size;
-    background-size: 44px;
+  background: url("../img/icons/button_pause.svg");
+  background-size: $player-button-size;
+  background-size: 44px;
 }
-
-
 
 // Fallback audio element styling -- just for use if you're using the default HTML5 audio element with controls
 
 audio {
-    margin: 0 auto;
-    display: block;
-    width: 47rem;
-    height: 4rem;
+  margin: 0 auto;
+  display: block;
+  width: 47rem;
+  height: 4rem;
 }

@@ -9,3 +9,6 @@ _scratchpad
 /node_modules/
 assets/react-app/
 websitestuff/
+*.wav
+*.ogg
+*.opus

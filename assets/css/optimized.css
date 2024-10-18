@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: #783030;
+  color: #2597dc;
   text-decoration: none;
   transition: background 300ms;
   padding: 0 0.1em;
@@ -171,7 +171,7 @@ blockquote p {
   .md-content {
     margin-left: 24.2rem;
   }
-  
+
   .md-sidebar--secondary {
     margin-left: 122rem;
   }
@@ -188,9 +188,9 @@ blockquote p {
 @media print {
   .md-typeset a:after {
     color: rgba(0, 0, 0, .54);
-    content: " [" attr(href) "]";
+    content: " ["attr(href) "]";
   }
-  
+
   .md-content__icon,
   .md-footer,
   .md-header,
