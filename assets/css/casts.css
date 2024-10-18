@@ -1,0 +1,66 @@
+body {
+    font-family: var(--font-family-ibm);
+    line-height: 1.6;
+    color: #a0a0a0;
+    background-color: #181818;
+    margin: 0 auto;
+    padding: 20px;
+    font-size: xx-large;
+}
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.category {
+    color: #e12d39;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.title {
+    font-size: 2.5em;
+    margin: 10px 0;
+    font-family: var(--font-family-special);
+    color: #7e411b;
+}
+.subtitle {
+    font-style: italic;
+    color: #666;
+    max-width: 800px;
+    justify-self: center;
+}
+.byline {
+    margin-top: 20px;
+}        
+.episode-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    margin: 20px 0;
+}
+.metadata {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+.player {
+    background-color: #282828;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.content {
+    margin-top: 30px;
+}
+.tags {
+    margin-top: 30px;
+}
+.tag {
+    background-color: #333;
+    color: #a0a0a0;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-right: 10px;
+    text-decoration: none;
+}
