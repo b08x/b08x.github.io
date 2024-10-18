@@ -12,3 +12,5 @@ websitestuff/
 *.wav
 *.ogg
 *.opus
+assets/audio/staging/
+/_drafts/
