@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thought Habits - Episode Index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #181818;
+            color: #a0a0a0;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #b45309;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .episode {
+            background-color: #202020;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .episode h2 {
+            color: #b45309;
+            margin-top: 0;
+        }
+        .episode-meta {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .episode-summary {
+            margin-bottom: 10px;
+        }
+        .episode-link {
+            color: #b45309;
+            text-decoration: none;
+        }
+        .episode-link:hover {
+            text-decoration: underline;
+        }
+        .episode-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thought Habits</h1>
+        
+        {% for episode in site.casts %}
+        <div class="episode">
+            <img src="{{ episode.image }}" alt="{{ episode.title }} Image" class="episode-image">
+            <h2><a href="{{ episode.url }}" class="episode-link">{{ episode.title }}</a></h2>
+            <div class="episode-meta">
+                {{ episode.date | date: "%B %d, %Y" }} • Duration: {{ episode.duration }}
+            </div>
+            <div class="episode-summary">
+                {{ episode.summary }}
+            </div>
+            <a href="{{ episode.url }}" class="episode-link">Listen to episode</a>
+        </div>
+        {% endfor %}
+        
+        <!-- More episode entries would be added here -->
+        
+    </div>
+</body>
+</html>

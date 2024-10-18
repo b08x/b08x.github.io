@@ -10,8 +10,8 @@ module Recents
     def generate(site)
       all_notes = site.collections['notes'].docs
       project_docs = site.collections['docs'].docs
-      projects = site.collections['projects'].docs
-      items = all_notes + project_docs + projects
+      casts = site.collections['casts'].docs
+      items = all_notes + project_docs + casts
       items.each do |page|
         timestamp = Jekyll::LastModifiedAt::Determinator.new(site.source, page.path, '%FT%T%:z').to_s
         page.data['last_modified_at_timestamp'] = timestamp

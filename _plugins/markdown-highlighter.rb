@@ -10,6 +10,10 @@ Jekyll::Hooks.register [:docs], :pre_render do |doc|
   replace(doc)
 end
 
+Jekyll::Hooks.register [:casts], :pre_render do |doc|
+  replace(doc)
+end
+
 Jekyll::Hooks.register [:pages], :pre_render do |doc|
   # jekyll considers anything at the root as a page,
   # we only want to consider actual pages

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ page.title }} | SyncopatedNotes</title>
+        <style>
+        body {
+            font-family: var(--font-family-ibm);
+            line-height: 1.6;
+            color: #a0a0a0;
+            background-color: #181818;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-size: xx-large;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .category {
+            color: #e12d39;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .title {
+            font-size: 2.5em;
+            margin: 10px 0;
+            font-family: var(--font-family-special);
+            color: #7e411b;
+        }
+        .subtitle {
+            font-style: italic;
+            color: #666;
+            max-width: 800px;
+            justify-self: center;
+        }
+        .byline {
+            margin-top: 20px;
+        }        
+        .episode-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            margin: 20px 0;
+        }
+        .metadata {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        .player {
+            background-color: #282828;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .content {
+            margin-top: 30px;
+        }
+        .tags {
+            margin-top: 30px;
+        }
+        .tag {
+            background-color: #333;
+            color: #a0a0a0;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="header">
+            <!-- <div class="category">{{ page.category | default: "RADIO ATLANTIC" }}</div> -->
+            <h1 class="title">{{ page.title }}</h1>
+            <div class="subtitle">{{ page.summary | default: page.excerpt
+                }}</div>
+            <div class="byline">By {{ site.author | default: "Hanna Rosin"
+                }}</div>
+        </div>
+
+        <img class="episode-image"
+            src="{{ page.image | default: '/path/to/default-image.jpg' }}"
+            alt="{{ page.title }}">
+
+        <div class="metadata">
+            <span>Episode {{ page.episode_number }}</span>
+            <span>{{ page.date | date: "%B %d, %Y" }}</span>
+            <span>Duration: {{ page.duration }}</span>
+        </div>
+
+        <div class="player">
+            <audio controls style="width: 100%;">
+                <source src="{{ page.audio_url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <div class="content">
+            <h2>Show Notes</h2>
+            {{ content }}
+        </div>
+
+        {% if page.tags %}
+        <div class="tags">
+            <h3>Tags</h3>
+            {% for tag in page.tags %}
+            <a href="/tags/{{ tag | slugify }}" class="tag">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if page.contributors %}
+        <div class="contributors">
+            <h3>Contributors</h3>
+            <ul>
+                {% for contributor in page.contributors %}
+                <li>{{ contributor }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="related-episodes">
+            <h3>Related Episodes</h3>
+            <!-- Add logic to display related episodes here -->
+        </div>
+
+        <div class="subscribe">
+            <h3>Subscribe</h3>
+            <p>
+                Listen on:
+                <a href="#">Apple Podcasts</a> |
+                <a href="#">Spotify</a> |
+                <a href="#">YouTube</a> |
+                <a href="#">Overcast</a> |
+                <a href="#">Pocket Casts</a>
+            </p>
+        </div>
+    </body>
+</html>

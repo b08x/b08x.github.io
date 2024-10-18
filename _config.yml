@@ -35,14 +35,12 @@ plugins:
   - jekyll-paginate-v2
   - jekyll-feed
   - jekyll-pandoc
-  - jekyll-react-player
   - jekyll-responsive-image
 include:
   - "_notes/"
   - "_pages/"
   - "_posts/"
-  - "_projects/"
-  - "_notebookllm/"
+  - "_casts/"
 exclude:
   - "CHANGELOG.md"
   - "LICENSE"
@@ -119,7 +117,7 @@ accentColor: orange # purple, green, etc.
 themeColor: orange # purple, green, blue, orange, purple, grey
 fixedNav: 'false' # true or false
 
-permalink: /:year/:title/
+permalink: /:year/:month/:day/:title/
 markdown: kramdown
 
 jekyll-spaceship:
@@ -151,10 +149,7 @@ collections:
   notes:
     output: true
     permalink: /:collection/:path
-  projects:
-    output: true
-    permalink: /:collection/:path
-  notebookllm:
+  casts:
     output: true
     permalink: /:collection/:path
 
@@ -162,6 +157,18 @@ collections:
 # Defaults
 defaults:
   - scope:
+      path: "_posts/**/*.md"
+      type: "posts"
+    values:
+      layout: "post"
+  - 
+    scope:
+      path: "_pages/*.md"
+      type: "pages"
+    values:
+      layout: "page"
+  - 
+    scope:
       path: "_notes/**/*.md"
     values:
       layout: "note"
@@ -173,50 +180,7 @@ defaults:
       layout: "docs"
   -
     scope:
-      path: "_projects/**/*.md"
-      type: "projects"
+      path: "_casts/**/*.md"
+      type: "casts"
     values:
-      layout: "project"
-  -
-    scope:
-      path: "_pages/*.md"
-      type: "pages"
-    values:
-      layout: "page"
-  -
-    scope:
-      path: "_pages/projects/**/*.md"
-    values:
-      layout: "page"
-  -
-    scope:
-      path: "_posts/**/*.md"
-      type: "posts"
-    values:
-      layout: "post"
-  -
-    scope:
-      path: "ai_safety_education.md"
-    values:
-      layout: "carousel_layout"
-  -
-    scope:
-      path: "_notebookllm/**/*.md"
-      type: "notebookLLM"
-    values:
-      layout: "podcast"
-      permalink: /:podcast_episode/
-
-podcast:
-  title: "Composite Semantics"
-  subtitle: "Using Words For Mostly Good"
-  description: "A podcast exploring the intersection of language, technology, and philosophy in the context of IT, LLMs, and AI."
-  summary: "Composite Semantics is a podcast that delves into the fascinating world of language, technology, and philosophy. Join us as we explore the latest developments in IT, Large Language Models (LLMs), and Artificial Intelligence (AI), and discuss their implications for our understanding of meaning, communication, and cognition."
-  email: rwpannick@gmail.com
-  language: en-US
-  author: Robert Pannick
-  owner: Robert Pannick
-  explicit: false
-  category: "Technology"
-  subcategory: "Artificial Intelligence"
-  complete: no
+      layout: "casts"
