@@ -1,36 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-{% include notebook/head.html %}
-<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-<body>
-  <nav>{% include notebook/nav.html %}</nav>
-  <div class="wrapper">
-    <main>
-        <div class="container">
-            <h1>Thought Habits</h1>
-            
-            <div class="episodes-grid">
-                {% for episode in site.casts %}
-                <div class="episode-card">
-                    <img src="{{ episode.image }}" alt="{{ episode.title }} Image" class="episode-image">
-                    <div class="episode-content">
-                        <h2 class="episode-title">{{ episode.title }}</h2>
-                        <div class="episode-meta">
-                            {{ episode.date | date: "%B %d, %Y" }} • {{ episode.duration }}
-                        </div>
-                        <div class="episode-summary">
-                            {{ episode.summary }}
-                        </div>
-                        <a href="{{ episode.url }}" class="episode-link">Listen to episode →</a>
-                    </div>
+---
+layout: base
+---
+
+<div class="container">
+    <h1>Thought Habits</h1>
+    
+    <div class="episodes-grid">
+        {% for episode in site.casts %}
+        <div class="episode-card">
+            <img src="{{ episode.image }}" alt="{{ episode.title }} Image" class="episode-image">
+            <div class="episode-content">
+                <h2 class="episode-title">{{ episode.title }}</h2>
+                <div class="episode-meta">
+                    {{ episode.date | date: "%B %d, %Y" }} • {{ episode.duration }}
                 </div>
-                {% endfor %}
+                <div class="episode-summary">
+                    {{ episode.summary }}
+                </div>
+                <a href="{{ episode.url }}" class="episode-link">Listen to episode →</a>
             </div>
         </div>
-    </main>
-    <footer>{% include notebook/footer.html %}</footer>
-  </div>
-
-  {% include link-previews.html wrapperQuerySelector="content" %}
-</body>
-</html>
+        {% endfor %}
+    </div>
+</div>

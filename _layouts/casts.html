@@ -1,82 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-{% include notebook/head.html %}
-<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-<body>
-  <nav>{% include notebook/nav.html %}</nav>
-  <div class="wrapper">
-    <main>
-        <div class="header">
-            <!-- <div class="category">{{ page.category | default: "RADIO ATLANTIC" }}</div> -->
-            <h1 class="title">{{ page.title }}</h1>
-            <div class="subtitle">{{ page.summary | default: page.excerpt
-                }}</div>
-            <div class="byline">By {{ site.author | default: "Hanna Rosin"
-                }}</div>
-        </div>
+---
+layout: base
+---
 
-        <img class="episode-image"
-            src="{{ page.image | default: '/path/to/default-image.jpg' }}"
-            alt="{{ page.title }}">
+<div class="header">
+    <h1 class="title">{{ page.title }}</h1>
+    <div class="subtitle">{{ page.summary | default: page.excerpt }}</div>
+    <div class="byline">By {{ site.author | default: "Hanna Rosin" }}</div>
+</div>
 
-        <div class="metadata">
-            <span>Episode {{ page.episode_number }}</span>
-            <span>{{ page.date | date: "%B %d, %Y" }}</span>
-            <span>Duration: {{ page.duration }}</span>
-        </div>
+<img class="episode-image"
+    src="{{ page.image | default: '/path/to/default-image.jpg' }}"
+    alt="{{ page.title }}">
 
-        <div class="player">
-            <audio controls style="width: 100%;">
-                <source src="{{ page.audio_url }}" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
+<div class="metadata">
+    <span>Episode {{ page.episode_number }}</span>
+    <span>{{ page.date | date: "%B %d, %Y" }}</span>
+    <span>Duration: {{ page.duration }}</span>
+</div>
 
-        <div class="content">
-            <h2>Show Notes</h2>
-            {{ content }}
-        </div>
+<div class="player">
+    <audio controls style="width: 100%;">
+        <source src="{{ page.audio_url }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
 
-        {% if page.tags %}
-        <div class="tags">
-            <h3>Tags</h3>
-            {% for tag in page.tags %}
-            <a href="/tags/{{ tag | slugify }}" class="tag">{{ tag }}</a>
-            {% endfor %}
-        </div>
-        {% endif %}
+<div class="content">
+    <h2>Show Notes</h2>
+    {{ content }}
+</div>
 
-        {% if page.contributors %}
-        <div class="contributors">
-            <h3>Contributors</h3>
-            <ul>
-                {% for contributor in page.contributors %}
-                <li>{{ contributor }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
+{% if page.tags %}
+<div class="tags">
+    <h3>Tags</h3>
+    {% for tag in page.tags %}
+    <a href="/tags/{{ tag | slugify }}" class="tag">{{ tag }}</a>
+    {% endfor %}
+</div>
+{% endif %}
 
-        <div class="related-episodes">
-            <h3>Related Episodes</h3>
-            <!-- Add logic to display related episodes here -->
-        </div>
+{% if page.contributors %}
+<div class="contributors">
+    <h3>Contributors</h3>
+    <ul>
+        {% for contributor in page.contributors %}
+        <li>{{ contributor }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 
-        <div class="subscribe">
-            <h3>Subscribe</h3>
-            <p>
-                Listen on:
-                <a href="#">Apple Podcasts</a> |
-                <a href="#">Spotify</a> |
-                <a href="#">YouTube</a> |
-                <a href="#">Overcast</a> |
-                <a href="#">Pocket Casts</a>
-            </p>
-        </div>
-    </main>
-    <footer>{% include notebook/footer.html %}</footer>
-  </div>
+<div class="related-episodes">
+    <h3>Related Episodes</h3>
+    <!-- Add logic to display related episodes here -->
+</div>
 
-  {% include link-previews.html wrapperQuerySelector="content" %}
-</body>
-</html>
+<div class="subscribe">
+    <h3>Subscribe</h3>
+    <p>
+        Listen on:
+        <a href="#">Apple Podcasts</a> |
+        <a href="#">Spotify</a> |
+        <a href="#">YouTube</a> |
+        <a href="#">Overcast</a> |
+        <a href="#">Pocket Casts</a>
+    </p>
+</div>
