@@ -66,13 +66,13 @@ a:hover {
   background: #fffaf1;
 }
 
-a:after {
+/* a:after {
   position: relative;
   top: -0.5em;
   font-size: 0.7em;
   content: "↗";
   color: #aaaaaa;
-}
+} */
 
 a.internal-link:after, a.footnote:after, a.reversefootnote:after {
   content: "";
