@@ -2,67 +2,142 @@
 layout: base
 ---
 
-<div class="header">
-    <h1 class="title">{{ page.title }}</h1>
-    <div class="subtitle">{{ page.summary | default: page.excerpt }}</div>
-    <div class="byline">By {{ site.author | default: "Hanna Rosin" }}</div>
-</div>
+<style>
+    .cast-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
 
-<img class="episode-image"
-    src="{{ page.image | default: '/path/to/default-image.jpg' }}"
-    alt="{{ page.title }}">
+    .episode-image {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 20px 0;
+    }
 
-<div class="metadata">
-    <span>Episode {{ page.episode_number }}</span>
-    <span>{{ page.date | date: "%B %d, %Y" }}</span>
-    <span>Duration: {{ page.duration }}</span>
-</div>
+    .metadata {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
 
-<div class="player">
-    <audio controls style="width: 100%;">
-        <source src="{{ page.audio_url }}" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-</div>
+    .metadata span {
+        background-color: #f0f0f0;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
 
-<div class="content">
-    <h2>Show Notes</h2>
-    {{ content }}
-</div>
+    .player audio {
+        width: 100%;
+    }
 
-{% if page.tags %}
-<div class="tags">
-    <h3>Tags</h3>
-    {% for tag in page.tags %}
-    <a href="/tags/{{ tag | slugify }}" class="tag">{{ tag }}</a>
-    {% endfor %}
-</div>
-{% endif %}
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 
-{% if page.contributors %}
-<div class="contributors">
-    <h3>Contributors</h3>
-    <ul>
-        {% for contributor in page.contributors %}
-        <li>{{ contributor }}</li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
+    .tag {
+        background-color: #e0e0e0;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #333;
+    }
 
-<div class="related-episodes">
-    <h3>Related Episodes</h3>
-    <!-- Add logic to display related episodes here -->
-</div>
+    .subscribe-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 
-<div class="subscribe">
-    <h3>Subscribe</h3>
-    <p>
-        Listen on:
-        <a href="#">Apple Podcasts</a> |
-        <a href="#">Spotify</a> |
-        <a href="#">YouTube</a> |
-        <a href="#">Overcast</a> |
-        <a href="#">Pocket Casts</a>
-    </p>
+    .subscribe-links a {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    @media (max-width: 600px) {
+        .metadata {
+            flex-direction: column;
+        }
+        
+        .subscribe-links {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<div class="cast-container">
+    <div class="header">
+        <h1 class="title">{{ page.title }}</h1>
+        <div class="subtitle">{{ page.summary | default: page.excerpt }}</div>
+        <div class="byline">By {{ site.author | default: "Hanna Rosin" }}</div>
+    </div>
+
+    <picture>
+        <source media="(max-width: 480px)" srcset="{{ page.image | default: '/path/to/default-image.jpg' | replace: '.jpg', '-small.jpg' }}">
+        <source media="(max-width: 768px)" srcset="{{ page.image | default: '/path/to/default-image.jpg' | replace: '.jpg', '-medium.jpg' }}">
+        <img class="episode-image" src="{{ page.image | default: '/path/to/default-image.jpg' }}" alt="{{ page.title }}">
+    </picture>
+
+    <div class="metadata">
+        <span class="episode-number">Episode {{ page.episode_number }}</span>
+        <span class="episode-date">{{ page.date | date: "%B %d, %Y" }}</span>
+        <span class="episode-duration">Duration: {{ page.duration }}</span>
+    </div>
+
+    <div class="player">
+        <audio controls>
+            <source src="{{ page.audio_url }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <div class="content">
+        <h2>Show Notes</h2>
+        {{ content }}
+    </div>
+
+    {% if page.tags %}
+    <div class="tags">
+        <h3>Tags</h3>
+        <div class="tag-list">
+            {% for tag in page.tags %}
+            <a href="/tags/{{ tag | slugify }}" class="tag">{{ tag }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if page.contributors %}
+    <div class="contributors">
+        <h3>Contributors</h3>
+        <ul>
+            {% for contributor in page.contributors %}
+            <li>{{ contributor }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="related-episodes">
+        <h3>Related Episodes</h3>
+        <!-- Add logic to display related episodes here -->
+    </div>
+
+    <div class="subscribe">
+        <h3>Subscribe</h3>
+        <div class="subscribe-links">
+            <a href="#">Apple Podcasts</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Overcast</a>
+            <a href="#">Pocket Casts</a>
+        </div>
+    </div>
 </div>

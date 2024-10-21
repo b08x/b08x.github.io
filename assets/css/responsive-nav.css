@@ -1,6 +1,5 @@
 /* Responsive Navigation Styles */
 .site-nav {
-  background-color: #3f51b5;
   padding: 1rem;
 }
 
@@ -69,7 +68,6 @@
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #3f51b5;
     padding: 1rem;
   }
 

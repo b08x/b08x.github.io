@@ -2,20 +2,111 @@
 layout: base
 ---
 
-<div class="container">
-    <h1>Thought Habits</h1>
+<style>
+    .casts-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .casts-title {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .episodes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .episode-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .episode-card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .episode-image-container {
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+    }
+
+    .episode-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .episode-content {
+        padding: 20px;
+    }
+
+    .episode-title {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1.2em;
+    }
+
+    .episode-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .episode-summary {
+        margin-bottom: 15px;
+        font-size: 0.95em;
+    }
+
+    .episode-link {
+        display: inline-block;
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .episode-link:hover {
+        background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+        .episodes-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="casts-container">
+    <h1 class="casts-title">Thought Habits</h1>
     
     <div class="episodes-grid">
         {% for episode in site.casts %}
         <div class="episode-card">
-            <img src="{{ episode.image }}" alt="{{ episode.title }} Image" class="episode-image">
+            <div class="episode-image-container">
+                <picture>
+                    <source media="(max-width: 480px)" srcset="{{ episode.image | replace: '.jpg', '-small.jpg' }}">
+                    <source media="(max-width: 768px)" srcset="{{ episode.image | replace: '.jpg', '-medium.jpg' }}">
+                    <img src="{{ episode.image }}" alt="{{ episode.title }} Image" class="episode-image">
+                </picture>
+            </div>
             <div class="episode-content">
                 <h2 class="episode-title">{{ episode.title }}</h2>
                 <div class="episode-meta">
-                    {{ episode.date | date: "%B %d, %Y" }} • {{ episode.duration }}
+                    <span class="episode-date">{{ episode.date | date: "%B %d, %Y" }}</span>
+                    <span class="episode-duration">{{ episode.duration }}</span>
                 </div>
                 <div class="episode-summary">
-                    {{ episode.summary }}
+                    {{ episode.summary | truncate: 150 }}
                 </div>
                 <a href="{{ episode.url }}" class="episode-link">Listen to episode →</a>
             </div>
