@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module UI - flowbots v0.1</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-c-custom_workflow">::custom_workflow</a>
+    <li ><a href="#method-c-edit_api_settings">::edit_api_settings</a>
+    <li ><a href="#method-c-edit_general_settings">::edit_general_settings</a>
+    <li ><a href="#method-c-edit_workflow_settings">::edit_workflow_settings</a>
+    <li ><a href="#method-c-open_settings">::open_settings</a>
+    <li ><a href="#method-c-run_workflow">::run_workflow</a>
+    <li ><a href="#method-c-start">::start</a>
+    <li ><a href="#method-c-start_workflow">::start_workflow</a>
+    <li ><a href="#method-c-view_logs">::view_logs</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-UI">
+  <h1 id="module-UI" class="module">
+    module UI
+  </h1>
+
+  <section class="description">
+    
+<p>Provides user interface functionality for the <a href="Flowbots.html"><code>Flowbots</code></a> application.</p>
+
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+
+
+
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+      <div id="method-c-custom_workflow" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">custom_workflow</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Creates a custom workflow.</p>
+
+<p>Prompts the user for a workflow name and tasks, and displays the created workflow.</p>
+
+<p>@return [void]</p>
+
+          <div class="method-source-code" id="custom_workflow-source">
+            <pre><span class="ruby-comment"># File lib/ui.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">custom_workflow</span>
+  <span class="ruby-identifier">say</span>(<span class="ruby-value">:info</span>, <span class="ruby-string">&quot;Custom Workflow Creator&quot;</span>)
+  <span class="ruby-identifier">workflow_name</span> = <span class="ruby-identifier">prompt</span>.<span class="ruby-identifier">ask</span>(<span class="ruby-string">&quot;Enter a name for your custom workflow:&quot;</span>)
+  <span class="ruby-identifier">tasks</span> = []
+  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">task</span> = <span class="ruby-identifier">prompt</span>.<span class="ruby-identifier">ask</span>(<span class="ruby-string">&quot;Enter a task for your workflow (or &#39;done&#39; to finish):&quot;</span>)
+    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;done&quot;</span>
+
+    <span class="ruby-identifier">tasks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">say</span>(<span class="ruby-value">:ok</span>, <span class="ruby-node">&quot;Custom workflow &#39;#{workflow_name}&#39; created with #{tasks.size} tasks.&quot;</span>)
+  <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">task</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">say</span>(<span class="ruby-value">:info</span>, <span class="ruby-node">&quot;Task #{index + 1}: #{task}&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-edit_api_settings" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">edit_api_settings</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Edits <a href="API.html"><code>API</code></a> settings.</p>
+
+<p>Displays a placeholder message indicating the <a href="API.html"><code>API</code></a> settings editor.</p>
+
+<p>@return [void]</p>
+
+          <div class="method-source-code" id="edit_api_settings-source">
+            <pre><span class="ruby-comment"># File lib/ui.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">edit_api_settings</span>
+  <span class="ruby-comment"># Implement API settings editor</span>
+  <span class="ruby-identifier">say</span>(<span class="ruby-value">:info</span>, <span class="ruby-string">&quot;Editing API Settings&quot;</span>)
+  <span class="ruby-comment"># Add more specific setting options here</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-edit_general_settings" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">edit_general_settings</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Edits general settings.</p>
+
+<p>Displays a placeholder message indicating the general settings editor.</p>
+
+<p>@return [void]</p>
+
+          <div class="method-source-code" id="edit_general_settings-source">
+            <pre><span class="ruby-comment"># File lib/ui.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">edit_general_settings</span>
+  <span class="ruby-comment"># Implement general settings editor</span>
+  <span class="ruby-identifier">say</span>(<span class="ruby-value">:info</span>, <span class="ruby-string">&quot;Editing General Settings&quot;</span>)
+  <span class="ruby-comment"># Add more specific setting options here</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-edit_workflow_settings" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">edit_workflow_settings</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Edits workflow settings.</p>
+
+<p>Displays a placeholder message indicating the workflow settings editor.</p>
+
+<p>@return [void]</p>
+
+          <div class="method-source-code" id="edit_workflow_settings-source">
+            <pre><span class="ruby-comment"># File lib/ui.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">edit_workflow_settings</span>
+  <span class="ruby-comment"># Implement workflow settings editor</span>
+  <span class="ruby-identifier">say</span>(<span class="ruby-value">:info</span>, <span class="ruby-string">&quot;Editing Workflow Settings&quot;</span>)
+  <span class="ruby-comment"># Add more specific setting options here</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-open_settings" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">open_settings</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Opens the settings menu.</p>
+
+<p>Displays a menu of settings categories and handles user selection.</p>
+
+<p>@return [void]</p>
+
+          <div class="method-source-code" id="open_settings-source">
+            <pre><span class="ruby-comment"># File lib/ui.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open_settings</span>
+  <span class="ruby-identifier">settings_choices</span> = [
+    { <span class="ruby-value">name:</span> <span class="ruby-string">&quot;General Settings&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-value">:general</span> },
+    { <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Workflow Settings&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-value">:workflow</span> },
+    { <span class="ruby-value">name:</span> <span class="ruby-string">&quot;API Settings&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-value">:api</span> },
+    { <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Back to Main Menu&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-value">:back</span> }
+  ]
+
+  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">choice</span> = <span class="ruby-identifier">prompt</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;Select a settings category:&quot;</span>, <span class="ruby-identifier">settings_choices</span>)
+
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">choice</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:general</span>
+      <span class="ruby-identifier">edit_general_settings</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:workflow</span>
+      <span class="ruby-identifier">edit_workflow_settings</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:api</span>
+      <span class="ruby-identifier">edit_api_settings</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:back</span>
+      <span class="ruby-keyword">break</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-run_workflow" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">run_workflow</span><span
+              class="method-args">(workflow_name)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Runs a workflow with a given name.</p>
+
+<p>Displays a spinner indicating workflow execution and simulates completion.</p>
+
+<p>@param workflow_name [String] The name of the workflow to run.</p>
+
+<p>@return [void]</p>
+
+          <div class="method-source-code" id="run_workflow-source">
+            <pre><span class="ruby-comment"># File lib/ui.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run_workflow</span>(<span class="ruby-identifier">workflow_name</span>)
+  <span class="ruby-identifier">spinner</span> = <span class="ruby-constant">TTY</span><span class="ruby-operator">::</span><span class="ruby-constant">Spinner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;[:spinner] Running #{workflow_name} Workflow...&quot;</span>, <span class="ruby-value">format:</span> <span class="ruby-value">:dots</span>)
+  <span class="ruby-identifier">spinner</span>.<span class="ruby-identifier">auto_spin</span>
+
+  <span class="ruby-comment"># Simulate workflow execution</span>
+  <span class="ruby-identifier">sleep</span>(<span class="ruby-value">3</span>)
+
+  <span class="ruby-identifier">spinner</span>.<span class="ruby-identifier">success</span>(<span class="ruby-node">&quot;(#{workflow_name} Workflow completed successfully!)&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-start" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">start</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Starts the main <a href="UI.html"><code>UI</code></a> loop.</p>
+
+<p>Displays the main menu and handles user interactions.</p>
+
+<p>@return [void]</p>
+
+          <div class="method-source-code" id="start-source">
+            <pre><span class="ruby-comment"># File lib/ui.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">start</span>
+  <span class="ruby-identifier">loop</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">header</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">main_menu</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:workflow</span>
+      <span class="ruby-identifier">start_workflow</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:settings</span>
+      <span class="ruby-identifier">open_settings</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:logs</span>
+      <span class="ruby-identifier">view_logs</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:exit</span>
+      <span class="ruby-identifier">say</span>(<span class="ruby-value">:ok</span>, <span class="ruby-string">&quot;Thank you for using Flowbots. Goodbye!&quot;</span>)
+      <span class="ruby-keyword">break</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-start_workflow" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">start_workflow</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Starts the workflow selection process.</p>
+
+<p>Displays a menu of available workflows and handles user selection.</p>
+
+<p>@return [void]</p>
+
+          <div class="method-source-code" id="start_workflow-source">
+            <pre><span class="ruby-comment"># File lib/ui.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">start_workflow</span>
+  <span class="ruby-identifier">workflow_choices</span> = [
+    { <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Text Processing Workflow&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-value">:text_processing</span> },
+    { <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Topic Model Trainer Workflow&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-value">:topic_model</span> },
+    { <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Custom Workflow&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-value">:custom</span> },
+    { <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Back to Main Menu&quot;</span>, <span class="ruby-value">value:</span> <span class="ruby-value">:back</span> }
+  ]
+
+  <span class="ruby-identifier">choice</span> = <span class="ruby-identifier">prompt</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;Select a workflow to start:&quot;</span>, <span class="ruby-identifier">workflow_choices</span>)
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">choice</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:text_processing</span>
+    <span class="ruby-identifier">run_workflow</span>(<span class="ruby-string">&quot;Text Processing&quot;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:topic_model</span>
+    <span class="ruby-identifier">run_workflow</span>(<span class="ruby-string">&quot;Topic Model Trainer&quot;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:custom</span>
+    <span class="ruby-identifier">custom_workflow</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:back</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-view_logs" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">view_logs</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Views the application logs.</p>
+
+<p>Attempts to read the log file and display it in a scrollable box. Handles potential errors during file reading.</p>
+
+<p>@return [void]</p>
+
+          <div class="method-source-code" id="view_logs-source">
+            <pre><span class="ruby-comment"># File lib/ui.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">view_logs</span>
+  <span class="ruby-identifier">log_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">LOG_DIR</span>, <span class="ruby-node">&quot;flowbots-#{current_date}.log&quot;</span>)
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">log_content</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">log_file</span>)
+    <span class="ruby-constant">ScrollableBox</span>.<span class="ruby-identifier">side_by_side_boxes</span>(
+      <span class="ruby-identifier">log_content</span>,
+      <span class="ruby-string">&quot;Log Analysis Goes Here&quot;</span>,
+      <span class="ruby-value">title1:</span> <span class="ruby-string">&quot;Log Viewer&quot;</span>,
+      <span class="ruby-value">title2:</span> <span class="ruby-string">&quot;Log Analysis&quot;</span>
+    )
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
+    <span class="ruby-identifier">say</span>(<span class="ruby-value">:error</span>, <span class="ruby-node">&quot;Log file not found: #{log_file}&quot;</span>)
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">say</span>(<span class="ruby-value">:error</span>, <span class="ruby-node">&quot;Error reading log file: #{e.message}&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.6.3.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
