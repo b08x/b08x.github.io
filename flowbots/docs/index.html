@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>flowbots v0.1</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search (/) for a class, method, ..." spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  <div id="project-metadata">
+    
+<div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+    <li><a href="./LICENSE.html">LICENSE</a>
+    <li><a href="./README_md.html">README</a>
+  </ul>
+</div>
+
+    <div id="classindex-section" class="nav-section">
+  <h3>Class and Module Index</h3>
+
+  <ul class="link-list">
+  <li><code><a href="./API.html">API</a></code>
+  <li><code><a href="./AccumulateFilteredSegmentsTask.html">AccumulateFilteredSegmentsTask</a></code>
+  <li><code><a href="./Agent.html">Agent</a></code>
+  <li><code><a href="./BatchCompletionTask.html">BatchCompletionTask</a></code>
+  <li><code><a href="./Cartridge.html">Cartridge</a></code>
+  <li><code><a href="./CompressionTask.html">CompressionTask</a></code>
+  <li><code><a href="./CompressionTestAssessmentTask.html">CompressionTestAssessmentTask</a></code>
+  <li><code><a href="./CompressionTestEvalTask.html">CompressionTestEvalTask</a></code>
+  <li><code><a href="./CompressionTestTask.html">CompressionTestTask</a></code>
+  <li><code><a href="./Cursor.html">Cursor</a></code>
+  <li><code><a href="./DisplayResultsTask.html">DisplayResultsTask</a></code>
+  <li><code><a href="./ExceptionAgent.html">ExceptionAgent</a></code>
+  <li><code><a href="./FileLoaderTask.html">FileLoaderTask</a></code>
+  <li><code><a href="./FileObject.html">FileObject</a></code>
+  <li><code><a href="./FilterSegmentsTask.html">FilterSegmentsTask</a></code>
+  <li><code><a href="./FinalReportTask.html">FinalReportTask</a></code>
+  <li><details><summary><code><a href="./Flowbots.html">Flowbots</a></code></summary>
+  <ul class="link-list">
+  <li><code><a href="./Flowbots/APIError.html">APIError</a></code>
+  <li><code><a href="./Flowbots/AgentError.html">AgentError</a></code>
+  <li><code><a href="./Flowbots/BaseTask.html">BaseTask</a></code>
+  <li><code><a href="./Flowbots/BatchProcessor.html">BatchProcessor</a></code>
+  <li><code><a href="./Flowbots/CLI.html">CLI</a></code>
+  <li><code><a href="./Flowbots/ConfigurationError.html">ConfigurationError</a></code>
+  <li><code><a href="./Flowbots/ExceptionAgent.html">ExceptionAgent</a></code>
+  <li><code><a href="./Flowbots/ExceptionHandler.html">ExceptionHandler</a></code>
+  <li><code><a href="./Flowbots/FileDiscovery.html">FileDiscovery</a></code>
+  <li><code><a href="./Flowbots/FileLoader.html">FileLoader</a></code>
+  <li><code><a href="./Flowbots/FileNotFoundError.html">FileNotFoundError</a></code>
+  <li><code><a href="./Flowbots/FileObjectError.html">FileObjectError</a></code>
+  <li><code><a href="./Flowbots/FlowbotError.html">FlowbotError</a></code>
+  <li><code><a href="./Flowbots/GrammarProcessor.html">GrammarProcessor</a></code>
+  <li><code><a href="./Flowbots/NLPProcessor.html">NLPProcessor</a></code>
+  <li><code><a href="./Flowbots/Task.html">Task</a></code>
+  <li><code><a href="./Flowbots/TaskNotFoundError.html">TaskNotFoundError</a></code>
+  <li><code><a href="./Flowbots/TextProcessingWorkflow.html">TextProcessingWorkflow</a></code>
+  <li><code><a href="./Flowbots/TextProcessor.html">TextProcessor</a></code>
+  <li><code><a href="./Flowbots/TextSegmentProcessor.html">TextSegmentProcessor</a></code>
+  <li><code><a href="./Flowbots/TextTaggerProcessor.html">TextTaggerProcessor</a></code>
+  <li><code><a href="./Flowbots/TextTokenizeProcessor.html">TextTokenizeProcessor</a></code>
+  <li><code><a href="./Flowbots/TopicModelProcessor.html">TopicModelProcessor</a></code>
+  <li><code><a href="./Flowbots/TopicModelTrainerWorkflow.html">TopicModelTrainerWorkflow</a></code>
+  <li><code><a href="./Flowbots/TopicModelTrainerWorkflowtest.html">TopicModelTrainerWorkflowtest</a></code>
+  <li><code><a href="./Flowbots/UnifiedFileProcessingPipeline.html">UnifiedFileProcessingPipeline</a></code>
+  <li><code><a href="./Flowbots/WorkflowError.html">WorkflowError</a></code>
+  <li><code><a href="./Flowbots/Workflows.html">Workflows</a></code>
+  </ul></details>
+  <li><code><a href="./FlowiseApiClient.html">FlowiseApiClient</a></code>
+  <li><code><a href="./InputRetrieval.html">InputRetrieval</a></code>
+  <li><details><summary><code><a href="./Jongleur.html">Jongleur</a></code></summary>
+  <ul class="link-list">
+  <li><code><a href="./Jongleur/WorkerTask.html">WorkerTask</a></code>
+  </ul></details>
+  <li><code><a href="./Lemma.html">Lemma</a></code>
+  <li><code><a href="./LlmAnalysisTask.html">LlmAnalysisTask</a></code>
+  <li><code><a href="./LoadFileObjectTask.html">LoadFileObjectTask</a></code>
+  <li><code><a href="./LoadTextFilesTask.html">LoadTextFilesTask</a></code>
+  <li><code><a href="./Logging.html">Logging</a></code>
+  <li><details><summary><code><a href="./MarkdownYaml.html">MarkdownYaml</a></code></summary>
+  <ul class="link-list">
+  <li><code><a href="./MarkdownYaml/Document0.html">Document0</a></code>
+  <li><code><a href="./MarkdownYaml/YamlFrontMatter0.html">YamlFrontMatter0</a></code>
+  <li><code><a href="./MarkdownYaml/YamlFrontMatter1.html">YamlFrontMatter1</a></code>
+  </ul></details>
+  <li><code><a href="./MarkdownYamlParser.html">MarkdownYamlParser</a></code>
+  <li><code><a href="./MicroAgentTask.html">MicroAgentTask</a></code>
+  <li><code><a href="./MonadicError.html">MonadicError</a></code>
+  <li><code><a href="./NlpAnalysisTask.html">NlpAnalysisTask</a></code>
+  <li><code><a href="./Object.html">Object</a></code>
+  <li><code><a href="./PreprocessFileObjectTask.html">PreprocessFileObjectTask</a></code>
+  <li><code><a href="./PreprocessTextFileTask.html">PreprocessTextFileTask</a></code>
+  <li><code><a href="./RedisConnection.html">RedisConnection</a></code>
+  <li><code><a href="./RedisKeys.html">RedisKeys</a></code>
+  <li><code><a href="./RunRubyTestsTask.html">RunRubyTestsTask</a></code>
+  <li><code><a href="./Segment.html">Segment</a></code>
+  <li><details><summary><code><a href="./Sublayer.html">Sublayer</a></code></summary>
+  <ul class="link-list">
+  <li><details><summary><code><a href="./Sublayer/Actions.html">Actions</a></code></summary>
+  <ul class="link-list">
+  <li><code><a href="./Sublayer/Actions/RunTestCommandAction.html">RunTestCommandAction</a></code>
+  <li><code><a href="./Sublayer/Actions/SpeechToTextAction.html">SpeechToTextAction</a></code>
+  <li><code><a href="./Sublayer/Actions/TextToSpeechAction.html">TextToSpeechAction</a></code>
+  <li><code><a href="./Sublayer/Actions/WriteFileAction.html">WriteFileAction</a></code>
+  </ul></details>
+  </ul></details>
+  <li><details><summary><code><a href="./TTY.html">TTY</a></code></summary>
+  <ul class="link-list">
+  <li><details><summary><code><a href="./TTY/Markdown.html">Markdown</a></code></summary>
+  <ul class="link-list">
+  <li><code><a href="./TTY/Markdown/Converter.html">Converter</a></code>
+  </ul></details>
+  <li><code><a href="./TTY/PromptX.html">PromptX</a></code>
+  </ul></details>
+  <li><code><a href="./Task.html">Task</a></code>
+  <li><code><a href="./TextSegmentTask.html">TextSegmentTask</a></code>
+  <li><code><a href="./TextTaggerTask.html">TextTaggerTask</a></code>
+  <li><code><a href="./TextTokenizeTask.html">TextTokenizeTask</a></code>
+  <li><code><a href="./TokenizeSegmentsTask.html">TokenizeSegmentsTask</a></code>
+  <li><code><a href="./Topic.html">Topic</a></code>
+  <li><code><a href="./TopicModelingTask.html">TopicModelingTask</a></code>
+  <li><code><a href="./TrainTopicModelTask.html">TrainTopicModelTask</a></code>
+  <li><details><summary><code><a href="./UI.html">UI</a></code></summary>
+  <ul class="link-list">
+  <li><code><a href="./UI/Box.html">Box</a></code>
+  <li><code><a href="./UI/ScrollableBox.html">ScrollableBox</a></code>
+  </ul></details>
+  <li><code><a href="./Word.html">Word</a></code>
+  <li><code><a href="./WorkflowAgent.html">WorkflowAgent</a></code>
+  <li><code><a href="./WorkflowInitializerTask.html">WorkflowInitializerTask</a></code>
+  <li><code><a href="./WorkflowOrchestrator.html">WorkflowOrchestrator</a></code>
+</div>
+
+  </div>
+</nav>
+
+<main role="main">
+
+
+<h1 id="label-Flowbots"><a href="Flowbots.html"><code>Flowbots</code></a><span><a href="#label-Flowbots">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Flowbots.html"><code>Flowbots</code></a> is an advanced text processing and analysis system that combines the power of <a href="https://github.com/icebaker/ruby-nano-bots.git">ruby-nano-bots</a>, <a href="https://gitlab.com/RedFred7/Jongleur.git">workflow orchestration</a>, and natural language processing to provide a flexible and powerful tool for document analysis and topic modeling.</p>
+
+<h2 id="label-Features">Features<span><a href="#label-Features">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>Text processing workflows for individual files and batch processing</p>
+</li><li>
+<p>Advanced NLP methods including tokenization, part-of-speech tagging, and named entity recognition</p>
+</li><li>
+<p><a href="Topic.html"><code>Topic</code></a> modeling with dynamic model training and inference</p>
+</li><li>
+<p>Flexible workflow system using <a href="Jongleur.html"><code>Jongleur</code></a> for task orchestration</p>
+</li><li>
+<p>Redis-based data persistence using Ohm models</p>
+</li><li>
+<p>Custom nano-bot cartridges for specialized AI-powered tasks</p>
+</li><li>
+<p>Robust error handling and logging system</p>
+</li></ul>
+
+<h2 id="label-System+Architecture">System Architecture<span><a href="#label-System+Architecture">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h2 id="label-Project+Structure">Project Structure<span><a href="#label-Project+Structure">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The <a href="Flowbots.html"><code>Flowbots</code></a> project is organized into several key directories:</p>
+<ul><li>
+<p><code>/lib</code>: Main application code</p>
+</li><li>
+<p><code>/components</code>: Core system components</p>
+</li><li>
+<p><code>/processors</code>: Text and NLP processors</p>
+</li><li>
+<p><code>/tasks</code>: Individual workflow tasks</p>
+</li><li>
+<p><code>/workflows</code>: Workflow definitions</p>
+</li><li>
+<p><code>/ohm</code>: Ohm model definitions</p>
+</li><li>
+<p><code>/utils</code>: Utility functions and classes</p>
+</li><li>
+<p><code>/nano-bots/cartridges</code>: Nano-bot cartridge definitions</p>
+</li><li>
+<p><code>/test</code>: Test files and test helpers</p>
+</li><li>
+<p><code>/log</code>: Log files</p>
+</li></ul>
+
+<h2 id="label-Key+Components">Key Components<span><a href="#label-Key+Components">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ol><li>
+<p><strong>CLI</strong>: The main entry point for user interaction, allowing users to select and run workflows.</p>
+</li><li>
+<p><strong>WorkflowOrchestrator</strong>: Manages the execution of workflows and their constituent tasks.</p>
+</li><li>
+<p><strong>Task Processors</strong>: Specialized classes for text processing, NLP analysis, and topic modeling.</p>
+</li><li>
+<p><strong>Ohm Models</strong>: Data persistence layer for storing document information and workflow states.</p>
+</li><li>
+<p><strong>NanoBot Integration</strong>: Utilizes nano-bot cartridges for specialized AI-powered tasks.</p>
+</li><li>
+<p><strong>Logging System</strong>: Comprehensive logging for debugging and monitoring.</p>
+</li></ol>
+
+<h1 id="label-Detailed+Operation">Detailed Operation<span><a href="#label-Detailed+Operation">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h2 id="label-1.+Workflow+Initialization">1. Workflow Initialization<span><a href="#label-1.+Workflow+Initialization">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>When a user selects a workflow through the CLI, the system initializes the chosen workflow (e.g., TextProcessingWorkflow or TopicModelTrainerWorkflow). The <a href="WorkflowOrchestrator.html"><code>WorkflowOrchestrator</code></a> sets up the task graph based on the workflow definition.</p>
+
+<h2 id="label-2.+Task+Execution">2. <a href="Task.html"><code>Task</code></a> Execution<span><a href="#label-2.+Task+Execution">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The <a href="WorkflowOrchestrator.html"><code>WorkflowOrchestrator</code></a> executes tasks in the defined order. Each task follows a similar pattern:</p>
+<ol><li>
+<p>Retrieve necessary data from Redis or Ohm models.</p>
+</li><li>
+<p>Process the data using specialized processors (e.g., NLPProcessor, TopicModelProcessor).</p>
+</li><li>
+<p>Store the results back in Redis (for temporary storage) or Ohm models (for persistence).</p>
+</li></ol>
+
+<h2 id="label-3.+Data+Flow">3. Data Flow<span><a href="#label-3.+Data+Flow">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>Redis is used for storing temporary data and passing information between tasks. This includes file IDs, current batch information, and intermediate processing results.</p>
+</li><li>
+<p>Ohm models, backed by Redis, are used for persistent storage of document information, segments, tokens, and analysis results.</p>
+</li></ul>
+
+<h2 id="label-4.+NLP+and+Topic+Modeling">4. NLP and <a href="Topic.html"><code>Topic</code></a> Modeling<span><a href="#label-4.+NLP+and+Topic+Modeling">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>The <a href="NlpAnalysisTask.html"><code>NlpAnalysisTask</code></a> uses the ruby-spacy gem to perform tasks like tokenization, part-of-speech tagging, and named entity recognition.</p>
+</li><li>
+<p>The <a href="TopicModelingTask.html"><code>TopicModelingTask</code></a> uses the tomoto gem to implement topic modeling algorithms.</p>
+</li></ul>
+
+<h2 id="label-5.+LLM+Integration">5. LLM Integration<span><a href="#label-5.+LLM+Integration">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The <a href="LlmAnalysisTask.html"><code>LlmAnalysisTask</code></a> integrates with external language models through the NanoBot system. This allows for high-level analysis and insights generation based on the processed text data.</p>
+
+<h2 id="label-6.+Error+Handling+and+Logging">6. Error Handling and <a href="Logging.html"><code>Logging</code></a><span><a href="#label-6.+Error+Handling+and+Logging">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Each task and the <a href="WorkflowOrchestrator.html"><code>WorkflowOrchestrator</code></a> include error handling mechanisms. Errors are caught, logged, and in some cases, trigger the <a href="ExceptionAgent.html"><code>ExceptionAgent</code></a> for detailed error analysis.</p>
+
+<h2 id="label-7.+Batch+Processing">7. Batch Processing<span><a href="#label-7.+Batch+Processing">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>For the TopicModelTrainerWorkflow, files are processed in batches. The <a href="WorkflowOrchestrator.html"><code>WorkflowOrchestrator</code></a> manages the batch state, ensuring all files in a batch are processed before moving to the next batch.</p>
+
+<h2 id="label-8.+Result+Presentation">8. Result Presentation<span><a href="#label-8.+Result+Presentation">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The <a href="DisplayResultsTask.html"><code>DisplayResultsTask</code></a> formats the analysis results and presents them to the user through the CLI. This may include summaries, topic distributions, and insights generated by the LLM.</p>
+
+<h2 id="label-Key+Interactions">Key Interactions<span><a href="#label-Key+Interactions">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ol><li>
+<p><strong>CLI &lt;-&gt; WorkflowOrchestrator</strong>: The CLI initiates workflow execution and receives final results.</p>
+</li><li>
+<p><strong>WorkflowOrchestrator &lt;-&gt; Tasks</strong>: The orchestrator manages task execution order and handles task results.</p>
+</li><li>
+<p><strong>Tasks &lt;-&gt; Redis</strong>: Tasks use Redis for short-term storage and inter-task communication.</p>
+</li><li>
+<p><strong>Tasks &lt;-&gt; Ohm Models</strong>: Tasks interact with Ohm models for persistent storage of document data and analysis results.</p>
+</li><li>
+<p><strong>NLP and Topic Modeling Tasks &lt;-&gt; External Libraries</strong>: These tasks utilize external Ruby gems for specialized processing.</p>
+</li><li>
+<p><strong>LlmAnalysisTask &lt;-&gt; NanoBot</strong>: This task interacts with the NanoBot system to leverage external language models.</p>
+</li></ol>
+
+<p>This architecture allows <a href="Flowbots.html"><code>Flowbots</code></a> to process text data through a series of specialized tasks, each building upon the results of previous tasks, to provide comprehensive text analysis and insights.</p>
+
+<h1 id="label-Ruby+Gems+Used+in+Flowbots">Ruby Gems Used in <a href="Flowbots.html"><code>Flowbots</code></a><span><a href="#label-Ruby+Gems+Used+in+Flowbots">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<h2 id="label-Workflow+and+Task+Management">Workflow and <a href="Task.html"><code>Task</code></a> Management<span><a href="#label-Workflow+and+Task+Management">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="https://rubygems.org/gems/jongleur">jongleur</a>: Core component for defining and executing task workflows, providing workflow orchestration and task management capabilities.</p>
+</li></ul>
+
+<h2 id="label-Data+Persistence">Data Persistence<span><a href="#label-Data+Persistence">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="https://rubygems.org/gems/ohm">ohm</a>: <a href="Object.html"><code>Object</code></a>-hash mapping for Redis, used as the data persistence layer for storing document information and workflow states.</p>
+</li></ul>
+
+<h2 id="label-Parallel+Processing">Parallel Processing<span><a href="#label-Parallel+Processing">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="https://rubygems.org/gems/parallel">parallel</a>: Enables parallel processing, with potential use for parallel execution of tasks (not prominently used in the current implementation).</p>
+</li></ul>
+
+<h2 id="label-Development+and+Debugging">Development and Debugging<span><a href="#label-Development+and+Debugging">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="https://rubygems.org/gems/pry">pry</a> and <a href="https://rubygems.org/gems/pry-stack_explorer">pry-stack_explorer</a>: Enhanced REPL and debugging tools for development and debugging purposes.</p>
+</li></ul>
+
+<h2 id="label-Natural+Language+Processing">Natural Language Processing<span><a href="#label-Natural+Language+Processing">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="https://rubygems.org/gems/ruby-spacy">ruby-spacy</a>: Ruby bindings for the Spacy NLP library, used for Natural Language Processing tasks.</p>
+</li><li>
+<p><a href="https://rubygems.org/gems/lingua">lingua</a>: Provides additional natural language detection and processing capabilities.</p>
+</li><li>
+<p><a href="https://rubygems.org/gems/pragmatic_segmenter">pragmatic_segmenter</a>: Used for text segmentation, splitting text into meaningful segments.</p>
+</li><li>
+<p><a href="https://rubygems.org/gems/pragmatic_tokenizer">pragmatic_tokenizer</a>: Handles text tokenization, breaking text into individual tokens.</p>
+</li></ul>
+
+<h2 id="label-Command-Line+Interface">Command-Line Interface<span><a href="#label-Command-Line+Interface">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="https://rubygems.org/gems/thor">thor</a>: Used for building command-line interfaces, specifically for creating the CLI for <a href="Flowbots.html"><code>Flowbots</code></a>.</p>
+</li></ul>
+
+<h2 id="label-Parsing+and+Data+Handling">Parsing and Data Handling<span><a href="#label-Parsing+and+Data+Handling">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="https://rubygems.org/gems/treetop">treetop</a>: A parsing expression grammar (PEG) parser generator, used for custom grammar parsing, particularly for Markdown with YAML front matter.</p>
+</li><li>
+<p><a href="https://rubygems.org/gems/yaml">yaml</a>: Handles YAML parsing and generation, particularly for configuration files and document front matter.</p>
+</li></ul>
+
+<h2 id="label-Terminal+Output+Formatting">Terminal Output Formatting<span><a href="#label-Terminal+Output+Formatting">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="https://rubygems.org/gems/tty-box">tty-box</a>, <a href="https://rubygems.org/gems/tty-cursor">tty-cursor</a>, <a href="https://rubygems.org/gems/tty-prompt">tty-prompt</a>, <a href="https://rubygems.org/gems/tty-screen">tty-screen</a>, <a href="https://rubygems.org/gems/tty-spinner">tty-spinner</a>, <a href="https://rubygems.org/gems/tty-table">tty-table</a>: Various terminal output formatting and interaction tools for creating rich command-line interfaces and displaying formatted output.</p>
+</li></ul>
+
+<h2 id="label-Topic+Modeling"><a href="Topic.html"><code>Topic</code></a> Modeling<span><a href="#label-Topic+Modeling">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="https://rubygems.org/gems/tomoto">tomoto</a>: Used for implementing topic modeling algorithms.</p>
+</li></ul>
+
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.6.3.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

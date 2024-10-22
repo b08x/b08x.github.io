@@ -4,7 +4,6 @@ title: "Acoustics of Hallucination Brain Synchrony and the Science of Hearing Vo
 abstract: "Often associated with conditions like schizophrenia, can be understood as a complex interplay of physiological and neurological factors rather than a purely mystical experience. This abstract explores how the skull's resonance can amplify internal bodily sounds, which are typically filtered out.  Due to misattributions in brain synchrony, these amplified sounds are misinterpreted as external voices. This misattribution is further reinforced by the brain's tendency to seek patterns and meaning, leading to the construction of narratives around these voices. Neural pathways responsible for processing internal and external stimuli become entangled, resulting in internal thoughts being perceived as external speech.  The emotional centers of the brain, particularly the amygdala, amplify this phenomenon, making the voices seem more real and significant.  Ongoing research using advanced neuroimaging techniques aims to further clarify these mechanisms and develop more effective therapeutic interventions."
 ---
 
-[[outside-of-your-skin]]
 
 ## Something
 
@@ -39,3 +38,5 @@ Ongoing research exploring neural oscillations, brain network connectivity, and 
 By understanding the "hearing voices" experience through the lens of acoustical properties, brain synchrony, and neural pathway misinterpretations, we can move beyond simplistic explanations and develop more targeted, effective therapeutic interventions to alleviate the distress associated with this complex phenomenon.
 
 ![a chart](/assets/img/nomnoml.png)
+
+[[Outside of Your Skin]]
