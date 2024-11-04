@@ -9,7 +9,7 @@ layout: base
       Last updated on {{ page.last_modified_at | date: "%B %-d, %Y" }}
       {% endif %}
     </time>
-  
+
   </div>
 
   <div id="notes-entry-container">
@@ -43,5 +43,30 @@ layout: base
 <hr>
 
 <!-- <p>Here are all the notes in this garden, along with their links, visualized as a graph.</p> -->
-
+{% if page.previous.url %}<a href="{{ site.baseurl }}{{ page.previous.url }}" title="{{ page.previous.title }}" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+   <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+     <span class="md-flex__ellipsis">
+       <span class="md-footer-nav__direction">
+         Previous:
+       </span>
+       {{ page.previous.title }}
+     </span>
+   </div>
+   <div class="md-flex__cell md-flex__cell--shrink">
+     <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+   </div>
+ </a>{% endif %}
+{% if page.next.url %}<a href="{{ site.baseurl }}{{ page.next.url }}" title="{{ page.next.title }}" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+   <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+     <span class="md-flex__ellipsis">
+       <span class="md-footer-nav__direction">
+         Next:
+       </span>
+       {{ page.next.title }}
+     </span>
+   </div>
+   <div class="md-flex__cell md-flex__cell--shrink">
+     <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+   </div>
+ </a>{% endif %}
 {% include notes_graph.html %}
