@@ -6,6 +6,19 @@
   <nav>{% include nav.html %}</nav>
   <div class="wrapper">
     <main>{{ content }}</main>
+         {% if page.next.url %}<a href="{{ site.baseurl }}{{ page.next.url }}" title="{{ page.next.title }}" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next:
+                </span>
+                {{ page.next.title }}
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>{% endif %}
     <footer>{% include notebook/footer.html %}</footer>
   </div>
 
