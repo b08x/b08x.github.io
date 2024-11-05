@@ -103,7 +103,22 @@ blockquote p {
   gap: 2em;
 }
 
-@media (min-width: 700px) {
+@media (max-width: 700px) {
+  #notes-entry-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  
+  #notes-entry-container > .content {
+    flex: 3;
+  }
+  
+  #notes-entry-container > .side {
+    flex: 1;
+  }
+}
+
+@media (min-width: 2048px) {
   #notes-entry-container {
     flex-direction: row;
   }
@@ -116,6 +131,7 @@ blockquote p {
     flex: 1;
   }
 }
+
 
 .backlink-box {
   background: hsl(0, 0%, 10%, 0.04);
