@@ -122,9 +122,9 @@ fixedNav: 'false' # true or false
 permalink: /:year/:month/:day/:title/
 markdown: kramdown
 
-sass:
-    sass_dir: _sass
-    style: compressed
+# sass:
+#     sass_dir: _sass
+#     style: compressed
 
 jekyll-spaceship:
   mermaid-processor:

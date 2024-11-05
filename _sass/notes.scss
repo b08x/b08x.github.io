@@ -1,13 +1,6 @@
-@use "sass:color";
----
-sitemap: false
----
 
-@import "variables.scss";
-@import "fonts.scss";
-@import "highlighter.scss";
-@import "normalize.scss";
-@import "optimized.scss"
+
+@import "variables";
 
 :root {
     --font-family-ibm: "IBM Plex Mono", monospace;
