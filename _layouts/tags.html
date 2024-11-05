@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include meta_tags/base.html %}
+        {% include head.html %}
+        {% if site.tags != "" %}
+          {% include tags/collect.html %}
+        {% endif %}
+    </head>
+
+    <body>
+        <div class="wrapper">
+
+
+          <div class="post">
+            <ul>
+            {% for post in site.tags[page.tag] %}
+              {% if post.lang %}
+              <li lang="{{post.lang}}">
+              {% else %}
+              <li>
+              {% endif %}
+              	<a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date_to_string }})<br>
+              	{{ post.description }}
+                {{ content }}
+              </li>
+            {% endfor %}
+            </ul>
+          </div>
+
+          <hr>
+        </div>
+
+        {% include footer.html %}
+
+        {% include link-previews.html wrapperQuerySelector="content" %}
+    </body>
+</html>

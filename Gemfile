@@ -14,6 +14,7 @@ gem 'ruby-lsp'
 gem 'ruby-vips'
 
 gem 'webrick', '~> 1.8'
+gem 'liquid-c'
 
 group :jekyll_plugins do
   gem 'jekyll-feed'
@@ -25,8 +26,16 @@ group :jekyll_plugins do
   gem 'jekyll-responsive-image'
   gem 'jekyll-spaceship'
   gem 'jekyll-toc'
+  gem 'jekyll-sass-converter'
+  gem 'jekyll-typogrify'
+  gem 'jekyll-figure'
+  gem 'jekyll-algolia', '>= 1.4.7'
+  gem 'jekyll-tagging-related_posts'
+  gem 'jekyll-include-cache'
 end
 
 gem 'mp3info'
 gem 'psych', '~> 5.1'
 gem "solargraph", "~> 0.48.0"
+
+gem "sass", "~> 3.7"

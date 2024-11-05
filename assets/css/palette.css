@@ -1,4 +1,5 @@
---- layout: null excluded_in_search: true --- button[data-md-color-accent], button[data-md-color-primary] {
+
+button[data-md-color-accent], button[data-md-color-primary] {
     width: 13rem;
     margin-bottom: .4rem;
     padding: 2.4rem .8rem .4rem;
@@ -15,13 +16,7 @@ button[data-md-color-accent]:hover, button[data-md-color-primary]:hover {
 }
 
 button[data-md-color-primary=red] {
-    background-color: {
-            {
-            site.color
-        }
-    }
-
-    ;
+    background-color: var(--md-primary-fg-color);
 }
 
 [data-md-color-primary=red] .md-typeset a {
@@ -1029,11 +1024,7 @@ button[data-md-color-accent=deep-orange] {
 @media only screen and (max-width:76.1875em) {
     html [data-md-color-primary=red] .md-nav--primary .md-nav__title--site {
         background-color: {
-                {
-                site.color
-            }
-        }
-
+            var(--md-primary-fg-color)
         ;
     }
 
@@ -1122,11 +1113,7 @@ button[data-md-color-accent=deep-orange] {
 @media only screen and (min-width:76.25em) {
     [data-md-color-primary=red] .md-tabs {
         background-color: {
-                {
-                site.color
-            }
-        }
-
+            var(--md-primary-fg-color)
         ;
     }
 
