@@ -1,4 +1,5 @@
---- layout: null excluded_in_search: true --- button[data-md-color-accent], button[data-md-color-primary] {
+
+button[data-md-color-accent], button[data-md-color-primary] {
     width: 13rem;
     margin-bottom: .4rem;
     padding: 2.4rem .8rem .4rem;

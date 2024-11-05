@@ -67,6 +67,8 @@ exclude:
   - assets/react-app/package.json
   - assets/react-app/package-lock.json
   - assets/react-app/webpack.config.js
+  - assets/stylesheets/
+  - assets/javascripts/
   - "websitestuff/"
 
 # If you are using a host that cannot resolve URLs that do

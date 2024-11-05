@@ -1,13 +1,30 @@
-@use "sass:color";
-
 ---
 ---
+@import "../_sass/variables.scss";
+@import "../_sass/fonts.scss";
+@import "../_sass/highlighter.scss";
+@import "../_sass/normalize.scss";
 
-// @import "../_sass/wall";
-// @import "../_sass/flexgrid/flexgrid.scss";
-@import "../_sass/notes.scss";
-// @import "../_sass/normalize";
-// @import "../_sass/code";
-// @import "../_sass/chat";
-// @import "../_sass/header";
-// @import "../_sass/style";
+
+:root {
+    --font-family-ibm: "IBM Plex Mono", monospace;
+    --font-family-special: "Special Elite", monospace;
+    --font-family-source: "Source Code Pro", monospace;
+    --font-family-source-serif: "Source Code Pro", serif;
+    --font-family-monospace: "Overpass Mono", monospace;
+    --font-family-sans-serif: "Overpass", sans-serif;
+    --font-family-logo: "Podkova", serif;
+    --font-family-text: "mononoki", monospace;
+    --font-family-hack: "Hack", monospace;
+    --font-family-forum: "Forum", serif;
+  
+    --color-primary: #f0c018;
+    --color-secondary: #189090;
+    --color-tertiary: #ffc018;
+    --color-quaternary: #186078;
+    --color-quinary: #786018;
+    --color-senary: #604818;
+    --color-background: #f0f0f0;
+    --color-text: #000000;
+  }
+  

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Our variables
 $base-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -14,7 +16,7 @@ $background-hr: #383838;
 $background-color: #222222;
 $background-darker: #1b1b1b;
 $brand-color: #43a047;
-$anchor-hover-color: color.adjust($color, $lightness: 5%);
+$anchor-hover-color: color.adjust($brand-color, $lightness: 5%);
 
 $player-now-playing-size: 13px;
 $player-height: 64px;

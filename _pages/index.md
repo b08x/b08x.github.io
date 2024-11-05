@@ -25,11 +25,10 @@ permalink: /
   {% endfor %}
 </ul>
 
----
 
 
 <style>
   .wrapper {
-    max-width: --webkit-fill-available;
+    max-width: 80%;
   }
 </style>
