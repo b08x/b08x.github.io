@@ -36,6 +36,7 @@ plugins:
   - jekyll-feed
   - jekyll-pandoc
   - jekyll-responsive-image
+  - jekyll-sass-converter
 include:
   - "_notes/"
   - "_pages/"
@@ -72,8 +73,8 @@ exclude:
 # not end with .html (such as Neocities), set this to 'true'.
 use_html_extension:  false
 
-# Set to `true` to open non-internal links in new tabs, or
-# set to `false` to open non-internal links in current tab.
+# Open non-internal links in new tabs when set to true, 
+# or in the current tab when set to false.
 open_external_links_in_new_tab: true
 
 # Set to `true` to replace tweet URLs with Twitter embeds.
@@ -87,9 +88,10 @@ github_user: "b08x"
 github_repo: "syncopatedDocs"
 
 # Optional
-twitter: b08x2
-linkedin: rwpannick
-dockerhub: b08x
+twitter: "b08x2"
+youtube: "@syncopatednotes"
+linkedin: "robert-pannick-260492176"
+dockerhub: "b08x"
 # google-analytics: G-XXXXXXXXXX
 # Image and (square) dimension for logo (don't start with /)
 # If commented, will use material hat theme
@@ -120,6 +122,10 @@ fixedNav: 'false' # true or false
 permalink: /:year/:month/:day/:title/
 markdown: kramdown
 
+sass:
+    sass_dir: _sass
+    style: compressed
+
 jekyll-spaceship:
   mermaid-processor:
     css:
@@ -141,6 +147,17 @@ responsive_image:
     - width: 800
     - width: 1400
 
+toc:
+  min_level: 1
+  max_level: 6
+  ordered_list: false
+  no_toc_section_class: no_toc_section
+  list_id: toc
+  list_class: section-nav
+  sublist_class: ''
+  item_class: toc-entry
+  item_prefix: toc-
+
 # Collections
 collections:
   docs:
@@ -148,7 +165,7 @@ collections:
     permalink: /:collection/:path
   notes:
     output: true
-    permalink: /:collection/:path
+    permalink: /:collection/:slugified_categories/:title
   casts:
     output: true
     permalink: /:collection/:path
@@ -184,3 +201,47 @@ defaults:
       type: "casts"
     values:
       layout: "casts"
+
+###########################################################
+# Site configuration for the Auto-Pages feature
+# The values here represent the defaults if nothing is set
+autopages:
+  # Site-wide kill switch, disable here and it doesn't run at all
+  enabled: true
+  # Category pages, omit entire config element to disable
+  categories:
+    # Optional, the list of layouts that should be processed for every category found in the site
+    layouts:
+      - 'autopage_category.html'
+    # Optional, the title that each category paginate page should get (:cat is replaced by the Category name)
+    title: 'Posts in category :cat'
+    # Optional, the permalink for the  pagination page (:cat is replaced),
+    # the pagination permalink path is then appended to this permalink structure
+    permalink: '/category/:cat'
+    # Optional, when true logging related to category pages will be supressed.
+    silent: false
+    slugify:
+      mode: 'default'   # :cat is slugified. Modes: default, raw, pretty, ascii, latin
+      case: true       # Whether to replace all uppercase letters with their lowercase counterparts
+    enabled: true
+  # Collection pages, omit to disable
+  collections:
+    layouts:
+      - 'autopage_collection.html'
+    title: 'Posts in collection :coll' # :coll is replaced by the collection name
+    silent: false
+    slugify:
+      mode: 'ascii'   # :coll is slugified.
+      case: true
+    enabled: true
+  # Tag pages, omit to disable
+  tags:
+    layouts:
+      - 'autopage_tags.html'
+    title: 'Posts tagged with :tag' # :tag is replaced by the tag name
+    permalink: '/tag/:tag'
+    silent: false
+    slugify:
+      mode: 'default'   # :tag is slugified.
+      case: true
+    enabled: true
