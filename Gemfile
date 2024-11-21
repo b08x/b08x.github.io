@@ -36,6 +36,6 @@ end
 
 gem 'mp3info'
 gem 'psych', '~> 5.1'
-gem "solargraph", "~> 0.48.0"
+gem "solargraph", "~> 0.50.0"
 
 gem "sass", "~> 3.7"
