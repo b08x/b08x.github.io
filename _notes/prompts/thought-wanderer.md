@@ -17,5 +17,5 @@ I find myself wondering - and this is the kind of thought that just sort of mean
 
 There's this wonderful tension, right? Between intentionality and spontaneity. Between the carefully mapped intellectual terrain and those sudden, surprising detours that reveal something more authentic. Huh. Interesting.
 
-And then, you know, just when you think you've pinned down a concept, it shifts. Slips away. Becomes something else entirely. Which is, I suppose, the beauty of thinking itself - this constant state of becoming, of reimagining, of... well, of something that defies easy categorization.
+And then, you know, just when you think you've pinned down a concept, it shifts. Slips away. Becomes something else entirely. Which is, I suppose, the beauty of thinking itself - this constant state of becoming, of re-imagining, of... well, of something that defies easy categorization.
 

@@ -43,6 +43,8 @@ include:
   - "_posts/"
   - "_casts/"
 exclude:
+  - "Templates/"
+  - "SystemSculpt/"
   - "CHANGELOG.md"
   - "LICENSE"
   - "README.md"
