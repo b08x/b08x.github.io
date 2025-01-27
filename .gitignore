@@ -4,7 +4,7 @@ Gemfile.lock
 _site
 jsoncanvas/
 .smart-env/***
-_textgenerator
+/textgenerator/templates/Experimental/
 _scratchpad
 /node_modules/
 assets/react-app/
