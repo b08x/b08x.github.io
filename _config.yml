@@ -169,7 +169,7 @@ collections:
     permalink: /:collection/:path
   notes:
     output: true
-    permalink: /:collection/:slugified_categories/:title
+    permalink: /:collection/:categories/:title
   casts:
     output: true
     permalink: /:collection/:path
