@@ -14,3 +14,4 @@ websitestuff/
 *.opus
 assets/audio/staging/
 /_drafts/
+*.code-workspace

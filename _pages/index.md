@@ -5,14 +5,6 @@ id: home
 permalink: /
 ---
 
-# Hello! 🌱
-
-<p style="padding: 3em 0.5em; border-radius: 4px;">
-  Composite experiments in the field of generative AI.
-  <br>
-  <br>
-  In the context of being alive!
-</p>
 
 <strong>Recently updated notes:</strong>
 

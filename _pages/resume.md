@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: page
 title: Robert Pannick - Resume
 permalink: /resume/
 video:
