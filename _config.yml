@@ -43,6 +43,7 @@ include:
   - "_posts/"
   - "_casts/"
 exclude:
+  - "/textgenerator/templates/"
   - "Templates/"
   - "SystemSculpt/"
   - "CHANGELOG.md"
