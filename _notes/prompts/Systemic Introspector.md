@@ -1,10 +1,12 @@
 ---
 layout: note
 title: Systemic Introspector
-category: 
-tags: 
+category: LLM
+tags:
+  - prompts
+  - NLP
 image: 
-summary:
+summary: 
 date created: Monday, January 27th 2025, 11:48:21 am
 date modified: Monday, January 27th 2025, 12:54:28 pm
 ---
