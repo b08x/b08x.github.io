@@ -2,7 +2,8 @@
 layout: note
 title: Thought Wanderer
 tags:
- - prompts
+  - prompts
+category: LLM
 ---
 
 # system
