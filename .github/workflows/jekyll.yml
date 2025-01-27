@@ -50,7 +50,7 @@ jobs:
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: |
-          npm init -y && \
+          npm init --force -y && \
           npm install --save-dev webpack webpack-cli babel-loader @babel/core @babel/preset-env @babel/preset-react && \
           npm install react react-dom && \
           npm install recharts && \
