@@ -1,48 +1,204 @@
+// Import color functions
 @use "sass:color";
+@use "sass:math";
 
-// Our variables
-$base-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+/* ==========================================================================
+   Colors
+   ========================================================================== */
 
-$base-font-size: 20px;
+// Base Colors Map
+$colors: (
+  'primary': #f0c018,
+  'secondary': #189090,
+  'tertiary': #ffc018,
+  'quaternary': #186078,
+  'quinary': #786018,
+  'senary': #604818,
+  'background': #f0f0f0,
+  'text': #000000,
+  'link': #2597dc,
+  'link-hover': #1a6fa3,
+  'border': #e0e0e0
+);
 
+// Theme Colors
+$base-color: #eaeaea !default;
+$text-color: #fafafa !default;
+$background-color: #222222 !default;
+$background-darker: #1b1b1b;
+$background-hr: #383838;
+$brand-color: #43a047;
+$accent-color: #00adb5 !default;
+
+// Navigation Colors
+$nav-color: #aeaeae !default;
+$nav-background-color: mix(#000, $background-color, 30%) !default;
+
+// Code Colors
+$code-background-color: mix(#000, $background-color, 15%) !default;
+
+// UI State Colors
+$primary-color: white !default;
+$success-color: rgb(48, 209, 88) !default;
+$warning-color: rgb(255, 214, 10) !default;
+$danger-color: rgb(255, 69, 58) !default;
+$info-color: rgb(100, 210, 255) !default;
+
+// Syntax Highlighting Colors
+$base00: #263238;
+$base01: #2e3c43;
+$base02: #314549;
+$base03: #546e7a;
+$base04: #b2ccd6;
+$base05: #eeffff;
+$base06: #eeffff;
+$base07: #ffffff;
+$base08: #f07178;
+$base09: #f78c6c;
+$base0a: #ffcb6b;
+$base0b: #c3e88d;
+$base0c: #89ddff;
+$base0d: #82aaff;
+$base0e: #c792ea;
+$base0f: #ff5370;
+
+// Social Brand Colors
+$behance-color: #1769ff !default;
+$bitbucket-color: #205081 !default;
+$dribbble-color: #ea4c89 !default;
+$facebook-color: #3b5998 !default;
+$flickr-color: #ff0084 !default;
+$foursquare-color: #0072b1 !default;
+$github-color: #171516 !default;
+$google-plus-color: #dd4b39 !default;
+$instagram-color: #517fa4 !default;
+$lastfm-color: #d51007 !default;
+$linkedin-color: #007bb6 !default;
+$pinterest-color: #cb2027 !default;
+$reddit-color: #ff4500 !default;
+$rss-color: #fa9b39 !default;
+$soundcloud-color: #ff3300 !default;
+$stackoverflow-color: #fe7a15 !default;
+$tumblr-color: #32506d !default;
+$twitter-color: #55acee !default;
+$vimeo-color: #1ab7ea !default;
+$vine-color: #00bf8f !default;
+$youtube-color: #bb0000 !default;
+$xing-color: #006567 !default;
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+// Font Families
+$serif-font-family: "Lora", serif !default;
+$sans-serif-font-family: "Source Sans Pro", sans-serif !default;
+$monospace-font-family: Menlo, Consolas, Monaco, "Courier New", Courier, monospace !default;
+
+// Base Typography
+$base-font-family: $sans-serif-font-family !default;
+$headline-font-family: $sans-serif-font-family !default;
+$title-font-family: $serif-font-family !default;
+$description-font-family: $serif-font-family !default;
+$meta-font-family: $serif-font-family !default;
+
+// Font Sizes
+$base-font-size: 16px !default;
+$small-font-size: math.div($base-font-size, 1.143);
 $base-font-weight: 400;
-$small-font-size: $base-font-size * 0.875;
 $base-line-height: 1.5;
 
+// Modular Scale
+$modular-scale-1: 1.067 !default; /* small */
+$modular-scale-2: 1.2 !default; /* large */
+
+// Heading Sizes
+$h1-min: $modular-scale-1 * $modular-scale-1 * $modular-scale-1 * $modular-scale-1 * $base-font-size !default;
+$h1-max: $modular-scale-2 * $modular-scale-2 * $modular-scale-2 * $modular-scale-2 * $base-font-size !default;
+$h2-min: $modular-scale-1 * $modular-scale-1 * $modular-scale-1 * $base-font-size !default;
+$h2-max: $modular-scale-2 * $modular-scale-2 * $modular-scale-2 * $base-font-size !default;
+$h3-min: $modular-scale-1 * $modular-scale-1 * $base-font-size !default;
+$h3-max: $modular-scale-2 * $modular-scale-2 * $base-font-size !default;
+$h4-min: $modular-scale-1 * $base-font-size !default;
+$h4-max: $modular-scale-2 * $base-font-size !default;
+$h5-min: $base-font-size !default;
+$h5-max: $base-font-size !default;
+$h6-min: math.div($base-font-size, $modular-scale-1) !default;
+$h6-max: math.div($base-font-size, $modular-scale-2) !default;
+
+// Font Weights
+$page-title-weight: bold !default;
+$entry-title-weight: bold !default;
+
+/* ==========================================================================
+   Layout & Spacing
+   ========================================================================== */
+
+// Spacing
 $spacing-unit: 30px;
+$content-width: 800px;
 
-$text-color: #fafafa;
-$background-hr: #383838;
-$background-color: #222222;
-$background-darker: #1b1b1b;
-$brand-color: #43a047;
-// $anchor-hover-color: color.adjust($brand-color, $lightness: 5%);
+// Breakpoints
+$small: 320px !default;
+$medium: 768px !default;
+$large: 1024px !default;
+$xlarge: 1280px !default;
 
-$player-now-playing-size: 13px;
+$on-tiny: 310px;
+$on-palm: 640px;
+$on-laptop: 800px;
+$height-600: 600px;
+
+// Fluid Type Settings
+$min-vw: $small !default;
+$max-vw: $xlarge !default;
+$min-font-size: 16px !default;
+$max-font-size: 18px !default;
+
+// Content Width
+$main-max-width: $medium !default;
+$main-sidebar-max-width: $large !default;
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
+// Audio Player
 $player-height: 64px;
+$player-now-playing-size: 13px;
 $player-button-size: 48px;
-$player-bgcolor: $brand-color;
-$player-scrubber-color: darken($brand-color, 1%);
-$player-loaded-color: darken($brand-color, 5%);
-$player-progress-color: lighten($brand-color, 10%);
-$player-play-color: lighten($brand-color, 5%);
 $player-progress-height: 10px;
 
+$player-bgcolor: map-get($colors, 'primary');
+$player-scrubber-color: darken(map-get($colors, 'primary'), 1%);
+$player-loaded-color: darken(map-get($colors, 'primary'), 5%);
+$player-progress-color: lighten(map-get($colors, 'primary'), 10%);
+$player-play-color: lighten(map-get($colors, 'primary'), 5%);
+
+// Tiles
 $tile-bgcolor: $brand-color;
 $tile-color: #fafafa;
 $tile-size: 56px;
 $tile-size-large: 64px;
 $tile-border-radius: 2px;
 
-$grey-color: $brand-color;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark: darken($grey-color, 25%);
+// Site Logo
+$site-logo-width: 75px !default;
+$site-logo-height: 75px !default;
 
-// Width of the content area
-$content-width: 800px;
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
 
-$on-tiny: 310px;
-$on-palm: 640px;
-$on-laptop: 800px;
+// Border
+$border-color: color.scale($base-color, $lightness: 80%) !default;
+$border-radius: 0.25rem !default;
 
-$height-600: 600px;
+// Transitions
+$global-transition: all 0.4s ease !default;
+
+// YIQ Color Contrast
+$yiq-contrasted-dark-default: #000 !default;
+$yiq-contrasted-light-default: #fff !default;
+$yiq-contrasted-threshold: 175 !default;
+$yiq-debug: false !default;

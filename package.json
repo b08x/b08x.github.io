@@ -27,7 +27,9 @@
     "grunt-contrib-jshint": "^3.2.0",
     "grunt-contrib-uglify": "^5.2.2",
     "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^3.1.0",
     "grunt-svgmin": "^7.0.0",
+    "sass": "^1.83.4",
     "webpack": "^5.97.1",
     "webpack-cli": "^4.10.0"
   },

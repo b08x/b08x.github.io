@@ -13,6 +13,16 @@ module.exports = function(grunt) {
         '!assets/js/scripts.min.js'
       ]
     },
+    sass: {
+      dist: {
+        options: {
+          implementation: require('sass')  // Add this line
+        },        
+        files: {
+          'assets/css/main.css': '_sass/main.scss' // Compile main.scss to main.css
+        }
+      }
+    },    
     uglify: {
       dist: {
         files: {
@@ -63,6 +73,7 @@ module.exports = function(grunt) {
   });
 
   // Load tasks
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -73,6 +84,7 @@ module.exports = function(grunt) {
   // Register tasks
   grunt.registerTask('default', [
     'clean',
+    'sass',
     'uglify',
     'imagemin',
     'svgmin'

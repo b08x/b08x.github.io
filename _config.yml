@@ -26,6 +26,8 @@ logo: "assets/img/image305.jpeg"
 # This is mostly for testing
 url: "https://b08x.github.io" # the base hostname & protocol for your site
 
+skin: "/assets/css/skins/default.css"
+
 plugins:
   - jekyll-last-modified-at
   - jekyll-jupyter-notebook

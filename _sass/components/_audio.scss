@@ -1,0 +1,146 @@
+// Audio Player Styling
+// Theme Colors
+$background-darker: #1b1b1b;
+$background-hr: #383838;
+
+.jp-audio {
+  position: relative;
+}
+
+.audio-footer-container {
+  background-color: darken($background-darker, 5%);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.audio-player {
+  padding: 0 0.25em;
+  background: none;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
+}
+
+.player-now-playing {
+  display: block;
+  font-size: $player-now-playing-size;
+  line-height: $player-now-playing-size;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  
+  p {
+    padding-top: calc($player-now-playing-size / 2);
+    padding-bottom: calc($player-now-playing-size / 2);
+    margin-bottom: 0;
+  }
+}
+
+.player-buttons {
+  height: $player-height;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  margin-top: 6px;
+  
+  .player-buttons-prev-number {
+    float: right;
+    line-height: $player-button-size;
+    vertical-align: top;
+    color: $player-bgcolor;
+  }
+  
+  .player-buttons-next-number {
+    float: left;
+    line-height: $player-button-size;
+    vertical-align: top;
+    color: $player-bgcolor;
+  }
+  
+  .player-buttons-prev {
+    display: inline-block;
+    text-align: left;
+    position: absolute;
+    left: 0;
+    
+    a {
+      background: url("../img/icons/button_prev.svg");
+      background-size: $player-button-size;
+      width: $player-button-size;
+      height: $player-button-size;
+      display: inline-block;
+      line-height: $player-height;
+      margin: 0;
+      padding: 0;
+      z-index: 10000;
+    }
+  }
+
+  .player-buttons-next {
+    display: inline-block;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    
+    a {
+      background: url("../img/icons/button_next.svg");
+      background-size: $player-button-size;
+      width: $player-button-size;
+      height: $player-button-size;
+      display: inline-block;
+      line-height: $player-height;
+      margin: 0;
+      padding: 0;
+      text-align: right;
+      z-index: 10000;
+    }
+  }
+}
+
+// Progress bar
+.jp-progress {
+  width: 100%;
+  height: $player-progress-height;
+  margin: 0;
+  border-radius: 3px;
+  background-color: $player-loaded-color;
+}
+
+.jp-play-bar {
+  height: $player-progress-height;
+  border-radius: 3px;
+  background-color: $player-progress-color;
+}
+
+.jp-controls {
+  button.jp-play {
+    background: none;
+    width: $player-button-size;
+    height: $player-button-size;
+    background: url("../img/icons/button_play.svg");
+    background-size: 44px;
+    border: 2px solid #aaaaaa !important;
+    border-radius: 32px !important;
+    
+    &:hover {
+      border-color: $player-bgcolor !important;
+    }
+  }
+}
+
+.jp-state-playing button.jp-play {
+  background: url("../img/icons/button_pause.svg");
+  background-size: $player-button-size;
+  background-size: 44px;
+}
+
+// Fallback audio element styling
+audio {
+  margin: 0 auto;
+  display: block;
+  width: 47rem;
+  height: 4rem;
+}

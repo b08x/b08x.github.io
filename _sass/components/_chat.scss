@@ -1,0 +1,42 @@
+// Chat Component Styles
+.chat-container {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column-reverse;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.chat {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.chat-bubble {
+  font-family: var(--font-family-ibm);
+  letter-spacing: 0.1px;
+  max-width: 60%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  color: var(--color-background);
+}
+
+.chat-start {
+  .chat-bubble {
+    background-color: var(--color-quaternary);
+    border-bottom-left-radius: 0;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+  }
+}
+
+.chat-end {
+  .chat-bubble {
+    background-color: var(--color-text);
+    color: var(--color-primary);
+    border-bottom-right-radius: 0;
+    align-self: flex-end;
+    margin-bottom: 1rem;
+  }
+}

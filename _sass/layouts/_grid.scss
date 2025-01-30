@@ -1,0 +1,67 @@
+// Grid Layout Styles
+#notes-entry-container {
+  display: flex;
+  flex-direction: row;
+  gap: 3em;
+  margin-top: 2em;
+}
+
+.main-content {
+  flex: 3;
+  min-width: 0; // Prevents flex item from overflowing
+}
+
+.sidebar {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  font-size: 0.9em;
+  background: hsla(0, 0%, 10%, 0.04);
+  padding: 1.5em;
+  border-radius: 8px;
+  height: fit-content;
+  position: sticky;
+  top: 2em;
+}
+
+.backlink-box {
+  background: hsla(0, 0%, 10%, 0.04);
+  padding: 1em;
+  border-radius: 4px;
+}
+
+// Responsive layout adjustments
+@media (max-width: 1024px) {
+  #notes-entry-container {
+    flex-direction: column;
+  }
+  
+  .main-content {
+    width: 100%;
+  }
+  
+  .sidebar {
+    width: 100%;
+    max-width: none;
+    position: static;
+  }
+}
+
+// Print styles
+@media print {
+  body {
+    padding: 0;
+  }
+  
+  nav, footer {
+    display: none;
+  }
+  
+  main {
+    margin: 0;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+}

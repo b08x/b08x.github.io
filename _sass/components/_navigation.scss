@@ -1,0 +1,75 @@
+// Navigation styles
+.site-nav {
+  padding: 1rem;
+  background-color: var(--color-text);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  color: var(--color-background);
+  text-decoration: none;
+}
+
+.nav-menu {
+  display: flex;
+}
+
+.nav-link {
+  color: var(--color-background);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+
+  .icon-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-background);
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background-color: var(--color-text);
+
+    &.active {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    padding: 0.5rem 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}

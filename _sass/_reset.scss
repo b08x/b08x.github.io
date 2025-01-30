@@ -1,0 +1,98 @@
+// Reset styles
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Reset margins and paddings
+h1, h2, h3, h4, h5, h6,
+p, blockquote, figure,
+ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+// Reset lists
+ul, ol {
+  list-style: none;
+}
+
+// Reset images
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Reset form elements
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+}
+
+// Reset buttons
+button {
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+// Reset links
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Reset tables
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// Remove outline on focused elements
+:focus {
+  outline: 0;
+}
+
+// Reset article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block;
+}
+
+// Reset audio, canvas, progress, video
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+// Hidden attribute
+[hidden] {
+  display: none;
+}

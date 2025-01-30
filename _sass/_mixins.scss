@@ -1,0 +1,89 @@
+@import "mixins/clearfix";
+@import "mixins/float";
+@import "mixins/image";
+@import "mixins/lists";
+@import "mixins/text-truncate";
+
+// Responsive breakpoint mixin
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == "tiny" {
+      @media only screen and (max-width: $on-tiny) {
+        @content;
+      }
+    }
+    @else if $breakpoint == "palm" {
+      @media only screen and (max-width: $on-palm) {
+        @content;
+      }
+    }
+    @else if $breakpoint == "laptop" {
+      @media only screen and (max-width: $on-laptop) {
+        @content;
+      }
+    }
+  }
+  
+  // Container mixin
+  @mixin container {
+    max-width: $content-width;
+    margin: 0 auto;
+    padding: 0 $spacing-unit;
+  }
+  
+  // Grid mixin
+  @mixin grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  // Flexbox mixins
+  @mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  @mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  // Clearfix mixin
+  @mixin clearfix {
+    &::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+  
+  // Typography mixins
+  @mixin heading-font {
+    font-family: var(--font-family-special);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  
+  @mixin body-font {
+    font-family: var(--font-family-hack);
+    font-weight: 400;
+    line-height: 1.7;
+  }
+  
+  // Box shadow mixin
+  @mixin box-shadow($level: 1) {
+    @if $level == 1 {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    } @else if $level == 2 {
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    } @else if $level == 3 {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+  }
+  
+  // Transition mixin
+  @mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+    transition: $property $duration $timing;
+  }
+  
