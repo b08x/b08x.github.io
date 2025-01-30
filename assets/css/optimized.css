@@ -22,14 +22,14 @@ body {
   line-height: 1.7;
   color: slategrey;
   background-color: #181818;
-  max-width: 78%;
+  max-width: 85%;
   overflow-x: hidden;
 }
 
 /* Responsive Typography */
 @media (min-width: 320px) {
   body {
-    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+    font-size: calc(10px + 6 * ((100vw - 320px) / 680));
   }
 }
 

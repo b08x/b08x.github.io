@@ -6,6 +6,10 @@ Jekyll::Hooks.register [:notes], :pre_render do |doc|
   replace(doc)
 end
 
+Jekyll::Hooks.register [:prompts], :pre_render do |doc|
+  replace(doc)
+end
+
 Jekyll::Hooks.register [:docs], :pre_render do |doc|
   replace(doc)
 end
@@ -18,9 +22,10 @@ Jekyll::Hooks.register [:pages], :pre_render do |doc|
   # jekyll considers anything at the root as a page,
   # we only want to consider actual pages
   next unless doc.path.start_with?('_pages/')
+
   replace(doc)
 end
 
 def replace(doc)
-  doc.content.gsub!(/==+([^ ](.*?)?[^ .=])==+/, "<mark>\\1</mark>")
+  doc.content.gsub!(/==+([^ ](.*?)?[^ .=])==+/, '<mark>\\1</mark>')
 end

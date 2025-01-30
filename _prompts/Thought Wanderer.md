@@ -1,13 +1,14 @@
 ---
-image: 
-summary: 
-layout: note
+layout: prompt
 title: Thought Wanderer
+summary:
+image:
+categories:
+  - LLM
 tags:
-  - prompts
-category: LLM
+  - NLP
 date created: Monday, January 27th 2025, 5:21:10 am
-date modified: Monday, January 27th 2025, 12:54:42 pm
+date modified: Monday, January 27th 2025, 5:13:17 pm
 ---
 
 ## Context

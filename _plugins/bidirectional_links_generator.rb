@@ -1,17 +1,19 @@
 # frozen_string_literal: true
+
 class BidirectionalLinksGenerator < Jekyll::Generator
   def generate(site)
     graph_nodes = []
     graph_edges = []
 
+    all_prompts = site.collections['prompts'].docs
     all_notes = site.collections['notes'].docs
     all_project_docs = site.collections['docs'].docs
     all_casts = site.collections['casts'].docs
     all_pages = site.pages
 
-    all_docs = all_casts + all_project_docs + all_notes + all_pages
+    all_docs = all_casts + all_project_docs + all_notes + all_prompts + all_pages
 
-    link_extension = !!site.config["use_html_extension"] ? '.html' : ''
+    link_extension = !!site.config['use_html_extension'] ? '.html' : ''
 
     # Convert all Wiki/Roam-style double-bracket link syntax to plain HTML
     # anchor tag elements (<a>) with "internal-link" CSS class
@@ -25,9 +27,7 @@ class BidirectionalLinksGenerator < Jekyll::Generator
         ).gsub('\_', '[ _]').gsub('\-', '[ -]').capitalize
 
         title_from_data = note_potentially_linked_to.data['title']
-        if title_from_data
-          title_from_data = Regexp.escape(title_from_data)
-        end
+        title_from_data = Regexp.escape(title_from_data) if title_from_data
 
         new_href = "#{site.baseurl}#{note_potentially_linked_to.url}#{link_extension}"
         anchor_tag = "<a class='internal-link' href='#{new_href}'>\\1</a>"
@@ -75,19 +75,23 @@ class BidirectionalLinksGenerator < Jekyll::Generator
       )
     end
 
+    all_the_notes = all_notes + all_prompts
+
     # Identify note backlinks and add them to each note
-    all_notes.each do |current_note|
+    all_the_notes.each do |current_note|
       # Nodes: Jekyll
       notes_linking_to_current_note = all_notes.filter do |e|
         e.content.include?(current_note.url)
       end
 
       # Nodes: Graph
-      graph_nodes << {
-        id: note_id_from_note(current_note),
-        path: "#{site.baseurl}#{current_note.url}#{link_extension}",
-        label: current_note.data['title'],
-      } unless current_note.path.include?('_notes/index.html')
+      unless current_note.path.include?('_notes/index.html') || current_note.path.include?('_prompts/index.html')
+        graph_nodes << {
+          id: note_id_from_note(current_note),
+          path: "#{site.baseurl}#{current_note.url}#{link_extension}",
+          label: current_note.data['title']
+        }
+      end
 
       # Edges: Jekyll
       current_note.data['backlinks'] = notes_linking_to_current_note
@@ -96,15 +100,15 @@ class BidirectionalLinksGenerator < Jekyll::Generator
       notes_linking_to_current_note.each do |n|
         graph_edges << {
           source: note_id_from_note(n),
-          target: note_id_from_note(current_note),
+          target: note_id_from_note(current_note)
         }
       end
     end
 
     File.write('_includes/notes_graph.json', JSON.dump({
-      edges: graph_edges,
-      nodes: graph_nodes,
-    }))
+                                                         edges: graph_edges,
+                                                         nodes: graph_nodes
+                                                       }))
   end
 
   def note_id_from_note(note)

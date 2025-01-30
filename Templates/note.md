@@ -1,9 +1,9 @@
 ---
 layout: note
 title: 
-category: 
-tags: 
+summary:
 image: 
-summary: 
+categories:
+tags:
 ---
 

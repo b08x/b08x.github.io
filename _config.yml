@@ -41,9 +41,10 @@ include:
   - "_notes/"
   - "_pages/"
   - "_posts/"
+  - "_prompts/"
   - "_casts/"
 exclude:
-  - "/textgenerator/templates/"
+  - "/Textgenerator/templates/"
   - "Templates/"
   - "SystemSculpt/"
   - "CHANGELOG.md"
@@ -56,7 +57,7 @@ exclude:
   - "plugins/"
   - "vendor"
   - "jsoncanvas/"
-  - "_textgenerator/"
+  - "_Textgenerator/"
   - "_scratchpad/"
   - ".obsidian/"
   - ".smart-env/"
@@ -170,6 +171,9 @@ collections:
   notes:
     output: true
     permalink: /:collection/:categories/:title
+  prompts:
+    output: true
+    permalink: /:collection/:categories/:title
   casts:
     output: true
     permalink: /:collection/:path
@@ -193,6 +197,11 @@ defaults:
       path: "_notes/**/*.md"
     values:
       layout: "note"
+  - 
+    scope:
+      path: "_prompts/**/*.md"
+    values:
+      layout: "prompt"
   -
     scope:
       path: "_docs/**/*.md"
