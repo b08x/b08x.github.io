@@ -32,7 +32,6 @@ plugins:
   - jekyll-last-modified-at
   - jekyll-jupyter-notebook
   - jekyll-spaceship
-  - jekyll_picture_tag
   - jekyll-toc
   - jekyll-paginate-v2
   - jekyll-feed
