@@ -1,6 +1,8 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - b08x
+
+gitlab_users:
+  - b08x
 
 repo_description_lines_max: 2
 
@@ -12,3 +14,7 @@ github_repos:
   - FortAwesome/Font-Awesome
   - mathjax/MathJax
   - jpswalsh/academicons
+
+gitlab_repos:
+  - syncopatedx/syncopated-iso
+  # Add more GitLab repositories as needed
