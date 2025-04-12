@@ -18,7 +18,7 @@ jobs:
         run: |
           sudo apt update -qq && \
           sudo apt install python3-pip imagemagick libvips-dev libopenslide-dev jupyter-core && \
-          sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*        
+          sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
