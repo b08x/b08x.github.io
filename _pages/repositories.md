@@ -2,7 +2,7 @@
 layout: page
 permalink: /repositories/
 title: repositories
-description: Edit the `_data/repositories.yml` to include your GitHub and GitLab profiles and repositories.
+description: Things I Tinker With.
 nav: true
 nav_order: 4
 ---

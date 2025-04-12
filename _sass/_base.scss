@@ -25,6 +25,11 @@ hr {
   border-top: 1px solid var(--global-divider-color);
 }
 
+.bootstrap-table .fixed-table-container .table {
+  width: 100%;
+  margin-bottom: 1rem !important;
+}
+
 table {
   td,
   th {

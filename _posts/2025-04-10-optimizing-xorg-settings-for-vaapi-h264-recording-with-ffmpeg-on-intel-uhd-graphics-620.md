@@ -2,7 +2,7 @@
 layout: post
 title: "Optimizing Xorg Settings for Vaapi H264 Recording with Ffmpeg on Intel Uhd Graphics 620"
 date: 2025-04-10 07:28:14 -0400
-category: 
+category:
 tags:
   - Linux
   - Xorg
@@ -15,6 +15,7 @@ description: "something"
 toc:
   beginning: true
 pretty_table: true
+giscus_comments: true
 ---
 
 # 1. Introduction: Leveraging GPU Acceleration for Video Encoding
@@ -69,20 +70,20 @@ ffmpeg -vaapi_device /dev/dri/renderD128 -i input.mp4 -vf 'format=nv12,hwupload'
 
 Let's break down the key components of this command:
 
-* `-vaapi_device /dev/dri/renderD128`: This option specifies the VAAPI device that FFmpeg should use for hardware acceleration. The path `/dev/dri/renderD128` is a common location for the DRM (Direct Rendering Manager) render node associated with the primary graphics device, but this path might vary depending on the system configuration[^15] This device node serves as the interface through which FFmpeg interacts with the VAAPI driver for the Intel GPU.
-* `-i input.mp4`: This standard FFmpeg option indicates the input video file that needs to be encoded[^15]
-* `-vf 'format=nv12,hwupload'`: This option applies a chain of video filters.
-    * `format=nv12`: The `nv12` pixel format is a common YUV 4:2:0 semi-planar format that is often preferred by hardware encoders for its efficient representation of color information[^15] Converting the input to this format ensures compatibility with the VAAPI encoder and can optimize encoding efficiency.
-    * `hwupload`: This filter is crucial for hardware acceleration as it uploads the video frames from the system's main memory (RAM) to the dedicated video memory of the GPU[^15] Hardware encoders operate on data residing within the GPU's memory, so this step is essential to leverage the Intel UHD Graphics 620's encoding capabilities.
-* `-c:v h264_vaapi`: This option explicitly selects the hardware-accelerated H264 encoder provided by the VAAPI implementation[^15] This tells FFmpeg to utilize the GPU's dedicated hardware for encoding the video into the H264 format.
-* `output.mp4`: This specifies the name of the output file where the encoded video will be saved[^15]
+- `-vaapi_device /dev/dri/renderD128`: This option specifies the VAAPI device that FFmpeg should use for hardware acceleration. The path `/dev/dri/renderD128` is a common location for the DRM (Direct Rendering Manager) render node associated with the primary graphics device, but this path might vary depending on the system configuration[^15] This device node serves as the interface through which FFmpeg interacts with the VAAPI driver for the Intel GPU.
+- `-i input.mp4`: This standard FFmpeg option indicates the input video file that needs to be encoded[^15]
+- `-vf 'format=nv12,hwupload'`: This option applies a chain of video filters.
+  - `format=nv12`: The `nv12` pixel format is a common YUV 4:2:0 semi-planar format that is often preferred by hardware encoders for its efficient representation of color information[^15] Converting the input to this format ensures compatibility with the VAAPI encoder and can optimize encoding efficiency.
+  - `hwupload`: This filter is crucial for hardware acceleration as it uploads the video frames from the system's main memory (RAM) to the dedicated video memory of the GPU[^15] Hardware encoders operate on data residing within the GPU's memory, so this step is essential to leverage the Intel UHD Graphics 620's encoding capabilities.
+- `-c:v h264_vaapi`: This option explicitly selects the hardware-accelerated H264 encoder provided by the VAAPI implementation[^15] This tells FFmpeg to utilize the GPU's dedicated hardware for encoding the video into the H264 format.
+- `output.mp4`: This specifies the name of the output file where the encoded video will be saved[^15]
 
 In addition to these fundamental options, several optional parameters can be used to control the encoding quality and performance:
 
-* `-qp <value>`: The Constant Quantization Parameter (QP) controls the quality of the encoded video. Lower QP values result in higher quality but also larger file sizes. A suggested range for good quality is typically between 15 and 25.25 Using a constant QP allows for consistent quality throughout the video.
-* `-b:v <bitrate>`: This option allows setting a target bitrate for the encoded video[^17]
-* `-profile:v <profile>`: The H264 profile (e.g., baseline, main, high) can be specified using this option to ensure compatibility with various playback devices[^16]
-* While less common for VAAPI encoders compared to software encoders like libx264, some VAAPI implementations might support presets to control the trade-off between encoding speed and quality.
+- `-qp <value>`: The Constant Quantization Parameter (QP) controls the quality of the encoded video. Lower QP values result in higher quality but also larger file sizes. A suggested range for good quality is typically between 15 and 25.25 Using a constant QP allows for consistent quality throughout the video.
+- `-b:v <bitrate>`: This option allows setting a target bitrate for the encoded video[^17]
+- `-profile:v <profile>`: The H264 profile (e.g., baseline, main, high) can be specified using this option to ensure compatibility with various playback devices[^16]
+- While less common for VAAPI encoders compared to software encoders like libx264, some VAAPI implementations might support presets to control the trade-off between encoding speed and quality.
 
 Two-pass encoding, a technique used to potentially achieve better quality at a given bitrate, might also be supported by the `h264_vaapi` encoder in some implementations[^17]
 
@@ -91,38 +92,35 @@ Two-pass encoding, a technique used to potentially achieve better quality at a g
 For users on Arch Linux with an Intel UHD Graphics 620, the following steps provide a practical guide to setting up VAAPI for H264 encoding with FFmpeg:
 
 1. **Install `intel-media-driver`:** Open a terminal and run: `sudo pacman -S intel-media-driver`[^4]
-    
 2. **Install `libva-utils`:** Install the `vainfo` utility: `sudo pacman -S libva-utils`[^4]
-    
 3. **Verify VAAPI:** Run the `vainfo` command: `vainfo`. Examine the output to confirm that `iHD_drv_video.so` is loaded and that `VAEntrypointEncSlice` is listed for H264.4 If the initial command fails, try explicitly specifying the driver: `LIBVA_DRIVER_NAME=iHD vainfo`[^4]
-    
 4. **Optional: Create Xorg Configuration Snippet:** For potentially improved video performance and to address potential issues like screen tearing, create a file named `20-intel.conf` in the `/etc/X11/xorg.conf.d/` directory: `sudo nano /etc/X11/xorg.conf.d/20-intel.conf`. Add the following content as a starting point. Users can experiment with these options to find the best configuration for their specific needs:
 
-    ```shell
-    Section "Device"
-      Identifier "Intel Graphics"
-      Driver "intel"
-      Option "AccelMethod" "sna"
-      Option "DRI" "iris"
-      Option "TearFree" "true"
-      Option "TripleBuffer" "true"
-    EndSection
-    ```
+   ```shell
+   Section "Device"
+     Identifier "Intel Graphics"
+     Driver "intel"
+     Option "AccelMethod" "sna"
+     Option "DRI" "iris"
+     Option "TearFree" "true"
+     Option "TripleBuffer" "true"
+   EndSection
+   ```
 
 5. **Test FFmpeg Encoding:** Encode a sample video file using a basic FFmpeg command to verify that hardware acceleration is being utilized. Monitor the CPU usage during the encoding process; a significant reduction compared to software encoding would indicate that the GPU is being used[^1] A basic command to test could be:
 
-    ```shell
-    ffmpeg -vaapi_device /dev/dri/renderD128 -i input.mp4 -vf 'format=nv12,hwupload' -c:v h264_vaapi -qp 20 output.mp4
-    ```
+   ```shell
+   ffmpeg -vaapi_device /dev/dri/renderD128 -i input.mp4 -vf 'format=nv12,hwupload' -c:v h264_vaapi -qp 20 output.mp4
+   ```
 
 # 7. Troubleshooting Common Issues and Solutions: Addressing Potential Problems with VAAPI and Xorg
 
 Setting up VAAPI for hardware acceleration can sometimes involve troubleshooting. Here are some common issues that might arise and their potential solutions:
 
-* **VAAPI Initialization Errors (`vaInitialize failed`, `va_openDriver() returns -1`):** This often indicates that the correct VAAPI driver is not being loaded[^26] Ensure that the `intel-media-driver` package is installed. Try explicitly setting the `LIBVA_DRIVER_NAME` environment variable to `iHD` before running applications that use VAAPI or when using `vainfo`[^4] Also, verify that the user has the necessary permissions to access the `/dev/dri/renderD128` device node, typically by ensuring the user is a member of the `video` group[^2] In some cases, interference from the Wayland display server might cause issues, although this is less likely to affect `vainfo` directly.
-* **Screen Tearing:** If screen tearing occurs during video playback or recording, ensure that the `Option "TearFree" "true"` is enabled in the Xorg configuration. For Intel UHD 620/630, also try adding `Option "TripleBuffer" "true"`[^18] Experimenting with different `AccelMethod` options (`sna` or `uxa`) might also help in some situations.
-* **Poor Encoding Performance or Errors with FFmpeg:** If FFmpeg encoding performance is not as expected or errors occur, verify that the `-vf 'format=nv12,hwupload'` options are included in the command[^15] Ensure that the input video's H264 profile is supported by the hardware encoder; trying different `-profile:v` options or lowering the encoding quality might be necessary[^16] Issues with specific input video codecs or formats might also arise[^24] Testing with different input files can help isolate these problems. If the `-hwaccel vaapi` option is used with FFmpeg for decoding, ensure that the input video is indeed decodable with hardware acceleration.
-* **Browser Issues with Hardware Acceleration:** While not the primary focus, users might encounter issues enabling VAAPI in web browsers like Firefox and Chromium. Various configuration flags and settings within the browser might need adjustment, as detailed in snippets.
+- **VAAPI Initialization Errors (`vaInitialize failed`, `va_openDriver() returns -1`):** This often indicates that the correct VAAPI driver is not being loaded[^26] Ensure that the `intel-media-driver` package is installed. Try explicitly setting the `LIBVA_DRIVER_NAME` environment variable to `iHD` before running applications that use VAAPI or when using `vainfo`[^4] Also, verify that the user has the necessary permissions to access the `/dev/dri/renderD128` device node, typically by ensuring the user is a member of the `video` group[^2] In some cases, interference from the Wayland display server might cause issues, although this is less likely to affect `vainfo` directly.
+- **Screen Tearing:** If screen tearing occurs during video playback or recording, ensure that the `Option "TearFree" "true"` is enabled in the Xorg configuration. For Intel UHD 620/630, also try adding `Option "TripleBuffer" "true"`[^18] Experimenting with different `AccelMethod` options (`sna` or `uxa`) might also help in some situations.
+- **Poor Encoding Performance or Errors with FFmpeg:** If FFmpeg encoding performance is not as expected or errors occur, verify that the `-vf 'format=nv12,hwupload'` options are included in the command[^15] Ensure that the input video's H264 profile is supported by the hardware encoder; trying different `-profile:v` options or lowering the encoding quality might be necessary[^16] Issues with specific input video codecs or formats might also arise[^24] Testing with different input files can help isolate these problems. If the `-hwaccel vaapi` option is used with FFmpeg for decoding, ensure that the input video is indeed decodable with hardware acceleration.
+- **Browser Issues with Hardware Acceleration:** While not the primary focus, users might encounter issues enabling VAAPI in web browsers like Firefox and Chromium. Various configuration flags and settings within the browser might need adjustment, as detailed in snippets.
 
 # 8. Recommended Xorg Configuration and FFmpeg Command for Intel UHD Graphics 620: A Practical Guide
 
@@ -157,110 +155,76 @@ Utilizing VAAPI for H264 encoding with FFmpeg on Intel UHD Graphics 620 offers s
 
 It is advisable to keep the Intel graphics drivers and related packages updated to benefit from the latest performance improvements and bug fixes[^8] For more advanced VAAPI encoding options and filters within FFmpeg, users are encouraged to consult the official FFmpeg documentation[^15] While this report focused on VAAPI, users might also explore other hardware acceleration APIs like Intel Quick Sync Video (QSV) if they encounter limitations or seek alternative solutions[^6]
 
-
 **Table 1: Intel VAAPI Driver Recommendations**
 
-|   |   |
-|---|---|
-|**Intel GPU Series/Generation**|**Recommended VAAPI Driver**|
-|GMA 4500|`libva-intel-driver` (i965)|
-|HD Graphics up to Coffee Lake|`libva-intel-driver` (i965)|
-|Broadwell and newer (e.g., UHD 620)|`intel-media-driver` (iHD)|
-
+|                                     |                              |
+| ----------------------------------- | ---------------------------- |
+| **Intel GPU Series/Generation**     | **Recommended VAAPI Driver** |
+| GMA 4500                            | `libva-intel-driver` (i965)  |
+| HD Graphics up to Coffee Lake       | `libva-intel-driver` (i965)  |
+| Broadwell and newer (e.g., UHD 620) | `intel-media-driver` (iHD)   |
 
 **Table 2: Recommended `xorg.conf` Options for Intel UHD Graphics 620**
 
-|   |   |   |
-|---|---|---|
-|**Option Name**|**Recommended Value**|**Explanation/Purpose**|
-|`Driver`|`"intel"`|Specifies the Intel graphics driver.|
-|`Identifier`|`"Intel Graphics"`|Identifies this device configuration section.|
-|`AccelMethod`|`"sna"`|Selects the SandyBridge New Acceleration method (generally recommended for newer Intel GPUs).|
-|`DRI`|`"iris"`|Uses the modern `iris` Mesa driver for direct rendering.|
-|`TearFree`|`"true"`|Attempts to eliminate screen tearing.|
-|`TripleBuffer`|`"true"`|May be necessary in conjunction with `TearFree` for UHD 620/630.|
+|                 |                       |                                                                                               |
+| --------------- | --------------------- | --------------------------------------------------------------------------------------------- |
+| **Option Name** | **Recommended Value** | **Explanation/Purpose**                                                                       |
+| `Driver`        | `"intel"`             | Specifies the Intel graphics driver.                                                          |
+| `Identifier`    | `"Intel Graphics"`    | Identifies this device configuration section.                                                 |
+| `AccelMethod`   | `"sna"`               | Selects the SandyBridge New Acceleration method (generally recommended for newer Intel GPUs). |
+| `DRI`           | `"iris"`              | Uses the modern `iris` Mesa driver for direct rendering.                                      |
+| `TearFree`      | `"true"`              | Attempts to eliminate screen tearing.                                                         |
+| `TripleBuffer`  | `"true"`              | May be necessary in conjunction with `TearFree` for UHD 620/630.                              |
 
 **Table 3: Common FFmpeg VAAPI Encoding Options**
 
-|   |   |   |
-|---|---|---|
-|**FFmpeg Option**|**Purpose**|**Example**|
-|`-vaapi_device /dev/dri/renderD128`|Specifies the VAAPI device to use.|`-vaapi_device /dev/dri/renderD128`|
-|`-i input.mp4`|Specifies the input video file.|`-i my_video.mp4`|
-|`-vf format=nv12`|Converts the video to the `nv12` pixel format.|`-vf format=nv12`|
-|`-vf hwupload`|Uploads video frames to GPU memory.|`-vf hwupload`|
-|`-c:v h264_vaapi`|Selects the hardware-accelerated H264 encoder.|`-c:v h264_vaapi`|
-|`-qp 20`|Sets the constant quantization parameter for quality control.|`-qp 18`|
-|`-b:v 2M`|Sets the target bitrate to 2 Megabits per second.|`-b:v 2M`|
-|`-profile:v high`|Sets the H264 profile to High.|`-profile:v main`|
+|                                     |                                                               |                                     |
+| ----------------------------------- | ------------------------------------------------------------- | ----------------------------------- |
+| **FFmpeg Option**                   | **Purpose**                                                   | **Example**                         |
+| `-vaapi_device /dev/dri/renderD128` | Specifies the VAAPI device to use.                            | `-vaapi_device /dev/dri/renderD128` |
+| `-i input.mp4`                      | Specifies the input video file.                               | `-i my_video.mp4`                   |
+| `-vf format=nv12`                   | Converts the video to the `nv12` pixel format.                | `-vf format=nv12`                   |
+| `-vf hwupload`                      | Uploads video frames to GPU memory.                           | `-vf hwupload`                      |
+| `-c:v h264_vaapi`                   | Selects the hardware-accelerated H264 encoder.                | `-c:v h264_vaapi`                   |
+| `-qp 20`                            | Sets the constant quantization parameter for quality control. | `-qp 18`                            |
+| `-b:v 2M`                           | Sets the target bitrate to 2 Megabits per second.             | `-b:v 2M`                           |
+| `-profile:v high`                   | Sets the H264 profile to High.                                | `-profile:v main`                   |
 
 ---
 
 ## Works Cited
 
 [^1]: Need help to enable hardware acceleration on my laptop : r/archlinux - Reddit, accessed April 11, 2025, [https://www.reddit.com/r/archlinux/comments/1ao49kz/need_help_to_enable_hardware_acceleration_on_my/](https://www.reddit.com/r/archlinux/comments/1ao49kz/need_help_to_enable_hardware_acceleration_on_my/)
-    
 [^2]: Xorg/Hardware 3D acceleration guide - Gentoo Wiki, accessed April 11, 2025, [https://wiki.gentoo.org/wiki/Xorg/Hardware_3D_acceleration_guide](https://wiki.gentoo.org/wiki/Xorg/Hardware_3D_acceleration_guide)
-    
 [^3]: The Intel Media Driver for VAAPI... what is it for ? : r/Fedora - Reddit, accessed April 11, 2025, [https://www.reddit.com/r/Fedora/comments/1cgrubj/the_intel_media_driver_for_vaapi_what_is_it_for/](https://www.reddit.com/r/Fedora/comments/1cgrubj/the_intel_media_driver_for_vaapi_what_is_it_for/)
-    
 [^4]: Hardware video acceleration - ArchWiki, accessed April 11, 2025, [https://wiki.archlinux.org/title/Hardware_video_acceleration](https://wiki.archlinux.org/title/Hardware_video_acceleration)
-    
 [^5]: VAAPI (Video Acceleration API) - Intel, accessed April 11, 2025, [https://www.intel.com/content/www/us/en/developer/articles/technical/linuxmedia-vaapi.html](https://www.intel.com/content/www/us/en/developer/articles/technical/linuxmedia-vaapi.html)
-    
 [^6]: Intel GPU - Jellyfin, accessed April 11, 2025, [https://jellyfin.org/docs/general/administration/hardware-acceleration/intel/](https://jellyfin.org/docs/general/administration/hardware-acceleration/intel/)
-    
 [^7]: Intel UHD 620 - clarification needed - Kernel, boot, graphics & hardware - EndeavourOS, accessed April 11, 2025, [https://forum.endeavouros.com/t/intel-uhd-620-clarification-needed/20905](https://forum.endeavouros.com/t/intel-uhd-620-clarification-needed/20905)
-    
 [^8]: What VA-API driver for i3-7100? / Multimedia and Games / Arch Linux Forums, accessed April 11, 2025, [https://bbs.archlinux.org/viewtopic.php?id=281739](https://bbs.archlinux.org/viewtopic.php?id=281739)
-    
 [^9]: How to enable Hardware Acceleration for Intel drivers? : r/linux4noobs - Reddit, accessed April 11, 2025, [https://www.reddit.com/r/linux4noobs/comments/xhzwy8/how_to_enable_hardware_acceleration_for_intel/](https://www.reddit.com/r/linux4noobs/comments/xhzwy8/how_to_enable_hardware_acceleration_for_intel/)
-    
 [^10]: Intel Graphics - Best practices and settings for hardware acceleration? - Fedora Discussion, accessed April 11, 2025, [https://discussion.fedoraproject.org/t/intel-graphics-best-practices-and-settings-for-hardware-acceleration/69944](https://discussion.fedoraproject.org/t/intel-graphics-best-practices-and-settings-for-hardware-acceleration/69944)
-    
 [^11]: Firefox Hardware acceleration - Fedora Project Wiki, accessed April 11, 2025, [https://fedoraproject.org/wiki/Firefox_Hardware_acceleration](https://fedoraproject.org/wiki/Firefox_Hardware_acceleration)
-    
 [^12]: HardwareVideoAcceleration - Debian Wiki, accessed April 11, 2025, [https://wiki.debian.org/HardwareVideoAcceleration](https://wiki.debian.org/HardwareVideoAcceleration)
-    
 [^13]: elFarto/nvidia-vaapi-driver: A VA-API implemention using NVIDIA's NVDEC - GitHub, accessed April 11, 2025, [https://github.com/elFarto/nvidia-vaapi-driver](https://github.com/elFarto/nvidia-vaapi-driver)
-    
 [^14]: Hardware video acceleration in Web browsers - Linux Gaming wiki, accessed April 11, 2025, [https://linux-gaming.kwindu.eu/index.php?title=Hardware_video_acceleration_in_Web_browsers](https://linux-gaming.kwindu.eu/index.php?title=Hardware_video_acceleration_in_Web_browsers)
 [^15]: Hardware/VAAPI – FFmpeg, accessed April 11, 2025, [https://trac.ffmpeg.org/wiki/Hardware/VAAPI](https://trac.ffmpeg.org/wiki/Hardware/VAAPI)
-    
 [^16]: ffmpeg: h264 hardware encoding : r/linuxquestions - Reddit, accessed April 11, 2025, [https://www.reddit.com/r/linuxquestions/comments/127ejym/ffmpeg_h264_hardware_encoding/](https://www.reddit.com/r/linuxquestions/comments/127ejym/ffmpeg_h264_hardware_encoding/)
-    
 [^17]: This gist contains instructions on setting up FFmpeg and Libav to use VAAPI-based hardware accelerated encoding (on supported platforms) for H[^264] (and H[^265] on supported hardware) video formats. · GitHub, accessed April 11, 2025, [https://gist.github.com/Brainiarc7/95c9338a737aa36d9bb2931bed379219](https://gist.github.com/Brainiarc7/95c9338a737aa36d9bb2931bed379219)
-    
 [^18]: Intel graphics - ArchWiki, accessed April 11, 2025, [https://wiki.archlinux.org/title/Intel_graphics](https://wiki.archlinux.org/title/Intel_graphics)
-    
 [^19]: Enabling Intel Video Acceleration On FreeBSD, accessed April 11, 2025, [https://forums.freebsd.org/threads/enabling-intel-video-acceleration-on-freebsd[^62120]/](https://forums.freebsd.org/threads/enabling-intel-video-acceleration-on-freebsd[^62120]/)
-    
 [^20]: How to fix video tearing in Linux (with Intel graphics) - Dedoimedo, accessed April 11, 2025, [https://www.dedoimedo.com/computers/linux-intel-graphics-video-tearing.html](https://www.dedoimedo.com/computers/linux-intel-graphics-video-tearing.html)
-    
 [^21]: Configure Xorg to use integrated Intel, not Nvidia - Ask Ubuntu, accessed April 11, 2025, [https://askubuntu.com/questions/1164654/configure-xorg-to-use-integrated-intel-not-nvidia](https://askubuntu.com/questions/1164654/configure-xorg-to-use-integrated-intel-not-nvidia)
-    
 [^22]: intel - X.Org, accessed April 11, 2025, [https://www.x.org/releases/X11R7.6-RC1/doc/man/man4/intel[^4].xhtml](https://www.x.org/releases/X11R7.6-RC1/doc/man/man4/intel[^4].xhtml)
-    
 [^23]: Intel - Poor graphics performance, frames dropped when playing videos, accessed April 11, 2025, [https://forum.manjaro.org/t/intel-poor-graphics-performance-frames-dropped-when-playing-videos/151652](https://forum.manjaro.org/t/intel-poor-graphics-performance-frames-dropped-when-playing-videos/151652)
-    
 [^24]: Getting FFMPEG to use VAAPI acceleration when decoding - Reddit, accessed April 11, 2025, [https://www.reddit.com/r/ffmpeg/comments/14fcmh5/getting_ffmpeg_to_use_vaapi_acceleration_when/](https://www.reddit.com/r/ffmpeg/comments/14fcmh5/getting_ffmpeg_to_use_vaapi_acceleration_when/)
-    
 [^25]: How to encode to HEVC using ffmpeg with VAAPI in order to get good video quality? (at reasonable bitrates) - Super User, accessed April 11, 2025, [https://superuser.com/questions/1684870/how-to-encode-to-hevc-using-ffmpeg-with-vaapi-in-order-to-get-good-video-quality](https://superuser.com/questions/1684870/how-to-encode-to-hevc-using-ffmpeg-with-vaapi-in-order-to-get-good-video-quality)
-    
 [^26]: Hardware video acceleration - ArchWiki, accessed April 11, 2025, [https://wiki.archlinux.org/title/Hardware_video_acceleration#Troubleshooting](https://wiki.archlinux.org/title/Hardware_video_acceleration#Troubleshooting)
-    
 [^27]: [SOLVED-ish] UHD 620 Xorg 30 FPS Video Issues / Multimedia and Games / Arch Linux Forums, accessed April 11, 2025, [https://bbs.archlinux.org/viewtopic.php?id=298983](https://bbs.archlinux.org/viewtopic.php?id=298983)
-    
 [^28]: [SOLVED] Firefox 99 breaks VAAPI / Applications & Desktop Environments / Arch Linux Forums, accessed April 11, 2025, [https://bbs.archlinux.org/viewtopic.php?id=275415](https://bbs.archlinux.org/viewtopic.php?id=275415)
-
 [^29]: Tutorial: How to enable hardware video acceleration on Firefox and Chromium based browsers : r/linux - Reddit, accessed April 11, 2025, [https://www.reddit.com/r/linux/comments/xcikym/tutorial_how_to_enable_hardware_video/](https://www.reddit.com/r/linux/comments/xcikym/tutorial_how_to_enable_hardware_video/)
-    
 [^30]: chromium: hardware video acceleration with VA-API (Page 31) / Applications & Desktop Environments / Arch Linux Forums, accessed April 11, 2025, [https://bbs.archlinux.org/viewtopic.php?id=244031&p=31](https://bbs.archlinux.org/viewtopic.php?id=244031&p=31)
-    
 [^31]: VA-API HW Acceleartion not working on Firefox with Xorg : r/archlinux - Reddit, accessed April 11, 2025, [https://www.reddit.com/r/archlinux/comments/rsbm64/vaapi_hw_acceleartion_not_working_on_firefox_with/](https://www.reddit.com/r/archlinux/comments/rsbm64/vaapi_hw_acceleartion_not_working_on_firefox_with/)
-    
 [^32]: Intel discontinues VAAPI driver support for Haswell (2013) and older - antiX-forum, accessed April 11, 2025, [https://www.antixforum.com/forums/topic/intel-discontinues-vaapi-driver-support-for-haswell-2013-and-older/](https://www.antixforum.com/forums/topic/intel-discontinues-vaapi-driver-support-for-haswell-2013-and-older/)
-    
 [^33]: Encode/H[^264] – FFmpeg, accessed April 11, 2025, [https://trac.ffmpeg.org/wiki/Encode/H[^264]](https://trac.ffmpeg.org/wiki/Encode/H[^264])
-    
 [^34]: HWAccelIntro – FFmpeg, accessed April 11, 2025, [https://trac.ffmpeg.org/wiki/HWAccelIntro](https://trac.ffmpeg.org/wiki/HWAccelIntro)

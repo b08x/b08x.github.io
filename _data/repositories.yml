@@ -7,14 +7,14 @@ gitlab_users:
 repo_description_lines_max: 2
 
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
-
+  - b08x/video_topic_splitter
+  - b08x/llm_memory
+  - b08x/jupyter-ruby-docker
+  - b08x/flowbots
+  
 gitlab_repos:
   - syncopatedx/syncopated-iso
+  - syncopatedX/syncopated-ansible
+  - syncopatedX/ansible-archlinux
+
   # Add more GitLab repositories as needed
