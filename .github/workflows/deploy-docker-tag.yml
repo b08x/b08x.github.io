@@ -2,6 +2,9 @@ name: Docker Image CI (Upload Tag)
 
 on:
   push:
+    branches:
+      - staging
+      # - main
     tags:
       - "v*"
     paths:

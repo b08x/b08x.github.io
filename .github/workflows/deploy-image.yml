@@ -3,8 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches:
-      - master
-      - main
+      - staging
+      # - main
     paths:
       - ".github/workflows/deploy-image.yml"
       - "bin/entry_point.sh"
