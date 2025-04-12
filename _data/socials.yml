@@ -43,7 +43,7 @@ rss_icon: true # set to true to show the RSS icon
 # wikipedia_id: # your wikipedia id (Case sensitive)
 # work_url: # work page URL
 # x_username: # your X handle
-youtube_id: 'syncopatednotes'
+youtube_id: "syncopatednotes"
 # zotero_username: # your zotero username
 custom_social: # can be any name here other than the ones already defined above
   logo: https://upload.wikimedia.org/wikipedia/commons/6/62/Suno_AI_icon.svg # can be png, svg, jpg

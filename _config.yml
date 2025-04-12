@@ -19,7 +19,7 @@ lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://b08x.github.io # the base hostname & protocol for your site
-baseurl: 
+baseurl:
 last_updated: false # set to true if you want to display last updated in the footer
 impressum_path: # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
 back_to_top: true # set to false to disable the back to top button
@@ -121,8 +121,8 @@ giscus:
 # https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
-use_html_extension:  false
-# Open non-internal links in new tabs when set to true, 
+use_html_extension: false
+# Open non-internal links in new tabs when set to true,
 # or in the current tab when set to false.
 open_external_links_in_new_tab: true
 
@@ -172,7 +172,6 @@ collections:
     output: true
   projects:
     output: true
-
 
 # -----------------------------------------------------------------------------
 # Jekyll settings

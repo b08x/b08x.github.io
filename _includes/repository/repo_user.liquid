@@ -1,5 +1,5 @@
 {% assign lang = site.lang | split: '-' | first %}
-{% assign platform = include.platform | default: "github" %}
+{% assign platform = include.platform | default: 'github' %}
 
 {% case lang %}
   {% when 'pt' %}
@@ -20,32 +20,31 @@
 {% endcase %}
 
 <div class="repo p-2 text-center">
-  {% if platform == "github" %}
-  <a href="https://github.com/{{ include.username }}">
-    <img
-      class="only-light w-100"
-      alt="{{ include.username }}"
-      src="https://github-readme-stats.vercel.app/api/?username={{ include.username }}&theme={{ site.repo_theme_light }}&locale={{ lang }}&show_icons=true"
-    >
-    <img
-      class="only-dark w-100"
-      alt="{{ include.username }}"
-      src="https://github-readme-stats.vercel.app/api/?username={{ include.username }}&theme={{ site.repo_theme_dark }}&locale={{ lang }}&show_icons=true"
-    >
-  </a>
-  {% elsif platform == "gitlab" %}
-  <a href="https://gitlab.com/{{ include.username }}">
-    <img
-      class="only-light w-100"
-      alt="{{ include.username }}"
-      src="https://gitlab-readme-stats.vercel.app/api?username={{ include.username }}&show_icons=true"
-    >
-    <img
-      class="only-dark w-100"
-      alt="{{ include.username }}"
-      src="https://gitlab-readme-stats.vercel.app/api?username={{ include.username }}&show_icons=true"
-    >
-  </a>
+  {% if platform == 'github' %}
+    <a href="https://github.com/{{ include.username }}">
+      <img
+        class="only-light w-100"
+        alt="{{ include.username }}"
+        src="https://github-readme-stats.vercel.app/api/?username={{ include.username }}&theme={{ site.repo_theme_light }}&locale={{ lang }}&show_icons=true"
+      >
+      <img
+        class="only-dark w-100"
+        alt="{{ include.username }}"
+        src="https://github-readme-stats.vercel.app/api/?username={{ include.username }}&theme={{ site.repo_theme_dark }}&locale={{ lang }}&show_icons=true"
+      >
+    </a>
+  {% elsif platform == 'gitlab' %}
+    <a href="https://gitlab.com/{{ include.username }}">
+      <img
+        class="only-light w-100"
+        alt="{{ include.username }}"
+        src="https://gitlab-readme-stats.vercel.app/api?username={{ include.username }}&show_icons=true"
+      >
+      <img
+        class="only-dark w-100"
+        alt="{{ include.username }}"
+        src="https://gitlab-readme-stats.vercel.app/api?username={{ include.username }}&show_icons=true"
+      >
+    </a>
   {% endif %}
 </div>
-

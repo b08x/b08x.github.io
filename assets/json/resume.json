@@ -93,16 +93,13 @@
       "startDate": "2002-01-01",
       "endDate": "2010-12-31",
       "summary": "Provided technical support to healthcare professionals",
-      "highlights": [
-        "Assisted clients with EPIC EMR login issues",
-        "Supported Windows XP and Mac OS X systems"
-      ]
+      "highlights": ["Assisted clients with EPIC EMR login issues", "Supported Windows XP and Mac OS X systems"]
     },
     {
       "name": "Indium Corporation",
       "position": "Telecommunications Administrator",
       "url": "",
-      "startDate": "2002-01-01", 
+      "startDate": "2002-01-01",
       "endDate": "2010-12-31",
       "summary": "Managed telecommunication systems and provided technical support",
       "highlights": [
@@ -147,73 +144,42 @@
     {
       "name": "Support Engineering",
       "level": "Expert",
-      "keywords": [
-        "Advanced troubleshooting methodologies",
-        "Root cause analysis",
-        "Incident management"
-      ]
+      "keywords": ["Advanced troubleshooting methodologies", "Root cause analysis", "Incident management"]
     },
     {
       "name": "Research & Analysis",
       "level": "Expert",
-      "keywords": [
-        "Problem pattern recognition",
-        "Systematic investigation",
-        "Documentation development"
-      ]
+      "keywords": ["Problem pattern recognition", "Systematic investigation", "Documentation development"]
     },
     {
       "name": "AI/LLM Integration",
       "level": "Advanced",
-      "keywords": [
-        "Prompt engineering",
-        "Context optimization",
-        "AI-assisted support workflows"
-      ]
+      "keywords": ["Prompt engineering", "Context optimization", "AI-assisted support workflows"]
     },
     {
       "name": "Knowledge Management",
       "level": "Advanced",
-      "keywords": [
-        "Technical documentation",
-        "Solution architecture"
-      ]
+      "keywords": ["Technical documentation", "Solution architecture"]
     },
     {
       "name": "Infrastructure & Systems",
       "level": "Expert",
-      "keywords": [
-        "Linux administration (Red Hat, Ubuntu, SUSE)",
-        "Cloud platforms",
-        "Containerization"
-      ]
+      "keywords": ["Linux administration (Red Hat, Ubuntu, SUSE)", "Cloud platforms", "Containerization"]
     },
     {
       "name": "Automation",
       "level": "Advanced",
-      "keywords": [
-        "Ruby and Python scripting",
-        "Shell scripting",
-        "Ansible"
-      ]
+      "keywords": ["Ruby and Python scripting", "Shell scripting", "Ansible"]
     },
     {
       "name": "Communication",
       "level": "Advanced",
-      "keywords": [
-        "Technical writing",
-        "User training",
-        "Cross-team collaboration"
-      ]
+      "keywords": ["Technical writing", "User training", "Cross-team collaboration"]
     },
     {
       "name": "Support Tools",
       "level": "Advanced",
-      "keywords": [
-        "ITSM platforms",
-        "Monitoring systems",
-        "Ticket management systems"
-      ]
+      "keywords": ["ITSM platforms", "Monitoring systems", "Ticket management systems"]
     }
   ],
   "languages": [],
@@ -228,9 +194,7 @@
     },
     {
       "name": "Process Improvement",
-      "keywords": [
-        "Support process automation and enhancement"
-      ]
+      "keywords": ["Support process automation and enhancement"]
     }
   ],
   "references": [],
