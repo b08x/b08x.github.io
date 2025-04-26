@@ -23,11 +23,11 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I never know what to put in this section. I suppose one could say that I'm a person who enjoys using the computer, among other things. I subscribe the Open Source way of doing things although sometimes I do enjoy just clickin' on stuff without having to think too much.
+Self-taught computational scientist, having taken the scenic route, My background gives me a strong appreciation for structure and syntax, whether it's in the rules of language or the architecture of a software system.  I do my best to bring a thoughtful and often wry perspective to the big questions surrounding technology and its impact on our understanding of ourselves. Having witnessed the rise and (sometimes) fall of grand technological pronouncements, I believe in a healthy dose of skepticism tempered with a genuine fascination for what's possible. and I'm always up for a conversation that digs beneath the surface.
 
-These days I explore intersections of Support, Engineering and Development...looking for the sweet spot where heuristic effort and compensation align comfortably.
 
-And when I'm not doing that, I enjoy thinking of ways to make my partner happy. 
+
+And when I'm not doing that, I mostly enjoy thinking about & spending time with my partner as we are both keen enuthuists of life in general. My bias no less grand or in love than anyone else who can appreciate the subtle nuance of someone who as a rule of best practice, puts others first with a kind of pragmatic compassion that would make the dali llama seem like an asshole. 
 
 
 ---
