@@ -2,6 +2,13 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
+timezone: UTC  # Set your preferred timezone
+future: false  # Don't show future-dated posts
+
+# Fix for Rails 8.1 deprecation warning
+active_support:
+  to_time_preserves_timezone: :zone
+
 title: blank # the website title (if blank, full name will be used instead)
 first_name: Robert
 middle_name: W.
@@ -163,8 +170,8 @@ newsletter:
 # -----------------------------------------------------------------------------
 
 collections:
-  books:
-    output: true
+  # prompts:
+  #   output: true
   projects:
     output: true
 
@@ -213,7 +220,6 @@ keep_files:
 
 # Plug-ins
 plugins:
-  - jekyll-archives-v2
   - jekyll-email-protect
   - jekyll-feed
   - jekyll-get-json

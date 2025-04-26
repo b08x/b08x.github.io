@@ -7,7 +7,6 @@ gem 'jekyll-last-modified-at', git: 'https://github.com/maximevaillancourt/jekyl
 group :jekyll_plugins do
   gem 'classifier-reborn' # used for content categorization during the build
   gem 'jekyll-algolia', '>= 1.4.7'
-  gem 'jekyll-archives-v2'
   gem 'jekyll-asciinema'
   gem 'jekyll-compose'
   gem 'jekyll-default-layout'
