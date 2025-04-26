@@ -4,6 +4,7 @@
  ******************************************************************************/
 
 @use "sass:color";
+@use "fonts";
 
 // Colors
 $red-color: #ff3636 !default;
@@ -32,6 +33,10 @@ $grey-900: #212529;
 $white-color: #ffffff !default;
 $black-color: #000000 !default;
 
+// Font families
+$heading-font-family: fonts.$heading-font-family !default;
+$body-font-family: fonts.$body-font-family !default;
+
 // Theme colors
 
 $code-bg-color-light: rgba($purple-color, 0.05);
@@ -51,4 +56,4 @@ $back-to-top-diameter: 40px;
 $back-to-top-height: $back-to-top-diameter;
 $back-to-top-width: $back-to-top-diameter;
 
-$max-content-width: 930px;
+$max-content-width: 1200px;

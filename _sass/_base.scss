@@ -6,19 +6,45 @@
 
 // Typography
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
+body {
+  font-family: $body-font-family;
+  line-height: 1.7;
+}
+
+p {
+  font-size: 1.5rem;
+}
 em,
 div,
 li,
 span,
 strong {
   color: var(--global-text-color);
+  font-family: $body-font-family;
+}
+
+h1 {
+  color: var(--global-theme-color); // Use theme accent color
+  margin-top: 1.5rem;    // Add top margin (adjust value as needed)
+  margin-bottom: 1rem;   // Add bottom margin (adjust value as needed)
+}
+
+h2 {
+  color: var(--global-theme-color); // Use theme accent color
+  margin-top: 1.5rem;    // Add top margin (adjust value as needed)
+  margin-bottom: 1rem;   // Add bottom margin (adjust value as needed)
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+h4,
+h5,
+h6 {
+  color: #aaaaaa;
+  font-family: $heading-font-family;
+  margin-top: 1.5rem;    // Add top margin (adjust value as needed)
+  margin-bottom: 1rem;   // Add bottom margin (adjust value as needed)
 }
 
 hr {
@@ -30,11 +56,16 @@ hr {
   margin-bottom: 1rem !important;
 }
 
+
+
 table {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   td,
   th {
     font-size: 1rem;
     padding: 1px 1rem 1px 0;
+    font-family: $body-font-family;
   }
 
   th {
@@ -45,9 +76,10 @@ table {
 a,
 table.table a {
   color: var(--global-theme-color);
+  font-family: $body-font-family;
 
   &:hover {
-    color: var(--global-theme-color);
+    color: var(--global-hover-color);
     text-decoration: underline;
   }
 
@@ -69,6 +101,7 @@ blockquote {
   margin: 1.5em 0;
   padding: 1em;
   font-size: 1.2rem;
+  font-family: $body-font-family;
 
   p {
     margin-bottom: 0;
@@ -137,6 +170,11 @@ blockquote {
       color: var(--global-danger-block-title);
     }
   }
+}
+
+ul > li,
+ol > li {
+  margin-bottom: 0.5rem; // Adjust value as needed (e.g., 0.75rem)
 }
 
 // Checklist
@@ -255,11 +293,13 @@ ul.task-list input[type="checkbox"] {
   border-bottom: 1px solid var(--global-divider-color);
   background-color: var(--global-bg-color);
   opacity: 0.95;
+  font-size: 1rem; /* Set fixed font size for navbar */
 }
 
 .navbar .dropdown-menu {
   background-color: var(--global-bg-color);
   border: 1px solid var(--global-divider-color);
+  font-size: 1rem; /* Set fixed font size for dropdown menu */
 
   a:not(.active) {
     color: var(--global-text-color);
@@ -276,6 +316,7 @@ ul.task-list input[type="checkbox"] {
 
 .dropdown-item {
   color: var(--global-text-color);
+  font-size: 1rem; /* Set fixed font size for dropdown items */
 
   &:hover {
     color: var(--global-hover-color);
@@ -296,6 +337,7 @@ ul.task-list input[type="checkbox"] {
 
   .navbar-nav .nav-item .nav-link {
     color: var(--global-text-color);
+    font-size: 1rem; /* Set fixed font size for nav links */
 
     &:hover {
       color: var(--global-hover-color);
@@ -888,6 +930,9 @@ pre {
   background-color: var(--global-code-bg-color);
   border-radius: 6px;
   padding: 6px 12px;
+  text-wrap: auto;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 
   pre,
   code {

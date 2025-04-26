@@ -6,11 +6,8 @@ subtitle: Still doing this.
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: prof_pic.png
   image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>4761 Crosscreek Drive</p>
-    <p>Columbus, OH 43232</p>
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -26,7 +23,12 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I never know what to put in this section. I suppose one could say that I'm a person who enjoys using the computer, among other things. I enjoy systems configuration and automation, software development and most recent emerging field of Generative AI. 
+I never know what to put in this section. I suppose one could say that I'm a person who enjoys using the computer, among other things. I subscribe the Open Source way of doing things although sometimes I do enjoy just clickin' on stuff without having to think too much.
 
-I suppose I'll have to add more later at some point when I'm in the mood for describing myself....
+These days I explore intersections of Support, Engineering and Development...looking for the sweet spot where heuristic effort and compensation align comfortably.
+
+And when I'm not doing that, I enjoy thinking of ways to make my partner happy. 
+
+
+---
 

@@ -66,9 +66,9 @@
             width="20"
           >
           <span class="gitlab-repo-name">{{ repo_url[1] }}</span>
-          {% if show_owner %}
+          {% comment %} {% if show_owner %}
             <span class="gitlab-repo-owner">by {{ repo_url[0] }}</span>
-          {% endif %}
+          {% endif %} {% endcomment %}
         </div>
         <div class="gitlab-repo-description">
           <!-- Note: GitLab doesn't have an equivalent to github-readme-stats -->
@@ -114,9 +114,12 @@
   }
 
   .gitlab-repo-description {
-    font-size: 14px;
+    font-size: 12px;
     margin-top: 8px;
     overflow: hidden;
     max-height: calc(1.5em * {{ max_lines }});
+    p {
+      font-size: medium;
+    }
   }
 </style>

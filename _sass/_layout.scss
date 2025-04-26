@@ -8,7 +8,8 @@ body {
   padding-bottom: 70px;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
-
+  font-size: 1.25rem;
+  line-height: 1.6;
   h1,
   h2,
   h3,
@@ -39,7 +40,19 @@ body.sticky-bottom-footer {
     width: 100%;
   }
 }
+// Example: If the container has class="repo-grid"
+.repo-grid {
+  display: grid; // Or flex
+  // ... other grid/flex properties ...
+  align-items: stretch; // Add this if using flex or sometimes grid
+}
 
+// Or, alternatively, target the cards directly:
+.repo-card { // Use the actual class name for the cards
+   height: 100%; // If using Grid, this often helps
+   // Or maybe a fixed min-height:
+   // min-height: 150px; // Adjust value as needed
+}
 // TODO: redefine content layout.
 
 /******************************************************************************

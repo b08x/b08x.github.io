@@ -7,7 +7,6 @@
 # bluesky_url: # your bluesky URL
 # dblp_url: # your DBLP profile url
 # discord_id: # your discord id (18-digit unique numerical identifier)
-email: rwpannick@gmail.com # your email address
 # facebook_id: # your facebook id
 # flickr_id: # your flickr id
 github_username: b08x
@@ -29,7 +28,6 @@ linkedin_username: robert-william-pannick-260492176
 # publons_id: # your ID on Publons
 # quora_username: # your Quora username
 # research_gate_profile: # your profile on ResearchGate
-rss_icon: true # set to true to show the RSS icon
 # scholar_userid: qc6CJjYAAAAJ # your Google Scholar ID
 # scopus_id: # your profile on Scopus
 # semanticscholar_id: # your Semantic Scholar ID
@@ -49,3 +47,5 @@ custom_social: # can be any name here other than the ones already defined above
   logo: https://upload.wikimedia.org/wikipedia/commons/6/62/Suno_AI_icon.svg # can be png, svg, jpg
   title: Suno AI
   url: https://suno.com/@b08x
+email: rwpannick@gmail.com # your email address
+rss_icon: true # set to true to show the RSS icon

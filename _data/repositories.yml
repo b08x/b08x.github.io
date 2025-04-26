@@ -1,9 +1,3 @@
-github_users:
-  - b08x
-
-gitlab_users:
-  - b08x
-
 repo_description_lines_max: 2
 
 github_repos:
@@ -16,5 +10,6 @@ gitlab_repos:
   - syncopatedx/syncopated-iso
   - syncopatedX/syncopated-ansible
   - syncopatedX/ansible-archlinux
+  - syncopatedX/syncopated-ai
 
   # Add more GitLab repositories as needed
