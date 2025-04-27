@@ -14,6 +14,8 @@ images:
   venobox: truem
 ---
 
+<div id="elevenlabs-audionative-widget" data-height="90" data-width="100%" data-frameborder="no" data-scrolling="no" data-publicuserid="92d135b76a931d6c34c5346b967eba55b32811b1f0d1b81d613d61bc1ca54732" data-playerurl="https://elevenlabs.io/player/index.html" data-projectid="n4UUoEr3jXOM36G34xiz" >Loading the <a href="https://elevenlabs.io/text-to-speech" target="_blank" rel="noopener">Elevenlabs Text to Speech</a> AudioNative Player...</div><script src="https://elevenlabs.io/player/audioNativeHelper.js" type="text/javascript"></script>
+
 It was on a particularly unremarkable Tuesday afternoon when I found myself staring at my phone, scrolling through LinkedIn of all places, when I came across a post about artificial intelligence and consciousness. A research team at a prestigious AI lab was earnestly announcing their brave new frontier: investigating whether AI models might someday have "experiences" of their own. I nearly spilled my coffee.
 
 Not because the question isn't fascinating—it certainly is—but because of the peculiar way we humans arrange our curiosities. Here we are, pouring significant intellectual resources into pondering whether arrangements of mathematics running on silicon might someday have subjective experiences, while just down the street from where I sat, a man named Harold had been living under a tarp for the better part of three years.
