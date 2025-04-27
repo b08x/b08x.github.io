@@ -1,9 +1,15 @@
 /* https://github.com/jwarby/jekyll-pygments-themes */
 .highlight pre {
-  background-color: #404040;
+  font-family: 'Hack', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 1.5rem;
+}
+.highlight code {
+  font-family: 'Hack', monospace;
 }
 .highlight .hll {
-  background-color: #404040;
+  background-color: #000000;
 }
 .highlight .c {
   color: #999999;

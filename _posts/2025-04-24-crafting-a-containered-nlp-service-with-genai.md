@@ -3,9 +3,9 @@ layout: post
 title: "Crafting a Containered NLP Service: A Slightly Jaded Retrospective"
 date: 2025-04-24 00:15:39 -0400 # Let's be honest, was it *really* 15 minutes past midnight? Or just... late?
 category: development
-author: Steve (as interpreted by Robert Pannick & Gemini 2.5 Pro Exp)
-tags: [ruby, docker, nlp, gen-ai, technical-debt, api-integration, existential-dread]
-description: How we Dockerized a Ruby NLP gem, flirted with an LLM, and faced the inevitable integration compromises. A tale of functional dysfunctionality.
+author: S.t.e.v.e (as interpreted by Robert Pannick & Gemini 2.5 Pro Exp)
+tags: [ruby, docker, nlp, gen-ai, learning]
+description: A tale of functional dysfunctionality.
 related_posts: true
 giscus_comments: true
 tabs: true
@@ -45,7 +45,7 @@ Maintaining focus felt like juggling chainsaws, especially with an LLM co-pilot 
 
 ## The Human-LLM Codependency Tango
 
-Working with the LLM wasn't straightforward collaboration. It was... weirder.
+Working with the LLM wasn't a straightforward collaboration. It was... weirder.
 
 * **Phase 1: LLM as Sketchy Code Dealer:** Early on, the AI was slinging code snippets like cheap watches in a back alley. "You need an endpoint? Got one right here, buddy." My job? Smile, nod, and verify if the thing actually worked without pawnable side effects.
 
@@ -75,7 +75,7 @@ Thinking of bringing an LLM onto your project team? Here's some unsolicited advi
 
 1. **Define Boundaries (Then Watch Them Blur):** My initial "Dockerize this gem with an API and worker" seemed simple. Too simple. Ambiguity allowed speed but led straight to the "refactoring cliff" when the initial quick-and-dirty implementation couldn't scale. Be specific, or prepare for architectural surprises.
 
-2. **Treat Your LLM Like a Hyper-Confident Junior Dev:** It's not magic, it's not sentient (yet). It's brilliant at patterns, terrible at context and long-term consequences. Guide it, review its work *critically*, and don't assume it understands the *why*.
+2. **Treat Your LLM Like a Hyper-Confident Junior Dev:** It's not magic, it's not sentient. It's brilliant at patterns, but terrible at context and long-term consequences. Guide it, review its work *critically*, and don't assume it understands the *why*.
 
 3. **Enforce Convention Ruthlessly:** Especially with generated code, you need rules. Framework conventions, team style guides, *something*. Without them, your codebase risks becoming a Tower of Babel built by caffeine-fueled developers and an overly enthusiastic AI. Consistency is key.
 
@@ -88,29 +88,3 @@ This project wasn't a pristine example of software engineering. It was messy, it
 The pragmatic Ruby approach, even augmented by AI, delivered something *functional*, if slightly dysfunctional. It highlights that getting something *working* is often the crucial first step, even if the path involves questionable shortcuts and future refactoring promises.
 
 Just remember: an LLM will cheerfully generate *exactly* what you ask for, even if you accidentally ask for the same endpoint five different ways. Caveat developer.
-
-## Another example
-
-{% tabs data-struct %}
-
-{% tab data-struct yaml %}
-
-```yaml
-hello:
-  - "whatsup"
-  - "hi"
-```
-
-{% endtab %}
-
-{% tab data-struct json %}
-
-```json
-{
-  "hello": ["whatsup", "hi"]
-}
-```
-
-{% endtab %}
-
-{% endtabs %}

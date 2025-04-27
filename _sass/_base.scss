@@ -17,7 +17,9 @@ p {
 em,
 div,
 li,
-span,
+span {
+
+}
 strong {
   color: var(--global-text-color);
   font-family: $body-font-family;
@@ -25,14 +27,14 @@ strong {
 
 h1 {
   color: var(--global-theme-color); // Use theme accent color
-  margin-top: 1.5rem;    // Add top margin (adjust value as needed)
-  margin-bottom: 1rem;   // Add bottom margin (adjust value as needed)
+  margin-top: 1.5rem; // Add top margin (adjust value as needed)
+  margin-bottom: 1rem; // Add bottom margin (adjust value as needed)
 }
 
 h2 {
   color: var(--global-theme-color); // Use theme accent color
-  margin-top: 1.5rem;    // Add top margin (adjust value as needed)
-  margin-bottom: 1rem;   // Add bottom margin (adjust value as needed)
+  margin-top: 1.5rem; // Add top margin (adjust value as needed)
+  margin-bottom: 1rem; // Add bottom margin (adjust value as needed)
 }
 h3 {
   font-size: 1.5rem;
@@ -43,8 +45,8 @@ h5,
 h6 {
   color: #aaaaaa;
   font-family: $heading-font-family;
-  margin-top: 1.5rem;    // Add top margin (adjust value as needed)
-  margin-bottom: 1rem;   // Add bottom margin (adjust value as needed)
+  margin-top: 1.5rem; // Add top margin (adjust value as needed)
+  margin-bottom: 1rem; // Add bottom margin (adjust value as needed)
 }
 
 hr {
@@ -55,8 +57,6 @@ hr {
   width: 100%;
   margin-bottom: 1rem !important;
 }
-
-
 
 table {
   margin-top: 1.5rem;
@@ -238,8 +238,14 @@ ul.task-list input[type="checkbox"] {
 // Profile
 
 .profile {
-  width: 100%;
+  width: 60%;
 
+  img {
+    display: block; // Ensures image behaves like a block
+    width: 100%; // Make image responsive within its container
+    height: auto; // Maintain aspect ratio
+    margin-top: 1rem;
+  }
   .more-info {
     margin-bottom: 5px;
     margin-top: 5px;
@@ -252,26 +258,61 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
+// Default float behavior for smaller screens or when Flexbox isn't applied
 .profile.float-right {
+  float: right;
   margin-left: 1rem;
 }
 
 .profile.float-left {
+  float: left;
   margin-right: 1rem;
 }
 
+// Styles for screens 576px and wider using Flexbox on the <article> tag
 @media (min-width: 576px) {
-  .profile {
-    width: 30%;
+  // --- NEW FLEXBOX APPROACH TARGETING <article> ---
+  // Apply Flexbox layout to the main article container
+  article {
+    display: flex; // Enable Flexbox
+    align-items: flex-start; // Align children (profile, clearfix) to the top
+    flex-direction: column;
+    gap: 1rem; // Add space between profile and content (adjust as needed)
+  }
 
-    .address {
-      p {
-        display: block;
-      }
+  // Style the .profile div within the flex container
+  article > .profile {
+    flex: 0 0 30%; // Set flex basis to 30%, don't grow, don't shrink
+    width: 30%; // Explicit width
+    float: none; // IMPORTANT: Disable float when using Flexbox
+    margin: 0; // Reset margins potentially added by float classes
+
+    // Ensure image aligns correctly (though align-items should handle it)
+    img {
+      vertical-align: top; // Can be redundant, but safe
+    }
+  }
+
+  // Style the .clearfix div (containing {{ content }}) within the flex container
+  article > .clearfix {
+    flex: 1 1 auto; // Allow this div to grow and take remaining space
+  }
+
+  // Reset top margin for the first H1/H2 inside the main content area (.clearfix)
+  // This should lift the "Robert W. Pannick" heading up.
+  article > .clearfix h1:first-child,
+  article > .clearfix h2:first-child {
+    margin-top: 0;
+  }
+  // --- END FLEXBOX APPROACH ---
+
+  // Keep address styles correctly scoped if they exist inside .profile
+  article > .profile .address {
+    p {
+      display: block; // Makes address paragraphs stack vertically
     }
   }
 }
-
 .post-description {
   margin-bottom: 2rem;
   font-size: 0.875rem;
@@ -448,6 +489,8 @@ ul.task-list input[type="checkbox"] {
 
 .social {
   text-align: center;
+  margin-top: 4rem;
+  margin-left: 1rem;
 
   .contact-icons {
     font-size: 4rem;
@@ -549,7 +592,7 @@ footer.sticky-bottom {
   font-size: 0.9rem;
 
   .container {
-    text-align: center;
+    text-align: left;
   }
 }
 
@@ -926,13 +969,14 @@ figure.highlight {
 }
 
 pre {
-  color: var(--global-theme-color);
-  background-color: var(--global-code-bg-color);
+  color: var(--global-theme-color) !important;
+  // background-color: var(--global-code-bg-color);
   border-radius: 6px;
   padding: 6px 12px;
   text-wrap: auto;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+  font-family: 'Hack', monospace;
 
   pre,
   code {
@@ -940,6 +984,7 @@ pre {
     border-radius: 0;
     margin-bottom: 0;
     padding: 0;
+    font-family: 'Hack', monospace;
   }
 }
 
@@ -948,6 +993,7 @@ code {
   background-color: var(--global-code-bg-color);
   border-radius: 3px;
   padding: 3px 3px;
+  font-family: 'Hack', monospace;
 }
 
 // Transitioning Themes
@@ -1042,6 +1088,8 @@ progress::-moz-progress-bar {
 /* Copy button */
 .code-display-wrapper {
   position: relative;
+  border: solid;
+  border-color: darkslategray;
 
   .copy {
     background: var(--global-card-bg-color);

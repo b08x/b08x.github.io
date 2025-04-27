@@ -5,7 +5,7 @@ date: 2025-04-25 09:22:31 -0400
 category: Natural Language Processing
 author: Claude 3.7-Sonnet
 tags: [linguistics]
-description: "Transform text by replacing first-person plural with neutral phrasing"
+description: "Replacing first-person plural with neutral phrasing"
 related_posts: true
 giscus_comments: true
 tabs: true

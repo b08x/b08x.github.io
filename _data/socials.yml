@@ -48,4 +48,4 @@ custom_social: # can be any name here other than the ones already defined above
   title: Suno AI
   url: https://suno.com/@b08x
 email: rwpannick@gmail.com # your email address
-rss_icon: true # set to true to show the RSS icon
+# rss_icon: false # set to true to show the RSS icon

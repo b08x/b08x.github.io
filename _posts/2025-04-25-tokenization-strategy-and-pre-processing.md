@@ -2,10 +2,10 @@
 layout: post
 title: "Narrative on Tokenization Strategy and Pre-processing in Ruby Systems"
 date: 2025-04-25 09:22:31 -0400
-category: Systems Evolution
-author: Steve (Ruby Developer Persona)
-tags: [tokenization, llm, ruby, pre-processing, system-design, nlp, architecture]
-description: "A narrative exploration of tokenization for LLMs within Ruby applications"
+category: natural-language-processing
+author: S.t.e.v.e (Ruby Developer Persona)
+tags: [tokenizationng, ruby]
+description: "A narrative exploration of tokenization."
 related_posts: true
 giscus_comments: true
 tabs: true
