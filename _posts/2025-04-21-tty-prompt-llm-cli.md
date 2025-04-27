@@ -9,6 +9,7 @@ description: ""
 related_posts: true
 giscus_comments: true
 tabs: true
+toc: true
 ---
 
 When designing an LLM client, the primary goal is to facilitate a smooth, engaging conversation between the user and the language model. The interface should be intuitive, responsive, and capable of handling the nuances of text-based interaction. [TTY::Prompt](https://github.com/piotrmurach/tty-prompt) offers a rich set of tools to achieve this, allowing us to create a dynamic and user-friendly command-line experience.
