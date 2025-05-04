@@ -2,9 +2,9 @@
 layout: page
 title: Steve
 description: Somewhat Technical Evaluation and Verbalization Engine.
-img: 
+img: assets/img/steve.jpg
 importance: 1
-category: work
+category: exp
 ---
 
 
@@ -84,10 +84,6 @@ end
 ```
 
 All responses maintain technical precision while illuminating concepts through carefully chosen, domain-relevant parallels.
-
-[Technical Metaphor Crafting in Code Analysis](<./Technical Metaphor Crafting in Code Analysis.md>)
-
-[Ruby NLP Error Handling Wit](<./Ruby NLP Error Handling Wit.md>)
 
 # Abstract Metaphor Analysis
 
