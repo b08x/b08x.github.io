@@ -1,0 +1,142 @@
+$font-family-source: 'Source Code Pro', monospace;
+
+highlight { 
+  background-color: #ffffff;
+  padding: 5px 10px;
+  margin: 20px 0;
+}
+
+
+.highlight  {
+  font-family: $font-family-source;
+  font-weight: 500;
+  // background: #0f0f0f;
+  background: transparent;  
+  color:#c6c5c5;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 1.0rem;
+  // overflow-y: auto;
+  // margin: 1em -1em;
+  margin: 1px 0;
+  max-width: fit-content;
+
+  @media (max-width: 1050px) {
+    overflow-y: auto;
+  }
+
+  code{
+    padding: 0;
+  }
+}
+
+.highlight pre {
+  /* overflow: scroll; Prefer no word wrap? Uncomment this line and comment out the 2 lines below. */
+  // overflow-x: scroll;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+div.highlight {
+  display: grid;
+  margin: 2rem;
+  border: black;
+  border-style: dashed;
+  @media (max-width: 820px) {
+    margin: unset;
+  }
+}
+
+.highlight, .highlight .w {
+  color: #fbf1c7;
+  background-color: transparent;
+
+  @media (max-width: 820px) {
+    background-color: black;
+    color: #afafaf;
+  }
+}
+.highlight .err {
+  color: #7a271eeb;
+  background-color: transparent;
+  font-weight: bold;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: hsl(0 0% 31% / 1);
+  font-style: italic;
+}
+.highlight .cp {
+  color: #8ec07c;
+}
+.highlight .nt {
+  color: #ab1200;
+}
+.highlight .o, .highlight .ow {
+  color: #965191;
+}
+.highlight .p, .highlight .pi {
+  color: #2ed10e;
+}
+.highlight .gi {
+  color: #b8bb26;
+  background-color: #282828;
+}
+.highlight .gd {
+  color: #fb4934;
+  background-color: #282828;
+}
+.highlight .gh {
+  color: #b8bb26;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #a52617;
+}
+.highlight .kc {
+  color: #d3869b;
+}
+.highlight .kt {
+  color: #fabd2f;
+}
+.highlight .kd {
+  color: #fe8019;
+}
+.highlight .s2 {
+  color: #aca8a8;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #67680a;
+  font-style: italic;
+}
+.highlight .si {
+  color: #1434abd6;
+  font-style: italic;
+}
+.highlight .sr {
+  color: #55560f;
+  font-style: italic;
+}
+.highlight .sa {
+  color: #fb4934;
+}
+.highlight .se {
+  color: #bb5f00;
+}
+.highlight .nn {
+  color: #8ec07c;
+}
+.highlight .nc {
+  color: #278904;
+}
+.highlight .no {
+  color: #1bab14;
+}
+.highlight .na {
+  color: #b8bb26;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #c94468;
+}
+.highlight .ss {
+  color: #0f6444;
+}

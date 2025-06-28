@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    .calendar-wrap {
+      container: Calendar / inline-size;
+    }
+    .calendar {
+      --dayHeaderHeight: 75px;
+      --hourHeight: 50px;
+
+      display: flex;
+
+      .hours {
+        > ol > li:first-of-type {
+          margin-block-start: var(--dayHeaderHeight);
+        }
+        > ol > li {
+          block-size: var(--hourHeight);
+        }
+        white-space: nowrap;
+        border-inline-end: 1px solid var(--gray);
+        .day-time {
+          padding-block: 0.25rem;
+          padding-inline-end: 0.5rem;
+          border-block-start: 1px solid var(--gray);
+        }
+      }
+
+      .days {
+        width: 100%;
+      }
+
+      .day-number {
+        font-weight: 300;
+        font-size: 2rem;
+      }
+      .day-name {
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .events {
+        display: flex;
+        width: 100%;
+        .day-of-events {
+          flex: 1;
+          padding-inline: 0.75rem;
+          display: grid;
+          grid-template-rows: var(--dayHeaderHeight) repeat(9, var(--hourHeight));
+          grid-template-columns: 1fr;
+          border-inline-end: 1px solid var(--gray);
+
+          & dt {
+            grid-row: 1;
+          }
+        }
+        .event {
+          --gray: #555;
+
+          grid-row: var(--row) / span var(--span, 1);
+          border: 1px solid var(--gray);
+          border-radius: 3px;
+          padding: 0.5rem;
+        }
+        & time {
+          font-weight: 600;
+          margin-block-end: 0.15rem;
+        }
+        .event-title {
+          opacity: 0.6;
+        }
+      }
+
+      @container Calendar (max-width: 690px) {
+        & {
+          display: block;
+        }
+        .hours {
+          display: none;
+        }
+        .events {
+          display: block;
+
+          .day-of-events {
+            border: 0;
+            grid-template-columns: 75px 1fr;
+            grid-template-rows: auto;
+            gap: 0.75rem;
+            margin-block-end: 2rem;
+            .event {
+              grid-column: 2;
+              grid-row: auto;
+            }
+          }
+        }
+      }
+
+      @container Calendar (max-width: 350px) {
+        .events {
+          .day-of-events {
+            display: block;
+            .event {
+              margin-block-end: 0.25rem;
+            }
+            & dt {
+              display: flex;
+              margin-block-end: 0.25rem;
+
+              .day-number {
+                font-size: 1.2rem;
+                font-weight: 800;
+                margin-inline-end: 0.25rem;
+              }
+              .day-name {
+                font-size: 1.2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .info-panel {
+      padding: 1rem 2rem;
+      container: InfoPanel / inline-size;
+
+      & h1 {
+        font-size: max(7cqi, 24px);
+      }
+    }
+
+    split-panel {
+      /* background: white; */
+      padding: 1rem 0.5rem;
+    }
+
+    @layer reset {
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        --gray: #ccc;
+
+        font-family: system-ui;
+        font-size: 85%;
+        line-height: 1.4;
+        background: #666;
+      }
+      body {
+        height: 100dvh;
+        margin: 0;
+        padding: 1rem;
+      }
+      ol,
+      ul,
+      dl {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      dd {
+        margin: 0;
+      }
+      h1 {
+        line-height: 1.1;
+      }
+    }    
+    section {
+      margin: 20px 0;
+      padding: 20px;
+      border: 1px solid #444;
+    }
+
+    .graphContainer {
+      min-height: 100%;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      flex-grow: 1;
+    }
+
+    .left-column {
+      width: auto;
+    }
+
+    .right-column {
+      width: fit-content;
+    }
+
+    .category {
+      font-size: 24px;
+      margin-bottom: 20px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #000;
+      border-radius: 10px;
+    }
+
+    .category img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+
+  <head>
+    {% include head.html %}
+    <script>
+      function fireEvent(
+        element,
+        eventName,
+        data,
+        bubbles = true,
+        cancelable = true
+      ) {
+        const event = document.createEvent("HTMLEvents");
+        event.initEvent(eventName, bubbles, cancelable); // event type,bubbling,cancelable
+        event.data = data;
+        return element.dispatchEvent(event);
+      }
+
+      class WcSplitPanel extends HTMLElement {
+        static observedAttributes = ["direction"];
+        #direction = "row";
+        #isResizing = false;
+        constructor() {
+          super();
+          this.bind(this);
+        }
+        bind(element) {
+          element.attachEvents = element.attachEvents.bind(element);
+          element.render = element.render.bind(element);
+          element.cacheDom = element.cacheDom.bind(element);
+          element.pointerdown = element.pointerdown.bind(element);
+          element.resizeDrag = element.resizeDrag.bind(element);
+        }
+        render() {
+          this.attachShadow({ mode: "open" });
+          this.shadowRoot.innerHTML = `
+                  <style>
+                      :host{ display: grid; }
+                      :host([resizing]){ user-select: none; }
+                      :host([resizing][direction=row]){ cursor: col-resize; }
+                      :host([direction=row]) { grid-template-columns: var(--first-size, 1fr) max-content var(--second-size, 1fr); }
+                      :host([direction=row]) #median { inline-size: 0.5rem; grid-column: 2 / 3; }
+                      :host([direction=row]) #median:hover { cursor: col-resize; }
+                      :host([direction=row]) #slot1 { grid-column: 1 / 2; grid-row: 1 / 1; }
+                      :host([direction=row]) #slot2 { grid-column: 3 / 4; grid-row: 1 / 1; }
+
+                      :host([resizing][direction=col]){ cursor: row-resize; }
+                      :host([direction=column]) { grid-template-rows: var(--first-size, 1fr) max-content var(--second-size, 1fr); }
+                      :host([direction=column]) #median { block-size: 0.5rem; grid-row: 2 / 3; }
+                      :host([direction=column]) #median:hover { cursor: row-resize; }
+                      :host([direction=column]) #slot1 { grid-row: 1 / 2; grid-column: 1 / 1; }
+                      :host([direction=column]) #slot2 { grid-row: 3 / 4; grid-column: 1 / 1; }
+
+                      #median { background: #2a2a2a; }
+                      ::slotted(*) { overflow: auto; }
+                  </style>
+                  <slot id="slot1" name="1"></slot>
+                  <div id="median" part="median"></div>
+                  <slot id="slot2" name="2"></slot>
+              `;
+        }
+        connectedCallback() {
+          this.render();
+          this.cacheDom();
+          this.attachEvents();
+        }
+        cacheDom() {
+          this.dom = {
+            median: this.shadowRoot.querySelector("#median")
+          };
+        }
+        attachEvents() {
+          this.dom.median.addEventListener("pointerdown", this.pointerdown);
+        }
+        pointerdown(e) {
+          this.isResizing = true;
+          const clientRect = this.getBoundingClientRect();
+          this.left = clientRect.x;
+          this.top = clientRect.y;
+          this.addEventListener("pointermove", this.resizeDrag);
+          this.addEventListener("pointerup", this.pointerup);
+        }
+        pointerup() {
+          this.isResizing = false;
+          fireEvent(this, "sizechanged");
+          this.removeEventListener("pointermove", this.resizeDrag);
+          this.removeEventListener("pointerup", this.pointerup);
+        }
+        resizeDrag(e) {
+          if (this.direction === "row") {
+            const newMedianLeft = e.clientX - this.left;
+            const median = this.dom.median.getBoundingClientRect().width;
+            this.style.gridTemplateColumns = `calc(${newMedianLeft}px - ${
+              median / 2
+            }px) ${median}px 1fr`;
+          }
+          if (this.direction === "column") {
+            const newMedianTop = e.clientY - this.top;
+            const median = this.dom.median.getBoundingClientRect().height;
+            this.style.gridTemplateRows = `calc(${newMedianTop}px - ${
+              median / 2
+            }px) ${median}px 1fr`;
+          }
+        }
+        attributeChangedCallback(name, oldValue, newValue) {
+          if (newValue != oldValue) {
+            this[name] = newValue;
+          }
+        }
+        set isResizing(value) {
+          this.#isResizing = value;
+          if (value) {
+            this.setAttribute("resizing", "");
+          } else {
+            this.style.userSelect = "";
+            this.style.cursor = "";
+            this.removeAttribute("resizing");
+          }
+        }
+        get isResizing() {
+          return this.#isResizing;
+        }
+        set direction(value) {
+          this.#direction = value;
+          this.setAttribute("direction", value);
+          this.style.gridTemplateRows = "";
+          this.style.gridTemplateColumns = "";
+        }
+        get direction() {
+          return this.#direction;
+        }
+      }
+
+      customElements.define("split-panel", WcSplitPanel);
+
+      //Page UI
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const panel = document.querySelector("split-panel");
+        panel.addEventListener("sizechanged", (e) => {
+          console.log("size changed!");
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <main>
+
+        <split-panel direction="row">
+          <div slot="1">
+            <div class="calendar-wrap">
+              <div class="calendar">
+                <div class="hours">
+                  <ol>
+                    <li>
+                      <div class="day-time">fuck</div>
+                    </li>
+                    <li>
+                      <div class="day-time">fuck</div>
+                    </li>
+                    <li>
+                      <div class="day-time">11 a.m.</div>
+                    </li>
+                    <li>
+                      <div class="day-time">12 p.m.</div>
+                    </li>
+                    <li>
+                      <div class="day-time">1 p.m.</div>
+                    </li>
+                    <li>
+                      <div class="day-time">2 p.m.</div>
+                    </li>
+                    <li>
+                      <div class="day-time">3 p.m.</div>
+                    </li>
+                    <li>
+                      <div class="day-time">4 p.m.</div>
+                    </li>
+                    <li>
+                      <div class="day-time">5 p.m.</div>
+                    </li>
+                  </ol>
+                </div>
+        
+                <dl class="events">
+                  <div class="day-of-events" data-day="Monday">
+                    <dt>
+                      <div class="day-number">5</div>
+                      <div class="day-name">Mon</div>
+                    </dt>
+        
+                    <dd class="event" style="--row: 2; --span: 2;">
+                      <time> Natural Language Processing</time>
+                      <div class="event-title">
+                        <a class="internal-link" href="{{ site.baseurl }}/nlp"><b>nlp</b></a>
+                      </div>
+                    </dd>
+        
+                    <dd class="event" style="--row: 5; --span: 2;">
+                      <time>12 - 2 p.m.</time>
+                      <div class="event-title">
+                        Team Lunch
+                      </div>
+                    </dd>
+                  </div>
+        
+                  <div class="day-of-events" data-day="Tuesday">
+                    <dt>
+                      <div class="day-number">6</div>
+                      <div class="day-name">Tue</div>
+                    </dt>
+        
+                    <dd class="event" style="--row: 5; --span: 1;">
+                      <time>12 - 1 p.m.</time>
+                      <div class="event-title">
+                        Work Out
+                      </div>
+                    </dd>
+                    <dd class="event" style="--row: 7; --span: 1;">
+                      <time>2 - 3 p.m.</time>
+                      <div class="event-title">
+                        Doctor
+                      </div>
+                    </dd>
+                    <dd class="event" style="--row: 9; --span: 2;">
+                      <time>4 - 6 p.m.</time>
+                      <div class="event-title">
+                        Soccer
+                      </div>
+                    </dd>
+                  </div>
+        
+                  <div class="day-of-events" data-day="Wednesday">
+                    <dt>
+                      <div class="day-number">7</div>
+                      <div class="day-name">Wed</div>
+                    </dt>
+        
+                    <dd class="event" style="--row: 2; --span: 2;">
+                      <time> 9 - 11 a.m.</time>
+                      <div class="event-title">
+                        Customer Call
+                      </div>
+                    </dd>
+                    <dd class="event" style="--row: 7; --span: 4;">
+                      <time>2 - 6 p.m.</time>
+                      <div class="event-title">
+                        Team Event
+                      </div>
+                    </dd>
+                  </div>
+        
+                  <div class="day-of-events" data-day="Thursday">
+                    <dt>
+                      <div class="day-number">8</div>
+                      <div class="day-name">Thu</div>
+                    </dt>
+        
+                    <dd class="event" style="--row: 5; --span: 1;">
+                      <time>12 - 1 p.m.</time>
+                      <div class="event-title">
+                        Work Out
+                      </div>
+                    </dd>
+                  </div>
+        
+                  <div class="day-of-events" data-day="Friday">
+                    <dt>
+                      <div class="day-number">9</div>
+                      <div class="day-name">Fri</div>
+                    </dt>
+                    <dd class="event" style="--row: 2; --span: 9;">
+                      <time>9 - 6 p.m.</time>
+                      <div class="event-title">
+                        No Meetings
+                      </div>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+        
+            </div>
+          </div>
+          </div>
+          <div slot="2">
+            <div class="info-panel">
+              {% include notes_graph.html %}
+            </div>
+          </div>
+
+        </split-panel>
+
+        <h1>syncopated notes</h1>
+
+      {% include footer.html %}
+
+    </main>
+
+    {% include link-previews.html wrapperQuerySelector="content" %}
+  </body>
+</html>

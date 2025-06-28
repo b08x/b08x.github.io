@@ -1,4 +1,6 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 gem 'jekyll'
@@ -9,20 +11,26 @@ gem 'nokogiri'
 gem 'pry'
 gem 'ruby-vips'
 
-gem "uglifier", "~> 3.2.0"
-gem "sass", "~> 3.4.0"
-gem "therubyracer", "~> 0.12.3"
+gem 'sass', '~> 3.4.0'
+gem 'therubyracer', '~> 0.12.3'
+gem 'uglifier', '~> 3.2.0'
 
 group :jekyll_plugins do
-  gem 'jekyll-asciinema'
   gem 'jekyll-feed'
+  gem 'jekyll-figure'
+  gem 'jekyll-include-cache'
   gem 'jekyll-jupyter-notebook'
+  gem 'jekyll-link-attributes'
   gem 'jekyll-paginate-v2'
-  gem 'jekyll_picture_tag'
-  gem 'jekyll-spaceship'
-  gem 'jekyll-toc'
   gem 'jekyll-pandoc'
+  gem 'jekyll_picture_tag' # Using local version in _plugins/
   gem 'jekyll-react-player'
+  gem 'jekyll-sass-converter'
+  gem 'jekyll-sitemap'
+  gem 'jekyll-spaceship'
+  gem 'jekyll-tabs'
+  gem 'jekyll-tagging-related_posts'
+  gem 'jekyll-toc'
 end
 
 group :development do

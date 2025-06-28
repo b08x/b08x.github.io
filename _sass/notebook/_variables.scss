@@ -1,0 +1,20 @@
+$sidebar-width: 280px !default;
+$sidebar-collapsed-width: 80px !default;
+$header-height: 64px !default;
+$footer-height: 64px !default;
+
+$breakpoint-xs: 480px !default;
+$breakpoint-sm: 576px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 992px !default;
+$breakpoint-xl: 1200px !default;
+$breakpoint-xxl: 1600px !default;
+
+// Color variables
+$color-primary: hsl(0, 0%, 10%) !default;
+$color-text: hsl(0, 0%, 20%) !default;
+$color-subtext: #9b9817 !default;
+$color-border: hsl(0, 0%, 85%) !default;
+
+// Chat variables  
+$chat-thread-avatar-size: 40px !default;

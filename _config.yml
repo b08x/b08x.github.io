@@ -11,16 +11,18 @@ phone: 614 653 8241
 github_username: b08x
 
 plugins:
-  - jekyll-last-modified-at
-  - jekyll-jupyter-notebook
-  - jekyll_asciinema
-  - jekyll-spaceship
-  - jekyll_picture_tag
-  - jekyll-toc
-  - jekyll-paginate-v2
   - jekyll-feed
+  - jekyll-jupyter-notebook
+  - jekyll-last-modified-at
+  - jekyll-link-attributes
+  - jekyll-paginate-v2
   - jekyll-pandoc
   - jekyll-react-player
+  - jekyll-sass-converter
+  - jekyll-sitemap
+  - jekyll-spaceship
+  - jekyll-tabs
+  - jekyll-toc
 
 include:
   - "_notes/"
@@ -42,6 +44,12 @@ exclude:
   - .qodo/
   - .jekyll-cache/
   - CLAUDE.md
+  - node_modules/
+  - react-components/node_modules/
+keep_files:
+  - CNAME
+  - .nojekyll
+  - assets/js/react-components 
 
 
 
@@ -62,6 +70,7 @@ permalink: pretty
 relative_permalinks: false
 
 sass:
+  sass_dir: _sass
   style: compressed
 
 picture:
@@ -91,7 +100,7 @@ defaults:
     values:
       layout: "note"
   - scope:
-      path: "_pages/**/*.md"
+      path: "_pages/*.md"
       type: "pages"
     values:
       layout: "page"
@@ -122,3 +131,58 @@ pagination:
   sort_reverse: false
   # collection: 'notes'
 
+toc:
+  min_level: 1
+  max_level: 6
+  ordered_list: false
+  no_toc_section_class: no_toc_section
+  list_id: toc
+  list_class: section-nav
+  sublist_class: ''
+  item_class: toc-entry
+  item_prefix: toc-
+
+
+###########################################################
+# Site configuration for the Auto-Pages feature
+# The values here represent the defaults if nothing is set
+autopages:
+  # Site-wide kill switch, disable here and it doesn't run at all
+  enabled: true
+  # Category pages, omit entire config element to disable
+  categories:
+    # Optional, the list of layouts that should be processed for every category found in the site
+    layouts:
+      - 'autopage_category.html'
+    # Optional, the title that each category paginate page should get (:cat is replaced by the Category name)
+    title: 'Posts in category :cat'
+    # Optional, the permalink for the  pagination page (:cat is replaced),
+    # the pagination permalink path is then appended to this permalink structure
+    permalink: '/category/:cat'
+    # Optional, when true logging related to category pages will be supressed.
+    silent: false
+    slugify:
+      mode: 'default'   # :cat is slugified. Modes: default, raw, pretty, ascii, latin
+      case: true       # Whether to replace all uppercase letters with their lowercase counterparts
+    enabled: true
+  # Collection pages, omit to disable
+  collections:
+    layouts:
+      - 'autopage_collection.html'
+    title: 'Posts in collection :coll' # :coll is replaced by the collection name
+    silent: false
+    slugify:
+      mode: 'ascii'   # :coll is slugified.
+      case: true
+    enabled: true
+  # Tag pages, omit to disable
+  tags:
+    layouts:
+      - 'autopage_tags.html'
+    title: 'Posts tagged with :tag' # :tag is replaced by the tag name
+    permalink: '/tag/:tag'
+    silent: false
+    slugify:
+      mode: 'default'   # :tag is slugified.
+      case: true
+    enabled: true

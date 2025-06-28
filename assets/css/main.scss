@@ -1,0 +1,36 @@
+---
+# Main stylesheet for the Jekyll site
+sitemap: false
+---
+
+@charset "utf-8";
+
+@use "sass:color";
+
+// Core base styles (ordered for dependencies)
+@import "functions";
+@import "variables";
+@import "normalize";
+@import "fonts";
+@import "global";
+@import "base";
+@import "code";
+@import "highlighter";
+@import "palette";
+@import "video";
+
+// Notebook-specific styles
+@import "notebook/variables";
+@import "notebook/normalize";
+@import "notebook/style";
+@import "notebook/header";
+@import "notebook/code";
+@import "notebook/toc";
+@import "notebook/chat";
+// @import "notebook/chat_bubble";
+// @import "notebook/chat_gemini";
+// @import "notebook/chat_thread";
+@import "notebook/preload";
+@import "notebook/wall";
+@import "notebook/css-pro-layout";
+@import "notebook/flexgrid/flexgrid";

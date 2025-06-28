@@ -1,0 +1,11 @@
+<span>{
+  {% if page.backlinks.size > 0 %}
+  {% for backlink in page.backlinks %}
+  {% if backlink.title != page.title %}
+  <a class="internal-link"
+    href="{{ site.baseurl }}{{ backlink.url }}{%- if site.use_html_extension -%}.html{%- endif -%}"><code
+      class="highligher-rouge"><nobr></nobr>{{ backlink.title }}</a></nobr></code></a>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  }</span>
