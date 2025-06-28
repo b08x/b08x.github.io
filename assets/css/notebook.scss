@@ -1,7 +1,8 @@
---- # Notebook-specific stylesheet for Jekyll site sitemap: false --- @charset "utf-8";
+---
+---
 
 /* ==========================================================================
-   Notebook Stylesheet - Separate from main site styles
+    Notebook Stylesheet - Separate from main site styles
    ========================================================================== */
 
 // Load shared foundational styles
@@ -11,4 +12,4 @@
 @use "variables";
 
 // Notebook-specific modules
-@use "notebook";
+// @use "notebook";

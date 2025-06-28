@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>syncopated notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ece9d4;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #de8b2f, #ba4d2d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(56, 66, 65, 0.2), 0 10px 10px -5px rgba(56, 66, 65, 0.1);
+        }
+        
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 30px;
+            height: calc(100% - 30px);
+            width: 2px;
+            background: #f9c552;
+        }
+    </style>
+</head>
+<body class="text-[#384241]">
+    <header class="bg-[#384241] shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">syncopated notes</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-blue-600 transition">About</a>
+                <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
+                <a href="#experience" class="hover:text-blue-600 transition">Experience</a>
+                <a href="#github" class="hover:text-blue-600 transition">GitHub</a>
+            </nav>
+            <button class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <!-- About Section -->
+        <section id="about" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="gradient-text">About Me</span>
+                    <span class="ml-4 h-px bg-gradient-to-r from-blue-500 to-purple-500 flex-1"></span>
+                </h2>
+                <div class="bg-[#384241] rounded-xl shadow-md p-8 text-gray-200">
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                        <div class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-4xl font-bold">SN</div>
+                        <div class="flex-1">
+                            <p class="text-gray-700 mb-4">Write a brief intro about yourself. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.</p>
+                            <p class="text-gray-700 mb-6">It's a good idea to include your personal interests and hobbies as well. Commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec.Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-3 py-1 bg-[#384241] text-[#f9c552] rounded-full text-sm border border-[#f9c552]">Web Development</span>
+                                <span class="px-3 py-1 bg-[#384241] text-[#de8b2f] rounded-full text-sm border border-[#de8b2f]">UI/UX Design</span>
+                                <span class="px-3 py-1 bg-[#384241] text-[#ba4d2d] rounded-full text-sm border border-[#ba4d2d]">Open Source</span>
+                                <span class="px-3 py-1 bg-[#384241] text-[#ece9d4] rounded-full text-sm border border-[#ece9d4]">Photography</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Projects Section -->
+        <section id="projects" class="mb-20">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="gradient-text">Latest Projects</span>
+                    <span class="ml-4 h-px bg-gradient-to-r from-blue-500 to-purple-500 flex-1"></span>
+                </h2>
+                
+                <!-- Featured Project -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-12 transition duration-300 project-card">
+                    <div class="md:flex">
+                        <div class="md:w-1/2">
+                            <img src="https://b08x.github.io/assets/img/projects/project-featured.png" alt="Velocity Project" class="w-full h-full object-cover">
+                        </div>
+                        <div class="md:w-1/2 p-8">
+                            <div class="flex items-center mb-2">
+                                <h3 class="text-xl font-bold mr-3">KickStarter - Velocity</h3>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">New</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">A responsive Bootstrap template designed for digital products</p>
+                            <p class="text-gray-700 mb-6">You can promote your main project here. Suspendisse in tellus dolor. Vivamus a tortor eu turpis pharetra consequat quis non metus. Aliquam aliquam, orci eu suscipit pellentesque, mauris dui tincidunt enim, eget iaculis ante dolor non turpis.</p>
+                            <p class="text-gray-700 mb-6">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. At vero eos et accusamus et iusto odio dignissimos ducimus.</p>
+                            <a href="http://themes.3rdwavemedia.com/website-templates/responsive-bootstrap-theme-for-products-velocity/" class="inline-block px-6 py-2 bg-gradient-to-r from-[#f9c552] to-[#de8b2f] text-white rounded-lg hover:opacity-90 transition">Back my project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other Projects Grid -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="bg-[#384241] rounded-xl shadow-md overflow-hidden transition duration-300 project-card text-gray-200">
+                        <img src="https://b08x.github.io/assets/img/projects/project-5.png" alt="Atom Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Atom - Designed for Mobile Apps</h3>
+                            <p class="text-gray-600 mb-4">You can put one of your secondary projects here. Suspendisse in tellus dolor. Vivamus a tortor eu turpis pharetra consequat quis non metus.</p>
+                            <a href="http://themes.3rdwavemedia.com/website-templates/responsive-bootstrap-theme-mobile-apps-atom/" class="text-blue-500 hover:text-blue-700 font-medium flex items-center">
+                                Find out more <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 2 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition duration-300 project-card">
+                        <img src="https://b08x.github.io/assets/img/projects/project-4.png" alt="DevStudio Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">DevStudio - Designed for Web Development Agencies</h3>
+                            <p class="text-gray-600 mb-4">You can put one of your secondary projects here. Suspendisse in tellus dolor. Vivamus a tortor eu turpis pharetra consequat quis non metus.</p>
+                            <a href="http://themes.3rdwavemedia.com/website-templates/responsive-bootstrap-theme-web-development-agencies-devstudio/" class="text-blue-500 hover:text-blue-700 font-medium flex items-center">
+                                Find out more <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 3 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition duration-300 project-card">
+                        <img src="https://b08x.github.io/assets/img/projects/project-1.png" alt="Tempo Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Tempo - Designed for Startups</h3>
+                            <p class="text-gray-600 mb-4">You can put one of your secondary projects here. Suspendisse in tellus dolor. Vivamus a tortor eu turpis pharetra consequat quis non metus.</p>
+                            <a href="http://themes.3rdwavemedia.com/website-templates/responsive-bootstrap-theme-for-startups-tempo/" class="text-blue-500 hover:text-blue-700 font-medium flex items-center">
+                                Find out more <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 4 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden transition duration-300 project-card">
+                        <img src="https://b08x.github.io/assets/img/projects/project-2.png" alt="Delta Project" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Delta - Designed for Mobile Apps</h3>
+                            <p class="text-gray-600 mb-4">You can put one of your secondary projects here. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue.</p>
+                            <a href="http://themes.3rdwavemedia.com/website-templates/responsive-bootstrap-theme-for-mobile-apps-delta/" class="text-blue-500 hover:text-blue-700 font-medium flex items-center">
+                                Find out more <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other Projects List -->
+                <div class="mt-16">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">Other Projects</h3>
+                    <div class="space-y-6">
+                        <!-- Project 1 -->
+                        <div class="bg-[#384241] rounded-lg shadow-sm p-6 hover:shadow-md transition text-gray-200">
+                            <h4 class="text-lg font-semibold mb-2">Project Title Cras Lacus</h4>
+                            <p class="text-gray-600 mb-3">Provide a brief description of your project. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatu.</p>
+                            <a href="#" class="text-blue-500 hover:text-blue-700 font-medium">Find out more →</a>
+                        </div>
+                        
+                        <!-- Project 2 -->
+                        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-2">Project Title Cras eget lacus</h4>
+                                    <span class="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full mb-2">Open Source</span>
+                                    <p class="text-gray-600 mb-3">Provide a brief description of your project. Maecenas ornare ultricies risus, in fermentum augue consectetur in.</p>
+                                </div>
+                                <a href="#" class="text-blue-500 hover:text-blue-700 font-medium">View on GitHub →</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Project 3 -->
+                        <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-lg font-semibold mb-2">Project Title Maecenas Ornare</h4>
+                                    <span class="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full mb-2">Open Source</span>
+                                    <p class="text-gray-600 mb-3">Provide a brief description of your project. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                                <a href="#" class="text-blue-500 hover:text-blue-700 font-medium">View on GitHub →</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <a href="#" class="inline-block px-6 py-2 border border-blue-500 text-blue-500 rounded-lg hover:bg-blue-50 transition">More on CoderWall</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Experience Section -->
+        <section id="experience" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="gradient-text">Work Experience</span>
+                    <span class="ml-4 h-px bg-gradient-to-r from-blue-500 to-purple-500 flex-1"></span>
+                </h2>
+                
+                <div class="space-y-8">
+                    <!-- Experience 1 -->
+                    <div class="relative pl-10 timeline-item">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="bg-[#384241] rounded-xl shadow-md p-6 text-gray-200">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <h3 class="text-xl font-bold">Co-Founder & Lead Developer - <a href="#" class="text-blue-500 hover:underline">Startup Hub</a></h3>
+                                <span class="text-gray-500">2014 - Present</span>
+                            </div>
+                            <p class="text-gray-700">Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 2 -->
+                    <div class="relative pl-10 timeline-item">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <h3 class="text-xl font-bold">Software Engineer - <a href="#" class="text-blue-500 hover:underline">Google</a></h3>
+                                <span class="text-gray-500">2013 - 2014</span>
+                            </div>
+                            <p class="text-gray-700">Vivamus a tortor eu turpis pharetra consequat quis non metus. Aliquam aliquam, orci eu suscipit pellentesque, mauris dui tincidunt enim. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 3 -->
+                    <div class="relative pl-10 timeline-item">
+                        <div class="absolute left-0 top-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <h3 class="text-xl font-bold">Software Engineer - <a href="#" class="text-blue-500 hover:underline">eBay</a></h3>
+                                <span class="text-gray-500">2012 - 2013</span>
+                            </div>
+                            <p class="text-gray-700">Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub Section -->
+        <section id="github" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 flex items-center">
+                    <span class="gradient-text">My GitHub</span>
+                    <span class="ml-4 h-px bg-gradient-to-r from-blue-500 to-purple-500 flex-1"></span>
+                </h2>
+                
+                <div class="bg-[#384241] rounded-xl shadow-md p-8 text-center text-gray-200">
+                    <div class="flex justify-center mb-6">
+                        <i class="fab fa-github text-5xl text-gray-700"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6">Loading data...</p>
+                    <p class="text-gray-500">You can also embed your GitHub activities using Casey Scarborough's <a href="http://caseyscarborough.com/projects/github-activity/" class="text-blue-500 hover:underline">GitHub Activity Stream</a> widget.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#384241] text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-2xl font-bold mb-6">Let's Connect</h2>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="w-10 h-10 rounded-full bg-[#384241] flex items-center justify-center hover:bg-[#f9c552] transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-700 transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-600 transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 transition">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                </div>
+                <p class="text-gray-400">© 2023 syncopated notes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle functionality
+        document.querySelector('button').addEventListener('click', function() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+            nav.classList.toggle('flex-col');
+            nav.classList.toggle('absolute');
+            nav.classList.toggle('top-16');
+            nav.classList.toggle('right-4');
+            nav.classList.toggle('bg-[#384241]');
+            nav.classList.toggle('p-4');
+            nav.classList.toggle('rounded-lg');
+            nav.classList.toggle('shadow-lg');
+            nav.classList.toggle('space-y-4');
+            nav.classList.toggle('space-x-0');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=b08x/portfolio-demo" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>

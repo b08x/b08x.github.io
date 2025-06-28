@@ -10,16 +10,15 @@ sitemap: false
    ========================================================================== */
 
 // Foundational styles (must be loaded first)
-@use "functions";
 @use "colors";
-@use "fonts";
+@use "functions";
 @use "variables";
-
-// Core site styles
 @use "normalize";
+@use "fonts";
 @use "global";
 @use "base";
 @use "code";
 @use "highlighter";
 @use "palette";
 @use "video";
+@use "notebook";
