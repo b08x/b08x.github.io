@@ -1,29 +1,14 @@
----
-# Notebook-specific stylesheet for Jekyll site
-sitemap: false
----
-
-@charset "utf-8";
+--- # Notebook-specific stylesheet for Jekyll site sitemap: false --- @charset "utf-8";
 
 /* ==========================================================================
    Notebook Stylesheet - Separate from main site styles
    ========================================================================== */
 
 // Load shared foundational styles
-@import "functions";
-@import "colors";
-@import "fonts";
-@import "variables";
+@use "functions";
+@use "colors";
+@use "fonts";
+@use "variables";
 
 // Notebook-specific modules
-@import "notebook/variables";
-@import "notebook/normalize";
-@import "notebook/style";
-@import "notebook/header";
-@import "notebook/code";
-@import "notebook/toc";
-@import "notebook/chat";
-@import "notebook/preload";
-@import "notebook/wall";
-@import "notebook/css-pro-layout";
-@import "notebook/flexgrid/flexgrid";
+@use "notebook";
