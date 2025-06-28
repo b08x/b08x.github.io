@@ -53,3 +53,6 @@ generated/
 
 # Local development
 .claude/
+.qodo/
+
+_drafts/
