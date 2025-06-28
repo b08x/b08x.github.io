@@ -1,8 +1,8 @@
-title: b08x
+title: syncopated notes
 baseurl: ""
 url: "https://b08x.github.io"
 
-name: Robert Pannick
+author: Robert Pannick
 tagline: Senior Linux Systems Engineer
 pic: profile.png
 
@@ -120,5 +120,5 @@ pagination:
   limit: 0
   sort_field: 'date'
   sort_reverse: false
-  collection: 'notes'
+  # collection: 'notes'
 

@@ -55,4 +55,8 @@ generated/
 .claude/
 .qodo/
 
-_drafts/
+.ruby-gemset
+.ruby-version
+
+
+/_drafts/
