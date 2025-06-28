@@ -1,0 +1,147 @@
+---
+layout: note
+---
+
+<!-- Just some nice to have styles for the pager buttons -->
+<style>
+  ul.pager {
+    text-align: center;
+    list-style: none;
+  }
+  ul.pager li {
+    display: inline;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px;
+  }
+  section {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #444;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    /* width: 80%; */
+    margin: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    @media (max-width: 820px) {
+      flex-direction: column;
+    }
+    @media (max-height: 820px) {
+      flex-direction: column;
+    }
+  }
+  .left-column,
+  .right-column {
+    width: 45%;
+    padding: 20px;
+    box-sizing: border-box;
+    @media (max-width: 820px) {
+      width: 100%;
+    }
+  }
+
+  .left-column {
+    background-color: black;
+  }
+
+  .right-column {
+    background-color: black;
+  }
+
+  .left-column img,
+  .right-column img {
+    width: 100%;
+    height: auto;
+  }
+
+  .category {
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+
+  }
+
+  .category img {
+    width: 100%;
+    height: auto;
+  }
+</style>
+
+<div class="container">
+  <h2 class="page-heading">
+    <b>
+      {% if page.autopages %}
+      <!-- #{{page.autopages.display_name}} -->
+      {% endif %}
+    </b>
+  </h2>
+
+  {{ content | markdownify }}
+
+  <ul class="post-list">
+    <!-- 
+        Here is the main paginator logic called.
+        All calls to site.posts should be replaced by paginator.posts 
+    -->
+    {% for item in paginator.posts %}
+    <div class="category">
+      <li>
+        <a class="note-link" sytle="padding: unset;" href="{{ item.url | relative_url }}">
+          <h4 style="margin: unset;">{{ item.title | escape }}</h4>
+        </a>
+        <br />
+        <span style="font-size: medium;">
+          {{ item.date | date: "%b %-d, %Y" }} | 
+          {% if item.book.rank %} | Rank: {{ item.book.rank }}{% endif %} 
+          {% if item.categories %}
+          {% for cat in item.categories %}
+          {% capture cat_name %}{{ cat }}{% endcapture %}
+           <a href="{{ site.baseurl }}/category/{{ cat_name | replace: ' ', '-'| downcase }}"><code class="highligher-rouge"><nobr>{{ cat_name | replace: ' ', '-' }}</nobr></code></a>
+          {% endfor %}
+           {% endif %} 
+          {% if item.tags %}
+          <br />Tags:
+          {% for tag in item.tags %}
+          {% capture tag_name %}{{ tag }}{% endcapture %}
+          {% if tag_name != 'obsidian-auto-glossary' %}
+          <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>#{{ tag_name }}</nobr></code></a>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+        </span>
+      </li>
+    </div>
+    {% endfor %}
+  </ul>
+
+  <!-- 
+    Showing buttons to move to the next and to the previous list of posts (pager buttons).
+  -->
+  {% if paginator.total_pages > 1 %}
+  <ul class="pager">
+    {% if paginator.previous_page %}
+    <li class="previous">
+      <a
+        href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"
+        >&larr; Newer Posts</a
+      >
+    </li>
+    {% endif %} {% if paginator.next_page %}
+    <li class="next">
+      <a
+        href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}"
+        >Older Posts &rarr;</a
+      >
+    </li>
+    {% endif %}
+  </ul>
+  {% endif %}
+</div>

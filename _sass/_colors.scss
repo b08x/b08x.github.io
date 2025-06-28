@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Colors - Consolidated color variables for light and dark themes
+   ========================================================================== */
+
+@use "sass:color";
+@use "sass:map";
+
+/* ==========================================================================
+   Base Color Palette
+   ========================================================================== */
+
+// New Unified Color Palette
+$colors: (
+  'primary': #f9c552,        // Golden yellow (249,197,82)
+  'secondary': #384241,      // Dark teal-gray (56,66,65)  
+  'tertiary': #ece9d4,       // Light cream (236,233,212)
+  'quaternary': #de8b2f,     // Orange (222,139,47)
+  'quinary': #ba4d2d,        // Red-brown (186,77,45)
+  'background': #ece9d4,     // Light cream background
+  'text': #384241,           // Dark teal-gray text
+  'link': #de8b2f,           // Orange links
+  'link-hover': #ba4d2d,     // Red-brown hover
+  'border': #f9c552          // Golden yellow borders
+) !default;
+
+/* ==========================================================================
+   Dark Theme Colors  
+   ========================================================================== */
+
+$base-color: #ece9d4 !default;
+$text-color: #ece9d4 !default;
+$background-color: #384241 !default;
+$background-darker: color.mix(#000, #384241, 20%) !default;
+$background-hr: #f9c552 !default;
+$brand-color: #f9c552 !default;
+$accent-color: #de8b2f !default;
+
+/* ==========================================================================
+   Navigation Colors
+   ========================================================================== */
+
+$nav-color: #ece9d4 !default;
+$nav-background-color: #384241 !default;
+
+/* ==========================================================================
+   Code & Syntax Colors
+   ========================================================================== */
+
+$code-background-color: color.mix(#f9c552, #ece9d4, 15%) !default;
+
+// Syntax Highlighting Colors (Custom Palette)
+$base00: #ece9d4 !default;  // Background
+$base01: #384241 !default;  // Dark teal-gray
+$base02: color.mix(#384241, #ece9d4, 30%) !default;  // Lighter dark
+$base03: color.mix(#384241, #ece9d4, 60%) !default;  // Medium
+$base04: #de8b2f !default;  // Orange
+$base05: #384241 !default;  // Main text
+$base06: #384241 !default;  // Light text
+$base07: #ece9d4 !default;  // Lightest
+$base08: #ba4d2d !default;  // Red-brown (variables, tags)
+$base09: #de8b2f !default;  // Orange (numbers, constants)
+$base0a: #f9c552 !default;  // Golden yellow (classes, types)
+$base0b: color.mix(#f9c552, #de8b2f, 50%) !default;  // String (warm gold)
+$base0c: #384241 !default;  // Support, regex
+$base0d: #de8b2f !default;  // Functions, methods
+$base0e: #ba4d2d !default;  // Keywords, storage
+$base0f: #ba4d2d !default;  // Deprecated
+
+/* ==========================================================================
+   UI State Colors
+   ========================================================================== */
+
+$primary-color: #f9c552 !default;
+$success-color: color.mix(#f9c552, #de8b2f, 70%) !default;
+$warning-color: #de8b2f !default;
+$danger-color: #ba4d2d !default;
+$info-color: #384241 !default;
+
+/* ==========================================================================
+   Social Brand Colors
+   ========================================================================== */
+
+$behance-color: #1769ff !default;
+$bitbucket-color: #205081 !default;
+$dribbble-color: #ea4c89 !default;
+$facebook-color: #3b5998 !default;
+$flickr-color: #ff0084 !default;
+$foursquare-color: #0072b1 !default;
+$github-color: #171516 !default;
+$google-plus-color: #dd4b39 !default;
+$instagram-color: #517fa4 !default;
+$lastfm-color: #d51007 !default;
+$linkedin-color: #007bb6 !default;
+$pinterest-color: #cb2027 !default;
+$reddit-color: #ff4500 !default;
+$rss-color: #fa9b39 !default;
+$soundcloud-color: #ff3300 !default;
+$stackoverflow-color: #fe7a15 !default;
+$tumblr-color: #32506d !default;
+$twitter-color: #55acee !default;
+$vimeo-color: #1ab7ea !default;
+$vine-color: #00bf8f !default;
+$youtube-color: #bb0000 !default;
+$xing-color: #006567 !default;
+
+/* ==========================================================================
+   Component Colors
+   ========================================================================== */
+
+// Audio Player Colors
+$player-bgcolor: map.get($colors, 'primary') !default;
+$player-scrubber-color: color.adjust(map.get($colors, 'primary'), $lightness: -1%) !default;
+$player-loaded-color: color.adjust(map.get($colors, 'primary'), $lightness: -5%) !default;
+$player-progress-color: color.adjust(map.get($colors, 'primary'), $lightness: 10%) !default;
+$player-play-color: color.adjust(map.get($colors, 'primary'), $lightness: 5%) !default;
+
+// Tile Colors
+$tile-bgcolor: #f9c552 !default;
+$tile-color: #384241 !default;
+
+// Border Colors
+$border-color: color.mix(#f9c552, #ece9d4, 30%) !default;
+
+/* ==========================================================================
+   Notebook Theme Colors
+   ========================================================================== */
+
+$color-primary: #384241 !default;
+$color-text: #384241 !default;
+$color-subtext: #de8b2f !default;
+$color-border: #f9c552 !default;
+
+/* ==========================================================================
+   YIQ Color Contrast
+   ========================================================================== */
+
+$yiq-contrasted-dark-default: #384241 !default;
+$yiq-contrasted-light-default: #ece9d4 !default;
+$yiq-contrasted-threshold: 175 !default;
+$yiq-debug: false !default;

@@ -1,0 +1,27 @@
+---
+# Main stylesheet for the Jekyll site
+sitemap: false
+---
+
+@charset "utf-8";
+
+/* ==========================================================================
+   Main Site Stylesheet - Excludes notebook-specific styles
+   ========================================================================== */
+
+// Foundational styles (must be loaded first)
+@use "functions";
+@use "colors";
+@use "fonts";
+@use "variables";
+
+// Core site styles
+@use "normalize";
+@use "global";
+@use "base";
+@use "code";
+@use "highlighter";
+@use "palette";
+@use "video";
+
+@use "bootstrap/bootstrap";

@@ -1,0 +1,11 @@
+---
+layout: null
+---
+{
+    "tags": [
+        {% for tag in site.tags %}
+        {% capture tag_name %}{{ tag }}{% endcapture %}
+        "{{ tag_name }}"{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ]
+}

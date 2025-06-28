@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {% include head.html %}
+
+  <body>
+
+    {% include header.html %}
+    
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">{{ page.title | escape }}</h2>
+                        <div class="content">
+                            {{ content }}
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+            </div>
+            <!--//primary-->
+            <div class="secondary col-md-4 col-sm-12 col-xs-12">
+                {% include basic_info.html %}
+                {% include skills.html %}
+                {% include latest_posts.html %}
+            </div>
+            <!--//secondary-->
+        </div>
+        <!--//row-->
+    </div>
+    
+    {% include footer.html %}
+    {% include scripts.html %}
+
+  </body>
+
+</html>

@@ -1,0 +1,5 @@
+// Forward all functions to make them globally available
+@forward "functions/color";
+@forward "functions/em";
+@forward "functions/fluid-type";
+@forward "functions/yiq";

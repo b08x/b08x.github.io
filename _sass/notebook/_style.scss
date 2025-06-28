@@ -1,0 +1,794 @@
+@use "sass:color";
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500|Inknut+Antiqua:400,500,600,700,800|Alegreya:800,900');
+
+:root {
+  /* Full grid area variable */
+  --fullGrid: 1 / 1 / -1 / -1;
+  
+  /* New Unified Color Palette */
+  --primary: #f9c552;        /* Golden yellow (249,197,82) */
+  --secondary: #384241;      /* Dark teal-gray (56,66,65) */
+  --tertiary: #ece9d4;       /* Light cream (236,233,212) */
+  --quaternary: #de8b2f;     /* Orange (222,139,47) */
+  --quinary: #ba4d2d;        /* Red-brown (186,77,45) */
+  
+  /* Legacy mappings for existing styles */
+  --blue-whale: #384241;
+  --cold-and-dark: #384241;
+  --nocturne: #384241;
+  --great-void: #384241;
+  --still-water: #de8b2f;
+  --north-atlantic: #f9c552;
+
+  --bitter-liquorice: #384241;
+  --black-olive: #384241;
+  --armadillo: #de8b2f;
+  --iron: #f9c552;
+  --lucky-grey: #ece9d4;
+  --mummys-tomb: #ece9d4;
+
+  --lava-rock: #384241;
+  --winter-storm: #384241;
+  --antique: #de8b2f;
+  --caramel-crumb: #de8b2f;
+  --polished-gold: #f9c552;
+  --kombucha: #f9c552;
+
+  --aztec: #384241;
+  --rosemary: #384241;
+  --arctic: #de8b2f;
+  --shallow-sea: #f9c552;
+  --aquatic-edge: #ece9d4;
+  --master-key: #f9c552;
+
+  --nirvana: #de8b2f;
+  --mighty-mauve: #ba4d2d;
+  --chimera: #ba4d2d;
+  --pinot-noir: #384241;
+  --pitch-black: #384241;
+  --ink-black: #384241;
+
+  --moutarde-de-benichon: #de8b2f;
+  --rich-gold: #f9c552;
+  --jungle-king: #384241;
+  --sea-of-stars: #384241;
+  --midnight-ocean: #384241;
+  --jp-mirror-editor-variable-color: #384241;
+
+  --base-font-family: "Darker Grotesque", serif;
+  --base-font-weight: 500;
+  --heading-font-family: "Syne", sans-serif;
+  --heading-font-weight: 800;
+  --highlight-font-weight: 800;
+  --base-font-size: 1rem;
+  --base-line-height: 1.5;
+
+  // --theme-bg: #151515;
+  --theme-bg: #755555;
+  --theme-bg-alt: #474d48;
+  --theme-bg-alt-alt: #1e4021;
+  --theme-bg-alt-alt-alt: #1A1E36;
+  --theme-text: #a39aa2;
+  --theme-accent: #5e4a5c;
+  /* ==== Typography ==== */
+  --font-family-primary: 'IBM Plex Sans', sans-serif;
+  --font-family-secondary: 'Inknut Antiqua', serif;
+  --font-weight-300: 300;
+  --font-weight-400: 400;
+  --font-weight-500: 500;
+  --font-weight-600: 600;
+  --font-weight-700: 700;
+  --font-weight-800: 800;
+
+
+  --baseline: calc(12 * 1px);
+  /* This is our baseline */
+  --base-line-height: calc(var(--baseline) * 2);
+  /* Base line height is a multiple of the baseline */
+  --base-font-size: 1rem;
+
+  /* ==== Spacing based on baseline ==== */
+  --spacing-1: var(--baseline);
+  --spacing-2: calc(var(--baseline) * 2);
+  --spacing-3: calc(var(--baseline) * 3);
+  --spacing-4: calc(var(--baseline) * 4);
+  --spacing-5: calc(var(--baseline) * 5);
+  --spacing-6: calc(var(--baseline) * 6);
+  --spacing-7: calc(var(--baseline) * 7);
+  --spacing-8: calc(var(--baseline) * 8);
+  --spacing-9: calc(var(--baseline) * 9);
+  --spacing-10: calc(var(--baseline) * 10);
+
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-BoldItalic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "mononoki";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../assets/fonts/mononoki-Italic.ttf) format("truetype");
+}
+
+$color-box-background: color.mix($color-primary, white, 4%);
+$border-radius: 4px;
+$font-family-ibm: "IBM Plex Mono", monospace;
+$font-family-special: "Special Elite", monospace;
+$font-family-source: "Source Code Pro", monospace;
+$font-family-source-serif: "Source Code Pro", serif;
+$font-family-monospace: "Overpass Mono", monospace;
+$font-family-sans-serif: "Overpass", sans-serif;
+$font-family-logo: "Podkova", serif;
+$font-family-text: "mononoki", monospace;
+$font-family-forum: "Forum", serif;
+
+body {
+  box-sizing: content-box;
+  font-family: $font-family-ibm;
+  font-weight: 300;
+  margin: 0 auto;
+  line-height: 1.4;
+  padding: 4vh 2vw;
+  overflow-x: hidden;
+  background-color: var(--theme-bg-alt-alt);
+  color: #B3B9C5;
+  font-size: 1rem;
+  align-items: center;
+
+  @media (max-width: 420px) {
+    background-color: #ffffff;
+    color: #B3B9C5;
+  }
+
+  @media (max-width: 300px) {
+    // background-color: #3f1e55;
+    // visibility: hidden;
+    // max-width: inherit;
+  }
+}
+
+hr {
+  width: 100%;
+  border: 0;
+  height: 1px;
+  margin-bottom: 2rem;
+  background: #000;
+}
+
+h1 {
+  font-family: $font-family-logo;
+  font-size: 4rem;
+  line-height: 1.25;
+  font-weight: 300;
+  letter-spacing: 0.1rem;
+  justify-self: center;
+  color: #ffd33e;
+
+  @media (max-width: 1560px) {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  @media (max-width: 1440px) {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  @media (max-width: 1050px) {
+    letter-spacing: 0rem;
+  }
+
+  &:before {
+    content: "# ";
+  }
+}
+
+h2 {
+  font-family: $font-family-logo;
+  font-weight: 500;
+  font-size: 3.5rem;
+  color: #c01212;
+  @media (max-width: 820px) {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-family: $font-family-logo;
+  font-weight: 500;
+  font-size: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: #ada087;
+  @media (max-width: 820px) {
+    font-size: revert;
+    // font-family: unset;
+    color: black;
+  }
+}
+
+h4 {
+  font-family: $font-family-logo;
+  font-weight: 500;
+  font-size: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: #b04848;
+}
+
+h5,
+h6 {
+  line-height: 1.3;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0;
+  font-weight: 500;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1.4rem;
+  word-spacing: 0.1rem;
+  color: #d3cbca;
+  strong {
+    color: #d10000;
+  }
+  code {
+    color: #018361;
+
+    background-color: rgb(18 18 18 / 81%);
+
+    padding: 0.025rem 0.185rem;
+
+    @media (max-width: 820px) {
+      color: #4df11c;
+    }
+  }
+  @media (max-width: 820px) {
+    // color: #18150e;
+    font-size: 1rem;
+  }
+}
+
+a:not([style*="color:"]) {
+  color: rgb(148, 213, 240) !important;
+}
+
+// #32bf23 !important
+
+a {
+  transition: background 300ms;
+  padding: 0 0.1em;
+  text-decoration: none;
+  color: #e21919;
+  // color: #c1185c;
+  font-weight: 500;
+  font-style: italic;
+
+  &:hover {
+    color: black !important;
+    background: #3f3e3d;
+  }
+
+  &.internal-link:after,
+  &.footnote:after,
+  &.reversefootnote:after {
+    content: "";
+  }
+}
+
+ul {
+  color: #8ca8a8;
+  padding-inline-start: 2rem;
+}
+
+ol {
+  padding: 1rem;
+}
+
+li {
+  position: relative;
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  font-family: $font-family-source-serif;
+  font-weight: 400;
+
+  // padding-left: 15px;
+  strong {
+    color: #d18900;
+  }
+
+  // @media (max-width: 820px) {
+  //   color: black;
+  // }
+}
+
+
+main {
+  justify-content: center;
+}
+
+content {
+  max-width: -webkit-fill-available;
+  @media (min-width: 820px) {
+    padding: unset;
+  }
+}
+
+.intro-ps {
+  columns: 2;
+  margin: 0 0 2rem 0;
+  p {
+    font-family: "Source Code Pro", serif;
+    font-size: 1rem;
+  }
+  > p:first-child {
+    text-indent: 0;
+    strong {
+      font-size: 125%;
+      letter-spacing: -1px;
+      line-height: 0;
+    }
+  
+  }
+  @media (max-width: 520px) {
+    columns: 1; 
+  }
+
+}
+
+.in-brief {
+  text-align: center;
+  margin: 0 0 2rem 0;
+  font-size: 18px;
+  line-height: 1.3;
+  @media (max-width: 520px) {
+    font-size: 16px; 
+  }  
+  h3 {
+    text-transform: uppercase;
+    text-align: center;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    display: inline-block;
+    padding: 0 20px;
+    color: #999;
+    letter-spacing: 0.2rem;
+    font-size: 80%;
+    margin: 0;
+    background: white;
+    position: relative;
+    top: 1px;
+  }
+}
+.in-brief-content {
+  columns: 3;
+  font-size: 0.8rem;
+
+  text-align: left;
+  border: 1px solid #ccc;
+  padding: 20px;
+
+  p {
+    font-family: "Source Code Pro", serif;
+    font-size: 1rem;
+    word-spacing: unset;
+  }
+  @media (max-width: 520px) {
+    columns: 2; 
+  }
+}
+
+
+aside {
+  nav {
+    ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin: 0 1rem;
+
+        a {
+          text-decoration: none;
+          color: #000;
+        }
+      }
+    }
+  }
+}
+
+#side {
+  font-size: 0.9em;
+  border-left: #000;
+  border-left-style: groove;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.row-flex-column {
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: 820px) {
+    pre code {
+      color: #1b9ca3;
+    }
+  }
+
+  .side {
+    padding-left: 1rem;
+    padding-right: 4rem;
+    display: flex;
+
+    @media (min-width: 1024px) {
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 33%;
+      padding-right: unset;
+    }
+
+    @media (max-width: 1330px) {
+      display: none;
+    }
+  }
+}
+
+
+time {
+  display: ruby-text;
+  color: #76b117;
+  // margin: 0em 0 1em;
+  font: caption;
+  // padding: 0.5rem;
+  font-family: $font-family-ibm;
+
+  @media (max-width: 1280px) {
+    display: none;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: inline-block;
+  margin: 0 auto;
+  max-height: 75vh;
+  border-radius: $border-radius;
+}
+
+.tags {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.last-update {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.headingobject {
+  box-sizing: border-box;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  h1 {
+    margin-top: unset;
+  }
+  // border: #597b65;
+  // border-style: dashed;
+
+  @media (max-width: 820px) {
+    flex-direction: row;
+    background-color: #672828;
+    // max-width: inherit;
+  }
+}
+
+.wrapper {
+
+  @media (max-width: 820px) {
+    background-color: #672828;
+  }
+}
+
+
+recently {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  ul {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 40rem) {
+    background-color: #672828;
+    visibility: hidden;
+  }
+}
+.left-column img,
+.right-column img {
+  width: 100%;
+  height: auto;
+}
+
+.contentobject {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  align-items: flex-start;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+#dark {
+  mix-blend-mode: difference;
+}
+
+
+#page-cover {
+  margin-bottom: 1rem;
+}
+
+#excerpt {
+  align-content: center;
+  align-items: center;
+}
+
+.c > div {
+  padding: 1em;
+}
+
+@media screen and (min-width: 31.42em) {
+  .c2,
+  .c3 {
+    float: left;
+    width: 50%;
+  }
+}
+
+.quote {
+  display: inline-block;
+  margin: 1em;
+  overflow: hidden;
+
+  blockquote {
+    background-color: var(--armadillo);
+    border: solid 2px #757575;
+    display: inline-block;
+    margin: 0;
+    padding: 1em;
+    position: relative;
+
+    &:before {
+      background-color: var(--armadillo);
+      bottom: -10%;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: -10%;
+      // transform: rotate(-15deg) skew(5deg);
+    }
+
+    cite {
+      display: block;
+      font-style: italic;
+      text-align: right;
+
+      &:before {
+        content: "- ";
+      }
+    }
+
+    > * {
+      font-family: $font-family-special;
+      position: relative;
+      z-index: 1;
+    }
+  }
+}
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 1rem;
+  margin-right: 0.5rem;
+}
+
+
+
+.post-list {
+  display: inline-block;
+  padding: unset;
+  list-style-type: none;
+}
+
+*:focus {
+  background: #ffe8bc !important;
+  color: black !important;
+}
+
+#table-of-contents {
+  ul,
+  ol {
+    font-size: 1rem;
+    display: block;
+    margin-block-start: 0em;
+    margin-block-end: 1em;
+    margin-inline-start: 5.125rem;
+    margin-inline-end: 4rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-inline-start: 1.25rem;
+    list-style-type: disclosure-closed;
+    line-height: 1.75rem;
+  }
+
+  li {
+    display: block;
+    text-align: left;
+  }
+
+  @media (max-width: 1440px) {
+    display: flex;
+  }
+}
+
+#markdown-content {
+  font-size: 1.25rem;
+  @media (max-width: 1080px) {
+    align-items: center;
+  }
+}
+
+#notes-entry-container {
+  display: grid;
+  // justify-items: center;
+  //  align-items: baseline;
+  // grid-gap: 2em;
+  grid-template-areas:
+    "content"
+    "side";
+
+  @media (min-width: 1440px) {
+    grid-template-columns: 3fr 0fr;
+    grid-template-areas: "content side";
+  }
+}
+
+.backlink-box {
+  padding: 0.5rem;
+  border-radius: $border-radius;
+
+  a {
+    color: #000;
+  }
+}
+
+.box {
+  display: grid;
+  padding: 0.5rem;
+
+  h1 {
+    margin: unset;
+  }
+}
+
+.sidebox {
+  border-style: dashed;
+  border-color: #4d656a;
+  padding: 0.5rem;
+}
+
+code {
+  background: transparent;
+  padding: 0.1em 0.2em;
+  border-radius: 4px;
+  color: burlywood;
+  font-size: 1.125rem;
+  text-wrap: balance;
+  word-break: auto-phrase;
+  @media (max-width: 820px) {
+    color: #484646;
+  }
+}
+
+.invalid-link {
+  color: #444444;
+  cursor: help;
+  background: #fafafa;
+  padding: 0 0.1em;
+}
+
+.invalid-link-brackets {
+  color: #ccc;
+  cursor: help;
+}
+
+footer {
+  margin: 0.5em 0;
+  font-size: 1em;
+  color: color.mix($color-text, white, 80%);
+  padding-top: 1em;
+  justify-content: center;
+
+  a {
+    color: #6a1313;
+  }
+}
+
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd) {
+  background: #091a28;
+}
+
+.jp-RenderedHTMLCommon tbody tr:nth-child(even) {
+  background: #333333;
+}
+
+.jp-Notebook {
+  background: #273639;
+}
+.jp-InputArea-editor {
+  background: #4a4b47;
+}
+
+.jp-RenderedHTMLCommon img,
+.jp-RenderedImage img,
+.jp-RenderedHTMLCommon svg,
+.jp-RenderedSVG svg {
+  max-width: 100%;
+  height: auto;
+}
+
+

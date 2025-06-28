@@ -1,0 +1,49 @@
+---
+---
+
+@charset "utf-8";
+
+@use "sass:color";
+
+// Load foundational styles first (functions must come before variables)
+@import "functions";
+@import "colors";
+@import "fonts";
+
+/* Light Theme Color Overrides */
+$base-color: #384241 !default;
+$text-color: #384241 !default;
+$accent-color: #de8b2f !default;
+$nav-color: #ece9d4 !default;
+$background-color: #ece9d4 !default;
+$nav-background-color: #384241 !default;
+$code-background-color: color.mix(#f9c552, #ece9d4, 10%) !default;
+$border-color: color.mix(#f9c552, #ece9d4, 25%) !default;
+
+$primary-color: #f9c552 !default;
+$success-color: color.mix(#f9c552, #de8b2f, 70%) !default;
+$warning-color: #de8b2f !default;
+$danger-color: #ba4d2d !default;
+$info-color: #384241 !default;
+
+/* Syntax highlighting (base16) colors */
+$base00: #ece9d4 !default;  // Background
+$base01: #384241 !default;  // Dark teal-gray
+$base02: color.mix(#384241, #ece9d4, 30%) !default;  // Lighter dark
+$base03: color.mix(#384241, #ece9d4, 60%) !default;  // Medium
+$base04: #de8b2f !default;  // Orange
+$base05: #384241 !default;  // Main text
+$base06: #384241 !default;  // Light text
+$base07: #ece9d4 !default;  // Lightest
+$base08: #ba4d2d !default;  // Red-brown (variables, tags)
+$base09: #de8b2f !default;  // Orange (numbers, constants)
+$base0a: #f9c552 !default;  // Golden yellow (classes, types)
+$base0b: color.mix(#f9c552, #de8b2f, 50%) !default;  // String (warm gold)
+$base0c: #384241 !default;  // Support, regex
+$base0d: #de8b2f !default;  // Functions, methods
+$base0e: #ba4d2d !default;  // Keywords, storage
+$base0f: #ba4d2d !default;  // Deprecated
+
+@import "variables";
+@import "notices";
+@import "skin";

@@ -53,3 +53,10 @@ generated/
 
 # Local development
 .claude/
+.qodo/
+
+.ruby-gemset
+.ruby-version
+
+
+/_drafts/

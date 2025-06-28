@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Notebook-Specific Variables
+   ========================================================================== */
+
+// Layout Dimensions
+$sidebar-width: 280px !default;
+$sidebar-collapsed-width: 80px !default;
+$header-height: 64px !default;
+$footer-height: 64px !default;
+
+// Notebook Breakpoints
+$breakpoint-xs: 480px !default;
+$breakpoint-sm: 576px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 992px !default;
+$breakpoint-xl: 1200px !default;
+$breakpoint-xxl: 1600px !default;
+
+// Chat Component Variables
+$chat-thread-avatar-size: 40px !default;

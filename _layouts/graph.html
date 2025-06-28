@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    section {
+      margin: 20px 0;
+      padding: 20px;
+      border: 1px solid #444;
+    }
+
+    .graphContainer {
+      min-height: 100%;
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      flex-grow: 1;
+    }
+
+    .left-column {
+      width: auto;
+    }
+
+    .right-column {
+      width: fit-content;
+    }
+
+    .category {
+      font-size: 24px;
+      margin-bottom: 20px;
+      padding: 20px;
+      text-align: center;
+      border: 2px solid #000;
+      border-radius: 10px;
+    }
+
+    .category img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+
+  <head>
+    {% include head.html %}
+  </head>
+
+  <body>
+    <main>
+      <div class="container">       
+      <div class="xl" style="margin-bottom: 1rem;">
+        {% include notes_graph.html %}
+      </div>
+
+      <div class="md-4">
+        {{content}}
+      </div>
+      </div>
+      {% include footer.html %}
+    </main>
+
+    {% include link-previews.html wrapperQuerySelector="content" %}
+  </body>
+</html>

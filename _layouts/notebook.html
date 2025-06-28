@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include head.html %}
+  </head>
+
+  <body>
+    {% include sidescript.html %} 
+
+    {% include notebook/nav.html %}
+    <div id="page-wrapper" class="page-wrapper">
+      <div class="page">
+        
+
+        <div id="content" class="content">
+          <main>{{ content }}</main>
+
+          <nav class="nav-wrapper" aria-label="Page navigation">
+            <!-- Mobile navigation buttons -->
+            <div style="clear: both"></div>
+          </nav>
+        </div>
+        {% include footer.html %}
+      </div>
+
+      <nav class="nav-wide-wrapper" aria-label="Page navigation">
+        {% include paginator.html %}
+      </nav>
+    </div>
+
+    <script
+      src="{{ site.baseurl }}/assets/js/book.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+
+    {% include link-previews.html wrapperQuerySelector="content" %}
+  </body>
+</html>
