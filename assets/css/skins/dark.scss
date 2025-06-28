@@ -5,10 +5,12 @@
 
 @use "sass:color";
 
-// Import functions first
+// Load foundational styles first (functions must come before variables)
 @import "functions";
+@import "colors";
+@import "fonts";
 
-/* Dark Theme Colors - Define before importing other stylesheets */
+/* Dark Theme Color Overrides */
 $base-color: #eaeaea !default;
 $text-color: #eaeaea !default;
 $accent-color: #00adb5 !default;

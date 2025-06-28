@@ -1,4 +1,5 @@
-@import "functions/color";
-@import "functions/em";
-@import "functions/fluid-type";
-@import "functions/yiq";
+// Forward all functions to make them globally available
+@forward "functions/color";
+@forward "functions/em";
+@forward "functions/fluid-type";
+@forward "functions/yiq";

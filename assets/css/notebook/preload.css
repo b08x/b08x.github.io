@@ -3,7 +3,7 @@ Just a preloading animation, didn't saw many of them here on Codepen, so I said 
 
 Used jQuery's window.load() function, in this demo there is also setTimeot(), cause there is no content to load, so we are simulating it.
 */
-@import url(https:*/
+/* @import url removed - was malformed */
 
 html {
   box-sizing: border-box;
@@ -67,10 +67,10 @@ html {
 .home{
   height: 100vh;
   position: relative;
-/* background-color: #F2F6F2;
+  /* background-color: #F2F6F2;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 .home:before{
   position: absolute;
@@ -80,7 +80,7 @@ html {
   top: 0;
   left: 0;
   content: '';
-/* background-color: #F2F6F2;
+  /* background-color: #F2F6F2; */
 }
 .home:after{
   position: absolute;
@@ -90,7 +90,7 @@ html {
   top: 0;
   right: 0;
   content: '';
-/* background-color: #F2F6F2;
+  /* background-color: #F2F6F2; */
 }
 .animate-border{
   border: 40px solid #EDEBE6;

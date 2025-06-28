@@ -5,10 +5,12 @@
 
 @use "sass:color";
 
-// Import functions first
+// Load foundational styles first (functions must come before variables)
 @import "functions";
+@import "colors";
+@import "fonts";
 
-/* Default Theme Colors */
+/* Default Theme Color Overrides */
 $base-color: #000 !default;
 $text-color: #000 !default;
 $accent-color: #34374C !default;

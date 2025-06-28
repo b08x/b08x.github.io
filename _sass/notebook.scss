@@ -1,11 +1,11 @@
-// Core styles
+/* ==========================================================================
+   Notebook Include File - Use assets/css/notebook.scss instead
+   ========================================================================== */
+
+// This file is deprecated in favor of assets/css/notebook.scss
+// Keeping minimal imports for backwards compatibility
+
 @import "functions";
-@import "variables";
-@import "normalize";
+@import "colors";
 @import "fonts";
-@import "global";
-@import "base";
-@import "code";
-@import "highlighter";
-@import "palette";
-@import "video";
+@import "variables";
