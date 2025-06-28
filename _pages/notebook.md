@@ -1,11 +1,11 @@
 ---
-id: index
+id: notebook
 aliases:
   - Welcome!
 tags: 
 layout: graph
-permalink: /index
-title: Home
+permalink: /notebook
+title: Notebook
 ---
 
 
