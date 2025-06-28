@@ -36,12 +36,12 @@ jobs:
       - name: Install deps
         run: |
           sudo apt update -qq && \
-          sudo apt install libvips-dev libopenslide-dev jupyter-core && \
+          sudo apt install imagemagick libvips-dev libopenslide-dev jupyter-core && \
           sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*     
       - name: Setup Ruby
         uses: ruby/setup-ruby@8575951200e472d5f2d95c625da0c7bec8217c42 # v1.161.0
         with:
-          ruby-version: '3.1' # Not needed with a .ruby-version file
+          ruby-version: '3.2' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
       - name: Setup Pages
@@ -49,7 +49,14 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        run: |
+          # npm init --force -y && \
+          # npm install --save-dev webpack webpack-cli babel-loader @babel/core @babel/preset-env @babel/preset-react && \
+          # npm install react react-dom && \
+          # npm install recharts && \
+          # npm install lucide-react && \
+          # npm run build && \
+          bundle install && bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
       - name: Upload artifact

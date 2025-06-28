@@ -20,7 +20,7 @@ AllCops:
   DisplayCopNames: true
   DisplayStyleGuide: true
   NewCops: enable
-  TargetRubyVersion: 3.4
+  TargetRubyVersion: 3.2
   Exclude:
     - "tmp/**/*"
     - "vendor/**/*"
