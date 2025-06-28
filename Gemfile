@@ -13,7 +13,7 @@ gem 'ruby-vips'
 
 gem 'sass', '~> 3.4.0'
 gem 'therubyracer', '~> 0.12.3'
-gem 'uglifier', '~> 3.2.0'
+gem 'uglifier', '~> 4.2.1'
 
 group :jekyll_plugins do
   gem 'jekyll-feed'
