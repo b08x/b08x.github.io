@@ -11,7 +11,7 @@ gem 'nokogiri'
 gem 'pry'
 gem 'ruby-vips'
 
-gem 'sass', '~> 3.4.0'
+gem 'sass', '~> 3.7.4'
 gem 'therubyracer', '~> 0.12.3'
 gem 'uglifier', '~> 3.2.0'
 
