@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {% include head.html %}
+
+  <body>
+
+    {% include header.html %}
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+                {% include about.html %}
+                {% include latest_projects.html %}
+                {% include other_projects.html %}
+                {% include experience.html %}
+                {% include github.html %}
+            </div>
+            <!--//primary-->
+            <div class="secondary col-md-4 col-sm-12 col-xs-12">
+                {% include basic_info.html %}
+                {% include skills.html %}
+                {% include testimonials.html %}
+                {% include education.html %}
+                {% include languages.html %}
+                {% include latest_posts.html %}
+                {% include favorite_music.html %}
+                {% include conferences.html %}
+                {% include credits.html %}
+            </div>
+            <!--//secondary-->
+        </div>
+        <!--//row-->
+    </div>
+    {% include footer.html %}
+    {% include scripts.html %}
+
+  </body>
+
+</html>
