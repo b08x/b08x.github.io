@@ -9,73 +9,72 @@
    Base Color Palette
    ========================================================================== */
 
-// Primary Color Map
+// New Unified Color Palette
 $colors: (
-  'primary': #f0c018,
-  'secondary': #189090,
-  'tertiary': #ffc018,
-  'quaternary': #186078,
-  'quinary': #786018,
-  'senary': #604818,
-  'background': #f0f0f0,
-  'text': #000000,
-  'link': #2597dc,
-  'link-hover': #1a6fa3,
-  'border': #e0e0e0
+  'primary': #f9c552,        // Golden yellow (249,197,82)
+  'secondary': #384241,      // Dark teal-gray (56,66,65)  
+  'tertiary': #ece9d4,       // Light cream (236,233,212)
+  'quaternary': #de8b2f,     // Orange (222,139,47)
+  'quinary': #ba4d2d,        // Red-brown (186,77,45)
+  'background': #ece9d4,     // Light cream background
+  'text': #384241,           // Dark teal-gray text
+  'link': #de8b2f,           // Orange links
+  'link-hover': #ba4d2d,     // Red-brown hover
+  'border': #f9c552          // Golden yellow borders
 ) !default;
 
 /* ==========================================================================
-   Dark Theme Colors
+   Dark Theme Colors  
    ========================================================================== */
 
-$base-color: #eaeaea !default;
-$text-color: #fafafa !default;
-$background-color: #222222 !default;
-$background-darker: #1b1b1b !default;
-$background-hr: #383838 !default;
-$brand-color: #43a047 !default;
-$accent-color: #00adb5 !default;
+$base-color: #ece9d4 !default;
+$text-color: #ece9d4 !default;
+$background-color: #384241 !default;
+$background-darker: color.mix(#000, #384241, 20%) !default;
+$background-hr: #f9c552 !default;
+$brand-color: #f9c552 !default;
+$accent-color: #de8b2f !default;
 
 /* ==========================================================================
    Navigation Colors
    ========================================================================== */
 
-$nav-color: #aeaeae !default;
-$nav-background-color: color.mix(#000, $background-color, 30%) !default;
+$nav-color: #ece9d4 !default;
+$nav-background-color: #384241 !default;
 
 /* ==========================================================================
    Code & Syntax Colors
    ========================================================================== */
 
-$code-background-color: color.mix(#000, $background-color, 15%) !default;
+$code-background-color: color.mix(#f9c552, #ece9d4, 15%) !default;
 
-// Syntax Highlighting Colors (Material Ocean)
-$base00: #263238 !default;
-$base01: #2e3c43 !default;
-$base02: #314549 !default;
-$base03: #546e7a !default;
-$base04: #b2ccd6 !default;
-$base05: #eeffff !default;
-$base06: #eeffff !default;
-$base07: #ffffff !default;
-$base08: #f07178 !default;
-$base09: #f78c6c !default;
-$base0a: #ffcb6b !default;
-$base0b: #c3e88d !default;
-$base0c: #89ddff !default;
-$base0d: #82aaff !default;
-$base0e: #c792ea !default;
-$base0f: #ff5370 !default;
+// Syntax Highlighting Colors (Custom Palette)
+$base00: #ece9d4 !default;  // Background
+$base01: #384241 !default;  // Dark teal-gray
+$base02: color.mix(#384241, #ece9d4, 30%) !default;  // Lighter dark
+$base03: color.mix(#384241, #ece9d4, 60%) !default;  // Medium
+$base04: #de8b2f !default;  // Orange
+$base05: #384241 !default;  // Main text
+$base06: #384241 !default;  // Light text
+$base07: #ece9d4 !default;  // Lightest
+$base08: #ba4d2d !default;  // Red-brown (variables, tags)
+$base09: #de8b2f !default;  // Orange (numbers, constants)
+$base0a: #f9c552 !default;  // Golden yellow (classes, types)
+$base0b: color.mix(#f9c552, #de8b2f, 50%) !default;  // String (warm gold)
+$base0c: #384241 !default;  // Support, regex
+$base0d: #de8b2f !default;  // Functions, methods
+$base0e: #ba4d2d !default;  // Keywords, storage
+$base0f: #ba4d2d !default;  // Deprecated
 
 /* ==========================================================================
    UI State Colors
    ========================================================================== */
 
-$primary-color: white !default;
-$success-color: rgb(48, 209, 88) !default;
-$warning-color: rgb(255, 214, 10) !default;
-$danger-color: rgb(255, 69, 58) !default;
-$info-color: rgb(100, 210, 255) !default;
+$primary-color: #f9c552 !default;
+$success-color: color.mix(#f9c552, #de8b2f, 70%) !default;
+$warning-color: #de8b2f !default;
+$danger-color: #ba4d2d !default;
+$info-color: #384241 !default;
 
 /* ==========================================================================
    Social Brand Colors
@@ -116,26 +115,26 @@ $player-progress-color: color.adjust(map.get($colors, 'primary'), $lightness: 10
 $player-play-color: color.adjust(map.get($colors, 'primary'), $lightness: 5%) !default;
 
 // Tile Colors
-$tile-bgcolor: $brand-color !default;
-$tile-color: #fafafa !default;
+$tile-bgcolor: #f9c552 !default;
+$tile-color: #384241 !default;
 
 // Border Colors
-$border-color: color.scale($base-color, $lightness: 80%) !default;
+$border-color: color.mix(#f9c552, #ece9d4, 30%) !default;
 
 /* ==========================================================================
    Notebook Theme Colors
    ========================================================================== */
 
-$color-primary: hsl(0, 0%, 10%) !default;
-$color-text: hsl(0, 0%, 20%) !default;
-$color-subtext: #9b9817 !default;
-$color-border: hsl(0, 0%, 85%) !default;
+$color-primary: #384241 !default;
+$color-text: #384241 !default;
+$color-subtext: #de8b2f !default;
+$color-border: #f9c552 !default;
 
 /* ==========================================================================
    YIQ Color Contrast
    ========================================================================== */
 
-$yiq-contrasted-dark-default: #000 !default;
-$yiq-contrasted-light-default: #fff !default;
+$yiq-contrasted-dark-default: #384241 !default;
+$yiq-contrasted-light-default: #ece9d4 !default;
 $yiq-contrasted-threshold: 175 !default;
 $yiq-debug: false !default;

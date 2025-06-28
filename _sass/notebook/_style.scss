@@ -4,48 +4,56 @@
 :root {
   /* Full grid area variable */
   --fullGrid: 1 / 1 / -1 / -1;
-  --blue-whale: #142e3c;
-  --cold-and-dark: #203e4a;
-  --nocturne: #2f4b55;
-  --great-void: #3e575e;
-  --still-water: #4d656a;
-  --north-atlantic: #60797e;
+  
+  /* New Unified Color Palette */
+  --primary: #f9c552;        /* Golden yellow (249,197,82) */
+  --secondary: #384241;      /* Dark teal-gray (56,66,65) */
+  --tertiary: #ece9d4;       /* Light cream (236,233,212) */
+  --quaternary: #de8b2f;     /* Orange (222,139,47) */
+  --quinary: #ba4d2d;        /* Red-brown (186,77,45) */
+  
+  /* Legacy mappings for existing styles */
+  --blue-whale: #384241;
+  --cold-and-dark: #384241;
+  --nocturne: #384241;
+  --great-void: #384241;
+  --still-water: #de8b2f;
+  --north-atlantic: #f9c552;
 
-  --bitter-liquorice: #282925;
-  --black-olive: #363731;
-  --armadillo: #4a4b47;
-  --iron: #616260;
-  --lucky-grey: #777876;
-  --mummys-tomb: #868c7e;
+  --bitter-liquorice: #384241;
+  --black-olive: #384241;
+  --armadillo: #de8b2f;
+  --iron: #f9c552;
+  --lucky-grey: #ece9d4;
+  --mummys-tomb: #ece9d4;
 
-  --lava-rock: #545b64;
-  --winter-storm: #4c6c6e;
-  --antique: #838064;
-  --caramel-crumb: #c09351;
-  --polished-gold: #eca447;
-  --kombucha: #e1ab6e;
+  --lava-rock: #384241;
+  --winter-storm: #384241;
+  --antique: #de8b2f;
+  --caramel-crumb: #de8b2f;
+  --polished-gold: #f9c552;
+  --kombucha: #f9c552;
 
-  --aztec: #273639;
-  --rosemary: #455e5a;
-  --arctic: #6a8989;
-  --shallow-sea: #95b8c5;
-  --aquatic-edge: #c1d2cd;
-  --master-key: #decf8f;
+  --aztec: #384241;
+  --rosemary: #384241;
+  --arctic: #de8b2f;
+  --shallow-sea: #f9c552;
+  --aquatic-edge: #ece9d4;
+  --master-key: #f9c552;
 
-  --nirvana: #a99aa2;
-  --mighty-mauve: #8c7e85;
-  --chimera: #75676e;
-  --pinot-noir: #61545b;
-  --pitch-black: #483d43;
-  --ink-black: #2a2226;
+  --nirvana: #de8b2f;
+  --mighty-mauve: #ba4d2d;
+  --chimera: #ba4d2d;
+  --pinot-noir: #384241;
+  --pitch-black: #384241;
+  --ink-black: #384241;
 
-  --moutarde-de-benichon: #b88b0a;
-  --rich-gold: #a58211;
-  --jungle-king: #545132;
-  --blue-whale: #273542;
-  --sea-of-stars: #1d3041;
-  --midnight-ocean: #142940;
-  --jp-mirror-editor-variable-color: #142940;
+  --moutarde-de-benichon: #de8b2f;
+  --rich-gold: #f9c552;
+  --jungle-king: #384241;
+  --sea-of-stars: #384241;
+  --midnight-ocean: #384241;
+  --jp-mirror-editor-variable-color: #384241;
 
   --base-font-family: "Darker Grotesque", serif;
   --base-font-weight: 500;

@@ -33,8 +33,9 @@ bundle exec rubocop -a
 
 ### Development Environment
 - Ruby version: 3.4.4 (specified in .ruby-version)
-- Uses RVM for Ruby version management (.ruby-gemset file present)
+- Uses RVM for Ruby version management (gemset: website00)
 - Development server runs on default Jekyll port (4000)
+- Uses Bundler for dependency management
 
 ## Architecture Overview
 
@@ -55,12 +56,14 @@ This is a Jekyll-based personal website/portfolio with the following key charact
 
 **Plugin Architecture:**
 - Custom bidirectional links generator for note interconnections
-- Tweet embedding with privacy controls
+- Tweet embedding with privacy controls (currently disabled)
 - External link handling (opens in new tabs)
-- Jupyter notebook integration
-- React player for media content
-- Image processing with jekyll_picture_tag
-- Jekyll Paginate V2 for advanced pagination (10 posts per page, configured)
+- Jupyter notebook integration (jekyll-jupyter-notebook)
+- React player for media content (jekyll-react-player)
+- Image processing with jekyll_picture_tag (custom local version)
+- Jekyll Paginate V2 for advanced pagination (10 posts per page)
+- Auto-page generation for categories, collections, and tags
+- Jekyll Spaceship for enhanced markdown features
 
 ### Key Features
 
@@ -105,6 +108,8 @@ This is a Jekyll-based personal website/portfolio with the following key charact
 
 **Build Process:**
 - Uses bundle exec for all Jekyll commands
-- Production builds set JEKYLL_ENV=production
+- Production builds set JEKYLL_ENV=production and use `--baseurl ""`
 - Assets are processed and optimized during build
+- Sass is compiled with compression
 - Site excludes development files and caches from output
+- Custom plugins in `_plugins/` are automatically loaded
