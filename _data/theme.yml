@@ -1,0 +1,87 @@
+# Theme Configuration for Dark/Light Mode Support
+
+themes:
+  light:
+    name: "Light"
+    icon: "☀️"
+    colors:
+      # Background colors
+      bg_primary: "#ffffff"
+      bg_secondary: "#f8f9fa"
+      bg_tertiary: "#f1f3f4"
+      
+      # Text colors
+      text_primary: "#1e293b"     # navy equivalent for dark text
+      text_secondary: "#64748b"   # gray-600 equivalent
+      text_tertiary: "#94a3b8"    # gray-400 equivalent
+      text_muted: "#cbd5e1"       # gray-300 equivalent
+      
+      # Border and accent colors
+      border_primary: "#e2e8f0"   # gray-200 equivalent
+      border_secondary: "#cbd5e1" # gray-300 equivalent
+      accent_primary: "#8b5cf6"   # violet-500 for links and accents
+      accent_hover: "#7c3aed"     # violet-600 for hover states
+      
+      # Header specific
+      header_bg: "#ffffff"
+      header_text: "#1e293b"
+      header_border: "rgba(0, 0, 0, 0.1)"
+      
+      # Sidebar specific
+      sidebar_bg: "#ffffff"
+      sidebar_text: "#1e293b"
+      
+      # Code and syntax highlighting
+      code_bg: "#f1f5f9"
+      code_text: "#334155"
+      
+  dark:
+    name: "Dark"
+    icon: "🌙"
+    colors:
+      # Background colors
+      bg_primary: "#0f172a"       # slate-900
+      bg_secondary: "#1e293b"     # slate-800
+      bg_tertiary: "#334155"      # slate-700
+      
+      # Text colors
+      text_primary: "#f8fafc"     # slate-50
+      text_secondary: "#cbd5e1"   # slate-300
+      text_tertiary: "#94a3b8"    # slate-400
+      text_muted: "#64748b"       # slate-500
+      
+      # Border and accent colors
+      border_primary: "#334155"   # slate-700
+      border_secondary: "#475569" # slate-600
+      accent_primary: "#a78bfa"   # violet-400 (lighter for dark theme)
+      accent_hover: "#8b5cf6"     # violet-500 for hover
+      
+      # Header specific
+      header_bg: "#1e293b"
+      header_text: "#f8fafc"
+      header_border: "rgba(255, 255, 255, 0.1)"
+      
+      # Sidebar specific
+      sidebar_bg: "#1e293b"
+      sidebar_text: "#f8fafc"
+      
+      # Code and syntax highlighting
+      code_bg: "#334155"
+      code_text: "#e2e8f0"
+      
+  auto:
+    name: "Auto"
+    icon: "🔄"
+    description: "Follow system preference"
+
+# Default theme (used when no preference is stored)
+default_theme: "light"
+
+# Enable automatic system theme detection
+enable_system_theme: true
+
+# Theme transition duration (CSS)
+transition_duration: "0.3s"
+
+# Enable theme persistence in localStorage
+enable_persistence: true

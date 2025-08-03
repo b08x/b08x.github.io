@@ -4,8 +4,8 @@ tags:
  - github
 description: Getting started with Tw-Jekyll
 author:
-  name: Vanessa Sochat
-  github: vsoch
+  name: Robert Pannick
+  github: b08x
 ---
 
 ## Features
@@ -358,7 +358,6 @@ https://<circleci>/0/tw-jekyll/docs/getting-started/index.html
 
 To edit configuration values, customize the [_config.yml](_config.yml). There are a lot
 of small details that are included there that are not mentioned here!
-Please [open an issue](<https://www.github.com/{{> site.github_user }}/{{ site.github_user }}/issues) if you have questions.
 
 #### Adding pages
 
