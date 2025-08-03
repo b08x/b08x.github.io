@@ -2,3 +2,8 @@ vendor
 _site
 Gemfile.lock
 .ruby-gemset
+.jekyll-cache
+.sass-cache
+.jekyll-metadata
+
+.qodo
