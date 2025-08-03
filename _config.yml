@@ -40,7 +40,7 @@ twitter:
 linkedin: robert-william-pannick-260492176
 support: https://github.com/b08x/b08x.github.io/issues
 repo: https://github.com/b08x/b08x.github.io
-github_user: "b08x"
+github_user: b08x
 github_repo: "b08x.github.io"
 # discord: https://community.discord.com
 
@@ -67,8 +67,11 @@ themeColor: red # purple, green, blue, orange, purple, grey
 fixedNav: 'true' # true or false
 
 permalink: /:year/:title/
-markdown: kramdown
+
 exclude: [_site, CHANGELOG.md, LICENSE, README.md, vendor]
+
+plugins:
+  - jekyll-postcss-v2
 
 # Collections
 collections:

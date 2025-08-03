@@ -65,8 +65,8 @@
 
 .btn:hover,
 .btn:focus {
-  background-color: #F7F7F7;
-  color: #333;
+  background-color: var(--color-bg-secondary, #F7F7F7);
+  color: var(--color-text-primary, #333);
 }
  
  
@@ -74,9 +74,9 @@
 blockquote{
   font-family:Open Sans;
   font-style:italic;
-  color: #555555;
+  color: var(--color-text-secondary, #555555);
   padding:1.2em 30px 0.2em 25px;
-  border-left:8px solid #CCC ;
+  border-left:8px solid var(--color-border-secondary, #CCC);
   line-height:1.6;
   position: relative;
 }
@@ -96,7 +96,7 @@ blockquote::after{
 
 blockquote span{
   display:block;
-  color:#333333;
+  color: var(--color-text-primary, #333333);
   font-style: normal;
   font-weight: bold;
   margin-top:1em;

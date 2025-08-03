@@ -38,3 +38,5 @@ group :development do
   gem 'ruby-lsp'
   gem 'solargraph'
 end
+
+gem "jekyll-postcss", "~> 0.5.0"

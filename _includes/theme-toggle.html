@@ -1,0 +1,220 @@
+<!-- Theme Toggle Component -->
+<div class="theme-toggle">
+  <!-- Button toggle for cycling through themes -->
+  <button 
+    id="theme-toggle" 
+    class="theme-toggle__button" 
+    aria-label="Toggle theme"
+    title="Toggle between light, dark, and auto themes"
+    type="button"
+  >
+    {% for theme in site.data.theme.themes %}
+    {% assign theme_name = theme[0] %}
+    {% assign theme_data = theme[1] %}
+    {% if theme_data.icon %}
+    <span 
+      class="theme-toggle__icon" 
+      data-theme="{{ theme_name }}"
+      aria-hidden="true"
+    >{{ theme_data.icon }}</span>
+    {% endif %}
+    {% endfor %}
+  </button>
+  
+  <!-- Optional dropdown select for accessibility -->
+  <select 
+    id="theme-select" 
+    class="theme-toggle__select sr-only md:not-sr-only" 
+    aria-label="Select theme"
+    title="Choose your preferred theme"
+  >
+    {% for theme in site.data.theme.themes %}
+    {% assign theme_name = theme[0] %}
+    {% assign theme_data = theme[1] %}
+    <option value="{{ theme_name }}">
+      {{ theme_data.name }}{% if theme_data.description %} - {{ theme_data.description }}{% endif %}
+    </option>
+    {% endfor %}
+  </select>
+</div>
+
+<!-- Theme management script -->
+<script>
+(function() {
+  'use strict';
+  
+  class ThemeManager {
+    constructor() {
+      this.themes = {{ site.data.theme.themes | jsonify }};
+      this.defaultTheme = '{{ site.data.theme.default_theme }}';
+      this.systemThemeEnabled = {{ site.data.theme.enable_system_theme | jsonify }};
+      this.persistenceEnabled = {{ site.data.theme.enable_persistence | jsonify }};
+      
+      this.currentTheme = this.getStoredTheme() || this.defaultTheme;
+      this.init();
+    }
+
+    init() {
+      this.applyTheme(this.currentTheme);
+      this.bindEvents();
+      this.updateToggleUI();
+    }
+
+    getStoredTheme() {
+      if (!this.persistenceEnabled) return null;
+      try {
+        return localStorage.getItem('theme');
+      } catch (e) {
+        console.warn('ThemeManager: Unable to access localStorage');
+        return null;
+      }
+    }
+
+    setStoredTheme(theme) {
+      if (!this.persistenceEnabled) return;
+      try {
+        localStorage.setItem('theme', theme);
+      } catch (e) {
+        console.warn('ThemeManager: Unable to save theme preference');
+      }
+    }
+
+    getSystemTheme() {
+      if (!this.systemThemeEnabled) return this.defaultTheme;
+      try {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      } catch (e) {
+        return this.defaultTheme;
+      }
+    }
+
+    applyTheme(theme) {
+      const resolvedTheme = theme === 'auto' ? this.getSystemTheme() : theme;
+      
+      // Apply theme to document
+      document.documentElement.setAttribute('data-theme', resolvedTheme);
+      
+      // Update meta theme-color for mobile browsers
+      this.updateThemeColor(resolvedTheme);
+      
+      this.currentTheme = theme;
+      this.setStoredTheme(theme);
+      
+      // Dispatch custom event for other scripts
+      window.dispatchEvent(new CustomEvent('themeChanged', {
+        detail: { theme: theme, resolvedTheme: resolvedTheme }
+      }));
+    }
+
+    updateThemeColor(resolvedTheme) {
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor && this.themes[resolvedTheme]) {
+        const themeColors = this.themes[resolvedTheme].colors;
+        if (themeColors && themeColors.header_bg) {
+          metaThemeColor.setAttribute('content', themeColors.header_bg);
+        }
+      }
+    }
+
+    toggleTheme() {
+      const themeKeys = Object.keys(this.themes);
+      const currentIndex = themeKeys.indexOf(this.currentTheme);
+      const nextTheme = themeKeys[(currentIndex + 1) % themeKeys.length];
+      
+      this.applyTheme(nextTheme);
+      this.updateToggleUI();
+    }
+
+    updateToggleUI() {
+      const button = document.getElementById('theme-toggle');
+      const select = document.getElementById('theme-select');
+      
+      if (button) {
+        // Hide all icons
+        const icons = button.querySelectorAll('.theme-toggle__icon');
+        icons.forEach(icon => {
+          icon.style.display = 'none';
+          icon.classList.remove('active');
+        });
+        
+        // Show current theme icon
+        const activeIcon = button.querySelector(`[data-theme="${this.currentTheme}"]`);
+        if (activeIcon) {
+          activeIcon.style.display = 'inline';
+          activeIcon.classList.add('active');
+        }
+        
+        // Update button title
+        const themeData = this.themes[this.currentTheme];
+        if (themeData) {
+          button.setAttribute('title', `Current theme: ${themeData.name}. Click to cycle themes.`);
+        }
+      }
+
+      if (select) {
+        select.value = this.currentTheme;
+      }
+    }
+
+    bindEvents() {
+      const button = document.getElementById('theme-toggle');
+      const select = document.getElementById('theme-select');
+
+      if (button) {
+        button.addEventListener('click', () => this.toggleTheme());
+      }
+
+      if (select) {
+        select.addEventListener('change', (e) => {
+          this.applyTheme(e.target.value);
+          this.updateToggleUI();
+        });
+      }
+
+      // Listen for system theme changes
+      if (this.systemThemeEnabled) {
+        try {
+          const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+          const handleSystemThemeChange = () => {
+            if (this.currentTheme === 'auto') {
+              this.applyTheme('auto');
+            }
+          };
+          
+          // Use addEventListener if available, fallback to addListener
+          if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener('change', handleSystemThemeChange);
+          } else if (mediaQuery.addListener) {
+            mediaQuery.addListener(handleSystemThemeChange);
+          }
+        } catch (e) {
+          console.warn('ThemeManager: Unable to listen for system theme changes');
+        }
+      }
+
+      // Handle keyboard navigation
+      if (button) {
+        button.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.toggleTheme();
+          }
+        });
+      }
+    }
+  }
+
+  // Initialize theme manager when DOM is ready
+  function initTheme() {
+    if (typeof window.themeManager === 'undefined') {
+      window.themeManager = new ThemeManager();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheme);
+  } else {
+    initTheme();
+  }
+})();
+</script>
