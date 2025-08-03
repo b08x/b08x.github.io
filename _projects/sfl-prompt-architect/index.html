@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFL Prompt Architect - Project Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* SFL Prompt Studio Dark Theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Primary Background */
+            color: #F9FAFB; /* Primary Text */
+        }
+        .tab-btn {
+            color: #9CA3AF; /* Secondary Text / Muted */
+            border-color: transparent;
+        }
+        .tab-btn:hover {
+            color: #2DD4BF; /* Secondary Accent / Teal */
+            border-color: #374151; /* Border / Divider */
+        }
+        .tab-btn.active {
+            border-color: #3B82F6; /* Primary Accent / Blue */
+            color: #3B82F6;
+            background-color: #1F2937; /* Secondary Background / Panel */
+        }
+        .tab-content-wrapper {
+             background-color: #1F2937; /* Secondary Background / Panel */
+             border: 1px solid #374151; /* Border / Divider */
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .prose {
+            max-width: 80ch;
+        }
+        .prose h1, .prose h2, .prose h3 {
+             color: #F9FAFB; /* Primary Text */
+        }
+        .prose h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #374151; /* Border / Divider */
+        }
+        .prose h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .prose p, .prose ul, .prose li, .prose ol {
+            color: #9CA3AF; /* Secondary Text / Muted */
+        }
+        .prose a {
+            color: #2DD4BF; /* Secondary Accent / Teal */
+        }
+        .prose a:hover {
+            color: #3B82F6; /* Primary Accent / Blue */
+        }
+        .prose ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+        .prose strong.yellow { color: #FBBF24; }
+        .prose strong.purple { color: #A78BFA; }
+        .prose strong.pink { color: #F472B6; }
+        .prose code {
+            background-color: #374151; /* Border / Divider */
+            color: #F9FAFB; /* Primary Text */
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+        }
+        .prose pre {
+            background-color: #111827; /* Primary Background */
+            color: #F9FAFB; /* Primary Text */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #374151; /* Border / Divider */
+            overflow-x: auto;
+        }
+        .prose pre code {
+            background-color: transparent;
+            padding: 0;
+            border: none;
+        }
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Page Container -->
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <div class="inline-flex items-center justify-center bg-[#1F2937] text-[#3B82F6] rounded-full p-3 mb-4">
+                 <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+                </svg>
+            </div>
+            <h1 class="text-4xl font-bold text-[#F9FAFB]">SFL Prompt Architect</h1>
+            <p class="mt-2 text-lg text-[#9CA3AF] max-w-3xl mx-auto">A full-stack application for creating, managing, and executing AI prompts and workflows with a visual interface.</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="mb-8 border-b border-[#374151]">
+            <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+                <button onclick="changeTab('overview')" class="tab-btn active whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm transition-colors duration-200">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+                    Overview
+                </button>
+                <button onclick="changeTab('functionality')" class="tab-btn whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm transition-colors duration-200">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.998 15.998 0 011.622-3.385m5.043.025a15.998 15.998 0 001.622-3.385m3.388 1.62a15.998 15.998 0 00-1.62-3.385m-1.777 0a3 3 0 00-5.78-1.128 2.25 2.25 0 01-2.4-2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 00-3.388-1.62m-5.043-.025a15.998 15.998 0 01-1.622-3.385m5.043.025a15.998 15.998 0 00-1.622-3.385m-3.388 1.62a15.998 15.998 0 001.62 3.385m1.777 0a3 3 0 005.78 1.128 2.25 2.25 0 012.4 2.245 4.5 4.5 0 00-8.4 2.245c0 .399.078.78.22 1.128z" /></svg>
+                    Functionality
+                </button>
+                <button onclick="changeTab('architecture')" class="tab-btn whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm transition-colors duration-200">
+                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+                    Architecture
+                </button>
+                <button onclick="changeTab('setup')" class="tab-btn whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm transition-colors duration-200">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+                    Setup
+                </button>
+                <button onclick="changeTab('usage')" class="tab-btn whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm transition-colors duration-200">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-1.741-1.483-3.154-3.308-3.154s-3.308 1.413-3.308 3.154v2.093c0 1.741 1.483 3.154 3.308 3.154s3.308-1.413 3.308-3.154V6.087z" /><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c.361.02.713.04.994.068.808.082 1.524.234 2.13.492a3.11 3.11 0 011.898 1.898c.258.606.41 1.322.492 2.13.028.281.048.563.068.994m-9.378 0c-.02-.361-.04-.713-.068-.994a4.618 4.618 0 01-.492-2.13 3.11 3.11 0 011.898-1.898c.606-.258 1.322-.41 2.13-.492.281-.028.563-.048.994-.068" /><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 11.813c0 1.741-1.483 3.154-3.308 3.154s-3.308-1.413-3.308-3.154V9.72c0-1.741 1.483-3.154 3.308-3.154s3.308 1.413 3.308 3.154v2.093z" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 11.813c-.361.02-.713.04-.994.068-.808.082-1.524.234-2.13.492a3.11 3.11 0 00-1.898 1.898c-.258.606-.41 1.322-.492 2.13-.028.281-.048.563-.068.994m9.378 0c.02-.361.04-.713.068-.994.082-.808.234-1.524.492-2.13a3.11 3.11 0 001.898-1.898c.258-.606.41-1.322.492-2.13.028-.281.048-.563.068-.994" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 21.75c-4.83 0-8.75-3.92-8.75-8.75S7.17 4.25 12 4.25s8.75 3.92 8.75 8.75-3.92 8.75-8.75 8.75z" /></svg>
+                    Usage
+                </button>
+                <button onclick="changeTab('api')" class="tab-btn whitespace-nowrap py-4 px-4 border-b-2 font-medium text-sm transition-colors duration-200">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75h-10.5a2.25 2.25 0 00-2.25 2.25v7.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 14.25l-2.25-2.25 2.25-2.25m4.5 4.5l2.25-2.25-2.25-2.25" /></svg>
+                    API Reference
+                </button>
+            </nav>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content-wrapper p-6 sm:p-8 rounded-lg shadow-sm">
+            <article class="prose prose-slate max-w-none">
+                <!-- Overview Tab -->
+                <div id="overview" class="tab-content active">
+                    <h2>Project Overview</h2>
+                    <p>SFL Prompt Architect is a comprehensive, full-stack solution designed to streamline the <strong class="yellow">creation</strong>, <strong class="purple">management</strong>, and <strong class="pink">execution</strong> of AI prompts and complex prompt workflows. It provides a centralized library for reusable prompts and a powerful "Prompt Lab" with a visual, node-based editor for constructing, testing, and running intricate chains of AI tasks.</p>
+                    <p>The application is built with a modern technology stack, featuring a React frontend and a Node.js backend, all containerized with Docker for easy setup and deployment. It aims to empower developers, prompt engineers, and content creators by providing robust tools to harness the capabilities of large language models (LLMs) like Google's Gemini.</p>
+                    
+                    <h3>Key Goals</h3>
+                    <ul>
+                        <li><strong>Centralize Prompts:</strong> Create a single source of truth for all AI prompts, making them easy to find, version, and reuse across different applications.</li>
+                        <li><strong>Visualize Workflows:</strong> Offer an intuitive, drag-and-drop canvas to build, visualize, and debug complex multi-step AI workflows.</li>
+                        <li><strong>Facilitate Experimentation:</strong> Allow users to quickly test different prompts, models, and parameters to optimize results.</li>
+                        <li><strong>Simplify Integration:</strong> Provide a stable API for executing prompts and workflows from other services.</li>
+                        <li><strong>Enhance Creativity:</strong> Include AI-powered wizards to assist users in generating novel prompts and workflow ideas.</li>
+                    </ul>
+                </div>
+
+                <!-- Functionality Tab -->
+                <div id="functionality" class="tab-content">
+                    <h2>Core Functionality</h2>
+                    
+                    <h3>Prompt Library</h3>
+                    <p>The Prompt Library is the central hub for managing all individual prompts. It supports full <strong class="yellow">CRUD</strong> (Create, Read, Update, Delete) functionality.</p>
+                    <ul>
+                        <li><strong>Create & Edit:</strong> A form allows users to define a new prompt with a title, description, the prompt text itself, and associated tags for categorization.</li>
+                        <li><strong>Search & Filter:</strong> Users can search for prompts by keywords or filter them by tags, making it easy to find the right prompt for any task.</li>
+                        <li><strong>Versioning (Implicit):</strong> While not a formal versioning system, updating a prompt allows for iterative improvement over time.</li>
+                        <li><strong>AI-Powered Prompt Wizard:</strong> A "Prompt Wizard" assists users in crafting high-quality, structured prompts. Instead of starting from a blank page, the wizard guides the user through a form with specific fields based on Systemic Functional Linguistics (SFL) principles. This includes:
+                            <ul>
+                                <li><strong class="yellow">SFL: Field:</strong> Defines the topic and task type (e.g., Backend system design).</li>
+                                <li><strong class="purple">SFL: Tenor:</strong> Sets the AI's persona and desired tone (e.g., Expert, Formal).</li>
+                                <li><strong class="pink">Domain Specifics:</strong> Provides context and key concepts (e.g., Ruby programming, DAGs).</li>
+                                <li><strong>Keywords:</strong> Adds relevant keywords for focus and retrieval (e.g., NLP, vector database).</li>
+                                <li><strong>Target Audience:</strong> Specifies the intended audience for the generated text (e.g., Beginners, Experts).</li>
+                            </ul>
+                            This structured input allows the LLM to generate a more precise and contextually-aware prompt, which can then be further refined by the user.
+                        </li>
+                    </ul>
+
+                    <h3>Prompt Lab & Workflow Engine</h3>
+                    <p>The Prompt Lab is the most powerful feature of the application. It uses a node-based UI (powered by React Flow) to <strong class="yellow">build</strong> and <strong class="pink">execute</strong> workflows.</p>
+                    <ul>
+                        <li><strong>Visual Workflow Editor:</strong> Drag and drop nodes onto a canvas to represent different tasks. Connect nodes to define the flow of data and execution.</li>
+                        <li><strong>Task Nodes:</strong> Each node represents a specific action, such as executing a prompt, transforming data, or making a conditional choice.</li>
+                        <li><strong>Data Flow:</strong> The output of one node can be used as the input for another, allowing for complex data manipulation and chaining of AI calls.</li>
+                        <li><strong>Real-time Execution:</strong> Run the entire workflow and see the status of each node (pending, running, success, error) in real-time.</li>
+                        <li><strong>Inspect Results:</strong> Click on any completed node to view its inputs and outputs, which is crucial for debugging and optimization.</li>
+                    </ul>
+                </div>
+
+                <!-- Architecture Tab -->
+                <div id="architecture" class="tab-content">
+                    <h2>System Architecture</h2>
+                    <p>The application is designed as a classic three-tier architecture, containerized using Docker for portability and ease of deployment.</p>
+                    
+                    <div class="my-6 p-4 border border-[#374151] rounded-lg bg-[#111827]">
+                        <h3 class="mt-0 text-center">Architecture Diagram</h3>
+                        <div class="flex flex-col md:flex-row items-center justify-around text-center gap-4">
+                            <div class="p-4 rounded-lg">
+                                <b class="text-lg text-[#F9FAFB]">User (Browser)</b>
+                                <div class="mt-2 text-sm text-[#9CA3AF]">React Frontend</div>
+                            </div>
+                            <div class="text-[#9CA3AF] font-mono text-2xl">&lt;--&gt;</div>
+                            <div class="p-4 rounded-lg">
+                                <b class="text-lg text-[#F9FAFB]">Web Server</b>
+                                <div class="mt-2 text-sm text-[#9CA3AF]">Node.js/Express API</div>
+                            </div>
+                            <div class="text-[#9CA3AF] font-mono text-2xl">&lt;--&gt;</div>
+                            <div class="p-4 rounded-lg">
+                                <b class="text-lg text-[#F9FAFB]">Database</b>
+                                <div class="mt-2 text-sm text-[#9CA3AF]">PostgreSQL</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Technology Stack</h3>
+                    <ul>
+                        <li><strong>Frontend:</strong>
+                            <ul>
+                                <li><strong>Framework:</strong> React with TypeScript</li>
+                                <li><strong>Build Tool:</strong> Vite</li>
+                                <li><strong>Styling:</strong> Tailwind CSS</li>
+                                <li><strong>Workflow Canvas:</strong> React Flow</li>
+                                <li><strong>State Management:</strong> React Context & Hooks</li>
+                            </ul>
+                        </li>
+                        <li><strong>Backend:</strong>
+                            <ul>
+                                <li><strong>Framework:</strong> Node.js with Express and TypeScript</li>
+                                <li><strong>Database ORM/Query Builder:</strong> Knex.js</li>
+                                <li><strong>External API:</strong> Google Gemini API</li>
+                            </ul>
+                        </li>
+                        <li><strong>Database:</strong>
+                            <ul>
+                                <li><strong>System:</strong> PostgreSQL</li>
+                                <li><strong>Migrations:</strong> Knex Migrations for schema management</li>
+                                <li><strong>Seeding:</strong> Knex Seeds for initial data</li>
+                            </ul>
+                        </li>
+                        <li><strong>Containerization:</strong>
+                            <ul>
+                                <li><strong>Services:</strong> Docker & Docker Compose</li>
+                                <li><strong>Frontend Server:</strong> Nginx (for serving the static React build)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Setup Tab -->
+                <div id="setup" class="tab-content">
+                    <h2>Local Development Setup</h2>
+                    <p>To run SFL Prompt Architect on your local machine, you'll need Docker and Docker Compose installed. The entire environment is orchestrated via a single `docker-compose` command.</p>
+
+                    <h3>Prerequisites</h3>
+                    <ul>
+                        <li><a href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener noreferrer">Docker Desktop</a> (or Docker Engine + Docker Compose)</li>
+                        <li>Git for cloning the repository</li>
+                        <li>A code editor like VS Code</li>
+                    </ul>
+
+                    <h3>Installation Steps</h3>
+                    <ol class="list-decimal list-inside">
+                        <li class="ml-4"><strong>Clone the repository:</strong>
+                            <pre><code>git clone &lt;repository_url&gt;
+cd SFLPromptArchitect</code></pre>
+                        </li>
+                        <li class="ml-4"><strong>Configure environment variables:</strong>
+                            <p>The backend requires an API key for the Google Gemini service. Create a `.env` file in the `backend/` directory by copying the example file:</p>
+                            <pre><code>cp backend/.env.example backend/.env</code></pre>
+                            <p>Then, edit `backend/.env` and add your Google AI Studio API key:</p>
+                            <pre><code># .env in backend/
+GOOGLE_API_KEY=your_api_key_here
+</code></pre>
+                        </li>
+                        <li class="ml-4"><strong>Build and run the services:</strong>
+                            <p>From the root directory of the project, run the following command. This will build the Docker images for the frontend and backend, start the database, and run all services.</p>
+                            <pre><code>docker-compose up --build</code></pre>
+                            <p>The `--build` flag is only necessary the first time or when you've made changes to the Dockerfiles or dependencies.</p>
+                        </li>
+                        <li class="ml-4"><strong>Access the application:</strong>
+                            <p>Once the containers are up and running, you can access the application in your web browser:</p>
+                            <ul>
+                                <li><strong>Frontend:</strong> <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
+                                <li><strong>Backend API:</strong> <a href="http://localhost:3000" target="_blank">http://localhost:3000</a></li>
+                            </ul>
+                        </li>
+                         <li class="ml-4"><strong>Stopping the application:</strong>
+                            <p>To stop all running containers, press `Ctrl+C` in the terminal where `docker-compose` is running, and then run:</p>
+                            <pre><code>docker-compose down</code></pre>
+                        </li>
+                    </ol>
+                </div>
+                
+                <!-- Usage Tab -->
+                <div id="usage" class="tab-content">
+                    <h2>How to Use the Application</h2>
+                    <p>After setting up the project, you can start using its features through the web interface.</p>
+
+                    <h3>Managing Prompts</h3>
+                    <ol class="list-decimal list-inside">
+                        <li class="ml-4">Navigate to the main page (Prompt Library).</li>
+                        <li class="ml-4">Click the "New Prompt" button to open a modal form. Fill in the details and save.</li>
+                        <li class="ml-4">Use the search bar and tag filters to find existing prompts.</li>
+                        <li class="ml-4">Click the pencil icon on a prompt card to edit it, or the trash icon to delete it.</li>
+                        <li class="ml-4">Click the "Wizard" button to get AI assistance. Fill out the structured form to generate a detailed prompt.</li>
+                    </ol>
+
+                    <h3>Using the Prompt Lab</h3>
+                     <ol class="list-decimal list-inside">
+                        <li class="ml-4">Navigate to the "Prompt Lab" from the sidebar.</li>
+                        <li class="ml-4">Click "New Workflow" to create a blank canvas. Give your workflow a name and description.</li>
+                        <li class="ml-4">From the controls, drag a "Task Node" onto the canvas.</li>
+                        <li class="ml-4">Click the new node to configure it. You can select a prompt from your library to be executed by this task.</li>
+                        <li class="ml-4">Add more nodes and connect them by dragging from the circular handles on the sides of each node. This defines the execution order.</li>
+                        <li class="ml-4">In the "User Input" area, provide any initial data needed for the first node in your workflow.</li>
+                        <li class="ml-4">Click the "Run" button. The nodes will change color to indicate their status (blue for running, green for success, red for error).</li>
+                        <li class="ml-4">Once finished, click on any node to see the data it received as input and the result it produced.</li>
+                    </ol>
+                </div>
+
+                <!-- API Reference Tab -->
+                <div id="api" class="tab-content">
+                    <h2>API Reference</h2>
+                    <p>The backend exposes a RESTful API for managing prompts and workflows. The base URL is <code>http://localhost:3000/api</code>.</p>
+
+                    <h3>Prompts</h3>
+                    <ul>
+                        <li><code>GET /prompts</code>: Fetches all prompts.</li>
+                        <li><code>POST /prompts</code>: Creates a new prompt.</li>
+                        <li><code>GET /prompts/:id</code>: Fetches a single prompt by its ID.</li>
+                        <li><code>PUT /prompts/:id</code>: Updates an existing prompt.</li>
+                        <li><code>DELETE /prompts/:id</code>: Deletes a prompt.</li>
+                        <li><code>POST /prompts/wizard</code>: Generates a prompt using an LLM based on structured SFL input.</li>
+                    </ul>
+
+                    <h3>Workflows</h3>
+                    <ul>
+                        <li><code>GET /workflows</code>: Fetches all workflows.</li>
+                        <li><code>POST /workflows</code>: Creates a new workflow.</li>
+                        <li><code>GET /workflows/:id</code>: Fetches a single workflow by its ID.</li>
+                        <li><code>PUT /workflows/:id</code>: Updates an existing workflow.</li>
+                        <li><code>DELETE /workflows/:id</code>: Deletes a workflow.</li>
+                        <li><code>POST /workflows/execute/:id</code>: Executes a workflow.</li>
+                        <li><code>POST /workflows/wizard</code>: Generates a workflow structure using an LLM.</li>
+                    </ul>
+
+                    <h3>Models</h3>
+                     <ul>
+                        <li><code>GET /models</code>: Fetches a list of available AI models.</li>
+                    </ul>
+
+                    <h3>Gemini Service</h3>
+                    <ul>
+                        <li><code>POST /gemini/generate</code>: A direct endpoint to generate text from a prompt using the Gemini model.</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="text-center mt-8 text-sm text-[#9CA3AF]">
+            <p>SFL Prompt Architect Project Page</p>
+            <p>Built with modern tools for effective prompt engineering.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Simple script for tab functionality
+        const tabs = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        function changeTab(targetId) {
+            // Update tab buttons
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.getAttribute('onclick').includes(`'${targetId}'`)) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Update tab content
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === targetId) {
+                    content.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
