@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Nexus | Modern Web Solution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .link-underline {
+            position: relative;
+        }
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3b82f6;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .link-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+        .section-divider {
+            border: none;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(59, 130, 246, 0.5), rgba(0, 0, 0, 0));
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-200 gradient-bg min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <header class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-4xl font-bold">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
+                        Project Nexus
+                    </span>
+                </h1>
+                <a href="#" class="text-blue-400 hover:text-cyan-400 transition-colors">
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+            <p class="text-lg text-gray-400">
+                Next-generation web framework for modern applications
+            </p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="space-y-12">
+            <!-- Features Section -->
+            <section>
+                <div class="flex items-center mb-4">
+                    <h2 id="features" class="text-2xl font-semibold text-gray-100 mr-3">
+                        Key Features
+                    </h2>
+                    <a href="#features" class="text-gray-500 hover:text-blue-400 transition-colors">
+                        <i class="fas fa-link text-sm"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 text-blue-400 mt-1 mr-3">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <p class="text-gray-300">
+                                <span class="font-medium text-gray-100">Blazing Fast:</span> Optimized for performance with near-instant load times
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 text-blue-400 mt-1 mr-3">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <p class="text-gray-300">
+                                <span class="font-medium text-gray-100">Secure by Default:</span> Built-in protection against common vulnerabilities
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 text-blue-400 mt-1 mr-3">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <p class="text-gray-300">
+                                <span class="font-medium text-gray-100">Developer Friendly:</span> Comprehensive documentation and intuitive API
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <hr class="section-divider my-8">
+
+            <!-- Get Started Section -->
+            <section>
+                <div class="flex items-center mb-4">
+                    <h2 id="get-started" class="text-2xl font-semibold text-gray-100 mr-3">
+                        Get Started
+                    </h2>
+                    <a href="#get-started" class="text-gray-500 hover:text-blue-400 transition-colors">
+                        <i class="fas fa-link text-sm"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg shadow-lg p-6 border border-gray-700">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-100 mb-3">Installation</h3>
+                            <div class="bg-gray-900 p-4 rounded-md font-mono text-sm text-gray-300 mb-4">
+                                npm install project-nexus
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Requires Node.js 16+ and npm 7+
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-100 mb-3">Quick Start</h3>
+                            <pre class="bg-gray-900 p-4 rounded-md font-mono text-sm text-gray-300 overflow-x-auto">
+<span class="text-blue-400">import</span> { Nexus } <span class="text-blue-400">from</span> <span class="text-green-400">'project-nexus'</span>;
+
+<span class="text-blue-400">const</span> app = <span class="text-blue-400">new</span> Nexus({
+  <span class="text-yellow-300">mode</span>: <span class="text-green-400">'production'</span>
+});
+
+app.start();</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-16 pt-8 border-t border-gray-200">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">
+                    &copy; 2023 Project Nexus. All rights reserved.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/yourusername/project-nexus" class="text-gray-500 hover:text-gray-300 transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://twitter.com" class="text-gray-600 hover:text-blue-400 transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add active class to current section in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                if (entry.intersectionRatio > 0) {
+                    document.querySelector(`nav a[href="#${id}"]`).classList.add('active');
+                } else {
+                    document.querySelector(`nav a[href="#${id}"]`).classList.remove('active');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Track all sections that have an `id` applied
+        document.querySelectorAll('section[id]').forEach((section) => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

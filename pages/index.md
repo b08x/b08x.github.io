@@ -1,25 +1,64 @@
 ---
 layout: page
-title: Tw-Jekyll Theme
+title: syncopated notes
 permalink: /
 ---
 
-# Welcome to Tailwind Jekyll!
+Welcome to my digital workspace where technology meets creativity. This is a modern web experience built with Jekyll and enhanced with beautiful gradient styling.
 
-This is a [starter template](https://vsoch.github.com/tw-jekyll/) for a Tailwind jekyll theme, based
-on [these docs](https://github.com/superfly/docs) that are based on [Tailwind css](https://tailwindcss.com/docs/installation),
-however everything has been modified to work on GitHub pages (using Jekyll). If you don't need
-native deployment on GitHub pages, then please consider checking out Tailwind. 
-The original [Apache License](https://github.com/vsoch/tw-jekyll/tree/main/LICENSE) is included.
+<hr class="section-divider">
 
-## Purpose
+## Features
 
-GitHub pages uses Jekyll natively, so when I make documentation, I typically
-look for Jekyll templates. Why? Using Jekyll means that I can use markdown,
-and allow for users to easily contribute, and build automatically just by
-way of pushing to a main branch (or general GitHub pages).
+<div class="demo-card p-6">
+  <ul class="feature-list">
+    <li>
+      <div class="feature-icon">⚡</div>
+      <div class="feature-content">
+        <span class="feature-title">Blazing Fast:</span> Optimized for performance with near-instant load times
+      </div>
+    </li>
+    <li>
+      <div class="feature-icon">🛡️</div>
+      <div class="feature-content">
+        <span class="feature-title">Secure by Default:</span> Built-in protection and modern security practices
+      </div>
+    </li>
+    <li>
+      <div class="feature-icon">💻</div>
+      <div class="feature-content">
+        <span class="feature-title">Developer Friendly:</span> Clean code architecture and comprehensive documentation
+      </div>
+    </li>
+  </ul>
+</div>
 
-{% include callout.html text="I fell in love with this template as soon as I saw it, and knew that I wanted others to be empowered to use it." %}
+<hr class="section-divider">
 
-For getting started with development, see the {% include doc.html name="Getting Started" path="getting-started" %} page. Would you like to request a feature or contribute? [Open an issue]({{ site.repo }}/issues)
+## Quick Start
+
+<div class="demo-card p-6">
+  <div class="grid md:grid-cols-2 gap-6">
+    <div>
+      <h3 class="text-lg font-medium text-gray-100 mb-3">Installation</h3>
+      <div class="code-block">
+        gem install bundler jekyll
+      </div>
+      <p class="text-gray-400 text-sm mt-2">
+        Requires Ruby 2.5+ and Bundler
+      </p>
+    </div>
+    <div>
+      <h3 class="text-lg font-medium text-gray-100 mb-3">Development</h3>
+      <div class="code-block">
+bundle exec jekyll serve --livereload
+      </div>
+      <p class="text-gray-400 text-sm mt-2">
+        Start the development server with live reloading
+      </p>
+    </div>
+  </div>
+</div>
+
+Explore the navigation to discover more about my projects, notes, and technical insights.
 
