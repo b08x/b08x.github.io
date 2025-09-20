@@ -1,5 +1,6 @@
 .highlight  {
-  background: #f8f8f8;
+  background: rgba(#4A4A4A, 0.9); // Charcoal background
+  border: 1px solid #909D9E; // Cloudy Sky border
   padding: 1px 1em;
   border-radius: 3px;
   font-size: 1em;
@@ -8,6 +9,7 @@
   margin: 1em -1em;
   code{
     padding: 0;
+    background: transparent;
   }
 }
 
@@ -15,10 +17,10 @@ div.highlight {
   display: grid;
 }
 
-.highlight .c { color: #999988; font-style: italic } /* Comment */
-.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
-.highlight .k { font-weight: bold } /* Keyword */
-.highlight .o { font-weight: bold } /* Operator */
+.highlight .c { color: #909D9E; font-style: italic } /* Comment - Cloudy Sky */
+.highlight .err { color: #BF7A60; background-color: rgba(#380528, 0.3) } /* Error - Burnt Orange on Deep Aubergine */
+.highlight .k { color: #E3B448; font-weight: bold } /* Keyword - Golden Wheat */
+.highlight .o { color: #A1887F; font-weight: bold } /* Operator - Terracotta Clay */
 .highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #999999; font-weight: bold } /* Comment.Preproc */
 .highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
@@ -41,17 +43,17 @@ div.highlight {
 .highlight .kr { font-weight: bold } /* Keyword.Reserved */
 .highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
 .highlight .m { color: #009999 } /* Literal.Number */
-.highlight .s { color: #d14 } /* Literal.String */
-.highlight .na { color: #008080 } /* Name.Attribute */
-.highlight .nb { color: #0086B3 } /* Name.Builtin */
-.highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+.highlight .s { color: #BF7A60 } /* Literal.String - Burnt Orange */
+.highlight .na { color: #E3B448 } /* Name.Attribute - Golden Wheat */
+.highlight .nb { color: #909D9E } /* Name.Builtin - Cloudy Sky */
+.highlight .nc { color: #BF7A60; font-weight: bold } /* Name.Class - Burnt Orange */
 .highlight .no { color: #008080 } /* Name.Constant */
 .highlight .ni { color: #800080 } /* Name.Entity */
 .highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
-.highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+.highlight .nf { color: #A1887F; font-weight: bold } /* Name.Function - Terracotta Clay */
 .highlight .nn { color: #555555 } /* Name.Namespace */
-.highlight .nt { color: #000080 } /* Name.Tag */
-.highlight .nv { color: #008080 } /* Name.Variable */
+.highlight .nt { color: #E3B448 } /* Name.Tag - Golden Wheat */
+.highlight .nv { color: #909D9E } /* Name.Variable - Cloudy Sky */
 .highlight .ow { font-weight: bold } /* Operator.Word */
 .highlight .w { color: #bbbbbb } /* Text.Whitespace */
 .highlight .mf { color: #009999 } /* Literal.Number.Float */
