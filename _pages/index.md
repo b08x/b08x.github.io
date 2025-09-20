@@ -17,7 +17,7 @@ The Goal: Flexible Neural Synchrony
 
 <a href="{{ site.baseurl }}/projects/neuro_divergance">Neurodivergence & Relational Dynamics</a>
 
-<a href="{{ site.baseurl }}/projects/relational_dynamics_explorer">Relational Dynamics Explorer</a>
+<a href="{{ site.baseurl }}/projects/relational_dynamics">Relational Dynamics Explorer</a>
 
 <a href="{{ site.baseurl }}/projects/relational_dynamics_burnout">Relational Dynamics & Burnout</a>
 
