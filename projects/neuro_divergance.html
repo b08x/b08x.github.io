@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neurodivergence & Relational Dynamics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application uses a central dashboard or "hub-and-spoke" model. The main page serves as the hub, introducing the core concepts and featuring a master "Alignment Slider" and a holistic radar chart. This slider is the primary interactive control. From the hub, users can navigate to dedicated sections ("spokes") for each specific disorder. This structure was chosen because it simplifies a highly complex, multi-variable topic into a single, understandable interactive dimension: the spectrum of relational alignment. It allows users to see both the high-level systemic impact (on the hub) and the specific, granular effects (in the spokes) in a clear, cause-and-effect manner, enhancing usability and comprehension. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Overall relationship health across five disorders -> Goal: Compare/Show Relationships -> Viz/Presentation Method: Radar Chart -> Interaction: Master slider updates all 5 axes simultaneously -> Justification: Provides an immediate, holistic "shape" of the relationship's state, visualizing the systemic nature of the alignment/misalignment. -> Library/Method: Chart.js (Canvas).
+        - Report Info: Specific traits of each disorder (Aligned vs. Mal-aligned) -> Goal: Inform/Compare -> Viz/Presentation Method: Dynamically updated text blocks and CSS styles (opacity/color) within a two-column layout. -> Interaction: Master slider fades content in/out and changes descriptive text. -> Justification: Directly connects the abstract concept of "alignment" to concrete, observable behaviors for each disorder, making the theory tangible. -> Library/Method: Vanilla JS, Tailwind CSS.
+        - Report Info: Foundational concepts (Psychedelics, Neural Synchrony, etc.) -> Goal: Inform -> Viz/Presentation Method: Static three-column card layout. -> Interaction: None. -> Justification: Presents prerequisite information in a clean, easily digestible format without distracting from the main interactive elements. -> Library/Method: HTML/Tailwind CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 400px;
+        }
+      }
+      .slider-track {
+        background: linear-gradient(to right, #4ade80, #facc15, #f87171);
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        background: #fff;
+        border: 2px solid #a3a3a3;
+        border-radius: 50%;
+        cursor: pointer;
+        margin-top: -8px;
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        background: #fff;
+        border: 2px solid #a3a3a3;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .content-section {
+        display: none;
+      }
+      .content-section.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body class="bg-[#FDFBF8] text-neutral-800">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+      <header class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-neutral-900">
+          Relational Dynamics & Neurodivergence
+        </h1>
+        <p class="mt-4 text-lg text-neutral-600 max-w-3xl mx-auto">
+          An interactive exploration of psychological traits shifting from
+          aligned to mal-aligned within a flourishing, non-traditional
+          relationship.
+        </p>
+      </header>
+
+      <main>
+        <section
+          id="introduction"
+          class="mb-12 bg-white p-6 rounded-2xl shadow-sm"
+        >
+          <h2 class="text-2xl font-bold text-neutral-900 mb-4">The Context</h2>
+          <div class="grid md:grid-cols-2 gap-6 text-neutral-700">
+            <p>
+              This model explores a relationship between two self-reliant,
+              independent individuals ('Sigma' archetypes). They operate outside
+              traditional social hierarchies, valuing intellectual independence
+              and deep, meaningful connections. Their confidence and strategic
+              thinking are cornerstones of their bond.
+            </p>
+            <p>
+              A unique factor in their dynamic is the regular, intentional use
+              of psychedelic therapy. This practice can enhance introspection,
+              empathy, and neural plasticity, profoundly influencing how their
+              individual psychological traits manifest and interact within the
+              relationship.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-neutral-900 mb-4 text-center">
+            Key Influencing Factors
+          </h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+              <h3 class="font-bold text-lg mb-2">Impression Management</h3>
+              <p class="text-neutral-600">
+                The conscious and subconscious process of regulating one's own
+                image during social interaction. In this context, it refers to
+                how each partner presents their traits, thoughts, and
+                vulnerabilities to the other.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+              <h3 class="font-bold text-lg mb-2">Neural Synchrony</h3>
+              <p class="text-neutral-600">
+                The alignment of neural activity between two individuals, often
+                associated with empathy, shared attention, and successful
+                communication. Psychedelic therapy may temporarily heighten this
+                phenomenon.
+              </p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm">
+              <h3 class="font-bold text-lg mb-2">
+                Psychedelic-Assisted Introspection
+              </h3>
+              <p class="text-neutral-600">
+                The use of psychedelics in a therapeutic context to lower
+                defenses, dissolve ego boundaries, and access deeper
+                self-awareness, potentially accelerating emotional processing
+                and bonding.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="dashboard"
+          class="mb-12 bg-white p-6 rounded-2xl shadow-lg"
+        >
+          <h2 class="text-2xl font-bold text-neutral-900 mb-2 text-center">
+            Relational Alignment Dashboard
+          </h2>
+          <p class="text-center text-neutral-600 mb-6">
+            Use the slider to shift the relationship's state between flourishing
+            and strained, and observe how the dynamics change.
+          </p>
+
+          <div class="mb-8">
+            <div class="flex justify-between font-medium text-neutral-700 mb-2">
+              <span>Flourishing (High Alignment)</span>
+              <span>Strained (Mal-alignment)</span>
+            </div>
+            <input
+              id="alignmentSlider"
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              class="w-full h-2 rounded-lg appearance-none cursor-pointer slider-track"
+            />
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="chart-container">
+              <canvas id="alignmentChart"></canvas>
+            </div>
+            <div>
+              <h3
+                id="dashboardTitle"
+                class="text-xl font-bold mb-2 text-green-600 transition-colors duration-300"
+              >
+                Current State: Flourishing
+              </h3>
+              <p id="dashboardDescription" class="text-neutral-700">
+                In a state of high alignment, the couple's neurodivergent traits
+                are synergistic. Differences are understood and leveraged as
+                strengths, fostering deep connection, mutual growth, and
+                creative problem-solving. Neural synchrony is high, and
+                impression management is minimal and authentic.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <nav class="flex flex-wrap justify-center gap-2 mb-8">
+          <button
+            data-target="delusions"
+            class="nav-button bg-white text-neutral-700 px-4 py-2 rounded-full shadow-sm hover:bg-neutral-100 transition"
+          >
+            Delusional Attachments
+          </button>
+          <button
+            data-target="dissociative"
+            class="nav-button bg-white text-neutral-700 px-4 py-2 rounded-full shadow-sm hover:bg-neutral-100 transition"
+          >
+            Dissociative Traits
+          </button>
+          <button
+            data-target="asd"
+            class="nav-button bg-white text-neutral-700 px-4 py-2 rounded-full shadow-sm hover:bg-neutral-100 transition"
+          >
+            Autism Spectrum (ASD)
+          </button>
+          <button
+            data-target="adhd"
+            class="nav-button bg-white text-neutral-700 px-4 py-2 rounded-full shadow-sm hover:bg-neutral-100 transition"
+          >
+            ADHD
+          </button>
+        </nav>
+
+        <div id="content-container">
+          <section
+            id="delusions"
+            class="content-section bg-white p-6 rounded-2xl shadow-sm"
+          >
+            <h2 class="text-2xl font-bold mb-4">
+              Attachment & Grandiose/Erotic Delusions
+            </h2>
+            <p class="mb-6 text-neutral-600">
+              This explores tendencies towards intense idealization,
+              possessiveness, or crafting narratives about the relationship's
+              specialness that may detach from reality. Psychedelic experiences
+              can sometimes blur the lines between profound insight and
+              grandiose fantasy.
+            </p>
+            <div
+              class="grid md:grid-cols-2 gap-6 transition-opacity duration-300"
+            >
+              <div
+                id="delusions-aligned"
+                class="border-l-4 border-green-500 pl-4"
+              >
+                <h3 class="font-bold text-lg mb-2 text-green-700">
+                  Aligned Expression: Shared Mythology
+                </h3>
+                <p class="text-neutral-700">
+                  The couple builds a positive, shared narrative about their
+                  connection's uniqueness. This 'mythology' strengthens their
+                  bond, provides meaning, and frames challenges as part of their
+                  special journey. It acts as a powerful relational glue.
+                </p>
+              </div>
+              <div
+                id="delusions-mal-aligned"
+                class="border-l-4 border-red-500 pl-4 opacity-20"
+              >
+                <h3 class="font-bold text-lg mb-2 text-red-700">
+                  Mal-aligned Expression: Folie à Deux
+                </h3>
+                <p class="text-neutral-700">
+                  The shared narrative detaches from reality, leading to a
+                  shared delusion (folie à deux). The couple may isolate
+                  themselves, believing their bond exempts them from normal
+                  rules or feedback, leading to poor decisions and alienation
+                  from support systems.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section
+            id="dissociative"
+            class="content-section bg-white p-6 rounded-2xl shadow-sm"
+          >
+            <h2 class="text-2xl font-bold mb-4">Dissociative Traits</h2>
+            <p class="mb-6 text-neutral-600">
+              Refers to a spectrum of experiences from mild detachment from
+              one's immediate surroundings to more severe disconnection from
+              physical or emotional experience. For high-functioning
+              individuals, it can be a coping mechanism for stress or intense
+              emotion.
+            </p>
+            <div
+              class="grid md:grid-cols-2 gap-6 transition-opacity duration-300"
+            >
+              <div
+                id="dissociative-aligned"
+                class="border-l-4 border-green-500 pl-4"
+              >
+                <h3 class="font-bold text-lg mb-2 text-green-700">
+                  Aligned Expression: Emotional Regulation
+                </h3>
+                <p class="text-neutral-700">
+                  A capacity for 'strategic detachment' allows partners to step
+                  back from emotionally charged situations, preventing
+                  escalation. It enables objective analysis of conflicts and
+                  creates space for calm discussion, preserving relational
+                  harmony.
+                </p>
+              </div>
+              <div
+                id="dissociative-mal-aligned"
+                class="border-l-4 border-red-500 pl-4 opacity-20"
+              >
+                <h3 class="font-bold text-lg mb-2 text-red-700">
+                  Mal-aligned Expression: Emotional Unavailability
+                </h3>
+                <p class="text-neutral-700">
+                  Detachment becomes a default state, leading to emotional
+                  numbing and unavailability. A partner may 'check out' during
+                  crucial moments, creating feelings of abandonment, blocking
+                  intimacy, and preventing resolution of core issues.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section
+            id="asd"
+            class="content-section bg-white p-6 rounded-2xl shadow-sm"
+          >
+            <h2 class="text-2xl font-bold mb-4">
+              Autism Spectrum Disorder (ASD) in Adulthood
+            </h2>
+            <p class="mb-6 text-neutral-600">
+              Characterized by distinct differences in social communication,
+              sensory processing, and a preference for routine and special
+              interests. In adults, these traits are often part of a
+              well-developed, unique personality.
+            </p>
+            <div
+              class="grid md:grid-cols-2 gap-6 transition-opacity duration-300"
+            >
+              <div id="asd-aligned" class="border-l-4 border-green-500 pl-4">
+                <h3 class="font-bold text-lg mb-2 text-green-700">
+                  Aligned Expression: Deep Shared Worlds
+                </h3>
+                <p class="text-neutral-700">
+                  The tendency for intense special interests allows the couple
+                  to build incredibly deep, shared worlds around mutual
+                  passions. Honesty is valued, communication is direct, and
+                  sensory needs are respected, creating a stable and
+                  intellectually rich environment.
+                </p>
+              </div>
+              <div
+                id="asd-mal-aligned"
+                class="border-l-4 border-red-500 pl-4 opacity-20"
+              >
+                <h3 class="font-bold text-lg mb-2 text-red-700">
+                  Mal-aligned Expression: Rigidity & Isolation
+                </h3>
+                <p class="text-neutral-700">
+                  An insistence on routine becomes rigid, stifling spontaneity.
+                  Sensory sensitivities lead to avoidance of shared experiences.
+                  Partners may retreat into their own worlds, leading to
+                  parallel lives rather than a shared one, causing profound
+                  loneliness.
+                </p>
+              </div>
+            </div>
+          </section>
+          <section
+            id="adhd"
+            class="content-section bg-white p-6 rounded-2xl shadow-sm"
+          >
+            <h2 class="text-2xl font-bold mb-4">
+              Attention-Deficit/Hyperactivity Disorder (ADHD) in Adulthood
+            </h2>
+            <p class="mb-6 text-neutral-600">
+              Involves patterns of inattention, hyperactivity, and impulsivity.
+              In adults, this often manifests as high creativity,
+              novelty-seeking, emotional intensity, and challenges with
+              executive function.
+            </p>
+            <div
+              class="grid md:grid-cols-2 gap-6 transition-opacity duration-300"
+            >
+              <div id="adhd-aligned" class="border-l-4 border-green-500 pl-4">
+                <h3 class="font-bold text-lg mb-2 text-green-700">
+                  Aligned Expression: Spontaneity & Hyperfocus
+                </h3>
+                <p class="text-neutral-700">
+                  Novelty-seeking fuels adventure and keeps the relationship
+                  exciting. The ability to hyperfocus is directed towards the
+                  partner and shared goals, leading to intense periods of
+                  connection and productivity. It creates a dynamic, passionate
+                  bond.
+                </p>
+              </div>
+              <div
+                id="adhd-mal-aligned"
+                class="border-l-4 border-red-500 pl-4 opacity-20"
+              >
+                <h3 class="font-bold text-lg mb-2 text-red-700">
+                  Mal-aligned Expression: Instability & Chaos
+                </h3>
+                <p class="text-neutral-700">
+                  Impulsivity leads to reckless decisions that harm the
+                  relationship's stability. Emotional dysregulation creates
+                  unpredictable conflict, while executive dysfunction can lead
+                  to one partner feeling like they carry the entire mental load,
+                  causing resentment.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const dataStore = {
+          labels: [
+            "Delusional Attachments",
+            "Dissociative Traits",
+            "ASD Traits",
+            "ADHD Traits",
+          ],
+          alignedData: [90, 85, 95, 80],
+          malAlignedData: [20, 30, 25, 35],
+          descriptions: {
+            flourishing:
+              "In a state of high alignment, the couple's neurodivergent traits are synergistic. Differences are understood and leveraged as strengths, fostering deep connection, mutual growth, and creative problem-solving. Neural synchrony is high, and impression management is minimal and authentic.",
+            transitioning:
+              "As stress or misunderstanding enters the dynamic, some traits begin to express in less constructive ways. Communication requires more effort, and minor frictions appear. Impression management may increase as partners become more guarded.",
+            strained:
+              "In a state of mal-alignment, the same traits that once created synergy now generate conflict and distance. Strengths become rigid liabilities. Communication breaks down, neural synchrony is low, and the relationship becomes a source of stress rather than support.",
+          },
+        };
+
+        const slider = document.getElementById("alignmentSlider");
+        const dashboardTitle = document.getElementById("dashboardTitle");
+        const dashboardDescription = document.getElementById(
+          "dashboardDescription",
+        );
+
+        const contentSections = document.querySelectorAll(".content-section");
+        const navButtons = document.querySelectorAll(".nav-button");
+
+        const delusionsAligned = document.getElementById("delusions-aligned");
+        const delusionsMalAligned = document.getElementById(
+          "delusions-mal-aligned",
+        );
+        const dissociativeAligned = document.getElementById(
+          "dissociative-aligned",
+        );
+        const dissociativeMalAligned = document.getElementById(
+          "dissociative-mal-aligned",
+        );
+        const asdAligned = document.getElementById("asd-aligned");
+        const asdMalAligned = document.getElementById("asd-mal-aligned");
+        const adhdAligned = document.getElementById("adhd-aligned");
+        const adhdMalAligned = document.getElementById("adhd-mal-aligned");
+
+        const ctx = document.getElementById("alignmentChart").getContext("2d");
+        let alignmentChart;
+
+        function interpolate(start, end, factor) {
+          return start + (end - start) * factor;
+        }
+
+        function createChart(initialData) {
+          if (alignmentChart) {
+            alignmentChart.destroy();
+          }
+          alignmentChart = new Chart(ctx, {
+            type: "radar",
+            data: {
+              labels: dataStore.labels,
+              datasets: [
+                {
+                  label: "Relational Alignment",
+                  data: initialData,
+                  backgroundColor: "rgba(74, 222, 128, 0.2)",
+                  borderColor: "rgba(34, 197, 94, 1)",
+                  pointBackgroundColor: "rgba(34, 197, 94, 1)",
+                  pointBorderColor: "#fff",
+                  pointHoverBackgroundColor: "#fff",
+                  pointHoverBorderColor: "rgba(34, 197, 94, 1)",
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              elements: {
+                line: {
+                  borderWidth: 3,
+                },
+              },
+              scales: {
+                r: {
+                  angleLines: {
+                    color: "rgba(0, 0, 0, 0.1)",
+                  },
+                  suggestedMin: 0,
+                  suggestedMax: 100,
+                  grid: {
+                    color: "rgba(0, 0, 0, 0.1)",
+                  },
+                  pointLabels: {
+                    font: {
+                      size: 12,
+                      weight: "500",
+                    },
+                    color: "#404040",
+                  },
+                  ticks: {
+                    backdropColor: "rgba(0,0,0,0)",
+                    color: "#737373",
+                  },
+                },
+              },
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+            },
+          });
+        }
+
+        function updateUI(value) {
+          const factor = value / 100;
+
+          const newData = dataStore.alignedData.map((start, i) => {
+            const end = dataStore.malAlignedData[i];
+            return Math.round(interpolate(start, end, factor));
+          });
+
+          alignmentChart.data.datasets[0].data = newData;
+
+          const bgStart = [74, 222, 128];
+          const bgEnd = [248, 113, 113];
+          const borderStart = [34, 197, 94];
+          const borderEnd = [220, 38, 38];
+
+          const currentBg = bgStart
+            .map((c, i) => interpolate(c, bgEnd[i], factor))
+            .join(", ");
+          const currentBorder = borderStart
+            .map((c, i) => interpolate(c, borderEnd[i], factor))
+            .join(", ");
+
+          alignmentChart.data.datasets[0].backgroundColor = `rgba(${currentBg}, 0.2)`;
+          alignmentChart.data.datasets[0].borderColor = `rgba(${currentBorder}, 1)`;
+          alignmentChart.data.datasets[0].pointBackgroundColor = `rgba(${currentBorder}, 1)`;
+          alignmentChart.data.datasets[0].pointHoverBorderColor = `rgba(${currentBorder}, 1)`;
+
+          alignmentChart.update();
+
+          if (factor < 0.33) {
+            dashboardTitle.textContent = "Current State: Flourishing";
+            dashboardTitle.className =
+              "text-xl font-bold mb-2 text-green-600 transition-colors duration-300";
+            dashboardDescription.textContent =
+              dataStore.descriptions.flourishing;
+          } else if (factor < 0.66) {
+            dashboardTitle.textContent = "Current State: Transitioning";
+            dashboardTitle.className =
+              "text-xl font-bold mb-2 text-yellow-500 transition-colors duration-300";
+            dashboardDescription.textContent =
+              dataStore.descriptions.transitioning;
+          } else {
+            dashboardTitle.textContent = "Current State: Strained";
+            dashboardTitle.className =
+              "text-xl font-bold mb-2 text-red-600 transition-colors duration-300";
+            dashboardDescription.textContent = dataStore.descriptions.strained;
+          }
+
+          const alignedOpacity = 1 - factor * 0.8;
+          const malAlignedOpacity = 0.2 + factor * 0.8;
+
+          delusionsAligned.style.opacity = alignedOpacity;
+          delusionsMalAligned.style.opacity = malAlignedOpacity;
+          dissociativeAligned.style.opacity = alignedOpacity;
+          dissociativeMalAligned.style.opacity = malAlignedOpacity;
+          asdAligned.style.opacity = alignedOpacity;
+          asdMalAligned.style.opacity = malAlignedOpacity;
+          adhdAligned.style.opacity = alignedOpacity;
+          adhdMalAligned.style.opacity = malAlignedOpacity;
+        }
+
+        function showContent(targetId) {
+          contentSections.forEach((section) => {
+            if (section.id === targetId) {
+              section.classList.add("active");
+            } else {
+              section.classList.remove("active");
+            }
+          });
+          navButtons.forEach((button) => {
+            if (button.dataset.target === targetId) {
+              button.classList.remove("bg-white", "text-neutral-700");
+              button.classList.add("bg-neutral-800", "text-white");
+            } else {
+              button.classList.remove("bg-neutral-800", "text-white");
+              button.classList.add("bg-white", "text-neutral-700");
+            }
+          });
+        }
+
+        slider.addEventListener("input", (e) => updateUI(e.target.value));
+
+        navButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const targetId = button.dataset.target;
+            showContent(targetId);
+          });
+        });
+
+        createChart(dataStore.alignedData);
+        showContent("delusions");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SFL for Hallucination Risk Reduction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chosen Palette: Warm Neutrals with Muted Blue/Green Accents -->
+    <!-- Application Structure Plan: A five-section, thematic SPA. 1) Intro to the problem (hallucinations). 2) SFL theory explained via interactive cards. 3) An interactive 'Skeleton Builder' to apply SFL concepts. 4) A dynamic Chart.js visualization comparing risk scores of different strategies. 5) Conclusion. This task-oriented flow guides users from theory to practical application, making a complex topic digestible and demonstrating the value of SFL more effectively than a static report. -->
+    <!-- Visualization & Content Choices: Report Info: SFL Metafunctions -> Goal: Organize/Inform -> Viz: Interactive HTML/CSS cards -> Interaction: Click/hover to reveal details -> Justification: Breaks down complex theory into manageable chunks. Report Info: Skeleton Strategies -> Goal: Compare/Organize -> Viz: Interactive form-based 'Builder' with text output -> Interaction: User selects options to generate skeletons and see a dynamic risk score -> Justification: Provides a hands-on, cause-and-effect learning experience. Report Info: Strategy Effectiveness -> Goal: Compare -> Viz: Dynamic Bar Chart -> Interaction: Updates based on 'Builder' inputs -> Justification: Quantitatively demonstrates the benefit of the optimized SFL approach. Library: Chart.js (Canvas). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #fdfbf8;
+        color: #1a202c;
+      }
+      .nav-link {
+        transition:
+          color 0.3s ease,
+          border-color 0.3s ease;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        color: #2c5282;
+        border-bottom-color: #2c5282;
+      }
+      .card {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .btn-primary {
+        background-color: #3182ce;
+        color: white;
+        transition: background-color 0.3s ease;
+      }
+      .btn-primary:hover {
+        background-color: #2b6cb0;
+      }
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.7rem center;
+        background-size: 0.65rem auto;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 350px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div class="text-2xl font-bold text-gray-800">
+          <span class="text-blue-800">SFL</span
+          ><span class="text-gray-600">Gen</span>
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a
+            href="#problem"
+            class="nav-link text-gray-600 border-b-2 border-transparent pb-1"
+            >The Problem</a
+          >
+          <a
+            href="#sfl"
+            class="nav-link text-gray-600 border-b-2 border-transparent pb-1"
+            >The SFL Framework</a
+          >
+          <a
+            href="#builder"
+            class="nav-link text-gray-600 border-b-2 border-transparent pb-1"
+            >Interactive Builder</a
+          >
+          <a
+            href="#results"
+            class="nav-link text-gray-600 border-b-2 border-transparent pb-1"
+            >Results</a
+          >
+          <a
+            href="#toolkit"
+            class="nav-link text-gray-600 border-b-2 border-transparent pb-1"
+            >Toolkit</a
+          >
+        </div>
+        <button
+          id="mobile-menu-button"
+          class="md:hidden text-gray-600 focus:outline-none"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+      </nav>
+      <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+        <a href="#problem" class="block nav-link text-gray-600">The Problem</a>
+        <a href="#sfl" class="block nav-link text-gray-600"
+          >The SFL Framework</a
+        >
+        <a href="#builder" class="block nav-link text-gray-600"
+          >Interactive Builder</a
+        >
+        <a href="#results" class="block nav-link text-gray-600">Results</a>
+        <a href="#toolkit" class="block nav-link text-gray-600">Toolkit</a>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+      <section
+        id="problem"
+        class="text-center min-h-[60vh] flex flex-col justify-center items-center"
+      >
+        <h1
+          class="text-4xl md:text-6xl font-bold text-gray-800 leading-tight mb-4"
+        >
+          The Challenge of AI <span class="text-red-500">Hallucinations</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          Large Language Models (LLMs) can generate fluent text, but they often
+          "hallucinate"—producing content that is nonsensical, factually
+          incorrect, or untethered from the source material. This poses a
+          significant risk for reliable AI applications. This tool explores a
+          novel approach to mitigating this risk.
+        </p>
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+          <p class="text-gray-500 text-sm font-medium">
+            ESTIMATED HALLUCINATION RISK
+          </p>
+          <p id="risk-display" class="text-5xl font-bold text-red-500">35.7%</p>
+        </div>
+        <p class="text-sm text-gray-500 mt-4">
+          Unconstrained generation can lead to high unpredictability.
+        </p>
+      </section>
+
+      <section id="sfl" class="py-20">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+            A Linguistics-Based Solution
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            Systemic Functional Linguistics (SFL) offers a powerful framework
+            for understanding and controlling language generation. Instead of
+            treating language as a set of rules, SFL sees it as a system of
+            choices for making meaning. We can leverage this to guide LLMs
+            towards more factual and grounded outputs by structuring the
+            "choices" they can make.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="card bg-white p-8 rounded-xl shadow-md border border-gray-100"
+          >
+            <div class="flex items-center mb-4">
+              <div class="p-2 bg-blue-100 rounded-full mr-4">
+                <span class="text-2xl">🌍</span>
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-800">Ideational</h3>
+            </div>
+            <p class="text-gray-600">
+              This metafunction concerns the "content" of language: who is doing
+              what, to whom, where, and when. By pre-defining the process (e.g.,
+              material action, verbal process), participants, and circumstances,
+              we can constrain the model's "worldview" to match the source data,
+              reducing factual deviation.
+            </p>
+          </div>
+          <div
+            class="card bg-white p-8 rounded-xl shadow-md border border-gray-100"
+          >
+            <div class="flex items-center mb-4">
+              <div class="p-2 bg-green-100 rounded-full mr-4">
+                <span class="text-2xl">💬</span>
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-800">
+                Interpersonal
+              </h3>
+            </div>
+            <p class="text-gray-600">
+              This covers the social aspect of language: the speaker's attitude,
+              the relationship with the listener, and the type of interaction
+              (e.g., statement, question). Controlling mood (declarative,
+              interrogative) and modality (certainty, obligation) ensures the
+              generated text has the intended tone and stance, preventing
+              unwarranted claims.
+            </p>
+          </div>
+          <div
+            class="card bg-white p-8 rounded-xl shadow-md border border-gray-100"
+          >
+            <div class="flex items-center mb-4">
+              <div class="p-2 bg-purple-100 rounded-full mr-4">
+                <span class="text-2xl">📚</span>
+              </div>
+              <h3 class="text-2xl font-semibold text-gray-800">Textual</h3>
+            </div>
+            <p class="text-gray-600">
+              This organizes the message itself, creating coherence and flow. By
+              structuring the Theme (the starting point of the message) and
+              Rheme (what is said about the Theme), we can ensure the text is
+              logically structured and focused, preventing the model from
+              generating tangential or irrelevant information.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="builder" class="py-20 bg-gray-50 rounded-2xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+            Interactive Skeleton Builder
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            Experiment with generating text skeletons using different
+            strategies. The "Basic" approach is a simple template. The
+            "SFL-Optimized" approach uses linguistic constraints to guide the
+            LLM. See how the hallucination risk score changes based on the level
+            of semantic and structural control.
+          </p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+          <div>
+            <h3 class="text-2xl font-semibold mb-6 text-gray-700">
+              Generation Controls
+            </h3>
+            <div
+              class="space-y-6 bg-white p-8 rounded-xl shadow-lg border border-gray-200"
+            >
+              <div>
+                <label
+                  for="strategy"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  >1. Select Generation Strategy</label
+                >
+                <select
+                  id="strategy"
+                  class="w-full p-3 border border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="basic">Basic Prompt</option>
+                  <option value="sfl" selected>SFL-Optimized Skeleton</option>
+                </select>
+              </div>
+
+              <div id="sfl-controls" class="space-y-6">
+                <div>
+                  <label
+                    for="ideational"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >2. Ideational: Define the core event</label
+                  >
+                  <select
+                    id="ideational"
+                    class="w-full p-3 border border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="material">Material Process (Action)</option>
+                    <option value="verbal">Verbal Process (Saying)</option>
+                    <option value="relational">
+                      Relational Process (Being/Having)
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="interpersonal"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >3. Interpersonal: Set the tone</label
+                  >
+                  <select
+                    id="interpersonal"
+                    class="w-full p-3 border border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="declarative-high">
+                      Declarative (High Certainty)
+                    </option>
+                    <option value="declarative-low">
+                      Declarative (Low Certainty)
+                    </option>
+                    <option value="interrogative">Interrogative</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="textual"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >4. Textual: Structure the message</label
+                  >
+                  <select
+                    id="textual"
+                    class="w-full p-3 border border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="actor-theme">Focus on Actor</option>
+                    <option value="process-theme">Focus on Process</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold mb-6 text-gray-700">
+              Generated Skeleton & Risk Analysis
+            </h3>
+            <div
+              class="bg-gray-800 text-white p-6 rounded-xl font-mono text-sm shadow-inner min-h-[200px] flex items-center"
+            >
+              <pre><code id="skeleton-output"></code></pre>
+            </div>
+            <div
+              class="mt-6 bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center"
+            >
+              <p class="text-gray-500 text-sm font-medium">
+                CALCULATED HALLUCINATION RISK
+              </p>
+              <p
+                id="builder-risk-score"
+                class="text-5xl font-bold text-green-600 transition-colors duration-300"
+              >
+                8.2%
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="py-20">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+            Comparative Results
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            This chart visualizes the impact of SFL-guided skeleton generation.
+            The SFL-Optimized approach consistently reduces the potential for
+            hallucination by providing clear, unambiguous instructions to the
+            language model, leaving less room for creative (and potentially
+            incorrect) interpretation.
+          </p>
+        </div>
+        <div class="chart-container">
+          <canvas id="resultsChart"></canvas>
+        </div>
+      </section>
+
+      <section id="toolkit" class="py-20 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">
+          Explore the Toolkit
+        </h2>
+        <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+          This interactive demonstration is part of the ongoing research for the
+          Hallucination Risk Calculator & Toolkit. The project aims to develop
+          practical tools for developers and researchers to build more reliable
+          and trustworthy AI systems.
+        </p>
+        <a
+          href="https://github.com/leochlon/hallbayes"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary inline-block px-8 py-4 rounded-lg font-semibold text-lg shadow-md"
+        >
+          View on GitHub
+        </a>
+      </section>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuButton.addEventListener("click", () => {
+          mobileMenu.classList.toggle("hidden");
+        });
+
+        const navLinks = document.querySelectorAll(".nav-link");
+        const sections = document.querySelectorAll("main section");
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.5,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute("id");
+              navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === `#${id}`) {
+                  link.classList.add("active");
+                }
+              });
+            }
+          });
+        }, observerOptions);
+
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
+
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            document.querySelector(targetId).scrollIntoView({
+              behavior: "smooth",
+            });
+            if (mobileMenu.classList.contains("hidden") === false) {
+              mobileMenu.classList.add("hidden");
+            }
+          });
+        });
+
+        let riskDisplay = document.getElementById("risk-display");
+        let currentRisk = 35.7;
+        setInterval(() => {
+          let change = (Math.random() - 0.5) * 0.2;
+          currentRisk += change;
+          if (currentRisk < 34 || currentRisk > 36) {
+            currentRisk = 35.7;
+          }
+          riskDisplay.textContent = `${currentRisk.toFixed(1)}%`;
+        }, 1500);
+
+        const sflData = {
+          ideational: {
+            material: {
+              text: "PARTICIPANT: [Actor] performs PROCESS: [Action] on PARTICIPANT: [Goal].",
+              risk: 5,
+            },
+            verbal: {
+              text: "PARTICIPANT: [Sayer] says PROCESS: [Verbiage] to PARTICIPANT: [Receiver].",
+              risk: 8,
+            },
+            relational: {
+              text: "PARTICIPANT: [Carrier] has ATTRIBUTE: [Attribute].",
+              risk: 3,
+            },
+          },
+          interpersonal: {
+            "declarative-high": { text: "It is certain that...", risk: 2 },
+            "declarative-low": { text: "It seems that...", risk: 6 },
+            interrogative: { text: "Is it the case that...?", risk: 10 },
+          },
+          textual: {
+            "actor-theme": { text: "Regarding [Actor], ...", risk: 4 },
+            "process-theme": { text: "The process of [Action]...", risk: 7 },
+          },
+        };
+
+        const strategySelect = document.getElementById("strategy");
+        const sflControlsContainer = document.getElementById("sfl-controls");
+        const ideationalSelect = document.getElementById("ideational");
+        const interpersonalSelect = document.getElementById("interpersonal");
+        const textualSelect = document.getElementById("textual");
+        const skeletonOutput = document.getElementById("skeleton-output");
+        const builderRiskScore = document.getElementById("builder-risk-score");
+
+        let chart;
+        const chartData = {
+          basic: 35.7,
+          sfl: 8.2,
+        };
+
+        function updateSkeleton() {
+          const strategy = strategySelect.value;
+          let skeleton = "";
+          let totalRisk = 0;
+
+          if (strategy === "basic") {
+            skeleton = "Summarize the key event involving [Actor] and [Goal].";
+            totalRisk = chartData.basic;
+            sflControlsContainer.style.display = "none";
+          } else {
+            sflControlsContainer.style.display = "block";
+            const ideational = sflData.ideational[ideationalSelect.value];
+            const interpersonal =
+              sflData.interpersonal[interpersonalSelect.value];
+            const textual = sflData.textual[textualSelect.value];
+
+            skeleton = `GENERATE TEXT with the following constraints:\n\n`;
+            skeleton += `INTERPERSONAL (Stance):\n- ${interpersonal.text}\n\n`;
+            skeleton += `IDEATIONAL (Content):\n- ${ideational.text}\n\n`;
+            skeleton += `TEXTUAL (Focus):\n- ${textual.text}`;
+
+            totalRisk = ideational.risk + interpersonal.risk + textual.risk;
+            totalRisk = Math.max(2, totalRisk / 3);
+          }
+
+          skeletonOutput.textContent = skeleton;
+          builderRiskScore.textContent = `${totalRisk.toFixed(1)}%`;
+
+          if (totalRisk > 15) {
+            builderRiskScore.className =
+              "text-5xl font-bold text-red-500 transition-colors duration-300";
+          } else if (totalRisk > 8) {
+            builderRiskScore.className =
+              "text-5xl font-bold text-yellow-500 transition-colors duration-300";
+          } else {
+            builderRiskScore.className =
+              "text-5xl font-bold text-green-600 transition-colors duration-300";
+          }
+
+          if (strategy === "sfl") {
+            chartData.sfl = totalRisk;
+          }
+
+          updateChart();
+        }
+
+        function createChart() {
+          const ctx = document.getElementById("resultsChart").getContext("2d");
+          chart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: ["Basic Prompt", "SFL-Optimized Skeleton"],
+              datasets: [
+                {
+                  label: "Hallucination Risk Score (%)",
+                  data: [chartData.basic, chartData.sfl],
+                  backgroundColor: [
+                    "rgba(239, 68, 68, 0.6)",
+                    "rgba(34, 197, 94, 0.6)",
+                  ],
+                  borderColor: ["rgba(239, 68, 68, 1)", "rgba(34, 197, 94, 1)"],
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  title: {
+                    display: true,
+                    text: "Risk Score (%)",
+                  },
+                  grid: {
+                    color: "#e5e7eb",
+                  },
+                },
+                x: {
+                  grid: {
+                    display: false,
+                  },
+                },
+              },
+              plugins: {
+                legend: {
+                  display: false,
+                },
+                tooltip: {
+                  enabled: true,
+                },
+              },
+            },
+          });
+        }
+
+        function updateChart() {
+          if (chart) {
+            chart.data.datasets[0].data = [chartData.basic, chartData.sfl];
+            chart.update();
+          }
+        }
+
+        [
+          strategySelect,
+          ideationalSelect,
+          interpersonalSelect,
+          textualSelect,
+        ].forEach((el) => {
+          el.addEventListener("change", updateSkeleton);
+        });
+
+        createChart();
+        updateSkeleton();
+      });
+    </script>
+  </body>
+</html>

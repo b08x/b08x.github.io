@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memex-RAG System: Architecture Visualization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0a0a0a;
+        color: #e5e7eb;
+      }
+      .graph-container {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #374151;
+        background-color: #111827;
+        border-radius: 0.75rem;
+        position: relative;
+        cursor: move; /* --- MODIFIED: Add move cursor for panning --- */
+      }
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+      .node circle {
+        cursor: pointer;
+        stroke: #9ca3af;
+        stroke-width: 1.5px;
+        transition:
+          transform 0.2s ease-in-out,
+          filter 0.2s ease-in-out;
+      }
+      .node:hover circle {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.7));
+      }
+      .node text {
+        font-size: 10px;
+        fill: #d1d5db;
+        pointer-events: none;
+        text-anchor: middle;
+        font-weight: 500;
+      }
+      .link {
+        stroke-opacity: 0.6;
+        transition:
+          stroke-opacity 0.2s ease-in-out,
+          stroke-width 0.2s ease-in-out;
+      }
+      .link.highlight {
+        stroke-opacity: 1;
+      }
+      .node.highlight text {
+        font-weight: 700;
+        fill: #f9fafb;
+      }
+      .node.fade text {
+        opacity: 0.3;
+      }
+      .node.fade circle {
+        opacity: 0.2;
+      }
+      .link.fade {
+        stroke-opacity: 0.1;
+      }
+      #info-panel {
+        background-color: rgba(31, 41, 55, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid #4b5563;
+      }
+    </style>
+  </head>
+  <body
+    class="w-screen h-screen overflow-hidden flex flex-col p-4 md:p-6 lg:p-8"
+  >
+    <header class="text-center mb-4 flex-shrink-0">
+      <h1 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        Memex-RAG System Architecture
+      </h1>
+      <p class="mt-2 text-md text-gray-400 max-w-3xl mx-auto">
+        An interactive visualization of the components and data flows. Hover for
+        details, drag background to pan, scroll to zoom.
+      </p>
+    </header>
+
+    <main class="flex-grow flex flex-col md:flex-row gap-6 min-h-0">
+      <div class="graph-container flex-grow" id="graph-container">
+        <div
+          id="info-panel"
+          class="absolute top-4 left-4 p-4 rounded-lg w-full max-w-xs shadow-lg transition-opacity duration-300 opacity-0 pointer-events-none"
+        >
+          <h3 id="info-title" class="font-bold text-lg text-white"></h3>
+          <p id="info-type" class="text-sm text-indigo-400 font-mono mb-2"></p>
+          <p id="info-description" class="text-sm text-gray-300"></p>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const graphData = {
+        nodes: [
+          // Core Concepts
+          {
+            id: "RAG Pipeline",
+            group: 1,
+            description:
+              "The core Retrieval-Augmented Generation process that grounds LLM answers in external knowledge.",
+          },
+          {
+            id: "Associative Trails",
+            group: 1,
+            description:
+              "The Memex-inspired layer for creating persistent, user-curated knowledge paths, linking document chunks together.",
+          },
+          {
+            id: "User Interface",
+            group: 1,
+            description:
+              "The primary interface for users to interact with the system, envisioned as a powerful Command-Line Interface (CLI).",
+          },
+
+          // Data Ingestion
+          {
+            id: "Data Ingestion",
+            group: 2,
+            description:
+              "The process of loading, parsing, and preparing source documents for the RAG system.",
+          },
+          {
+            id: "pragmatic_segmenter",
+            group: 2,
+            description:
+              "A Ruby gem used for robust, rule-based sentence segmentation to create coherent initial chunks.",
+          },
+          {
+            id: "ruby-spacy",
+            group: 2,
+            description:
+              "A wrapper for the spaCy NLP library, used for advanced processing like Named-Entity Recognition to enrich chunks with metadata.",
+          },
+
+          // Embedding
+          {
+            id: "Embedding",
+            group: 3,
+            description:
+              "The process of converting text chunks into numerical vector representations for semantic search.",
+          },
+          {
+            id: "informers",
+            group: 3,
+            description:
+              "A high-performance Ruby gem for running local transformer models (e.g., for embeddings), ensuring data privacy and cost control.",
+          },
+
+          // Vector Storage
+          {
+            id: "Vector Storage",
+            group: 4,
+            description:
+              "The database system responsible for storing vector embeddings and performing efficient similarity searches.",
+          },
+          {
+            id: "PostgreSQL",
+            group: 4,
+            description:
+              "The chosen relational database, extended with vector capabilities.",
+          },
+          {
+            id: "pgvector",
+            group: 4,
+            description:
+              "A PostgreSQL extension that adds the `vector` data type and enables Approximate Nearest Neighbor (ANN) search.",
+          },
+          {
+            id: "neighbor",
+            group: 4,
+            description:
+              "An ActiveRecord-native gem that provides a clean, idiomatic interface for querying `pgvector`.",
+          },
+
+          // LLM Orchestration
+          {
+            id: "LLM Orchestration",
+            group: 5,
+            description:
+              "The layer that constructs prompts, manages interactions with LLMs, and handles responses.",
+          },
+          {
+            id: "ruby_llm",
+            group: 5,
+            description:
+              "The primary gem for LLM interaction, offering a clean, multi-provider API for chat and embeddings.",
+          },
+          {
+            id: "LLM APIs",
+            group: 5,
+            description:
+              "Represents external, third-party Large Language Model providers like OpenAI, Anthropic, or Google.",
+          },
+
+          // Associative Trails Storage
+          {
+            id: "Trail Storage",
+            group: 6,
+            description:
+              "The database model for storing the graph-like structure of associative trails.",
+          },
+          {
+            id: "Neo4j",
+            group: 6,
+            description:
+              "A native graph database, recommended as the long-term, scalable solution for storing and querying complex trails.",
+          },
+          {
+            id: "activegraph",
+            group: 6,
+            description:
+              "An Object-Graph Mapper (OGM) gem for interacting with Neo4j using ActiveRecord-like patterns.",
+          },
+          {
+            id: "rgl",
+            group: 6,
+            description:
+              "The Ruby Graph Library, used for in-memory graph analysis and executing complex algorithms on trail data.",
+          },
+
+          // Concurrency
+          {
+            id: "Concurrency Model",
+            group: 7,
+            description:
+              "The architecture for handling concurrent requests, crucial for scalable LLM streaming.",
+          },
+          {
+            id: "falcon",
+            group: 7,
+            description:
+              "An async-aware web server built on Ruby Fibers, ideal for handling many concurrent I/O-bound operations.",
+          },
+          {
+            id: "async",
+            group: 7,
+            description:
+              "The core gem providing a fiber-based concurrency framework for Ruby.",
+          },
+
+          // UI Implementation
+          {
+            id: "tty-toolkit",
+            group: 8,
+            description:
+              "A suite of gems for building powerful and interactive command-line interfaces in Ruby.",
+          },
+        ],
+        links: [
+          // Ingestion Flow
+          {
+            source: "Data Ingestion",
+            target: "pragmatic_segmenter",
+            weight: 4,
+            type: "Uses Gem",
+          },
+          {
+            source: "Data Ingestion",
+            target: "ruby-spacy",
+            weight: 4,
+            type: "Uses Gem",
+          },
+          {
+            source: "Data Ingestion",
+            target: "Embedding",
+            weight: 6,
+            type: "Data Flow",
+          },
+
+          // Embedding Flow
+          {
+            source: "Embedding",
+            target: "informers",
+            weight: 4,
+            type: "Uses Gem (Local)",
+          },
+          {
+            source: "Embedding",
+            target: "ruby_llm",
+            weight: 3,
+            type: "Uses Gem (API)",
+          },
+          {
+            source: "Embedding",
+            target: "Vector Storage",
+            weight: 6,
+            type: "Data Flow",
+          },
+
+          // Vector Storage Stack
+          {
+            source: "Vector Storage",
+            target: "PostgreSQL",
+            weight: 6,
+            type: "Primary DB",
+          },
+          {
+            source: "PostgreSQL",
+            target: "pgvector",
+            weight: 8,
+            type: "Uses Extension",
+          },
+          {
+            source: "Vector Storage",
+            target: "neighbor",
+            weight: 8,
+            type: "Primary Interface",
+          },
+          {
+            source: "neighbor",
+            target: "PostgreSQL",
+            weight: 5,
+            type: "Queries",
+          },
+
+          // RAG Pipeline Core Logic
+          {
+            source: "RAG Pipeline",
+            target: "Data Ingestion",
+            weight: 5,
+            type: "Component",
+          },
+          {
+            source: "RAG Pipeline",
+            target: "Embedding",
+            weight: 5,
+            type: "Component",
+          },
+          {
+            source: "RAG Pipeline",
+            target: "Vector Storage",
+            weight: 5,
+            type: "Component",
+          },
+          {
+            source: "RAG Pipeline",
+            target: "LLM Orchestration",
+            weight: 5,
+            type: "Component",
+          },
+
+          // LLM Orchestration
+          {
+            source: "LLM Orchestration",
+            target: "ruby_llm",
+            weight: 8,
+            type: "Primary Interface",
+          },
+          {
+            source: "ruby_llm",
+            target: "LLM APIs",
+            weight: 6,
+            type: "API Calls",
+          },
+
+          // Associative Trails
+          {
+            source: "Associative Trails",
+            target: "Trail Storage",
+            weight: 5,
+            type: "Manages",
+          },
+          {
+            source: "Trail Storage",
+            target: "PostgreSQL",
+            weight: 4,
+            type: "Initial Storage (MVP)",
+          },
+          {
+            source: "Trail Storage",
+            target: "Neo4j",
+            weight: 7,
+            type: "Scalable Storage (Target)",
+          },
+          {
+            source: "Neo4j",
+            target: "activegraph",
+            weight: 8,
+            type: "Primary Interface",
+          },
+          {
+            source: "Associative Trails",
+            target: "rgl",
+            weight: 3,
+            type: "For Analysis",
+          },
+
+          // System Integration
+          {
+            source: "RAG Pipeline",
+            target: "Associative Trails",
+            weight: 2,
+            type: "System Integration",
+            dashed: true,
+          },
+
+          // Concurrency
+          {
+            source: "Concurrency Model",
+            target: "falcon",
+            weight: 8,
+            type: "Web Server",
+          },
+          {
+            source: "Concurrency Model",
+            target: "async",
+            weight: 6,
+            type: "Core Framework",
+          },
+          { source: "falcon", target: "async", weight: 8, type: "Built On" },
+
+          // UI
+          {
+            source: "User Interface",
+            target: "tty-toolkit",
+            weight: 8,
+            type: "Implementation",
+          },
+          {
+            source: "User Interface",
+            target: "RAG Pipeline",
+            weight: 3,
+            type: "Interacts With",
+            dashed: true,
+          },
+          {
+            source: "User Interface",
+            target: "Associative Trails",
+            weight: 3,
+            type: "Interacts With",
+            dashed: true,
+          },
+        ],
+      };
+
+      const graphContainerEl = document.getElementById("graph-container");
+      const width = graphContainerEl.clientWidth;
+      const height = graphContainerEl.clientHeight;
+
+      const svg = d3
+        .select(graphContainerEl)
+        .append("svg")
+        .attr("viewBox", [0, 0, width, height])
+        .style("max-width", "100%")
+        .style("height", "auto");
+
+      // --- ADDED: A main <g> element for all graph content to apply zoom transformations ---
+      const view = svg.append("g");
+
+      const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+      const simulation = d3
+        .forceSimulation(graphData.nodes)
+        .force(
+          "link",
+          d3
+            .forceLink(graphData.links)
+            .id((d) => d.id)
+            .distance((d) => 150 - d.weight * 5),
+        )
+        .force("charge", d3.forceManyBody().strength(-250))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("collide", d3.forceCollide().radius(40));
+
+      // --- MODIFIED: Append links and nodes to the 'view' group instead of the main svg ---
+      const link = view
+        .append("g")
+        .selectAll("line")
+        .data(graphData.links)
+        .join("line")
+        .attr("class", "link")
+        .attr("stroke", "#9ca3af")
+        .attr("stroke-width", (d) => Math.sqrt(d.weight))
+        .style("stroke-dasharray", (d) => (d.dashed ? "5,5" : "none"));
+
+      const node = view
+        .append("g")
+        .selectAll("g")
+        .data(graphData.nodes)
+        .join("g")
+        .attr("class", "node")
+        .call(drag(simulation));
+
+      node
+        .append("circle")
+        .attr("r", (d) => 10 + d.group)
+        .attr("fill", (d) => color(d.group));
+
+      node
+        .append("text")
+        .text((d) => d.id)
+        .attr("dy", (d) => 20 + d.group);
+
+      simulation.on("tick", () => {
+        link
+          .attr("x1", (d) => d.source.x)
+          .attr("y1", (d) => d.source.y)
+          .attr("x2", (d) => d.target.x)
+          .attr("y2", (d) => d.target.y);
+
+        node.attr("transform", (d) => `translate(${d.x},${d.y})`);
+      });
+
+      // Interactivity
+      const infoPanel = d3.select("#info-panel");
+      const infoTitle = d3.select("#info-title");
+      const infoType = d3.select("#info-type");
+      const infoDescription = d3.select("#info-description");
+
+      const linkedByIndex = {};
+      graphData.links.forEach((d) => {
+        linkedByIndex[`${d.source.id},${d.target.id}`] = 1;
+      });
+
+      function isConnected(a, b) {
+        return (
+          linkedByIndex[`${a.id},${b.id}`] ||
+          linkedByIndex[`${b.id},${a.id}`] ||
+          a.id === b.id
+        );
+      }
+
+      node.on("mouseover", function (event, d) {
+        infoPanel.style("opacity", 1);
+        infoTitle.text(d.id);
+        infoType.text(`Component: Group ${d.group}`);
+        infoDescription.text(d.description);
+
+        node.classed("fade", (n) => !isConnected(d, n));
+        node.classed("highlight", (n) => isConnected(d, n));
+
+        link.classed("fade", (l) => l.source !== d && l.target !== d);
+        link.classed("highlight", (l) => l.source === d || l.target === d);
+      });
+
+      link.on("mouseover", function (event, d) {
+        infoPanel.style("opacity", 1);
+        infoTitle.text(`${d.source.id} → ${d.target.id}`);
+        infoType.text(`Link Type: ${d.type}`);
+        infoDescription.text(
+          `A relationship with a conceptual weight of ${d.weight}.`,
+        );
+
+        node.classed("fade", (n) => n !== d.source && n !== d.target);
+        node.classed("highlight", (n) => n === d.source || n === d.target);
+
+        link.classed("fade", (l) => l !== d);
+        link.classed("highlight", (l) => l === d);
+      });
+
+      node.on("mouseout", mouseout);
+      link.on("mouseout", mouseout);
+
+      function mouseout() {
+        infoPanel.style("opacity", 0);
+        node.classed("fade", false).classed("highlight", false);
+        link.classed("fade", false).classed("highlight", false);
+      }
+
+      // --- ADDED: Zoom and Pan functionality ---
+      const zoom = d3
+        .zoom()
+        .scaleExtent([0.1, 8]) // Min 0.1x, Max 8x zoom
+        .on("zoom", (event) => {
+          view.attr("transform", event.transform);
+        });
+
+      // Apply the zoom behavior to the main SVG element
+      svg.call(zoom);
+
+      function drag(simulation) {
+        function dragstarted(event, d) {
+          // --- MODIFIED: Stop pan/zoom event while dragging a node ---
+          event.sourceEvent.stopPropagation();
+          if (!event.active) simulation.alphaTarget(0.3).restart();
+          d.fx = d.x;
+          d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+          d.fx = event.x;
+          d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+          if (!event.active) simulation.alphaTarget(0);
+          d.fx = null;
+          d.fy = null;
+        }
+
+        return d3
+          .drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended);
+      }
+
+      // Handle window resize
+      window.addEventListener("resize", () => {
+        const newWidth = graphContainerEl.clientWidth;
+        const newHeight = graphContainerEl.clientHeight;
+        svg.attr("viewBox", [0, 0, newWidth, newHeight]);
+        simulation
+          .force("center", d3.forceCenter(newWidth / 2, newHeight / 2))
+          .alpha(0.3)
+          .restart();
+        // --- ADDED: Reset zoom on resize to keep it centered ---
+        svg.call(zoom.transform, d3.zoomIdentity);
+      });
+    </script>
+  </body>
+</html>

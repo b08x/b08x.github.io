@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relational Dynamics Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: The application is designed as an interactive simulator. The main UI is split into a control panel on the left and a results/visualization area on the right. This structure allows users to create scenarios by selecting disorders and situational factors for two partners and immediately see the impact on a central "Relationship Alignment" chart. This interactive, cause-and-effect model was chosen over a static report to best explore the user's query about the *shift* from aligned to mal-aligned states. The user flow is exploratory: select inputs -> observe visual output -> read detailed, dynamic explanations. This fosters a deeper understanding of the complex interplay between the variables. -->
+    <!-- Visualization & Content Choices: 
+    - Report Info: Core relationship health (Communication, Empathy, etc.). Goal: Inform, Compare. Viz: Polar Area Chart. Interaction: Dynamically updates based on user selections. Justification: Provides a holistic "snapshot" of relational health, with distortions clearly indicating mal-alignment. Library: Chart.js.
+    - Report Info: Various psychological disorders. Goal: Organize, Control. Viz: Checkbox selectors. Interaction: User selection defines the scenario. Justification: Simple, intuitive method for creating complex combinations. Library: HTML/JS.
+    - Report Info: Contextual factors (Psychedelics, Impression Management). Goal: Control, Change. Viz: Range sliders. Interaction: User slides to modify context. Justification: Allows for nuanced, continuous input to see subtle shifts. Library: HTML/JS.
+    - Report Info: Explanations of dynamic states. Goal: Inform, Explain. Viz: Dynamic text blocks. Interaction: Text content updates based on selections. Justification: Crucial for explaining the complex psychological reasons behind the visualization's state. Library: JS.
+    - Report Info: Neural Synchrony. Goal: Inform. Viz: HTML/CSS progress bar. Interaction: Updates with other controls. Justification: A simple visual metaphor for a complex neurological concept. Library: HTML/CSS/JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #faf8f7;
+        color: #424242;
+      }
+      .control-panel-bg {
+        background-color: #f5f5f5;
+      }
+      .card-bg {
+        background-color: #ffffff;
+      }
+      .accent-bg {
+        background-color: #64b5f6;
+      }
+      .accent-text {
+        color: #1e88e5;
+      }
+      .warn-bg {
+        background-color: #ffb74d;
+      }
+      .slider-track {
+        background-color: #e0e0e0;
+      }
+      .slider-thumb {
+        background-color: #64b5f6;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 40vh;
+        max-height: 500px;
+      }
+      .nav-button.active {
+        background-color: #64b5f6;
+        color: white;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <div id="app" class="flex flex-col lg:flex-row w-full min-h-screen">
+      <aside
+        class="w-full lg:w-1/3 xl:w-1/4 p-4 lg:p-6 control-panel-bg lg:min-h-screen"
+      >
+        <div class="sticky top-6">
+          <h1 class="text-2xl font-bold mb-1 text-gray-800">
+            Relational Dynamics
+          </h1>
+          <p class="text-sm text-gray-600 mb-6">
+            Explore how psychological states and therapeutic contexts shape
+            relational alignment.
+          </p>
+
+          <div class="space-y-6">
+            <div>
+              <h3 class="font-semibold text-lg text-gray-700 mb-3">
+                Partner 1
+              </h3>
+              <div id="partner1-controls" class="space-y-2 text-sm"></div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-lg text-gray-700 mb-3">
+                Partner 2
+              </h3>
+              <div id="partner2-controls" class="space-y-2 text-sm"></div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-lg text-gray-700 mb-4">
+                Contextual Factors
+              </h3>
+              <div class="space-y-5">
+                <div>
+                  <div class="flex justify-between items-center mb-2">
+                    <label
+                      for="psych-state"
+                      class="text-sm font-medium text-gray-600"
+                      >Psychedelic Therapy Stage</label
+                    >
+                    <span
+                      id="psych-state-label"
+                      class="text-sm font-semibold accent-text"
+                      >Pre-Session</span
+                    >
+                  </div>
+                  <input
+                    id="psych-state"
+                    type="range"
+                    min="0"
+                    max="2"
+                    value="0"
+                    step="1"
+                    class="w-full h-2 slider-track rounded-lg appearance-none cursor-pointer slider-thumb"
+                  />
+                  <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Pre</span>
+                    <span>During</span>
+                    <span>Post</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between items-center mb-2">
+                    <label
+                      for="impression-mgmt"
+                      class="text-sm font-medium text-gray-600"
+                      >Impression Management</label
+                    >
+                    <span
+                      id="impression-mgmt-label"
+                      class="text-sm font-semibold accent-text"
+                      >3 / 10</span
+                    >
+                  </div>
+                  <input
+                    id="impression-mgmt"
+                    type="range"
+                    min="0"
+                    max="10"
+                    value="3"
+                    class="w-full h-2 slider-track rounded-lg appearance-none cursor-pointer slider-thumb"
+                  />
+                  <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>Low</span>
+                    <span>High</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="w-full lg:w-2/3 xl:w-3/4 p-4 md:p-8 lg:p-10">
+        <div class="max-w-4xl mx-auto">
+          <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">
+              Relationship Alignment Visualization
+            </h2>
+            <p class="text-gray-600">
+              This chart represents the current state of the relationship across
+              key dimensions. A balanced, larger shape indicates alignment,
+              while a smaller, skewed shape suggests mal-alignment. Adjust the
+              controls to see how different factors influence this dynamic
+              balance.
+            </p>
+          </div>
+
+          <div class="card-bg p-4 sm:p-6 rounded-2xl shadow-lg mb-8">
+            <div class="chart-container">
+              <canvas id="relationshipChart"></canvas>
+            </div>
+          </div>
+
+          <div id="info-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="card-bg p-6 rounded-2xl shadow-lg">
+                <h3 class="font-semibold text-xl mb-3 accent-text">
+                  Interaction Analysis
+                </h3>
+                <p
+                  id="interaction-text"
+                  class="text-gray-700 text-sm leading-relaxed"
+                ></p>
+              </div>
+              <div class="card-bg p-6 rounded-2xl shadow-lg">
+                <h3 class="font-semibold text-xl mb-3 accent-text">
+                  Psychedelic Context
+                </h3>
+                <p
+                  id="psych-text"
+                  class="text-gray-700 text-sm leading-relaxed"
+                ></p>
+              </div>
+              <div class="card-bg p-6 rounded-2xl shadow-lg">
+                <h3 class="font-semibold text-xl mb-3 accent-text">
+                  Impression Management
+                </h3>
+                <p
+                  id="impression-text"
+                  class="text-gray-700 text-sm leading-relaxed"
+                ></p>
+              </div>
+              <div class="card-bg p-6 rounded-2xl shadow-lg">
+                <h3 class="font-semibold text-xl mb-3 accent-text">
+                  Potential Neural Synchrony
+                </h3>
+                <div class="w-full slider-track rounded-full h-4 mt-4">
+                  <div
+                    id="synchrony-bar"
+                    class="accent-bg h-4 rounded-full transition-all duration-500"
+                  ></div>
+                </div>
+                <p
+                  id="synchrony-text"
+                  class="text-gray-700 text-sm leading-relaxed mt-3"
+                ></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const disorderData = {
+        adhd: {
+          name: "ADHD",
+          mods: {
+            communication: -15,
+            empathy: -5,
+            trust: -5,
+            stability: -20,
+            intimacy: 5,
+          },
+        },
+        asd: {
+          name: "ASD",
+          mods: {
+            communication: -20,
+            empathy: -20,
+            trust: 5,
+            stability: 15,
+            intimacy: -15,
+          },
+        },
+        did: {
+          name: "Dissociative Disorder",
+          mods: {
+            communication: -25,
+            empathy: -15,
+            trust: -30,
+            stability: -30,
+            intimacy: -20,
+          },
+        },
+        "delusional-attachment": {
+          name: "Attachment Delusions",
+          mods: {
+            communication: -10,
+            empathy: -25,
+            trust: -40,
+            stability: -25,
+            intimacy: 10,
+          },
+        },
+        "delusional-grandiose": {
+          name: "Grandiose Delusions",
+          mods: {
+            communication: -15,
+            empathy: -30,
+            trust: -10,
+            stability: -15,
+            intimacy: -5,
+          },
+        },
+      };
+
+      const psychStateData = [
+        {
+          name: "Pre-Session",
+          mods: {
+            communication: 0,
+            empathy: 0,
+            stability: 0,
+            intimacy: 0,
+            synchrony: 1.0,
+          },
+          text: "In the pre-session phase, existing relational patterns are dominant. There might be apprehension or hope, but the core dynamics are unaltered by immediate therapeutic effects.",
+        },
+        {
+          name: "During Session",
+          mods: {
+            communication: 10,
+            empathy: 30,
+            stability: -20,
+            intimacy: 25,
+            synchrony: 2.0,
+          },
+          text: "During a psychedelic session, ego boundaries can dissolve, potentially increasing empathy and intimacy dramatically. However, this state of vulnerability can also decrease perceived stability as raw emotions and unconscious material surface.",
+        },
+        {
+          name: "Integration",
+          mods: {
+            communication: 15,
+            empathy: 15,
+            stability: 10,
+            intimacy: 10,
+            synchrony: 1.5,
+          },
+          text: "The integration phase is crucial. Insights from the session are processed, ideally leading to improved communication and lasting increases in empathy. This period fosters stability as new, healthier patterns are established.",
+        },
+      ];
+
+      const impressionMgmtText = [
+        "With low impression management, both partners are presenting authentically. This vulnerability can lead to deeper connection but also risks exposing raw, unresolved conflicts directly.",
+        "A moderate level of impression management is common, involving a balance of politeness and authenticity. It can smooth over minor issues but may also prevent deeper, more difficult conversations from happening.",
+        "High impression management, or masking, creates a facade of stability. While it avoids conflict, it severely damages intimacy and trust, as partners are not relating to each other's true selves. This can lead to a sudden collapse when the facade is no longer sustainable.",
+      ];
+
+      const appState = {
+        partner1: new Set(),
+        partner2: new Set(),
+        psychState: 0,
+        impressionMgmt: 3,
+      };
+
+      function generateControls() {
+        const p1Controls = document.getElementById("partner1-controls");
+        const p2Controls = document.getElementById("partner2-controls");
+
+        Object.keys(disorderData).forEach((key) => {
+          const p1Label = document.createElement("label");
+          p1Label.className = "flex items-center space-x-3 cursor-pointer";
+          p1Label.innerHTML = `<input type="checkbox" data-partner="1" data-disorder="${key}" class="form-checkbox h-4 w-4 text-blue-600 rounded"><span>${disorderData[key].name}</span>`;
+          p1Controls.appendChild(p1Label);
+
+          const p2Label = document.createElement("label");
+          p2Label.className = "flex items-center space-x-3 cursor-pointer";
+          p2Label.innerHTML = `<input type="checkbox" data-partner="2" data-disorder="${key}" class="form-checkbox h-4 w-4 text-blue-600 rounded"><span>${disorderData[key].name}</span>`;
+          p2Controls.appendChild(p2Label);
+        });
+      }
+
+      function calculateScores() {
+        let baseScores = {
+          communication: 80,
+          empathy: 80,
+          trust: 80,
+          stability: 80,
+          intimacy: 80,
+        };
+        let interactionText =
+          "With no specific disorders selected, the relationship operates from a baseline of typical relational dynamics, influenced primarily by the contextual factors.";
+        const activeDisorders = new Set([
+          ...appState.partner1,
+          ...appState.partner2,
+        ]);
+
+        [appState.partner1, appState.partner2].forEach(
+          (partnerDisorders, partnerIndex) => {
+            partnerDisorders.forEach((disorderKey) => {
+              const disorder = disorderData[disorderKey];
+              for (const metric in disorder.mods) {
+                baseScores[metric] += disorder.mods[metric];
+              }
+            });
+          },
+        );
+
+        if (
+          (appState.partner1.has("asd") && appState.partner2.has("adhd")) ||
+          (appState.partner1.has("adhd") && appState.partner2.has("asd"))
+        ) {
+          baseScores.communication -= 15;
+          baseScores.stability -= 10;
+          interactionText =
+            "The ASD/ADHD dynamic can be challenging. ADHD's need for novelty may clash with ASD's need for routine, leading to communication friction. However, shared hyperfocus can also create intense points of connection.";
+        } else if (activeDisorders.size > 0) {
+          interactionText =
+            "The selected disorders introduce specific dynamics. ";
+          let details = [];
+          if (
+            appState.partner1.has("delusional-attachment") ||
+            appState.partner2.has("delusional-attachment")
+          ) {
+            details.push(
+              "Attachment delusions can create intense jealousy and mistrust, straining the relationship's foundation.",
+            );
+          }
+          if (appState.partner1.has("did") || appState.partner2.has("did")) {
+            details.push(
+              "Dissociative states can lead to inconsistencies in memory and behavior, making stability and trust difficult to maintain.",
+            );
+          }
+          interactionText += details.join(" ");
+          if (details.length == 0)
+            interactionText =
+              "Each condition brings its own unique set of challenges and strengths to the relationship dynamic.";
+        }
+
+        const psychMods = psychStateData[appState.psychState].mods;
+        for (const metric in baseScores) {
+          if (psychMods[metric]) {
+            baseScores[metric] += psychMods[metric];
+          }
+        }
+
+        let impressionMod = 1 - appState.impressionMgmt / 15;
+        baseScores.intimacy *= impressionMod;
+        baseScores.trust *= impressionMod + 0.1;
+        let stabilityFacade = appState.impressionMgmt * 1.5;
+        baseScores.stability += stabilityFacade;
+
+        let synchronyScore = 60;
+        synchronyScore +=
+          Object.values(baseScores).reduce((a, b) => a + b, 0) / 100;
+        synchronyScore *= psychMods.synchrony;
+        synchronyScore -= appState.impressionMgmt * 3;
+
+        for (const metric in baseScores) {
+          baseScores[metric] = Math.max(5, Math.min(100, baseScores[metric]));
+        }
+        synchronyScore = Math.max(10, Math.min(100, synchronyScore));
+
+        return {
+          scores: Object.values(baseScores),
+          interactionText,
+          synchronyScore,
+        };
+      }
+
+      function updateUI() {
+        const { scores, interactionText, synchronyScore } = calculateScores();
+        relationshipChart.data.datasets[0].data = scores;
+        relationshipChart.update();
+
+        document.getElementById("psych-state-label").textContent =
+          psychStateData[appState.psychState].name;
+        document.getElementById("impression-mgmt-label").textContent =
+          `${appState.impressionMgmt} / 10`;
+
+        document.getElementById("interaction-text").textContent =
+          interactionText;
+        document.getElementById("psych-text").textContent =
+          psychStateData[appState.psychState].text;
+
+        let impressionTextContent = "";
+        if (appState.impressionMgmt < 4) {
+          impressionTextContent = impressionMgmtText[0];
+        } else if (appState.impressionMgmt < 8) {
+          impressionTextContent = impressionMgmtText[1];
+        } else {
+          impressionTextContent = impressionMgmtText[2];
+        }
+        document.getElementById("impression-text").textContent =
+          impressionTextContent;
+
+        const synchronyBar = document.getElementById("synchrony-bar");
+        synchronyBar.style.width = `${synchronyScore}%`;
+        let synchronyTextContent = "";
+        if (synchronyScore < 33)
+          synchronyTextContent =
+            "Low Synchrony: Partners may feel disconnected, as if on different wavelengths. Shared understanding is difficult.";
+        else if (synchronyScore < 66)
+          synchronyTextContent =
+            "Moderate Synchrony: There are moments of connection and attunement, but they may be inconsistent. Effort is required to stay on the same page.";
+        else
+          synchronyTextContent =
+            "High Synchrony: A strong sense of connection and effortless understanding. Partners feel deeply attuned to each other's emotional and mental states.";
+        document.getElementById("synchrony-text").textContent =
+          synchronyTextContent;
+      }
+
+      const ctx = document.getElementById("relationshipChart").getContext("2d");
+      const relationshipChart = new Chart(ctx, {
+        type: "polarArea",
+        data: {
+          labels: [
+            "Communication",
+            "Empathy",
+            "Trust",
+            "Stability",
+            "Intimacy",
+          ],
+          datasets: [
+            {
+              label: "Relationship State",
+              data: [80, 80, 80, 80, 80],
+              backgroundColor: [
+                "rgba(100, 181, 246, 0.6)",
+                "rgba(129, 199, 132, 0.6)",
+                "rgba(255, 183, 77, 0.6)",
+                "rgba(229, 115, 115, 0.6)",
+                "rgba(149, 117, 205, 0.6)",
+              ],
+              borderColor: [
+                "rgba(100, 181, 246, 1)",
+                "rgba(129, 199, 132, 1)",
+                "rgba(255, 183, 77, 1)",
+                "rgba(229, 115, 115, 1)",
+                "rgba(149, 117, 205, 1)",
+              ],
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                display: false,
+              },
+              grid: {
+                color: "rgba(0, 0, 0, 0.05)",
+              },
+              pointLabels: {
+                font: {
+                  size: 14,
+                },
+                color: "#555",
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        },
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        generateControls();
+        updateUI();
+
+        document.getElementById("app").addEventListener("input", (e) => {
+          if (e.target.matches("input")) {
+            if (e.target.type === "checkbox") {
+              const { partner, disorder } = e.target.dataset;
+              const targetSet =
+                partner === "1" ? appState.partner1 : appState.partner2;
+              if (e.target.checked) {
+                targetSet.add(disorder);
+              } else {
+                targetSet.delete(disorder);
+              }
+            } else if (e.target.id === "psych-state") {
+              appState.psychState = parseInt(e.target.value);
+            } else if (e.target.id === "impression-mgmt") {
+              appState.impressionMgmt = parseInt(e.target.value);
+            }
+            updateUI();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

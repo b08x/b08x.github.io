@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MemexRAG - Living Architecture Diagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        overflow: hidden;
+      }
+      .node circle {
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      .node:hover circle {
+        transform: scale(1.1);
+      }
+      .node text {
+        pointer-events: none;
+        font-size: 10px;
+        fill: #333;
+        text-anchor: middle;
+        paint-order: stroke;
+        stroke: #fff;
+        stroke-width: 3px;
+        stroke-linecap: butt;
+        stroke-linejoin: round;
+      }
+      .link {
+        stroke-opacity: 0.6;
+        transition: stroke-opacity 0.2s;
+      }
+      .link:hover {
+        stroke-opacity: 1;
+      }
+      #tooltip {
+        position: absolute;
+        opacity: 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 12px;
+        pointer-events: none;
+        transition: opacity 0.2s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 300px;
+      }
+      /* Custom styles for different link types */
+      .link.method-call {
+        stroke-dasharray: 0;
+      }
+      .link.dependency {
+        stroke-dasharray: 2, 2;
+      }
+      .link.data-flow {
+        stroke-dasharray: 5, 5;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+    <div id="graph-container" class="relative w-screen h-screen">
+      <svg id="architecture-graph" class="w-full h-full"></svg>
+    </div>
+
+    <div
+      id="header"
+      class="absolute top-0 left-0 p-6 w-full flex justify-between items-start pointer-events-none"
+    >
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">MemexRAG Architecture</h1>
+        <p class="text-gray-600">
+          An interactive visualization of the system's components and data flow.
+        </p>
+      </div>
+      <div
+        id="legend"
+        class="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-md border border-gray-200 pointer-events-auto"
+      >
+        <h3 class="font-semibold mb-2 text-gray-700">Legend</h3>
+        <div class="space-y-2 text-sm">
+          <!-- Legend items will be injected by D3 -->
+        </div>
+      </div>
+    </div>
+
+    <div id="tooltip"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // --- 1. DATA DEFINITION ---
+        // Define the architectural components (nodes) and their relationships (links)
+        // This data is derived from the "Architectural Blueprint for a Memex-RAG System" document.
+        const graphData = {
+          nodes: [
+            // Architectural Layers & Services
+            {
+              id: "WebAppUI",
+              group: "Entry Point",
+              label: "Web App / UI",
+              insight:
+                "User-facing interface for queries and trail visualization.",
+            },
+            {
+              id: "IngestionService",
+              group: "Ingestion Pipeline",
+              label: "Ingestion Service",
+              insight:
+                "Orchestrates the process of converting raw data into searchable vectors and metadata.",
+            },
+            {
+              id: "GenerativeCore",
+              group: "Generative Core",
+              label: "Generative Core",
+              insight:
+                "Manages all interactions with LLMs for generation, analysis, and trail creation.",
+            },
+            {
+              id: "KnowledgeBase",
+              group: "Knowledge Base",
+              label: "Knowledge Base",
+              insight:
+                "The heart of the system, storing both semantic vectors and the relational graph of associative trails.",
+            },
+            {
+              id: "AgentService",
+              group: "Augmentation Framework",
+              label: "Agent Service",
+              insight:
+                "Transforms the system into an agent by enabling interaction with external tools via MCP.",
+            },
+
+            // Core Internal Modules/Classes
+            {
+              id: "DocumentProcessor",
+              group: "Ingestion Pipeline",
+              label: "Doc Processor",
+              insight:
+                "Uses a hybrid approach to segment and enrich text with linguistic metadata.",
+            },
+            {
+              id: "EmbeddingGenerator",
+              group: "Ingestion Pipeline",
+              label: "Embedding Gen",
+              insight:
+                "Generates vector embeddings for text chunks using local or cloud models.",
+            },
+            {
+              id: "VectorStoreInterface",
+              group: "Knowledge Base",
+              label: "Vector Store",
+              insight:
+                "Provides an interface for semantic search against the vector database.",
+            },
+            {
+              id: "TrailManager",
+              group: "Knowledge Base",
+              label: "Trail Manager",
+              insight:
+                "Manages the creation, retrieval, and storage of associative trails in the relational database.",
+            },
+            {
+              id: "SchemaEnforcer",
+              group: "Generative Core",
+              label: "Schema Enforcer",
+              insight:
+                "Ensures LLM output for trails is structured and programmatically usable.",
+            },
+
+            // External Gems (Dependencies)
+            {
+              id: "pragmatic_segmenter",
+              group: "External Gem",
+              label: "pragmatic_segmenter",
+              insight:
+                "Robust, rule-based sentence segmentation. Ideal for initial, clean chunking.",
+            },
+            {
+              id: "ruby-spacy",
+              group: "External Gem",
+              label: "ruby-spacy",
+              insight:
+                "Provides deep linguistic analysis (NER, PoS) for metadata enrichment.",
+            },
+            {
+              id: "informers",
+              group: "External Gem",
+              label: "informers",
+              insight:
+                "Enables fast, local transformer inference for cost-effective and private embeddings.",
+            },
+            {
+              id: "ruby_llm",
+              group: "External Gem",
+              label: "ruby_llm",
+              insight:
+                "Unified API for diverse LLM providers (OpenAI, Gemini, etc.). Central to the Generative Core.",
+            },
+            {
+              id: "pgvector_neighbor",
+              group: "External Gem",
+              label: "pgvector / neighbor",
+              insight:
+                "PostgreSQL extension and ActiveRecord interface for vector storage and search.",
+            },
+            {
+              id: "sequel",
+              group: "External Gem",
+              label: "sequel",
+              insight:
+                "Powerful database toolkit for managing the relational knowledge graph (documents, trails).",
+            },
+            {
+              id: "ruby_llm-schema",
+              group: "External Gem",
+              label: "ruby_llm-schema",
+              insight:
+                "A DSL for creating JSON schemas to enforce structured output from LLMs.",
+            },
+            {
+              id: "ruby_llm-mcp",
+              group: "External Gem",
+              label: "ruby_llm-mcp",
+              insight:
+                "Client for the Model Context Protocol, enabling the system to use external tools.",
+            },
+          ],
+          links: [
+            // User Interaction Flow
+            {
+              source: "WebAppUI",
+              target: "GenerativeCore",
+              weight: 8,
+              type: "method-call",
+              info: "User query is sent to the core for processing.",
+            },
+            {
+              source: "WebAppUI",
+              target: "IngestionService",
+              weight: 4,
+              type: "method-call",
+              info: "User uploads a new document for ingestion.",
+            },
+
+            // Ingestion Pipeline Flow
+            {
+              source: "IngestionService",
+              target: "DocumentProcessor",
+              weight: 8,
+              type: "method-call",
+              info: "Passes raw document for chunking and enrichment.",
+            },
+            {
+              source: "DocumentProcessor",
+              target: "pragmatic_segmenter",
+              weight: 7,
+              type: "dependency",
+              info: "Uses gem for initial sentence segmentation.",
+            },
+            {
+              source: "DocumentProcessor",
+              target: "ruby-spacy",
+              weight: 7,
+              type: "dependency",
+              info: "Uses gem for deep linguistic analysis and metadata extraction.",
+            },
+            {
+              source: "IngestionService",
+              target: "EmbeddingGenerator",
+              weight: 8,
+              type: "method-call",
+              info: "Sends processed chunks for vectorization.",
+            },
+            {
+              source: "EmbeddingGenerator",
+              target: "informers",
+              weight: 6,
+              type: "dependency",
+              info: "Uses local models for bulk embedding.",
+            },
+            {
+              source: "EmbeddingGenerator",
+              target: "ruby_llm",
+              weight: 4,
+              type: "dependency",
+              info: "Can use cloud models for high-quality embeddings.",
+            },
+            {
+              source: "IngestionService",
+              target: "KnowledgeBase",
+              weight: 9,
+              type: "data-flow",
+              info: "Stores final vectors and metadata into the knowledge base.",
+            },
+
+            // RAG Core Loop
+            {
+              source: "GenerativeCore",
+              target: "EmbeddingGenerator",
+              weight: 6,
+              type: "method-call",
+              info: "Embeds the incoming user query.",
+            },
+            {
+              source: "GenerativeCore",
+              target: "KnowledgeBase",
+              weight: 10,
+              type: "data-flow",
+              info: "Performs semantic search and retrieves trails.",
+            },
+            {
+              source: "KnowledgeBase",
+              target: "VectorStoreInterface",
+              weight: 9,
+              type: "method-call",
+              info: "Delegates vector search operations.",
+            },
+            {
+              source: "VectorStoreInterface",
+              target: "pgvector_neighbor",
+              weight: 9,
+              type: "dependency",
+              info: "Executes nearest neighbor search in PostgreSQL.",
+            },
+            {
+              source: "KnowledgeBase",
+              target: "TrailManager",
+              weight: 9,
+              type: "method-call",
+              info: "Delegates trail management.",
+            },
+            {
+              source: "TrailManager",
+              target: "sequel",
+              weight: 9,
+              type: "dependency",
+              info: "Uses Sequel for complex graph queries.",
+            },
+            {
+              source: "GenerativeCore",
+              target: "ruby_llm",
+              weight: 10,
+              type: "dependency",
+              info: "Sends augmented prompt (query + context + trails) for generation.",
+            },
+
+            // Trail Creation Flow
+            {
+              source: "GenerativeCore",
+              target: "SchemaEnforcer",
+              weight: 7,
+              type: "method-call",
+              info: "Uses schema to request structured trail data from LLM.",
+            },
+            {
+              source: "SchemaEnforcer",
+              target: "ruby_llm-schema",
+              weight: 8,
+              type: "dependency",
+              info: "Defines the JSON schema for associative trails.",
+            },
+            {
+              source: "SchemaEnforcer",
+              target: "ruby_llm",
+              weight: 8,
+              type: "method-call",
+              info: "Passes schema to LLM to enforce structured output.",
+            },
+            {
+              source: "GenerativeCore",
+              target: "TrailManager",
+              weight: 7,
+              type: "data-flow",
+              info: "Saves the new, validated associative trail to the database.",
+            },
+
+            // Agentic Augmentation
+            {
+              source: "GenerativeCore",
+              target: "AgentService",
+              weight: 5,
+              type: "method-call",
+              info: "Optionally invokes agentic capabilities for live data.",
+            },
+            {
+              source: "AgentService",
+              target: "ruby_llm-mcp",
+              weight: 9,
+              type: "dependency",
+              info: "Connects to MCP servers to discover and use external tools.",
+            },
+          ],
+        };
+
+        // --- 2. SETUP & CONFIGURATION ---
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const svg = d3
+          .select("#architecture-graph")
+          .attr("viewBox", [0, 0, width, height])
+          .style("max-width", "100%")
+          .style("height", "auto");
+
+        const tooltip = d3.select("#tooltip");
+
+        // Color scale for node groups
+        const color = d3
+          .scaleOrdinal(d3.schemeCategory10)
+          .domain([
+            "Entry Point",
+            "Ingestion Pipeline",
+            "Generative Core",
+            "Knowledge Base",
+            "Augmentation Framework",
+            "External Gem",
+          ]);
+
+        // --- 3. D3 FORCE SIMULATION ---
+        const simulation = d3
+          .forceSimulation(graphData.nodes)
+          .force(
+            "link",
+            d3
+              .forceLink(graphData.links)
+              .id((d) => d.id)
+              .distance(150),
+          )
+          .force("charge", d3.forceManyBody().strength(-400))
+          .force("center", d3.forceCenter(width / 2, height / 2))
+          .on("tick", ticked);
+
+        // --- 4. DRAWING ELEMENTS ---
+        const link = svg
+          .append("g")
+          .attr("stroke", "#999")
+          .selectAll("line")
+          .data(graphData.links)
+          .join("line")
+          .attr("class", (d) => `link ${d.type}`)
+          .attr("stroke-width", (d) => Math.sqrt(d.weight))
+          .on("mouseover", (event, d) => {
+            tooltip.transition().duration(200).style("opacity", 0.9);
+            tooltip
+              .html(
+                `<strong>Type:</strong> ${d.type.replace("-", " ")}<br><strong>Info:</strong> ${d.info}`,
+              )
+              .style("left", event.pageX + 15 + "px")
+              .style("top", event.pageY - 28 + "px");
+          })
+          .on("mouseout", () => {
+            tooltip.transition().duration(500).style("opacity", 0);
+          });
+
+        const node = svg
+          .append("g")
+          .attr("class", "nodes")
+          .selectAll("g")
+          .data(graphData.nodes)
+          .join("g")
+          .attr("class", "node")
+          .call(drag(simulation));
+
+        node
+          .append("circle")
+          .attr("r", (d) => (d.group === "External Gem" ? 15 : 25))
+          .attr("fill", (d) => color(d.group))
+          .attr("stroke", "#fff")
+          .attr("stroke-width", 2)
+          .on("mouseover", (event, d) => {
+            tooltip.transition().duration(200).style("opacity", 0.9);
+            tooltip
+              .html(`<strong>${d.label}</strong> (${d.group})<br>${d.insight}`)
+              .style("left", event.pageX + 15 + "px")
+              .style("top", event.pageY - 28 + "px");
+          })
+          .on("mouseout", () => {
+            tooltip.transition().duration(500).style("opacity", 0);
+          });
+
+        node
+          .append("text")
+          .text((d) => d.label)
+          .attr("y", (d) => (d.group === "External Gem" ? 25 : 35));
+
+        // --- 5. SIMULATION TICK HANDLER ---
+        function ticked() {
+          link
+            .attr("x1", (d) => d.source.x)
+            .attr("y1", (d) => d.source.y)
+            .attr("x2", (d) => d.target.x)
+            .attr("y2", (d) => d.target.y);
+
+          node.attr("transform", (d) => `translate(${d.x},${d.y})`);
+        }
+
+        // --- 6. DRAG & DROP FUNCTIONALITY ---
+        function drag(simulation) {
+          function dragstarted(event) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            event.subject.fx = event.subject.x;
+            event.subject.fy = event.subject.y;
+          }
+          function dragged(event) {
+            event.subject.fx = event.x;
+            event.subject.fy = event.y;
+          }
+          function dragended(event) {
+            if (!event.active) simulation.alphaTarget(0);
+            event.subject.fx = null;
+            event.subject.fy = null;
+          }
+          return d3
+            .drag()
+            .on("start", dragstarted)
+            .on("drag", dragged)
+            .on("end", dragended);
+        }
+
+        // --- 7. LEGEND GENERATION ---
+        const legendContainer = d3.select("#legend .space-y-2");
+        const legendItems = legendContainer
+          .selectAll("div")
+          .data(color.domain())
+          .join("div")
+          .attr("class", "flex items-center");
+
+        legendItems
+          .append("div")
+          .style("width", "12px")
+          .style("height", "12px")
+          .style("background-color", (d) => color(d))
+          .attr("class", "rounded-full mr-2");
+
+        legendItems.append("span").text((d) => d);
+      });
+    </script>
+  </body>
+</html>

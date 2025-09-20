@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MemexRAG - Interactive Architecture Diagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #111827; /* Tailwind gray-900 */
+        color: #f3f4f6; /* Tailwind gray-100 */
+        overflow: hidden; /* Prevent body scrolling */
+      }
+      #graph-container {
+        cursor: move; /* Grab cursor */
+      }
+      .link {
+        stroke: #4b5563; /* Tailwind gray-600 */
+        stroke-opacity: 0.7;
+      }
+      .node text {
+        fill: #e5e7eb; /* Tailwind gray-200 */
+        font-size: 10px;
+        pointer-events: none;
+        text-anchor: middle;
+        dominant-baseline: central;
+      }
+      .link-text {
+        font-size: 8px;
+        fill: #9ca3af; /* Tailwind gray-400 */
+        text-anchor: middle;
+      }
+      .tooltip {
+        position: absolute;
+        text-align: left;
+        padding: 8px 12px;
+        font-size: 14px;
+        background: #1f2937; /* Tailwind gray-800 */
+        border: 1px solid #4b5563; /* Tailwind gray-600 */
+        border-radius: 8px;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.2s;
+        max-width: 300px;
+        z-index: 10;
+      }
+      .tooltip h3 {
+        font-weight: bold;
+        color: #ffffff;
+        margin-bottom: 4px;
+      }
+      .tooltip p {
+        font-size: 12px;
+        color: #d1d5db; /* Tailwind gray-300 */
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .legend-color {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body
+    class="w-full min-h-screen flex flex-col items-center justify-center p-4"
+  >
+    <div class="w-full max-w-7xl text-center mb-4">
+      <h1 class="text-3xl font-bold text-white">
+        MemexRAG - Living Architecture Diagram
+      </h1>
+      <p class="text-gray-400 mt-1">
+        An interactive visualization of the codebase, module relationships, and
+        data flows.
+      </p>
+      <p class="text-sm text-gray-500 mt-1">
+        Scroll to zoom, click and drag background to pan.
+      </p>
+    </div>
+
+    <div
+      class="w-full max-w-7xl h-[70vh] bg-gray-800/50 border border-gray-700 rounded-lg shadow-lg relative"
+      id="graph-container"
+    >
+      <!-- Tooltip will be appended here by D3 -->
+    </div>
+
+    <div
+      class="w-full max-w-7xl mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+    >
+      <div
+        id="legend"
+        class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"
+      >
+        <h2 class="text-lg font-semibold mb-2 text-white">Legend</h2>
+      </div>
+      <div
+        id="insights"
+        class="bg-gray-800/50 p-4 rounded-lg border border-gray-700 md:col-span-2 lg:col-span-3"
+      >
+        <h2 class="text-lg font-semibold mb-2 text-white">
+          Architectural Insights
+        </h2>
+        <ul class="list-disc list-inside text-sm text-gray-300 space-y-2">
+          <li>
+            <span class="font-semibold text-sky-400"
+              >Central Orchestrator:</span
+            >
+            The
+            <span class="font-mono text-xs bg-gray-700 p-1 rounded">Rails</span>
+            application acts as the system's core, connecting and coordinating
+            all other components.
+          </li>
+          <li>
+            <span class="font-semibold text-teal-400"
+              >Asynchronous by Design:</span
+            >
+            The use of
+            <span class="font-mono text-xs bg-gray-700 p-1 rounded"
+              >Falcon</span
+            >
+            &
+            <span class="font-mono text-xs bg-gray-700 p-1 rounded">Async</span>
+            is a critical choice to handle the high-latency, I/O-bound nature of
+            LLM API calls, ensuring scalability.
+          </li>
+          <li>
+            <span class="font-semibold text-rose-400"
+              >Decoupled NLP Processing:</span
+            >
+            Encapsulating
+            <span class="font-mono text-xs bg-gray-700 p-1 rounded">spaCy</span>
+            in a separate Docker container isolates the Python environment,
+            simplifying the main Rails app and improving maintainability.
+          </li>
+          <li>
+            <span class="font-semibold text-amber-400"
+              >Phased Database Strategy:</span
+            >
+            The architecture pragmatically starts with
+            <span class="font-mono text-xs bg-gray-700 p-1 rounded"
+              >PostgreSQL</span
+            >
+            for both relational and graph data, with a clear, planned migration
+            path to
+            <span class="font-mono text-xs bg-gray-700 p-1 rounded">Neo4j</span>
+            for advanced graph queries as the system matures.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // 1. Data Definition
+      const graphData = {
+        nodes: [
+          // Core Application & Web Server
+          {
+            id: "Rails",
+            group: "Core",
+            size: 30,
+            description:
+              "The central application framework, orchestrating all business logic, data models, and workflows.",
+          },
+          {
+            id: "Falcon",
+            group: "Concurrency",
+            size: 22,
+            description:
+              "A high-performance, asynchronous web server built for Ruby, essential for handling concurrent I/O-bound operations like LLM streaming.",
+          },
+          {
+            id: "Async",
+            group: "Concurrency",
+            size: 18,
+            description:
+              "The underlying fiber-based concurrency library that powers Falcon, enabling non-blocking I/O.",
+          },
+          {
+            id: "Async-Job",
+            group: "Concurrency",
+            size: 18,
+            description:
+              "An Active Job adapter for the Async ecosystem, used for performing background jobs (like document ingestion) asynchronously.",
+          },
+
+          // LLM Orchestration
+          {
+            id: "RubyLLM",
+            group: "LLM",
+            size: 25,
+            description:
+              "The primary client for interacting with various LLM providers (OpenAI, Anthropic, etc.). Handles API requests for generation and embeddings.",
+          },
+          {
+            id: "RubyLLM-Schema",
+            group: "LLM",
+            size: 16,
+            description:
+              "A DSL for defining structured JSON outputs, ensuring the LLM returns predictable, machine-readable data for creating trails.",
+          },
+          {
+            id: "RubyLLM-MCP",
+            group: "LLM",
+            size: 16,
+            description:
+              "A client for the Model Context Protocol, enabling the LLM to interact with external tools and data sources in an agentic fashion.",
+          },
+
+          // Data Ingestion & Preprocessing
+          {
+            id: "Pragmatic Segmenter",
+            group: "Preprocessing",
+            size: 16,
+            description:
+              "A rule-based gem for reliably splitting text into sentences, the first step in the chunking pipeline.",
+          },
+          {
+            id: "SpacyAPI Service",
+            group: "Preprocessing",
+            size: 22,
+            description:
+              "A containerized Python microservice providing advanced NLP (NER, POS tagging) via a REST API, decoupling the Python dependency.",
+          },
+          {
+            id: "Informers",
+            group: "Preprocessing",
+            size: 18,
+            description:
+              "A gem for running local transformer models (e.g., for embeddings), ensuring data privacy and cost control for bulk processing.",
+          },
+
+          // Database & Storage
+          {
+            id: "PostgreSQL",
+            group: "Database",
+            size: 28,
+            description:
+              "The primary relational database, storing application data, document chunks, and vector embeddings.",
+          },
+          {
+            id: "pgvector",
+            group: "Database",
+            size: 20,
+            description:
+              "A PostgreSQL extension that adds vector similarity search capabilities, turning the relational DB into a powerful vector database.",
+          },
+          {
+            id: "Neighbor",
+            group: "Database",
+            size: 18,
+            description:
+              "An ActiveRecord-native gem that provides a clean, idiomatic interface for querying vectors stored with pgvector.",
+          },
+          {
+            id: "Neo4j",
+            group: "Database",
+            size: 24,
+            isFuture: true,
+            description:
+              "A native graph database planned for future integration to manage complex associative trails and enable advanced graph-based queries.",
+          },
+          {
+            id: "ActiveGraph",
+            group: "Database",
+            size: 18,
+            isFuture: true,
+            description:
+              "An Object-Graph Mapper (OGM) gem for interacting with Neo4j using ActiveRecord-like patterns.",
+          },
+
+          // UI & Deployment
+          {
+            id: "TTY-Toolkit",
+            group: "UI",
+            size: 20,
+            description:
+              "A suite of gems for building a powerful and interactive Command-Line Interface (CLI) as the primary user workspace.",
+          },
+          {
+            id: "Docker",
+            group: "Deployment",
+            size: 26,
+            description:
+              "The containerization platform used to package the Rails app, Python NLP service, and databases for consistent development and deployment.",
+          },
+        ],
+        links: [
+          // Web & Concurrency
+          { source: "Falcon", target: "Rails", value: 10, label: "Serves" },
+          { source: "Falcon", target: "Async", value: 8, label: "Built on" },
+          {
+            source: "Rails",
+            target: "Async-Job",
+            value: 5,
+            label: "Uses for jobs",
+          },
+
+          // Rails Core Logic
+          {
+            source: "Rails",
+            target: "TTY-Toolkit",
+            value: 6,
+            label: "Drives CLI",
+          },
+          {
+            source: "Rails",
+            target: "RubyLLM",
+            value: 10,
+            label: "Orchestrates LLM calls",
+          },
+          {
+            source: "Rails",
+            target: "Neighbor",
+            value: 9,
+            label: "Queries vectors",
+          },
+          {
+            source: "Rails",
+            target: "Pragmatic Segmenter",
+            value: 7,
+            label: "Uses for chunking",
+          },
+          {
+            source: "Rails",
+            target: "SpacyAPI Service",
+            value: 8,
+            label: "HTTP requests for NLP",
+          },
+          {
+            source: "Rails",
+            target: "Informers",
+            value: 7,
+            label: "Generates local embeddings",
+          },
+
+          // LLM Stack
+          {
+            source: "RubyLLM",
+            target: "RubyLLM-Schema",
+            value: 6,
+            label: "Uses for structured output",
+          },
+          {
+            source: "RubyLLM",
+            target: "RubyLLM-MCP",
+            value: 4,
+            label: "Integrates external tools",
+          },
+
+          // Database Stack
+          {
+            source: "Neighbor",
+            target: "PostgreSQL",
+            value: 10,
+            label: "Executes vector SQL",
+          },
+          {
+            source: "PostgreSQL",
+            target: "pgvector",
+            value: 9,
+            label: "Extension for",
+          },
+          {
+            source: "Rails",
+            target: "PostgreSQL",
+            value: 12,
+            label: "ActiveRecord (ORM)",
+          },
+
+          // Future DB
+          {
+            source: "Rails",
+            target: "ActiveGraph",
+            value: 3,
+            label: "Future OGM for Trails",
+            isFuture: true,
+          },
+          {
+            source: "ActiveGraph",
+            target: "Neo4j",
+            value: 3,
+            label: "Connects to",
+            isFuture: true,
+          },
+
+          // Deployment
+          {
+            source: "Docker",
+            target: "Rails",
+            value: 10,
+            label: "Containerizes",
+          },
+          {
+            source: "Docker",
+            target: "PostgreSQL",
+            value: 10,
+            label: "Containerizes",
+          },
+          {
+            source: "Docker",
+            target: "SpacyAPI Service",
+            value: 10,
+            label: "Containerizes",
+          },
+        ],
+      };
+
+      const groupColors = {
+        Core: "#3b82f6", // blue-500
+        Concurrency: "#22c55e", // green-500
+        LLM: "#ec4899", // pink-500
+        Preprocessing: "#f97316", // orange-500
+        Database: "#a855f7", // purple-500
+        UI: "#14b8a6", // teal-500
+        Deployment: "#6366f1", // indigo-500
+      };
+
+      // 2. Setup SVG and Simulation
+      const containerDiv = d3.select("#graph-container");
+      const width = containerDiv.node().getBoundingClientRect().width;
+      const height = containerDiv.node().getBoundingClientRect().height;
+
+      const svg = containerDiv
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [0, 0, width, height]);
+
+      const g = svg.append("g"); // This group will be transformed by zoom
+
+      // Tooltip
+      const tooltip = d3
+        .select("#graph-container")
+        .append("div")
+        .attr("class", "tooltip");
+
+      const simulation = d3
+        .forceSimulation(graphData.nodes)
+        .force(
+          "link",
+          d3
+            .forceLink(graphData.links)
+            .id((d) => d.id)
+            .distance(120)
+            .strength(0.5),
+        )
+        .force("charge", d3.forceManyBody().strength(-500))
+        .force("center", d3.forceCenter(width / 2, height / 2))
+        .force("x", d3.forceX(width / 2).strength(0.05))
+        .force("y", d3.forceY(height / 2).strength(0.05));
+
+      // Arrowhead marker definition
+      svg
+        .append("defs")
+        .selectAll("marker")
+        .data(["end"])
+        .enter()
+        .append("marker")
+        .attr("id", String)
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 15)
+        .attr("refY", 0)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M0,-5L10,0L0,5")
+        .attr("fill", "#4b5563");
+
+      // 3. Render Elements into the 'g' group
+      const linkGroup = g.append("g").attr("class", "links");
+
+      const link = linkGroup
+        .selectAll("line")
+        .data(graphData.links)
+        .enter()
+        .append("line")
+        .attr("class", "link")
+        .attr("stroke-width", (d) => Math.sqrt(d.value / 2))
+        .attr("marker-end", "url(#end)")
+        .style("stroke-dasharray", (d) => (d.isFuture ? "3, 3" : "none"));
+
+      const linkText = linkGroup
+        .selectAll(".link-text")
+        .data(graphData.links)
+        .enter()
+        .append("text")
+        .attr("class", "link-text")
+        .text((d) => d.label);
+
+      const node = g
+        .append("g")
+        .attr("class", "nodes")
+        .selectAll("g")
+        .data(graphData.nodes)
+        .enter()
+        .append("g")
+        .attr("class", "node");
+
+      const circles = node
+        .append("circle")
+        .attr("r", (d) => d.size / 2)
+        .attr("fill", (d) => groupColors[d.group] || "#71717a")
+        .style("stroke", (d) =>
+          d.isFuture ? "#f59e0b" : "#1f2937",
+        ) /* amber-500 for future */
+        .style("stroke-width", (d) => (d.isFuture ? 2 : 1))
+        .style("stroke-dasharray", (d) => (d.isFuture ? "4, 2" : "none"));
+
+      const labels = node
+        .append("text")
+        .text((d) => d.id)
+        .attr("dy", (d) => d.size / 2 + 12);
+
+      // 4. Interactivity
+      // Drag functionality
+      node.call(
+        d3
+          .drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended),
+      );
+
+      // Tooltip functionality
+      node
+        .on("mouseover", (event, d) => {
+          tooltip.transition().duration(200).style("opacity", 0.95);
+          tooltip
+            .html(`<h3>${d.id}</h3><p>${d.description}</p>`)
+            .style("left", event.pageX + 15 + "px")
+            .style("top", event.pageY - 28 + "px");
+
+          link.style("stroke", (l) =>
+            l.source.id === d.id || l.target.id === d.id
+              ? "#e5e7eb"
+              : "#4b5563",
+          );
+          link.style("stroke-opacity", (l) =>
+            l.source.id === d.id || l.target.id === d.id ? 1 : 0.7,
+          );
+        })
+        .on("mouseout", (event, d) => {
+          tooltip.transition().duration(500).style("opacity", 0);
+          link.style("stroke", "#4b5563");
+          link.style("stroke-opacity", 0.7);
+        });
+
+      // Zoom functionality
+      const zoom = d3
+        .zoom()
+        .scaleExtent([0.2, 5]) // Min 0.2x, Max 5x zoom
+        .on("zoom", (event) => {
+          g.attr("transform", event.transform);
+        });
+
+      svg.call(zoom);
+
+      // 5. Simulation Ticker
+      simulation.on("tick", () => {
+        link
+          .attr("x1", (d) => d.source.x)
+          .attr("y1", (d) => d.source.y)
+          .attr("x2", (d) => d.target.x)
+          .attr("y2", (d) => d.target.y);
+
+        node.attr("transform", (d) => `translate(${d.x},${d.y})`);
+
+        linkText
+          .attr("x", (d) => (d.source.x + d.target.x) / 2)
+          .attr("y", (d) => (d.source.y + d.target.y) / 2);
+      });
+
+      // Drag functions
+      function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
+
+      function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+      }
+
+      function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
+
+      // 6. Legend
+      const legendContainer = d3.select("#legend");
+      Object.entries(groupColors).forEach(([group, color]) => {
+        const legendItem = legendContainer
+          .append("div")
+          .attr("class", "legend-item");
+        legendItem
+          .append("div")
+          .attr("class", "legend-color")
+          .style("background-color", color);
+        legendItem
+          .append("span")
+          .text(group)
+          .attr("class", "text-sm text-gray-300");
+      });
+    </script>
+  </body>
+</html>
