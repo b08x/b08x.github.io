@@ -8,7 +8,7 @@ permalink: /
 # Welcome! 🌱
 
 <p style="padding: 3em 1em; background: #f5f7ff; border-radius: 4px;">
-  A collection of observations, notes, ideas, and art.
+  A collection of observations tied together with context
 </p>
 
 <strong>Current Projects:</strong>
@@ -18,6 +18,8 @@ The Goal: Flexible Neural Synchrony
 <a href="{{ site.baseurl }}/projects/neuro_divergance">Neurodivergence & Relational Dynamics</a>
 
 <a href="{{ site.baseurl }}/projects/relational_dynamics_explorer">Relational Dynamics Explorer</a>
+
+<a href="{{ site.baseurl }}/projects/relational_dynamics_burnout">Relational Dynamics & Burnout</a>
 
 <strong>Recently updated notes</strong>
 

@@ -1,0 +1,705 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relational Dynamics & Burnout Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chosen Palette: Serene Neutrals -->
+    <!-- Application Structure Plan: The application is designed as an interactive dashboard. This structure was chosen over a linear format to allow users to non-linearly explore the complex, multi-faceted relationships between different psychological disorders, relational states (aligned vs. mal-aligned), and key concepts like neural synchrony and burnout. The user flow is centered around selecting a "Disorder in Focus" which then dynamically updates all other modules on the page. An "Alignment Toggle" acts as the primary interactive control, allowing users to instantly see the cause-and-effect shifts across the entire system. This hub-and-spoke model makes the intricate connections intuitive and easy to grasp. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Main disorders -> Goal: Organize/Select -> Viz/Method: Interactive HTML buttons -> Interaction: Click to update entire dashboard state -> Justification: Provides a clear, central navigation point for the user's exploration.
+        - Report Info: Aligned vs. Mal-aligned states -> Goal: Compare/Show Change -> Viz/Method: HTML/CSS toggle switch -> Interaction: Click to toggle between the two core states -> Justification: The most direct way to demonstrate the central theme of shifting dynamics.
+        - Report Info: Disorder Trait Expression -> Goal: Compare multifaceted data -> Viz/Method: Radar Chart -> Interaction: Dynamically updates on disorder/state change -> Justification: Excellent for showing the changing "shape" of a disorder's expression across multiple traits simultaneously. Library: Chart.js.
+        - Report Info: Neural Synchrony -> Goal: Visualize a relationship concept -> Viz/Method: Line Chart -> Interaction: Dynamically updates -> Justification: A simple line chart effectively visualizes the concept of convergence (alignment) vs. divergence (mal-alignment) in brain activity. Library: Chart.js.
+        - Report Info: Caregiver Burnout -> Goal: Inform/Show Intensity -> Viz/Method: Styled HTML progress bar/gauge -> Interaction: Dynamically updates -> Justification: A simple, universally understood visual for showing rising risk or intensity.
+        - Report Info: All other concepts (Impression Management, Therapy Influence) -> Goal: Inform/Explain -> Viz/Method: Dynamic Text Blocks -> Interaction: Text content updates based on selections -> Justification: Direct textual explanation is best for these qualitative, nuanced concepts. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #fdfbf8;
+        color: #3d352f;
+      }
+      .active-button {
+        background-color: #a59b91 !important;
+        color: #ffffff !important;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      }
+      .toggle-bg:after {
+        content: "";
+        @apply absolute top-0.5 left-0.5 bg-white border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
+      }
+      input:checked + .toggle-bg:after {
+        transform: translateX(100%);
+        @apply border-white;
+      }
+      input:checked + .toggle-bg {
+        @apply bg-slate-600;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 350px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 350px;
+          max-height: 400px;
+        }
+      }
+      .card {
+        background-color: #ffffff;
+        border: 1px solid #e5e1dc;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease-in-out;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+      <header class="text-center mb-10">
+        <h1 class="text-4xl md:text-5xl font-bold text-[#4A403A] mb-2">
+          Relational Dynamics & Burnout Explorer
+        </h1>
+        <p class="text-lg text-[#6B5F58] max-w-3xl mx-auto">
+          An interactive model exploring psychological states in a flourishing
+          relationship between two independent individuals undergoing
+          psychedelic therapy.
+        </p>
+      </header>
+
+      <main id="app">
+        <div class="card p-6 md:p-8 mb-8">
+          <h2 class="text-2xl font-semibold text-[#4A403A] mb-3">
+            The Scenario
+          </h2>
+          <p class="text-[#6B5F58] leading-relaxed">
+            This model explores a relationship between two self-reliant, "lone
+            wolf" individuals who value their independence but share a deep
+            connection. They regularly engage in psychedelic therapy to foster
+            growth and understanding. We will examine how various psychological
+            disorders can shift from an
+            <span class="font-semibold text-[#8C7D72]">"Aligned"</span> state
+            (integrated, manageable, or even beneficial) to a
+            <span class="font-semibold text-[#8C7D72]">"Mal-aligned"</span>
+            state (creating friction, misunderstanding, and leading to caregiver
+            burnout), all within the context of this unique relational dynamic.
+          </p>
+        </div>
+
+        <div
+          class="sticky top-0 bg-[#FDFBF8]/80 backdrop-blur-sm py-4 z-10 mb-8"
+        >
+          <div class="flex flex-col items-center justify-center space-y-6">
+            <div>
+              <h3 class="text-lg font-semibold text-center text-[#4A403A] mb-3">
+                1. Select Disorder in Focus
+              </h3>
+              <div
+                id="disorder-selector"
+                class="flex flex-wrap justify-center gap-2 md:gap-3"
+              ></div>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-center text-[#4A403A] mb-3">
+                2. Toggle Relational State
+              </h3>
+              <div class="flex items-center justify-center space-x-4">
+                <span class="font-medium text-gray-600">Aligned</span>
+                <label
+                  for="alignment-toggle"
+                  class="flex items-center cursor-pointer"
+                >
+                  <div class="relative">
+                    <input
+                      type="checkbox"
+                      id="alignment-toggle"
+                      class="sr-only"
+                    />
+                    <div
+                      class="toggle-bg block bg-gray-200 w-11 h-6 rounded-full"
+                    ></div>
+                  </div>
+                </label>
+                <span class="font-medium text-gray-600">Mal-aligned</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="content-display" class="space-y-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="card p-6">
+              <h3
+                id="disorder-title"
+                class="text-xl font-semibold mb-4 text-center text-[#4A403A]"
+              ></h3>
+              <p
+                id="disorder-description"
+                class="text-[#6B5F58] leading-relaxed"
+              ></p>
+            </div>
+            <div class="card p-6">
+              <h3 class="text-xl font-semibold mb-4 text-center text-[#4A403A]">
+                Trait Expression Profile
+              </h3>
+              <div class="chart-container">
+                <canvas id="trait-chart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="card p-6">
+              <h3 class="text-xl font-semibold mb-4 text-center text-[#4A403A]">
+                Caregiver Burnout Risk
+              </h3>
+              <div class="w-full bg-gray-200 rounded-full h-6 mt-4">
+                <div
+                  id="burnout-gauge"
+                  class="bg-[#A59B91] h-6 rounded-full text-center text-white text-sm transition-all duration-500"
+                  style="width: 10%"
+                >
+                  10%
+                </div>
+              </div>
+              <p id="burnout-text" class="mt-4 text-[#6B5F58] text-center"></p>
+            </div>
+
+            <div class="card p-6 col-span-1 md:col-span-2 lg:col-span-1">
+              <h3 class="text-xl font-semibold mb-4 text-center text-[#4A403A]">
+                Impression Management
+              </h3>
+              <p
+                id="impression-text"
+                class="text-[#6B5F58] leading-relaxed"
+              ></p>
+            </div>
+
+            <div class="card p-6 md:col-span-2 lg:col-span-1">
+              <h3 class="text-xl font-semibold mb-4 text-center text-[#4A403A]">
+                Psychedelic Therapy's Influence
+              </h3>
+              <p id="therapy-text" class="text-[#6B5F58] leading-relaxed"></p>
+            </div>
+
+            <div class="card p-6 md:col-span-2 lg:col-span-3">
+              <h3 class="text-xl font-semibold mb-4 text-center text-[#4A403A]">
+                Neural Synchrony
+              </h3>
+              <p id="sync-text" class="text-[#6B5F58] text-center mb-4"></p>
+              <div class="chart-container h-64 max-h-72">
+                <canvas id="sync-chart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const appData = {
+        adhd: {
+          title: "ADHD in Adulthood",
+          description:
+            "Characterized by patterns of inattention, hyperactivity, and impulsivity. In high-functioning adults, it can manifest as immense creativity, hyperfocus on passions, and high energy, but also as disorganization, emotional dysregulation, and difficulty with mundane tasks.",
+          aligned: {
+            traits: {
+              labels: [
+                "Hyperfocus",
+                "Creativity",
+                "Impulsivity",
+                "Inattention",
+                "Emotional Dysregulation",
+              ],
+              values: [8, 9, 3, 2, 2],
+            },
+            burnout: {
+              level: 10,
+              text: "Minimal risk. Partner appreciates the energy and creativity. Predictability is low but manageable.",
+            },
+            impression:
+              'Presents as "quirky" and "energetic." Self-presentation is authentic, with little energy spent hiding traits. The individual leans into their strengths, like rapid idea generation.',
+            therapy:
+              "Therapy helps channel hyperfocus into constructive shared goals and provides strategies for managing inattention, strengthening the relational container.",
+            sync: {
+              text: 'Synchrony is high but dynamic. Partners "ride the wave" of creative energy together, finding a unique rhythm. Communication is rapid and associative.',
+              values: [
+                { x: 1, y: 4 },
+                { x: 2, y: 5 },
+                { x: 3, y: 6 },
+                { x: 4, y: 5 },
+                { x: 5, y: 7 },
+                { x: 6, y: 8 },
+                { x: 1, y: 3.5 },
+                { x: 2, y: 4.5 },
+                { x: 3, y: 5.8 },
+                { x: 4, y: 5.2 },
+                { x: 5, y: 6.5 },
+                { x: 6, y: 7.8 },
+              ],
+            },
+          },
+          malaligned: {
+            traits: {
+              labels: [
+                "Hyperfocus",
+                "Creativity",
+                "Impulsivity",
+                "Inattention",
+                "Emotional Dysregulation",
+              ],
+              values: [3, 4, 8, 9, 8],
+            },
+            burnout: {
+              level: 85,
+              text: "High risk. Constant task-switching, forgotten commitments, and emotional outbursts exhaust the caregiver partner, who feels unheard and undervalued.",
+            },
+            impression:
+              'Presents as "unreliable" or "chaotic." To compensate for perceived failures, the individual might overcommit or mask their struggles, leading to eventual collapse of this facade.',
+            therapy:
+              "The therapeutic space becomes a source of stress, with insights being weaponized or forgotten, leading to frustration and a breakdown of trust in the process.",
+            sync: {
+              text: "Synchrony breaks down. One partner's chaotic mental state creates unpredictable signals, making it impossible for the other to attune. Communication is fragmented.",
+              values: [
+                { x: 1, y: 4 },
+                { x: 2, y: 2 },
+                { x: 3, y: 8 },
+                { x: 4, y: 3 },
+                { x: 5, y: 7 },
+                { x: 6, y: 1 },
+                { x: 1, y: 3.5 },
+                { x: 2, y: 4.5 },
+                { x: 3, y: 5 },
+                { x: 4, y: 4 },
+                { x: 5, y: 3.5 },
+                { x: 6, y: 3.8 },
+              ],
+            },
+          },
+        },
+        asd: {
+          title: "Autism Spectrum Disorder (ASD) in Adulthood",
+          description:
+            "A neurodevelopmental condition affecting social interaction, communication, and behavior. In adults, it can manifest as deep expertise in specific interests, unwavering loyalty, and honesty, but also as social misunderstandings, sensory sensitivities, and a need for routine.",
+          aligned: {
+            traits: {
+              labels: [
+                "Special Interests",
+                "Logical Thinking",
+                "Routine Adherence",
+                "Social Reciprocity Deficit",
+                "Sensory Sensitivity",
+              ],
+              values: [9, 8, 7, 3, 4],
+            },
+            burnout: {
+              level: 15,
+              text: "Low risk. Routines provide stability. Partner values the deep conversations and honesty, and accommodations for sensory needs are integrated into the relationship.",
+            },
+            impression:
+              'Presents as "focused" and "authentic." The individual doesn\'t engage in typical social games, leading to a perception of sincerity. Their self-presentation is direct and unmasked.',
+            therapy:
+              "Therapy provides a structured way to explore emotions and social nuances. It helps translate abstract feelings into concrete language, enhancing mutual understanding.",
+            sync: {
+              text: "Synchrony is achieved through shared intellectual interests and predictable routines. It's a calm, stable, and deep connection rather than a fluctuating, emotional one.",
+              values: [
+                { x: 1, y: 4 },
+                { x: 2, y: 4.2 },
+                { x: 3, y: 4.5 },
+                { x: 4, y: 4.8 },
+                { x: 5, y: 5 },
+                { x: 6, y: 5.3 },
+                { x: 1, y: 4.1 },
+                { x: 2, y: 4.3 },
+                { x: 3, y: 4.6 },
+                { x: 4, y: 4.9 },
+                { x: 5, y: 5.1 },
+                { x: 6, y: 5.4 },
+              ],
+            },
+          },
+          malaligned: {
+            traits: {
+              labels: [
+                "Special Interests",
+                "Logical Thinking",
+                "Routine Adherence",
+                "Social Reciprocity Deficit",
+                "Sensory Sensitivity",
+              ],
+              values: [5, 4, 3, 9, 9],
+            },
+            burnout: {
+              level: 90,
+              text: 'Very high risk. Caregiver feels like they are "walking on eggshells" to avoid sensory overload or meltdowns. The lack of perceived emotional reciprocity feels isolating.',
+            },
+            impression:
+              'Presents as "rigid" and "unfeeling." The individual may withdraw completely to manage overwhelming sensory input, which is misinterpreted as rejection or disinterest.',
+            therapy:
+              "Therapeutic insights are rejected as illogical or threatening to established routines. The process itself can become a source of sensory and emotional overload.",
+            sync: {
+              text: "Synchrony is nearly impossible. One partner is in a state of sensory and emotional overload, while the other is in a state of confusion and emotional starvation.",
+              values: [
+                { x: 1, y: 8 },
+                { x: 2, y: 7 },
+                { x: 3, y: 9 },
+                { x: 4, y: 6 },
+                { x: 5, y: 8 },
+                { x: 6, y: 7 },
+                { x: 1, y: 2 },
+                { x: 2, y: 3 },
+                { x: 3, y: 2.5 },
+                { x: 4, y: 3.2 },
+                { x: 5, y: 2.8 },
+                { x: 6, y: 3.5 },
+              ],
+            },
+          },
+        },
+        delusions: {
+          title: "Grandiose/Attachment Delusions",
+          description:
+            "Characterized by unfounded beliefs of superiority, specialness, or an intense, often delusional, belief in a unique and destined connection with another person. This can blur the lines between profound love and distorted reality.",
+          aligned: {
+            traits: {
+              labels: [
+                "Shared Purpose",
+                "Idealization",
+                "Confidence",
+                "Reality Testing",
+                "Jealousy/Possessiveness",
+              ],
+              values: [9, 7, 8, 8, 2],
+            },
+            burnout: {
+              level: 25,
+              text: 'Moderate risk. The shared "specialness" is intoxicating and bonding. However, the caregiver must gently provide reality checks, which can be tiring.',
+            },
+            impression:
+              'Presents as a "power couple." Their shared narrative is magnetic and confident. They project an image of unbreakable unity and purpose, which is genuinely felt.',
+            therapy:
+              "Therapy helps ground the grandiose beliefs in shared, achievable goals. It provides a safe space to differentiate between healthy idealization and reality-detaching delusions.",
+            sync: {
+              text: "Synchrony is extremely high, almost to the point of fusion. The shared delusion creates a powerful feedback loop, making their connection feel cosmically significant.",
+              values: [
+                { x: 1, y: 5 },
+                { x: 2, y: 6 },
+                { x: 3, y: 7 },
+                { x: 4, y: 8 },
+                { x: 5, y: 9 },
+                { x: 6, y: 10 },
+                { x: 1, y: 5.1 },
+                { x: 2, y: 6.2 },
+                { x: 3, y: 7.1 },
+                { x: 4, y: 8.2 },
+                { x: 5, y: 9.1 },
+                { x: 6, y: 10 },
+              ],
+            },
+          },
+          malaligned: {
+            traits: {
+              labels: [
+                "Shared Purpose",
+                "Idealization",
+                "Confidence",
+                "Reality Testing",
+                "Jealousy/Possessiveness",
+              ],
+              values: [3, 4, 3, 1, 10],
+            },
+            burnout: {
+              level: 95,
+              text: 'Extreme risk. The caregiver is constantly trying to manage the partner\'s paranoia and jealousy. The "special bond" becomes a prison, isolating them from outside support.',
+            },
+            impression:
+              'Presents as "unstable" and "paranoid." The intense attachment turns into public displays of jealousy or accusations. Self-presentation is about controlling the partner\'s interactions.',
+            therapy:
+              "The therapist may be incorporated into the delusion (e.g., as a threat to the special bond), making genuine progress impossible. The process is viewed with suspicion.",
+            sync: {
+              text: "Synchrony is a caricature of attunement. It is driven by fear and control. One partner constantly monitors the other, creating a hyper-vigilant, stressful, and distorted connection.",
+              values: [
+                { x: 1, y: 2 },
+                { x: 2, y: 8 },
+                { x: 3, y: 3 },
+                { x: 4, y: 9 },
+                { x: 5, y: 2 },
+                { x: 6, y: 10 },
+                { x: 1, y: 2.2 },
+                { x: 2, y: 7.5 },
+                { x: 3, y: 3.5 },
+                { x: 4, y: 8.5 },
+                { x: 5, y: 2.5 },
+                { x: 6, y: 9.5 },
+              ],
+            },
+          },
+        },
+        did: {
+          title: "Dissociative Identity Disorder",
+          description:
+            "Often a response to trauma, characterized by having two or more distinct personality states (alters). In a stable environment, this can be managed with internal cooperation, but stress can trigger chaotic and unpredictable switching.",
+          aligned: {
+            traits: {
+              labels: [
+                "Internal Cooperation",
+                "Memory Cohesion",
+                "Functional Switching",
+                "Adaptability",
+                "Lost Time",
+              ],
+              values: [8, 7, 7, 9, 2],
+            },
+            burnout: {
+              level: 30,
+              text: "Moderate risk. The caregiver partner is aware of the system and has relationships with key alters. Communication is open, but requires significant mental energy to track.",
+            },
+            impression:
+              'Presents as highly "adaptable." The individual (as a system) can call upon different alters with different skills for various situations. This is managed discreetly.',
+            therapy:
+              "Therapy is crucial for internal communication and cooperation. It helps the system work towards shared goals and ensures all alters feel heard and respected.",
+            sync: {
+              text: "Synchrony is complex but possible. The caregiver learns to attune to the subtle cues of different alters, adapting their interaction style accordingly. It requires immense focus.",
+              values: [
+                { x: 1, y: 4 },
+                { x: 2, y: 5 },
+                { x: 3, y: 4.5 },
+                { x: 4, y: 6 },
+                { x: 5, y: 5.5 },
+                { x: 6, y: 7 },
+                { x: 1, y: 3.8 },
+                { x: 2, y: 5.2 },
+                { x: 3, y: 4.7 },
+                { x: 4, y: 6.1 },
+                { x: 5, y: 5.6 },
+                { x: 6, y: 7 },
+              ],
+            },
+          },
+          malaligned: {
+            traits: {
+              labels: [
+                "Internal Cooperation",
+                "Memory Cohesion",
+                "Functional Switching",
+                "Adaptability",
+                "Lost Time",
+              ],
+              values: [1, 2, 2, 3, 10],
+            },
+            burnout: {
+              level: 100,
+              text: "Extreme. Rapid, chaotic switching means the caregiver never knows who they are talking to. Amnesia and lost time lead to broken promises and a sense of deep instability.",
+            },
+            impression:
+              'Presents as "dangerously unpredictable." The lack of internal control leads to conflicting actions and statements, destroying trust and creating a perception of chaos.',
+            therapy:
+              "The therapeutic alliance is shattered. Different alters may have opposing views of therapy, with some actively sabotaging the process. Trust is impossible to maintain.",
+            sync: {
+              text: "Synchrony is completely fragmented. The constant switching of alters presents a constantly changing signal, making attunement impossible. The caregiver is left disoriented.",
+              values: [
+                { x: 1, y: 5 },
+                { x: 2, y: 1 },
+                { x: 3, y: 9 },
+                { x: 4, y: 2 },
+                { x: 5, y: 8 },
+                { x: 6, y: 3 },
+                { x: 1, y: 4 },
+                { x: 2, y: 4 },
+                { x: 3, y: 4 },
+                { x: 4, y: 4 },
+                { x: 5, y: 4 },
+                { x: 6, y: 4 },
+              ],
+            },
+          },
+        },
+      };
+
+      let currentState = {
+        disorder: "adhd",
+        alignment: "aligned",
+      };
+
+      let traitChart, syncChart;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const disorderSelector = document.getElementById("disorder-selector");
+        const alignmentToggle = document.getElementById("alignment-toggle");
+
+        const disorders = [
+          { id: "adhd", name: "ADHD" },
+          { id: "asd", name: "ASD" },
+          { id: "delusions", name: "Delusions" },
+          { id: "did", name: "DID" },
+        ];
+
+        disorders.forEach((disorder) => {
+          const button = document.createElement("button");
+          button.dataset.disorder = disorder.id;
+          button.textContent = disorder.name;
+          button.className =
+            "px-4 py-2 rounded-full text-sm font-medium border-2 border-transparent text-[#6B5F58] bg-[#EFEAE4] hover:bg-[#A59B91] hover:text-white transition-all";
+          disorderSelector.appendChild(button);
+        });
+
+        disorderSelector.addEventListener("click", (e) => {
+          if (e.target.tagName === "BUTTON") {
+            currentState.disorder = e.target.dataset.disorder;
+            updateApp();
+          }
+        });
+
+        alignmentToggle.addEventListener("change", (e) => {
+          currentState.alignment = e.target.checked ? "malaligned" : "aligned";
+          updateApp();
+        });
+
+        initializeCharts();
+        updateApp();
+      });
+
+      function initializeCharts() {
+        const traitCtx = document
+          .getElementById("trait-chart")
+          .getContext("2d");
+        traitChart = new Chart(traitCtx, {
+          type: "radar",
+          data: {
+            labels: [],
+            datasets: [
+              {
+                label: "Expression Level",
+                data: [],
+                backgroundColor: "rgba(165, 155, 145, 0.2)",
+                borderColor: "rgba(165, 155, 145, 1)",
+                borderWidth: 2,
+                pointBackgroundColor: "rgba(165, 155, 145, 1)",
+              },
+            ],
+          },
+          options: {
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                angleLines: { color: "#E5E1DC" },
+                grid: { color: "#E5E1DC" },
+                pointLabels: { font: { size: 12 }, color: "#6B5F58" },
+                ticks: {
+                  backdropColor: "rgba(253, 251, 248, 1)",
+                  color: "#8C7D72",
+                  stepSize: 2,
+                },
+                min: 0,
+                max: 10,
+              },
+            },
+            plugins: {
+              legend: { display: false },
+            },
+          },
+        });
+
+        const syncCtx = document.getElementById("sync-chart").getContext("2d");
+        syncChart = new Chart(syncCtx, {
+          type: "line",
+          data: {
+            datasets: [
+              {
+                label: "Partner 1",
+                data: [],
+                borderColor: "rgba(165, 155, 145, 1)",
+                tension: 0.3,
+                borderWidth: 3,
+              },
+              {
+                label: "Partner 2",
+                data: [],
+                borderColor: "rgba(61, 53, 47, 0.5)",
+                tension: 0.3,
+                borderWidth: 3,
+                borderDash: [5, 5],
+              },
+            ],
+          },
+          options: {
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                type: "linear",
+                display: false,
+              },
+              y: {
+                display: false,
+                min: 0,
+                max: 12,
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+          },
+        });
+      }
+
+      function updateApp() {
+        const data = appData[currentState.disorder][currentState.alignment];
+        const disorderData = appData[currentState.disorder];
+
+        document.getElementById("disorder-title").textContent =
+          disorderData.title;
+        document.getElementById("disorder-description").textContent =
+          disorderData.description;
+
+        document
+          .querySelectorAll("#disorder-selector button")
+          .forEach((btn) => {
+            btn.classList.toggle(
+              "active-button",
+              btn.dataset.disorder === currentState.disorder,
+            );
+          });
+
+        document.getElementById("impression-text").textContent =
+          data.impression;
+        document.getElementById("therapy-text").textContent = data.therapy;
+
+        const burnoutGauge = document.getElementById("burnout-gauge");
+        burnoutGauge.style.width = `${data.burnout.level}%`;
+        burnoutGauge.textContent = `${data.burnout.level}%`;
+        document.getElementById("burnout-text").textContent = data.burnout.text;
+
+        document.getElementById("sync-text").textContent = data.sync.text;
+
+        traitChart.data.labels = data.traits.labels;
+        traitChart.data.datasets[0].data = data.traits.values;
+        traitChart.update();
+
+        syncChart.data.datasets[0].data = data.sync.values.slice(0, 6);
+        syncChart.data.datasets[1].data = data.sync.values.slice(6);
+        syncChart.update();
+      }
+    </script>
+  </body>
+</html>
