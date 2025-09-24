@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pragmatic Eclecticism</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is designed as a single-page dashboard with a fixed sidebar for navigation. This structure was chosen over a linear document to allow users to non-linearly explore the four distinct but interconnected types of eclecticism. The core user flow is: 1) Absorb the high-level concept in the header. 2) Use the sticky navigation to select a domain of eclecticism (Foundational, Methodological, etc.). 3) Interact with specific components (cards, charts) within that section to compare and contrast the selected theories. This interactive, section-based approach breaks down the dense academic text into manageable, thematic chunks, enhancing comprehension and engagement by focusing on one layer of the "Architecture of Meaning" at a time. -->
+    <!-- Visualization & Content Choices: 1. Foundational Eclecticism: Info: UG vs. SFL reconciled by Existentialism. Goal: Compare opposing ideas and their synthesis. Method: Side-by-side interactive cards. Interaction: Clicking a card highlights its role ('Given' vs. 'Chosen'). Justification: Visually separates the core conflict and its resolution. Method: HTML/CSS/JS. 2. Methodological Eclecticism: Info: CBT vs. NLP for different contexts. Goal: Show context-based selection. Method: A polar area chart. Interaction: Buttons dynamically update the chart and descriptive text to show priorities for each context (Ethical vs. Performance). Justification: A chart effectively visualizes the shifting priorities (Ethics vs. Speed) that drive pragmatic choice. Library: Chart.js. 3. Mechanistic Eclecticism: Info: INS, Neuroplasticity, Quantum Cognition. Goal: Explain biological/theoretical proofs. Method: A grid of expandable info cards. Interaction: Clicking a card reveals detailed utility. Justification: A clean, organized way to present distinct scientific concepts. Method: HTML/CSS/JS. 4. Applied Eclecticism: Info: AuDHD Dyad model. Goal: Demonstrate synthesis in a case study. Method: An interactive diagram (HTML/CSS) and a bar chart. Interaction: Hovering over diagram layers reveals their role; the bar chart visualizes the goal state. Justification: The diagram shows the multifactorial nature of the model, and the chart quantifies the therapeutic objective. Library: Chart.js. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #fdfbf8;
+        color: #38332e;
+      }
+      .nav-link {
+        transition: all 0.2s ease-in-out;
+      }
+      .nav-link.active {
+        background-color: #eaddd7;
+        color: #38332e;
+        font-weight: 600;
+      }
+      .nav-link:not(.active):hover {
+        background-color: #f4ece6;
+      }
+      .card {
+        background-color: #ffffff;
+        border: 1px solid #eaddd7;
+        transition:
+          transform 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.05),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 350px;
+        }
+      }
+      .btn-primary {
+        background-color: #bca89f;
+        color: #ffffff;
+        transition: background-color 0.2s;
+      }
+      .btn-primary:hover {
+        background-color: #a9948a;
+      }
+      .btn-secondary {
+        background-color: #eaddd7;
+        color: #38332e;
+        transition: background-color 0.2s;
+      }
+      .btn-secondary.active {
+        background-color: #38332e;
+        color: #ffffff;
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-in-out forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <div class="relative min-h-screen md:flex">
+      <aside
+        class="md:fixed md:top-0 md:left-0 md:h-screen md:w-64 bg-[#F4ECE6] text-gray-800 p-4 space-y-4"
+      >
+        <h1 class="text-xl font-bold text-[#38332E]">
+          Architecture of Meaning
+        </h1>
+        <nav class="flex flex-col space-y-2">
+          <a
+            href="#foundational"
+            class="nav-link p-3 rounded-lg text-sm font-medium"
+            >Foundational Eclecticism</a
+          >
+          <a
+            href="#methodological"
+            class="nav-link p-3 rounded-lg text-sm font-medium"
+            >Methodological Eclecticism</a
+          >
+          <a
+            href="#mechanistic"
+            class="nav-link p-3 rounded-lg text-sm font-medium"
+            >Mechanistic Eclecticism</a
+          >
+          <a href="#applied" class="nav-link p-3 rounded-lg text-sm font-medium"
+            >Applied Eclecticism</a
+          >
+          <a
+            href="#dissonance"
+            class="nav-link p-3 rounded-lg text-sm font-medium"
+            >Cognitive Dissonance</a
+          >
+          <a href="#quantum" class="nav-link p-3 rounded-lg text-sm font-medium"
+            >Quantum Cognition</a
+          >
+        </nav>
+      </aside>
+
+      <main class="flex-1 md:ml-64 p-6 md:p-10">
+        <header class="mb-10">
+          <h1 class="text-4xl font-bold text-[#38332E] mb-2">
+            Pragmatic Eclecticism
+          </h1>
+          <p class="text-lg text-gray-600">
+            Exploring the selective and utility-driven framework for
+            constructing a cohesive "Architecture of Meaning" that defines human
+            existence and change. This approach prioritizes what works—combining
+            ideas from conflicting domains to achieve philosophical utility,
+            scientific rigor, and functional application.
+          </p>
+        </header>
+
+        <section id="foundational" class="mb-12 space-y-6 scroll-mt-20">
+          <h2 class="text-3xl font-bold border-b-2 border-[#EADDD7] pb-2">
+            Foundational Eclecticism
+          </h2>
+          <p class="text-gray-700">
+            This section explores the fundamental negotiation of the human
+            condition: the tension between predetermined form and radical
+            freedom. The framework pragmatically selects two opposing linguistic
+            theories, not as a contradiction, but as the essential poles of our
+            existence. Click on the cards to see how each theory contributes to
+            the model.
+          </p>
+          <div class="grid md:grid-cols-2 gap-6 items-start">
+            <div id="card-given" class="card p-6 rounded-xl cursor-pointer">
+              <h3 class="font-bold text-xl mb-2 text-[#BCA89F]">
+                The "Given" (Form)
+              </h3>
+              <span class="text-sm font-semibold text-gray-500 block mb-3"
+                >Theory: Universal Grammar (UG)</span
+              >
+              <p class="text-gray-600">
+                UG is chosen to model the innate, biological blueprint of
+                language. It represents the "unchosen, given architecture" that
+                provides a universal starting point and defines our shared
+                humanity.
+              </p>
+            </div>
+            <div id="card-chosen" class="card p-6 rounded-xl cursor-pointer">
+              <h3 class="font-bold text-xl mb-2 text-[#BCA89F]">
+                The "Chosen" (Freedom)
+              </h3>
+              <span class="text-sm font-semibold text-gray-500 block mb-3"
+                >Theory: Systemic Functional Linguistics (SFL)</span
+              >
+              <p class="text-gray-600">
+                SFL is chosen because it views language as a network of
+                conscious, contextual choices. It models our radical freedom and
+                the individual's responsibility to create authentic meaning.
+              </p>
+            </div>
+          </div>
+          <div class="card p-6 rounded-xl bg-white mt-6">
+            <h3 class="font-bold text-xl mb-2">
+              Reconciliation via Existentialism
+            </h3>
+            <p id="reconciliation-text" class="text-gray-700">
+              The framework utilizes Existential Philosophy to reframe the
+              tension between UG's determinism and SFL's radical choice. This
+              tension is not a contradiction, but a reflection of the
+              fundamental negotiation inherent in being human. The grammar we
+              use becomes the very medium through which we execute this constant
+              negotiation and articulate our existence.
+            </p>
+          </div>
+        </section>
+
+        <section id="methodological" class="mb-12 space-y-6 scroll-mt-20">
+          <h2 class="text-3xl font-bold border-b-2 border-[#EADDD7] pb-2">
+            Methodological Eclecticism
+          </h2>
+          <p class="text-gray-700">
+            Here, we see pragmatism in action by selecting different tools for
+            different goals—even when those tools come from scientifically
+            opposed domains. The choice is driven entirely by context and
+            desired utility, balancing ethics against speed. Select a context
+            below to see how the priorities and chosen methods change.
+          </p>
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="w-full md:w-1/2">
+              <div class="flex justify-center space-x-4 mb-4">
+                <button
+                  id="btn-cbt"
+                  class="btn-secondary px-4 py-2 rounded-lg active"
+                >
+                  Ethical & Clinical
+                </button>
+                <button id="btn-nlp" class="btn-secondary px-4 py-2 rounded-lg">
+                  Rapid & Performance
+                </button>
+              </div>
+              <div
+                id="method-text-container"
+                class="card p-6 rounded-xl h-full"
+              ></div>
+            </div>
+            <div class="w-full md:w-1/2 flex items-center justify-center">
+              <div class="chart-container">
+                <canvas id="methodologyChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="card p-6 rounded-xl bg-white mt-6">
+            <h3 class="font-bold text-xl mb-2">
+              Technical Utility: Neuro-Linguistic Prompt Engineering (NLPE)
+            </h3>
+            <p class="text-gray-700">
+              The most explicit act of eclecticism is creating NLPE. It
+              repurposes NLP principles, despite their pseudoscientific label,
+              as a "powerful metaphorical framework" to strategically influence
+              Large Language Models (LLMs). The utility is purely technical:
+              using the Meta-Model for precision (a "Clarity Engine") and the
+              Milton Model for creativity (a "Creativity Engine").
+            </p>
+          </div>
+        </section>
+
+        <section id="mechanistic" class="mb-12 space-y-6 scroll-mt-20">
+          <h2 class="text-3xl font-bold border-b-2 border-[#EADDD7] pb-2">
+            Mechanistic Eclecticism
+          </h2>
+          <p class="text-gray-700">
+            This layer of the framework selects specific neuroscientific and
+            speculative concepts to provide tangible, biological, and
+            theoretical proof for the subjective phenomena of meaning and
+            choice. These selections are prioritized to ground the framework's
+            philosophical claims in objective correlates.
+          </p>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="card p-6 rounded-xl">
+              <h3 class="font-bold text-xl mb-2">Shared Reality</h3>
+              <span class="text-sm font-semibold text-gray-500 block mb-3"
+                >Mechanism: Interpersonal Neural Synchrony (INS)</span
+              >
+              <p class="text-gray-600">
+                INS, the coupling of brain activity between people, is chosen as
+                the observable, biological proof of a shared social reality. It
+                serves as the neurobiological indicator that the existential
+                negotiation has succeeded in creating a shared mental world.
+              </p>
+            </div>
+            <div class="card p-6 rounded-xl">
+              <h3 class="font-bold text-xl mb-2">Radical Change</h3>
+              <span class="text-sm font-semibold text-gray-500 block mb-3"
+                >Mechanism: Psychedelic-induced Neuroplasticity</span
+              >
+              <p class="text-gray-600">
+                This is selected as the definitive biological model for profound
+                psychological reorganization. By disrupting the Default Mode
+                Network (DMN), it provides a mechanism for breaking rigid
+                thought patterns and actively reconstructing subjective reality.
+              </p>
+            </div>
+            <div class="card p-6 rounded-xl">
+              <h3 class="font-bold text-xl mb-2">Subjectivity & Choice</h3>
+              <span class="text-sm font-semibold text-gray-500 block mb-3"
+                >Mechanism: Quantum Cognition</span
+              >
+              <p class="text-gray-600">
+                Chosen as a speculative tool to address phenomena defying
+                classical logic. It provides a "theoretical space" for human
+                subjectivity and a new conceptual language for agency,
+                incorporating fundamental randomness to model non-deterministic
+                free will.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="applied" class="mb-12 space-y-6 scroll-mt-20">
+          <h2 class="text-3xl font-bold border-b-2 border-[#EADDD7] pb-2">
+            Applied Eclecticism: The Neurodivergent Dyad
+          </h2>
+          <p class="text-gray-700">
+            This clinical application demonstrates a powerful synthesis of the
+            eclectic approach. It constructs a multifactorial model to explain
+            systemic relational fracture in an AuDHD dyad by integrating
+            components from several distinct disciplines. The goal is to show
+            how complex traits, medication, and interventions combine to
+            destabilize a relationship and how to track its health.
+          </p>
+          <div class="flex flex-col md:flex-row gap-8">
+            <div class="w-full md:w-1/2 space-y-3">
+              <div class="card p-4 rounded-lg">
+                <h4 class="font-semibold">Neurodevelopmental Psychology</h4>
+                <p class="text-sm text-gray-600">
+                  Provides the AuDHD "Lone Wolf" archetype as the neurocognitive
+                  foundation.
+                </p>
+              </div>
+              <div class="card p-4 rounded-lg">
+                <h4 class="font-semibold">Psychopharmacology</h4>
+                <p class="text-sm text-gray-600">
+                  Establishes chronic dextroamphetamine use as a
+                  "pharmacological constant" creating stability and
+                  vulnerability.
+                </p>
+              </div>
+              <div class="card p-4 rounded-lg">
+                <h4 class="font-semibold">Relational Psychology</h4>
+                <p class="text-sm text-gray-600">
+                  Identifies impression management (masking) as the chronic
+                  stressor and "tipping point".
+                </p>
+              </div>
+              <div class="card p-4 rounded-lg">
+                <h4 class="font-semibold">Neurobiology of Attachment</h4>
+                <p class="text-sm text-gray-600">
+                  Uses Neural Synchrony (INS) as the barometer of relational
+                  health, diagnosing its state.
+                </p>
+              </div>
+              <div class="card p-4 rounded-lg">
+                <h4 class="font-semibold">Psychedelic Science</h4>
+                <p class="text-sm text-gray-600">
+                  Selects the "Psychedelic Crucible" as the disruptive agent
+                  needed to fracture rigid, pathological structures.
+                </p>
+              </div>
+            </div>
+            <div class="w-full md:w-1/2">
+              <div class="card p-6 rounded-xl">
+                <h3 class="font-bold text-xl mb-2">
+                  Relational Health Barometer
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Neural Synchrony is used to diagnose the state of the
+                  relationship and track the therapeutic goal.
+                </p>
+                <div class="chart-container" style="height: 250px">
+                  <canvas id="relationalHealthChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="dissonance" class="mb-12 space-y-6 scroll-mt-20">
+          <h2 class="text-3xl font-bold border-b-2 border-[#EADDD7] pb-2">
+            Cognitive Dissonance & The Observing Self
+          </h2>
+          <p class="text-gray-700">
+            This section explores the internal mental process that often
+            initiates the search for meaning. It breaks down the chain reaction
+            from an unexpected event to the state of detached self-awareness you
+            described as "the observing part of the brain." This experience is a
+            practical application of how we negotiate meaning when our reality
+            conflicts with our expectations. Click the steps below to explore
+            the process.
+          </p>
+          <div class="card p-6 rounded-xl">
+            <div
+              class="flex flex-col md:flex-row items-center justify-center text-center space-y-4 md:space-y-0 md:space-x-4"
+            >
+              <div
+                id="step1"
+                class="p-4 rounded-lg cursor-pointer transition-all duration-300 w-full md:w-1/4 border-2 border-transparent"
+              >
+                <span class="text-2xl">🎭</span>
+                <h4 class="font-semibold">1. Unexpected Event</h4>
+                <p class="text-sm text-gray-500">
+                  A social interaction defies your expectations.
+                </p>
+              </div>
+              <div class="text-2xl text-gray-300 font-light hidden md:block">
+                →
+              </div>
+              <div
+                id="step2"
+                class="p-4 rounded-lg cursor-pointer transition-all duration-300 w-full md:w-1/4 border-2 border-transparent"
+              >
+                <span class="text-2xl">🤯</span>
+                <h4 class="font-semibold">2. Cognitive Dissonance</h4>
+                <p class="text-sm text-gray-500">
+                  Mental discomfort from conflicting realities.
+                </p>
+              </div>
+              <div class="text-2xl text-gray-300 font-light hidden md:block">
+                →
+              </div>
+              <div
+                id="step3"
+                class="p-4 rounded-lg cursor-pointer transition-all duration-300 w-full md:w-1/3 border-2 border-transparent"
+              >
+                <span class="text-2xl">🧘‍♂️</span>
+                <h4 class="font-semibold">3. Activating the Observing Self</h4>
+                <p class="text-sm text-gray-500">
+                  Metacognition provides a "witness" perspective.
+                </p>
+              </div>
+            </div>
+            <div
+              id="dissonance-explanation"
+              class="mt-6 pt-4 border-t border-gray-200"
+            >
+              <p class="text-gray-700 text-center">
+                Select a step to see its description.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="quantum" class="space-y-6 scroll-mt-20">
+          <h2 class="text-3xl font-bold border-b-2 border-[#EADDD7] pb-2">
+            Role of Quantum Cognition
+          </h2>
+          <p class="text-gray-700">
+            Quantum Cognition is a key speculative component, selected
+            pragmatically to ensure the framework is theoretically complete. It
+            addresses the aspects of human experience that classical,
+            deterministic views cannot fully explain. Its purpose is not to be
+            an empirically proven fact, but to provide the necessary conceptual
+            space to account for subjectivity and free will.
+          </p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="card p-6 rounded-xl">
+              <h3 class="font-bold text-xl mb-2">
+                Rationale: Why It's Necessary
+              </h3>
+              <p class="text-gray-600">
+                Classical models are insufficient to explain the dynamic, often
+                illogical, nature of human decision-making. Quantum cognition is
+                utilized because it can model "quantum-like" behaviors and
+                account for the fundamental indeterminacy of choice, which
+                classical probability fails to capture.
+              </p>
+            </div>
+            <div class="card p-6 rounded-xl">
+              <h3 class="font-bold text-xl mb-2">Function: What It Provides</h3>
+              <ul class="list-disc list-inside text-gray-600 space-y-2">
+                <li>
+                  <span class="font-semibold">Origin of Subjectivity:</span>
+                  Provides a theoretical home for the nuances of subjective
+                  experience central to existential thought.
+                </li>
+                <li>
+                  <span class="font-semibold">Language for Agency:</span> Offers
+                  a new vocabulary to describe the indeterminate nature of free
+                  will.
+                </li>
+                <li>
+                  <span class="font-semibold">A Conceptual Bridge:</span> Acts
+                  as a potential link between the objective brain and subjective
+                  awareness, tackling the "hard problem" of consciousness.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll("main section");
+        const navLinks = document.querySelectorAll("nav a");
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.3,
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (
+                  link.getAttribute("href").substring(1) === entry.target.id
+                ) {
+                  link.classList.add("active");
+                }
+              });
+            }
+          });
+        }, observerOptions);
+
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
+
+        navLinks.forEach((link) => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.querySelector(link.getAttribute("href")).scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+
+        const cardGiven = document.getElementById("card-given");
+        const cardChosen = document.getElementById("card-chosen");
+
+        cardGiven.addEventListener("click", () => {
+          cardGiven.style.borderColor = "#BCA89F";
+          cardGiven.style.boxShadow = "0 0 15px rgba(188, 168, 159, 0.3)";
+          cardChosen.style.borderColor = "#EADDD7";
+          cardChosen.style.boxShadow = "none";
+        });
+
+        cardChosen.addEventListener("click", () => {
+          cardChosen.style.borderColor = "#BCA89F";
+          cardChosen.style.boxShadow = "0 0 15px rgba(188, 168, 159, 0.3)";
+          cardGiven.style.borderColor = "#EADDD7";
+          cardGiven.style.boxShadow = "none";
+        });
+
+        const methodologyData = {
+          cbt: {
+            labels: [
+              "Ethical Validity",
+              "Scientific Rigor",
+              "Transparency",
+              "Clinical Context",
+              "Rapid Results",
+            ],
+            values: [9, 8, 8, 9, 3],
+            title: "Cognitive Behavioral Therapy (CBT)",
+            description:
+              "CBT is selected as the 'gold standard' of evidence-based therapy. It's prioritized for clinical issues in regulated contexts, operating through transparent meaning-making and collaborative empiricism. Its high value on ethics and rigor makes it the choice for therapeutic intervention.",
+          },
+          nlp: {
+            labels: [
+              "Ethical Validity",
+              "Scientific Rigor",
+              "Transparency",
+              "Clinical Context",
+              "Rapid Results",
+            ],
+            values: [2, 1, 3, 4, 10],
+            title: "Neuro-Linguistic Programming (NLP)",
+            description:
+              "NLP is selected for rapid transformation in unregulated, performance-focused environments like coaching. Techniques are chosen for their claimed ability to deliver 'deeper, faster' results by working at the unconscious level. The priority is purely on effect and speed.",
+          },
+        };
+
+        const methodTextContainer = document.getElementById(
+          "method-text-container",
+        );
+        const ctxMethodology = document
+          .getElementById("methodologyChart")
+          .getContext("2d");
+        const methodologyChart = new Chart(ctxMethodology, {
+          type: "polarArea",
+          data: {
+            labels: methodologyData.cbt.labels,
+            datasets: [
+              {
+                label: "Priority Score",
+                data: methodologyData.cbt.values,
+                backgroundColor: [
+                  "rgba(188, 168, 159, 0.5)",
+                  "rgba(234, 221, 215, 0.5)",
+                  "rgba(56, 51, 46, 0.5)",
+                  "rgba(169, 148, 138, 0.5)",
+                  "rgba(211, 194, 185, 0.5)",
+                ],
+                borderWidth: 1,
+                borderColor: "#38332E",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                pointLabels: {
+                  display: true,
+                  centerPointLabels: true,
+                  font: {
+                    size: 11,
+                  },
+                },
+                ticks: {
+                  display: false,
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+          },
+        });
+
+        function updateMethodologyView(type) {
+          const data = methodologyData[type];
+          methodologyChart.data.datasets[0].data = data.values;
+          methodologyChart.data.labels = data.labels;
+          methodologyChart.update();
+
+          methodTextContainer.innerHTML = `
+                    <div class="fade-in">
+                        <h3 class="font-bold text-xl mb-2">${data.title}</h3>
+                        <p class="text-gray-700">${data.description}</p>
+                    </div>`;
+
+          document
+            .getElementById("btn-cbt")
+            .classList.toggle("active", type === "cbt");
+          document
+            .getElementById("btn-nlp")
+            .classList.toggle("active", type === "nlp");
+        }
+
+        document
+          .getElementById("btn-cbt")
+          .addEventListener("click", () => updateMethodologyView("cbt"));
+        document
+          .getElementById("btn-nlp")
+          .addEventListener("click", () => updateMethodologyView("nlp"));
+
+        updateMethodologyView("cbt");
+
+        const ctxRelational = document
+          .getElementById("relationalHealthChart")
+          .getContext("2d");
+        new Chart(ctxRelational, {
+          type: "bar",
+          data: {
+            labels: ["Relational State"],
+            datasets: [
+              {
+                label: "Pathological Alignment (Rigid)",
+                data: [7],
+                backgroundColor: "#BCA89F",
+                borderColor: "#A9948A",
+                borderWidth: 1,
+              },
+              {
+                label: "Therapeutic Goal (Flexible)",
+                data: [10],
+                backgroundColor: "#EADDD7",
+                borderColor: "#D3C2B9",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                display: false,
+                max: 12,
+              },
+              y: {
+                display: false,
+              },
+            },
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+              tooltip: {
+                enabled: true,
+              },
+            },
+          },
+        });
+
+        const dissonanceSteps = {
+          step1: {
+            title: "The Trigger: An Unexpected Event",
+            text: "The process begins with an experience that violates your implicit social or personal rules. For example, someone speaks to you in a way that feels completely out of character for them or the situation. This creates a moment of paradox or confusion.",
+          },
+          step2: {
+            title: "The State: Cognitive Dissonance",
+            text: "This is the mental discomfort felt when reality clashes with your beliefs or expectations. Your brain holds two contradictory ideas: 'This is how this person should be' versus 'This is how they are actually being.' This conflict is the core of the dissonant feeling.",
+          },
+          step3: {
+            title: "The Response: The Observing Self (Metacognition)",
+            text: "To resolve the dissonance, a higher-level awareness activates. This is 'thinking about thinking,' or Metacognition. You detach from being purely a participant and become an observer of your own experience. This 'Observing Self' or 'Witness' notices your confusion and the situation from a different, more analytical level, allowing you to process the conflict instead of being overwhelmed by it.",
+          },
+        };
+
+        const step1El = document.getElementById("step1");
+        const step2El = document.getElementById("step2");
+        const step3El = document.getElementById("step3");
+        const explanationEl = document.getElementById("dissonance-explanation");
+        const allSteps = [step1El, step2El, step3El];
+
+        function showExplanation(stepId) {
+          const content = dissonanceSteps[stepId];
+          explanationEl.innerHTML = `
+                    <div class="fade-in">
+                         <h4 class="font-bold text-lg text-center mb-2">${content.title}</h4>
+                         <p class="text-gray-700 text-center">${content.text}</p>
+                    </div>
+                `;
+          allSteps.forEach((el) => {
+            if (el) {
+              el.style.borderColor = "transparent";
+              el.style.backgroundColor = "transparent";
+            }
+          });
+          const activeEl = document.getElementById(stepId);
+          if (activeEl) {
+            activeEl.style.borderColor = "#BCA89F";
+            activeEl.style.backgroundColor = "#FDFBF8";
+          }
+        }
+
+        if (step1El)
+          step1El.addEventListener("click", () => showExplanation("step1"));
+        if (step2El)
+          step2El.addEventListener("click", () => showExplanation("step2"));
+        if (step3El)
+          step3El.addEventListener("click", () => showExplanation("step3"));
+      });
+    </script>
+  </body>
+</html>

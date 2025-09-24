@@ -13,7 +13,7 @@ permalink: /
 
 <strong>Current Projects:</strong>
 
-The Goal: Flexible Neural Synchrony
+<a href="{{ site.baseurl }}/projects/pragmatic_electicism">Pragmatic Eclecticism</a>
 
 <a href="{{ site.baseurl }}/projects/neuro_divergance">Neurodivergence & Relational Dynamics</a>
 
