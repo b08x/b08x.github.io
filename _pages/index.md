@@ -13,7 +13,9 @@ permalink: /
 
 <strong>Current Projects:</strong>
 
-<a href="{{ site.baseurl }}/projects/pragmatic_electicism">Pragmatic Eclecticism</a>
+<a href="{{ site.baseurl }}/projects/pragmatic_electicism_another_with_one">Pragmatic Eclecticism: The Art of Compromise</a>
+
+<a href="{{ site.baseurl }}/projects/pragmatic_electicism_one">Pragmatic Eclecticism: One Way of Looking At It</a>
 
 <a href="{{ site.baseurl }}/projects/neuro_divergance">Neurodivergence & Relational Dynamics</a>
 
