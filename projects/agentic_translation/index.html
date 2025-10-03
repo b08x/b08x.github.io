@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Translation Pipeline: System Architecture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals with Sky Blue Accent -->
+    <!-- Application Structure Plan: The application is structured around a central, interactive pipeline diagram representing the 4-stage translation workflow. This visual-first approach immediately communicates the process flow. Users can click on any stage in the pipeline (Translate, Critique, Synthesize, Refine) to dynamically load its detailed information into a dedicated content pane below. This "overview first, details on demand" architecture was chosen to make a complex, multi-document process easily digestible. It prevents overwhelming the user by layering information, allowing them to explore the workflow non-linearly at their own pace. The structure includes an introductory section for overall context and a concluding section for challenges, providing a complete narrative. -->
+    <!-- Visualization & Content Choices: The core visualization is the workflow pipeline itself, built using styled HTML and Tailwind CSS to represent a process flow. Report Info: The 4-stage translation process. -> Goal: Organize & Inform. -> Viz/Presentation Method: Interactive cards in a flexbox layout to form a pipeline diagram, with a dynamic content area below. -> Interaction: User clicks a stage card. This updates the content area with that stage's specific details (role, goal, instructions) and visually highlights the selected card. -> Justification: This method directly mirrors the process described in the source documents, making it highly intuitive. It avoids the need for complex charts as the data is qualitative and procedural. Library/Method: Vanilla JavaScript for DOM manipulation and event handling. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        .arrow {
+            color: #d1d5db;
+        }
+        .stage-card.active {
+            border-color: #0ea5e9;
+            box-shadow: 0 4px 14px 0 rgba(14, 165, 233, 0.2);
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-sky-800">Agentic Translation Pipeline for Radiology IT</h1>
+            <p class="mt-2 text-lg text-stone-600">A technical overview of the multi-agent workflow architecture.</p>
+        </header>
+
+        <section id="overview" class="mb-8 md:mb-12 bg-white p-6 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-bold text-sky-700 mb-3">System Objective & Scope</h2>
+            <p class="text-stone-600 leading-relaxed">
+                The objective of this system is to execute a high-fidelity translation of English Radiology IT documentation into Tamil. The architecture is designed to serve a key stakeholder group: Tamil-speaking Radiology IT technicians in India. The scope of the process includes ensuring technical accuracy, linguistic fluency, and cultural appropriateness while maintaining the integrity of the source document's Markdown formatting.
+            </p>
+        </section>
+
+        <section id="workflow-pipeline" class="mb-6">
+             <h2 class="text-2xl font-bold text-sky-700 mb-4 text-center">Workflow Architecture</h2>
+             <p class="text-center text-stone-600 mb-8 max-w-3xl mx-auto">
+                The translation process is modeled as a sequential data pipeline of four distinct agentic nodes, each performing a specific transformation function. Select a node from the architectural diagram below to inspect its role, transformation logic, and I/O schema.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+
+                <div id="stage-translate" class="stage-card w-full md:w-1/5 bg-white p-4 rounded-lg shadow-md border-2 border-transparent cursor-pointer transition-all duration-300">
+                    <div class="flex items-center">
+                        <div class="bg-sky-100 text-sky-700 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">1</div>
+                        <h3 class="ml-3 font-semibold text-stone-800">Core Translation</h3>
+                    </div>
+                </div>
+
+                <div class="text-2xl font-light arrow transform md:rotate-0 rotate-90">&rarr;</div>
+
+                <div id="stage-critique" class="stage-card w-full md:w-1/5 bg-white p-4 rounded-lg shadow-md border-2 border-transparent cursor-pointer transition-all duration-300">
+                    <div class="flex items-center">
+                        <div class="bg-sky-100 text-sky-700 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">2</div>
+                        <h3 class="ml-3 font-semibold text-stone-800">Unified Critique</h3>
+                    </div>
+                </div>
+
+                <div class="text-2xl font-light arrow transform md:rotate-0 rotate-90">&rarr;</div>
+
+                <div id="stage-synthesize" class="stage-card w-full md:w-1/5 bg-white p-4 rounded-lg shadow-md border-2 border-transparent cursor-pointer transition-all duration-300">
+                     <div class="flex items-center">
+                        <div class="bg-sky-100 text-sky-700 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">3</div>
+                        <h3 class="ml-3 font-semibold text-stone-800">Revision Synthesis</h3>
+                    </div>
+                </div>
+
+                <div class="text-2xl font-light arrow transform md:rotate-0 rotate-90">&rarr;</div>
+
+                <div id="stage-refine" class="stage-card w-full md:w-1/5 bg-white p-4 rounded-lg shadow-md border-2 border-transparent cursor-pointer transition-all duration-300">
+                     <div class="flex items-center">
+                        <div class="bg-sky-100 text-sky-700 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">4</div>
+                        <h3 class="ml-3 font-semibold text-stone-800">Stylistic Refinement</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow-details" class="mt-8 md:mt-12 min-h-[30rem]">
+            <!-- Dynamic content will be loaded here -->
+        </section>
+        
+        <section id="challenges" class="mt-8 md:mt-12 bg-white p-6 rounded-lg shadow-sm">
+            <h2 class="text-2xl font-bold text-sky-700 mb-3">System Challenges & Future Work</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-lg text-stone-800 mb-2">Key Engineering Challenges</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li>Maintaining terminological consistency across the knowledge domain.</li>
+                        <li>Resolving lexical ambiguity via contextual disambiguation.</li>
+                        <li>Addressing parallel corpora scarcity for the target technical domain.</li>
+                        <li>Fine-tuning for cultural and professional register alignment.</li>
+                        <li>Ensuring robust parsing and regeneration of Markdown data structures.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg text-stone-800 mb-2">Future System Enhancements</h3>
+                    <ul class="list-disc list-inside text-stone-600 space-y-1">
+                        <li>Implement an active learning feedback loop for continuous improvement.</li>
+                        <li>Execute domain adaptation via targeted model fine-tuning.</li>
+                        <li>Develop API integration with standard Computer-Assisted Translation (CAT) tools.</li>
+                        <li>Automate generation of quantitative quality metrics in the critique node.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+
+    <script>
+        const workflowData = {
+            'translate': {
+                title: 'Node 1: Core Transformation Module',
+                description: 'The initial agent in the pipeline executes the primary English-to-Tamil translation. Its function is to generate a structurally sound and technically accurate draft based on predefined metafunctional priorities.',
+                details: [
+                    {
+                        heading: 'Agent Role',
+                        content: 'Tamil Technical Translator for Radiology IT.'
+                    },
+                    {
+                        heading: 'Transformation Heuristics',
+                        subheadings: [
+                            {
+                                title: 'Ideational Processing',
+                                points: [
+                                    'Preserve technical precision, retaining English acronyms (e.g., PACS, DICOM) as per domain convention.',
+                                    'Disambiguate terminology contextually (e.g., "crash" -> "செயலிழந்துவிடும்" vs. "freeze ஆயிடும்").',
+                                    'Map semantic concepts rather than performing literal word-for-word replacement.'
+                                ]
+                            },
+                            {
+                                title: 'Interpersonal Calibration',
+                                points: [
+                                    'Calibrate output to a semi-formal, professional register appropriate for the target audience.',
+                                    'Inject natural linguistic connectors to improve readability and flow.'
+                                ]
+                            },
+                             {
+                                title: 'Textual Restructuring',
+                                points: [
+                                    'Deconstruct complex, high-arity English sentences into shorter, more parsable Tamil phrases.',
+                                    'Maintain the structural integrity of the source Markdown document (headers, lists, etc.).'
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        heading: 'I/O Schema',
+                        io: {
+                            input: 'Source English Document (Markdown)',
+                            output: 'Initial Tamil Draft (Markdown)'
+                        }
+                    }
+                ]
+            },
+            'critique': {
+                title: 'Node 2: Unified Critique Module',
+                description: 'This agent functions as a bilingual technical editor, performing a comparative analysis between the source and translated drafts. The output is not a revised text but a structured report of identified deviations and recommended corrections.',
+                details: [
+                    {
+                        heading: 'Agent Role',
+                        content: 'Bilingual Technical Editor (Radiology IT Domain).'
+                    },
+                    {
+                        heading: 'Evaluation Vectors',
+                        subheadings: [
+                            {
+                                title: '',
+                                points: [
+                                    '**Factual & Technical Accuracy**: Verifies correctness of technical data, process steps, and configurations (e.g., "HL7").',
+                                    '**Linguistic Fluency**: Detects awkward phrasing or "machine-translation-isms" unnatural for a native speaker.',
+                                    '**Style & Tone Consistency**: Ensures the semi-formal, professional tone is maintained.',
+                                    '**Completeness**: Performs a diff against the source to identify content omissions.'
+                                ]
+                            }
+                        ]
+                    },
+                     {
+                        heading: 'I/O Schema',
+                        io: {
+                            input: 'Source English Document + Initial Tamil Draft',
+                            output: 'Structured Critique Report (Markdown)'
+                        }
+                    }
+                ]
+            },
+            'synthesize': {
+                title: 'Node 3: Revision Synthesis Module',
+                description: 'This deterministic agent applies the patches described in the critique report to the initial draft. Its sole function is to implement the specified changes without introducing novel modifications.',
+                details: [
+                     {
+                        heading: 'Agent Role',
+                        content: 'Automated Technical Writer.'
+                    },
+                    {
+                        heading: 'Execution Protocol',
+                        subheadings: [
+                            {
+                                title: '',
+                                points: [
+                                    'Iterate through each directive in the critique report.',
+                                    'Locate the corresponding text segment in the draft document.',
+                                    'Apply the suggested modification precisely as specified.',
+                                    'Do not introduce new information or deviate from the critique.',
+                                    'Ensure final output maintains valid Markdown data format integrity.'
+                                ]
+                            }
+                        ]
+                    },
+                     {
+                        heading: 'I/O Schema',
+                        io: {
+                            input: 'Initial Tamil Draft + Critique Report',
+                            output: 'Revised Tamil Document (Markdown)'
+                        }
+                    }
+                ]
+            },
+            'refine': {
+                title: 'Node 4: Stylistic Nuance Module',
+                description: 'The final agent serves as a quality gate, performing micro-adjustments to enhance cultural resonance and linguistic naturalness. This stage operates under strict constraints, focusing only on stylistic nuance.',
+                details: [
+                    {
+                        heading: 'Agent Role',
+                        content: 'Bilingual Cultural & Stylistic Consultant.'
+                    },
+                    {
+                        heading: 'Operational Constraints',
+                        subheadings: [
+                            {
+                                title: '',
+                                points: [
+                                    '**Natural Phrasing**: Replaces technically correct but stiff phrases with more common, fluent equivalents.',
+                                    '**Cultural Resonance**: Adjusts word choice for optimal connection with the target professional culture.',
+                                    '**Strict Constraint**: Modifications are restricted to the word and short-phrase level.',
+                                    '**Strict Constraint**: The agent must not alter technical facts or restructure sentences.'
+                                ]
+                            }
+                        ]
+                    },
+                     {
+                        heading: 'I/O Schema',
+                        io: {
+                            input: 'Revised Tamil Document',
+                            output: 'Final Production-Ready Document (Markdown)'
+                        }
+                    }
+                ]
+            },
+             'initial': {
+                title: 'System Architecture Overview',
+                description: 'This application provides a technical breakdown of a multi-agent workflow designed for specialized document translation. The system models the process as a sequential pipeline of distinct functional nodes. <br/><br/> Use the architectural diagram above to inspect the role, transformation logic, and I/O schema for each module in the pipeline.',
+                details: []
+            }
+        };
+
+        const detailsContainer = document.getElementById('workflow-details');
+        const stageCards = document.querySelectorAll('.stage-card');
+
+        function generateDetailsHTML(data) {
+            let detailsHtml = '';
+            data.details.forEach(detail => {
+                detailsHtml += `<h3 class="text-xl font-semibold text-stone-800 mt-6 mb-3">${detail.heading}</h3>`;
+                if (detail.content) {
+                    detailsHtml += `<p class="text-stone-600 leading-relaxed">${detail.content}</p>`;
+                }
+                if (detail.subheadings) {
+                    detail.subheadings.forEach(sub => {
+                        if(sub.title) {
+                           detailsHtml += `<h4 class="text-lg font-medium text-stone-700 mt-4 mb-2">${sub.title}</h4>`;
+                        }
+                        detailsHtml += '<ul class="list-disc list-inside text-stone-600 space-y-2">';
+                        sub.points.forEach(point => {
+                            detailsHtml += `<li>${point}</li>`;
+                        });
+                        detailsHtml += '</ul>';
+                    });
+                }
+                if (detail.io) {
+                    detailsHtml += `
+                    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                        <div class="bg-blue-50 p-4 rounded-md border border-blue-200">
+                            <h4 class="font-semibold text-blue-800">INPUT</h4>
+                            <p class="text-blue-700 font-mono text-sm">${detail.io.input}</p>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-md border border-green-200">
+                            <h4 class="font-semibold text-green-800">OUTPUT</h4>
+                            <p class="text-green-700 font-mono text-sm">${detail.io.output}</p>
+                        </div>
+                    </div>`;
+                }
+            });
+
+            return `
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-lg transition-opacity duration-500 animate-fade-in">
+                    <h2 class="text-3xl font-bold text-sky-700 mb-3">${data.title}</h2>
+                    <p class="text-stone-600 leading-relaxed text-lg">${data.description}</p>
+                    <hr class="my-6">
+                    ${detailsHtml}
+                </div>
+                <style>
+                    @keyframes fade-in {
+                        from { opacity: 0; transform: translateY(10px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                    .animate-fade-in {
+                        animation: fade-in 0.5s ease-out forwards;
+                    }
+                </style>
+            `;
+        }
+        
+        function updateDetails(stageKey) {
+            const data = workflowData[stageKey];
+            if (data) {
+                detailsContainer.innerHTML = generateDetailsHTML(data);
+                
+                stageCards.forEach(card => card.classList.remove('active'));
+                const activeCard = document.getElementById(`stage-${stageKey}`);
+                if(activeCard){
+                    activeCard.classList.add('active');
+                }
+            }
+        }
+        
+        stageCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const stageKey = card.id.replace('stage-', '');
+                updateDetails(stageKey);
+            });
+        });
+
+        window.addEventListener('load', () => {
+            updateDetails('initial');
+        });
+
+    </script>
+
+</body>
+</html>
+

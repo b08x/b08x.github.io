@@ -1,0 +1,461 @@
+<!-- https://gemini.google.com/gem/b9c1599e01e7/142d40d09b15ff82 -->
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFL Prompt Studio - Interactive System Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 
+        Chosen Palette: Warm Neutrals 
+        Application Structure Plan: The application is designed as a single-page interactive dashboard. This structure was chosen to provide a non-linear, exploratory experience, which is more effective for a technical document than a simple top-to-bottom reading. A sticky navigation bar allows users to jump to key sections (Framework, Features, Stack, Setup) instantly. The core SFL concepts are presented in a parallel three-column layout to emphasize their relationship. Interactive elements, like a live prompt wizard demo and data visualizations for the tech stack and task complexity, are used to make abstract concepts more tangible and engaging. The user flow is designed for discovery, allowing technical and non-technical users to grasp the project's essence quickly.
+        Visualization & Content Choices: 
+        - SFL Components: Goal: Organize/Inform -> Method: Interactive HTML cards in a grid -> Justification: Clearly separates and defines the three core pillars of the SFL framework.
+        - Prompt Wizard Demo: Goal: Demonstrate -> Method: Interactive text area updating a JSON display -> Justification: Provides a hands-on feel for the natural language to SFL conversion process, making it more understandable than a static code block.
+        - Orchestrator Task Complexity: Goal: Compare -> Method: Chart.js Bar Chart -> Justification: Effectively visualizes the relative computational cost of different workflow task types.
+        - Tech Stack Breakdown: Goal: Inform (Proportions) -> Method: Chart.js Doughnut Chart -> Justification: Gives a quick, high-level overview of the technologies used in the project.
+        - Orchestration Patterns: Goal: Organize/Inform -> Method: HTML/CSS diagrams -> Justification: Recreates the report's Mermaid diagrams using compliant technologies (no SVG/Mermaid JS) to illustrate workflow patterns.
+        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. 
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7;
+            color: #4A4A4A;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #D97706; 
+        }
+        .active-link {
+            color: #D97706;
+            border-bottom-color: #D97706;
+        }
+        .diagram-node {
+            border: 1px solid #D1D5DB;
+            background-color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        .diagram-arrow {
+            position: relative;
+            flex-grow: 1;
+            background-color: #9CA3AF;
+            height: 2px;
+            margin: 0 0.5rem;
+        }
+        .diagram-arrow::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: -4px;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 6px solid #9CA3AF;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 100%;
+            max-width: 600px;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-amber-700">SFL Prompt Studio</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 border-b-2 border-transparent">Home</a>
+                        <a href="#sfl-framework" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 border-b-2 border-transparent">SFL Framework</a>
+                        <a href="#features" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 border-b-2 border-transparent">Features</a>
+                        <a href="#stack" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 border-b-2 border-transparent">Tech Stack</a>
+                        <a href="#setup" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700 border-b-2 border-transparent">Setup</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-amber-800">Interactive System Design</h1>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">An explorable overview of the SFL Prompt Studio, a tool designed to streamline the creation and management of LLM prompts and complex AI workflows using Systemic Functional Linguistics.</p>
+            </div>
+        </section>
+
+        <section id="sfl-framework" class="py-16 sm:py-24 bg-amber-50/50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-amber-800 sm:text-4xl">SFL Framework: The Core of Prompt Engineering</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-md text-gray-600">This section details the Systemic Functional Linguistics (SFL) framework that is foundational to the SFL Prompt Studio. The application's features are built to leverage this linguistic model for more effective and consistent AI prompt generation.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card rounded-xl p-6 shadow-lg">
+                        <h3 class="text-xl font-semibold text-amber-700">Field (Experiential)</h3>
+                        <p class="mt-2 text-sm text-gray-600">Captures the "what" of the communication: the subject matter, processes, and participants involved.</p>
+                        <pre class="mt-4 bg-gray-800 text-white text-xs rounded p-3 overflow-x-auto"><code>export interface SFLField {
+  topic: string;
+  taskType: string;
+  domainSpecifics: string;
+  keywords: string;
+}</code></pre>
+                    </div>
+                    <div class="glass-card rounded-xl p-6 shadow-lg">
+                        <h3 class="text-xl font-semibold text-amber-700">Tenor (Interpersonal)</h3>
+                        <p class="mt-2 text-sm text-gray-600">Encodes the "who": the social relationships, roles, and attitudes between participants.</p>
+                        <pre class="mt-4 bg-gray-800 text-white text-xs rounded p-3 overflow-x-auto"><code>export interface SFLTenor {
+  aiPersona: string;
+  targetAudience: string[];
+  desiredTone: string;
+  interpersonalStance: string;
+}</code></pre>
+                    </div>
+                    <div class="glass-card rounded-xl p-6 shadow-lg">
+                        <h3 class="text-xl font-semibold text-amber-700">Mode (Textual)</h3>
+                        <p class="mt-2 text-sm text-gray-600">Organizes the "how": structuring the language into a coherent, contextually appropriate text.</p>
+                        <pre class="mt-4 bg-gray-800 text-white text-xs rounded p-3 overflow-x-auto"><code>export interface SFLMode {
+  outputFormat: string;
+  rhetoricalStructure: string;
+  lengthConstraint: string;
+  textualDirectives: string;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-amber-800 sm:text-4xl">Application Features</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-md text-gray-600">The SFL Prompt Studio provides two primary features built upon the SFL framework: the Prompt Wizard for generating structured prompts and the Agent Orchestrator for creating complex workflows.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <h3 class="text-2xl font-semibold text-amber-700">Prompt Wizard Demo</h3>
+                        <p class="mt-2 text-sm text-gray-600">This interactive demo simulates how the Prompt Wizard translates a natural language goal into a structured SFL prompt. Type your goal below to see the generated JSON.</p>
+                        <div class="mt-6">
+                            <label for="goal-input" class="block text-sm font-medium text-gray-700">Enter your goal:</label>
+                            <textarea id="goal-input" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500 sm:text-sm" placeholder="e.g., Write Python code to analyze customer data..."></textarea>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-sm font-medium text-gray-700">Generated SFL Prompt:</p>
+                            <pre id="sfl-output" class="mt-1 bg-gray-100 text-gray-800 text-xs rounded p-3 overflow-x-auto h-80">Awaiting input...</pre>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-md">
+                        <h3 class="text-2xl font-semibold text-amber-700">Agent Orchestrator Insights</h3>
+                        <p class="mt-2 text-sm text-gray-600">The orchestrator breaks down goals into executable tasks. The chart below visualizes the relative computational complexity of different task types, helping users understand workflow performance.</p>
+                        <div class="mt-6 chart-container">
+                            <canvas id="taskComplexityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-16">
+                     <h3 class="text-2xl font-semibold text-amber-700 text-center mb-6">Orchestration Patterns</h3>
+                     <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">The Agent Orchestrator supports various patterns for structuring workflows. Below are visual representations of the most common patterns, built with HTML and CSS.</p>
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 rounded-xl shadow-md">
+                            <h4 class="font-semibold text-center mb-4">Sequential Pattern</h4>
+                            <div class="flex items-center justify-center">
+                                <div class="diagram-node">Input</div>
+                                <div class="diagram-arrow"></div>
+                                <div class="diagram-node">Process</div>
+                                <div class="diagram-arrow"></div>
+                                <div class="diagram-node">Output</div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-md">
+                            <h4 class="font-semibold text-center mb-4">Fan-Out Pattern</h4>
+                            <div class="flex flex-col items-center">
+                                <div class="diagram-node mb-4">Input</div>
+                                <div class="w-px bg-gray-400 h-4"></div>
+                                <div class="flex justify-center space-x-4">
+                                    <div class="flex flex-col items-center">
+                                        <div class="h-4 w-px bg-gray-400"></div>
+                                        <div class="diagram-node">Process 1</div>
+                                    </div>
+                                    <div class="flex flex-col items-center">
+                                        <div class="h-4 w-px bg-gray-400"></div>
+                                        <div class="diagram-node">Process 2</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-md">
+                            <h4 class="font-semibold text-center mb-4">Map-Reduce Pattern</h4>
+                             <div class="flex flex-col items-center">
+                                <div class="diagram-node mb-4">Data Split</div>
+                                <div class="w-px bg-gray-400 h-4"></div>
+                                <div class="flex justify-center space-x-2">
+                                    <div class="diagram-node">Map 1</div>
+                                    <div class="diagram-node">Map 2</div>
+                                    <div class="diagram-node">Map 3</div>
+                                </div>
+                                <div class="w-px bg-gray-400 h-4 mt-4"></div>
+                                <div class="diagram-node">Reduce</div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="py-16 sm:py-24 bg-amber-50/50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-amber-800 sm:text-4xl">Technology Stack</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-md text-gray-600">This application is built on a modern, scalable technology stack. The visualization provides a high-level breakdown of the main architectural components.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="chart-container">
+                        <canvas id="techStackChart"></canvas>
+                    </div>
+                    <div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-sky-500 flex items-center justify-center text-white font-bold">F</div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium">Frontend</h4>
+                                    <p class="text-sm text-gray-600">React, Vite, TypeScript, and Tailwind CSS for a responsive and modern user interface.</p>
+                                </div>
+                            </li>
+                             <li class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold">B</div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium">Backend</h4>
+                                    <p class="text-sm text-gray-600">Node.js and Express.js with TypeScript for a robust and type-safe API.</p>
+                                </div>
+                            </li>
+                             <li class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-rose-500 flex items-center justify-center text-white font-bold">D</div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium">Database & Cache</h4>
+                                    <p class="text-sm text-gray-600">PostgreSQL with pgvector for data persistence and vector operations, and Redis for caching and job queues.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold">A</div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium">AI Providers</h4>
+                                    <p class="text-sm text-gray-600">A flexible integration layer supporting Google Gemini, OpenAI, and Anthropic models.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="setup" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-amber-800 sm:text-4xl">Setup and Configuration</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-md text-gray-600">The recommended setup uses Docker for a consistent and reproducible environment. Follow the steps below to get the application running locally.</p>
+                </div>
+                <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="font-semibold text-lg mb-4">Docker-Based Installation</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-mono text-sm">1. Clone the repository:</p>
+                            <pre class="bg-gray-800 text-white text-sm rounded p-3 mt-1 overflow-x-auto"><code>git clone https://github.com/your-username/sfl-prompt-studio.git
+cd sfl-prompt-studio</code></pre>
+                        </div>
+                        <div>
+                            <p class="font-mono text-sm">2. Create environment configuration and add API keys:</p>
+                            <pre class="bg-gray-800 text-white text-sm rounded p-3 mt-1 overflow-x-auto"><code>cp backend/.env.example backend/.env
+# Now, edit backend/.env with your API keys</code></pre>
+                        </div>
+                        <div>
+                            <p class="font-mono text-sm">3. Start all services with Docker Compose:</p>
+                            <pre class="bg-gray-800 text-white text-sm rounded p-3 mt-1 overflow-x-auto"><code>docker-compose up -d</code></pre>
+                        </div>
+                         <div>
+                            <p class="font-mono text-sm">4. Verify the deployment:</p>
+                            <pre class="bg-gray-800 text-white text-sm rounded p-3 mt-1 overflow-x-auto"><code># Check backend health
+curl http://localhost:4000/health
+
+# Access frontend in your browser
+http://localhost/</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800">
+        <div class="container mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-gray-400">SFL Prompt Studio - Interactive System Design</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active-link', link.getAttribute('href') === `#${id}`);
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            const goalInput = document.getElementById('goal-input');
+            const sflOutput = document.getElementById('sfl-output');
+
+            goalInput.addEventListener('input', (e) => {
+                const goal = e.target.value.trim();
+                if (goal === '') {
+                    sflOutput.textContent = 'Awaiting input...';
+                    return;
+                }
+                
+                const mockSFL = generateMockSFL(goal);
+                sflOutput.textContent = JSON.stringify(mockSFL, null, 2);
+            });
+
+            function generateMockSFL(goal) {
+                const keywords = goal.split(' ').filter(word => word.length > 4).slice(0, 3).join(', ');
+                const taskType = goal.toLowerCase().includes('code') ? 'Code Generation' : 'Text Analysis';
+                const persona = goal.toLowerCase().includes('marketing') ? 'Marketing Expert' : 'Technical Analyst';
+
+                return {
+                    title: `AI-Generated Prompt for: ${goal.substring(0, 20)}...`,
+                    promptText: `As a ${persona}, your task is to ${goal}. The output should be in Markdown format. Keywords: ${keywords}.`,
+                    sflField: {
+                        topic: "AI-Assisted Task",
+                        taskType: taskType,
+                        domainSpecifics: "General",
+                        keywords: keywords
+                    },
+                    sflTenor: {
+                        aiPersona: persona,
+                        targetAudience: ["General Audience"],
+                        desiredTone: "Professional and helpful",
+                        interpersonalStance: "Expert guidance"
+                    },
+                    sflMode: {
+                        outputFormat: "Markdown",
+                        rhetoricalStructure: "Problem-Solution",
+                        lengthConstraint: "Approximately 300 words",
+                        textualDirectives: "Use clear and concise language."
+                    }
+                };
+            }
+
+            const taskComplexityCtx = document.getElementById('taskComplexityChart').getContext('2d');
+            new Chart(taskComplexityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Data Input', 'Gemini Prompt', 'Image Analysis', 'Text Manipulation', 'Display Chart', 'Grounded Gen'],
+                    datasets: [{
+                        label: 'Relative Computational Complexity',
+                        data: [1, 5, 8, 3, 2, 7],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Complexity Score' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Task Complexity Comparison' }
+                    }
+                }
+            });
+
+            const techStackCtx = document.getElementById('techStackChart').getContext('2d');
+            new Chart(techStackCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Frontend (React/Vite)', 'Backend (Node/Express)', 'Database & Cache', 'AI Providers'],
+                    datasets: [{
+                        label: 'Technology Stack',
+                        data: [30, 35, 20, 15],
+                        backgroundColor: [
+                            '#38BDF8', // sky-500
+                            '#10B981', // emerald-500
+                            '#F43F5E', // rose-500
+                            '#6366F1'  // indigo-500
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'Architecture Component Breakdown' }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

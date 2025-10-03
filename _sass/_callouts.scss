@@ -1,0 +1,195 @@
+// Obsidian-style Callouts
+// Based on existing color scheme with dark theme support
+
+.callout {
+  margin: 1.5em 0;
+  padding: 0;
+  border-radius: $border-radius;
+  overflow: hidden;
+  background: rgba($color-box-background, 0.5);
+  border-left: 4px solid $color-border;
+
+  .callout-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.75em 1em;
+    font-weight: 600;
+    background: rgba($color-charcoal, 0.3);
+  }
+
+  .callout-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+
+    &::before {
+      content: "ℹ";
+      font-size: 1.2em;
+    }
+  }
+
+  .callout-title-inner {
+    flex: 1;
+  }
+
+  .callout-content {
+    padding: 1em 1em 1em 2.5em;
+
+    p:first-child {
+      margin-top: 0;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Callout type colors and icons
+.callout[data-callout="note"] {
+  border-left-color: #5b9dd9;
+  .callout-title {
+    background: rgba(91, 157, 217, 0.15);
+    color: #7db3e8;
+  }
+  .callout-icon::before {
+    content: "✎";
+    color: #5b9dd9;
+  }
+}
+
+.callout[data-callout="abstract"],
+.callout[data-callout="summary"],
+.callout[data-callout="tldr"] {
+  border-left-color: #00b0d7;
+  .callout-title {
+    background: rgba(0, 176, 215, 0.15);
+    color: #5ec9e6;
+  }
+  .callout-icon::before {
+    content: "⚡";
+    color: #00b0d7;
+  }
+}
+
+.callout[data-callout="info"] {
+  border-left-color: #5b9dd9;
+  .callout-title {
+    background: rgba(91, 157, 217, 0.15);
+    color: #7db3e8;
+  }
+  .callout-icon::before {
+    content: "ℹ";
+    color: #5b9dd9;
+  }
+}
+
+.callout[data-callout="todo"] {
+  border-left-color: #5b9dd9;
+  .callout-title {
+    background: rgba(91, 157, 217, 0.15);
+    color: #7db3e8;
+  }
+  .callout-icon::before {
+    content: "☐";
+    color: #5b9dd9;
+  }
+}
+
+.callout[data-callout="tip"],
+.callout[data-callout="hint"],
+.callout[data-callout="important"] {
+  border-left-color: #00d9a3;
+  .callout-title {
+    background: rgba(0, 217, 163, 0.15);
+    color: #5ce6c3;
+  }
+  .callout-icon::before {
+    content: "🔥";
+    color: #00d9a3;
+  }
+}
+
+.callout[data-callout="success"],
+.callout[data-callout="check"],
+.callout[data-callout="done"] {
+  border-left-color: #00d977;
+  .callout-title {
+    background: rgba(0, 217, 119, 0.15);
+    color: #5ce6a4;
+  }
+  .callout-icon::before {
+    content: "✓";
+    color: #00d977;
+  }
+}
+
+.callout[data-callout="question"],
+.callout[data-callout="help"],
+.callout[data-callout="faq"] {
+  border-left-color: #d9a300;
+  .callout-title {
+    background: rgba(217, 163, 0, 0.15);
+    color: #e6c35c;
+  }
+  .callout-icon::before {
+    content: "?";
+    color: #d9a300;
+  }
+}
+
+.callout[data-callout="warning"],
+.callout[data-callout="caution"],
+.callout[data-callout="attention"] {
+  border-left-color: #d97700;
+  .callout-title {
+    background: rgba(217, 119, 0, 0.15);
+    color: #e6a45c;
+  }
+  .callout-icon::before {
+    content: "⚠";
+    color: #d97700;
+  }
+}
+
+.callout[data-callout="failure"],
+.callout[data-callout="fail"],
+.callout[data-callout="missing"],
+.callout[data-callout="error"],
+.callout[data-callout="bug"] {
+  border-left-color: #d90000;
+  .callout-title {
+    background: rgba(217, 0, 0, 0.15);
+    color: #e65c5c;
+  }
+  .callout-icon::before {
+    content: "✗";
+    color: #d90000;
+  }
+}
+
+.callout[data-callout="example"] {
+  border-left-color: #9d5bd9;
+  .callout-title {
+    background: rgba(157, 91, 217, 0.15);
+    color: #b37de8;
+  }
+  .callout-icon::before {
+    content: "◈";
+    color: #9d5bd9;
+  }
+}
+
+.callout[data-callout="quote"],
+.callout[data-callout="cite"] {
+  border-left-color: $color-border;
+  .callout-title {
+    background: rgba($color-border, 0.15);
+    color: $color-border;
+  }
+  .callout-icon::before {
+    content: "\201C";
+    color: $color-border;
+  }
+}

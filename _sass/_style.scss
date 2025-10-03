@@ -1,0 +1,168 @@
+// Base sky colors - deep, dark foundation
+$color-primary: #0b1026; // Chinese Black
+$color-text: #242b4b; // Space Cadet
+$color-subtext: #4c5158; // Davy's Gray
+$color-border: #909d9e; // Cloudy Sky
+
+// Additional cloudy palette colors
+$color-deep-aubergine: #380528;
+$color-charcoal: #4a4a4a;
+$color-box-background: #4c5158; // Davy's Gray for cards/quotes
+
+// Warm fall accent colors
+$color-accent-warm: #bf7a60; // Burnt Orange
+$color-focus: #a1887f; // Terracotta Clay
+$color-highlight: #e3b448; // Golden Wheat
+$border-radius: 4px;
+$font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  Segoe UI,
+  Helvetica,
+  Arial,
+  sans-serif,
+  Apple Color Emoji,
+  Segoe UI Emoji,
+  Segoe UI Symbol;
+
+body {
+  box-sizing: content-box;
+  font-family: $font-family;
+  margin: 0 auto;
+  line-height: 1.7;
+  padding: 4vh 6vw;
+  overflow-x: hidden;
+  background-color: $color-primary;
+  color: $color-border; // Light text on dark background
+  font-size: 1rem;
+  max-width: 63em;
+
+  @media (min-width: 820px) {
+    font-size: 1.2rem;
+  }
+}
+
+time {
+  display: block;
+  color: $color-subtext;
+  margin: 0.5em 0 1em;
+}
+
+footer {
+  margin: 2em 0;
+  font-size: 0.8em;
+  color: $color-subtext;
+  padding-top: 1em;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  max-height: 75vh;
+  border-radius: $border-radius;
+}
+
+blockquote {
+  padding: 1.5em;
+  margin: 0;
+  font-size: 0.88em;
+  background: $color-box-background;
+  border-radius: $border-radius;
+
+  p {
+    margin: 0;
+  }
+}
+
+hr {
+  width: 100%;
+  border: 0;
+  height: 1px;
+  margin: 1.5em 0;
+  background: $color-border;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.3;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+a {
+  transition: background 300ms;
+  padding: 0 0.1em;
+  text-decoration: none;
+  border-bottom: 1px solid $color-accent-warm;
+  color: $color-accent-warm;
+  &:hover {
+    color: $color-highlight !important;
+    background: rgba($color-focus, 0.2);
+  }
+  &:after {
+    position: relative;
+    top: -0.5em;
+    font-size: 0.7em;
+    content: "↗";
+    color: $color-subtext;
+  }
+  &.internal-link:after,
+  &.footnote:after,
+  &.reversefootnote:after {
+    content: "";
+  }
+}
+
+*:focus {
+  background: rgba($color-highlight, 0.3) !important;
+  color: $color-primary !important;
+  outline: 2px solid $color-highlight;
+}
+
+nav {
+  margin: 1em 0 3em;
+}
+
+#notes-entry-container {
+  display: grid;
+  grid-gap: 2em;
+  grid-template-areas:
+    "content"
+    "side";
+
+  @media (min-width: 700px) {
+    // grid-template-columns: 3fr 1fr;
+    grid-template-areas: "content side";
+  }
+}
+
+.backlink-box {
+  background: $color-box-background;
+  padding: 1em;
+  border-radius: $border-radius;
+}
+
+code {
+  background: rgba($color-charcoal, 0.8);
+  color: $color-border;
+  padding: 0.1em 0.2em;
+  border-radius: 4px;
+  text-wrap-mode: wrap;
+}
+
+.invalid-link {
+  color: $color-subtext;
+  cursor: help;
+  background: rgba($color-charcoal, 0.5);
+  padding: 0 0.1em;
+}
+
+.invalid-link-brackets {
+  color: $color-subtext;
+  cursor: help;
+}
