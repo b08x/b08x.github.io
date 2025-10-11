@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguistic-DB Model Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Academic Slate -->
+    <!-- Application Structure Plan: The application structure has been updated to reflect the detailed schema. It begins with the foundational linguistic theories (UG & SFL), now with more specific details from the source document. The core of the app is the new "Interactive Schema Explorer," which visually represents the entire ActiveRecord schema from the provided CSV, allowing users to click and explore each model in detail. This replaces the previous simplified diagram. This is followed by the "Processing Pipeline," which remains relevant for data ingestion. The final "RAG Demo" is now directly tied to the new schema, showing how different SFL metafunction models (`IdeationalFrame`, `InterpersonalStance`, `TextualOrganization`) are weighted based on a selected `ContextOfSituation`. This structure logically flows from abstract theory -> detailed data model -> population method -> practical application. -->
+    <!-- Visualization & Content Choices: 
+        1. Core Theories: Report Info -> Differentiating UG (X-bar theory, Deep Structure) & SFL (Context of Situation, Metafunctions). Goal -> Compare. Viz -> Two-column text layout. Interaction -> Static. Justification -> Clear, concise definitions are needed before showing the complex schema. Method -> HTML/Tailwind.
+        2. Schema Explorer: Report Info -> The entire "Proposed Integrated ActiveRecord Schema" CSV. Goal -> Organize & Explore Relationships. Viz -> A custom diagram of all models and their connections, built with styled divs. Interaction -> Clicking on any model in the diagram opens a modal displaying its columns, data types, and descriptions directly from the CSV data. Justification -> This provides a comprehensive, interactive view of the data architecture, which is the core of the source document. Method -> HTML/Tailwind/JS.
+        3. RAG Demo: Report Info -> The SFL metafunctions as separate models linked to a `Clause` and `ContextOfSituation`. Goal -> Demonstrate Change. Viz -> Bar chart showing the relevance of the three SFL metafunction frames. Interaction -> User selects a `ContextOfSituation`, and the chart dynamically updates to show the contextual weighting. Justification -> This provides a tangible example of how the SFL portion of the schema directly enables contextual retrieval. Library -> Chart.js.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #212529;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .active-nav {
+            color: #3B82F6;
+            border-bottom: 2px solid #3B82F6;
+        }
+        .inactive-nav {
+            color: #4B5563;
+            border-bottom: 2px solid transparent;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            max-height: 450px;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 90vw;
+            width: 700px;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        .code-block {
+            background-color: #1F2937;
+            color: #F9FAFB;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+        .schema-model {
+            border: 1px solid #E5E7EB;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .schema-model:hover {
+            border-color: #3B82F6;
+            background-color: #EFF6FF;
+        }
+        .model-title {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .model-subtitle {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+        .connector {
+            position: absolute;
+            border-color: #9CA3AF;
+            border-style: dashed;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-lg">L</div>
+                    <h1 class="text-xl font-bold text-gray-800">Linguistic ORM Architecture</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#concepts" class="inactive-nav hover:active-nav transition-colors duration-300 pb-1">Concepts</a>
+                    <a href="#schema" class="inactive-nav hover:active-nav transition-colors duration-300 pb-1">Schema Explorer</a>
+                    <a href="#pipeline" class="inactive-nav hover:active-nav transition-colors duration-300 pb-1">Pipeline</a>
+                    <a href="#demo" class="inactive-nav hover:active-nav transition-colors duration-300 pb-1">RAG Demo</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <section id="intro" class="text-center mb-16">
+            <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Modeling Language as Data</h2>
+            <p class="mt-6 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
+                This application explores a novel database architecture for Natural Language Processing. It translates abstract linguistic theories—Universal Grammar (UG) and Systemic Functional Linguistics (SFL)—into a concrete, integrated ActiveRecord schema designed for contextual Retrieval-Augmented Generation (RAG) systems.
+            </p>
+        </section>
+
+        <section id="concepts" class="mb-20 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-900">Core Linguistic Theories</h3>
+                <p class="mt-3 text-md text-gray-500 max-w-2xl mx-auto">The architecture models language on two axes: its formal, hierarchical structure (the "what") and its functional, contextual meaning (the "why" and "how").</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-8 text-center border-t-4 border-blue-500">
+                    <h4 class="text-2xl font-semibold mb-3">Universal Grammar (UG)</h4>
+                    <p class="text-gray-600 mb-4">Provides a blueprint for the formal syntactic structure of text. It allows us to model the underlying grammatical rules (Deep Structure) in a canonical form, independent of surface-level variations.</p>
+                    <ul class="text-left space-y-2 text-gray-700 list-disc list-inside">
+                        <li><strong>Focus:</strong> Formal Syntax & Structure</li>
+                        <li><strong>Key Concept:</strong> X-bar theory models phrasal hierarchies (NP, VP, etc.).</li>
+                        <li><strong>Application:</strong> Defines the schema for `Lexeme`, `Phrase`, and `DeepStructure` models.</li>
+                    </ul>
+                </div>
+                <div class="card p-8 text-center border-t-4 border-green-500">
+                    <h4 class="text-2xl font-semibold mb-3">Systemic Functional Linguistics (SFL)</h4>
+                    <p class="text-gray-600 mb-4">Provides a framework for modeling the functional and contextual dimensions of language. It analyzes how language is used to make meaning based on the situation.</p>
+                    <ul class="text-left space-y-2 text-gray-700 list-disc list-inside">
+                        <li><strong>Focus:</strong> Function & Contextual Meaning</li>
+                        <li><strong>Key Concept:</strong> The `ContextOfSituation` (field, tenor, mode) shapes meaning.</li>
+                        <li><strong>Application:</strong> Defines the schema for `Clause` and its three metafunctional frames.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="schema" class="mb-20 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-900">Interactive Schema Explorer</h3>
+                <p class="mt-3 text-md text-gray-500 max-w-2xl mx-auto">This diagram visualizes the integrated ActiveRecord schema. The top half represents the UG-based structural models, while the bottom half shows the SFL-based functional models. Click on any model to view its detailed schema.</p>
+            </div>
+            <div class="card p-8">
+                <div class="grid grid-cols-3 gap-x-8 gap-y-12">
+                    <!-- UG Structural Layer -->
+                    <div class="col-span-1 flex items-center justify-center">
+                        <div class="schema-model w-40" data-model="Lexeme">
+                            <div class="model-title">Lexeme</div>
+                            <div class="model-subtitle">Base lexical unit</div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex items-center justify-center">
+                        <div class="schema-model w-40" data-model="Phrase">
+                            <div class="model-title">Phrase</div>
+                            <div class="model-subtitle">Syntactic group (NP, VP)</div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex items-center justify-center">
+                        <div class="schema-model w-40" data-model="DeepStructure">
+                            <div class="model-title">DeepStructure</div>
+                            <div class="model-subtitle">Canonical grammar</div>
+                        </div>
+                    </div>
+
+                    <!-- Bridge Layer -->
+                    <div class="col-span-3 text-center py-4 border-y-2 border-dashed my-4">
+                        <div class="schema-model w-48 mx-auto" data-model="SurfaceUtterance">
+                            <div class="model-title">SurfaceUtterance</div>
+                            <div class="model-subtitle">Actual source text</div>
+                        </div>
+                    </div>
+
+                    <!-- SFL Functional Layer -->
+                    <div class="col-span-1 flex items-center justify-center">
+                         <div class="schema-model w-48" data-model="ContextOfSituation">
+                            <div class="model-title">ContextOfSituation</div>
+                            <div class="model-subtitle">Field, Tenor, Mode</div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex items-center justify-center">
+                         <div class="schema-model w-40" data-model="Clause">
+                            <div class="model-title">Clause</div>
+                            <div class="model-subtitle">Unit of meaning</div>
+                        </div>
+                    </div>
+                    <div class="col-span-1 flex flex-col items-center justify-center gap-y-4">
+                        <div class="schema-model w-48" data-model="IdeationalFrame">
+                            <div class="model-title">IdeationalFrame</div>
+                            <div class="model-subtitle text-red-600">Content (Who does what)</div>
+                        </div>
+                        <div class="schema-model w-48" data-model="InterpersonalStance">
+                            <div class="model-title">InterpersonalStance</div>
+                            <div class="model-subtitle text-blue-600">Interaction (Mood, Tone)</div>
+                        </div>
+                        <div class="schema-model w-48" data-model="TextualOrganization">
+                            <div class="model-title">TextualOrganization</div>
+                            <div class="model-subtitle text-green-600">Message Flow (Theme)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pipeline" class="mb-20 scroll-mt-24">
+             <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-900">Data Processing Pipeline</h3>
+                <p class="mt-3 text-md text-gray-500 max-w-2xl mx-auto">Raw text is processed through a series of specialized Ruby gems to extract structural and functional information, which then populates the schema models.</p>
+            </div>
+            <div class="card p-8 overflow-x-auto">
+                <div class="flex items-center gap-2 md:gap-4 justify-center">
+                    <div class="text-center font-semibold">Raw Text</div>
+                    <div class="text-3xl text-gray-400">&rarr;</div>
+                    <div class="pipeline-step card-hover text-center p-3 rounded-lg border-2 border-gray-200 cursor-pointer min-w-[150px]" data-gem="tokenizer">
+                        <h6 class="font-semibold">Tokenization</h6><p class="text-xs text-gray-500">Pragmatic Tokenizer</p>
+                    </div>
+                    <div class="text-3xl text-gray-400">&rarr;</div>
+                    <div class="pipeline-step card-hover text-center p-3 rounded-lg border-2 border-gray-200 cursor-pointer min-w-[150px]" data-gem="spacy">
+                        <h6 class="font-semibold">POS & DEP Parsing</h6><p class="text-xs text-gray-500">ruby-spacy</p>
+                    </div>
+                    <div class="text-3xl text-gray-400">&rarr;</div>
+                    <div class="pipeline-step card-hover text-center p-3 rounded-lg border-2 border-gray-200 cursor-pointer min-w-[150px]" data-gem="linkparser">
+                        <h6 class="font-semibold">Deep Grammar</h6><p class="text-xs text-gray-500">Link Parser</p>
+                    </div>
+                    <div class="text-3xl text-gray-400">&rarr;</div>
+                    <div class="pipeline-step card-hover text-center p-3 rounded-lg border-2 border-gray-200 cursor-pointer min-w-[150px]" data-gem="wordnet">
+                        <h6 class="font-semibold">Semantic Relations</h6><p class="text-xs text-gray-500">ruby-wordnet</p>
+                    </div>
+                    <div class="text-3xl text-gray-400">&rarr;</div>
+                    <div class="text-center font-semibold text-blue-600/80">Populate Schema</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="demo" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-900">Interactive RAG Demo</h3>
+                <p class="mt-3 text-md text-gray-500 max-w-2xl mx-auto">This simulates how a RAG application queries the SFL models. Select a `ContextOfSituation` to see how the three metafunction frames are weighted differently to retrieve or generate the most relevant response.</p>
+            </div>
+            <div class="card p-8">
+                <div class="flex flex-wrap justify-center items-center gap-4 mb-8">
+                    <button class="context-btn bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow" data-context="technical">Technical Manual</button>
+                    <button class="context-btn bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg" data-context="email">Casual Email</button>
+                    <button class="context-btn bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg" data-context="marketing">Marketing Copy</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="sflChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-title" class="text-2xl font-bold mb-1"></h3>
+            <p id="modal-description" class="text-gray-600 mb-4"></p>
+            <div id="modal-body"></div>
+            <button id="modal-close" class="mt-6 w-full bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-lg">Close</button>
+        </div>
+    </div>
+
+    <footer class="bg-white mt-20 border-t">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            <p>&copy; 2025 Linguistic ORM Architecture Explorer. A conceptual model for advanced NLP.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const dbSchema = {
+        Lexeme: {
+            description: "The base/dictionary form of a word.",
+            columns: [
+                { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the lexeme.' },
+                { name: 'lemma', type: 'string', desc: 'The base/dictionary form of the word (e.g., "run").' },
+                { name: 'lexical_category', type: 'enum', desc: 'Part of speech (Noun, Verb, Adjective, etc.).' },
+                { name: 'wordnet_synset_id', type: 'string', desc: 'Link to WordNet for semantic definition.' },
+            ]
+        },
+        Phrase: {
+            description: "A node in the syntactic tree, representing a group of words.",
+            columns: [
+                { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the phrase node.' },
+                { name: 'phrase_type', type: 'enum', desc: 'Category of the phrase (NP, VP, PP, etc.).' },
+                { name: 'head_id', type: 'references (Lexeme)', desc: 'Foreign key to the Lexeme that is the head.' },
+                { name: 'specifier_id', type: 'references (Phrase)', desc: 'Self-referential FK to the specifier phrase.' },
+                { name: 'complement_id', type: 'references (Phrase)', desc: 'Self-referential FK to the complement phrase.' },
+            ]
+        },
+        DeepStructure: {
+            description: "The canonical, abstract syntactic structure of an utterance.",
+            columns: [
+                { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the canonical structure.' },
+                { name: 'root_phrase_id', type: 'references (Phrase)', desc: 'Foreign key to the root node of the syntactic tree.' },
+                { name: 'structure_hash', type: 'string', desc: 'Unique hash of the tree for de-duplication.' },
+            ]
+        },
+        SurfaceUtterance: {
+            description: "The actual text as it appears in a source document.",
+            columns: [
+                { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the surface text.' },
+                { name: 'text', type: 'text', desc: 'The actual string as it appears.' },
+                { name: 'deep_structure_id', type: 'references (DeepStructure)', desc: 'FK linking to its canonical deep structure.' },
+            ]
+        },
+        ContextOfSituation: {
+            description: "The situational context in which language is used.",
+            columns: [
+                { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the context.' },
+                { name: 'field', type: 'string', desc: 'The subject matter/domain of the discourse.' },
+                { name: 'tenor', type: 'string', desc: 'The relationship between participants.' },
+                { name: 'mode', type: 'string', desc: 'The channel of communication.' },
+            ]
+        },
+        Clause: {
+            description: "A fundamental unit of meaning, linking structure to context.",
+            columns: [
+                { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the clause unit.' },
+                { name: 'surface_utterance_id', type: 'references (SurfaceUtterance)', desc: 'Links the clause to its parent utterance.' },
+                { name: 'context_of_situation_id', type: 'references (ContextOfSituation)', desc: 'Links the clause to its situational context.' },
+            ]
+        },
+        IdeationalFrame: {
+            description: 'Captures the "content" meaning (Transitivity).',
+            columns: [
+                { name: 'clause_id', type: 'references (Clause) (PK)', desc: 'Links to the clause.' },
+                { name: 'process_type', type: 'enum', desc: 'The type of action/state (material, mental, etc.).' },
+                { name: 'actor_phrase_id', type: 'references (Phrase)', desc: 'The phrase acting as the primary participant.' },
+                { name: 'goal_phrase_id', type: 'references (Phrase)', desc: 'The phrase being acted upon.' },
+            ]
+        },
+        InterpersonalStance: {
+            description: 'Captures the "interactional" meaning (Mood, Modality).',
+            columns: [
+                { name: 'clause_id', type: 'references (Clause) (PK)', desc: 'Links to the clause.' },
+                { name: 'speech_function', type: 'enum', desc: 'The communicative act (statement, question, etc.).' },
+                { name: 'modality', type: 'string', desc: 'Expressions of certainty or obligation.' },
+                { name: 'polarity', type: 'enum', desc: 'Whether the clause is positive or negative.' },
+            ]
+        },
+        TextualOrganization: {
+            description: 'Captures the "message" structure (Theme/Rheme).',
+            columns: [
+                { name: 'clause_id', type: 'references (Clause) (PK)', desc: 'Links to the clause.' },
+                { name: 'theme_phrase_id', type: 'references (Phrase)', desc: "The phrase serving as the message's starting point." },
+                { name: 'rheme_phrase_id', type: 'references (Phrase)', desc: "The phrase that develops the theme." },
+            ]
+        }
+    };
+
+    const gemData = {
+        tokenizer: { title: 'Pragmatic Tokenizer', description: 'Breaks raw text into individual words or tokens, handling punctuation and contractions.', code: `tokenizer.tokenize("Let's-go to the U.S.A.")\n#=> ["let's", "go", "to", "the", "u.s.a."]` },
+        spacy: { title: 'ruby-spacy', description: 'Performs Part-of-Speech (POS) tagging, dependency parsing, and named entity recognition.', code: `doc.ents.each { |ent| puts "#{ent.text} (#{ent.label_})" }\n#=> Apple (ORG)\n#=> U.K. (GPE)` },
+        linkparser: { title: 'Link Parser', description: 'Analyzes deep syntactic structure, creating a "linkage" that connects words based on grammar.', code: `puts sent.constituent_tree_string\n#=> (S (NP The cat) (VP sat (PP on (NP the mat))))` },
+        wordnet: { title: 'ruby-wordnet', description: 'Accesses the WordNet lexical database to find semantic relationships between words.', code: `lemma = WordNet::Lemma.find("car", :noun)\nlemma.synsets.first.words.join(', ')\n#=> "car, auto, automobile, machine, motorcar"` }
+    };
+    
+    const sflChartData = {
+        technical: { label: 'Technical Manual', data: [10, 3, 8] },
+        email: { label: 'Casual Email', data: [5, 9, 6] },
+        marketing: { label: 'Marketing Copy', data: [6, 10, 4] }
+    };
+    
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalBody = document.getElementById('modal-body');
+    const modalClose = document.getElementById('modal-close');
+    
+    function showModal(content) {
+        modalTitle.textContent = content.title;
+        modalDescription.textContent = content.description;
+        modalBody.innerHTML = content.body;
+        modal.classList.add('visible');
+    }
+
+    function hideModal() {
+        modal.classList.remove('visible');
+    }
+
+    modalClose.addEventListener('click', hideModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            hideModal();
+        }
+    });
+
+    document.querySelectorAll('.schema-model').forEach(el => {
+        el.addEventListener('click', (e) => {
+            const modelKey = e.currentTarget.dataset.model;
+            const modelData = dbSchema[modelKey];
+            if (modelData) {
+                let tableHtml = `<div class="mt-4 overflow-x-auto"><table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr>
+                    <th scope="col" class="px-4 py-3">Column Name</th>
+                    <th scope="col" class="px-4 py-3">Data Type</th>
+                    <th scope="col" class="px-4 py-3">Description</th>
+                    </tr></thead><tbody>`;
+                modelData.columns.forEach(col => {
+                    tableHtml += `<tr class="bg-white border-b"><td class="px-4 py-3 font-mono font-medium text-gray-900">${col.name}</td><td class="px-4 py-3 font-mono text-purple-700">${col.type}</td><td class="px-4 py-3">${col.desc}</td></tr>`;
+                });
+                tableHtml += `</tbody></table></div>`;
+
+                showModal({
+                    title: `Schema: ${modelKey}`,
+                    description: modelData.description,
+                    body: tableHtml
+                });
+            }
+        });
+    });
+
+    document.querySelectorAll('.pipeline-step').forEach(step => {
+        step.addEventListener('click', () => {
+            const gem = gemData[step.dataset.gem];
+            const content = {
+                title: gem.title,
+                description: gem.description,
+                body: `<p class="text-sm font-semibold text-gray-700 mt-4">Code Example:</p><pre class="code-block"><code>${gem.code}</code></pre>`
+            };
+            showModal(content);
+        });
+    });
+
+    const chartCtx = document.getElementById('sflChart').getContext('2d');
+    let sflChart;
+
+    function createOrUpdateChart(contextKey) {
+        const contextData = sflChartData[contextKey];
+        if (sflChart) {
+            sflChart.data.datasets[0].data = contextData.data;
+            sflChart.data.datasets[0].label = `Relevance for: ${contextData.label}`;
+            sflChart.update();
+        } else {
+            sflChart = new Chart(chartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Ideational (Content)', 'Interpersonal (Stance)', 'Textual (Organization)'],
+                    datasets: [{
+                        label: `Relevance for: ${contextData.label}`,
+                        data: contextData.data,
+                        backgroundColor: ['rgba(219, 39, 119, 0.5)','rgba(59, 130, 246, 0.5)','rgba(16, 185, 129, 0.5)'],
+                        borderColor: ['rgba(219, 39, 119, 1)','rgba(59, 130, 246, 1)','rgba(16, 185, 129, 1)'],
+                        borderWidth: 1,
+                        borderRadius: 5,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, max: 12, title: { display: true, text: 'Contextual Relevance Score' } } },
+                    plugins: {
+                        legend: { position: 'top' },
+                        title: { display: true, text: 'SFL Metafunction Frame Weighting by Context' }
+                    }
+                }
+            });
+        }
+    }
+
+    createOrUpdateChart('technical');
+
+    document.querySelectorAll('.context-btn').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const context = e.target.dataset.context;
+            createOrUpdateChart(context);
+            document.querySelectorAll('.context-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-500', 'text-white', 'shadow');
+                btn.classList.add('bg-gray-200', 'text-gray-800');
+            });
+            e.target.classList.add('bg-blue-500', 'text-white', 'shadow');
+            e.target.classList.remove('bg-gray-200', 'text-gray-800');
+        });
+    });
+});
+</script>
+
+</body>
+</html>
+

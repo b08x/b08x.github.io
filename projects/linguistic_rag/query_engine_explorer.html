@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguistic Query Engine Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral Harmony -->
+    <!-- Application Structure Plan: The application is structured as a narrative journey, guiding the user from the high-level problem to the detailed solution. It begins with the 'Why' (surpassing traditional RAG), moves to the 'What' (the dual-model architecture), then the 'How' (the processing pipeline and schema), and finally the 'Result' (powerful new query capabilities). This thematic, top-down structure is more intuitive for learning than a flat presentation of data, as it builds context at each step. Interactions are designed to let users drill down into details at their own pace, preventing information overload. -->
+    <!-- Visualization & Content Choices: 
+        - RAG vs. Linguistic Engine: A dynamic HTML/CSS diagram is used instead of a static image to allow for interactive highlighting and to avoid SVG. This visually explains the core value proposition. Goal: Compare. Method: Interactive Diagram. Interaction: Hover/Click to reveal details.
+        - Dual Architecture: A two-column layout visually separates the 'Firmare' (UG) and 'Software' (SFL) concepts, reinforcing the central thesis. Goal: Organize. Method: Side-by-side cards. Interaction: N/A, clarity through layout.
+        - Processing Pipeline: An interactive stepper component presents the 5-stage process. This breaks a complex workflow into manageable steps. Goal: Change/Process. Method: Stepper diagram. Interaction: Clicking a stage updates a detail pane.
+        - Integrated Schema: A dropdown selector paired with a dynamic content display allows users to explore the detailed database schema without being overwhelmed by a single, large table. Goal: Inform/Organize. Method: Dynamic Content View. Interaction: Select from dropdown to view specific model details.
+        - Query Examples: Side-by-side text blocks with interactive buttons demonstrate the practical benefits of the system. Goal: Compare. Method: Text comparison. Interaction: Buttons to cycle through examples.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #404040;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #A57C5A;
+            border-bottom-color: #A57C5A;
+        }
+        .section-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .section-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+        }
+        .btn-primary {
+            background-color: #A57C5A;
+            color: #FFFFFF;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #8E6A4D;
+        }
+        .btn-secondary {
+            background-color: #F3F4F6;
+            color: #404040;
+            border: 1px solid #D1D5DB;
+            transition: background-color 0.3s;
+        }
+        .btn-secondary:hover {
+            background-color: #E5E7EB;
+        }
+        .pipeline-step {
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border: 2px solid #D1D5DB;
+        }
+        .pipeline-step.active {
+            background-color: #A57C5A;
+            color: #FFFFFF;
+            border-color: #A57C5A;
+        }
+        .diagram-box { border: 2px dashed #D1D5DB; }
+        .diagram-arrow { color: #A57C5A; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800">Linguistic Query Engine</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#vision" class="nav-link active">Vision</a>
+                <a href="#architecture" class="nav-link">Architecture</a>
+                <a href="#pipeline" class="nav-link">Pipeline</a>
+                <a href="#schema" class="nav-link">Schema</a>
+                <a href="#queries" class="nav-link">Queries</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        
+        <section id="vision" class="mb-20 text-center">
+            <h2 class="text-4xl font-bold mb-4 text-gray-900">Beyond Keyword Search</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12">Traditional Retrieval-Augmented Generation (RAG) systems find relevant text chunks, but they don't understand the language within them. We propose a Linguistic Query Engine that models language structure to enable far more precise, meaningful, and powerful queries.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="section-card p-6 text-left">
+                    <h3 class="text-2xl font-semibold mb-4 text-center">Traditional RAG</h3>
+                    <div class="space-y-4">
+                        <div class="diagram-box p-4 rounded-lg">
+                            <p class="font-semibold text-gray-700">User Query</p>
+                            <p class="text-sm text-gray-500">"Did the project fail?"</p>
+                        </div>
+                        <div class="text-center text-4xl diagram-arrow">&darr;</div>
+                        <div class="diagram-box p-4 rounded-lg">
+                            <p class="font-semibold text-gray-700">Semantic Search</p>
+                            <p class="text-sm text-gray-500">Finds vectors close to the query.</p>
+                        </div>
+                        <div class="text-center text-4xl diagram-arrow">&darr;</div>
+                        <div class="diagram-box p-4 rounded-lg bg-red-50 border-red-200">
+                            <p class="font-semibold text-gray-700">Retrieved Text Chunks</p>
+                            <p class="text-sm text-gray-500">"The project launch was a success..."<br>"...initial failure was overcome..."<br>"...a project to mitigate failure..."</p>
+                        </div>
+                    </div>
+                    <p class="mt-6 text-gray-600">This approach often retrieves documents with matching keywords but conflicting or irrelevant meanings, leading to inaccurate answers.</p>
+                </div>
+                
+                <div class="section-card p-6 text-left border-2 border-amber-500">
+                    <h3 class="text-2xl font-semibold mb-4 text-center text-amber-700">Linguistic Query Engine</h3>
+                    <div class="space-y-4">
+                        <div class="diagram-box p-4 rounded-lg">
+                            <p class="font-semibold text-gray-700">User Query</p>
+                            <p class="text-sm text-gray-500">"Did the project fail?"</p>
+                        </div>
+                        <div class="text-center text-4xl diagram-arrow">&darr;</div>
+                        <div class="diagram-box p-4 rounded-lg">
+                            <p class="font-semibold text-gray-700">Linguistic Parsing</p>
+                            <p class="text-sm text-gray-500">Analyzes grammar, roles, and context.</p>
+                        </div>
+                        <div class="text-center text-4xl diagram-arrow">&darr;</div>
+                        <div class="diagram-box p-4 rounded-lg bg-green-50 border-green-200">
+                            <p class="font-semibold text-gray-700">Structured Query on Model</p>
+                            <p class="text-sm text-gray-500">SELECT * WHERE<br>Participant = 'project'<br>Process = 'fail'<br>Polarity = 'positive'</p>
+                        </div>
+                    </div>
+                    <p class="mt-6 text-gray-600">By querying a structured model of language, we can precisely target concepts and their relationships, ignoring superficial keyword matches.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="mb-20">
+            <h2 class="text-3xl font-bold mb-2 text-center text-gray-900">A Dual-Model Architecture</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-12">The engine's power comes from integrating two linguistic theories: Universal Grammar (UG) for timeless, stable structure, and Systemic Functional Linguistics (SFL) for dynamic, contextual meaning.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="section-card p-8">
+                    <h3 class="text-2xl font-semibold mb-4">Firmare (The Deep Structure - UG)</h3>
+                    <p class="text-gray-600 mb-6">Represents the core, abstract knowledge. It's the stable "hardware" of meaning, defining concepts and their relationships independent of how they are expressed.</p>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-gray-50 rounded-lg border">
+                            <h4 class="font-bold">Proposition</h4>
+                            <p class="text-sm text-gray-600">The core unit of knowledge. A timeless, abstract claim. (e.g., The concept 'Acme Corp' is related to the concept 'acquire' which is related to the concept 'Innovate Inc').</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg border">
+                            <h4 class="font-bold">Concept</h4>
+                            <p class="text-sm text-gray-600">The atomic entities (nouns, ideas) that build propositions. The building blocks of the ontology.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-card p-8">
+                    <h3 class="text-2xl font-semibold mb-4">Software (The Contextual Meaning - SFL)</h3>
+                    <p class="text-gray-600 mb-6">Represents a single, concrete communicative act. It's the dynamic "software" that runs on the hardware, capturing who is saying what to whom, and why.</p>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-gray-50 rounded-lg border">
+                            <h4 class="font-bold">Discourse Event</h4>
+                            <p class="text-sm text-gray-600">The central hub for context. Represents a specific utterance like an email, a sentence in a report, etc.</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg border">
+                            <h4 class="font-bold">Interpersonal Stance</h4>
+                            <p class="text-sm text-gray-600">Captures the "Tenor" - the relationship, attitude, and certainty of the speaker.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-2 section-card p-8 bg-amber-50 border-amber-200">
+                    <h3 class="text-2xl font-semibold mb-4 text-center">The Critical Bridge: Text Chunk</h3>
+                    <p class="text-gray-700 text-center max-w-2xl mx-auto">The `TextChunk` model is the linchpin that connects the two worlds. It links a specific piece of text (e.g., "The company announced a layoff") to both its dynamic SFL context (who announced it, when, with what certainty) and the timeless UG propositions it represents (company -> layoff).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="pipeline" class="mb-20">
+            <h2 class="text-3xl font-bold mb-2 text-center text-gray-900">Hybrid Processing Pipeline</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-12">Raw text is transformed into the structured dual-model through a five-stage automated pipeline, combining traditional computational linguistics with modern LLM capabilities.</p>
+            <div class="section-card p-8">
+                <div id="pipeline-steps" class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4 mb-8">
+                </div>
+                <div id="pipeline-details" class="bg-gray-50 p-6 rounded-lg border min-h-[200px]">
+                </div>
+            </div>
+        </section>
+
+        <section id="schema" class="mb-20">
+            <h2 class="text-3xl font-bold mb-2 text-center text-gray-900">Integrated Database Schema</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-12">The architecture is realized as a set of interconnected database tables. Explore the models below to see how linguistic concepts are stored.</p>
+            <div class="section-card p-8">
+                <div class="flex flex-col sm:flex-row items-center mb-6">
+                    <label for="schema-select" class="font-semibold mr-4 mb-2 sm:mb-0">Select a Model to Explore:</label>
+                    <select id="schema-select" class="block w-full sm:w-auto p-2 border border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500">
+                    </select>
+                </div>
+                <div id="schema-details" class="overflow-x-auto">
+                </div>
+            </div>
+        </section>
+
+        <section id="queries" class="mb-20">
+            <h2 class="text-3xl font-bold mb-2 text-center text-gray-900">Unlocking Powerful Queries</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-12">This structured approach enables queries that are impossible for systems based on semantic similarity alone. See the difference in specificity and power.</p>
+            <div class="section-card p-8">
+                <div id="query-buttons" class="flex flex-wrap justify-center gap-4 mb-8">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-xl mb-2 text-gray-500">Traditional RAG Query</h3>
+                        <div id="rag-query" class="p-6 rounded-lg bg-gray-100 border border-gray-200 min-h-[150px] text-gray-700 font-mono text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-2 text-amber-700">Linguistic Engine Query</h3>
+                        <div id="linguistic-query" class="p-6 rounded-lg bg-amber-50 border border-amber-200 min-h-[150px] text-amber-900 font-mono text-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+            <p>&copy; 2025 Linguistic Query Engine Initiative. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const pipelineData = [
+                { stage: 1, name: 'Pre-processing', gems: 'lingua, pragmatic_segmenter, pragmatic_tokenizer', input: 'Raw Document text', output: 'Language-tagged, segmented, and tokenized Clauses', purpose: 'Prepare text for deep parsing by breaking it into clean, sentence-level units.' },
+                { stage: 2, name: 'Structural Parsing', gems: 'ruby-spacy, linkparser', input: 'Tokenized Clause', output: 'Dependency parse graph, Link Grammar graph', purpose: 'Generate a formal syntactic analysis of the clause\'s structure.' },
+                { stage: 3, name: 'UG Model Population', gems: 'Custom XBarTreeBuilder, linguistics, rwordnet', input: 'Syntactic parse graphs, tokens', output: 'Populated Phrase and LexicalItem records', purpose: 'Translate the syntactic analysis into the persistent X-bar tree structure in the database and enrich the lexicon.' },
+                { stage: 4, name: 'SFL Annotation', gems: 'ruby_llm, ruby_llm-schema', input: 'Clause text + structural metadata', output: 'Structured JSON with SFL analysis', purpose: 'Use an LLM to perform functional analysis, constrained by pre-parsed structure and a strict output schema.' },
+                { stage: 5, name: 'SFL Model Population', gems: 'Custom SFLAnnotator', input: 'Structured JSON, existing Phrase records', output: 'Populated ClauseContext, IdeationalMeaning, Participant, etc.', purpose: 'Persist the functional analysis in the database, creating the "realization bridge" between the UG and SFL models.' },
+            ];
+
+            const schemaData = {
+                'Lexeme': [
+                    { column: 'id', type: 'bigint (PK)', desc: 'Primary key for the lexeme.' },
+                    { column: 'lemma', type: 'string', desc: 'The base/dictionary form of the word (e.g., "run").' },
+                    { column: 'lexical_category', type: 'enum', desc: 'Part of speech (Noun, Verb, Adjective, Preposition, etc.).' },
+                    { column: 'wordnet_synset_id', type: 'string', desc: 'Link to WordNet for semantic definition and relationships.' },
+                ],
+                'Phrase': [
+                    { column: 'id', type: 'bigint (PK)', desc: 'Primary key for the phrase node.' },
+                    { column: 'phrase_type', type: 'enum', desc: 'Category of the phrase (NP, VP, PP, etc.).' },
+                    { column: 'head_id', type: 'references (Lexeme)', desc: 'Foreign key to the Lexeme that is the head of the phrase.' },
+                    { column: 'specifier_id', type: 'references (Phrase)', desc: 'Self-referential foreign key to the specifier phrase.' },
+                    { column: 'complement_id', type: 'references (Phrase)', desc: 'Self-referential foreign key to the complement phrase.' },
+                ],
+                'DeepStructure': [
+                    { column: 'id', type: 'bigint (PK)', desc: 'Primary key for the canonical structure.' },
+                    { column: 'root_phrase_id', type: 'references (Phrase)', desc: 'Foreign key to the root node of the syntactic tree.' },
+                    { column: 'structure_hash', type: 'string', desc: 'Unique hash of the tree for de-duplication.' },
+                ],
+                'SurfaceUtterance': [
+                    { column: 'id', type: 'bigint (PK)', desc: 'Primary key for the surface text.' },
+                    { column: 'text', type: 'text', desc: 'The actual string as it appears in the source document.' },
+                    { column: 'deep_structure_id', type: 'references (DeepStructure)', desc: 'Foreign key linking this surface form to its canonical deep structure.' },
+                ],
+                'ContextOfSituation': [
+                    { column: 'id', type: 'bigint (PK)', desc: 'Primary key for the context.' },
+                    { column: 'field', type: 'string', desc: 'The subject matter/domain of the discourse.' },
+                    { column: 'tenor', type: 'string', desc: 'The relationship between participants.' },
+                    { column: 'mode', type: 'string', desc: 'The channel of communication.' },
+                ],
+                'Clause': [
+                     { column: 'id', type: 'bigint (PK)', desc: 'Primary key for the clause unit.' },
+                     { column: 'surface_utterance_id', type: 'references (SurfaceUtterance)', desc: 'Links the clause to its parent utterance.' },
+                     { column: 'context_of_situation_id', type: 'references (ContextOfSituation)', desc: 'Links the clause to its situational context.' },
+                ],
+                'IdeationalFrame': [
+                     { column: 'clause_id', type: 'references (Clause) (PK)', desc: 'Captures the "content" meaning (Transitivity).' },
+                     { column: 'process_type', type: 'enum', desc: 'The type of action/state (material, mental, relational).' },
+                     { column: 'actor_phrase_id', type: 'references (Phrase)', desc: 'The phrase acting as the primary participant (Actor).' },
+                     { column: 'goal_phrase_id', type: 'references (Phrase)', desc: 'The phrase being acted upon (Goal).' },
+                ],
+                 'InterpersonalStance': [
+                     { column: 'clause_id', type: 'references (Clause) (PK)', desc: 'Captures the "interactional" meaning (Mood, Modality).' },
+                     { column: 'speech_function', type: 'enum', desc: 'The communicative act (statement, question, command).' },
+                     { column: 'modality', type: 'string', desc: 'Expressions of certainty or obligation.' },
+                     { column: 'polarity', type: 'enum', desc: 'Whether the clause is positive or negative.' },
+                ],
+                 'TextualOrganization': [
+                     { column: 'clause_id', type: 'references (Clause) (PK)', desc: 'Captures the "message" structure (Theme/Rheme).' },
+                     { column: 'theme_phrase_id', type: 'references (Phrase)', desc: 'The phrase serving as the message\'s starting point.' },
+                     { column: 'rheme_phrase_id', type: 'references (Phrase)', desc: 'The phrase that develops the Theme.' },
+                ]
+            };
+            
+            const queryData = [
+                {
+                    name: 'Financial Performance',
+                    rag: 'Search for "revenue decreased"',
+                    linguistic: `Find clauses where:<br>
+- Process Type IS 'material'<br>
+- Actor IS 'revenue'<br>
+- Process Lemma IS 'decrease'<br>
+- Polarity IS 'positive'`
+                },
+                {
+                    name: 'Project Responsibility',
+                    rag: 'Search for "John" and "API project" and "responsible"',
+                    linguistic: `Find clauses where:<br>
+- Participant Role IS 'Actor'<br>
+- Participant Lemma IS 'John'<br>
+- Related Participant Role IS 'Goal'<br>
+- Related Participant Lemma CONTAINS 'API'`
+                },
+                {
+                    name: 'Future Commitments',
+                    rag: 'Search for "we will launch"',
+                    linguistic: `Find clauses where:<br>
+- Speech Function IS 'statement'<br>
+- Modality CONTAINS 'high certainty' (will, must)<br>
+- Process Lemma IS 'launch'`
+                },
+                {
+                    name: 'Negative Sentiment',
+                    rag: 'Search for "product" and "bad" or "poor"',
+                    linguistic: `Find clauses where:<br>
+- A Participant CONTAINS 'product'<br>
+- AND Interpersonal Stance has Polarity = 'negative'`
+                }
+            ];
+
+
+            const pipelineStepsContainer = document.getElementById('pipeline-steps');
+            const pipelineDetailsContainer = document.getElementById('pipeline-details');
+            
+            pipelineData.forEach((step, index) => {
+                const stepEl = document.createElement('div');
+                stepEl.className = 'pipeline-step flex-1 text-center font-semibold p-4 rounded-full';
+                stepEl.textContent = `${step.stage}. ${step.name}`;
+                stepEl.dataset.stage = step.stage;
+                if (index > 0) {
+                     const connector = document.createElement('div');
+                     connector.className = 'w-1/5 h-1 bg-gray-300 hidden md:block';
+                     pipelineStepsContainer.appendChild(connector);
+                }
+                pipelineStepsContainer.appendChild(stepEl);
+            });
+
+            function updatePipelineDetails(stage = 1) {
+                const stepData = pipelineData.find(s => s.stage == stage);
+                if (stepData) {
+                    pipelineDetailsContainer.innerHTML = `
+                        <h4 class="text-xl font-bold mb-4">${stepData.stage}. ${stepData.name}</h4>
+                        <p class="mb-4 text-gray-700">${stepData.purpose}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                            <div class="bg-white p-3 rounded-lg border"><strong>Input:</strong> ${stepData.input}</div>
+                            <div class="bg-white p-3 rounded-lg border"><strong>Output:</strong> ${stepData.output}</div>
+                            <div class="bg-white p-3 rounded-lg border sm:col-span-2"><strong>Tools Used:</strong> ${stepData.gems}</div>
+                        </div>
+                    `;
+                    document.querySelectorAll('.pipeline-step').forEach(el => {
+                        el.classList.toggle('active', el.dataset.stage == stage);
+                    });
+                }
+            }
+
+            pipelineStepsContainer.addEventListener('click', (e) => {
+                if (e.target.matches('.pipeline-step')) {
+                    updatePipelineDetails(e.target.dataset.stage);
+                }
+            });
+
+            updatePipelineDetails(1);
+
+            const schemaSelect = document.getElementById('schema-select');
+            const schemaDetailsContainer = document.getElementById('schema-details');
+
+            Object.keys(schemaData).forEach(modelName => {
+                const option = document.createElement('option');
+                option.value = modelName;
+                option.textContent = modelName;
+                schemaSelect.appendChild(option);
+            });
+            
+            function updateSchemaDetails(modelName) {
+                const modelDetails = schemaData[modelName];
+                if(modelDetails) {
+                    const table = `
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="p-3 font-semibold text-sm border-b">Column Name</th>
+                                    <th class="p-3 font-semibold text-sm border-b">Data Type</th>
+                                    <th class="p-3 font-semibold text-sm border-b">Description / Associations</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${modelDetails.map(col => `
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="p-3 border-b border-gray-200 font-mono text-sm">${col.column}</td>
+                                        <td class="p-3 border-b border-gray-200 font-mono text-xs">${col.type}</td>
+                                        <td class="p-3 border-b border-gray-200 text-sm">${col.desc}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                    schemaDetailsContainer.innerHTML = table;
+                }
+            }
+
+            schemaSelect.addEventListener('change', (e) => {
+                updateSchemaDetails(e.target.value);
+            });
+
+            updateSchemaDetails(Object.keys(schemaData)[0]);
+            
+            const queryButtonsContainer = document.getElementById('query-buttons');
+            const ragQueryEl = document.getElementById('rag-query');
+            const linguisticQueryEl = document.getElementById('linguistic-query');
+
+            queryData.forEach((q, index) => {
+                const button = document.createElement('button');
+                button.className = index === 0 ? 'btn-primary px-4 py-2 rounded-md font-semibold' : 'btn-secondary px-4 py-2 rounded-md font-semibold';
+                button.textContent = q.name;
+                button.dataset.index = index;
+                queryButtonsContainer.appendChild(button);
+            });
+
+            function updateQueryExamples(index = 0) {
+                const query = queryData[index];
+                if (query) {
+                    ragQueryEl.innerHTML = query.rag;
+                    linguisticQueryEl.innerHTML = query.linguistic;
+                    queryButtonsContainer.querySelectorAll('button').forEach((btn, btnIndex) => {
+                         btn.className = btnIndex == index 
+                            ? 'btn-primary px-4 py-2 rounded-md font-semibold' 
+                            : 'btn-secondary px-4 py-2 rounded-md font-semibold';
+                    });
+                }
+            }
+            
+            queryButtonsContainer.addEventListener('click', (e) => {
+                if(e.target.matches('button')) {
+                    updateQueryExamples(e.target.dataset.index);
+                }
+            });
+
+            updateQueryExamples(0);
+
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 60) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

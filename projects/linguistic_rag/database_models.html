@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguistic Database Models for RAG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-active {
+            border-color: #4f46e5;
+            color: #4f46e5;
+            font-weight: 600;
+            background-color: #eef2ff;
+        }
+        .tab-inactive {
+            border-color: transparent;
+            color: #6b7280;
+        }
+        .schema-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr;
+            gap: 0.5rem 1rem;
+            align-items: start;
+        }
+        .schema-grid .grid-header {
+            font-weight: 600;
+            color: #111827;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #d1d5db;
+        }
+        .schema-grid .grid-cell {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .pipeline-arrow {
+            position: relative;
+            padding-right: 2.5rem;
+        }
+        .pipeline-arrow::after {
+            content: '→';
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #9ca3af;
+        }
+        @media (max-width: 768px) {
+            .pipeline {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .pipeline-item {
+                margin-bottom: 1rem;
+            }
+            .pipeline-arrow {
+                padding-right: 0;
+                padding-bottom: 2.5rem;
+            }
+            .pipeline-arrow::after {
+                content: '↓';
+                right: 50%;
+                top: auto;
+                bottom: 0.5rem;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#FDFBF8] text-gray-800">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is structured as a single-page, educational deep-dive. It follows a linear narrative flow, starting with the core problem (context in RAG), presenting the proposed solution (linguistic models), and then breaking down each model (UG and SFL) with interactive examples. This is followed by a section on the tooling (Ruby gems) and culminates in an interactive demo. This top-down, narrative structure was chosen because the topic is complex and conceptual; it guides the user from the "why" to the "what" and finally the "how," making it easier to understand than a dashboard-style layout. The interactive demo at the end serves as a practical synthesis of all the preceding theory. -->
+    <!-- Visualization & Content Choices: 
+        - UG/SFL Concepts -> Goal: Inform/Organize -> Viz: Styled HTML cards with collapsible sections -> Interaction: Click to expand/collapse -> Justification: Manages information density, allowing users to explore concepts at their own pace.
+        - Database Schemas -> Goal: Organize -> Viz: Grid-based layouts mimicking tables -> Interaction: Displayed within collapsible sections -> Justification: Presents structured data in a familiar, easy-to-scan format without cluttering the main view.
+        - SFL Metafunctions -> Goal: Compare -> Viz: Tabbed interface -> Interaction: Click to switch between Ideational, Interpersonal, and Textual views -> Justification: Tabs are an intuitive UI pattern for comparing parallel concepts within a single framework.
+        - Ruby Gem Pipeline -> Goal: Show Process -> Viz: HTML/CSS flexbox diagram -> Interaction: Hover for tooltips (not implemented to keep JS minimal, but concept is visual) -> Justification: A flowchart is the clearest way to represent a data processing sequence.
+        - Interactive Demo -> Goal: Synthesize/Explore -> Viz: Dynamic HTML cards generated from user input -> Interaction: User types a sentence and clicks "Analyze" -> Justification: Provides a hands-on experience that solidifies understanding by connecting theory to a practical, albeit simulated, output.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">Linguistic Database Models</h1>
+            <p class="text-lg text-gray-600">Exploring UG & SFL for Contextual RAG Applications with ActiveRecord</p>
+        </header>
+
+        <main>
+            <section id="problem" class="mb-12 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-2xl font-bold mb-4 text-indigo-700">The Challenge: Deeper Context in RAG</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    Retrieval-Augmented Generation (RAG) systems depend on retrieving relevant documents to generate accurate answers. While vector embeddings are powerful, they can miss the nuanced, structural meaning embedded in language. How can we model data to capture not just *what* is said, but *how* it's said and *why*? This exploration proposes using linguistic theories—Universal Grammar and Systemic Functional Linguistics—as blueprints for database schemas in an ActiveRecord ORM, creating a richer, more context-aware retrieval layer.
+                </p>
+            </section>
+
+            <section id="solution-overview" class="mb-12 grid md:grid-cols-2 gap-8">
+                <div id="ug-card" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">Universal Grammar (UG)</h3>
+                    <p class="text-gray-700 mb-4">UG posits that all human languages share an innate, underlying structure. By modeling these universal "rules," we can create a database that understands the fundamental grammatical roles and relationships within a sentence, independent of the specific vocabulary used.</p>
+                </div>
+                <div id="sfl-card" class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">Systemic Functional Linguistics (SFL)</h3>
+                    <p class="text-gray-700 mb-4">SFL views language as a set of choices for making meaning in context. It analyzes language through three "metafunctions": the content (Ideational), the social relationships (Interpersonal), and the textual organization (Textual). This allows us to model the *purpose* and *function* of language.</p>
+                </div>
+            </section>
+            
+            <section id="integrated-schema" class="mb-12 bg-white p-6 rounded-lg shadow-sm border border-gray-200 scroll-mt-20">
+                <h2 class="text-2xl font-bold mb-4 text-indigo-700">Proposed Integrated ActiveRecord Schema</h2>
+                <p class="text-gray-700 mb-6">This schema integrates concepts from both UG and SFL. The UG-inspired models (`Lexeme`, `Phrase`, `DeepStructure`) capture the syntactic form of the text, while the SFL-inspired models (`ContextOfSituation`, `IdeationalFrame`, etc.) capture its communicative function. The `Clause` model serves as the central pivot, linking form to function.</p>
+                <div id="schema-container" class="space-y-2">
+                    <!-- Schema content will be injected here by JS -->
+                </div>
+            </section>
+
+            <section id="toolchain" class="mb-12 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-2xl font-bold mb-4 text-indigo-700">The Toolchain: A Ruby Gem Pipeline</h2>
+                <p class="text-gray-700 mb-6">To populate these database models, a text processing pipeline would use various Ruby gems to extract linguistic features. Each gem plays a specific role in deconstructing the text into structured data suitable for the UG and SFL schemas.</p>
+                <div class="flex flex-wrap justify-center items-center text-center p-4 pipeline">
+                    <div class="pipeline-item pipeline-arrow"><div class="p-3 bg-gray-100 rounded-md">Input Text</div></div>
+                    <div class="pipeline-item pipeline-arrow"><div class="p-3 bg-indigo-50 rounded-md">ruby-spacy / linkparser <br/><span class="text-sm text-indigo-700">(Parsing)</span></div></div>
+                    <div class="pipeline-item pipeline-arrow"><div class="p-3 bg-indigo-50 rounded-md">rwordnet <br/><span class="text-sm text-indigo-700">(Lexical Relations)</span></div></div>
+                    <div class="pipeline-item pipeline-arrow"><div class="p-3 bg-emerald-50 rounded-md">Custom Logic <br/><span class="text-sm text-emerald-700">(Feature Extraction)</span></div></div>
+                    <div class="pipeline-item"><div class="p-3 bg-green-100 rounded-md">ActiveRecord ORM <br/><span class="text-sm text-green-700">(Database Models)</span></div></div>
+                </div>
+            </section>
+
+            <section id="demo" class="mb-12">
+                 <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h2 class="text-2xl font-bold mb-4 text-indigo-700">Interactive Demo</h2>
+                    <p class="text-gray-700 mb-6">Enter a sentence to see a simplified, simulated analysis based on the proposed integrated schema. This demonstrates how raw text could be mapped to the relational models.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                        <input type="text" id="text-input" class="flex-grow p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., The agile team deploys new features.">
+                        <button id="analyze-button" class="bg-indigo-600 text-white font-semibold py-3 px-6 rounded-md hover:bg-indigo-700 transition-colors">Analyze Sentence</button>
+                    </div>
+                    <div id="demo-output" class="space-y-4"></div>
+                 </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-12 text-gray-500">
+            <p>&copy; 2025. Conceptual exploration of linguistic models in software architecture.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const schemaData = [
+                { model: 'Lexeme', columns: [
+                    { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the lexeme.' },
+                    { name: 'lemma', type: 'string', desc: 'The base/dictionary form of the word (e.g., "run").' },
+                    { name: 'lexical_category', type: 'enum', desc: 'Part of speech (Noun, Verb, Adjective, Preposition, etc.).' },
+                    { name: 'wordnet_synset_id', type: 'string', desc: 'Link to WordNet for semantic definition and relationships.' }
+                ]},
+                { model: 'Phrase', columns: [
+                    { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the phrase node.' },
+                    { name: 'phrase_type', type: 'enum', desc: 'Category of the phrase (NP, VP, PP, etc.).' },
+                    { name: 'head_id', type: 'references (Lexeme)', desc: 'Foreign key to the Lexeme that is the head of the phrase.' },
+                    { name: 'specifier_id', type: 'references (Phrase)', desc: 'Self-referential foreign key to the specifier phrase.' },
+                    { name: 'complement_id', type: 'references (Phrase)', desc: 'Self-referential foreign key to the complement phrase.' }
+                ]},
+                { model: 'PhraseAdjunct', columns: [
+                    { name: 'phrase_id', type: 'references (Phrase)', desc: 'Join table mapping phrases to their (potentially multiple) adjuncts.' },
+                    { name: 'adjunct_phrase_id', type: 'references (Phrase)', desc: 'Foreign key to the adjunct phrase.' }
+                ]},
+                { model: 'DeepStructure', columns: [
+                    { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the canonical structure.' },
+                    { name: 'root_phrase_id', type: 'references (Phrase)', desc: 'Foreign key to the root node of the syntactic tree.' },
+                    { name: 'structure_hash', type: 'string', desc: 'Unique hash of the tree for de-duplication.' }
+                ]},
+                { model: 'SurfaceUtterance', columns: [
+                    { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the surface text.' },
+                    { name: 'text', type: 'text', desc: 'The actual string as it appears in the source document.' },
+                    { name: 'source_document_id', type: 'bigint', desc: 'Foreign key to the source document.' },
+                    { name: 'deep_structure_id', type: 'references (DeepStructure)', desc: 'Foreign key linking this surface form to its canonical deep structure.' }
+                ]},
+                { model: 'ContextOfSituation', columns: [
+                    { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the context.' },
+                    { name: 'field', type: 'string', desc: 'The subject matter/domain of the discourse.' },
+                    { name: 'tenor', type: 'string', desc: 'The relationship between participants.' },
+                    { name: 'mode', type: 'string', desc: 'The channel of communication.' }
+                ]},
+                { model: 'Clause', columns: [
+                    { name: 'id', type: 'bigint (PK)', desc: 'Primary key for the clause unit.' },
+                    { name: 'surface_utterance_id', type: 'references (SurfaceUtterance)', desc: 'Links the clause to its parent utterance.' },
+                    { name: 'context_of_situation_id', type: 'references (ContextOfSituation)', desc: 'Links the clause to its situational context.' }
+                ]},
+                { model: 'IdeationalFrame', columns: [
+                    { name: 'clause_id', type: 'references (Clause) (PK)', desc: 'Captures the "content" meaning (Transitivity).' },
+                    { name: 'process_type', type: 'enum', desc: 'The type of action/state (material, mental, relational).' },
+                    { name: 'actor_phrase_id', type: 'references (Phrase)', desc: 'The phrase acting as the primary participant (Actor).' },
+                    { name: 'goal_phrase_id', type: 'references (Phrase)', desc: 'The phrase being acted upon (Goal).' }
+                ]},
+                { model: 'InterpersonalStance', columns: [
+                    { name: 'clause_id', type: 'references (Clause) (PK)', desc: 'Captures the "interactional" meaning (Mood, Modality).' },
+                    { name: 'speech_function', type: 'enum', desc: 'The communicative act (statement, question, command).' },
+                    { name: 'modality', type: 'string', desc: 'Expressions of certainty or obligation.' },
+                    { name: 'polarity', type: 'enum', desc: 'Whether the clause is positive or negative.' }
+                ]},
+                { model: 'TextualOrganization', columns: [
+                    { name: 'clause_id', type: 'references (Clause) (PK)', desc: 'Captures the "message" structure (Theme/Rheme).' },
+                    { name: 'theme_phrase_id', type: 'references (Phrase)', desc: 'The phrase serving as the message\'s starting point.' },
+                    { name: 'rheme_phrase_id', type: 'references (Phrase)', desc: 'The phrase representing what is said about the theme.' }
+                ]}
+            ];
+
+            const schemaContainer = document.getElementById('schema-container');
+            schemaData.forEach(table => {
+                const columnsHtml = table.columns.map(col => `
+                    <div class="grid-cell font-mono text-sm text-gray-700">${col.name}</div>
+                    <div class="grid-cell font-mono text-sm text-indigo-600">${col.type}</div>
+                    <div class="grid-cell text-sm text-gray-600">${col.desc}</div>
+                `).join('');
+
+                const tableHtml = `
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 rounded-t-lg font-semibold flex justify-between items-center toggle-button" data-target="schema-${table.model}">
+                            <span>${table.model}</span>
+                            <span class="transform transition-transform text-indigo-500">▼</span>
+                        </button>
+                        <div id="schema-${table.model}" class="p-4 border-t border-gray-200 hidden">
+                            <div class="schema-grid text-sm">
+                                <div class="grid-header">Column Name</div>
+                                <div class="grid-header">Data Type</div>
+                                <div class="grid-header">Description/Associations</div>
+                                ${columnsHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                schemaContainer.innerHTML += tableHtml;
+            });
+
+            document.querySelectorAll('.toggle-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    const targetElement = document.getElementById(targetId);
+                    const icon = button.querySelector('span:last-child');
+                    
+                    if (targetElement) {
+                        targetElement.classList.toggle('hidden');
+                        icon.classList.toggle('rotate-180');
+                    }
+                });
+            });
+
+            const analyzeButton = document.getElementById('analyze-button');
+            const textInput = document.getElementById('text-input');
+            const demoOutput = document.getElementById('demo-output');
+
+            const mockData = {
+                "the agile team deploys new features": {
+                    surface: { model: "SurfaceUtterance", id: 1, text: "The agile team deploys new features." },
+                    phrases: [
+                        { model: "Phrase", id: 10, type: "NP", text: "The agile team" },
+                        { model: "Phrase", id: 11, type: "VP", text: "deploys new features" },
+                        { model: "Phrase", id: 12, type: "NP", text: "new features" }
+                    ],
+                    ideational: { model: "IdeationalFrame", process_type: "material", actor_phrase_id: 10, goal_phrase_id: 12 },
+                    interpersonal: { model: "InterpersonalStance", speech_function: "statement", polarity: "positive" },
+                    textual: { model: "TextualOrganization", theme_phrase_id: 10 }
+                },
+                 "could you review the code": {
+                    surface: { model: "SurfaceUtterance", id: 2, text: "Could you review the code?" },
+                    phrases: [
+                        { model: "Phrase", id: 20, type: "NP", text: "you" },
+                        { model: "Phrase", id: 21, type: "VP", text: "review the code" },
+                        { model: "Phrase", id: 22, type: "NP", text: "the code" }
+                    ],
+                    ideational: { model: "IdeationalFrame", process_type: "mental", actor_phrase_id: 20, goal_phrase_id: 22 },
+                    interpersonal: { model: "InterpersonalStance", speech_function: "question", modality: "could", polarity: "positive" },
+                    textual: { model: "TextualOrganization", theme_phrase_id: 20 }
+                }
+            };
+            
+            function createAnalysisCard(title, data) {
+                let fieldsHtml = Object.entries(data).filter(([key]) => key !== 'model').map(([key, value]) => `
+                    <div class="flex justify-between items-start text-sm py-1">
+                        <span class="text-gray-500">${key.replace(/_/g, ' ')}:</span>
+                        <span class="text-right font-mono text-indigo-700">${value}</span>
+                    </div>
+                `).join('');
+
+                return `
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-gray-800">${title} <span class="text-sm font-normal text-gray-500">(${data.model})</span></h4>
+                        <div class="mt-2">${fieldsHtml}</div>
+                    </div>
+                `;
+            }
+
+            analyzeButton.addEventListener('click', () => {
+                const text = textInput.value.toLowerCase().trim().replace(/[.?]/g, '');
+                demoOutput.innerHTML = '';
+                
+                const analysis = mockData[text];
+
+                if (analysis) {
+                    let outputHtml = createAnalysisCard("Surface Text", analysis.surface);
+                    
+                    let phrasesHtml = analysis.phrases.map(p => `ID ${p.id} (${p.type}): "${p.text}"`).join(', ');
+                    outputHtml += createAnalysisCard("Syntactic Phrases", { model: "Phrase", identified: phrasesHtml });
+                    
+                    outputHtml += createAnalysisCard("Ideational Frame (Content)", analysis.ideational);
+                    outputHtml += createAnalysisCard("Interpersonal Stance (Interaction)", analysis.interpersonal);
+                    outputHtml += createAnalysisCard("Textual Organization (Message)", analysis.textual);
+                    
+                    demoOutput.innerHTML = outputHtml;
+
+                } else if (text === '') {
+                     demoOutput.innerHTML = '<p class="text-gray-500 text-center">Please enter a sentence to analyze.</p>';
+                } else {
+                    demoOutput.innerHTML = '<p class="text-gray-500 text-center">Sorry, no analysis available for that sentence. Try one of the examples.</p>';
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
+

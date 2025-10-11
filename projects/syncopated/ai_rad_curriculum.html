@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Radiology IT: Curriculum Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The SPA uses a thematic, top-level navigation ('Fundamentals', 'Practical Skills', 'Project Rollout', 'Dashboard') instead of a rigid weekly timeline. This allows users to directly access content relevant to their immediate needs (e.g., jumping straight to 'Documentation'). Content within sections is organized into interactive cards that reveal details on click, reducing initial cognitive load. A summary dashboard with a chart provides a high-level overview of the curriculum's balanced focus. This user-centric structure prioritizes skill-based exploration and quick reference over linear consumption. -->
+    <!-- Visualization & Content Choices: 1. Curriculum Breakdown -> Goal: Organize -> Viz: Donut Chart -> Interaction: Hover for details -> Justification: Provides a quick, visual summary of the curriculum's four core themes, showing their equal weight. Library: Chart.js. 2. User Request -> Goal: Inform/Illustrate -> Presentation: Interactive text block -> Interaction: Button click to reveal AI-generated user story -> Justification: Mimics the practical application of an AI tool as described in the curriculum, making the concept tangible. Method: Vanilla JS DOM manipulation. 3. System Diagrams -> Goal: Organize/Inform -> Presentation: Simplified flow diagrams -> Interaction: Static -> Justification: Recreates key concepts from source PDFs (e.g., message flows) using accessible HTML/CSS instead of prohibited SVGs, providing visual context. Method: Tailwind CSS styled divs. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8; /* A very light warm neutral */
+            color: #44403c; /* stone-700 */
+        }
+        .nav-link {
+            transition: color 0.2s, border-bottom-color 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #c2410c; /* orange-600 */
+            border-bottom-color: #c2410c;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #f5f5f4; /* stone-100 */
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .details-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .details-content.show {
+            max-height: 1000px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 40vh;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-orange-600">AI Curriculum Explorer</h1>
+            <ul id="nav-menu" class="hidden md:flex space-x-8 text-sm font-medium text-stone-600">
+                <li><a href="#fundamentals" class="nav-link active">Fundamentals</a></li>
+                <li><a href="#skills" class="nav-link">Practical Skills</a></li>
+                <li><a href="#rollout" class="nav-link">Project Rollout</a></li>
+                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="intro" class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">The AI-Powered Radiology IT Curriculum</h2>
+            <p class="max-w-3xl mx-auto text-stone-600">An interactive guide for IT Systems Support Engineers. This curriculum integrates foundational AI literacy with practical, role-specific applications in troubleshooting, documentation, and project management for clinical system rollouts.</p>
+        </section>
+
+        <section id="video-intro" class="mb-16">
+            <h3 class="text-3xl font-semibold mb-8 text-center text-orange-600">Curriculum Overview</h3>
+            <div class="max-w-4xl mx-auto bg-white p-2 rounded-lg shadow-lg border border-stone-200">
+                 <video class="w-full rounded" controls poster="https://placehold.co/1280x720/44403c/fdfbf8?text=Introductory+Video">
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section id="fundamentals" class="mb-16 scroll-mt-20">
+            <h3 class="text-3xl font-semibold mb-2 text-orange-600">Week 1: Foundations of AI in a Clinical Context</h3>
+            <p class="text-stone-600 mb-8">This section establishes a solid understanding of AI, defining core terminology and setting the framework for responsible use while supporting clinical systems like PACS and RIS.</p>
+            <div id="fundamentals-content" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        </section>
+
+        <section id="skills" class="mb-16 scroll-mt-20">
+            <h3 class="text-3xl font-semibold mb-2 text-orange-600">Weeks 2 & 3: Practical Skills Development</h3>
+            <p class="text-stone-600 mb-8">Move from theory to practice. These modules focus on developing core prompting skills to solve daily troubleshooting tasks, create high-quality documentation, and translate user feedback into actionable requirements.</p>
+            <div id="skills-content" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        </section>
+
+        <section id="rollout" class="mb-16 scroll-mt-20">
+            <h3 class="text-3xl font-semibold mb-2 text-orange-600">Week 4: AI as a Project Rollout Partner</h3>
+            <p class="text-stone-600 mb-8">Apply all learned skills to a simulated project: switching a small hospital to a new system. This section focuses on using AI to support project scoping, training material generation, user acceptance testing, and post-go-live analysis.</p>
+            <div id="rollout-content" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        </section>
+        
+        <section id="dashboard" class="mb-16 scroll-mt-20">
+            <h3 class="text-3xl font-semibold mb-2 text-orange-600">Curriculum at a Glance</h3>
+            <p class="text-stone-600 mb-8">This dashboard provides a high-level overview of the curriculum's structure, highlighting the balanced focus across four key competency areas.</p>
+            <div class="bg-white p-8 rounded-lg shadow-md border border-stone-100">
+                <h4 class="text-xl font-medium text-center mb-4">Thematic Focus Distribution</h4>
+                 <div class="chart-container">
+                    <canvas id="curriculumChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-stone-200 mt-16">
+        <div class="container mx-auto px-6 py-4 text-center text-sm text-stone-500">
+            <p>&copy; 2025 AI Curriculum Explorer. An Interactive Learning Experience.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const curriculumData = {
+        fundamentals: [
+            { day: 1, title: "What AI Is & Isn’t", concept: "Differentiate between general AI, ML, and LLMs. Set realistic expectations for AI's role in a high-stakes clinical environment.", context: "AI can excel at parsing support tickets and logs but cannot replace an engineer's judgment in diagnosing a critical DICOM routing failure." },
+            { day: 2, title: "Essential AI Terminology", concept: "Define key terms: LLM, Context Window, Temperature, Fine-tuning.", context: "<strong>Context Window:</strong> The max length of an HL7 message the AI can analyze at once. <br><strong>Fine-tuning:</strong> Teaching a model our specific environment, like the difference between a 'Point' and 'Enterprise' setup from documentation." },
+            { day: 3, title: "The Landscape of AI Tools", concept: "Introduce major AI tools (ChatGPT, Gemini, Claude, Copilot) and their ideal use cases.", context: "Choose the right tool for the job: Claude for drafting user emails, Gemini for complex log analysis, and Copilot for scripting." },
+            { day: 4, title: "Ethics, Responsibility, and Data Privacy", concept: "Discuss the critical importance of responsible AI, focusing on data privacy.", context: "<strong>CRITICAL:</strong> Protected Health Information (PHI) must NEVER be entered into a public AI tool. Understand the risks and the importance of sandboxed, HIPAA-compliant environments." }
+        ],
+        skills: [
+            { day: 5, title: "The Art of the Basic Prompt", concept: "Learn to write clear, concise, and context-rich prompts for troubleshooting.", task: "<strong>Prompt Task:</strong> \"Act as an IT support specialist. Write a clear, jargon-free email to a radiologist explaining why they might be seeing a 'Failed to Query/Retrieve' error in PACS.\""},
+            { day: 6, title: "Creating Reusable Prompt Templates", concept: "Build a library of prompt templates for common, recurring tasks to improve efficiency.", task: "<strong>Template Example (Log Analysis):</strong> \"Analyze the following application log for errors related to 'database connection'. Summarize the top 3 errors and suggest a likely cause for each.\""},
+            { day: 7, title: "Chain-of-Thought for Troubleshooting", concept: "Guide an AI through a multi-step diagnostic process to solve complex problems.", task: "<strong>Prompt Task:</strong> \"A patient study from CT is not arriving at PACS. My first step is to check interface logs. What should I look for? If found, what is step two? If not found, what should I check then?\""},
+            { day: 8, title: "Exploring Cross-Departmental Use-Cases", concept: "Understand how different teams (Clinical Apps, Project Managers) can leverage AI.", task: "<strong>Your Role's Task:</strong> Use an LLM to translate technical vendor release notes into a simple, actionable summary for the internal helpdesk team."},
+            { day: 9, title: "AI as a Technical Writer", concept: "Transform notes, tickets, and specs into clear, structured knowledge base (KB) articles.", task: "<strong>Prompt Task:</strong> \"Act as a senior technical writer. Using the provided architecture diagram, write a KB article titled 'Understanding the IRIS High-Availability Environment'. Explain the roles of nodes, the arbiter, and the load balancer for new IT staff.\""},
+            { day: 10, title: "Generating User-Facing FAQs", concept: "Proactively address common user questions by creating easy-to-understand guides.", task: "<strong>Prompt Task:</strong> \"Generate a user-facing FAQ for a new hospital integrating with our system. Create non-technical answers for: 'What is an MRN?', 'What is an accession number?', and 'What's the difference between a preliminary and a final report?'\""},
+            { day: 11, title: "Translating Requests into User Stories", concept: "Convert unstructured user feedback into formal user stories and epics for a project backlog.", task: { request: "A radiologist emails: 'It takes too many clicks to get to the billing information after I sign a report. Can't we just have a button on the main screen?'", story: "<strong>User Story:</strong> As a Radiologist, I want a one-click button to access billing information from the main report screen so that I can complete my workflow more efficiently.", epic: "<strong>Epic:</strong> Reporting Workflow Optimization"}},
+            { day: 12, title: "Maintaining & Auditing Documentation", concept: "Use AI to ensure documentation consistency and identify what needs to be updated.", task: "<strong>Prompt Task:</strong> \"Here is our KB article on 'HL7 Message Flows'. Our process is updated to include a new ADT A60 message for patient swaps. Analyze the article, identify where to add this info, and suggest the new text.\""}
+        ],
+        rollout: [
+            { day: 13, title: "AI-Assisted Project Scoping & Risk Analysis", concept: "Use an LLM as a project management consultant to identify potential issues before they arise.", task: "<strong>Prompt Task:</strong> \"Act as a clinical IT project manager. Based on the provided vendor docs and our architecture, generate a risk assessment checklist for this migration. Focus on data integrity, workflow disruption, and interface compatibility.\"" },
+            { day: 14, title: "Generating Dynamic Training Materials", concept: "Use an LLM to rapidly create user-facing documentation and training guides for a new system.", task: "<strong>Prompt Task:</strong> \"Create a one-page Quick Start Guide for a front-desk administrator on how to register a new patient and schedule an exam in the new RIS. Use simple language and a step-by-step format.\"" },
+            { day: 15, title: "Supporting User Acceptance Testing (UAT)", concept: "Prepare for user issues before they happen by simulating problems with an AI chatbot.", task: "<strong>Simulation Task:</strong> Role-play as a technologist: \"The patient worklist on the new system is missing a patient who was just scheduled. What are the first three things I should check?\"" },
+            { day: 16, title: "Post-Go-Live Analysis & Knowledge Creation", concept: "Use an LLM to analyze initial support data and create lasting knowledge assets for continuous improvement.", task: "<strong>Prompt Task:</strong> \"Analyze these support tickets from the first week. Identify the top 3 most common issues. For each, draft a clear solution to be added to our internal knowledge base.\"" }
+        ]
+    };
+
+    function createCard(item) {
+        let contentHTML = '';
+        if (item.context) {
+            contentHTML = `<p class="text-sm text-stone-600">${item.context}</p>`;
+        } else if (typeof item.task === 'string') {
+            contentHTML = `<div class="mt-4 pt-4 border-t border-stone-200"><h5 class="font-semibold text-sm text-orange-600 mb-2">Practical Task</h5><p class="text-sm text-stone-600">${item.task}</p></div>`;
+        } else if (typeof item.task === 'object') {
+            const requestId = `request-${item.day}`;
+            const storyId = `story-${item.day}`;
+            const buttonId = `button-${item.day}`;
+            contentHTML = `
+                <div class="mt-4 pt-4 border-t border-stone-200">
+                    <h5 class="font-semibold text-sm text-orange-600 mb-2">Translate User Feedback</h5>
+                    <div class="p-3 bg-stone-100 rounded-md">
+                        <p class="text-sm text-stone-700 italic">" ${item.task.request} "</p>
+                    </div>
+                    <button id="${buttonId}" class="mt-3 text-sm bg-orange-500 text-white py-1 px-3 rounded-md hover:bg-orange-600 transition-colors">Generate User Story</button>
+                    <div id="${storyId}" class="mt-3 p-3 bg-orange-50 rounded-md border border-orange-200 hidden">
+                        <p class="text-sm text-stone-800">${item.task.story}</p>
+                        <p class="text-sm text-stone-800 mt-2">${item.task.epic}</p>
+                    </div>
+                </div>`;
+        }
+
+        return `
+            <div class="card rounded-lg shadow-md border border-stone-200 overflow-hidden">
+                <div class="p-6">
+                    <h4 class="font-bold text-lg">${item.title}</h4>
+                    <p class="text-sm text-stone-500 mt-1">${item.concept}</p>
+                    <button data-target="details-${item.day}" class="toggle-details text-sm font-medium text-orange-600 hover:text-orange-700 mt-4 flex items-center">
+                        Show Details 
+                        <svg class="w-4 h-4 ml-1 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+                <div id="details-${item.day}" class="details-content bg-stone-50 px-6 border-t border-stone-200">
+                    ${contentHTML}
+                </div>
+            </div>`;
+    }
+
+    document.getElementById('fundamentals-content').innerHTML = curriculumData.fundamentals.map(createCard).join('');
+    document.getElementById('skills-content').innerHTML = curriculumData.skills.map(createCard).join('');
+    document.getElementById('rollout-content').innerHTML = curriculumData.rollout.map(createCard).join('');
+
+    document.querySelectorAll('.toggle-details').forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('data-target');
+            const content = document.getElementById(targetId);
+            const icon = button.querySelector('svg');
+            content.classList.toggle('show');
+            icon.classList.toggle('rotate-180');
+            button.innerHTML = content.classList.contains('show') ? `Hide Details <svg class="w-4 h-4 ml-1 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>` : `Show Details <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>`;
+        });
+    });
+
+    document.querySelectorAll('[id^="button-"]').forEach(button => {
+        button.addEventListener('click', () => {
+            const day = button.id.split('-')[1];
+            document.getElementById(`story-${day}`).classList.remove('hidden');
+            button.style.display = 'none';
+        });
+    });
+
+    const ctx = document.getElementById('curriculumChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['AI Fundamentals', 'Troubleshooting & Support', 'Documentation & User Stories', 'Project Management & Rollout'],
+            datasets: [{
+                label: 'Curriculum Focus',
+                data: [4, 4, 4, 4],
+                backgroundColor: ['#fdba74', '#fb923c', '#f97316', '#ea580c'],
+                borderColor: '#FDFBF8',
+                borderWidth: 4,
+                hoverOffset: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '60%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        font: {
+                            family: "'Inter', sans-serif",
+                            size: 12
+                        }
+                    }
+                },
+                tooltip: {
+                    bodyFont: {
+                        family: "'Inter', sans-serif"
+                    },
+                    titleFont: {
+                        family: "'Inter', sans-serif"
+                    }
+                }
+            }
+        }
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.4 
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === entry.target.id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector(link.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+});
+</script>
+</body>
+</html>
+

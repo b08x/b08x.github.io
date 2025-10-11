@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocky Linux 9 Corrupted EFI Boot Troubleshooting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .code-block {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .code-block:hover .copy-btn {
+            opacity: 1;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <header class="mb-8 border-b border-gray-200 pb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Rocky Linux 9 Corrupted EFI Boot Troubleshooting</h1>
+                    <div class="flex items-center mt-2 text-sm text-gray-500">
+                        <span class="mr-4"><i class="fas fa-calendar-alt mr-1"></i> October 8, 2025</span>
+                        <span><i class="fas fa-link mr-1"></i> b08x.github.io</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> Technical Guide
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none">
+            <!-- Introduction -->
+            <section class="mb-10">
+                <p class="text-lg leading-relaxed">
+                    The problem occurs after a power outage on a host with a weak or low CMOS battery. A sudden loss of power, combined with a failing battery, will cause the NVRAM to lose its stored settings including the EFI Boot entries required for system boot.
+                </p>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4 rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-500 mt-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-blue-700">
+                                In this specific context; the efi, boot and root partitions were assigned to /dev/sdb
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 1 -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span class="bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">1</span>
+                    Mounting Partitions & Chroot
+                </h2>
+                
+                <div class="code-block bg-gray-800 rounded-lg p-4 text-gray-100 mb-4 relative">
+                    <button class="copy-btn bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs">
+                        <i class="fas fa-copy mr-1"></i> Copy
+                    </button>
+                    <pre class="overflow-x-auto"><code>[root@localhost-live ~] mkdir -pv /mnt/boot/efi
+
+[root@localhost-live ~] mount /dev/sdb3 /mnt
+[root@localhost-live ~] mount /dev/sdb2 /mnt/boot
+[root@localhost-live ~] mount /dev/sdb1 /mnt/boot/efi
+
+[root@localhost-live ~] mount -o bind /dev /mnt/dev
+[root@localhost-live ~] mount -o bind /proc /mnt/proc
+[root@localhost-live ~] mount -o bind /sys /mnt/sys
+
+[root@localhost-live ~] chroot /mnt</code></pre>
+                </div>
+                
+                <p class="text-gray-700">
+                    This sequence of commands prepares the environment for repairing the bootloader by mounting the necessary partitions and entering a chroot environment.
+                </p>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span class="bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">2</span>
+                    Reinstalling Grub Packages and Mounting efivarfs
+                </h2>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 my-4 rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 mt-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                These notes assume that UEFI Secure Boot is <em>disabled</em> – seek additional information if the host requires Secure Boot
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="code-block bg-gray-800 rounded-lg p-4 text-gray-100 mb-4 relative">
+                    <button class="copy-btn bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs">
+                        <i class="fas fa-copy mr-1"></i> Copy
+                    </button>
+                    <pre><code>[root@localhost-live /] dnf reinstall grub2-common grub2-efi-* shim*
+
+[root@localhost-live /] mount -t efivarfs efivarfs /sys/firmware/efi/efivars</code></pre>
+                </div>
+                
+                <p class="text-gray-700">
+                    Reinstalling the GRUB packages ensures you have all necessary components, while mounting efivarfs allows communication with the UEFI firmware.
+                </p>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span class="bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">3</span>
+                    Installing Grub
+                </h2>
+                
+                <div class="code-block bg-gray-800 rounded-lg p-4 text-gray-100 mb-4 relative">
+                    <button class="copy-btn bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs">
+                        <i class="fas fa-copy mr-1"></i> Copy
+                    </button>
+                    <pre><code>[root@localhost-live /] grub2-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=rocky --recheck
+Installing for x86_64-efi platform.
+grub2-install: error: This utility should not be used for EFI platforms because it does not support UEFI Secure Boot. If you really wish to proceed, invoke the --force option.
+Make sure Secure Boot is disabled before proceeding.</code></pre>
+                </div>
+                
+                <div class="bg-red-50 border-l-4 border-red-400 p-4 my-4 rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-red-500 mt-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700">
+                                The <code>--force</code> option is used because Secure Boot is assumed to be disabled. If Secure Boot is enabled, stop here and investigate the correct procedure.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="code-block bg-gray-800 rounded-lg p-4 text-gray-100 mb-4 relative">
+                    <button class="copy-btn bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs">
+                        <i class="fas fa-copy mr-1"></i> Copy
+                    </button>
+                    <pre><code>[root@localhost-live /] grub2-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=rocky --recheck --force
+Installing for x86_64-efi platform.
+Installation finished. No error reported.</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <span class="bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">4</span>
+                    Generating the GRUB Configuration
+                </h2>
+                
+                <div class="code-block bg-gray-800 rounded-lg p-4 text-gray-100 mb-4 relative">
+                    <button class="copy-btn bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs">
+                        <i class="fas fa-copy mr-1"></i> Copy
+                    </button>
+                    <pre><code>[root@localhost-live /] grub2-mkconfig -o /boot/grub2/grub.cfg
+Generating grub configuration file ...
+grub2-probe: error: cannot find a GRUB drive for /dev/sdd1.  Check your device.map.
+Adding boot menu entry for UEFI Firmware Settings ...
+done
+
+[root@localhost-live /] exit
+
+[root@localhost-live ~] reboot</code></pre>
+                </div>
+                
+                <div class="bg-green-50 border-l-4 border-green-400 p-4 my-4 rounded">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-green-700">
+                                After the reboot, your system should now boot correctly.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="mt-12 pt-6 border-t border-gray-200 text-sm text-gray-500">
+                <div class="flex flex-col sm:flex-row justify-between items-center">
+                    <div class="mb-4 sm:mb-0">
+                        <p>© 2025 b08x.github.io - All rights reserved</p>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-gray-700"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700"><i class="fas fa-rss"></i></a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Copy button functionality
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const codeBlock = button.parentElement;
+                const code = codeBlock.querySelector('code').textContent;
+                
+                navigator.clipboard.writeText(code).then(() => {
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

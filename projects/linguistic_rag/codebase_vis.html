@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentient Coder | Codebase Visualization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chosen Palette: Slate Gray & Indigo -->
+    <!-- Application Structure Plan: The application implements the conceptual design document's vision. The structure is a two-panel layout: a main stage for the interactive graph visualization ('The Canvas') and a sidebar for displaying details on demand. This directly follows the "Overview First, Zoom and Filter, Details on Demand" principle. The core logic is managed in JavaScript, simulating the 'Graph Data Synthesis Engine' by using a predefined JSON object that represents the analyzed Ruby codebase. -->
+    <!-- Visualization & Content Choices: Report Info: Ruby codebase architecture -> Goal: Create an interactive 'living diagram' -> Viz/Presentation Method: An interactive graph using HTML divs for nodes and CSS-transformed divs for edges. -> Interaction: Users can click nodes to view details, hover to highlight connections ("Blast Radius"), and use filters. The 'weight' of an edge is visualized by its thickness. 'Intelligent Insights' are presented in the details panel for key components. -> Justification: This approach makes the abstract architectural concepts tangible and explorable, directly fulfilling the vision of the conceptual design document. Library/Method: Vanilla JS for all rendering and state management. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f1f5f9; /* slate-100 */
+      }
+      .font-code {
+        font-family: "Fira Code", monospace;
+      }
+      #graph-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      .node {
+        position: absolute;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 9999px;
+        box-shadow:
+          0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+      }
+      .node.active {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 4px #6366f1; /* indigo-500 */
+        z-index: 20;
+      }
+      .node.highlight,
+      .node.highlight-neighbor {
+        z-index: 15;
+      }
+      .node:not(.highlight):not(.highlight-neighbor) {
+        filter: grayscale(80%);
+        opacity: 0.5;
+      }
+      .edge {
+        position: absolute;
+        background-color: #94a3b8; /* slate-400 */
+        transform-origin: 0 0;
+        z-index: 1;
+        transition: all 0.2s ease-in-out;
+      }
+      .edge.highlight {
+        background-color: #4f46e5; /* indigo-600 */
+        z-index: 5;
+      }
+      .edge:not(.highlight) {
+        opacity: 0.3;
+      }
+      .sidebar {
+        transition: transform 0.3s ease-in-out;
+      }
+      .gemini-btn {
+        background: linear-gradient(to right, #6366f1, #8b5cf6);
+      }
+      .gemini-btn:hover {
+        background: linear-gradient(to right, #4f46e5, #7c3aed);
+      }
+      .spinner {
+        border-top-color: #4f46e5;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body class="text-slate-800 antialiased">
+    <div id="app" class="flex flex-col h-screen overflow-hidden">
+      <!-- Header -->
+      <header
+        class="bg-white border-b border-slate-200 p-4 z-30 flex items-center justify-between flex-wrap"
+      >
+        <div class="max-w-7xl">
+          <h1 class="text-2xl font-bold text-slate-900">Sentient Coder</h1>
+          <p class="text-slate-500">
+            A Living Architecture Diagram of the Modular Ruby Stack
+          </p>
+        </div>
+        <div id="filters" class="flex items-center space-x-4 mt-2 sm:mt-0">
+          <span class="font-semibold text-sm">Filter by Type:</span>
+          <!-- Filter checkboxes will be inserted here -->
+        </div>
+      </header>
+
+      <div class="flex-1 flex overflow-hidden">
+        <!-- Main Content: Graph -->
+        <main class="flex-1 overflow-hidden relative" id="main-content">
+          <div id="graph-container">
+            <!-- Graph will be rendered here -->
+          </div>
+          <div
+            class="absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm p-3 rounded-lg shadow-lg border text-xs text-slate-600"
+          >
+            <h4 class="font-bold mb-2">Legend</h4>
+            <div class="space-y-1">
+              <div class="flex items-center">
+                <div class="w-3 h-3 rounded-full bg-sky-500 mr-2"></div>
+                Service/Logic
+              </div>
+              <div class="flex items-center">
+                <div class="w-3 h-3 rounded-full bg-teal-500 mr-2"></div>
+                Core Library
+              </div>
+              <div class="flex items-center">
+                <div class="w-3 h-3 rounded-full bg-amber-500 mr-2"></div>
+                Utility Library
+              </div>
+              <div class="flex items-center">
+                <div class="w-3 h-3 rounded-full bg-rose-500 mr-2"></div>
+                External Dependency
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside
+          id="sidebar"
+          class="sidebar w-full md:w-2/5 lg:w-1/3 bg-white border-l border-slate-200 shadow-xl overflow-y-auto p-6 transform translate-x-full md:translate-x-0 md:relative md:transform-none"
+        >
+          <div id="sidebar-content" class="h-full">
+            <div
+              class="flex flex-col items-center justify-center h-full text-center"
+            >
+              <i class="fas fa-mouse-pointer text-5xl text-slate-300 mb-4"></i>
+              <h3 class="text-xl font-semibold text-slate-700">
+                Explore the Architecture
+              </h3>
+              <p class="text-slate-500 mt-2">
+                Click a node to view its details, dependencies, and
+                architectural insights. Hover over a node to see its "blast
+                radius."
+              </p>
+            </div>
+          </div>
+          <button
+            id="close-sidebar-btn"
+            class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 md:hidden"
+          >
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+        </aside>
+      </div>
+    </div>
+
+    <script>
+      const GRAPH_DATA = {
+        nodes: [
+          {
+            id: "CustomWorkflows",
+            type: "Service/Logic",
+            label: "Custom Workflows",
+            x: 50,
+            y: 50,
+            description:
+              "Represents custom Ruby classes that compose library calls to implement application-specific logic, replacing framework 'Chains'.",
+            insights:
+              "This node represents the 'Explicit over Implicit' pattern. By using standard Ruby, data flow is transparent and debugging is simplified.",
+          },
+          {
+            id: "Ingestion",
+            type: "Service/Logic",
+            label: "Ingestion Service",
+            x: 20,
+            y: 25,
+            description:
+              "Handles the initial loading, parsing, and processing of source documents from various formats.",
+          },
+          {
+            id: "Retrieval",
+            type: "Service/Logic",
+            label: "Retrieval Service",
+            x: 50,
+            y: 20,
+            description:
+              "Executes user queries against the index to find the most relevant context chunks.",
+          },
+          {
+            id: "Generation",
+            type: "Service/Logic",
+            label: "Generation Service",
+            x: 80,
+            y: 25,
+            description:
+              "Constructs a final prompt with retrieved context and uses an LLM to generate a structured, validated answer.",
+          },
+          {
+            id: "ruby_llm",
+            type: "Core Library",
+            label: "ruby_llm",
+            x: 85,
+            y: 55,
+            description:
+              "A provider-agnostic client for all LLM interactions. The central nervous system for model communication.",
+            insights:
+              "This component is a key architectural lynchpin. Its abstraction prevents vendor lock-in and centralizes the LLM interface.",
+          },
+          {
+            id: "ruby_llm_schema",
+            type: "Utility Library",
+            label: "ruby_llm-schema",
+            x: 88,
+            y: 80,
+            description:
+              "Provides a DSL for creating and validating JSON schemas, ensuring structured and predictable LLM outputs.",
+            insights:
+              "Represents a mature design that treats the LLM as a structured data provider, critical for reliability in agentic systems.",
+          },
+          {
+            id: "pragmatic_segmenter",
+            type: "Utility Library",
+            label: "pragmatic_segmenter",
+            x: 5,
+            y: 45,
+            description:
+              "A rule-based, deterministic tool for splitting text into coherent sentences.",
+          },
+          {
+            id: "bm25f_ruby",
+            type: "Core Library",
+            label: "bm25f-ruby",
+            x: 50,
+            y: 0,
+            description:
+              "An advanced lexical search algorithm (Okapi BM25F) that supports field-level weighting for superior relevance ranking.",
+            insights:
+              "This is a hotspot for retrieval performance. Its field-weighting feature is the cornerstone of the high-fidelity lexical search strategy.",
+          },
+          {
+            id: "DocumentParsers",
+            type: "External Dependency",
+            label: "Document Parsers",
+            x: 15,
+            y: 5,
+            description:
+              "Specialized gems (e.g., pdf-reader, nokogiri) used for parsing specific file formats like PDF and HTML.",
+          },
+        ],
+        edges: [
+          {
+            source: "CustomWorkflows",
+            target: "Ingestion",
+            type: "calls",
+            weight: 0.8,
+          },
+          {
+            source: "CustomWorkflows",
+            target: "Retrieval",
+            type: "calls",
+            weight: 0.9,
+          },
+          {
+            source: "CustomWorkflows",
+            target: "Generation",
+            type: "calls",
+            weight: 0.9,
+          },
+          {
+            source: "Ingestion",
+            target: "DocumentParsers",
+            type: "uses",
+            weight: 0.9,
+          },
+          {
+            source: "Ingestion",
+            target: "pragmatic_segmenter",
+            type: "uses",
+            weight: 1.0,
+          },
+          {
+            source: "Retrieval",
+            target: "bm25f_ruby",
+            type: "calls",
+            weight: 1.0,
+          },
+          {
+            source: "Generation",
+            target: "ruby_llm",
+            type: "calls",
+            weight: 1.0,
+          },
+          {
+            source: "ruby_llm",
+            target: "ruby_llm_schema",
+            type: "semanticLink",
+            weight: 0.7,
+          },
+        ],
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const graphContainer = document.getElementById("graph-container");
+        const sidebar = document.getElementById("sidebar");
+        const sidebarContent = document.getElementById("sidebar-content");
+        const closeSidebarBtn = document.getElementById("close-sidebar-btn");
+        const filtersContainer = document.getElementById("filters");
+
+        let activeNodeId = null;
+        let activeFilters = new Set();
+
+        const nodeColors = {
+          "Service/Logic": "bg-sky-500",
+          "Core Library": "bg-teal-500",
+          "Utility Library": "bg-amber-500",
+          "External Dependency": "bg-rose-500",
+        };
+
+        const nodeIcon = {
+          "Service/Logic": "fa-gears",
+          "Core Library": "fa-book-bookmark",
+          "Utility Library": "fa-screwdriver-wrench",
+          "External Dependency": "fa-box-archive",
+        };
+
+        function renderFilters() {
+          const nodeTypes = [...new Set(GRAPH_DATA.nodes.map((n) => n.type))];
+          let filtersHTML = "";
+          nodeTypes.forEach((type) => {
+            filtersHTML += `
+                <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                    <input type="checkbox" data-filter-type="${type}" class="filter-checkbox h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <span>${type}</span>
+                </label>
+            `;
+          });
+          filtersContainer.innerHTML += filtersHTML;
+
+          document.querySelectorAll(".filter-checkbox").forEach((checkbox) => {
+            checkbox.addEventListener("change", (e) => {
+              const type = e.target.dataset.filterType;
+              if (e.target.checked) {
+                activeFilters.add(type);
+              } else {
+                activeFilters.delete(type);
+              }
+              renderGraph();
+            });
+          });
+        }
+
+        function renderGraph() {
+          graphContainer.innerHTML = "";
+
+          const nodeElements = {};
+          const filteredNodes = GRAPH_DATA.nodes.filter(
+            (node) => activeFilters.size === 0 || activeFilters.has(node.type),
+          );
+
+          filteredNodes.forEach((node) => {
+            const el = document.createElement("div");
+            el.id = `node-${node.id}`;
+            el.className = `node border-2 border-white/50 ${node.id === activeNodeId ? "active" : ""}`;
+            el.style.left = `${node.x}%`;
+            el.style.top = `${node.y}%`;
+            el.dataset.nodeId = node.id;
+
+            const color = nodeColors[node.type] || "bg-slate-500";
+            const icon = nodeIcon[node.type] || "fa-question-circle";
+
+            el.innerHTML = `
+                <div class="w-8 h-8 ${color} rounded-full flex items-center justify-center text-white text-sm mr-2 flex-shrink-0">
+                    <i class="fas ${icon}"></i>
+                </div>
+                <span class="font-semibold text-sm text-slate-800">${node.label}</span>`;
+
+            graphContainer.appendChild(el);
+            nodeElements[node.id] = el;
+          });
+
+          GRAPH_DATA.edges.forEach((edge) => {
+            if (!nodeElements[edge.source] || !nodeElements[edge.target])
+              return;
+
+            const sourceNode = GRAPH_DATA.nodes.find(
+              (n) => n.id === edge.source,
+            );
+            const targetNode = GRAPH_DATA.nodes.find(
+              (n) => n.id === edge.target,
+            );
+
+            const x1 = sourceNode.x;
+            const y1 = sourceNode.y;
+            const x2 = targetNode.x;
+            const y2 = targetNode.y;
+
+            const length = Math.sqrt(
+              Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2),
+            );
+            const angle = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
+
+            const el = document.createElement("div");
+            el.className = "edge";
+            el.dataset.source = edge.source;
+            el.dataset.target = edge.target;
+            el.style.width = `calc(${length}vw * 0.7)`; // Adjust multiplier for responsiveness
+            el.style.left = `${x1}%`;
+            el.style.top = `${y1}%`;
+            el.style.transform = `rotate(${angle}deg)`;
+            el.style.height = `${2 + edge.weight * 4}px`; // Weighted edges
+
+            graphContainer.appendChild(el);
+          });
+
+          // Add event listeners after rendering
+          Object.values(nodeElements).forEach((el) => {
+            el.addEventListener("click", () => {
+              selectNode(el.dataset.nodeId);
+            });
+            el.addEventListener("mouseover", () => {
+              highlightConnections(el.dataset.nodeId, true);
+            });
+            el.addEventListener("mouseout", () => {
+              highlightConnections(el.dataset.nodeId, false);
+            });
+          });
+        }
+
+        async function generateAiInsights(nodeData, incoming, outgoing) {
+          const insightsContainer = document.getElementById(
+            "gemini-insights-content",
+          );
+          if (!insightsContainer) return;
+
+          insightsContainer.innerHTML = `<div class="flex items-center justify-center p-4"><div class="spinner w-6 h-6 rounded-full border-4 border-slate-200"></div><span class="ml-3 text-slate-500">Generating insights...</span></div>`;
+
+          const apiKey = ""; // API key will be automatically provided in the environment.
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+          const systemPrompt =
+            "You are an expert software architect providing insights on a component within a codebase. Be concise, insightful, and focus on architectural patterns, risks, and best practices. Format your response using simple HTML like <h4> for headers and <ul><li> for lists.";
+
+          const userQuery = `
+            Analyze the following software component from a Ruby-based LLM application architecture:
+
+            - **Component Name:** ${nodeData.label}
+            - **Component Type:** ${nodeData.type}
+            - **Description:** ${nodeData.description}
+            - **Incoming Dependencies:** ${incoming.length > 0 ? incoming.map((e) => e.source).join(", ") : "None"}
+            - **Outgoing Dependencies:** ${outgoing.length > 0 ? outgoing.map((e) => e.target).join(", ") : "None"}
+
+            Based on this information, provide:
+            1. A more detailed **Architectural Role** explanation.
+            2. Potential **Strengths & Trade-offs**.
+            3. **Integration Best Practices** or potential risks to consider.
+        `;
+
+          const payload = {
+            contents: [{ parts: [{ text: userQuery }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+          };
+
+          try {
+            const response = await fetch(apiUrl, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+              throw new Error(`API error: ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+            if (text) {
+              insightsContainer.innerHTML = text;
+            } else {
+              insightsContainer.innerHTML = `<p class="text-red-500">Could not generate insights. The model returned an empty response.</p>`;
+            }
+          } catch (error) {
+            console.error("Error calling Gemini API:", error);
+            insightsContainer.innerHTML = `<p class="text-red-500">Failed to generate insights. Please check the console for details.</p>`;
+          }
+        }
+
+        function selectNode(nodeId) {
+          if (activeNodeId) {
+            document
+              .getElementById(`node-${activeNodeId}`)
+              ?.classList.remove("active");
+          }
+          activeNodeId = nodeId;
+          document.getElementById(`node-${nodeId}`)?.classList.add("active");
+
+          const nodeData = GRAPH_DATA.nodes.find((n) => n.id === nodeId);
+          if (!nodeData) return;
+
+          const incoming = GRAPH_DATA.edges.filter((e) => e.target === nodeId);
+          const outgoing = GRAPH_DATA.edges.filter((e) => e.source === nodeId);
+
+          sidebarContent.innerHTML = `
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900">${nodeData.label}</h2>
+                <p class="mt-1 text-sm font-semibold ${nodeColors[nodeData.type].replace("bg-", "bg-").replace("500", "100")} ${nodeColors[nodeData.type].replace("bg-", "text-").replace("500", "800")} rounded-full inline-block px-3 py-1">${nodeData.type}</p>
+            </div>
+            <div class="mt-6 text-slate-600">${nodeData.description}</div>
+            
+            ${
+              nodeData.insights
+                ? `
+            <div class="mt-6">
+                <h3 class="font-bold text-slate-800 flex items-center"><i class="fas fa-lightbulb mr-2 text-amber-400"></i>Architectural Insight</h3>
+                <p class="mt-2 text-sm text-slate-800 bg-slate-50 p-3 rounded-lg border border-slate-200">${nodeData.insights}</p>
+            </div>`
+                : ""
+            }
+
+            <div class="mt-6">
+                <h3 class="font-bold text-slate-800">Dependencies</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+                    <div>
+                        <h4 class="text-sm font-semibold">Incoming (${incoming.length})</h4>
+                        <ul class="text-sm mt-1 space-y-1 font-code">${incoming.length ? incoming.map((e) => `<li><i class="fas fa-arrow-left text-red-400 mr-2"></i>${e.source}</li>`).join("") : '<li class="text-slate-400">None</li>'}</ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold">Outgoing (${outgoing.length})</h4>
+                        <ul class="text-sm mt-1 space-y-1 font-code">${outgoing.length ? outgoing.map((e) => `<li><i class="fas fa-arrow-right text-green-400 mr-2"></i>${e.target}</li>`).join("") : '<li class="text-slate-400">None</li>'}</ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 border-t pt-6">
+                <button id="gemini-btn" class="gemini-btn w-full text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center transition-transform duration-200 hover:scale-105">
+                    <i class="fas fa-sparkles mr-2"></i> ✨ Generate AI Insights
+                </button>
+                <div id="gemini-insights-content" class="mt-4 text-sm text-slate-700 bg-slate-50 p-3 rounded-lg border border-slate-200 hidden"></div>
+            </div>
+        `;
+
+          const geminiBtn = document.getElementById("gemini-btn");
+          geminiBtn.addEventListener("click", () => {
+            document
+              .getElementById("gemini-insights-content")
+              .classList.remove("hidden");
+            generateAiInsights(nodeData, incoming, outgoing);
+          });
+
+          if (window.innerWidth < 768) {
+            sidebar.classList.remove("translate-x-full");
+          }
+        }
+
+        closeSidebarBtn.addEventListener("click", () => {
+          sidebar.classList.add("translate-x-full");
+          if (activeNodeId) {
+            document
+              .getElementById(`node-${activeNodeId}`)
+              ?.classList.remove("active");
+            activeNodeId = null;
+          }
+        });
+
+        function highlightConnections(nodeId, isHovering) {
+          const nodes = document.querySelectorAll(".node");
+          const edges = document.querySelectorAll(".edge");
+
+          if (isHovering) {
+            const connectedNodeIds = new Set([nodeId]);
+            edges.forEach((edge) => {
+              const source = edge.dataset.source;
+              const target = edge.dataset.target;
+              if (source === nodeId) {
+                edge.classList.add("highlight");
+                connectedNodeIds.add(target);
+              }
+              if (target === nodeId) {
+                edge.classList.add("highlight");
+                connectedNodeIds.add(source);
+              }
+            });
+            nodes.forEach((node) => {
+              if (node.dataset.nodeId === nodeId) {
+                node.classList.add("highlight");
+              } else if (connectedNodeIds.has(node.dataset.nodeId)) {
+                node.classList.add("highlight-neighbor");
+              }
+            });
+          } else {
+            nodes.forEach((n) =>
+              n.classList.remove("highlight", "highlight-neighbor"),
+            );
+            edges.forEach((e) => e.classList.remove("highlight"));
+          }
+        }
+
+        renderFilters();
+        renderGraph();
+        window.addEventListener("resize", renderGraph);
+      });
+    </script>
+  </body>
+</html>

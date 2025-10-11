@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bundle exec jekyll:*)",
+      "Bash(bundle exec:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

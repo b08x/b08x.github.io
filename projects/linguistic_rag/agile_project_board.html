@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agile Project Board: Linguistic RAG Database</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Slate Blue -->
+    <!-- Application Structure Plan: A single-page application featuring a Kanban board. The top-level navigation consists of filters for high-level 'Epics' derived from the report's phased implementation plan. Selecting an Epic filters the user stories displayed on the board. The board itself has columns for 'Backlog', 'To Do', 'In Progress', and 'Done', allowing for interactive project tracking via drag-and-drop. This structure was chosen because it directly translates the strategic roadmap from the report into a familiar, actionable Agile workflow, making the complex project understandable and manageable for a development team. It prioritizes task visualization and progress tracking over the report's linear, descriptive format. -->
+    <!-- Visualization & Content Choices: 
+        - Epics: Report Info -> Phased implementation strategy. Goal -> Organize. Presentation -> A row of filter buttons. Interaction -> Click to filter stories. Justification -> Provides high-level project navigation.
+        - User Stories: Report Info -> Specific technical tasks detailed in the report (e.g., implementing models, setting up gems). Goal -> Organize/Inform. Presentation -> Draggable cards on a Kanban board. Interaction -> Drag between columns to update status; Click to view details. Justification -> The standard, intuitive method for representing and tracking work in an Agile context.
+        - Story Details: Report Info -> Deeper descriptions of tasks from the report. Goal -> Inform. Presentation -> A modal window. Interaction -> Opens on card click. Justification -> Keeps the main board clean while providing necessary detail on demand.
+        - Kanban Board: Report Info -> The overall project workflow. Goal -> Organize/Track Change. Presentation -> HTML/CSS columns. Interaction -> Hosts the drag-and-drop functionality. Justification -> Visually represents the flow of work from conception to completion.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        .kanban-column {
+            min-height: 70vh;
+        }
+        .story-card {
+            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: grab;
+        }
+        .story-card:active {
+            cursor: grabbing;
+        }
+        .dragging {
+            opacity: 0.5;
+            transform: rotate(3deg);
+        }
+        .drag-over {
+            background-color: #e0e7ff;
+            border-color: #4f46e5;
+        }
+        .modal {
+            display: none;
+        }
+        .modal.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div id="app" class="p-4 sm:p-6 lg:p-8">
+        <header class="mb-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900">Linguistic RAG Database: Agile Project Board</h1>
+            <p class="text-slate-500 mt-1">An interactive project plan based on the phased implementation strategy for the UG/SFL database architecture.</p>
+        </header>
+
+        <section id="epics" class="mb-6">
+            <h2 class="text-lg font-semibold text-slate-800 mb-2">Filter by Epic:</h2>
+            <div id="epic-filters-container" class="flex flex-wrap gap-2">
+                <button data-epic-id="all" class="epic-filter bg-slate-800 text-white py-2 px-4 rounded-full text-sm font-semibold">All Epics</button>
+            </div>
+        </section>
+
+        <section id="kanban-board">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div id="col-backlog" class="kanban-column bg-slate-200 p-4 rounded-lg border-2 border-transparent" data-status="backlog">
+                    <h3 class="font-semibold text-slate-700 mb-4 flex items-center">
+                        <span class="w-3 h-3 bg-slate-400 rounded-full mr-2"></span> Backlog
+                    </h3>
+                    <div class="story-container space-y-3"></div>
+                </div>
+                <div id="col-todo" class="kanban-column bg-slate-200 p-4 rounded-lg border-2 border-transparent" data-status="todo">
+                    <h3 class="font-semibold text-slate-700 mb-4 flex items-center">
+                        <span class="w-3 h-3 bg-blue-400 rounded-full mr-2"></span> To Do
+                    </h3>
+                    <div class="story-container space-y-3"></div>
+                </div>
+                <div id="col-inprogress" class="kanban-column bg-slate-200 p-4 rounded-lg border-2 border-transparent" data-status="inprogress">
+                    <h3 class="font-semibold text-slate-700 mb-4 flex items-center">
+                        <span class="w-3 h-3 bg-yellow-400 rounded-full mr-2"></span> In Progress
+                    </h3>
+                    <div class="story-container space-y-3"></div>
+                </div>
+                <div id="col-done" class="kanban-column bg-slate-200 p-4 rounded-lg border-2 border-transparent" data-status="done">
+                    <h3 class="font-semibold text-slate-700 mb-4 flex items-center">
+                        <span class="w-3 h-3 bg-green-400 rounded-full mr-2"></span> Done
+                    </h3>
+                    <div class="story-container space-y-3"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="story-modal" class="modal fixed inset-0 bg-black bg-opacity-50 justify-center items-center p-4">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p id="modal-epic" class="text-sm font-semibold text-indigo-600 mb-1"></p>
+                        <h2 id="modal-title" class="text-2xl font-bold text-slate-900"></h2>
+                    </div>
+                    <button id="close-modal" class="text-slate-500 hover:text-slate-800 text-2xl">&times;</button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
+                    <div>
+                        <p class="font-semibold text-slate-600">Assignee</p>
+                        <p id="modal-assignee" class="text-slate-800"></p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-600">Points</p>
+                        <p id="modal-points" class="text-slate-800"></p>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-600">Status</p>
+                        <p id="modal-status" class="capitalize"></p>
+                    </div>
+                </div>
+                <h3 class="font-semibold text-slate-800 mb-2">Description</h3>
+                <p id="modal-description" class="text-slate-600 leading-relaxed mb-6"></p>
+                <h3 class="font-semibold text-slate-800 mb-2">Acceptance Criteria</h3>
+                <ul id="modal-ac" class="list-disc list-inside text-slate-600 space-y-1"></ul>
+            </div>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const projectData = {
+        epics: [
+            { id: 1, title: 'Phase 1: SFL-Augmented Vector RAG', color: 'bg-blue-100 text-blue-800' },
+            { id: 2, title: 'Phase 2: UG Structural Model Pilot', color: 'bg-green-100 text-green-800' },
+            { id: 3, title: 'Phase 3: Hybrid Retrieval & Integration', color: 'bg-yellow-100 text-yellow-800' },
+            { id: 4, title: 'Toolchain & Ingestion Pipeline', color: 'bg-purple-100 text-purple-800' },
+        ],
+        stories: [
+            { id: 101, epicId: 1, title: 'Implement SFL ContextOfSituation Model', assignee: 'DB Team', points: 5, status: 'backlog', description: 'Create the ActiveRecord model for ContextOfSituation to store Field, Tenor, and Mode as defined by Systemic Functional Linguistics.', acceptanceCriteria: ['Model has indexed columns for field, tenor, and mode.', 'Model is associated with the Clause model.', 'Migrations are written and successfully run.'] },
+            { id: 102, epicId: 1, title: 'Develop SFL Metadata Extractor', assignee: 'NLP Team', points: 8, status: 'backlog', description: 'Build a service to process text chunks and determine their Field, Tenor, and Mode, either from document metadata or a classification model.', acceptanceCriteria: ['Service can accurately classify text into predefined contexts.', 'Integrates with the main ingestion pipeline.', 'Handles errors gracefully for unclassifiable text.'] },
+            { id: 103, epicId: 1, title: 'Integrate Contextual Pre-filtering', assignee: 'Backend Team', points: 5, status: 'todo', description: 'Modify the existing RAG retrieval process to first filter the document set based on SFL context before performing a vector search.', acceptanceCriteria: ['API endpoint accepts context filters.', 'Vector search is performed only on the pre-filtered subset.', 'Performance is benchmarked to ensure no significant degradation.'] },
+            { id: 201, epicId: 2, title: 'Implement UG Core Models', assignee: 'DB Team', points: 8, status: 'backlog', description: 'Create the core UG-based ActiveRecord models: Lexeme, Phrase (with self-referential associations), and DeepStructure.', acceptanceCriteria: ['Phrase model correctly implements specifier, complement, and adjunct relationships.', 'DeepStructure model includes a unique hash for de-duplication.', 'All foreign keys and indices are properly configured.'] },
+            { id: 202, epicId: 2, title: 'Develop Dependency Parse to X-bar Tree Algorithm', assignee: 'NLP Team', points: 13, status: 'backlog', description: 'Create the core algorithm to traverse a dependency parse from ruby-spacy and construct a hierarchical set of Phrase records conforming to X-bar theory.', acceptanceCriteria: ['Algorithm correctly identifies heads, complements, and specifiers from dependency labels.', 'Handles common linguistic structures like passives and questions.', 'Includes robust error handling for unparsable sentences.'] },
+            { id: 203, epicId: 2, title: 'Build Pilot Ingestion for Curated Dataset', assignee: 'Backend Team', points: 8, status: 'todo', description: 'Set up a pipeline to ingest a small, well-understood dataset using the full UG/SFL parsing logic, populating all database models.', acceptanceCriteria: ['Pipeline runs end-to-end without errors.', 'Data is correctly stored in the structured schema.', 'Ingestion process is logged and monitored.'] },
+            { id: 401, epicId: 4, title: 'Integrate ruby-spacy as Core Parser', assignee: 'NLP Team', points: 5, status: 'inprogress', description: 'Set up the ruby-spacy gem as the primary service for sentence segmentation, tokenization, lemmatization, and dependency parsing.', acceptanceCriteria: ['Service is containerized and accessible to the ingestion pipeline.', 'Wrapper code correctly handles API calls to the spaCy backend.', 'Models for the target language are downloaded and loaded correctly.'] },
+            { id: 402, epicId: 4, title: 'Implement Async rwordnet Enrichment', assignee: 'Backend Team', points: 5, status: 'todo', description: 'Create a background job system to asynchronously enrich new Lexeme records with WordNet synset IDs using the rwordnet gem.', acceptanceCriteria: ['Job is enqueued upon Lexeme creation.', 'Successfully queries WordNet and updates the lexeme record.', 'Failures are logged and can be retried.'] },
+            { id: 301, epicId: 3, title: 'Integrate Ideational & Interpersonal Models', assignee: 'DB Team', points: 5, status: 'backlog', description: 'Implement the IdeationalFrame, InterpersonalStance, and TextualOrganization models to capture the SFL metafunctions.', acceptanceCriteria: ['Models are correctly associated with the Clause model.', 'Enum types for process_type and speech_function are defined.', 'Data population logic is added to the ingestion pipeline.'] },
+            { id: 302, epicId: 3, title: 'Build Hybrid Retrieval Engine', assignee: 'Backend Team', points: 13, status: 'backlog', description: 'Develop a service that can execute queries against both the vector database and the structured linguistic database, then merge the results.', acceptanceCriteria: ['Service can translate a user intent into both a vector query and a structured ActiveRecord query.', 'A re-ranking algorithm intelligently combines results.', 'The final merged result set is returned via a single API endpoint.'] },
+            { id: 303, epicId: 3, title: 'Implement ruby_llm Generation Client', assignee: 'AI Team', points: 3, status: 'todo', description: 'Use the ruby_llm gem to send the retrieved context to a generative LLM and stream the response back to the user.', acceptanceCriteria: ['Client is configured with the chosen LLM provider.', 'Retrieved context is correctly formatted into a prompt.', 'Final answer is displayed to the user.'] },
+        ]
+    };
+
+    let currentEpicFilter = 'all';
+    let draggedStory = null;
+
+    const epicFiltersContainer = document.getElementById('epic-filters-container');
+    const storyContainers = document.querySelectorAll('.story-container');
+    const modal = document.getElementById('story-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+
+    function renderEpics() {
+        projectData.epics.forEach(epic => {
+            const button = document.createElement('button');
+            button.className = 'epic-filter bg-white text-slate-700 py-2 px-4 rounded-full text-sm font-semibold border border-slate-300 hover:bg-slate-100';
+            button.dataset.epicId = epic.id;
+            button.textContent = epic.title;
+            epicFiltersContainer.appendChild(button);
+        });
+    }
+
+    function renderStories() {
+        storyContainers.forEach(c => c.innerHTML = '');
+        const filteredStories = projectData.stories.filter(story => 
+            currentEpicFilter === 'all' || story.epicId == currentEpicFilter
+        );
+
+        filteredStories.forEach(story => {
+            const storyCard = createStoryCard(story);
+            const container = document.querySelector(`#col-${story.status} .story-container`);
+            if (container) {
+                container.appendChild(storyCard);
+            }
+        });
+    }
+
+    function createStoryCard(story) {
+        const epic = projectData.epics.find(e => e.id === story.epicId);
+        const card = document.createElement('div');
+        card.className = 'story-card bg-white p-3 rounded-md shadow-sm border border-slate-200';
+        card.dataset.storyId = story.id;
+        card.draggable = true;
+
+        card.innerHTML = `
+            <span class="text-xs font-semibold px-2 py-1 rounded-full ${epic.color}">${epic.title}</span>
+            <p class="mt-2 font-medium text-slate-800">${story.title}</p>
+            <div class="flex justify-between items-center mt-3 text-xs">
+                <span class="text-slate-500">${story.assignee}</span>
+                <span class="font-bold text-slate-600 bg-slate-200 rounded-full w-6 h-6 flex items-center justify-center">${story.points}</span>
+            </div>
+        `;
+
+        card.addEventListener('dragstart', handleDragStart);
+        card.addEventListener('dragend', handleDragEnd);
+        card.addEventListener('click', () => openModal(story.id));
+        return card;
+    }
+    
+    function handleDragStart(e) {
+        draggedStory = e.target.closest('.story-card');
+        setTimeout(() => {
+            draggedStory.classList.add('dragging');
+        }, 0);
+    }
+    
+    function handleDragEnd() {
+        if(draggedStory){
+            draggedStory.classList.remove('dragging');
+            draggedStory = null;
+        }
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault();
+        const column = e.target.closest('.kanban-column');
+        if (column) {
+             storyContainers.forEach(c => c.parentElement.classList.remove('drag-over'));
+             column.classList.add('drag-over');
+        }
+    }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        const column = e.target.closest('.kanban-column');
+        if (column && draggedStory) {
+            const newStatus = column.dataset.status;
+            const storyId = draggedStory.dataset.storyId;
+            const story = projectData.stories.find(s => s.id == storyId);
+            
+            story.status = newStatus;
+            column.querySelector('.story-container').appendChild(draggedStory);
+        }
+        storyContainers.forEach(c => c.parentElement.classList.remove('drag-over'));
+    }
+
+    function handleFilterClick(e) {
+        if (e.target.matches('.epic-filter')) {
+            currentEpicFilter = e.target.dataset.epicId;
+            document.querySelectorAll('.epic-filter').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+            e.target.classList.add('bg-slate-800', 'text-white');
+            e.target.classList.remove('bg-white', 'text-slate-700');
+            renderStories();
+        }
+    }
+
+    function openModal(storyId) {
+        const story = projectData.stories.find(s => s.id == storyId);
+        if (!story) return;
+        
+        const epic = projectData.epics.find(e => e.id === story.epicId);
+        
+        document.getElementById('modal-epic').textContent = epic.title;
+        document.getElementById('modal-title').textContent = story.title;
+        document.getElementById('modal-assignee').textContent = story.assignee;
+        document.getElementById('modal-points').textContent = story.points;
+        document.getElementById('modal-status').textContent = story.status;
+        document.getElementById('modal-description').textContent = story.description;
+        
+        const acList = document.getElementById('modal-ac');
+        acList.innerHTML = '';
+        story.acceptanceCriteria.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            acList.appendChild(li);
+        });
+
+        modal.classList.add('active');
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+    }
+    
+    epicFiltersContainer.addEventListener('click', handleFilterClick);
+    storyContainers.forEach(container => {
+        container.parentElement.addEventListener('dragover', handleDragOver);
+        container.parentElement.addEventListener('drop', handleDrop);
+        container.parentElement.addEventListener('dragleave', () => container.parentElement.classList.remove('drag-over'));
+    });
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    renderEpics();
+    renderStories();
+});
+</script>
+</body>
+</html>
+

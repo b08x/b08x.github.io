@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguistic ORM Explorer: UG & SFL Models</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals (Beige, Slate, Teal) -->
+    <!-- Application Structure Plan: The application is structured as a single-page exploratory journey, divided into four thematic sections (Concepts, Architecture, Demo, Stack) accessible via a persistent header navigation. This non-linear, scroll-based structure was chosen because the source material is a complex, abstract concept, not a linear report. It allows users to either follow a logical progression from theory to practice or jump directly to the section most relevant to them. The key interaction is the 'Architecture' diagram, where clicking the immutable UG structure highlights the malleable SFL content, making the core thesis of the model tangible. This is followed by a practical RAG demo that simulates the model's application, solidifying user understanding by showing the "why" behind the "what". -->
+    <!-- Visualization & Content Choices: 
+        - UG/SFL Relationship: Report Info -> Represent the dual nature of the linguistic model. Goal -> Show the connection between immutable rules (UG) and contextual instances (SFL). Viz/Presentation -> A two-column diagram built with styled HTML/CSS divs resembling an Entity-Relationship Diagram. Interaction -> Clicking a UG 'table' highlights related SFL 'records'. Justification -> This interactive mapping is more intuitive than a static diagram, making the abstract relationship concrete for the user. Library/Method -> Vanilla JS, TailwindCSS.
+        - RAG Process: Report Info -> Simulate the model's use in a Retrieval-Augmented Generation task. Goal -> Break down the complex RAG pipeline. Viz/Presentation -> A multi-step flow diagram (HTML/CSS) combined with a Chart.js bar chart for relevance scores. Interaction -> User clicks a button to trigger a step-by-step animation of the process. Justification -> Deconstructs a complex workflow into digestible, sequential steps. The bar chart adds a quantitative, data-driven element to the 'retrieval' phase. Library/Method -> Vanilla JS, Chart.js.
+        - Tech Stack: Report Info -> List and explain the relevant Ruby libraries. Goal -> Organize the provided tools contextually. Viz/Presentation -> A responsive grid layout. Interaction -> Hovering reveals tooltips with descriptions. Justification -> A clean, interactive grid is more engaging and less overwhelming than a simple list. Library/Method -> HTML/TailwindCSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A5568;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #2C7A7B;
+        }
+        .active-nav {
+            color: #2C7A7B;
+            font-weight: 600;
+        }
+        .highlight {
+            transition: all 0.3s ease-in-out;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(44, 122, 123, 0.5);
+            border-color: #2C7A7B;
+        }
+        .ug-item { cursor: pointer; transition: all 0.2s ease-in-out; }
+        .ug-item:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); }
+        .sfl-item-highlight {
+            background-color: #E6FFFA !important;
+            border-left-color: #2C7A7B !important;
+        }
+        .step-hidden { opacity: 0; transform: translateY(20px); }
+        .step-visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800">Linguistic ORM Explorer</h1>
+            <nav class="hidden md:flex space-x-8 text-gray-600 font-medium">
+                <a href="#concepts" class="nav-link">Concepts</a>
+                <a href="#architecture" class="nav-link">Architecture</a>
+                <a href="#demo" class="nav-link">Demo</a>
+                <a href="#stack" class="nav-link">Stack</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-16">
+        
+        <section id="concepts" class="mb-24 scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Modeling Language as Data</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    This application explores a novel approach to computational linguistics: modeling language using a dual-system database framework inspired by ActiveRecord. We separate the immutable, universal rules of language (Universal Grammar) from the fluid, context-dependent usage (Systemic Functional Linguistics) to create a powerful model for Contextual Retrieval-Augmented Generation (RAG) applications.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Universal Grammar (UG) as Schema</h3>
+                    <p class="text-gray-600">
+                        UG represents the innate, structural blueprint of language. In our model, this translates to the database <strong>schema</strong>—the immutable tables, columns, and relationships that define grammatical possibility. It's the fixed architecture that all language instances must adhere to.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Systemic Functional Linguistics (SFL) as Records</h3>
+                    <p class="text-gray-600">
+                        SFL describes how language is used in specific contexts to create meaning. This becomes the <strong>data</strong> in our database—the malleable records and content that populate the UG schema. Each record is an instance of language in use, rich with contextual metadata.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="mb-24 scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">The Dual Model Architecture</h2>
+                <p class="text-lg text-gray-600">
+                    Below is a conceptual representation of the ORM. On the left, the Universal Grammar (UG) models define the rigid structure. On the right, the Systemic Functional Linguistics (SFL) models contain the dynamic content. <strong>Click on a UG model</strong> to see how it relates to SFL records.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold text-center text-gray-800 mb-6">UG: The Immutable Schema</h3>
+                    <div id="ug-container" class="space-y-4">
+                        <div class="ug-item bg-white p-4 rounded-lg shadow-md border border-gray-200" data-target="constituents">
+                            <p class="font-bold text-teal-700">Constituent</p>
+                            <small class="text-gray-500">Defines basic phrasal units.</small>
+                            <ul class="text-sm text-gray-600 mt-2 list-disc list-inside">
+                                <li>id: integer (PK)</li>
+                                <li>type: string (e.g., 'Noun Phrase')</li>
+                            </ul>
+                        </div>
+                        <div class="ug-item bg-white p-4 rounded-lg shadow-md border border-gray-200" data-target="dependencies">
+                            <p class="font-bold text-teal-700">DependencyRule</p>
+                            <small class="text-gray-500">Grammatical relationships between words.</small>
+                            <ul class="text-sm text-gray-600 mt-2 list-disc list-inside">
+                                <li>id: integer (PK)</li>
+                                <li>type: string (e.g., 'nsubj')</li>
+                                <li>description: string</li>
+                            </ul>
+                        </div>
+                         <div class="ug-item bg-white p-4 rounded-lg shadow-md border border-gray-200" data-target="lexemes">
+                            <p class="font-bold text-teal-700">Lexeme</p>
+                            <small class="text-gray-500">The abstract dictionary form of a word.</small>
+                            <ul class="text-sm text-gray-600 mt-2 list-disc list-inside">
+                                <li>id: integer (PK)</li>
+                                <li>lemma: string</li>
+                                <li>pos_tag: string (e.g., 'VERB')</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-center text-gray-800 mb-6">SFL: The Malleable Content</h3>
+                    <div id="sfl-container" class="space-y-3">
+                         <div class="sfl-item bg-white p-3 rounded-md border-l-4 border-gray-300 transition-all duration-300" data-group="constituents">
+                            <p class="font-semibold text-gray-700">Utterance #123</p>
+                            <p class="text-sm text-gray-600">"[The quick brown fox] jumps..."</p>
+                            <small class="text-slate-500">Constituent: Noun Phrase</small>
+                        </div>
+                        <div class="sfl-item bg-white p-3 rounded-md border-l-4 border-gray-300 transition-all duration-300" data-group="dependencies">
+                            <p class="font-semibold text-gray-700">Utterance #123</p>
+                            <p class="text-sm text-gray-600">"The quick brown [fox] [jumps]..."</p>
+                            <small class="text-slate-500">Dependency: nsubj (nominal subject)</small>
+                        </div>
+                        <div class="sfl-item bg-white p-3 rounded-md border-l-4 border-gray-300 transition-all duration-300" data-group="lexemes">
+                            <p class="font-semibold text-gray-700">Token: "jumps"</p>
+                            <p class="text-sm text-gray-600">Context: part of Utterance #123</p>
+                            <small class="text-slate-500">Lexeme: 'jump' (VERB)</small>
+                        </div>
+                        <div class="sfl-item bg-white p-3 rounded-md border-l-4 border-gray-300 transition-all duration-300" data-group="constituents">
+                            <p class="font-semibold text-gray-700">Utterance #456</p>
+                            <p class="text-sm text-gray-600">"...[over the lazy dog]."</p>
+                            <small class="text-slate-500">Constituent: Prepositional Phrase</small>
+                        </div>
+                        <div class="sfl-item bg-white p-3 rounded-md border-l-4 border-gray-300 transition-all duration-300" data-group="dependencies">
+                            <p class="font-semibold text-gray-700">Utterance #456</p>
+                            <p class="text-sm text-gray-600">"...[over] the lazy [dog]."</p>
+                            <small class="text-slate-500">Dependency: pobj (object of preposition)</small>
+                        </div>
+                         <div class="sfl-item bg-white p-3 rounded-md border-l-4 border-gray-300 transition-all duration-300" data-group="lexemes">
+                            <p class="font-semibold text-gray-700">Token: "dog"</p>
+                            <p class="text-sm text-gray-600">Context: part of Utterance #456</p>
+                            <small class="text-slate-500">Lexeme: 'dog' (NOUN)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo" class="mb-24 scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Interactive RAG Demo</h2>
+                <p class="text-lg text-gray-600">
+                    See how the UG/SFL model powers a Contextual RAG application. Enter a query or use the example below, and watch how the system parses, retrieves, and generates a response based on our linguistic database model.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                    <input id="rag-query" type="text" class="flex-grow w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-teal-500" value="What is the primary goal of the new initiative?">
+                    <button id="rag-submit" class="w-full sm:w-auto bg-teal-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-teal-700 transition-colors">Process Query</button>
+                </div>
+
+                <div id="rag-pipeline" class="space-y-8">
+                    <div id="step-1" class="step-hidden flex items-start gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center font-bold text-lg">1</div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800">Parsing (UG)</h4>
+                            <p class="text-gray-600">The query is broken down into its grammatical structure based on the UG schema. Key constituents and dependencies are identified.</p>
+                            <div class="mt-2 p-3 bg-gray-50 rounded-md text-sm font-mono text-gray-700 border">
+                                [NP: What] [VP: is [NP: the primary goal] [PP: of [NP: the new initiative]]]?
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="step-2" class="step-hidden flex items-start gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center font-bold text-lg">2</div>
+                        <div class="flex-grow">
+                            <h4 class="text-lg font-semibold text-gray-800">Contextual Retrieval (SFL)</h4>
+                            <p class="text-gray-600">The parsed structure is used to query the SFL database for relevant records (utterances, documents). A relevance score is computed for each retrieved chunk.</p>
+                            <div class="mt-4 chart-container h-64 md:h-72 w-full max-w-lg mx-auto">
+                                <canvas id="relevanceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="step-3" class="step-hidden flex items-start gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center font-bold text-lg">3</div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-800">Generation (LLM)</h4>
+                            <p class="text-gray-600">The highest-scoring retrieved chunks are passed to a Large Language Model (LLM) as context to generate a precise, grounded answer.</p>
+                            <div id="rag-output" class="mt-4 p-4 bg-teal-50 border-l-4 border-teal-500 text-gray-800 rounded-r-md">
+                                The primary goal of the new initiative, as stated in the project charter, is to "enhance customer engagement by 20% through personalized digital experiences."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="scroll-mt-20">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Supporting Tech Stack</h2>
+                <p class="text-lg text-gray-600">
+                    This conceptual model would be built using a combination of powerful Ruby gems for linguistics, ORM, and interfacing with language models.
+                </p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="bg-white p-5 rounded-lg shadow-md border border-gray-200">
+                    <h4 class="font-semibold text-lg text-gray-800">Parsing & Segmentation</h4>
+                    <p class="text-gray-600 text-sm mt-1">Gems like <code class="bg-gray-100 text-sm rounded px-1">pragmatic_tokenizer</code>, <code class="bg-gray-100 text-sm rounded px-1">pragmatic_segmenter</code>, and <code class="bg-gray-100 text-sm rounded px-1">linkparser</code> would handle the initial processing of text into structured UG components.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-md border border-gray-200">
+                    <h4 class="font-semibold text-lg text-gray-800">Linguistic Analysis</h4>
+                    <p class="text-gray-600 text-sm mt-1">Libraries such as <code class="bg-gray-100 text-sm rounded px-1">lingua</code>, <code class="bg-gray-100 text-sm rounded px-1">ruby-wordnet</code>, and <code class="bg-gray-100 text-sm rounded px-1">ruby-spacy</code> would provide deeper semantic and syntactic analysis to populate the SFL models.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-md border border-gray-200">
+                    <h4 class="font-semibold text-lg text-gray-800">Object-Relational Mapping</h4>
+                    <p class="text-gray-600 text-sm mt-1"><code class="bg-gray-100 text-sm rounded px-1">ActiveRecord</code> is the primary inspiration, providing the framework for defining the UG/SFL models and their interactions with the database.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-md border border-gray-200">
+                    <h4 class="font-semibold text-lg text-gray-800">Database & Data Stores</h4>
+                    <p class="text-gray-600 text-sm mt-1">For key-value or graph-like relationships within the SFL data, libraries like <code class="bg-gray-100 text-sm rounded px-1">ohm</code> could complement a traditional SQL database.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-md border border-gray-200">
+                    <h4 class="font-semibold text-lg text-gray-800">LLM Integration</h4>
+                    <p class="text-gray-600 text-sm mt-1">The <code class="bg-gray-100 text-sm rounded px-1">ruby_llm</code> gem would provide the interface for sending retrieved SFL context to a language model for the final generation step.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 Linguistic ORM Explorer. A conceptual demonstration.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const ugContainer = document.getElementById('ug-container');
+            const sflItems = document.querySelectorAll('.sfl-item');
+            let activeHighlight = null;
+
+            ugContainer.addEventListener('click', (e) => {
+                const ugItem = e.target.closest('.ug-item');
+                if (!ugItem) return;
+
+                const targetGroup = ugItem.dataset.target;
+                
+                document.querySelectorAll('.ug-item').forEach(item => item.classList.remove('highlight'));
+                
+                if (activeHighlight === targetGroup) {
+                    activeHighlight = null;
+                    sflItems.forEach(item => {
+                        item.classList.remove('sfl-item-highlight');
+                    });
+                } else {
+                    ugItem.classList.add('highlight');
+                    activeHighlight = targetGroup;
+                    sflItems.forEach(item => {
+                        if (item.dataset.group === targetGroup) {
+                            item.classList.add('sfl-item-highlight');
+                        } else {
+                            item.classList.remove('sfl-item-highlight');
+                        }
+                    });
+                }
+            });
+
+            let relevanceChartInstance = null;
+            const ragSubmitBtn = document.getElementById('rag-submit');
+            const pipelineSteps = [
+                document.getElementById('step-1'),
+                document.getElementById('step-2'),
+                document.getElementById('step-3')
+            ];
+
+            function createRelevanceChart() {
+                const ctx = document.getElementById('relevanceChart').getContext('2d');
+                if (relevanceChartInstance) {
+                    relevanceChartInstance.destroy();
+                }
+                const data = {
+                    labels: ['Doc A: Project Charter', 'Doc B: Meeting Notes', 'Doc C: Email Thread', 'Doc D: Old Spec'],
+                    datasets: [{
+                        label: 'Relevance Score',
+                        data: [92, 75, 60, 30],
+                        backgroundColor: [
+                            'rgba(44, 122, 123, 0.7)',
+                            'rgba(44, 122, 123, 0.5)',
+                            'rgba(44, 122, 123, 0.4)',
+                            'rgba(44, 122, 123, 0.2)',
+                        ],
+                        borderColor: 'rgba(44, 122, 123, 1)',
+                        borderWidth: 1
+                    }]
+                };
+                const options = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { beginAtZero: true, max: 100 },
+                        y: { 
+                            ticks: {
+                                callback: function(value) {
+                                    const label = this.getLabelForValue(value);
+                                    return label.length > 20 ? label.substring(0, 20) + '...' : label;
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` Score: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                };
+                relevanceChartInstance = new Chart(ctx, { type: 'bar', data: data, options: options });
+            }
+            
+            ragSubmitBtn.addEventListener('click', () => {
+                ragSubmitBtn.disabled = true;
+                ragSubmitBtn.textContent = 'Processing...';
+
+                pipelineSteps.forEach(step => {
+                    step.classList.add('step-hidden');
+                    step.classList.remove('step-visible');
+                });
+                
+                let delay = 0;
+                pipelineSteps.forEach((step, index) => {
+                    setTimeout(() => {
+                        step.classList.remove('step-hidden');
+                        step.classList.add('step-visible');
+                        if (step.id === 'step-2') {
+                            createRelevanceChart();
+                        }
+                        if (index === pipelineSteps.length - 1) {
+                           ragSubmitBtn.disabled = false;
+                           ragSubmitBtn.textContent = 'Process Query';
+                        }
+                    }, delay);
+                    delay += 700;
+                });
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+            
+            const onScroll = () => {
+                let currentSection = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 120) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active-nav');
+                    if(link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active-nav');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', onScroll);
+            onScroll();
+        });
+    </script>
+</body>
+</html>

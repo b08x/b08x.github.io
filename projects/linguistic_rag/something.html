@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeWeaver - Interactive Code Cartography</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chosen Palette: Architect's Blueprint -->
+    <!-- Application Structure Plan: The application is structured around a central, interactive canvas flanked by a control panel and an inspector panel, creating a "workbench" for architectural exploration. This design is directly inspired by the source document's separation of concerns. The user can toggle between two primary views:
+        1. Static Architecture View (The "Universal Grammar"): Visualizes the immutable codebase structure—modules, class inheritance, and dependencies. This is the formal "competence" of the code.
+        2. Runtime Flow View (The "Systemic Functional Linguistics"): Visualizes a specific execution trace, showing the dynamic call graph and data flow. This is the "performance" of the code in a specific context.
+        This dual-view approach, coupled with powerful filtering and a detailed inspector, allows a user to move seamlessly from abstract structure to concrete function, making it a "living diagram" that answers not just "what is it?" but "what does it do?" -->
+    <!-- Visualization & Content Choices: 
+        1. Main Graph: Report Info -> Codebase structure (modules, classes, functions) and runtime behavior (call stacks). Goal -> Organize & Show Relationships. Viz/Presentation -> A force-directed graph layout simulated with HTML divs and CSS transforms for nodes and edges, rendered within a canvas-like container. This explicitly avoids SVG per constraints. Interaction -> Pan, zoom (simulated), click nodes to inspect. Justification -> A dynamic graph is the most intuitive way to represent complex relationships in a codebase.
+        2. View Toggle (Static/Runtime): Report Info -> The core theoretical dichotomy of UG vs. SFL. Goal -> Compare. Viz/Presentation -> Segmented control buttons. Interaction -> Toggling redraws the graph edges to show either static dependencies or dynamic call flows. Justification -> This toggle is the primary interactive element that embodies the application's core conceptual model.
+        3. Inspector Panel: Report Info -> Detailed attributes of code elements. Goal -> Inform. Viz/Presentation -> A dedicated panel with text details and a supplementary chart. Interaction -> Updates on node click. A Chart.js doughnut chart shows the distribution of call types (internal, external, DB) for a selected function in the Runtime view. Justification -> Provides granular, contextual data that complements the high-level graph visualization. Library -> Chart.js.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0d1117;
+        color: #c9d1d9;
+      }
+      .control-panel,
+      .inspector-panel {
+        background-color: #161b22;
+        border-color: #30363d;
+      }
+      .graph-node {
+        position: absolute;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        border: 2px solid transparent;
+      }
+      .graph-node:hover,
+      .graph-node.selected {
+        transform: scale(1.1);
+        z-index: 10;
+      }
+      .graph-node.selected {
+        border-color: #58a6ff;
+        box-shadow: 0 0 15px rgba(88, 166, 255, 0.7);
+      }
+      .graph-edge {
+        position: absolute;
+        background-color: #484f58;
+        height: 2px;
+        transform-origin: 0 0;
+        z-index: -1;
+      }
+      .runtime-edge {
+        background: linear-gradient(90deg, #58a6ff, #30363d);
+        animation: flow 2s linear infinite;
+      }
+      @keyframes flow {
+        0% {
+          background-position: 100% 0;
+        }
+        100% {
+          background-position: -100% 0;
+        }
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 200px;
+        max-height: 200px;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #161b22;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #484f58;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #58a6ff;
+      }
+    </style>
+  </head>
+  <body class="h-screen w-full overflow-hidden flex flex-col">
+    <header
+      class="bg-[#161b22] border-b border-[#30363d] p-3 flex items-center justify-between text-sm z-20"
+    >
+      <div class="flex items-center gap-3">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="text-[#58a6ff]"
+        >
+          <path
+            d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M2 7L12 12"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M12 22V12"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M22 7L12 12"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M17 4.5L7 9.5"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <h1 class="font-bold text-lg">CodeWeaver</h1>
+        <span class="text-[#8b949e]">/</span>
+        <span class="text-white font-medium">Project: LinguisticRAG</span>
+      </div>
+      <div class="flex items-center gap-4 text-[#8b949e]">
+        <div><span class="font-semibold text-white">Files:</span> 42</div>
+        <div><span class="font-semibold text-white">Classes:</span> 15</div>
+        <div><span class="font-semibold text-white">Dependencies:</span> 8</div>
+      </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden">
+      <!-- Control Panel -->
+      <aside
+        class="control-panel w-72 border-r p-4 flex-shrink-0 flex flex-col gap-6 overflow-y-auto"
+      >
+        <div>
+          <h2 class="font-semibold mb-3">Visualization Mode</h2>
+          <div class="flex bg-[#0d1117] rounded-md p-1">
+            <button
+              id="static-view-btn"
+              class="flex-1 text-sm py-1.5 rounded-md bg-[#58a6ff] text-white font-semibold"
+            >
+              Static Architecture
+            </button>
+            <button
+              id="runtime-view-btn"
+              class="flex-1 text-sm py-1.5 rounded-md text-[#8b949e]"
+            >
+              Runtime Flow
+            </button>
+          </div>
+          <p class="text-xs text-[#8b949e] mt-2">
+            Toggle between the structural blueprint and a dynamic execution
+            trace.
+          </p>
+        </div>
+
+        <div id="runtime-controls" class="hidden">
+          <label for="trace-select" class="block font-semibold mb-2"
+            >Select Runtime Trace</label
+          >
+          <select
+            id="trace-select"
+            class="w-full bg-[#0d1117] border border-[#30363d] rounded-md p-2 text-sm"
+          >
+            <option value="userLogin">User Login Flow</option>
+            <option value="apiFetch">API Data Fetch</option>
+            <option value="dataProcessing">Data Processing Job</option>
+          </select>
+          <p class="text-xs text-[#8b949e] mt-2">
+            Simulates different "Contexts of Situation" for the codebase.
+          </p>
+        </div>
+
+        <div>
+          <label for="filter-input" class="block font-semibold mb-2"
+            >Filter & Highlight</label
+          >
+          <input
+            type="text"
+            id="filter-input"
+            placeholder="e.g., 'UserService', 'connect()'"
+            class="w-full bg-[#0d1117] border border-[#30363d] rounded-md p-2 text-sm placeholder-[#484f58]"
+          />
+        </div>
+
+        <div>
+          <h3 class="font-semibold mb-2">Legend</h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-blue-500 rounded-sm"></div>
+              <span>Module</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+              <span>Class</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-purple-500 transform rotate-45"></div>
+              <span>Function</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Visualization -->
+      <main
+        id="graph-container"
+        class="flex-1 bg-[#0d1117] relative overflow-hidden"
+      >
+        <!-- Nodes and Edges will be injected here by JS -->
+      </main>
+
+      <!-- Inspector Panel -->
+      <aside
+        id="inspector"
+        class="inspector-panel w-80 border-l p-4 flex-shrink-0 flex-col gap-4 overflow-y-auto hidden"
+      >
+        <div id="inspector-content">
+          <div class="text-center py-10 text-[#8b949e]">
+            <svg
+              class="mx-auto h-12 w-12"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <p class="mt-2 text-sm">Click a node to inspect its details.</p>
+          </div>
+        </div>
+        <div id="inspector-details" class="hidden">
+          <h2
+            id="inspector-title"
+            class="text-lg font-bold text-white mb-1"
+          ></h2>
+          <p
+            id="inspector-type"
+            class="text-sm text-[#58a6ff] font-mono mb-4"
+          ></p>
+
+          <div class="space-y-4">
+            <div>
+              <h3
+                class="font-semibold text-sm mb-2 border-b border-[#30363d] pb-1"
+              >
+                Static Details
+              </h3>
+              <div class="text-xs space-y-1 font-mono text-[#8b949e]">
+                <p><strong>Path:</strong> <span id="inspector-path"></span></p>
+                <p>
+                  <strong>Inherits:</strong>
+                  <span id="inspector-inherits"></span>
+                </p>
+                <p>
+                  <strong>Dependencies:</strong>
+                  <span id="inspector-deps"></span>
+                </p>
+              </div>
+            </div>
+            <div id="runtime-details" class="hidden">
+              <h3
+                class="font-semibold text-sm mb-2 border-b border-[#30363d] pb-1"
+              >
+                Runtime Analysis
+              </h3>
+              <div class="text-xs space-y-1 font-mono text-[#8b949e]">
+                <p>
+                  <strong>Call Count:</strong>
+                  <span id="inspector-calls"></span>
+                </p>
+                <p>
+                  <strong>Avg. Exec Time:</strong>
+                  <span id="inspector-time"></span>
+                </p>
+              </div>
+              <div class="chart-container mt-4">
+                <canvas id="callTypeChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Mock Data representing the codebase structure and runtime traces
+        const codebase = {
+          nodes: {
+            models: {
+              id: "models",
+              type: "module",
+              label: "models",
+              color: "bg-blue-500",
+              shape: "rounded-sm",
+            },
+            services: {
+              id: "services",
+              type: "module",
+              label: "services",
+              color: "bg-blue-500",
+              shape: "rounded-sm",
+            },
+            controllers: {
+              id: "controllers",
+              type: "module",
+              label: "controllers",
+              color: "bg-blue-500",
+              shape: "rounded-sm",
+            },
+            User: {
+              id: "User",
+              type: "class",
+              label: "User",
+              parent: "models",
+              color: "bg-green-500",
+              shape: "rounded-full",
+              path: "app/models/user.rb",
+              inherits: "ApplicationRecord",
+              deps: 1,
+            },
+            AuthService: {
+              id: "AuthService",
+              type: "class",
+              label: "AuthService",
+              parent: "services",
+              color: "bg-green-500",
+              shape: "rounded-full",
+              path: "app/services/auth_service.rb",
+              inherits: null,
+              deps: 2,
+            },
+            UserService: {
+              id: "UserService",
+              type: "class",
+              label: "UserService",
+              parent: "services",
+              color: "bg-green-500",
+              shape: "rounded-full",
+              path: "app/services/user_service.rb",
+              inherits: null,
+              deps: 1,
+            },
+            SessionsController: {
+              id: "SessionsController",
+              type: "class",
+              label: "SessionsController",
+              parent: "controllers",
+              color: "bg-green-500",
+              shape: "rounded-full",
+              path: "app/controllers/sessions_controller.rb",
+              inherits: "ApplicationController",
+              deps: 1,
+            },
+            authenticate: {
+              id: "authenticate",
+              type: "function",
+              label: "authenticate",
+              parent: "AuthService",
+              color: "bg-purple-500",
+              shape: "transform rotate-45",
+            },
+            find_user: {
+              id: "find_user",
+              type: "function",
+              label: "find_user",
+              parent: "UserService",
+              color: "bg-purple-500",
+              shape: "transform rotate-45",
+            },
+            create_session: {
+              id: "create_session",
+              type: "function",
+              label: "create",
+              parent: "SessionsController",
+              color: "bg-purple-500",
+              shape: "transform rotate-45",
+            },
+          },
+          // "Universal Grammar": Static dependencies
+          staticEdges: [
+            { from: "AuthService", to: "UserService" },
+            { from: "AuthService", to: "User" },
+            { from: "UserService", to: "User" },
+            { from: "SessionsController", to: "AuthService" },
+            { from: "create_session", to: "authenticate" },
+            { from: "authenticate", to: "find_user" },
+          ],
+          // "Systemic Functional Linguistics": Runtime call traces
+          runtimeTraces: {
+            userLogin: {
+              edges: [
+                {
+                  from: "create_session",
+                  to: "authenticate",
+                  calls: 120,
+                  time: "25ms",
+                },
+                {
+                  from: "authenticate",
+                  to: "find_user",
+                  calls: 120,
+                  time: "50ms",
+                },
+                { from: "find_user", to: "User", calls: 115, time: "15ms" }, // Represents an ORM call
+              ],
+              callTypes: { authenticate: [10, 80, 10], find_user: [5, 5, 90] },
+            },
+            apiFetch: { edges: [], callTypes: {} },
+            dataProcessing: { edges: [], callTypes: {} },
+          },
+        };
+
+        const container = document.getElementById("graph-container");
+        const inspector = document.getElementById("inspector");
+        const inspectorContent = document.getElementById("inspector-content");
+        const inspectorDetails = document.getElementById("inspector-details");
+        const runtimeControls = document.getElementById("runtime-controls");
+        let currentView = "static";
+        let callTypeChart = null;
+
+        function renderGraph() {
+          container.innerHTML = "";
+          const nodes = codebase.nodes;
+          const edges =
+            currentView === "static"
+              ? codebase.staticEdges
+              : codebase.runtimeTraces.userLogin.edges;
+          const nodeElements = {};
+
+          // Simple physics simulation parameters
+          const width = container.clientWidth;
+          const height = container.clientHeight;
+          const positions = {};
+
+          // Initial random positioning
+          Object.keys(nodes).forEach((id) => {
+            positions[id] = {
+              x: Math.random() * (width - 100) + 50,
+              y: Math.random() * (height - 100) + 50,
+            };
+          });
+
+          // A very basic force-directed layout simulation
+          for (let i = 0; i < 50; i++) {
+            // Iterations
+            Object.keys(nodes).forEach((id) => {
+              let fx = 0,
+                fy = 0;
+              // Repulsion from other nodes
+              Object.keys(nodes).forEach((otherId) => {
+                if (id === otherId) return;
+                const dx = positions[id].x - positions[otherId].x;
+                const dy = positions[id].y - positions[otherId].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 1) dist = 1;
+                const force = 5000 / (dist * dist);
+                fx += (dx / dist) * force;
+                fy += (dy / dist) * force;
+              });
+              // Attraction from edges
+              edges.forEach((edge) => {
+                if (edge.from === id) {
+                  const dx = positions[edge.to].x - positions[id].x;
+                  const dy = positions[edge.to].y - positions[id].y;
+                  const dist = Math.sqrt(dx * dx + dy * dy);
+                  const force = dist * 0.1;
+                  fx += (dx / dist) * force;
+                  fy += (dy / dist) * force;
+                }
+                if (edge.to === id) {
+                  const dx = positions[edge.from].x - positions[id].x;
+                  const dy = positions[edge.from].y - positions[id].y;
+                  const dist = Math.sqrt(dx * dx + dy * dy);
+                  const force = dist * 0.1;
+                  fx += (dx / dist) * force;
+                  fy += (dy / dist) * force;
+                }
+              });
+              positions[id].x += fx * 0.01;
+              positions[id].y += fy * 0.01;
+
+              // Bound check
+              positions[id].x = Math.max(
+                50,
+                Math.min(width - 50, positions[id].x),
+              );
+              positions[id].y = Math.max(
+                50,
+                Math.min(height - 50, positions[id].y),
+              );
+            });
+          }
+
+          // Render nodes
+          Object.values(nodes).forEach((node) => {
+            const el = document.createElement("div");
+            el.className = `graph-node w-20 h-20 flex items-center justify-center p-2 text-center text-xs font-semibold text-white ${node.color} ${node.shape}`;
+            el.id = `node-${node.id}`;
+            el.dataset.id = node.id;
+            el.textContent = node.label;
+            el.style.left = `${positions[node.id].x - 40}px`;
+            el.style.top = `${positions[node.id].y - 40}px`;
+            el.addEventListener("click", () => showInspector(node.id));
+            container.appendChild(el);
+            nodeElements[node.id] = el;
+          });
+
+          // Render edges
+          edges.forEach((edge) => {
+            const fromNode = nodeElements[edge.from];
+            const toNode = nodeElements[edge.to];
+            if (!fromNode || !toNode) return;
+
+            const fromPos = {
+              x: parseFloat(fromNode.style.left) + 40,
+              y: parseFloat(fromNode.style.top) + 40,
+            };
+            const toPos = {
+              x: parseFloat(toNode.style.left) + 40,
+              y: parseFloat(toNode.style.top) + 40,
+            };
+
+            const dx = toPos.x - fromPos.x;
+            const dy = toPos.y - fromPos.y;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = (Math.atan2(dy, dx) * 180) / Math.PI;
+
+            const edgeEl = document.createElement("div");
+            edgeEl.className = `graph-edge ${currentView === "runtime" ? "runtime-edge" : ""}`;
+            edgeEl.style.width = `${length}px`;
+            edgeEl.style.left = `${fromPos.x}px`;
+            edgeEl.style.top = `${fromPos.y}px`;
+            edgeEl.style.transform = `rotate(${angle}deg)`;
+            container.prepend(edgeEl);
+          });
+        }
+
+        function showInspector(nodeId) {
+          // Deselect previous
+          document
+            .querySelectorAll(".graph-node.selected")
+            .forEach((n) => n.classList.remove("selected"));
+          // Select new
+          document.getElementById(`node-${nodeId}`).classList.add("selected");
+
+          const node = codebase.nodes[nodeId];
+          inspector.classList.remove("hidden");
+          inspector.classList.add("flex");
+          inspectorContent.classList.add("hidden");
+          inspectorDetails.classList.remove("hidden");
+
+          document.getElementById("inspector-title").textContent = node.label;
+          document.getElementById("inspector-type").textContent =
+            `Type: ${node.type}`;
+          document.getElementById("inspector-path").textContent =
+            node.path || "N/A";
+          document.getElementById("inspector-inherits").textContent =
+            node.inherits || "None";
+          document.getElementById("inspector-deps").textContent =
+            node.deps || "0";
+
+          const runtimeDetailsContainer =
+            document.getElementById("runtime-details");
+          if (currentView === "runtime" && node.type === "function") {
+            const trace = codebase.runtimeTraces.userLogin;
+            const edge = trace.edges.find(
+              (e) => e.from === node.id || e.to === node.id,
+            );
+            document.getElementById("inspector-calls").textContent = edge
+              ? edge.calls
+              : "N/A";
+            document.getElementById("inspector-time").textContent = edge
+              ? edge.time
+              : "N/A";
+
+            const callData = trace.callTypes[node.id];
+            updateChart(callData);
+
+            runtimeDetailsContainer.classList.remove("hidden");
+          } else {
+            runtimeDetailsContainer.classList.add("hidden");
+          }
+        }
+
+        function updateChart(data) {
+          if (!data) {
+            if (callTypeChart) callTypeChart.destroy();
+            callTypeChart = null;
+            return;
+          }
+          const chartCanvas = document.getElementById("callTypeChart");
+          if (callTypeChart) {
+            callTypeChart.data.datasets[0].data = data;
+            callTypeChart.update();
+          } else {
+            callTypeChart = new Chart(chartCanvas, {
+              type: "doughnut",
+              data: {
+                labels: ["Internal Calls", "External API", "DB Queries"],
+                datasets: [
+                  {
+                    data: data,
+                    backgroundColor: ["#388bfd", "#8b949e", "#79c0ff"],
+                    borderColor: "#161b22",
+                    borderWidth: 2,
+                  },
+                ],
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    display: true,
+                    position: "bottom",
+                    labels: { color: "#c9d1d9", boxWidth: 10, padding: 10 },
+                  },
+                  title: {
+                    display: true,
+                    text: "Call Type Distribution",
+                    color: "#c9d1d9",
+                  },
+                },
+              },
+            });
+          }
+        }
+
+        // Event Listeners
+        const staticBtn = document.getElementById("static-view-btn");
+        const runtimeBtn = document.getElementById("runtime-view-btn");
+
+        staticBtn.addEventListener("click", () => {
+          currentView = "static";
+          staticBtn.classList.add(
+            "bg-[#58a6ff]",
+            "text-white",
+            "font-semibold",
+          );
+          runtimeBtn.classList.remove(
+            "bg-[#58a6ff]",
+            "text-white",
+            "font-semibold",
+          );
+          runtimeControls.classList.add("hidden");
+          renderGraph();
+        });
+
+        runtimeBtn.addEventListener("click", () => {
+          currentView = "runtime";
+          runtimeBtn.classList.add(
+            "bg-[#58a6ff]",
+            "text-white",
+            "font-semibold",
+          );
+          staticBtn.classList.remove(
+            "bg-[#58a6ff]",
+            "text-white",
+            "font-semibold",
+          );
+          runtimeControls.classList.remove("hidden");
+          renderGraph();
+        });
+
+        document
+          .getElementById("filter-input")
+          .addEventListener("input", (e) => {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll(".graph-node").forEach((node) => {
+              if (query && !node.textContent.toLowerCase().includes(query)) {
+                node.style.opacity = "0.2";
+              } else {
+                node.style.opacity = "1";
+              }
+            });
+          });
+
+        new ResizeObserver(renderGraph).observe(container);
+
+        // Initial Render
+        renderGraph();
+      });
+    </script>
+  </body>
+</html>
