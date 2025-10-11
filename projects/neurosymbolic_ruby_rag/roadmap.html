@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RubyRAG to Neurosymbolic KG Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The application is structured as a single-page interactive dashboard with a persistent top navigation for seamless exploration. This non-linear design was chosen over a simple document reproduction to allow users to explore the project's concepts based on their interests—be it the high-level vision, the technical implementation, or competitive analysis. The flow starts with a high-level "Overview," moves to the core "Architectural Vision," compares approaches in "RAG Evolution," details the project plan in the "Implementation Roadmap," and finally dives into the technical specifics in "Core Components." This layered approach facilitates understanding by presenting the 'why' before the 'how', making complex information digestible for both technical and strategic audiences. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: RAG capability comparison from 'A Comparative Framework...' CSV. Goal: Compare. Viz/Presentation: Interactive bar chart (Chart.js) and dynamic text. Interaction: User selects a capability from a dropdown, and both the chart and a detailed text description update. Justification: This transforms a static table into an engaging, explorable comparison tool, allowing users to focus on one capability at a time. Library/Method: Chart.js (Canvas).
+        - Report Info: Project phases from 'Roadmap.md'. Goal: Change/Process. Viz/Presentation: Interactive timeline built with HTML/CSS. Interaction: Clicking a phase expands a card to reveal details (duration, priority, deliverables). Justification: This is more intuitive and less cluttered than a long text list, providing a clear visual overview of the project's progression. Library/Method: Vanilla JS + Tailwind CSS.
+        - Report Info: 5-stage processing pipeline from 'Hybrid Pipeline Design.csv'. Goal: Organize/Process. Viz/Presentation: Horizontal flowchart diagram using HTML/CSS. Interaction: Clicking on a stage highlights it and displays its detailed information in a separate panel. Justification: Visually represents the data flow, which is more effective for understanding a process than a simple table. Library/Method: Vanilla JS + Tailwind CSS.
+        - Report Info: Database schema from 'Proposed Integrated ActiveRecord Schema.csv'. Goal: Inform/Organize. Viz/Presentation: An interactive schema explorer with a dropdown menu and a table. Interaction: User selects a model from the dropdown to view its specific schema in the table. Justification: Provides a clean, organized way to navigate a complex database schema without overwhelming the user with all the information at once. Library/Method: Vanilla JS + Tailwind CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #38332E;
+        }
+        .nav-active {
+            color: #D97706;
+            font-weight: 600;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header class="sticky top-0 bg-white/80 backdrop-blur-lg z-10 shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="font-bold text-xl text-amber-700">RubyRAG Evolution</span>
+                </div>
+                <div class="hidden md:block">
+                    <div id="nav-links" class="ml-10 flex items-baseline space-x-4">
+                        <a href="#overview" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-amber-600">Overview</a>
+                        <a href="#architecture" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-amber-600">Architecture</a>
+                        <a href="#evolution" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-amber-600">RAG Evolution</a>
+                        <a href="#roadmap" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-amber-600">Roadmap</a>
+                        <a href="#components" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-amber-600">Components</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <section id="overview" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Beyond Semantic Search: A Neurosymbolic Knowledge Graph</h1>
+                <p class="mt-6 text-lg leading-8 text-gray-600">An initiative to evolve Retrieval-Augmented Generation (RAG) from simple vector search to a sophisticated, linguistically-grounded reasoning engine using a modular Ruby stack.</p>
+            </div>
+            <div class="bg-amber-50 border-l-4 border-amber-500 text-amber-800 p-6 rounded-r-lg shadow-md">
+                <p class="text-xl italic">"The dominant architectural paradigm... is built upon a foundation of vector-based semantic similarity search. This foundation, while effective for simple fact retrieval, imposes a hard 'semantic ceiling' on the system's reasoning, precision, and contextual understanding capabilities."</p>
+            </div>
+            <div class="mt-10 text-gray-700 space-y-4 text-base leading-relaxed">
+                <p>This project addresses a critical limitation in modern AI systems: the "context conundrum." Traditional RAG methods often destroy vital contextual information during data processing, leading to responses that are topically relevant but lack deep understanding. By migrating from monolithic frameworks like `langchainrb` to a curated stack of high-performance Ruby gems, we can build a system that prioritizes explicit control, transparency, and maintainability.</p>
+                <p>The goal is to implement a working neurosymbolic knowledge graph with Systemic Functional Linguistics (SFL) and Memex-inspired capabilities. The existing RubyRAG architecture provides the perfect foundation for this evolution, enabling rapid, research-friendly, and incremental development of a system capable of true multi-faceted contextual understanding.</p>
+            </div>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="architecture" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900">The Firmare & Software Architecture</h2>
+                <p class="mt-4 text-lg leading-8 text-gray-600">A bifurcated data model grounded in linguistic theory to capture both stable knowledge and dynamic context.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div id="firmare-card" class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-xl hover:border-amber-400">
+                    <h3 class="text-2xl font-semibold text-gray-800">The "Firmare" Layer</h3>
+                    <p class="text-sm text-amber-600 font-medium mb-2">Theory: Universal Grammar (UG)</p>
+                    <p class="text-gray-600">This layer structures the stable, timeless, ontological knowledge base. It represents the deep, canonical meaning of information, independent of how it's expressed. Using UG principles, it models innate hierarchical syntax and core logic, forming the backbone of the knowledge graph.</p>
+                </div>
+                <div id="software-card" class="bg-white p-6 rounded-lg shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-xl hover:border-amber-400">
+                    <h3 class="text-2xl font-semibold text-gray-800">The "Software" Layer</h3>
+                    <p class="text-sm text-amber-600 font-medium mb-2">Theory: Systemic Functional Linguistics (SFL)</p>
+                    <p class="text-gray-600">This layer models the rich, dynamic, and queryable context surrounding each piece of information. It captures language in use, answering questions about who is communicating, what is being discussed, and through what channel, enabling highly precise, context-aware retrieval.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="evolution" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900">The Evolution of RAG</h2>
+                <p class="mt-4 text-lg leading-8 text-gray-600">Comparing traditional RAG methods with the proposed Linguistic Query Engine.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                <div class="mb-6 flex justify-center">
+                    <select id="capability-selector" class="block w-full max-w-xs pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                    </select>
+                </div>
+                <div class="chart-container">
+                    <canvas id="rag-comparison-chart"></canvas>
+                </div>
+                <div id="capability-description" class="mt-8 p-4 bg-gray-50 rounded-md text-center text-gray-700 min-h-[100px]">
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="roadmap" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900">Implementation Roadmap</h2>
+                <p class="mt-4 text-lg leading-8 text-gray-600">A phased approach to building the Neurosymbolic Knowledge Graph. Click each phase for details.</p>
+                 <p class="mt-2 text-md text-gray-500">Total Estimated Timeline: 14-20 weeks</p>
+            </div>
+            <div id="roadmap-container" class="space-y-4">
+            </div>
+        </section>
+
+        <hr class="my-16 border-gray-200">
+
+        <section id="components" class="scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900">Core Components & Pipeline</h2>
+                <p class="mt-4 text-lg leading-8 text-gray-600">The modular gem stack, processing pipeline, and database schema that power the system.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Hybrid Processing Pipeline</h3>
+                    <div id="pipeline-container" class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-2">
+                    </div>
+                    <div id="pipeline-details" class="mt-6 bg-white p-6 rounded-lg shadow-md border border-gray-200 min-h-[180px]">
+                        <p class="text-gray-500 text-center">Click a stage above to see details.</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Database Schema Explorer</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <select id="schema-selector" class="block w-full pl-3 pr-10 py-2 mb-4 text-base border-gray-300 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm rounded-md">
+                            <option>Select a model to view its schema</option>
+                        </select>
+                        <div class="overflow-x-auto">
+                           <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Column</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Type</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="schema-table-body" class="bg-white divide-y divide-gray-200">
+                                    <tr><td colspan="3" class="px-6 py-4 text-center text-gray-500">Schema details will appear here.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const ragComparisonData = {
+        labels: ["Naive RAG", "Graph RAG", "Agentic RAG", "Linguistic Query Engine"],
+        capabilities: {
+            "Basic Unit of Knowledge": {
+                values: [1, 2, 3, 4],
+                descriptions: [
+                    "<strong>Arbitrary Text Chunk:</strong> Knowledge is stored in raw, unstructured text segments, often leading to fragmented context.",
+                    "<strong>Inferred Semantic Node:</strong> Knowledge is organized into nodes with inferred relationships, offering more structure.",
+                    "<strong>Tool/API Call:</strong> Knowledge is accessed dynamically through external tools, treated as a functional unit.",
+                    "<strong>Linguistically-Defined Clause/Phrase:</strong> Knowledge is precisely captured in formal grammatical units, enabling deep analysis."
+                ]
+            },
+            "Retrieval Mechanism": {
+                values: [1, 2, 3, 4],
+                descriptions: [
+                    "<strong>Vector Similarity Search:</strong> Retrieves chunks based on semantic closeness in a vector space.",
+                    "<strong>Graph Traversal (Semantic):</strong> Navigates a knowledge graph to find related nodes and paths.",
+                    "<strong>Multi-Step Tool Use:</strong> Chains together multiple tool calls in a planned sequence to find information.",
+                    "<strong>Relational Database Query (SQL-like):</strong> Executes precise, structured queries against a linguistically-modeled database."
+                ]
+            },
+            "Understanding of Syntax": {
+                values: [0, 1, 0, 4],
+                descriptions: [
+                    "<strong>None:</strong> Purely based on semantics; grammatical structure is ignored.",
+                    "<strong>Limited/Inferred:</strong> Syntax may be partially inferred during graph creation but is not explicit.",
+                    "<strong>None (delegated to LLM):</strong> The agent framework itself has no syntactic understanding; it's up to the LLM.",
+                    "<strong>Explicit & Formal (UG Model):</strong> A core feature, with syntax formally modeled using Universal Grammar principles."
+                ]
+            },
+            "Understanding of Context": {
+                values: [1, 2, 3, 4],
+                 descriptions: [
+                    "<strong>Local (within chunk):</strong> Context is limited to the information within the retrieved text chunk.",
+                    "<strong>Local + Inferred Links:</strong> Context includes the immediate node and its inferred connections in the graph.",
+                    "<strong>Dynamic (task-dependent):</strong> Context is built on-the-fly based on the specific task and tool outputs.",
+                    "<strong>Explicit & Multi-Stratal (SFL Model):</strong> Context is deeply modeled across multiple linguistic layers (field, tenor, mode)."
+                ]
+            },
+            "Query Capability": {
+                values: [1, 2, 3, 4],
+                 descriptions: [
+                    "<strong>'Find documents about X':</strong> Capable of basic keyword and semantic searches.",
+                    "<strong>'Find documents where X is related to Y':</strong> Can handle simple relational queries.",
+                    "<strong>'Plan and find X, then Y':</strong> Can execute complex, multi-step information gathering tasks.",
+                    "<strong>'Find documents where X is the Actor of a process affecting Y, expressed with low modality':</strong> Allows for deeply specific, nuanced queries based on linguistic roles and context."
+                ]
+            }
+        }
+    };
+
+    const roadmapData = [
+        { phase: "Phase 1: Core KG Foundation", duration: "3-4 weeks", priority: "High", details: "Extend database with knowledge graph tables (Entities, Relations, etc.). Enhance text processors for basic entity extraction (NER) and embedding. Build foundational CLI commands for management." },
+        { phase: "Phase 2: SFL Integration", duration: "4-6 weeks", priority: "High", details: "Develop metafunction analyzers to process text for contextual data (Field, Tenor, Mode). Enhance processors to capture SFL-based insights, bridging the 'Firmare' and 'Software' layers." },
+        { phase: "Phase 3: Memex Trails", duration: "2-3 weeks", priority: "Medium", details: "Implement a system for creating and traversing associative 'trails' between knowledge graph entities. Develop visualization tools to display these connections, inspired by Vannevar Bush's Memex." },
+        { phase: "Phase 4: Neurosymbolic", duration: "4-5 weeks", priority: "High", details: "Build a hybrid reasoning engine that combines neural (LLM-based) and symbolic (KG-based) methods. Develop an inference engine capable of multi-hop reasoning across the graph." },
+        { phase: "Phase 5: CLI Polish", duration: "1-2 weeks", priority: "Low", details: "Refine the Thor CLI for a better user experience. Improve documentation, add help commands, and streamline workflows for knowledge extraction, trail creation, and analysis." }
+    ];
+
+    const pipelineData = [
+        { stage: 1, name: "Pre-processing", gems: "lingua, pragmatic_segmenter, pragmatic_tokenizer", input: "Raw Document text", output: "Language-tagged, segmented, and tokenized Clauses", purpose: "Prepare text for deep parsing by breaking it into clean, sentence-level units." },
+        { stage: 2, name: "Structural Parsing", gems: "ruby-spacy, linkparser", input: "Tokenized Clause", output: "Dependency parse graph, Link Grammar graph", purpose: "Generate a formal syntactic analysis of the clause's structure." },
+        { stage: 3, name: "UG Model Population", gems: "Custom XBarTreeBuilder, linguistics, rwordnet", input: "Syntactic parse graphs, tokens", output: "Populated Phrase and LexicalItem records", purpose: "Translate the syntactic analysis into the persistent X-bar tree structure in the database and enrich the lexicon." },
+        { stage: 4, name: "SFL Annotation", gems: "ruby_llm, ruby_llm-schema", input: "Clause text + structural metadata", output: "Structured JSON with SFL analysis", purpose: "Use an LLM to perform functional analysis, constrained by pre-parsed structure and a strict output schema." },
+        { stage: 5, name: "SFL Model Population", gems: "Custom SFLAnnotator", input: "Structured JSON, existing Phrase records", output: "Populated ClauseContext, IdeationalMeaning, Participant, etc.", purpose: "Persist the functional analysis in the database, creating the 'realization bridge' between the UG and SFL models." }
+    ];
+
+    const schemaData = {
+        'Lexeme': [
+            ['id', 'bigint (PK)', 'Primary key for the lexeme.'],
+            ['lemma', 'string', 'The base/dictionary form of the word (e.g., "run").'],
+            ['lexical_category', 'enum', 'Part of speech (Noun, Verb, Adjective, etc.).'],
+            ['wordnet_synset_id', 'string', 'Link to WordNet for semantic definition.']
+        ],
+        'Phrase': [
+            ['id', 'bigint (PK)', 'Primary key for the phrase node.'],
+            ['phrase_type', 'enum', 'Category of the phrase (NP, VP, PP, etc.).'],
+            ['head_id', 'references (Lexeme)', 'Foreign key to the Lexeme that is the head of the phrase.'],
+            ['specifier_id', 'references (Phrase)', 'Self-referential key to the specifier phrase.'],
+            ['complement_id', 'references (Phrase)', 'Self-referential key to the complement phrase.']
+        ],
+        'DeepStructure': [
+            ['id', 'bigint (PK)', 'Primary key for the canonical structure.'],
+            ['root_phrase_id', 'references (Phrase)', 'Foreign key to the root node of the syntactic tree.'],
+            ['structure_hash', 'string', 'Unique hash of the tree for de-duplication.']
+        ],
+        'SurfaceUtterance': [
+            ['id', 'bigint (PK)', 'Primary key for the surface text.'],
+            ['text', 'text', 'The actual string as it appears in the source.'],
+            ['deep_structure_id', 'references (DeepStructure)', 'Foreign key linking this surface form to its canonical deep structure.']
+        ],
+        'ContextOfSituation': [
+             ['id', 'bigint (PK)', 'Primary key for the context.'],
+             ['field', 'string', 'The subject matter/domain of the discourse.'],
+             ['tenor', 'string', 'The relationship between participants.'],
+             ['mode', 'string', 'The channel of communication.']
+        ],
+        'IdeationalFrame': [
+            ['clause_id', 'references (Clause) (PK)', 'Captures the "content" meaning (Transitivity).'],
+            ['process_type', 'enum', 'The type of action/state (material, mental, relational).'],
+            ['actor_phrase_id', 'references (Phrase)', 'The phrase acting as the primary participant (Actor).'],
+            ['goal_phrase_id', 'references (Phrase)', 'The phrase being acted upon (Goal).']
+        ]
+    };
+    
+    const navLinks = document.querySelectorAll('#nav-links a');
+    const sections = document.querySelectorAll('main section');
+
+    function updateActiveNavLink() {
+        let currentSection = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 80) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('nav-active');
+            if (link.getAttribute('href').substring(1) === currentSection) {
+                link.classList.add('nav-active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveNavLink);
+    updateActiveNavLink();
+
+    const capabilitySelector = document.getElementById('capability-selector');
+    const capabilityDescription = document.getElementById('capability-description');
+    const ctx = document.getElementById('rag-comparison-chart').getContext('2d');
+    let ragChart;
+
+    const capabilities = Object.keys(ragComparisonData.capabilities);
+    capabilities.forEach(cap => {
+        const option = document.createElement('option');
+        option.value = cap;
+        option.textContent = cap;
+        capabilitySelector.appendChild(option);
+    });
+
+    function updateChart(capability) {
+        const data = ragComparisonData.capabilities[capability];
+        capabilityDescription.innerHTML = data.descriptions[data.descriptions.length - 1];
+
+        if (ragChart) {
+            ragChart.data.datasets[0].data = data.values;
+            ragChart.update();
+        } else {
+            ragChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ragComparisonData.labels,
+                    datasets: [{
+                        label: capability,
+                        data: data.values,
+                        backgroundColor: [
+                            'rgba(107, 114, 128, 0.6)',
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(16, 185, 129, 0.6)',
+                            'rgba(217, 119, 6, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgb(107, 114, 128)',
+                            'rgb(59, 130, 246)',
+                            'rgb(16, 185, 129)',
+                            'rgb(217, 119, 6)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: { display: false },
+                            grid: { display: false },
+                        },
+                        y: {
+                           ticks: {
+                                autoSkip: false,
+                                callback: function(value, index, values) {
+                                   const label = this.getLabelForValue(value);
+                                   if (label.length > 16) {
+                                     return label.match(/.{1,16}/g);
+                                   }
+                                   return label;
+                                }
+                           }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const capability = capabilitySelector.value;
+                                    const descriptionIndex = context.dataIndex;
+                                    const description = ragComparisonData.capabilities[capability].descriptions[descriptionIndex];
+                                    return description.replace(/<\/?strong>/g, '').split(' ');
+                                }
+                            }
+                        }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const capability = capabilitySelector.value;
+                            capabilityDescription.innerHTML = ragComparisonData.capabilities[capability].descriptions[index];
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    capabilitySelector.addEventListener('change', (e) => {
+        updateChart(e.target.value);
+    });
+    updateChart(capabilities[0]);
+    
+    const roadmapContainer = document.getElementById('roadmap-container');
+    roadmapData.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden cursor-pointer';
+        card.innerHTML = `
+            <div class="p-4 flex justify-between items-center">
+                <h4 class="text-lg font-semibold text-gray-800">${item.phase}</h4>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-500">${item.duration}</span>
+                    <span class="px-2 py-0.5 text-xs font-semibold rounded-full ${item.priority === 'High' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}">${item.priority}</span>
+                    <span class="transform transition-transform duration-300">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </span>
+                </div>
+            </div>
+            <div class="px-4 pb-4 border-t border-gray-200 hidden max-h-0 transition-all duration-500 ease-in-out">
+                <p class="text-gray-600 mt-2">${item.details}</p>
+            </div>
+        `;
+        roadmapContainer.appendChild(card);
+
+        card.addEventListener('click', () => {
+            const content = card.querySelector('.hidden');
+            const arrow = card.querySelector('svg');
+            
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.classList.add('max-h-0');
+                arrow.parentElement.classList.remove('rotate-180');
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.classList.remove('max-h-0');
+                arrow.parentElement.classList.add('rotate-180');
+            }
+        });
+    });
+
+    const pipelineContainer = document.getElementById('pipeline-container');
+    const pipelineDetails = document.getElementById('pipeline-details');
+
+    pipelineData.forEach((item, index) => {
+        const step = document.createElement('div');
+        step.className = 'pipeline-step group flex flex-col items-center cursor-pointer text-center flex-1';
+        step.dataset.stage = item.stage;
+        step.innerHTML = `
+            <div class="w-16 h-16 rounded-full bg-gray-200 group-hover:bg-amber-500 flex items-center justify-center text-xl font-bold text-gray-600 group-hover:text-white transition-colors duration-300">${item.stage}</div>
+            <p class="mt-2 text-sm font-medium text-gray-700 group-hover:text-amber-600">${item.name}</p>
+        `;
+        pipelineContainer.appendChild(step);
+        
+        if (index < pipelineData.length - 1) {
+            const arrow = document.createElement('div');
+            arrow.className = 'hidden md:block text-gray-300 mx-2 text-2xl font-light self-start mt-5';
+            arrow.innerHTML = '&rarr;';
+            pipelineContainer.appendChild(arrow);
+        }
+
+        step.addEventListener('click', () => {
+            document.querySelectorAll('.pipeline-step').forEach(s => {
+                 s.querySelector('div').classList.remove('bg-amber-500', 'text-white');
+                 s.querySelector('div').classList.add('bg-gray-200', 'text-gray-600');
+            });
+             step.querySelector('div').classList.add('bg-amber-500', 'text-white');
+             step.querySelector('div').classList.remove('bg-gray-200', 'text-gray-600');
+            
+            const detailData = pipelineData.find(d => d.stage == item.stage);
+            pipelineDetails.innerHTML = `
+                <h4 class="font-bold text-lg text-gray-800">${detailData.stage}. ${detailData.name}</h4>
+                <p class="text-sm text-gray-600 mt-2"><strong class="font-semibold">Purpose:</strong> ${detailData.purpose}</p>
+                <p class="text-xs text-gray-500 mt-2"><strong class="font-semibold">Gems:</strong> ${detailData.gems}</p>
+                <div class="mt-2 text-xs grid grid-cols-2 gap-2">
+                    <p><strong class="font-semibold text-gray-600">Input:</strong> ${detailData.input}</p>
+                    <p><strong class="font-semibold text-gray-600">Output:</strong> ${detailData.output}</p>
+                </div>
+            `;
+        });
+    });
+    
+    const schemaSelector = document.getElementById('schema-selector');
+    const schemaTableBody = document.getElementById('schema-table-body');
+    Object.keys(schemaData).forEach(modelName => {
+        const option = document.createElement('option');
+        option.value = modelName;
+        option.textContent = modelName;
+        schemaSelector.appendChild(option);
+    });
+
+    schemaSelector.addEventListener('change', (e) => {
+        const modelName = e.target.value;
+        const modelSchema = schemaData[modelName];
+        schemaTableBody.innerHTML = '';
+
+        if (!modelSchema) {
+            schemaTableBody.innerHTML = '<tr><td colspan="3" class="px-6 py-4 text-center text-gray-500">Select a model to view its schema.</td></tr>';
+            return;
+        }
+
+        modelSchema.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${row[0]}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono">${row[1]}</td>
+                <td class="px-6 py-4 text-sm text-gray-600">${row[2]}</td>
+            `;
+            schemaTableBody.appendChild(tr);
+        });
+    });
+});
+</script>
+</body>
+</html>

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(bundle exec jekyll:*)",
-      "Bash(bundle exec:*)"
+      "Bash(bundle exec:*)",
+      "mcp__magic__21st_magic_component_refiner"
     ],
     "deny": [],
     "ask": []

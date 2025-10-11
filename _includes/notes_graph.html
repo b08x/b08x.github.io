@@ -1,38 +1,7 @@
 <style>
-  .links line {
-    stroke: #ccc;
-    opacity: 0.5;
-  }
-
-  .nodes circle {
-    cursor: pointer;
-    fill: #8b88e6;
-    transition: all 0.15s ease-out;
-  }
-
-  .text text {
-    cursor: pointer;
-    fill: #333;
-    /* text-shadow:
-      -1px -1px 0 #fafafabb,
-      1px -1px 0 #fafafabb,
-      -1px 1px 0 #fafafabb,
-      1px 1px 0 #fafafabb; */
-  }
-
-  .nodes [active],
-  .text [active] {
-    cursor: pointer;
-    fill: #43747d;
-  }
-
-  .inactive {
-    opacity: 0.1;
-    transition: all 0.15s ease-out;
-  }
-
+  /* Dark Theme Notes Graph */
   #graph-wrapper {
-    /* background: #fcfcfc; */
+    background: #121212;  /* Slightly lighter than page background */
     border-radius: 4px;
     height: auto;
   }
@@ -40,6 +9,35 @@
   #graph-wrapper > svg {
     max-width: 100%;
     display: block;
+  }
+
+  .links line {
+    stroke: #4A4A4A;  /* Dark gray for links */
+    opacity: 0.6;
+  }
+
+  .nodes circle {
+    cursor: pointer;
+    fill: #4DB6AC;  /* Soft teal for node base color */
+    transition: all 0.15s ease-out;
+  }
+
+  .text text {
+    cursor: pointer;
+    fill: #E0E0E0;  /* Light gray text */
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  .nodes [active],
+  .text [active] {
+    cursor: pointer;
+    fill: #80CBC4;  /* Lighter teal for active state */
+  }
+
+  .inactive {
+    opacity: 0.2;  /* Slightly more visible in dark theme */
+    transition: all 0.15s ease-out;
   }
 </style>
 

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguistic RAG Architecture Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #38332E;
+        }
+        .section-card {
+            background-color: #FFFFFF;
+            border: 1px solid #EAE6E1;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+        .tab-button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid transparent;
+        }
+        .tab-button.active {
+            background-color: #A69279;
+            color: #FFFFFF;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+        }
+        .tab-button:not(.active):hover {
+            background-color: #F4F1ED;
+            border-color: #EAE6E1;
+        }
+        .model-box {
+            border: 1px solid #D9D2C9;
+            background-color: #F9F7F5;
+            cursor: pointer;
+        }
+        .model-box.selected {
+            border-color: #A69279;
+            background-color: #F4F1ED;
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(166, 146, 121, 0.2);
+        }
+        .pipeline-stage {
+            cursor: pointer;
+        }
+        .pipeline-stage .pipeline-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .pipeline-stage.active .pipeline-content {
+            max-height: 500px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .connector {
+            display: none;
+        }
+        @media (min-width: 1024px) {
+            .connector {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-grow: 1;
+            }
+            .connector-line {
+                width: 100%;
+                height: 2px;
+                background-color: #D9D2C9;
+            }
+        }
+    </style>
+    <!-- Chosen Palette: Soothing Neutrals -->
+    <!-- Application Structure Plan: The application is structured into thematic, collapsible sections to manage cognitive load for a complex topic. 1) Introduction: Sets the context. 2) Core Concept: Explains the foundational UG vs. SFL dichotomy. 3) Interactive Schema Explorer: The main interactive component, allowing users to switch between schema views (Integrated, Core Models) and click on models to see details. This task-oriented design helps users understand the database structure piece by piece rather than being overwhelmed. 4) Processing Pipeline: An interactive stepper that visualizes the data flow. 5) Comparison: Summarizes the value proposition. This structure guides the user from the high-level theory to the concrete implementation details in a logical, explorable sequence. -->
+    <!-- Visualization & Content Choices: 
+    - Report Info: UG vs SFL Dichotomy -> Goal: Inform -> Viz: Two-column descriptive layout with icons -> Interaction: N/A -> Justification: Clearly and simply presents the foundational theoretical split.
+    - Report Info: ActiveRecord Schema (CSVs) -> Goal: Organize/Explore -> Viz: Interactive diagram built with HTML/CSS divs -> Interaction: User clicks buttons to switch schema views and clicks on individual model boxes to populate a details panel -> Justification: A static diagram would be too dense. This interactive approach allows focused exploration of the complex database structure, which is the core of the report. Library: N/A (custom HTML/JS).
+    - Report Info: Data Processing Workflow (CSV) -> Goal: Show Process -> Viz: Interactive horizontal stepper built with HTML/CSS -> Interaction: User clicks on a stage to expand and view details (gems, inputs/outputs) -> Justification: Clearly visualizes the sequential nature of the pipeline while keeping the UI clean by hiding details until requested.
+    - Report Info: Comparison to Standard RAG -> Goal: Compare -> Viz: Two-column Pro/Con list -> Interaction: N/A -> Justification: Provides a direct, scannable summary of the architecture's advantages and challenges.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#A69279]">Linguistic RAG Architecture</h1>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">An interactive exploration of a novel database architecture for Retrieval-Augmented Generation, grounded in formal linguistic theory.</p>
+        </header>
+
+        <main class="space-y-8">
+
+            <!-- Core Concept Section -->
+            <section class="section-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-6">The Core Dichotomy: Structure vs. Content</h2>
+                <div class="grid md:grid-cols-2 gap-8 text-center">
+                    <div class="p-6 border border-gray-200 rounded-lg">
+                        <div class="text-4xl mb-4">⚙️</div>
+                        <h3 class="text-xl font-semibold mb-2">Universal Grammar (UG) as "Firmware"</h3>
+                        <p class="text-gray-600">Represents the immutable, deep structures of language. It's the stable, rule-governed framework (syntax, phrase structures) that is universal across contexts.</p>
+                    </div>
+                    <div class="p-6 border border-gray-200 rounded-lg">
+                        <div class="text-4xl mb-4">🎨</div>
+                        <h3 class="text-xl font-semibold mb-2">Systemic Functional Linguistics (SFL) as "Software"</h3>
+                        <p class="text-gray-600">Represents the malleable, functional content of language. It's how specific utterances create meaning in a particular context (e.g., mood, theme, participant roles).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Schema Explorer -->
+            <section class="section-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-2">Interactive Schema Explorer</h2>
+                <p class="text-center text-gray-500 mb-6">Select a view and click on a model to see its details.</p>
+                
+                <div class="flex justify-center mb-6 border-b border-gray-200 pb-4">
+                    <div id="schema-tabs" class="flex space-x-2 bg-[#F4F1ED] p-1 rounded-lg">
+                        <button class="tab-button active" data-schema="integrated">Integrated Schema</button>
+                        <button class="tab-button" data-schema="core">Core Models</button>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div id="schema-display" class="lg:col-span-2 space-y-4">
+                    </div>
+                    <div id="model-details" class="lg:col-span-1 p-4 rounded-lg bg-gray-50 border h-fit sticky top-8">
+                        <h3 class="font-bold text-lg mb-2 text-[#A69279]">Model Details</h3>
+                        <div id="details-content" class="text-gray-700">
+                            <p class="text-gray-500">Click on a model in the diagram to view its properties and associations here.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Data Processing Pipeline -->
+            <section class="section-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-6">Hybrid Data Processing Pipeline</h2>
+                <p class="text-center text-gray-500 mb-8">This 5-stage pipeline processes raw text to populate both the UG and SFL models. Click each stage to expand.</p>
+                <div id="pipeline-container" class="flex flex-col lg:flex-row items-stretch justify-center w-full">
+                </div>
+            </section>
+
+            <!-- Advantages vs. Standard RAG -->
+            <section class="section-card p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-center mb-6">Comparison with Standard RAG</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="p-4 rounded-lg bg-green-50 border border-green-200">
+                        <h3 class="font-semibold text-lg text-green-800 mb-2">✅ Advantages of this Architecture</h3>
+                        <ul class="list-disc list-inside space-y-2 text-green-700">
+                            <li><strong>Contextual Precision:</strong> Retrieves information based on grammatical role and function, not just keyword similarity.</li>
+                            <li><strong>Reduced Hallucinations:</strong> Provides the LLM with structured, less ambiguous context, reducing factual errors.</li>
+                            <li><strong>Explainability:</strong> Queries can be traced through a formal linguistic structure, making results more transparent.</li>
+                            <li><strong>Complex Queries:</strong> Enables queries that combine structural and semantic criteria (e.g., "Find all clauses where 'the company' is the actor in a material process").</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 rounded-lg bg-red-50 border border-red-200">
+                        <h3 class="font-semibold text-lg text-red-800 mb-2">❌ Challenges & Disadvantages</h3>
+                        <ul class="list-disc list-inside space-y-2 text-red-700">
+                             <li><strong>Complexity:</strong> Requires significant upfront design and linguistic expertise to model the database schema.</li>
+                             <li><strong>Performance Overhead:</strong> Parsing text into deep linguistic structures is computationally more expensive than vectorization.</li>
+                             <li><strong>Scalability:</strong> Complex relational queries might be slower at massive scale compared to optimized vector index lookups.</li>
+                             <li><strong>Brittleness:</strong> The formal structure might struggle to flexibly handle highly idiomatic or ungrammatical language.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center mt-12 text-gray-500">
+            <p>A conceptual visualization based on the report "Linguistically-Grounded Database Architecture for Contextual RAG".</p>
+        </footer>
+
+    </div>
+
+<script>
+const schemaData = {
+    integrated: [
+        { name: 'Lexeme', type: 'ug', cols: ['id (PK)', 'lemma', 'lexical_category', 'wordnet_synset_id'], desc: 'The base/dictionary form of a word, representing its core lexical identity.' },
+        { name: 'Phrase', type: 'ug', cols: ['id (PK)', 'phrase_type', 'head_id', 'specifier_id', 'complement_id'], desc: 'A syntactic unit composed of one or more words, such as a Noun Phrase (NP) or Verb Phrase (VP).' },
+        { name: 'DeepStructure', type: 'ug', cols: ['id (PK)', 'root_phrase_id', 'structure_hash'], desc: 'Represents the canonical, abstract syntactic structure (X-bar tree) of an utterance, independent of its surface form.' },
+        { name: 'SurfaceUtterance', type: 'bridge', cols: ['id (PK)', 'text', 'source_document_id', 'deep_structure_id'], desc: 'The actual text as it appears in a source document. This acts as a bridge between the deep structure and its specific realization.' },
+        { name: 'ContextOfSituation', type: 'sfl', cols: ['id (PK)', 'field', 'tenor', 'mode'], desc: 'Models the SFL context: the subject matter (field), participant relationships (tenor), and communication channel (mode).' },
+        { name: 'Clause', type: 'sfl', cols: ['id (PK)', 'surface_utterance_id', 'context_of_situation_id'], desc: 'The central unit of SFL analysis, linked to a specific utterance and its context.' },
+        { name: 'IdeationalFrame', type: 'sfl', cols: ['clause_id (PK)', 'process_type', 'actor_phrase_id', 'goal_phrase_id'], desc: 'Captures the "content" meaning (Transitivity). It describes who does what to whom.' },
+        { name: 'InterpersonalStance', type: 'sfl', cols: ['clause_id (PK)', 'speech_function', 'modality', 'polarity'], desc: 'Captures the "interactional" meaning (Mood). It describes the speech act, certainty, and polarity.' },
+        { name: 'TextualOrganization', type: 'sfl', cols: ['clause_id (PK)', 'theme_phrase_id', 'rheme_phrase_id'], desc: 'Captures the "message" structure (Theme/Rheme). It describes how the message is organized and presented.' },
+    ],
+    core: [
+        { name: 'Proposition', type: 'ug', cols: [], desc: 'The core, abstract unit of knowledge in the UG "Firmware". Represents a stable, timeless claim.', associations: 'has_many :text_chunks, through: :text_chunk_propositions' },
+        { name: 'Concept', type: 'ug', cols: [], desc: 'The atomic entities (nouns, ideas) that constitute Propositions. The building blocks of the ontology.', associations: 'has_many :relationships, as: :source' },
+        { name: 'DiscourseEvent', type: 'sfl', cols: [], desc: 'The central hub for SFL context. Represents a single, concrete communicative act in a specific situation.', associations: 'has_many :text_chunks, has_one :interpersonal_stance...' },
+        { name: 'InterpersonalStance', type: 'sfl', cols: [], desc: 'Captures the "Tenor" of discourse—who is speaking, to whom, and with what attitude, certainty, and social relationship.', associations: 'belongs_to :discourse_event, belongs_to :actor' },
+        { name: 'TextChunk', type: 'bridge', cols: [], desc: 'The critical bridge linking a specific piece of text to both its dynamic SFL context and its underlying, stable UG propositions.', associations: 'belongs_to :discourse_event, has_many :propositions...' },
+    ]
+};
+
+const pipelineData = [
+    { stage: 1, title: 'Pre-processing', gems: 'lingua, pragmatic_segmenter, pragmatic_tokenizer', input: 'Raw Document Text', output: 'Language-tagged, segmented, and tokenized Clauses', purpose: 'Prepare text for deep parsing by breaking it into clean, sentence-level units.' },
+    { stage: 2, title: 'Structural Parsing', gems: 'ruby-spacy, linkparser', input: 'Tokenized Clause', output: 'Dependency parse graph, Link Grammar graph', purpose: 'Generate a formal syntactic analysis of the clause\'s structure.' },
+    { stage: 3, title: 'UG Model Population', gems: 'Custom XBarTreeBuilder, linguistics, rwordnet', input: 'Syntactic parse graphs, tokens', output: 'Populated Phrase and LexicalItem records', purpose: 'Translate the syntactic analysis into the persistent X-bar tree structure in the database and enrich the lexicon.' },
+    { stage: 4, title: 'SFL Annotation', gems: 'ruby_llm, ruby_llm-schema', input: 'Clause text + structural metadata', output: 'Structured JSON with SFL analysis', purpose: 'Use an LLM to perform functional analysis, constrained by pre-parsed structure and a strict output schema.' },
+    { stage: 5, title: 'SFL Model Population', gems: 'Custom SFLAnnotator', input: 'Structured JSON, existing Phrase records', output: 'Populated ClauseContext, IdeationalMeaning, etc.', purpose: 'Persist the functional analysis in the database, linking the UG and SFL models.' },
+];
+
+let activeSchema = 'integrated';
+let selectedModel = null;
+
+const schemaDisplay = document.getElementById('schema-display');
+const detailsContent = document.getElementById('details-content');
+const schemaTabs = document.getElementById('schema-tabs');
+const pipelineContainer = document.getElementById('pipeline-container');
+
+function getTypeColor(type) {
+    switch (type) {
+        case 'ug': return { border: 'border-blue-300', bg: 'bg-blue-50', text: 'text-blue-800' };
+        case 'sfl': return { border: 'border-emerald-300', bg: 'bg-emerald-50', text: 'text-emerald-800' };
+        case 'bridge': return { border: 'border-amber-300', bg: 'bg-amber-50', text: 'text-amber-800' };
+        default: return { border: 'border-gray-300', bg: 'bg-gray-50', text: 'text-gray-800' };
+    }
+}
+
+function renderModelDetails(modelName) {
+    const model = schemaData[activeSchema].find(m => m.name === modelName);
+    if (!model) {
+        detailsContent.innerHTML = `<p class="text-gray-500">Select a model to view its details.</p>`;
+        return;
+    }
+
+    selectedModel = modelName;
+
+    const colors = getTypeColor(model.type);
+    let colsHtml = model.cols.length > 0
+        ? `<ul class="mt-2 space-y-1 text-sm list-disc list-inside">${model.cols.map(c => `<li><code>${c}</code></li>`).join('')}</ul>`
+        : '';
+    
+    let associationsHtml = model.associations
+        ? `<div class="mt-4"><h4 class="font-semibold text-sm">Key Associations:</h4><p class="text-sm font-mono bg-gray-100 p-2 rounded mt-1">${model.associations}</p></div>`
+        : '';
+
+    detailsContent.innerHTML = `
+        <div class="p-4 rounded-lg ${colors.bg} ${colors.border} border">
+            <h3 class="font-bold text-lg ${colors.text}">${model.name}</h3>
+            <p class="mt-2 text-sm">${model.desc}</p>
+            ${colsHtml}
+            ${associationsHtml}
+        </div>
+    `;
+
+    document.querySelectorAll('.model-box').forEach(box => {
+        box.classList.toggle('selected', box.dataset.model === modelName);
+    });
+}
+
+function renderSchema() {
+    schemaDisplay.innerHTML = '';
+    const models = schemaData[activeSchema];
+    models.forEach(model => {
+        const colors = getTypeColor(model.type);
+        const modelBox = document.createElement('div');
+        modelBox.className = `model-box p-4 rounded-lg transition-all duration-200 ${colors.border} ${colors.bg} ${selectedModel === model.name ? 'selected' : ''}`;
+        modelBox.dataset.model = model.name;
+        modelBox.innerHTML = `<h4 class="font-semibold ${colors.text}">${model.name}</h4>`;
+        schemaDisplay.appendChild(modelBox);
+    });
+
+    if (selectedModel) {
+        renderModelDetails(selectedModel);
+    } else {
+       detailsContent.innerHTML = `<p class="text-gray-500">Click on a model in the diagram to view its properties and associations here.</p>`;
+    }
+}
+
+function renderPipeline() {
+    pipelineData.forEach((item, index) => {
+        const stageDiv = document.createElement('div');
+        stageDiv.className = 'pipeline-stage flex-1';
+        stageDiv.dataset.stage = item.stage;
+        stageDiv.innerHTML = `
+            <div class="p-4 m-2 border rounded-lg hover:bg-gray-50 transition-colors">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-[#A69279] text-white flex items-center justify-center font-bold text-lg">${item.stage}</div>
+                    <div>
+                        <h4 class="font-semibold text-lg">${item.title}</h4>
+                        <p class="text-sm text-gray-500">${item.gems}</p>
+                    </div>
+                     <span class="ml-auto text-2xl text-gray-400 transition-transform stage-arrow">▼</span>
+                </div>
+                <div class="pipeline-content">
+                    <div class="border-t pt-4 mt-4 space-y-2 text-sm">
+                        <p><strong>Purpose:</strong> ${item.purpose}</p>
+                        <p><strong>Input:</strong> <span class="font-mono bg-gray-100 p-1 rounded">${item.input}</span></p>
+                        <p><strong>Output:</strong> <span class="font-mono bg-gray-100 p-1 rounded">${item.output}</span></p>
+                    </div>
+                </div>
+            </div>
+        `;
+        pipelineContainer.appendChild(stageDiv);
+
+        if (index < pipelineData.length - 1) {
+            const connectorDiv = document.createElement('div');
+            connectorDiv.className = 'connector';
+            connectorDiv.innerHTML = '<div class="connector-line"></div>';
+            pipelineContainer.appendChild(connectorDiv);
+        }
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    schemaTabs.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            activeSchema = e.target.dataset.schema;
+            selectedModel = null;
+            document.querySelectorAll('#schema-tabs button').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            renderSchema();
+        }
+    });
+
+    schemaDisplay.addEventListener('click', (e) => {
+        const modelBox = e.target.closest('.model-box');
+        if (modelBox) {
+            renderModelDetails(modelBox.dataset.model);
+        }
+    });
+
+    pipelineContainer.addEventListener('click', (e) => {
+        const stage = e.target.closest('.pipeline-stage');
+        if (stage) {
+            const wasActive = stage.classList.contains('active');
+            document.querySelectorAll('.pipeline-stage').forEach(s => s.classList.remove('active'));
+            if (!wasActive) {
+                stage.classList.add('active');
+            }
+        }
+    });
+
+    renderSchema();
+    renderPipeline();
+});
+
+</script>
+</body>
+</html>
