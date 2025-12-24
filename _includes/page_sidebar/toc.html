@@ -1,0 +1,65 @@
+<nav class="toc-widget" aria-labelledby="toc-heading">
+  <h3
+    id="toc-heading"
+    class="text-sm font-semibold uppercase mb-3"
+    style="color: var(--text-secondary)"
+  >
+    <i class="fas fa-list mr-2"></i>On This Page
+  </h3>
+
+  <ul id="toc-list" class="space-y-2 text-sm">
+    <!-- Populated by JavaScript -->
+  </ul>
+</nav>
+
+<style>
+  .toc-widget {
+    padding: var(--space-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-primary);
+  }
+
+  #toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-widget a {
+    display: block;
+    padding: 0.25rem 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all var(--transition-fast);
+    border-radius: var(--radius-sm);
+  }
+
+  .toc-widget a:hover {
+    color: var(--link-hover);
+    background: var(--ui-hover);
+  }
+
+  .toc-widget a.active {
+    color: var(--link-base);
+    border-left-color: var(--link-base);
+    background: var(--ui-hover);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .toc-widget a:focus-visible {
+    outline: 2px solid var(--ui-focus);
+    outline-offset: 2px;
+  }
+
+  .toc-widget .toc-h3 {
+    padding-left: 1rem;
+    font-size: 0.85em;
+    color: var(--text-tertiary);
+  }
+
+  .toc-widget .toc-h3.active {
+    color: var(--link-base);
+  }
+</style>

@@ -1,0 +1,19 @@
+services:
+  jekyll:
+    build:
+      context: .
+      dockerfile: Containerfile
+    ports:
+      - "4000:4000"
+      - "35729:35729" # Livereload port
+    volumes:
+      - .:/srv/jekyll
+      - vendor_bundle:/srv/jekyll/vendor/bundle
+      - node_modules:/srv/jekyll/node_modules
+    environment:
+      - BUNDLE_PATH=vendor/bundle
+    command: bundle exec jekyll serve --host 0.0.0.0 --incremental --livereload
+
+volumes:
+  vendor_bundle:
+  node_modules:

@@ -1,0 +1,17 @@
+inherit_from: .rubocop_todo.yml
+
+# Exclude files/directories that shouldn't be linted
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - '.git/**/*'
+    - 'generated/**/*'
+    - 'log/**/*'
+  # Consider enabling NewCops to catch new violations with RuboCop updates.
+  NewCops: enable
+  # Set the target Ruby version for more accurate analysis.
+  TargetRubyVersion: 3.4 # Example for Ruby 3.1

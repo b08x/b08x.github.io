@@ -1,0 +1,148 @@
+{% if page.audio_file %}
+<div class="audio-widget mb-6">
+  <h3
+    class="text-sm font-semibold uppercase mb-3"
+    style="color: var(--text-secondary)"
+  >
+    <i class="fas fa-headphones mr-2"></i>Audio Guide
+  </h3>
+
+  <div
+    class="p-4 rounded"
+    style="background: var(--bg-secondary); border: 1px solid var(--border-primary)"
+  >
+    <audio
+      id="page-audio"
+      controls
+      class="w-full mb-3"
+      style="background: var(--bg-tertiary); border-radius: var(--radius-md)"
+    >
+      <source src="{{ page.audio_file }}" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <!-- Speed Control -->
+    <div class="flex items-center gap-2 mb-3">
+      <label
+        for="speed-control"
+        class="text-xs font-semibold"
+        style="color: var(--text-secondary)"
+      >
+        Speed:
+      </label>
+      <select
+        id="speed-control"
+        class="text-xs px-2 py-1 rounded"
+        style="background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-primary)"
+      >
+        <option value="0.75">0.75x</option>
+        <option value="1" selected>1x</option>
+        <option value="1.25">1.25x</option>
+        <option value="1.5">1.5x</option>
+        <option value="2">2x</option>
+      </select>
+    </div>
+
+    <!-- Timestamps -->
+    {% if page.audio_timestamps %}
+    <div class="space-y-1">
+      <p
+        class="text-xs uppercase font-semibold mb-2"
+        style="color: var(--text-tertiary)"
+      >
+        Jump to:
+      </p>
+      {% for timestamp in page.audio_timestamps %}
+      <button
+        class="timestamp-btn text-xs w-full text-left px-2 py-1 rounded transition-all"
+        data-time="{{ timestamp.time }}"
+        style="background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-primary)"
+      >
+        <i class="fas fa-play-circle mr-1" style="color: var(--link-base)"></i>
+        <span class="font-mono font-semibold">{{ timestamp.time }}</span>
+        - {{ timestamp.description }}
+      </button>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .timestamp-btn:hover {
+    background: var(--ui-hover);
+    border-color: var(--link-base);
+    cursor: pointer;
+  }
+
+  .timestamp-btn:focus-visible {
+    outline: 2px solid var(--ui-focus);
+    outline-offset: 2px;
+  }
+</style>
+{% endif %}
+
+{% if page.videos %}
+<div class="video-widget mb-6">
+  <h3
+    class="text-sm font-semibold uppercase mb-3"
+    style="color: var(--text-secondary)"
+  >
+    <i class="fas fa-video mr-2"></i>Videos
+  </h3>
+
+  {% for video in page.videos %}
+  <div
+    class="video-item mb-4"
+    data-video-platform="{{ video.platform }}"
+  >
+    <button
+      class="video-thumbnail-btn w-full text-left p-3 rounded transition-all"
+      data-embed-id="{{ video.embed_id }}"
+      data-video-index="{{ forloop.index }}"
+      style="background: var(--bg-secondary); border: 1px solid var(--border-primary)"
+    >
+      <div class="flex items-center gap-3">
+        <svg
+          class="w-10 h-10 flex-shrink-0"
+          style="color: var(--link-base)"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="12" cy="12" r="10" opacity="0.2"></circle>
+          <path d="M8 5v14l11-7z"></path>
+        </svg>
+        <div>
+          <div class="font-semibold" style="color: var(--text-primary)">
+            {{ video.title }}
+          </div>
+          {% if video.platform %}
+          <div class="text-xs mt-1" style="color: var(--text-tertiary)">
+            <i class="fas fa-external-link-alt mr-1"></i>{{ video.platform | capitalize }}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </button>
+    <div
+      class="video-embed hidden mt-2"
+      id="video-{{ forloop.index }}"
+      style="border-radius: var(--radius-md); overflow: hidden"
+    ></div>
+  </div>
+  {% endfor %}
+</div>
+
+<style>
+  .video-thumbnail-btn:hover {
+    background: var(--ui-hover);
+    border-color: var(--link-base);
+    cursor: pointer;
+  }
+
+  .video-thumbnail-btn:focus-visible {
+    outline: 2px solid var(--ui-focus);
+    outline-offset: 2px;
+  }
+</style>
+{% endif %}

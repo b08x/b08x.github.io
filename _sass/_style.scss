@@ -1,0 +1,160 @@
+// Legacy Sass variables for backward compatibility
+// These will be gradually phased out in favor of CSS custom properties
+$color-primary: #0b1026; // Chinese Black (legacy)
+$color-text: #242b4b; // Space Cadet (legacy)
+$color-subtext: #4c5158; // Davy's Gray (legacy)
+$color-border: #909d9e; // Cloudy Sky (legacy)
+$color-deep-aubergine: #380528;
+$color-charcoal: #4a4a4a;
+$color-box-background: #4c5158;
+$color-accent-warm: #bf7a60;
+$color-focus: #a1887f;
+$color-highlight: #e3b448;
+$border-radius: 4px;
+$font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  Segoe UI,
+  Helvetica,
+  Arial,
+  sans-serif,
+  Apple Color Emoji,
+  Segoe UI Emoji,
+  Segoe UI Symbol;
+
+body {
+  box-sizing: content-box;
+  font-family: $font-family;
+  margin: 0 auto;
+  line-height: var(--line-height-base, 1.7);
+  padding: 4vh 6vw;
+  overflow-x: hidden;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  max-width: 63em;
+
+  @media (min-width: 820px) {
+    font-size: 1.2rem;
+  }
+}
+
+time {
+  display: block;
+  color: var(--text-secondary);
+  margin: 0.5em 0 1em;
+}
+
+footer {
+  margin: 2em 0;
+  font-size: 0.8em;
+  color: var(--text-secondary);
+  padding-top: 1em;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  max-height: 75vh;
+  border-radius: $border-radius;
+}
+
+blockquote {
+  padding: 1.5em;
+  margin: 0;
+  font-size: 0.88em;
+  background: var(--bg-secondary);
+  border-radius: $border-radius;
+  border-left: 4px solid var(--link-base);
+
+  p {
+    margin: 0;
+  }
+}
+
+hr {
+  width: 100%;
+  border: 0;
+  height: 1px;
+  margin: 1.5em 0;
+  background: var(--border-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.3;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  color: var(--text-primary);
+}
+
+a {
+  transition: background 300ms;
+  padding: 0 0.1em;
+  text-decoration: none;
+  border-bottom: 1px solid var(--link-base);
+  color: var(--link-base);
+  &:hover {
+    color: var(--link-hover) !important;
+    background: var(--ui-hover);
+  }
+  &:after {
+    position: relative;
+    top: -0.5em;
+    font-size: 0.7em;
+    content: "↗";
+    color: var(--text-secondary);
+  }
+  &.internal-link:after,
+  &.footnote:after,
+  &.reversefootnote:after {
+    content: "";
+  }
+}
+
+*:focus {
+  background: var(--ui-hover) !important;
+  color: var(--text-primary) !important;
+  outline: 2px solid var(--ui-focus);
+}
+
+nav {
+  margin: 1em 0 3em;
+}
+
+#notes-entry-container {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.backlink-box {
+  background: var(--bg-secondary);
+  padding: 1em;
+  border-radius: $border-radius;
+}
+
+code {
+  background: var(--bg-code);
+  color: var(--text-primary);
+  padding: 0.1em 0.2em;
+  border-radius: 4px;
+  text-wrap-mode: wrap;
+}
+
+.invalid-link {
+  color: var(--text-tertiary);
+  cursor: help;
+  background: rgba(74, 74, 74, 0.5);
+  padding: 0 0.1em;
+}
+
+.invalid-link-brackets {
+  color: var(--text-tertiary);
+  cursor: help;
+}
