@@ -1,5 +1,16 @@
 title: syncopated notes
-include: ["_pages", "projects", "logs", "docs"]
+include:
+  [
+    "_pages",
+    "projects",
+    "logs",
+    "docs",
+    "Containerfile",
+    "docker-compose.yml",
+    "CLAUDE.md",
+    "LICENSE",
+    "README.md",
+  ]
 exclude:
   - .gitignore
   - bin
