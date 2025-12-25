@@ -4,10 +4,7 @@ layout: default
 
 <head>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     /* Theme-aware body styling */
     body {
@@ -20,39 +17,47 @@ layout: default
       line-height: var(--line-height-base, 1.8);
       color: var(--text-primary);
     }
+
     .prose p {
       margin-top: 1.5em;
       margin-bottom: 1.5em;
     }
+
     .prose h1,
     .prose h2,
     .prose h3 {
       color: var(--text-primary);
       border-color: var(--border-secondary);
     }
+
     .prose h2 {
       margin-top: 2em;
       margin-bottom: 1em;
     }
+
     .prose h3 {
       margin-top: 1.75em;
       margin-bottom: 0.75em;
     }
+
     .prose ul,
     .prose ol {
       margin-top: 1.5em;
       margin-bottom: 1.5em;
       color: var(--text-primary);
     }
+
     .prose li {
       margin-top: 0.5em;
       margin-bottom: 0.5em;
     }
+
     .prose a {
       color: var(--link-base);
       text-decoration: underline;
       transition: color 0.3s ease;
     }
+
     .prose a:hover {
       color: var(--link-hover);
     }
@@ -65,14 +70,8 @@ layout: default
     <!-- Main Content (takes remaining space) -->
     <main class="flex-1 min-w-0">
       <!-- Hero/Header Section -->
-      <header
-        class="mb-16 pb-10"
-        style="border-bottom: 2px solid var(--border-primary)"
-      >
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
-          style="color: var(--text-primary)"
-        >
+      <header class="mb-16 pb-10" style="border-bottom: 2px solid var(--border-primary)">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight" style="color: var(--text-primary)">
           {{ page.title }}
         </h1>
         {% if page.description %}
@@ -83,35 +82,21 @@ layout: default
       </header>
 
       <!-- Page Content -->
-      <div class="prose prose-base lg:prose-lg xl:prose-xl max-w-none" style="max-width: 75ch;">
+      <div class="prose prose-base lg:prose-lg xl:prose-xl max-w-none" style="max-width: 100ch;">
         {{ content }}
       </div>
     </main>
 
     <!-- Sidebar (fixed width, sticky on desktop) -->
-    <aside
-      class="w-full lg:w-80 lg:flex-shrink-0 lg:sticky lg:top-8 lg:self-start"
-      id="page-sidebar"
-      aria-label="Page sidebar navigation and resources"
-      style="max-width: 320px;"
-    >
+    <aside class="w-full lg:w-80 lg:flex-shrink-0 lg:sticky lg:top-8 lg:self-start" id="page-sidebar"
+      aria-label="Page sidebar navigation and resources" style="max-width: 320px;">
       <!-- Mobile Toggle Button -->
-      <button
-        id="sidebar-toggle"
-        class="lg:hidden w-full mb-4 px-4 py-2 rounded flex items-center justify-between"
-        style="background: var(--bg-secondary); color: var(--text-primary)"
-        aria-expanded="true"
-        aria-controls="sidebar-content"
-      >
+      <button id="sidebar-toggle" class="lg:hidden w-full mb-4 px-4 py-2 rounded flex items-center justify-between"
+        style="background: var(--bg-secondary); color: var(--text-primary)" aria-expanded="true"
+        aria-controls="sidebar-content">
         <span class="font-semibold">Table of Contents & Resources</span>
-        <svg
-          class="w-5 h-5 transition-transform"
-          style="color: var(--text-secondary)"
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
+        <svg class="w-5 h-5 transition-transform" style="color: var(--text-secondary)" aria-hidden="true" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
         </svg>
       </button>
@@ -119,23 +104,20 @@ layout: default
       <!-- Sidebar Widgets -->
       <div id="sidebar-content" class="space-y-6">
         {% if page.toc %}
-          {% include page_sidebar/toc.html %}
+        {% include page_sidebar/toc.html %}
         {% endif %}
 
         {% if page.audio_file or page.videos %}
-          {% include page_sidebar/media_widgets.html %}
+        {% include page_sidebar/media_widgets.html %}
         {% endif %}
 
         {% if page.sources %}
-          {% include page_sidebar/references.html %}
+        {% include page_sidebar/references.html %}
         {% endif %}
 
         <!-- Empty State -->
         {% unless page.toc or page.audio_file or page.videos or page.sources %}
-        <div
-          class="p-4 rounded text-center"
-          style="background: var(--bg-secondary); color: var(--text-secondary)"
-        >
+        <div class="p-4 rounded text-center" style="background: var(--bg-secondary); color: var(--text-secondary)">
           <p class="text-sm">No sidebar content configured for this page.</p>
         </div>
         {% endunless %}
