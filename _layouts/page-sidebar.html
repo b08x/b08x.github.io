@@ -10,6 +10,9 @@ layout: default
     body {
       background-color: var(--bg-primary);
       color: var(--text-primary);
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
 
     /* Prose styling with theme variables */
@@ -64,7 +67,7 @@ layout: default
   </style>
 </head>
 
-<article class="w-full mx-auto px-6 sm:px-8 lg:px-16 xl:px-24 py-10" style="max-width: 1600px;">
+<article class="w-full mx-auto px-6 sm:px-8 lg:px-16 xl:px-24 py-10" style="max-width: 1280px;">
   <div class="flex flex-col lg:flex-row gap-12">
 
     <!-- Main Content (takes remaining space) -->
@@ -82,7 +85,7 @@ layout: default
       </header>
 
       <!-- Page Content -->
-      <div class="prose prose-base lg:prose-lg xl:prose-xl max-w-none" style="max-width: 100ch;">
+      <div class="prose prose-base lg:prose-lg xl:prose-xl max-w-none">
         {{ content }}
       </div>
     </main>

@@ -57,9 +57,13 @@ collections:
 
 defaults:
   - scope:
-      path: "**/*"
+      path: ""
     values:
       layout: "default"
+  - scope:
+      path: "assets/css/**/*"
+    values:
+      layout: null
   - scope:
       path: "_notes/**/*.md"
     values:

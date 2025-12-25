@@ -4,6 +4,7 @@ module.exports = {
     './_layouts/**/*.html',
     './_notes/*.md',
     './_pages/*.md',
+    './src/**/*.{ts,tsx}',
     './*.html',
   ],
   theme: {

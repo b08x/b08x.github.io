@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include head.html %}
+<style>
+  body {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+</style>
 
 <body class="h-screen flex flex-col overflow-hidden bg-background text-foreground font-mono antialiased">
 
@@ -20,7 +30,7 @@
 
     <!-- Main Content Area -->
     <main class="flex-1 overflow-y-auto scroll-smooth" id="main-content">
-      <div class="max-w-6xl mx-auto px-8 py-12 lg:px-16">
+      <div class="max-w-none mx-auto px-8 py-12 lg:px-16">
 
         <!-- Article Header -->
         <header class="mb-12">
@@ -76,6 +86,12 @@
 
       </div>
     </main>
+
+    <!-- Right Sidebar: TOC -->
+    <aside class="w-64 flex-none hidden lg:block border-l overflow-y-auto p-6"
+      style="border-color: var(--border); background-color: var(--background);">
+      <terminal-toc></terminal-toc>
+    </aside>
   </div>
 
   <!-- Web Component for TOC -->
