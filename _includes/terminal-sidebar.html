@@ -1,0 +1,41 @@
+<nav class="p-6 sidebar">
+  <!-- Recent Notes Section -->
+  <!-- <div class="mb-8">
+    <div class="text-xs uppercase tracking-wide font-bold mb-4" style="color: var(--muted); letter-spacing: 0.05em;">
+      Recent Notes
+    </div>
+    <ul class="space-y-1">
+      {% assign recent_notes = site.notes | sort: 'last_modified_at' | reverse %}
+      {% for note in recent_notes limit:15 %}
+      <li>
+        <a href="{{ note.url | relative_url }}"
+          class="block py-2 px-3 text-sm border-l-2 transition-all {% if page.url == note.url %}active-nav-item{% endif %}"
+          style="
+             {% if page.url == note.url %}
+               color: var(--accent);
+               border-left-color: var(--accent);
+               background-color: rgba(255, 102, 0, 0.1);
+             {% else %}
+               color: var(--muted);
+               border-left-color: transparent;
+             {% endif %}
+           "
+          onmouseover="if ('{{ page.url }}' !== '{{ note.url }}') { this.style.color='var(--foreground)'; this.style.borderLeftColor='var(--border)'; this.style.backgroundColor='var(--surface)'; }"
+          onmouseout="if ('{{ page.url }}' !== '{{ note.url }}') { this.style.color='var(--muted)'; this.style.borderLeftColor='transparent'; this.style.backgroundColor='transparent'; }">
+          {{ note.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div> -->
+
+
+
+  <!-- All Notes Link -->
+  <!-- <div class="mt-8 pt-6 border-t" style="border-color: var(--border);">
+    <a href="{{ site.baseurl }}/" class="block text-sm font-mono transition-colors" style="color: var(--muted);"
+      onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">
+      ← All Notes
+    </a>
+  </div> -->
+</nav>
