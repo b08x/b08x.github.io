@@ -45,20 +45,20 @@ jobs:
           ruby-version: "3.3" # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: |
-          # npm init --force -y && \
-          # npm install --save-dev webpack webpack-cli babel-loader @babel/core @babel/preset-env @babel/preset-react && \
-          # npm install react react-dom && \
-          # npm install recharts && \
-          # npm install lucide-react && \
-          # npm run build && \
-          npm install && \
-          bundle install && bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+          npm ci
+          npm run build:js
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
