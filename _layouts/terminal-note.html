@@ -80,7 +80,7 @@
           <p class="mb-6 text-base font-prose" style="color: var(--muted);">
             Here are all the notes in this garden, along with their links, visualized as a graph.
           </p>
-          {% include notes_graph.html %}
+          {% include react_graph.html %}
         </section>
         {% endif %}
 
@@ -96,6 +96,10 @@
 
   <!-- Web Component for TOC -->
   <script src="{{ site.baseurl }}/assets/js/components/terminal-toc.js" defer></script>
+  
+  <!-- Garden Widgets (React Islands) -->
+  <div data-island="SearchCmdK"></div>
+  <script src="{{ '/assets/js/dist/garden-widgets.js' | relative_url }}"></script>
 
   <!-- Code Block Copy Buttons -->
   <script>

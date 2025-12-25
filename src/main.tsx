@@ -3,9 +3,13 @@ import { createRoot } from 'react-dom/client';
 
 // Import components
 import HelloGarden from './components/HelloGarden';
+import GraphView from './components/GraphView';
+import SearchCmdK from './components/SearchCmdK';
 
 const components: Record<string, React.ComponentType<any>> = {
   HelloGarden,
+  GraphView,
+  SearchCmdK,
 };
 
 const mountIslands = () => {
@@ -17,13 +21,16 @@ const mountIslands = () => {
       const Component = components[componentName];
       const props = JSON.parse(container.getAttribute('data-props') || '{}');
       
-      const root = createRoot(container);
+      const root = createRoot(container, {
+        onUncaughtError: (error, errorInfo) => {
+          console.error('[Garden] React Error:', error, errorInfo);
+        }
+      });
       root.render(<Component {...props} />);
     }
   });
 };
 
-// Mount on load
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', mountIslands);
 } else {
