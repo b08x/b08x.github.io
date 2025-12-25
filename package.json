@@ -4,6 +4,12 @@
   "description": "[![Netlify Status](https://api.netlify.com/api/v1/badges/8cfa8785-8df8-4aad-ad35-8f1c790b8baf/deploy-status)](https://app.netlify.com/sites/digital-garden-jekyll-template/deploys)",
   "main": "index.js",
   "scripts": {
+    "dev": "npm-run-all --parallel watch:js dev:jekyll",
+    "dev:jekyll": "bundle exec jekyll serve --incremental --livereload",
+    "build": "npm-run-all build:js build:jekyll",
+    "build:js": "esbuild src/main.tsx --bundle --outfile=assets/js/dist/garden-widgets.js --minify --sourcemap --target=es2020",
+    "build:jekyll": "bundle exec jekyll build",
+    "watch:js": "esbuild src/main.tsx --bundle --outfile=assets/js/dist/garden-widgets.js --sourcemap --target=es2020 --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,10 +26,21 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.12",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/d3": "^7.4.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.22",
+    "esbuild": "^0.27.2",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "d3": "^7.9.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   }
 }

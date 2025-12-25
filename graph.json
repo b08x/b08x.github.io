@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /graph.json
+---
+{% include notes_graph.json %}
