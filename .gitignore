@@ -24,3 +24,4 @@ _site/
 logs/
 projects/
 .ruby-lsp/
+*.code-workspace

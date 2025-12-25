@@ -11,8 +11,7 @@ $color-accent-warm: #bf7a60;
 $color-focus: #a1887f;
 $color-highlight: #e3b448;
 $border-radius: 4px;
-$font-family:
-  -apple-system,
+$font-family: -apple-system,
   BlinkMacSystemFont,
   Segoe UI,
   Helvetica,
@@ -25,18 +24,12 @@ $font-family:
 body {
   box-sizing: content-box;
   font-family: $font-family;
-  margin: 0 auto;
+  margin: 0;
   line-height: var(--line-height-base, 1.7);
-  padding: 4vh 6vw;
+  padding: 0;
   overflow-x: hidden;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-size: 1rem;
-  max-width: 63em;
-
-  @media (min-width: 820px) {
-    font-size: 1.2rem;
-  }
 }
 
 time {
@@ -99,10 +92,12 @@ a {
   text-decoration: none;
   border-bottom: 1px solid var(--link-base);
   color: var(--link-base);
+
   &:hover {
     color: var(--link-hover) !important;
     background: var(--ui-hover);
   }
+
   &:after {
     position: relative;
     top: -0.5em;
@@ -110,6 +105,7 @@ a {
     content: "↗";
     color: var(--text-secondary);
   }
+
   &.internal-link:after,
   &.footnote:after,
   &.reversefootnote:after {

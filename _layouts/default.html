@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  {% include head.html %}
-  <body>
-    <nav>{% include nav.html %}</nav>
-    <div class="wrapper">
-      <main>{{ content }}</main>
-      <footer>{% include footer.html %}</footer>
+{% include head.html %}
+
+<body class="bg-background text-foreground min-h-screen font-mono">
+
+  <!-- #container -->
+  <div id="container" class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
+
+    <!-- #header -->
+    <header id="header" class="flex-none py-6 border-b" style="border-color: var(--border);">
+      {% include nav.html %}
+    </header>
+
+    <!-- Flex Wrapper for Content and Sidebar -->
+    <div class="flex-grow flex flex-col lg:flex-row gap-8 py-10">
+
+      <!-- #content -->
+      <main id="content" class="flex-1 min-w-0">
+        {{ content }}
+      </main>
+
+      <!-- #sidebar (Reserved but empty in default layout unless overridden) -->
+      <aside id="sidebar" class="w-full lg:w-80 lg:flex-shrink-0">
+        {% if page.sidebar %}
+        {{ page.sidebar_content }}
+        {% endif %}
+      </aside>
+
     </div>
 
-    {% include link-previews.html wrapperQuerySelector="content" %}
-    <div data-island="SearchCmdK"></div>
-    <script src="{{ '/assets/js/dist/garden-widgets.js' | relative_url }}"></script>
-  </body>
+    <!-- #footer -->
+    <footer id="footer" class="flex-none py-8 border-t" style="border-color: var(--border);">
+      {% include footer.html %}
+    </footer>
+
+  </div>
+
+  {% include link-previews.html wrapperQuerySelector="content" %}
+  <div data-island="SearchCmdK"></div>
+  <script src="{{ '/assets/js/dist/garden-widgets.js' | relative_url }}"></script>
+</body>
+
 </html>

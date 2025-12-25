@@ -12,12 +12,18 @@
   color-scheme: dark;
 
   /* ===  Terminal Color Palette === */
-  --background: #0a0a0a;        /* Nearly black background */
-  --foreground: #e5e5e5;        /* Light gray text */
-  --surface: #111111;           /* Component backgrounds */
-  --border: #333333;            /* Subtle borders */
-  --muted: #888888;             /* Secondary/muted text */
-  --accent: #ff6600;            /* Warm orange accent */
+  --background: #0a0a0a;
+  /* Nearly black background */
+  --foreground: #e5e5e5;
+  /* Light gray text */
+  --surface: #111111;
+  /* Component backgrounds */
+  --border: #333333;
+  /* Subtle borders */
+  --muted: #888888;
+  /* Secondary/muted text */
+  --accent: #ff6600;
+  /* Warm orange accent */
 
   /* === Extended Terminal Palette === */
   --card: var(--surface);
@@ -56,11 +62,26 @@
   --sidebar-ring: var(--accent);
 
   /* === Charts & Data Visualization === */
-  --chart-1: #ff6600;  /* Orange */
-  --chart-2: #6ab0ff;  /* Blue */
-  --chart-3: #50c878;  /* Green */
-  --chart-4: #ffaa00;  /* Yellow */
-  --chart-5: #ff4466;  /* Red */
+  --chart-1: #ff6600;
+  /* Orange */
+  --chart-2: #6ab0ff;
+  /* Blue */
+  --chart-3: #50c878;
+  /* Green */
+  --chart-4: #ffaa00;
+  /* Yellow */
+  --chart-5: #ff4466;
+  /* Red */
+
+  /* === Mermaid Diagram Colors === */
+  --mermaid-primary: var(--chart-2);
+  /* Cyan */
+  --mermaid-secondary: var(--chart-5);
+  /* Pink */
+  --mermaid-tertiary: var(--border);
+  /* Grey */
+  --mermaid-edge: var(--foreground);
+  --mermaid-node-bg: var(--background);
 
   /* === Design Tokens === */
   --radius: 0.5rem;
@@ -129,7 +150,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color var(--transition-base),
-              color var(--transition-base);
+    color var(--transition-base);
 }
 
 /* === Links === */
@@ -137,7 +158,7 @@ a {
   color: var(--link-base);
   text-decoration: none;
   transition: color var(--transition-fast),
-              background-color var(--transition-fast);
+    background-color var(--transition-fast);
 }
 
 a:hover {
@@ -193,6 +214,40 @@ blockquote {
   color: var(--muted-foreground);
 }
 
+/* === Lists === */
+article ul,
+article ol {
+  padding-left: 2rem;
+  margin-bottom: var(--space-md);
+}
+
+article li {
+  margin-bottom: var(--space-sm);
+  line-height: 1.8;
+}
+
+article ul>li {
+  list-style-type: none;
+  position: relative;
+}
+
+article ul>li::before {
+  content: "•";
+  color: var(--chart-2);
+  position: absolute;
+  left: -1.25rem;
+  font-weight: bold;
+}
+
+/* Indentation for nested lists */
+article ul ul,
+article ol ol,
+article ul ol,
+article ol ul {
+  margin-top: var(--space-xs);
+  padding-left: 1.5rem;
+}
+
 /* === Focus Styles (Accessibility) === */
 *:focus-visible {
   outline: 2px solid var(--ring);
@@ -200,7 +255,12 @@ blockquote {
 }
 
 /* === Headings === */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--foreground);
   font-weight: var(--font-weight-semibold);
   line-height: 1.3;
@@ -224,10 +284,85 @@ table {
   margin: var(--space-lg) 0;
 }
 
-th, td {
+th,
+td {
   border: 1px solid var(--border);
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xs) var(--space-md);
   text-align: left;
+}
+
+/* === Mermaid Diagrams === */
+.mermaid,
+.mermaid-js {
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  margin: var(--space-lg) 0;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mermaid Node Styling */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon,
+.mermaid .node path {
+  fill: var(--surface) !important;
+  stroke: var(--border) !important;
+  stroke-width: 1.5px !important;
+}
+
+/* Text in nodes */
+.mermaid .node text,
+.mermaid .node .label {
+  fill: var(--foreground) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 14px;
+}
+
+/* Edges and Arrows */
+.mermaid .edgePath .path {
+  stroke: var(--foreground) !important;
+  stroke-width: 1.5px !important;
+  opacity: 0.8;
+}
+
+.mermaid .marker {
+  fill: var(--foreground) !important;
+  stroke: none !important;
+}
+
+.mermaid .edgeLabel {
+  background-color: var(--background) !important;
+  color: var(--muted) !important;
+  font-family: var(--font-mono) !important;
+}
+
+/* Support for custom colored nodes in Mermaid */
+.mermaid .node.cyan rect,
+.mermaid .node.cyan circle,
+.mermaid .node.cyan-node rect {
+  fill: var(--mermaid-primary) !important;
+  stroke: var(--mermaid-primary) !important;
+}
+
+.mermaid .node.pink rect,
+.mermaid .node.pink circle,
+.mermaid .node.pink-node rect {
+  fill: var(--mermaid-secondary) !important;
+  stroke: var(--mermaid-secondary) !important;
+}
+
+.mermaid .node.grey rect,
+.mermaid .node.grey-node rect {
+  fill: var(--mermaid-tertiary) !important;
+  stroke: var(--border) !important;
 }
 
 th {
@@ -277,7 +412,12 @@ article,
 .prose,
 main p,
 main li,
-main h1, main h2, main h3, main h4, main h5, main h6,
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
 main blockquote {
   font-family: var(--font-prose);
 }
