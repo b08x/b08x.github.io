@@ -4,10 +4,7 @@ layout: default
 
 <head>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     /* Dark Theme Global Styles using CSS variables */
     body {
@@ -24,6 +21,7 @@ layout: default
       border-radius: 0.5rem;
       padding: 1rem;
     }
+
     .copy-btn {
       position: absolute;
       right: 0.5rem;
@@ -34,9 +32,11 @@ layout: default
       color: var(--text-primary);
       border: 1px solid var(--border-primary);
     }
+
     .code-block:hover .copy-btn {
       opacity: 1;
     }
+
     pre {
       white-space: pre-wrap;
       word-wrap: break-word;
@@ -49,30 +49,36 @@ layout: default
       line-height: var(--line-height-base, 1.8);
       color: var(--text-primary);
     }
+
     .prose p {
       margin-top: 1.5em;
       margin-bottom: 1.5em;
     }
+
     .prose h1,
     .prose h2,
     .prose h3 {
       color: var(--text-primary);
       border-color: var(--border-secondary);
     }
+
     .prose h2 {
       margin-top: 2em;
       margin-bottom: 1em;
     }
+
     .prose h3 {
       margin-top: 1.75em;
       margin-bottom: 0.75em;
     }
+
     .prose ul,
     .prose ol {
       margin-top: 1.5em;
       margin-bottom: 1.5em;
       color: var(--text-primary);
     }
+
     .prose li {
       margin-top: 0.5em;
       margin-bottom: 0.5em;
@@ -84,6 +90,7 @@ layout: default
       text-decoration: underline;
       transition: color 0.3s ease;
     }
+
     .prose a:hover {
       color: var(--link-hover);
     }
@@ -92,27 +99,15 @@ layout: default
 
 <article class="container mx-auto px-6 sm:px-8 lg:px-12 py-10 max-w-6xl">
   <!-- Header -->
-  <header
-    class="mb-12 pb-8"
-    style="border-bottom: 1px solid var(--border-primary)"
-  >
+  <header class="mb-12 pb-8" style="border-bottom: 1px solid var(--border-primary)">
     <div class="flex items-center justify-between">
       <div>
-        <h1
-          class="text-3xl md:text-4xl font-bold mb-3"
-          style="color: var(--text-primary)"
-        >
+        <h1 class="text-3xl md:text-4xl font-bold mb-3" style="color: var(--text-primary)">
           {{ page.title }}
         </h1>
-        <div
-          class="flex items-center mt-4 text-sm"
-          style="color: var(--text-secondary)"
-        >
+        <div class="flex items-center mt-4 text-sm" style="color: var(--text-secondary)">
           {% if page.type != 'pages' %}
-          <time
-            datetime="{{ page.last_modified_at | date_to_xmlschema }}"
-            class="mr-4"
-          >
+          <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" class="mr-4">
             <i class="fas fa-calendar-alt mr-1"></i>
             Last updated on {{ page.last_modified_at | date: "%B %-d, %Y" }}
           </time>
@@ -122,8 +117,7 @@ layout: default
           <div class="flex flex-wrap gap-2 mb-6">
             {% for tag in page.tags %}
             <span
-              class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#434c5e] text-[#d8dee9]"
-            >
+              class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#434c5e] text-[#d8dee9]">
               <i class="fas fa-tag mr-1"></i> {{ tag }}
             </span>
             {% endfor %}
@@ -133,13 +127,10 @@ layout: default
       </div>
       {% if page.type %}
       <div class="hidden md:block">
-        <span
-          class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
-          style="
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium" style="
             background-color: var(--bg-secondary);
             color: var(--text-primary);
-          "
-        >
+          ">
           <i class="fas fa-tag mr-2"></i> {{ page.type }}
         </span>
       </div>
@@ -153,15 +144,12 @@ layout: default
   </main>
 
   <!-- Notes Graph Section -->
-  <section
-    class="mt-16 pt-10"
-    style="border-top: 1px solid var(--border-primary)"
-  >
+  <section class="mt-16 pt-10" style="border-top: 1px solid var(--border-primary)">
     <p class="mb-6 text-lg" style="color: var(--text-secondary)">
       Here are all the notes in this garden, along with their links, visualized
       as a graph.
     </p>
-    {% include notes_graph.html %}
+    {% include react_graph.html %}
   </section>
 </article>
 
