@@ -1337,7 +1337,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React4 = require_react(), Internals = {
+        var React5 = require_react(), Internals = {
           d: {
             f: noop2,
             r: function() {
@@ -1355,7 +1355,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React5.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -2890,7 +2890,7 @@
           "number" === type2 && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React4.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React5.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -18522,14 +18522,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React4 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React5 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
         /* @__PURE__ */ Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
         /* @__PURE__ */ Symbol.for("react.legacy_hidden");
         /* @__PURE__ */ Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
         /* @__PURE__ */ Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React5.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21317,7 +21317,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React4.version;
+          var isomorphicReactPackageVersion = React5.version;
           if ("19.2.3" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.3\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21671,18 +21671,18 @@
         function isValidElement(object) {
           return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
         }
-        var React4 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
+        var React5 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React5.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
           return null;
         };
-        React4 = {
+        React5 = {
           react_stack_bottom_frame: function(callStackForError) {
             return callStackForError();
           }
         };
         var specialPropKeyWarningShown;
         var didWarnAboutElementRef = {};
-        var unknownOwnerDebugStack = React4.react_stack_bottom_frame.bind(
-          React4,
+        var unknownOwnerDebugStack = React5.react_stack_bottom_frame.bind(
+          React5,
           UnknownOwner
         )();
         var unknownOwnerDebugTask = createTask(getTaskName(UnknownOwner));
@@ -27545,33 +27545,385 @@
     }
   });
 
+  // src/components/VideoPlayer.tsx
+  var VideoPlayer_exports = {};
+  __export(VideoPlayer_exports, {
+    default: () => VideoPlayer_default
+  });
+  var import_react3, import_jsx_runtime4, VideoPlayer, VideoPlayer_default;
+  var init_VideoPlayer = __esm({
+    "src/components/VideoPlayer.tsx"() {
+      "use strict";
+      import_react3 = __toESM(require_react());
+      import_jsx_runtime4 = __toESM(require_jsx_runtime());
+      VideoPlayer = ({
+        videoUrl,
+        segments,
+        transcript = [],
+        title = "Video Tutorial"
+      }) => {
+        const videoRef = (0, import_react3.useRef)(null);
+        const [currentTime, setCurrentTime] = (0, import_react3.useState)(0);
+        const [isPlaying, setIsPlaying] = (0, import_react3.useState)(false);
+        const [playbackRate, setPlaybackRate] = (0, import_react3.useState)(1);
+        const [activeSegment, setActiveSegment] = (0, import_react3.useState)(null);
+        const [activeAction, setActiveAction] = (0, import_react3.useState)(null);
+        const [searchQuery, setSearchQuery] = (0, import_react3.useState)("");
+        (0, import_react3.useEffect)(() => {
+          const video = videoRef.current;
+          if (!video) return;
+          const handleTimeUpdate = () => {
+            setCurrentTime(video.currentTime);
+          };
+          const handlePlay = () => setIsPlaying(true);
+          const handlePause = () => setIsPlaying(false);
+          video.addEventListener("timeupdate", handleTimeUpdate);
+          video.addEventListener("play", handlePlay);
+          video.addEventListener("pause", handlePause);
+          return () => {
+            video.removeEventListener("timeupdate", handleTimeUpdate);
+            video.removeEventListener("play", handlePlay);
+            video.removeEventListener("pause", handlePause);
+          };
+        }, []);
+        (0, import_react3.useEffect)(() => {
+          const current = segments.find(
+            (seg) => currentTime >= seg.startTime && currentTime < seg.endTime
+          );
+          setActiveSegment(current || null);
+          if (current) {
+            const recentAction = [...current.actions].reverse().find((action) => currentTime >= action.timestamp);
+            setActiveAction(recentAction || null);
+          } else {
+            setActiveAction(null);
+          }
+        }, [currentTime, segments]);
+        const jumpToTime = (time) => {
+          if (videoRef.current) {
+            videoRef.current.currentTime = time;
+            videoRef.current.play();
+          }
+        };
+        const formatTime = (seconds) => {
+          const mins = Math.floor(seconds / 60);
+          const secs = Math.floor(seconds % 60);
+          return `${mins}:${secs.toString().padStart(2, "0")}`;
+        };
+        const changePlaybackRate = (rate) => {
+          setPlaybackRate(rate);
+          if (videoRef.current) {
+            videoRef.current.playbackRate = rate;
+          }
+        };
+        const filteredTranscript = transcript.filter(
+          (item) => item.text.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "video-player-container", style: {
+          display: "flex",
+          gap: "var(--spacing-6)",
+          flexDirection: "row",
+          minHeight: "600px"
+        }, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+            flex: "0 0 60%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--spacing-4)"
+          }, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+            background: "var(--bg-secondary)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius-lg)",
+            padding: "var(--spacing-4)"
+          }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h2", { style: {
+              color: "var(--text-primary)",
+              marginBottom: "var(--spacing-3)",
+              fontSize: "1.25rem",
+              fontWeight: 600
+            }, children: title }),
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+              "video",
+              {
+                ref: videoRef,
+                src: videoUrl,
+                controls: true,
+                style: {
+                  width: "100%",
+                  borderRadius: "var(--radius-md)",
+                  background: "#000"
+                }
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+              display: "flex",
+              gap: "var(--spacing-3)",
+              marginTop: "var(--spacing-3)",
+              alignItems: "center"
+            }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { style: {
+                color: "var(--text-secondary)",
+                fontSize: "0.875rem",
+                fontWeight: 500
+              }, children: "Speed:" }),
+              [0.5, 0.75, 1, 1.25, 1.5, 2].map((rate) => /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+                "button",
+                {
+                  onClick: () => changePlaybackRate(rate),
+                  style: {
+                    padding: "var(--spacing-2) var(--spacing-3)",
+                    borderRadius: "var(--radius-md)",
+                    border: "1px solid var(--border)",
+                    background: playbackRate === rate ? "var(--link-base)" : "var(--surface)",
+                    color: playbackRate === rate ? "#fff" : "var(--text-primary)",
+                    cursor: "pointer",
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
+                    transition: "all 150ms"
+                  },
+                  children: [
+                    rate,
+                    "x"
+                  ]
+                },
+                rate
+              ))
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+              marginTop: "var(--spacing-3)",
+              color: "var(--text-tertiary)",
+              fontSize: "0.875rem"
+            }, children: [
+              "Current: ",
+              formatTime(currentTime),
+              activeSegment && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { style: { marginLeft: "var(--spacing-2)" }, children: [
+                "\u2022 ",
+                activeSegment.title
+              ] })
+            ] })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+            flex: "0 0 40%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--spacing-4)"
+          }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+              background: "var(--bg-secondary)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-lg)",
+              padding: "var(--spacing-4)",
+              maxHeight: "300px",
+              overflowY: "auto"
+            }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h3", { style: {
+                color: "var(--text-primary)",
+                fontSize: "1rem",
+                fontWeight: 600,
+                marginBottom: "var(--spacing-3)"
+              }, children: "Actionable Steps" }),
+              activeSegment ? /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                  color: "var(--link-base)",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  marginBottom: "var(--spacing-3)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em"
+                }, children: activeSegment.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: "var(--spacing-2)" }, children: activeSegment.actions.map((action, idx) => {
+                  const isPast = action.timestamp < currentTime;
+                  const isCurrent = action === activeAction;
+                  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+                    "div",
+                    {
+                      onClick: () => jumpToTime(action.timestamp),
+                      style: {
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: "var(--spacing-2)",
+                        padding: "var(--spacing-2)",
+                        borderRadius: "var(--radius-md)",
+                        cursor: "pointer",
+                        background: isCurrent ? "var(--ui-hover)" : "transparent",
+                        border: isCurrent ? "1px solid var(--link-base)" : "1px solid transparent",
+                        transition: "all 150ms"
+                      },
+                      children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+                          width: "20px",
+                          height: "20px",
+                          borderRadius: "50%",
+                          border: `2px solid ${isPast ? "var(--link-base)" : "var(--border)"}`,
+                          background: isPast ? "var(--link-base)" : "transparent",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                          marginTop: "2px"
+                        }, children: [
+                          isPast && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("svg", { width: "12", height: "12", viewBox: "0 0 12 12", fill: "none", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("path", { d: "M2 6L5 9L10 3", stroke: "#fff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }) }),
+                          isCurrent && !isPast && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                            width: "8px",
+                            height: "8px",
+                            borderRadius: "50%",
+                            background: "var(--link-base)",
+                            animation: "pulse 2s ease-in-out infinite"
+                          } })
+                        ] }),
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: { flex: 1 }, children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                            color: "var(--text-primary)",
+                            fontSize: "0.875rem",
+                            fontWeight: isCurrent ? 600 : 400
+                          }, children: action.description }),
+                          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                            color: "var(--text-tertiary)",
+                            fontSize: "0.75rem",
+                            marginTop: "2px",
+                            fontFamily: "monospace"
+                          }, children: formatTime(action.timestamp) })
+                        ] })
+                      ]
+                    },
+                    idx
+                  );
+                }) })
+              ] }) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                color: "var(--text-tertiary)",
+                fontSize: "0.875rem",
+                textAlign: "center",
+                padding: "var(--spacing-4)"
+              }, children: "Play the video to see actionable steps" })
+            ] }),
+            transcript.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+              background: "var(--bg-secondary)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-lg)",
+              padding: "var(--spacing-4)",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column"
+            }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h3", { style: {
+                color: "var(--text-primary)",
+                fontSize: "1rem",
+                fontWeight: 600,
+                marginBottom: "var(--spacing-3)"
+              }, children: "Full Transcript" }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                "input",
+                {
+                  type: "text",
+                  placeholder: "Search transcript...",
+                  value: searchQuery,
+                  onChange: (e) => setSearchQuery(e.target.value),
+                  style: {
+                    width: "100%",
+                    padding: "var(--spacing-2)",
+                    borderRadius: "var(--radius-md)",
+                    border: "1px solid var(--border)",
+                    background: "var(--surface)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.875rem",
+                    marginBottom: "var(--spacing-3)"
+                  }
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                flex: 1,
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: "var(--spacing-2)"
+              }, children: filteredTranscript.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+                "div",
+                {
+                  onClick: () => jumpToTime(item.timestamp),
+                  style: {
+                    padding: "var(--spacing-2)",
+                    borderRadius: "var(--radius-md)",
+                    cursor: "pointer",
+                    background: Math.abs(currentTime - item.timestamp) < 2 ? "var(--ui-hover)" : "transparent",
+                    transition: "background 150ms"
+                  },
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+                      color: "var(--link-base)",
+                      fontSize: "0.75rem",
+                      fontFamily: "monospace",
+                      marginBottom: "4px"
+                    }, children: [
+                      "[",
+                      formatTime(item.timestamp),
+                      "]"
+                    ] }),
+                    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                      color: "var(--text-primary)",
+                      fontSize: "0.875rem",
+                      lineHeight: 1.5
+                    }, children: item.text })
+                  ]
+                },
+                idx
+              )) })
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("style", { children: `
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      ` })
+        ] });
+      };
+      VideoPlayer_default = VideoPlayer;
+    }
+  });
+
   // src/main.tsx
-  var import_react3 = __toESM(require_react());
+  var import_react4 = __toESM(require_react());
   var import_client = __toESM(require_client());
-  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
-  var HelloGarden2 = import_react3.default.lazy(() => Promise.resolve().then(() => (init_HelloGarden(), HelloGarden_exports)));
-  var GraphView2 = import_react3.default.lazy(() => Promise.resolve().then(() => (init_GraphView(), GraphView_exports)));
-  var SearchCmdK2 = import_react3.default.lazy(() => Promise.resolve().then(() => (init_SearchCmdK(), SearchCmdK_exports)));
+  var import_jsx_runtime5 = __toESM(require_jsx_runtime());
+  var HelloGarden2 = import_react4.default.lazy(() => Promise.resolve().then(() => (init_HelloGarden(), HelloGarden_exports)));
+  var GraphView2 = import_react4.default.lazy(() => Promise.resolve().then(() => (init_GraphView(), GraphView_exports)));
+  var SearchCmdK2 = import_react4.default.lazy(() => Promise.resolve().then(() => (init_SearchCmdK(), SearchCmdK_exports)));
+  var VideoPlayer2 = import_react4.default.lazy(() => Promise.resolve().then(() => (init_VideoPlayer(), VideoPlayer_exports)));
   var components = {
     HelloGarden: HelloGarden2,
     GraphView: GraphView2,
-    SearchCmdK: SearchCmdK2
+    SearchCmdK: SearchCmdK2,
+    VideoPlayer: VideoPlayer2
   };
   var mountIslands = () => {
     const islands = document.querySelectorAll("[data-island]");
+    console.log(`[Garden] Found ${islands.length} islands to mount`);
     islands.forEach((container) => {
       const componentName = container.getAttribute("data-island");
+      console.log(`[Garden] Attempting to mount island: ${componentName}`);
       if (componentName && components[componentName]) {
         const Component = components[componentName];
-        const props = JSON.parse(container.getAttribute("data-props") || "{}");
+        let props = {};
+        try {
+          const propsAttr = container.getAttribute("data-props");
+          if (propsAttr) {
+            const sanitizedProps = propsAttr.replace(/[\u201C\u201D]/g, '"').replace(/[\u2018\u2019]/g, "'");
+            props = JSON.parse(sanitizedProps);
+          }
+        } catch (e) {
+          console.error(`[Garden] Failed to parse props for island ${componentName}:`, e);
+          console.error(`[Garden] Raw props content:`, container.getAttribute("data-props"));
+        }
         const root2 = (0, import_client.createRoot)(container, {
           onUncaughtError: (error, errorInfo) => {
-            console.error("[Garden] React Error:", error, errorInfo);
+            console.error(`[Garden] React Error in island ${componentName}:`, error, errorInfo);
           }
         });
         root2.render(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react3.Suspense, { fallback: null, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Component, { ...props }) })
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_react4.Suspense, { fallback: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { children: "Loading component..." }), children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Component, { ...props }) })
         );
+        console.log(`[Garden] Successfully rendered island: ${componentName}`);
+      } else {
+        console.warn(`[Garden] Component "${componentName}" not found in registry`);
       }
     });
   };
