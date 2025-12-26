@@ -12,6 +12,13 @@
   color-scheme: dark;
 
   /* ===  Terminal Color Palette === */
+  /* WCAG AA Compliance Audit (Last verified: 2025-12-26)
+   * All color combinations tested and PASS WCAG AA standards:
+   * - Muted (#888888) on Background (#0a0a0a): 5.58:1 ✓ PASS
+   * - Muted (#888888) on Surface (#111111):    5.33:1 ✓ PASS
+   * - Foreground (#e5e5e5) on Background:     15.72:1 ✓ PASS
+   * Minimum required: 4.5:1 for normal text, 3:1 for large text
+   */
   --background: #0a0a0a;
   /* Nearly black background */
   --foreground: #e5e5e5;
