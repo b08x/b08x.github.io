@@ -5,7 +5,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.title }}{% endif %}">
+  <meta name="description"
+    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.title }}{% endif %}">
 
   <meta property="og:site_name" content="{{ site.title }}">
 
@@ -14,15 +15,17 @@
   <!-- Fonts: JetBrains Mono (UI) + Inter (Prose) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
-  <link rel="stylesheet" href="{{ "/assets/css/tailwind.css" | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/compiled.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="stylesheet" href="{{ site.baseurl }}/styles.css">
 
   {% if page.excerpt %}
-  <meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}"/>
+  <meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}" />
   {% else %}
-  <meta property="og:description" content="{{ site.title | strip_html | strip_newlines | truncate: 160 }}"/>
+  <meta property="og:description" content="{{ site.title | strip_html | strip_newlines | truncate: 160 }}" />
   {% endif %}
 
   {% if page.title %}
@@ -46,9 +49,9 @@
 
   <title>
     {% if page.id == "home" %}
-      {{ site.title }}
+    {{ site.title }}
     {% else %}
-      {{ page.title }} &mdash; {{ site.title }}
+    {{ page.title }} &mdash; {{ site.title }}
     {% endif %}
   </title>
 </head>

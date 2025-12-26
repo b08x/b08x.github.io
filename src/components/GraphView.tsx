@@ -88,8 +88,8 @@ const GraphView: React.FC = () => {
 
     // Helper to calculate node weight
     const getNodeSize = (id: string) => {
-      const connections = edges.filter(e => 
-        (typeof e.source === 'string' ? e.source === id : e.source.id === id) || 
+      const connections = edges.filter(e =>
+        (typeof e.source === 'string' ? e.source === id : e.source.id === id) ||
         (typeof e.target === 'string' ? e.target === id : e.target.id === id)
       ).length;
       let weight = 3 * Math.sqrt(connections + 1);
@@ -114,6 +114,25 @@ const GraphView: React.FC = () => {
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('collision', d3.forceCollide().radius(80));
 
+    // Helper to check if a node is isolated (no connections)
+    const isNodeIsolated = (id: string) =>
+      !edges.some(e =>
+        (typeof e.source === 'string' ? e.source === id : e.source.id === id) ||
+        (typeof e.target === 'string' ? e.target === id : e.target.id === id)
+      );
+
+    // Position isolated nodes in a circle around the edge
+    const isolatedNodes = nodes.filter(n => isNodeIsolated(n.id));
+    if (isolatedNodes.length > 0) {
+      const radius = Math.min(width, height) / 2.5;
+      const angleStep = (2 * Math.PI) / isolatedNodes.length;
+      isolatedNodes.forEach((node, i) => {
+        node.fx = width / 2 + radius * Math.cos(i * angleStep);
+        node.fy = height / 2 + radius * Math.sin(i * angleStep);
+      });
+    }
+
+
     // Links
     const link = g.append('g')
       .attr('class', 'links')
@@ -132,6 +151,8 @@ const GraphView: React.FC = () => {
       .enter().append('circle')
       .attr('r', d => getNodeSize(d.id))
       .attr('fill', d => window.location.pathname.includes(d.path) ? 'var(--accent)' : 'var(--muted)')
+      .attr('stroke', d => isNodeIsolated(d.id) ? 'var(--accent)' : 'none')
+      .attr('stroke-width', d => isNodeIsolated(d.id) ? 2 : 0)
       .attr('cursor', 'pointer')
       .on('click', (event, d) => {
         window.location.href = d.path;
@@ -154,7 +175,7 @@ const GraphView: React.FC = () => {
       });
 
     // Hover Effects
-    node.on('mouseover', function(event, d) {
+    node.on('mouseover', function (event, d) {
       const neighbors = new Set([d.id]);
       edges.forEach(e => {
         const sId = typeof e.source === 'string' ? e.source : e.source.id;
@@ -171,7 +192,7 @@ const GraphView: React.FC = () => {
         return sId === d.id || tId === d.id ? 1 : 0.1;
       });
       d3.select(this).attr('r', getNodeSize(d.id) * ACTIVE_RADIUS_FACTOR);
-    }).on('mouseout', function(event, d) {
+    }).on('mouseout', function (event, d) {
       node.style('opacity', 1);
       label.style('opacity', 1);
       link.style('opacity', 0.6);
@@ -217,9 +238,9 @@ const GraphView: React.FC = () => {
 
   return (
     <div ref={containerRef} className="w-full bg-surface border border-border rounded-lg overflow-hidden my-8">
-      <svg 
-        ref={svgRef} 
-        width={dimensions.width} 
+      <svg
+        ref={svgRef}
+        width={dimensions.width}
         height={dimensions.height}
         className="cursor-move"
       />

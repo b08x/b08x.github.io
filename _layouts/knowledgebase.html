@@ -1,0 +1,70 @@
+---
+layout: default
+---
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row gap-8 py-10 w-full min-h-[600px] kb-layout">
+        <!-- Left Sidebar Navigation -->
+        <aside id="kb-sidebar" class="w-full lg:w-72 lg:flex-shrink-0 border-r border-border pr-8">
+            <div class="sticky top-8">
+                <h3 class="text-xs font-bold uppercase tracking-wider mb-6 text-muted">Knowledgebase</h3>
+                <nav id="kb-toc" class="space-y-2">
+                    <!-- Content sections will be dynamically populated here -->
+                </nav>
+
+                <div class="mt-10 pt-10 border-t border-border">
+                    <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">Resources</h4>
+                    <div class="space-y-4">
+                        {% if page.resources %}
+                        {% for item in page.resources %}
+                        <div class="flex items-center gap-2 text-sm">
+                            <i class="fas fa-link text-accent"></i>
+                            <a href="{{ item.url }}" class="hover:text-accent transition-colors">{{ item.title }}</a>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area with Carousel -->
+        <main class="flex-1 min-w-0 flex flex-col">
+            <header class="mb-10">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ page.title }}</h1>
+                <p class="text-lg text-muted font-prose leading-relaxed">{{ page.description }}</p>
+            </header>
+
+            <div id="kb-carousel-container" class="relative overflow-hidden flex-grow flex flex-col">
+                <div id="kb-carousel-inner" class="flex transition-transform duration-500 ease-in-out">
+                    <!-- Content sections will be moved here by JS -->
+                    <div id="kb-raw-content" class="hidden">
+                        {{ content }}
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex items-center justify-between mt-auto pt-8 border-t border-border bg-background z-10">
+                    <button id="kb-prev"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-surface transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Previous</span>
+                    </button>
+
+                    <div id="kb-pagination" class="flex items-center gap-2">
+                        <!-- Dots will be generated here -->
+                    </div>
+
+                    <button id="kb-next"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:bg-surface transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                        <span>Next</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <link rel="stylesheet" href="{{ '/assets/css/knowledgebase.css' | relative_url }}">
+    <script src="{{ '/assets/js/knowledgebase-paginator.js' | relative_url }}"></script>
+</div>
