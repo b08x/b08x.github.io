@@ -5,7 +5,7 @@
 <body class="max-w-none m-0 p-0 h-screen flex flex-col bg-background text-foreground font-mono antialiased">
 
   <!-- #container -->
-  <div id="container" class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
+  <div id="container" class="w-full flex flex-col min-h-screen">
 
     <!-- #header -->
     <header id="header" class="flex-none border-b" style="border-color: var(--border);">
@@ -13,7 +13,7 @@
     </header>
 
     <!-- Flex Wrapper for Columns -->
-    <div class="flex-grow flex flex-col lg:flex-row gap-8 py-10">
+    <div class="flex-grow flex flex-col lg:flex-row gap-8 py-10 container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 
       <!-- #content -->
       <main id="content" class="flex-1 min-w-0">
@@ -93,7 +93,7 @@
     </div>
 
     <!-- #footer -->
-    <footer id="footer" class="flex-none py-8 border-t" style="border-color: var(--border);">
+    <footer id="footer" class="flex-none py-8 border-t px-4 sm:px-6 lg:px-8" style="border-color: var(--border);">
       {% include footer.html %}
     </footer>
 
