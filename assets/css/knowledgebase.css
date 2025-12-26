@@ -1,0 +1,118 @@
+/* Knowledgebase Layout Styles */
+
+.kb-layout {
+    --transition-speed: 0.5s;
+}
+
+#kb-carousel-container {
+    min-height: 400px;
+}
+
+#kb-carousel-inner {
+    display: flex;
+    width: 100%;
+}
+
+.kb-section {
+    flex: 0 0 100%;
+    width: 100%;
+    animation: fadeIn 0.5s ease-out;
+    padding-bottom: 2rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typography and Media within Sections */
+.kb-section h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--foreground);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.kb-section .prose {
+    max-width: none;
+}
+
+/* Rich Media Containers */
+.kb-media {
+    margin: 2rem 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.kb-media img,
+.kb-media video {
+    width: 100%;
+    display: block;
+}
+
+.kb-media-caption {
+    padding: 1rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    background: var(--background);
+}
+
+/* Audio Player Skinning */
+.kb-audio-container {
+    padding: 1rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin: 1.5rem 0;
+}
+
+/* Pagination Dots */
+.kb-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--muted);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.kb-dot.active {
+    background: var(--accent);
+    transform: scale(1.5);
+}
+
+/* Sidebar Active State */
+.kb-nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    border-left: 2px solid transparent;
+    color: var(--muted);
+    transition: all 0.2s ease;
+    font-size: 0.9375rem;
+}
+
+.kb-nav-link:hover {
+    color: var(--foreground);
+    background: var(--surface);
+}
+
+.kb-nav-link.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--surface);
+    font-weight: 600;
+}

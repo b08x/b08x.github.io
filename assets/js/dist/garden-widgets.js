@@ -25275,8 +25275,20 @@
       });
       svg.call(zoom);
       const simulation = simulation_default(nodes).force("link", link_default(edges).id((d) => d.id).distance(150)).force("charge", manyBody_default().strength(-300)).force("center", center_default(width / 2, height / 2)).force("collision", collide_default().radius(80));
+      const isNodeIsolated = (id2) => !edges.some(
+        (e) => (typeof e.source === "string" ? e.source === id2 : e.source.id === id2) || (typeof e.target === "string" ? e.target === id2 : e.target.id === id2)
+      );
+      const isolatedNodes = nodes.filter((n) => isNodeIsolated(n.id));
+      if (isolatedNodes.length > 0) {
+        const radius = Math.min(width, height) / 2.5;
+        const angleStep = 2 * Math.PI / isolatedNodes.length;
+        isolatedNodes.forEach((node2, i) => {
+          node2.fx = width / 2 + radius * Math.cos(i * angleStep);
+          node2.fy = height / 2 + radius * Math.sin(i * angleStep);
+        });
+      }
       const link = g.append("g").attr("class", "links").selectAll("line").data(edges).enter().append("line").attr("stroke", "var(--border)").attr("stroke-opacity", 0.6).attr("stroke-width", STROKE);
-      const node = g.append("g").attr("class", "nodes").selectAll("circle").data(nodes).enter().append("circle").attr("r", (d) => getNodeSize(d.id)).attr("fill", (d) => window.location.pathname.includes(d.path) ? "var(--accent)" : "var(--muted)").attr("cursor", "pointer").on("click", (event, d) => {
+      const node = g.append("g").attr("class", "nodes").selectAll("circle").data(nodes).enter().append("circle").attr("r", (d) => getNodeSize(d.id)).attr("fill", (d) => window.location.pathname.includes(d.path) ? "var(--accent)" : "var(--muted)").attr("stroke", (d) => isNodeIsolated(d.id) ? "var(--accent)" : "none").attr("stroke-width", (d) => isNodeIsolated(d.id) ? 2 : 0).attr("cursor", "pointer").on("click", (event, d) => {
         window.location.href = d.path;
       });
       const label = g.append("g").attr("class", "labels").selectAll("text").data(nodes).enter().append("text").text((d) => d.label.length > MAX_LABEL_LENGTH ? d.label.substring(0, MAX_LABEL_LENGTH) + "..." : d.label).attr("font-size", FONT_SIZE).attr("font-family", "var(--font-mono)").attr("fill", "var(--foreground)").attr("text-anchor", "middle").attr("cursor", "pointer").on("click", (event, d) => {

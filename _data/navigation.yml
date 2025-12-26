@@ -1,0 +1,13 @@
+primary:
+  - title: "Notes"
+    url: "/"
+  - title: "Projects"
+    url: "/projects"
+  - title: "About"
+    url: "/about"
+
+social:
+  - title: "GitHub"
+    url: "https://github.com"
+    icon: "github"
+    external: true

@@ -1,36 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include head.html %}
-<style>
-  body {
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-</style>
 
-<body class="h-screen flex flex-col overflow-hidden bg-background text-foreground font-mono antialiased">
+<body class="max-w-none m-0 p-0 h-screen flex flex-col bg-background text-foreground font-mono antialiased">
 
-  <!-- Header -->
-  <header class="flex-none border-b" style="border-color: var(--border);">
-    {% include terminal-header.html %}
-  </header>
+  <!-- #container -->
+  <div id="container" class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
 
-  <!-- Main Layout: Sidebar + Content + TOC -->
-  <div class="flex flex-1 overflow-hidden">
+    <!-- #header -->
+    <header id="header" class="flex-none border-b" style="border-color: var(--border);">
+      {% include terminal-header.html %}
+    </header>
 
-    <!-- Left Sidebar: Navigation -->
-    <aside class="w-64 flex-none hidden md:block border-r overflow-y-auto"
-      style="border-color: var(--border); background-color: var(--background);">
-      {% include terminal-sidebar.html %}
-    </aside>
+    <!-- Flex Wrapper for Columns -->
+    <div class="flex-grow flex flex-col lg:flex-row gap-8 py-10">
 
-    <!-- Main Content Area -->
-    <main class="flex-1 overflow-y-auto scroll-smooth" id="main-content">
-      <div class="max-w-none mx-auto px-8 py-12 lg:px-16">
+      <!-- #content -->
+      <main id="content" class="flex-1 min-w-0">
 
         <!-- Article Header -->
         <header class="mb-12">
@@ -65,7 +51,7 @@
         </header>
 
         <!-- Article Content -->
-        <article class="prose font-prose" style="max-width: none;">
+        <article class="prose font-prose max-w-none">
           <div id="notes-entry-container">
             {{ content }}
           </div>
@@ -84,19 +70,38 @@
         </section>
         {% endif %}
 
-      </div>
-    </main>
+      </main>
 
-    <!-- Right Sidebar: TOC -->
-    <aside class="w-64 flex-none hidden lg:block border-l overflow-y-auto p-6"
-      style="border-color: var(--border); background-color: var(--background);">
-      <terminal-toc></terminal-toc>
-    </aside>
+      <!-- #sidebar -->
+      <aside id="sidebar" class="w-full lg:w-80 lg:flex-shrink-0 flex flex-col gap-10">
+
+        <!-- Navigation Sidebar (Integrated) -->
+        <div class="hidden lg:block">
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4" style="color: var(--muted);">Navigation</h3>
+          {% include terminal-sidebar.html %}
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="sticky top-8">
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4" style="color: var(--muted);">Table of Contents
+          </h3>
+          <terminal-toc></terminal-toc>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- #footer -->
+    <footer id="footer" class="flex-none py-8 border-t" style="border-color: var(--border);">
+      {% include footer.html %}
+    </footer>
+
   </div>
 
   <!-- Web Component for TOC -->
   <script src="{{ site.baseurl }}/assets/js/components/terminal-toc.js" defer></script>
-  
+
   <!-- Garden Widgets (React Islands) -->
   <div data-island="SearchCmdK"></div>
   <script src="{{ '/assets/js/dist/garden-widgets.js' | relative_url }}"></script>

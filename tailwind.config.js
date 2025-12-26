@@ -1,5 +1,5 @@
 module.exports = {
-  content:[
+  content: [
     './_includes/**/*.html',
     './_layouts/**/*.html',
     './_notes/*.md',
@@ -10,16 +10,63 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
-        prose: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        mono: ['var(--font-mono)'],
+        prose: ['var(--font-prose)'],
       },
       colors: {
-        bg: '#0a0a0a',
-        surface: '#111111',
-        border: '#333333',
-        foreground: '#e5e5e5',
-        muted: '#888888',
-        accent: '#ff6600',
+        // Core theme colors (from _theme-variables.scss)
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        surface: 'var(--surface)',
+        border: 'var(--border)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
+
+        // Extended palette
+        card: 'var(--card)',
+        popover: 'var(--popover)',
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
+        destructive: 'var(--destructive)',
+
+        // Legacy mappings for backwards compatibility
+        'bg-primary': 'var(--bg-primary)',
+        'bg-secondary': 'var(--bg-secondary)',
+        'bg-tertiary': 'var(--bg-tertiary)',
+        'bg-code': 'var(--bg-code)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'link-base': 'var(--link-base)',
+        'link-hover': 'var(--link-hover)',
+
+        // Chart colors
+        'chart-1': 'var(--chart-1)',
+        'chart-2': 'var(--chart-2)',
+        'chart-3': 'var(--chart-3)',
+        'chart-4': 'var(--chart-4)',
+        'chart-5': 'var(--chart-5)',
+      },
+      spacing: {
+        xs: 'var(--space-xs)',
+        sm: 'var(--space-sm)',
+        md: 'var(--space-md)',
+        lg: 'var(--space-lg)',
+        xl: 'var(--space-xl)',
+        '2xl': 'var(--space-2xl)',
+      },
+      borderRadius: {
+        sm: 'var(--radius-sm)',
+        md: 'var(--radius-md)',
+        lg: 'var(--radius-lg)',
+        DEFAULT: 'var(--radius)',
+      },
+      transitionDuration: {
+        fast: '150ms',
+        DEFAULT: '300ms',
+        slow: '500ms',
+      },
+      transitionTimingFunction: {
+        DEFAULT: 'cubic-bezier(0.4, 0, 0.2, 1)',
       },
     }
   },
