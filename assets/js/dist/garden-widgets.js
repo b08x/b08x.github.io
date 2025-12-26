@@ -6,8 +6,15 @@
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __esm = (fn, res) => function __init() {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  };
   var __commonJS = (cb, mod) => function __require() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  };
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
   };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
@@ -25,277 +32,6 @@
     isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
     mod
   ));
-
-  // node_modules/scheduler/cjs/scheduler.development.js
-  var require_scheduler_development = __commonJS({
-    "node_modules/scheduler/cjs/scheduler.development.js"(exports) {
-      "use strict";
-      (function() {
-        function performWorkUntilDeadline() {
-          needsPaint = false;
-          if (isMessageLoopRunning) {
-            var currentTime = exports.unstable_now();
-            startTime = currentTime;
-            var hasMoreWork = true;
-            try {
-              a: {
-                isHostCallbackScheduled = false;
-                isHostTimeoutScheduled && (isHostTimeoutScheduled = false, localClearTimeout(taskTimeoutID), taskTimeoutID = -1);
-                isPerformingWork = true;
-                var previousPriorityLevel = currentPriorityLevel;
-                try {
-                  b: {
-                    advanceTimers(currentTime);
-                    for (currentTask = peek(taskQueue); null !== currentTask && !(currentTask.expirationTime > currentTime && shouldYieldToHost()); ) {
-                      var callback = currentTask.callback;
-                      if ("function" === typeof callback) {
-                        currentTask.callback = null;
-                        currentPriorityLevel = currentTask.priorityLevel;
-                        var continuationCallback = callback(
-                          currentTask.expirationTime <= currentTime
-                        );
-                        currentTime = exports.unstable_now();
-                        if ("function" === typeof continuationCallback) {
-                          currentTask.callback = continuationCallback;
-                          advanceTimers(currentTime);
-                          hasMoreWork = true;
-                          break b;
-                        }
-                        currentTask === peek(taskQueue) && pop(taskQueue);
-                        advanceTimers(currentTime);
-                      } else pop(taskQueue);
-                      currentTask = peek(taskQueue);
-                    }
-                    if (null !== currentTask) hasMoreWork = true;
-                    else {
-                      var firstTimer = peek(timerQueue);
-                      null !== firstTimer && requestHostTimeout(
-                        handleTimeout,
-                        firstTimer.startTime - currentTime
-                      );
-                      hasMoreWork = false;
-                    }
-                  }
-                  break a;
-                } finally {
-                  currentTask = null, currentPriorityLevel = previousPriorityLevel, isPerformingWork = false;
-                }
-                hasMoreWork = void 0;
-              }
-            } finally {
-              hasMoreWork ? schedulePerformWorkUntilDeadline() : isMessageLoopRunning = false;
-            }
-          }
-        }
-        function push(heap, node) {
-          var index2 = heap.length;
-          heap.push(node);
-          a: for (; 0 < index2; ) {
-            var parentIndex = index2 - 1 >>> 1, parent = heap[parentIndex];
-            if (0 < compare(parent, node))
-              heap[parentIndex] = node, heap[index2] = parent, index2 = parentIndex;
-            else break a;
-          }
-        }
-        function peek(heap) {
-          return 0 === heap.length ? null : heap[0];
-        }
-        function pop(heap) {
-          if (0 === heap.length) return null;
-          var first = heap[0], last = heap.pop();
-          if (last !== first) {
-            heap[0] = last;
-            a: for (var index2 = 0, length = heap.length, halfLength = length >>> 1; index2 < halfLength; ) {
-              var leftIndex = 2 * (index2 + 1) - 1, left = heap[leftIndex], rightIndex = leftIndex + 1, right = heap[rightIndex];
-              if (0 > compare(left, last))
-                rightIndex < length && 0 > compare(right, left) ? (heap[index2] = right, heap[rightIndex] = last, index2 = rightIndex) : (heap[index2] = left, heap[leftIndex] = last, index2 = leftIndex);
-              else if (rightIndex < length && 0 > compare(right, last))
-                heap[index2] = right, heap[rightIndex] = last, index2 = rightIndex;
-              else break a;
-            }
-          }
-          return first;
-        }
-        function compare(a2, b) {
-          var diff = a2.sortIndex - b.sortIndex;
-          return 0 !== diff ? diff : a2.id - b.id;
-        }
-        function advanceTimers(currentTime) {
-          for (var timer2 = peek(timerQueue); null !== timer2; ) {
-            if (null === timer2.callback) pop(timerQueue);
-            else if (timer2.startTime <= currentTime)
-              pop(timerQueue), timer2.sortIndex = timer2.expirationTime, push(taskQueue, timer2);
-            else break;
-            timer2 = peek(timerQueue);
-          }
-        }
-        function handleTimeout(currentTime) {
-          isHostTimeoutScheduled = false;
-          advanceTimers(currentTime);
-          if (!isHostCallbackScheduled)
-            if (null !== peek(taskQueue))
-              isHostCallbackScheduled = true, isMessageLoopRunning || (isMessageLoopRunning = true, schedulePerformWorkUntilDeadline());
-            else {
-              var firstTimer = peek(timerQueue);
-              null !== firstTimer && requestHostTimeout(
-                handleTimeout,
-                firstTimer.startTime - currentTime
-              );
-            }
-        }
-        function shouldYieldToHost() {
-          return needsPaint ? true : exports.unstable_now() - startTime < frameInterval ? false : true;
-        }
-        function requestHostTimeout(callback, ms) {
-          taskTimeoutID = localSetTimeout(function() {
-            callback(exports.unstable_now());
-          }, ms);
-        }
-        "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        exports.unstable_now = void 0;
-        if ("object" === typeof performance && "function" === typeof performance.now) {
-          var localPerformance = performance;
-          exports.unstable_now = function() {
-            return localPerformance.now();
-          };
-        } else {
-          var localDate = Date, initialTime = localDate.now();
-          exports.unstable_now = function() {
-            return localDate.now() - initialTime;
-          };
-        }
-        var taskQueue = [], timerQueue = [], taskIdCounter = 1, currentTask = null, currentPriorityLevel = 3, isPerformingWork = false, isHostCallbackScheduled = false, isHostTimeoutScheduled = false, needsPaint = false, localSetTimeout = "function" === typeof setTimeout ? setTimeout : null, localClearTimeout = "function" === typeof clearTimeout ? clearTimeout : null, localSetImmediate = "undefined" !== typeof setImmediate ? setImmediate : null, isMessageLoopRunning = false, taskTimeoutID = -1, frameInterval = 5, startTime = -1;
-        if ("function" === typeof localSetImmediate)
-          var schedulePerformWorkUntilDeadline = function() {
-            localSetImmediate(performWorkUntilDeadline);
-          };
-        else if ("undefined" !== typeof MessageChannel) {
-          var channel = new MessageChannel(), port = channel.port2;
-          channel.port1.onmessage = performWorkUntilDeadline;
-          schedulePerformWorkUntilDeadline = function() {
-            port.postMessage(null);
-          };
-        } else
-          schedulePerformWorkUntilDeadline = function() {
-            localSetTimeout(performWorkUntilDeadline, 0);
-          };
-        exports.unstable_IdlePriority = 5;
-        exports.unstable_ImmediatePriority = 1;
-        exports.unstable_LowPriority = 4;
-        exports.unstable_NormalPriority = 3;
-        exports.unstable_Profiling = null;
-        exports.unstable_UserBlockingPriority = 2;
-        exports.unstable_cancelCallback = function(task) {
-          task.callback = null;
-        };
-        exports.unstable_forceFrameRate = function(fps) {
-          0 > fps || 125 < fps ? console.error(
-            "forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported"
-          ) : frameInterval = 0 < fps ? Math.floor(1e3 / fps) : 5;
-        };
-        exports.unstable_getCurrentPriorityLevel = function() {
-          return currentPriorityLevel;
-        };
-        exports.unstable_next = function(eventHandler) {
-          switch (currentPriorityLevel) {
-            case 1:
-            case 2:
-            case 3:
-              var priorityLevel = 3;
-              break;
-            default:
-              priorityLevel = currentPriorityLevel;
-          }
-          var previousPriorityLevel = currentPriorityLevel;
-          currentPriorityLevel = priorityLevel;
-          try {
-            return eventHandler();
-          } finally {
-            currentPriorityLevel = previousPriorityLevel;
-          }
-        };
-        exports.unstable_requestPaint = function() {
-          needsPaint = true;
-        };
-        exports.unstable_runWithPriority = function(priorityLevel, eventHandler) {
-          switch (priorityLevel) {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-              break;
-            default:
-              priorityLevel = 3;
-          }
-          var previousPriorityLevel = currentPriorityLevel;
-          currentPriorityLevel = priorityLevel;
-          try {
-            return eventHandler();
-          } finally {
-            currentPriorityLevel = previousPriorityLevel;
-          }
-        };
-        exports.unstable_scheduleCallback = function(priorityLevel, callback, options) {
-          var currentTime = exports.unstable_now();
-          "object" === typeof options && null !== options ? (options = options.delay, options = "number" === typeof options && 0 < options ? currentTime + options : currentTime) : options = currentTime;
-          switch (priorityLevel) {
-            case 1:
-              var timeout2 = -1;
-              break;
-            case 2:
-              timeout2 = 250;
-              break;
-            case 5:
-              timeout2 = 1073741823;
-              break;
-            case 4:
-              timeout2 = 1e4;
-              break;
-            default:
-              timeout2 = 5e3;
-          }
-          timeout2 = options + timeout2;
-          priorityLevel = {
-            id: taskIdCounter++,
-            callback,
-            priorityLevel,
-            startTime: options,
-            expirationTime: timeout2,
-            sortIndex: -1
-          };
-          options > currentTime ? (priorityLevel.sortIndex = options, push(timerQueue, priorityLevel), null === peek(taskQueue) && priorityLevel === peek(timerQueue) && (isHostTimeoutScheduled ? (localClearTimeout(taskTimeoutID), taskTimeoutID = -1) : isHostTimeoutScheduled = true, requestHostTimeout(handleTimeout, options - currentTime))) : (priorityLevel.sortIndex = timeout2, push(taskQueue, priorityLevel), isHostCallbackScheduled || isPerformingWork || (isHostCallbackScheduled = true, isMessageLoopRunning || (isMessageLoopRunning = true, schedulePerformWorkUntilDeadline())));
-          return priorityLevel;
-        };
-        exports.unstable_shouldYield = shouldYieldToHost;
-        exports.unstable_wrapCallback = function(callback) {
-          var parentPriorityLevel = currentPriorityLevel;
-          return function() {
-            var previousPriorityLevel = currentPriorityLevel;
-            currentPriorityLevel = parentPriorityLevel;
-            try {
-              return callback.apply(this, arguments);
-            } finally {
-              currentPriorityLevel = previousPriorityLevel;
-            }
-          };
-        };
-        "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
-      })();
-    }
-  });
-
-  // node_modules/scheduler/index.js
-  var require_scheduler = __commonJS({
-    "node_modules/scheduler/index.js"(exports, module) {
-      "use strict";
-      if (false) {
-        module.exports = null;
-      } else {
-        module.exports = require_scheduler_development();
-      }
-    }
-  });
 
   // node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS({
@@ -1281,6 +1017,277 @@
     }
   });
 
+  // node_modules/scheduler/cjs/scheduler.development.js
+  var require_scheduler_development = __commonJS({
+    "node_modules/scheduler/cjs/scheduler.development.js"(exports) {
+      "use strict";
+      (function() {
+        function performWorkUntilDeadline() {
+          needsPaint = false;
+          if (isMessageLoopRunning) {
+            var currentTime = exports.unstable_now();
+            startTime = currentTime;
+            var hasMoreWork = true;
+            try {
+              a: {
+                isHostCallbackScheduled = false;
+                isHostTimeoutScheduled && (isHostTimeoutScheduled = false, localClearTimeout(taskTimeoutID), taskTimeoutID = -1);
+                isPerformingWork = true;
+                var previousPriorityLevel = currentPriorityLevel;
+                try {
+                  b: {
+                    advanceTimers(currentTime);
+                    for (currentTask = peek(taskQueue); null !== currentTask && !(currentTask.expirationTime > currentTime && shouldYieldToHost()); ) {
+                      var callback = currentTask.callback;
+                      if ("function" === typeof callback) {
+                        currentTask.callback = null;
+                        currentPriorityLevel = currentTask.priorityLevel;
+                        var continuationCallback = callback(
+                          currentTask.expirationTime <= currentTime
+                        );
+                        currentTime = exports.unstable_now();
+                        if ("function" === typeof continuationCallback) {
+                          currentTask.callback = continuationCallback;
+                          advanceTimers(currentTime);
+                          hasMoreWork = true;
+                          break b;
+                        }
+                        currentTask === peek(taskQueue) && pop(taskQueue);
+                        advanceTimers(currentTime);
+                      } else pop(taskQueue);
+                      currentTask = peek(taskQueue);
+                    }
+                    if (null !== currentTask) hasMoreWork = true;
+                    else {
+                      var firstTimer = peek(timerQueue);
+                      null !== firstTimer && requestHostTimeout(
+                        handleTimeout,
+                        firstTimer.startTime - currentTime
+                      );
+                      hasMoreWork = false;
+                    }
+                  }
+                  break a;
+                } finally {
+                  currentTask = null, currentPriorityLevel = previousPriorityLevel, isPerformingWork = false;
+                }
+                hasMoreWork = void 0;
+              }
+            } finally {
+              hasMoreWork ? schedulePerformWorkUntilDeadline() : isMessageLoopRunning = false;
+            }
+          }
+        }
+        function push(heap, node) {
+          var index2 = heap.length;
+          heap.push(node);
+          a: for (; 0 < index2; ) {
+            var parentIndex = index2 - 1 >>> 1, parent = heap[parentIndex];
+            if (0 < compare(parent, node))
+              heap[parentIndex] = node, heap[index2] = parent, index2 = parentIndex;
+            else break a;
+          }
+        }
+        function peek(heap) {
+          return 0 === heap.length ? null : heap[0];
+        }
+        function pop(heap) {
+          if (0 === heap.length) return null;
+          var first = heap[0], last = heap.pop();
+          if (last !== first) {
+            heap[0] = last;
+            a: for (var index2 = 0, length = heap.length, halfLength = length >>> 1; index2 < halfLength; ) {
+              var leftIndex = 2 * (index2 + 1) - 1, left = heap[leftIndex], rightIndex = leftIndex + 1, right = heap[rightIndex];
+              if (0 > compare(left, last))
+                rightIndex < length && 0 > compare(right, left) ? (heap[index2] = right, heap[rightIndex] = last, index2 = rightIndex) : (heap[index2] = left, heap[leftIndex] = last, index2 = leftIndex);
+              else if (rightIndex < length && 0 > compare(right, last))
+                heap[index2] = right, heap[rightIndex] = last, index2 = rightIndex;
+              else break a;
+            }
+          }
+          return first;
+        }
+        function compare(a2, b) {
+          var diff = a2.sortIndex - b.sortIndex;
+          return 0 !== diff ? diff : a2.id - b.id;
+        }
+        function advanceTimers(currentTime) {
+          for (var timer2 = peek(timerQueue); null !== timer2; ) {
+            if (null === timer2.callback) pop(timerQueue);
+            else if (timer2.startTime <= currentTime)
+              pop(timerQueue), timer2.sortIndex = timer2.expirationTime, push(taskQueue, timer2);
+            else break;
+            timer2 = peek(timerQueue);
+          }
+        }
+        function handleTimeout(currentTime) {
+          isHostTimeoutScheduled = false;
+          advanceTimers(currentTime);
+          if (!isHostCallbackScheduled)
+            if (null !== peek(taskQueue))
+              isHostCallbackScheduled = true, isMessageLoopRunning || (isMessageLoopRunning = true, schedulePerformWorkUntilDeadline());
+            else {
+              var firstTimer = peek(timerQueue);
+              null !== firstTimer && requestHostTimeout(
+                handleTimeout,
+                firstTimer.startTime - currentTime
+              );
+            }
+        }
+        function shouldYieldToHost() {
+          return needsPaint ? true : exports.unstable_now() - startTime < frameInterval ? false : true;
+        }
+        function requestHostTimeout(callback, ms) {
+          taskTimeoutID = localSetTimeout(function() {
+            callback(exports.unstable_now());
+          }, ms);
+        }
+        "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
+        exports.unstable_now = void 0;
+        if ("object" === typeof performance && "function" === typeof performance.now) {
+          var localPerformance = performance;
+          exports.unstable_now = function() {
+            return localPerformance.now();
+          };
+        } else {
+          var localDate2 = Date, initialTime = localDate2.now();
+          exports.unstable_now = function() {
+            return localDate2.now() - initialTime;
+          };
+        }
+        var taskQueue = [], timerQueue = [], taskIdCounter = 1, currentTask = null, currentPriorityLevel = 3, isPerformingWork = false, isHostCallbackScheduled = false, isHostTimeoutScheduled = false, needsPaint = false, localSetTimeout = "function" === typeof setTimeout ? setTimeout : null, localClearTimeout = "function" === typeof clearTimeout ? clearTimeout : null, localSetImmediate = "undefined" !== typeof setImmediate ? setImmediate : null, isMessageLoopRunning = false, taskTimeoutID = -1, frameInterval = 5, startTime = -1;
+        if ("function" === typeof localSetImmediate)
+          var schedulePerformWorkUntilDeadline = function() {
+            localSetImmediate(performWorkUntilDeadline);
+          };
+        else if ("undefined" !== typeof MessageChannel) {
+          var channel = new MessageChannel(), port = channel.port2;
+          channel.port1.onmessage = performWorkUntilDeadline;
+          schedulePerformWorkUntilDeadline = function() {
+            port.postMessage(null);
+          };
+        } else
+          schedulePerformWorkUntilDeadline = function() {
+            localSetTimeout(performWorkUntilDeadline, 0);
+          };
+        exports.unstable_IdlePriority = 5;
+        exports.unstable_ImmediatePriority = 1;
+        exports.unstable_LowPriority = 4;
+        exports.unstable_NormalPriority = 3;
+        exports.unstable_Profiling = null;
+        exports.unstable_UserBlockingPriority = 2;
+        exports.unstable_cancelCallback = function(task) {
+          task.callback = null;
+        };
+        exports.unstable_forceFrameRate = function(fps) {
+          0 > fps || 125 < fps ? console.error(
+            "forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported"
+          ) : frameInterval = 0 < fps ? Math.floor(1e3 / fps) : 5;
+        };
+        exports.unstable_getCurrentPriorityLevel = function() {
+          return currentPriorityLevel;
+        };
+        exports.unstable_next = function(eventHandler) {
+          switch (currentPriorityLevel) {
+            case 1:
+            case 2:
+            case 3:
+              var priorityLevel = 3;
+              break;
+            default:
+              priorityLevel = currentPriorityLevel;
+          }
+          var previousPriorityLevel = currentPriorityLevel;
+          currentPriorityLevel = priorityLevel;
+          try {
+            return eventHandler();
+          } finally {
+            currentPriorityLevel = previousPriorityLevel;
+          }
+        };
+        exports.unstable_requestPaint = function() {
+          needsPaint = true;
+        };
+        exports.unstable_runWithPriority = function(priorityLevel, eventHandler) {
+          switch (priorityLevel) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+              break;
+            default:
+              priorityLevel = 3;
+          }
+          var previousPriorityLevel = currentPriorityLevel;
+          currentPriorityLevel = priorityLevel;
+          try {
+            return eventHandler();
+          } finally {
+            currentPriorityLevel = previousPriorityLevel;
+          }
+        };
+        exports.unstable_scheduleCallback = function(priorityLevel, callback, options) {
+          var currentTime = exports.unstable_now();
+          "object" === typeof options && null !== options ? (options = options.delay, options = "number" === typeof options && 0 < options ? currentTime + options : currentTime) : options = currentTime;
+          switch (priorityLevel) {
+            case 1:
+              var timeout2 = -1;
+              break;
+            case 2:
+              timeout2 = 250;
+              break;
+            case 5:
+              timeout2 = 1073741823;
+              break;
+            case 4:
+              timeout2 = 1e4;
+              break;
+            default:
+              timeout2 = 5e3;
+          }
+          timeout2 = options + timeout2;
+          priorityLevel = {
+            id: taskIdCounter++,
+            callback,
+            priorityLevel,
+            startTime: options,
+            expirationTime: timeout2,
+            sortIndex: -1
+          };
+          options > currentTime ? (priorityLevel.sortIndex = options, push(timerQueue, priorityLevel), null === peek(taskQueue) && priorityLevel === peek(timerQueue) && (isHostTimeoutScheduled ? (localClearTimeout(taskTimeoutID), taskTimeoutID = -1) : isHostTimeoutScheduled = true, requestHostTimeout(handleTimeout, options - currentTime))) : (priorityLevel.sortIndex = timeout2, push(taskQueue, priorityLevel), isHostCallbackScheduled || isPerformingWork || (isHostCallbackScheduled = true, isMessageLoopRunning || (isMessageLoopRunning = true, schedulePerformWorkUntilDeadline())));
+          return priorityLevel;
+        };
+        exports.unstable_shouldYield = shouldYieldToHost;
+        exports.unstable_wrapCallback = function(callback) {
+          var parentPriorityLevel = currentPriorityLevel;
+          return function() {
+            var previousPriorityLevel = currentPriorityLevel;
+            currentPriorityLevel = parentPriorityLevel;
+            try {
+              return callback.apply(this, arguments);
+            } finally {
+              currentPriorityLevel = previousPriorityLevel;
+            }
+          };
+        };
+        "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
+      })();
+    }
+  });
+
+  // node_modules/scheduler/index.js
+  var require_scheduler = __commonJS({
+    "node_modules/scheduler/index.js"(exports, module) {
+      "use strict";
+      if (false) {
+        module.exports = null;
+      } else {
+        module.exports = require_scheduler_development();
+      }
+    }
+  });
+
   // node_modules/react-dom/cjs/react-dom.development.js
   var require_react_dom_development = __commonJS({
     "node_modules/react-dom/cjs/react-dom.development.js"(exports) {
@@ -1330,7 +1337,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React3 = require_react(), Internals = {
+        var React4 = require_react(), Internals = {
           d: {
             f: noop2,
             r: function() {
@@ -1348,7 +1355,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React3.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -2883,7 +2890,7 @@
           "number" === type2 && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React3.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React4.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -4172,11 +4179,11 @@
           ), dispatchQueue.push({ event: nativeEvent, listeners: doc }), nativeEvent.target = activeElement)));
         }
         function makePrefixMap(styleProp, eventName) {
-          var prefixes = {};
-          prefixes[styleProp.toLowerCase()] = eventName.toLowerCase();
-          prefixes["Webkit" + styleProp] = "webkit" + eventName;
-          prefixes["Moz" + styleProp] = "moz" + eventName;
-          return prefixes;
+          var prefixes2 = {};
+          prefixes2[styleProp.toLowerCase()] = eventName.toLowerCase();
+          prefixes2["Webkit" + styleProp] = "webkit" + eventName;
+          prefixes2["Moz" + styleProp] = "moz" + eventName;
+          return prefixes2;
         }
         function getVendorPrefixedEventName(eventName) {
           if (prefixedEventNames[eventName]) return prefixedEventNames[eventName];
@@ -8243,14 +8250,14 @@
               1,
               badgeFormat + " " + error[0],
               badgeStyle,
-              pad + JSCompiler_inline_result + pad,
+              pad2 + JSCompiler_inline_result + pad2,
               resetStyle
             ) : error.splice(
               0,
               0,
               badgeFormat,
               badgeStyle,
-              pad + JSCompiler_inline_result + pad,
+              pad2 + JSCompiler_inline_result + pad2,
               resetStyle
             );
             error.unshift(console);
@@ -18375,8 +18382,8 @@
           }
           return true;
         }
-        function attemptReplayContinuousQueuedEventInMap(queuedEvent, key, map) {
-          attemptReplayContinuousQueuedEvent(queuedEvent) && map.delete(key);
+        function attemptReplayContinuousQueuedEventInMap(queuedEvent, key, map2) {
+          attemptReplayContinuousQueuedEvent(queuedEvent) && map2.delete(key);
         }
         function replayUnblockedEvents() {
           hasScheduledReplayAttempt = false;
@@ -18515,14 +18522,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React3 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React4 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
         /* @__PURE__ */ Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
         /* @__PURE__ */ Symbol.for("react.legacy_hidden");
         /* @__PURE__ */ Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
         /* @__PURE__ */ Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React3.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -19544,9 +19551,9 @@
             return localPerformance.now();
           };
         } else {
-          var localDate = Date;
+          var localDate2 = Date;
           getCurrentTime = function() {
-            return localDate.now();
+            return localDate2.now();
           };
         }
         var reportGlobalError = "function" === typeof reportError ? reportError : function(error) {
@@ -21214,7 +21221,7 @@
           _currentValue: NotPendingTransition,
           _currentValue2: NotPendingTransition,
           _threadCount: 0
-        }, badgeFormat = "%c%s%c", badgeStyle = "background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px", resetStyle = "", pad = " ", bind = Function.prototype.bind;
+        }, badgeFormat = "%c%s%c", badgeStyle = "background: #e6e6e6;background: light-dark(rgba(0,0,0,0.1), rgba(255,255,255,0.25));color: #000000;color: light-dark(#000000, #ffffff);border-radius: 2px", resetStyle = "", pad2 = " ", bind = Function.prototype.bind;
         var didWarnAboutNestedUpdates = false;
         var overrideHookState = null, overrideHookStateDeletePath = null, overrideHookStateRenamePath = null, overrideProps = null, overridePropsDeletePath = null, overridePropsRenamePath = null, scheduleUpdate = null, scheduleRetry = null, setErrorHandler = null, setSuspenseHandler = null;
         overrideHookState = function(fiber, id2, path, value) {
@@ -21310,7 +21317,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React3.version;
+          var isomorphicReactPackageVersion = React4.version;
           if ("19.2.3" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.3\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21664,18 +21671,18 @@
         function isValidElement(object) {
           return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
         }
-        var React3 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React3.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
+        var React4 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
           return null;
         };
-        React3 = {
+        React4 = {
           react_stack_bottom_frame: function(callStackForError) {
             return callStackForError();
           }
         };
         var specialPropKeyWarningShown;
         var didWarnAboutElementRef = {};
-        var unknownOwnerDebugStack = React3.react_stack_bottom_frame.bind(
-          React3,
+        var unknownOwnerDebugStack = React4.react_stack_bottom_frame.bind(
+          React4,
           UnknownOwner
         )();
         var unknownOwnerDebugTask = createTask(getTaskName(UnknownOwner));
@@ -21719,29 +21726,43 @@
     }
   });
 
-  // src/main.tsx
-  var import_client = __toESM(require_client());
-
   // src/components/HelloGarden.tsx
-  var import_jsx_runtime = __toESM(require_jsx_runtime());
-  var HelloGarden = ({ name = "Gardener" }) => {
-    return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "p-4 border border-accent rounded-md bg-surface text-foreground font-mono", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-accent animate-pulse", children: "_ system_status: ONLINE" }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", { className: "text-xl font-bold", children: [
-        "Hello, ",
-        name
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm mt-2 text-muted", children: "This is a React Island running inside Jekyll." })
-    ] });
-  };
-  var HelloGarden_default = HelloGarden;
+  var HelloGarden_exports = {};
+  __export(HelloGarden_exports, {
+    default: () => HelloGarden_default
+  });
+  var import_jsx_runtime, HelloGarden, HelloGarden_default;
+  var init_HelloGarden = __esm({
+    "src/components/HelloGarden.tsx"() {
+      "use strict";
+      import_jsx_runtime = __toESM(require_jsx_runtime());
+      HelloGarden = ({ name = "Gardener" }) => {
+        return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "p-4 border border-accent rounded-md bg-surface text-foreground font-mono", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-accent animate-pulse", children: "_ system_status: ONLINE" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", { className: "text-xl font-bold", children: [
+            "Hello, ",
+            name
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { className: "text-sm mt-2 text-muted", children: "This is a React Island running inside Jekyll." })
+        ] });
+      };
+      HelloGarden_default = HelloGarden;
+    }
+  });
 
-  // src/components/GraphView.tsx
-  var import_react = __toESM(require_react());
+  // node_modules/d3-array/src/index.js
+  var init_src = __esm({
+    "node_modules/d3-array/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-axis/src/index.js
+  var init_src2 = __esm({
+    "node_modules/d3-axis/src/index.js"() {
+    }
+  });
 
   // node_modules/d3-dispatch/src/dispatch.js
-  var noop = { value: () => {
-  } };
   function dispatch() {
     for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
       if (!(t = arguments[i] + "") || t in _ || /[\s.]/.test(t)) throw new Error("illegal type: " + t);
@@ -21760,36 +21781,6 @@
       return { type: t, name };
     });
   }
-  Dispatch.prototype = dispatch.prototype = {
-    constructor: Dispatch,
-    on: function(typename, callback) {
-      var _ = this._, T = parseTypenames(typename + "", _), t, i = -1, n = T.length;
-      if (arguments.length < 2) {
-        while (++i < n) if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name))) return t;
-        return;
-      }
-      if (callback != null && typeof callback !== "function") throw new Error("invalid callback: " + callback);
-      while (++i < n) {
-        if (t = (typename = T[i]).type) _[t] = set(_[t], typename.name, callback);
-        else if (callback == null) for (t in _) _[t] = set(_[t], typename.name, null);
-      }
-      return this;
-    },
-    copy: function() {
-      var copy = {}, _ = this._;
-      for (var t in _) copy[t] = _[t].slice();
-      return new Dispatch(copy);
-    },
-    call: function(type2, that) {
-      if ((n = arguments.length - 2) > 0) for (var args = new Array(n), i = 0, n, t; i < n; ++i) args[i] = arguments[i + 2];
-      if (!this._.hasOwnProperty(type2)) throw new Error("unknown type: " + type2);
-      for (t = this._[type2], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
-    },
-    apply: function(type2, that, args) {
-      if (!this._.hasOwnProperty(type2)) throw new Error("unknown type: " + type2);
-      for (var t = this._[type2], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
-    }
-  };
   function get(type2, name) {
     for (var i = 0, n = type2.length, c2; i < n; ++i) {
       if ((c2 = type2[i]).name === name) {
@@ -21807,17 +21798,66 @@
     if (callback != null) type2.push({ name, value: callback });
     return type2;
   }
-  var dispatch_default = dispatch;
+  var noop, dispatch_default;
+  var init_dispatch = __esm({
+    "node_modules/d3-dispatch/src/dispatch.js"() {
+      noop = { value: () => {
+      } };
+      Dispatch.prototype = dispatch.prototype = {
+        constructor: Dispatch,
+        on: function(typename, callback) {
+          var _ = this._, T = parseTypenames(typename + "", _), t, i = -1, n = T.length;
+          if (arguments.length < 2) {
+            while (++i < n) if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name))) return t;
+            return;
+          }
+          if (callback != null && typeof callback !== "function") throw new Error("invalid callback: " + callback);
+          while (++i < n) {
+            if (t = (typename = T[i]).type) _[t] = set(_[t], typename.name, callback);
+            else if (callback == null) for (t in _) _[t] = set(_[t], typename.name, null);
+          }
+          return this;
+        },
+        copy: function() {
+          var copy = {}, _ = this._;
+          for (var t in _) copy[t] = _[t].slice();
+          return new Dispatch(copy);
+        },
+        call: function(type2, that) {
+          if ((n = arguments.length - 2) > 0) for (var args = new Array(n), i = 0, n, t; i < n; ++i) args[i] = arguments[i + 2];
+          if (!this._.hasOwnProperty(type2)) throw new Error("unknown type: " + type2);
+          for (t = this._[type2], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
+        },
+        apply: function(type2, that, args) {
+          if (!this._.hasOwnProperty(type2)) throw new Error("unknown type: " + type2);
+          for (var t = this._[type2], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
+        }
+      };
+      dispatch_default = dispatch;
+    }
+  });
+
+  // node_modules/d3-dispatch/src/index.js
+  var init_src3 = __esm({
+    "node_modules/d3-dispatch/src/index.js"() {
+      init_dispatch();
+    }
+  });
 
   // node_modules/d3-selection/src/namespaces.js
-  var xhtml = "http://www.w3.org/1999/xhtml";
-  var namespaces_default = {
-    svg: "http://www.w3.org/2000/svg",
-    xhtml,
-    xlink: "http://www.w3.org/1999/xlink",
-    xml: "http://www.w3.org/XML/1998/namespace",
-    xmlns: "http://www.w3.org/2000/xmlns/"
-  };
+  var xhtml, namespaces_default;
+  var init_namespaces = __esm({
+    "node_modules/d3-selection/src/namespaces.js"() {
+      xhtml = "http://www.w3.org/1999/xhtml";
+      namespaces_default = {
+        svg: "http://www.w3.org/2000/svg",
+        xhtml,
+        xlink: "http://www.w3.org/1999/xlink",
+        xml: "http://www.w3.org/XML/1998/namespace",
+        xmlns: "http://www.w3.org/2000/xmlns/"
+      };
+    }
+  });
 
   // node_modules/d3-selection/src/namespace.js
   function namespace_default(name) {
@@ -21825,6 +21865,11 @@
     if (i >= 0 && (prefix = name.slice(0, i)) !== "xmlns") name = name.slice(i + 1);
     return namespaces_default.hasOwnProperty(prefix) ? { space: namespaces_default[prefix], local: name } : name;
   }
+  var init_namespace = __esm({
+    "node_modules/d3-selection/src/namespace.js"() {
+      init_namespaces();
+    }
+  });
 
   // node_modules/d3-selection/src/creator.js
   function creatorInherit(name) {
@@ -21842,6 +21887,12 @@
     var fullname = namespace_default(name);
     return (fullname.local ? creatorFixed : creatorInherit)(fullname);
   }
+  var init_creator = __esm({
+    "node_modules/d3-selection/src/creator.js"() {
+      init_namespace();
+      init_namespaces();
+    }
+  });
 
   // node_modules/d3-selection/src/selector.js
   function none() {
@@ -21851,6 +21902,10 @@
       return this.querySelector(selector);
     };
   }
+  var init_selector = __esm({
+    "node_modules/d3-selection/src/selector.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/select.js
   function select_default(select) {
@@ -21865,11 +21920,21 @@
     }
     return new Selection(subgroups, this._parents);
   }
+  var init_select = __esm({
+    "node_modules/d3-selection/src/selection/select.js"() {
+      init_selection();
+      init_selector();
+    }
+  });
 
   // node_modules/d3-selection/src/array.js
   function array(x3) {
     return x3 == null ? [] : Array.isArray(x3) ? x3 : Array.from(x3);
   }
+  var init_array = __esm({
+    "node_modules/d3-selection/src/array.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selectorAll.js
   function empty() {
@@ -21880,6 +21945,10 @@
       return this.querySelectorAll(selector);
     };
   }
+  var init_selectorAll = __esm({
+    "node_modules/d3-selection/src/selectorAll.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/selectAll.js
   function arrayAll(select) {
@@ -21900,6 +21969,13 @@
     }
     return new Selection(subgroups, parents);
   }
+  var init_selectAll = __esm({
+    "node_modules/d3-selection/src/selection/selectAll.js"() {
+      init_selection();
+      init_array();
+      init_selectorAll();
+    }
+  });
 
   // node_modules/d3-selection/src/matcher.js
   function matcher_default(selector) {
@@ -21912,9 +21988,12 @@
       return node.matches(selector);
     };
   }
+  var init_matcher = __esm({
+    "node_modules/d3-selection/src/matcher.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/selectChild.js
-  var find = Array.prototype.find;
   function childFind(match) {
     return function() {
       return find.call(this.children, match);
@@ -21926,9 +22005,15 @@
   function selectChild_default(match) {
     return this.select(match == null ? childFirst : childFind(typeof match === "function" ? match : childMatcher(match)));
   }
+  var find;
+  var init_selectChild = __esm({
+    "node_modules/d3-selection/src/selection/selectChild.js"() {
+      init_matcher();
+      find = Array.prototype.find;
+    }
+  });
 
   // node_modules/d3-selection/src/selection/selectChildren.js
-  var filter = Array.prototype.filter;
   function children() {
     return Array.from(this.children);
   }
@@ -21940,6 +22025,13 @@
   function selectChildren_default(match) {
     return this.selectAll(match == null ? children : childrenFilter(typeof match === "function" ? match : childMatcher(match)));
   }
+  var filter;
+  var init_selectChildren = __esm({
+    "node_modules/d3-selection/src/selection/selectChildren.js"() {
+      init_matcher();
+      filter = Array.prototype.filter;
+    }
+  });
 
   // node_modules/d3-selection/src/selection/filter.js
   function filter_default(match) {
@@ -21953,11 +22045,21 @@
     }
     return new Selection(subgroups, this._parents);
   }
+  var init_filter = __esm({
+    "node_modules/d3-selection/src/selection/filter.js"() {
+      init_selection();
+      init_matcher();
+    }
+  });
 
   // node_modules/d3-selection/src/selection/sparse.js
   function sparse_default(update) {
     return new Array(update.length);
   }
+  var init_sparse = __esm({
+    "node_modules/d3-selection/src/selection/sparse.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/enter.js
   function enter_default() {
@@ -21970,21 +22072,27 @@
     this._parent = parent;
     this.__data__ = datum2;
   }
-  EnterNode.prototype = {
-    constructor: EnterNode,
-    appendChild: function(child) {
-      return this._parent.insertBefore(child, this._next);
-    },
-    insertBefore: function(child, next) {
-      return this._parent.insertBefore(child, next);
-    },
-    querySelector: function(selector) {
-      return this._parent.querySelector(selector);
-    },
-    querySelectorAll: function(selector) {
-      return this._parent.querySelectorAll(selector);
+  var init_enter = __esm({
+    "node_modules/d3-selection/src/selection/enter.js"() {
+      init_sparse();
+      init_selection();
+      EnterNode.prototype = {
+        constructor: EnterNode,
+        appendChild: function(child) {
+          return this._parent.insertBefore(child, this._next);
+        },
+        insertBefore: function(child, next) {
+          return this._parent.insertBefore(child, next);
+        },
+        querySelector: function(selector) {
+          return this._parent.querySelector(selector);
+        },
+        querySelectorAll: function(selector) {
+          return this._parent.querySelectorAll(selector);
+        }
+      };
     }
-  };
+  });
 
   // node_modules/d3-selection/src/constant.js
   function constant_default(x3) {
@@ -21992,6 +22100,10 @@
       return x3;
     };
   }
+  var init_constant = __esm({
+    "node_modules/d3-selection/src/constant.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/data.js
   function bindIndex(parent, group, enter, update, exit, data) {
@@ -22064,11 +22176,24 @@
   function arraylike(data) {
     return typeof data === "object" && "length" in data ? data : Array.from(data);
   }
+  var init_data = __esm({
+    "node_modules/d3-selection/src/selection/data.js"() {
+      init_selection();
+      init_enter();
+      init_constant();
+    }
+  });
 
   // node_modules/d3-selection/src/selection/exit.js
   function exit_default() {
     return new Selection(this._exit || this._groups.map(sparse_default), this._parents);
   }
+  var init_exit = __esm({
+    "node_modules/d3-selection/src/selection/exit.js"() {
+      init_sparse();
+      init_selection();
+    }
+  });
 
   // node_modules/d3-selection/src/selection/join.js
   function join_default(onenter, onupdate, onexit) {
@@ -22087,6 +22212,10 @@
     else onexit(exit);
     return enter && update ? enter.merge(update).order() : update;
   }
+  var init_join = __esm({
+    "node_modules/d3-selection/src/selection/join.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/merge.js
   function merge_default(context) {
@@ -22103,6 +22232,11 @@
     }
     return new Selection(merges, this._parents);
   }
+  var init_merge = __esm({
+    "node_modules/d3-selection/src/selection/merge.js"() {
+      init_selection();
+    }
+  });
 
   // node_modules/d3-selection/src/selection/order.js
   function order_default() {
@@ -22116,6 +22250,10 @@
     }
     return this;
   }
+  var init_order = __esm({
+    "node_modules/d3-selection/src/selection/order.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/sort.js
   function sort_default(compare) {
@@ -22136,6 +22274,11 @@
   function ascending(a2, b) {
     return a2 < b ? -1 : a2 > b ? 1 : a2 >= b ? 0 : NaN;
   }
+  var init_sort = __esm({
+    "node_modules/d3-selection/src/selection/sort.js"() {
+      init_selection();
+    }
+  });
 
   // node_modules/d3-selection/src/selection/call.js
   function call_default() {
@@ -22144,11 +22287,19 @@
     callback.apply(null, arguments);
     return this;
   }
+  var init_call = __esm({
+    "node_modules/d3-selection/src/selection/call.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/nodes.js
   function nodes_default() {
     return Array.from(this);
   }
+  var init_nodes = __esm({
+    "node_modules/d3-selection/src/selection/nodes.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/node.js
   function node_default() {
@@ -22160,6 +22311,10 @@
     }
     return null;
   }
+  var init_node = __esm({
+    "node_modules/d3-selection/src/selection/node.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/size.js
   function size_default() {
@@ -22167,11 +22322,19 @@
     for (const node of this) ++size;
     return size;
   }
+  var init_size = __esm({
+    "node_modules/d3-selection/src/selection/size.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/empty.js
   function empty_default() {
     return !this.node();
   }
+  var init_empty = __esm({
+    "node_modules/d3-selection/src/selection/empty.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/each.js
   function each_default(callback) {
@@ -22182,6 +22345,10 @@
     }
     return this;
   }
+  var init_each = __esm({
+    "node_modules/d3-selection/src/selection/each.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/attr.js
   function attrRemove(name) {
@@ -22226,11 +22393,20 @@
     }
     return this.each((value == null ? fullname.local ? attrRemoveNS : attrRemove : typeof value === "function" ? fullname.local ? attrFunctionNS : attrFunction : fullname.local ? attrConstantNS : attrConstant)(fullname, value));
   }
+  var init_attr = __esm({
+    "node_modules/d3-selection/src/selection/attr.js"() {
+      init_namespace();
+    }
+  });
 
   // node_modules/d3-selection/src/window.js
   function window_default(node) {
     return node.ownerDocument && node.ownerDocument.defaultView || node.document && node || node.defaultView;
   }
+  var init_window = __esm({
+    "node_modules/d3-selection/src/window.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/style.js
   function styleRemove(name) {
@@ -22256,6 +22432,11 @@
   function styleValue(node, name) {
     return node.style.getPropertyValue(name) || window_default(node).getComputedStyle(node, null).getPropertyValue(name);
   }
+  var init_style = __esm({
+    "node_modules/d3-selection/src/selection/style.js"() {
+      init_window();
+    }
+  });
 
   // node_modules/d3-selection/src/selection/property.js
   function propertyRemove(name) {
@@ -22278,6 +22459,10 @@
   function property_default(name, value) {
     return arguments.length > 1 ? this.each((value == null ? propertyRemove : typeof value === "function" ? propertyFunction : propertyConstant)(name, value)) : this.node()[name];
   }
+  var init_property = __esm({
+    "node_modules/d3-selection/src/selection/property.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/classed.js
   function classArray(string) {
@@ -22290,25 +22475,6 @@
     this._node = node;
     this._names = classArray(node.getAttribute("class") || "");
   }
-  ClassList.prototype = {
-    add: function(name) {
-      var i = this._names.indexOf(name);
-      if (i < 0) {
-        this._names.push(name);
-        this._node.setAttribute("class", this._names.join(" "));
-      }
-    },
-    remove: function(name) {
-      var i = this._names.indexOf(name);
-      if (i >= 0) {
-        this._names.splice(i, 1);
-        this._node.setAttribute("class", this._names.join(" "));
-      }
-    },
-    contains: function(name) {
-      return this._names.indexOf(name) >= 0;
-    }
-  };
   function classedAdd(node, names) {
     var list = classList(node), i = -1, n = names.length;
     while (++i < n) list.add(names[i]);
@@ -22341,6 +22507,29 @@
     }
     return this.each((typeof value === "function" ? classedFunction : value ? classedTrue : classedFalse)(names, value));
   }
+  var init_classed = __esm({
+    "node_modules/d3-selection/src/selection/classed.js"() {
+      ClassList.prototype = {
+        add: function(name) {
+          var i = this._names.indexOf(name);
+          if (i < 0) {
+            this._names.push(name);
+            this._node.setAttribute("class", this._names.join(" "));
+          }
+        },
+        remove: function(name) {
+          var i = this._names.indexOf(name);
+          if (i >= 0) {
+            this._names.splice(i, 1);
+            this._node.setAttribute("class", this._names.join(" "));
+          }
+        },
+        contains: function(name) {
+          return this._names.indexOf(name) >= 0;
+        }
+      };
+    }
+  });
 
   // node_modules/d3-selection/src/selection/text.js
   function textRemove() {
@@ -22360,6 +22549,10 @@
   function text_default(value) {
     return arguments.length ? this.each(value == null ? textRemove : (typeof value === "function" ? textFunction : textConstant)(value)) : this.node().textContent;
   }
+  var init_text = __esm({
+    "node_modules/d3-selection/src/selection/text.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/html.js
   function htmlRemove() {
@@ -22379,6 +22572,10 @@
   function html_default(value) {
     return arguments.length ? this.each(value == null ? htmlRemove : (typeof value === "function" ? htmlFunction : htmlConstant)(value)) : this.node().innerHTML;
   }
+  var init_html = __esm({
+    "node_modules/d3-selection/src/selection/html.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/raise.js
   function raise() {
@@ -22387,6 +22584,10 @@
   function raise_default() {
     return this.each(raise);
   }
+  var init_raise = __esm({
+    "node_modules/d3-selection/src/selection/raise.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/lower.js
   function lower() {
@@ -22395,6 +22596,10 @@
   function lower_default() {
     return this.each(lower);
   }
+  var init_lower = __esm({
+    "node_modules/d3-selection/src/selection/lower.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/append.js
   function append_default(name) {
@@ -22403,6 +22608,11 @@
       return this.appendChild(create2.apply(this, arguments));
     });
   }
+  var init_append = __esm({
+    "node_modules/d3-selection/src/selection/append.js"() {
+      init_creator();
+    }
+  });
 
   // node_modules/d3-selection/src/selection/insert.js
   function constantNull() {
@@ -22414,6 +22624,12 @@
       return this.insertBefore(create2.apply(this, arguments), select.apply(this, arguments) || null);
     });
   }
+  var init_insert = __esm({
+    "node_modules/d3-selection/src/selection/insert.js"() {
+      init_creator();
+      init_selector();
+    }
+  });
 
   // node_modules/d3-selection/src/selection/remove.js
   function remove() {
@@ -22423,6 +22639,10 @@
   function remove_default() {
     return this.each(remove);
   }
+  var init_remove = __esm({
+    "node_modules/d3-selection/src/selection/remove.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/clone.js
   function selection_cloneShallow() {
@@ -22436,11 +22656,19 @@
   function clone_default(deep) {
     return this.select(deep ? selection_cloneDeep : selection_cloneShallow);
   }
+  var init_clone = __esm({
+    "node_modules/d3-selection/src/selection/clone.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/datum.js
   function datum_default(value) {
     return arguments.length ? this.property("__data__", value) : this.node().__data__;
   }
+  var init_datum = __esm({
+    "node_modules/d3-selection/src/selection/datum.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/on.js
   function contextListener(listener) {
@@ -22504,6 +22732,10 @@
     for (i = 0; i < n; ++i) this.each(on(typenames[i], value, options));
     return this;
   }
+  var init_on = __esm({
+    "node_modules/d3-selection/src/selection/on.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/dispatch.js
   function dispatchEvent(node, type2, params) {
@@ -22530,6 +22762,11 @@
   function dispatch_default2(type2, params) {
     return this.each((typeof params === "function" ? dispatchFunction : dispatchConstant)(type2, params));
   }
+  var init_dispatch2 = __esm({
+    "node_modules/d3-selection/src/selection/dispatch.js"() {
+      init_window();
+    }
+  });
 
   // node_modules/d3-selection/src/selection/iterator.js
   function* iterator_default() {
@@ -22539,9 +22776,12 @@
       }
     }
   }
+  var init_iterator = __esm({
+    "node_modules/d3-selection/src/selection/iterator.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/selection/index.js
-  var root = [null];
   function Selection(groups, parents) {
     this._groups = groups;
     this._parents = parents;
@@ -22552,50 +22792,95 @@
   function selection_selection() {
     return this;
   }
-  Selection.prototype = selection.prototype = {
-    constructor: Selection,
-    select: select_default,
-    selectAll: selectAll_default,
-    selectChild: selectChild_default,
-    selectChildren: selectChildren_default,
-    filter: filter_default,
-    data: data_default,
-    enter: enter_default,
-    exit: exit_default,
-    join: join_default,
-    merge: merge_default,
-    selection: selection_selection,
-    order: order_default,
-    sort: sort_default,
-    call: call_default,
-    nodes: nodes_default,
-    node: node_default,
-    size: size_default,
-    empty: empty_default,
-    each: each_default,
-    attr: attr_default,
-    style: style_default,
-    property: property_default,
-    classed: classed_default,
-    text: text_default,
-    html: html_default,
-    raise: raise_default,
-    lower: lower_default,
-    append: append_default,
-    insert: insert_default,
-    remove: remove_default,
-    clone: clone_default,
-    datum: datum_default,
-    on: on_default,
-    dispatch: dispatch_default2,
-    [Symbol.iterator]: iterator_default
-  };
-  var selection_default = selection;
+  var root, selection_default;
+  var init_selection = __esm({
+    "node_modules/d3-selection/src/selection/index.js"() {
+      init_select();
+      init_selectAll();
+      init_selectChild();
+      init_selectChildren();
+      init_filter();
+      init_data();
+      init_enter();
+      init_exit();
+      init_join();
+      init_merge();
+      init_order();
+      init_sort();
+      init_call();
+      init_nodes();
+      init_node();
+      init_size();
+      init_empty();
+      init_each();
+      init_attr();
+      init_style();
+      init_property();
+      init_classed();
+      init_text();
+      init_html();
+      init_raise();
+      init_lower();
+      init_append();
+      init_insert();
+      init_remove();
+      init_clone();
+      init_datum();
+      init_on();
+      init_dispatch2();
+      init_iterator();
+      root = [null];
+      Selection.prototype = selection.prototype = {
+        constructor: Selection,
+        select: select_default,
+        selectAll: selectAll_default,
+        selectChild: selectChild_default,
+        selectChildren: selectChildren_default,
+        filter: filter_default,
+        data: data_default,
+        enter: enter_default,
+        exit: exit_default,
+        join: join_default,
+        merge: merge_default,
+        selection: selection_selection,
+        order: order_default,
+        sort: sort_default,
+        call: call_default,
+        nodes: nodes_default,
+        node: node_default,
+        size: size_default,
+        empty: empty_default,
+        each: each_default,
+        attr: attr_default,
+        style: style_default,
+        property: property_default,
+        classed: classed_default,
+        text: text_default,
+        html: html_default,
+        raise: raise_default,
+        lower: lower_default,
+        append: append_default,
+        insert: insert_default,
+        remove: remove_default,
+        clone: clone_default,
+        datum: datum_default,
+        on: on_default,
+        dispatch: dispatch_default2,
+        [Symbol.iterator]: iterator_default
+      };
+      selection_default = selection;
+    }
+  });
 
   // node_modules/d3-selection/src/select.js
   function select_default2(selector) {
     return typeof selector === "string" ? new Selection([[document.querySelector(selector)]], [document.documentElement]) : new Selection([[selector]], root);
   }
+  var init_select2 = __esm({
+    "node_modules/d3-selection/src/select.js"() {
+      init_selection();
+    }
+  });
 
   // node_modules/d3-selection/src/sourceEvent.js
   function sourceEvent_default(event) {
@@ -22603,6 +22888,10 @@
     while (sourceEvent = event.sourceEvent) event = sourceEvent;
     return event;
   }
+  var init_sourceEvent = __esm({
+    "node_modules/d3-selection/src/sourceEvent.js"() {
+    }
+  });
 
   // node_modules/d3-selection/src/pointer.js
   function pointer_default(event, node) {
@@ -22623,13 +22912,37 @@
     }
     return [event.pageX, event.pageY];
   }
+  var init_pointer = __esm({
+    "node_modules/d3-selection/src/pointer.js"() {
+      init_sourceEvent();
+    }
+  });
+
+  // node_modules/d3-selection/src/index.js
+  var init_src4 = __esm({
+    "node_modules/d3-selection/src/index.js"() {
+      init_matcher();
+      init_namespace();
+      init_pointer();
+      init_select2();
+      init_selection();
+      init_selector();
+      init_selectorAll();
+      init_style();
+    }
+  });
 
   // node_modules/d3-drag/src/noevent.js
-  var nonpassivecapture = { capture: true, passive: false };
   function noevent_default(event) {
     event.preventDefault();
     event.stopImmediatePropagation();
   }
+  var nonpassivecapture;
+  var init_noevent = __esm({
+    "node_modules/d3-drag/src/noevent.js"() {
+      nonpassivecapture = { capture: true, passive: false };
+    }
+  });
 
   // node_modules/d3-drag/src/nodrag.js
   function nodrag_default(view) {
@@ -22656,6 +22969,19 @@
       delete root2.__noselect;
     }
   }
+  var init_nodrag = __esm({
+    "node_modules/d3-drag/src/nodrag.js"() {
+      init_src4();
+      init_noevent();
+    }
+  });
+
+  // node_modules/d3-drag/src/index.js
+  var init_src5 = __esm({
+    "node_modules/d3-drag/src/index.js"() {
+      init_nodrag();
+    }
+  });
 
   // node_modules/d3-color/src/define.js
   function define_default(constructor, factory, prototype) {
@@ -22667,187 +22993,14 @@
     for (var key in definition) prototype[key] = definition[key];
     return prototype;
   }
+  var init_define = __esm({
+    "node_modules/d3-color/src/define.js"() {
+    }
+  });
 
   // node_modules/d3-color/src/color.js
   function Color() {
   }
-  var darker = 0.7;
-  var brighter = 1 / darker;
-  var reI = "\\s*([+-]?\\d+)\\s*";
-  var reN = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)\\s*";
-  var reP = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)%\\s*";
-  var reHex = /^#([0-9a-f]{3,8})$/;
-  var reRgbInteger = new RegExp(`^rgb\\(${reI},${reI},${reI}\\)$`);
-  var reRgbPercent = new RegExp(`^rgb\\(${reP},${reP},${reP}\\)$`);
-  var reRgbaInteger = new RegExp(`^rgba\\(${reI},${reI},${reI},${reN}\\)$`);
-  var reRgbaPercent = new RegExp(`^rgba\\(${reP},${reP},${reP},${reN}\\)$`);
-  var reHslPercent = new RegExp(`^hsl\\(${reN},${reP},${reP}\\)$`);
-  var reHslaPercent = new RegExp(`^hsla\\(${reN},${reP},${reP},${reN}\\)$`);
-  var named = {
-    aliceblue: 15792383,
-    antiquewhite: 16444375,
-    aqua: 65535,
-    aquamarine: 8388564,
-    azure: 15794175,
-    beige: 16119260,
-    bisque: 16770244,
-    black: 0,
-    blanchedalmond: 16772045,
-    blue: 255,
-    blueviolet: 9055202,
-    brown: 10824234,
-    burlywood: 14596231,
-    cadetblue: 6266528,
-    chartreuse: 8388352,
-    chocolate: 13789470,
-    coral: 16744272,
-    cornflowerblue: 6591981,
-    cornsilk: 16775388,
-    crimson: 14423100,
-    cyan: 65535,
-    darkblue: 139,
-    darkcyan: 35723,
-    darkgoldenrod: 12092939,
-    darkgray: 11119017,
-    darkgreen: 25600,
-    darkgrey: 11119017,
-    darkkhaki: 12433259,
-    darkmagenta: 9109643,
-    darkolivegreen: 5597999,
-    darkorange: 16747520,
-    darkorchid: 10040012,
-    darkred: 9109504,
-    darksalmon: 15308410,
-    darkseagreen: 9419919,
-    darkslateblue: 4734347,
-    darkslategray: 3100495,
-    darkslategrey: 3100495,
-    darkturquoise: 52945,
-    darkviolet: 9699539,
-    deeppink: 16716947,
-    deepskyblue: 49151,
-    dimgray: 6908265,
-    dimgrey: 6908265,
-    dodgerblue: 2003199,
-    firebrick: 11674146,
-    floralwhite: 16775920,
-    forestgreen: 2263842,
-    fuchsia: 16711935,
-    gainsboro: 14474460,
-    ghostwhite: 16316671,
-    gold: 16766720,
-    goldenrod: 14329120,
-    gray: 8421504,
-    green: 32768,
-    greenyellow: 11403055,
-    grey: 8421504,
-    honeydew: 15794160,
-    hotpink: 16738740,
-    indianred: 13458524,
-    indigo: 4915330,
-    ivory: 16777200,
-    khaki: 15787660,
-    lavender: 15132410,
-    lavenderblush: 16773365,
-    lawngreen: 8190976,
-    lemonchiffon: 16775885,
-    lightblue: 11393254,
-    lightcoral: 15761536,
-    lightcyan: 14745599,
-    lightgoldenrodyellow: 16448210,
-    lightgray: 13882323,
-    lightgreen: 9498256,
-    lightgrey: 13882323,
-    lightpink: 16758465,
-    lightsalmon: 16752762,
-    lightseagreen: 2142890,
-    lightskyblue: 8900346,
-    lightslategray: 7833753,
-    lightslategrey: 7833753,
-    lightsteelblue: 11584734,
-    lightyellow: 16777184,
-    lime: 65280,
-    limegreen: 3329330,
-    linen: 16445670,
-    magenta: 16711935,
-    maroon: 8388608,
-    mediumaquamarine: 6737322,
-    mediumblue: 205,
-    mediumorchid: 12211667,
-    mediumpurple: 9662683,
-    mediumseagreen: 3978097,
-    mediumslateblue: 8087790,
-    mediumspringgreen: 64154,
-    mediumturquoise: 4772300,
-    mediumvioletred: 13047173,
-    midnightblue: 1644912,
-    mintcream: 16121850,
-    mistyrose: 16770273,
-    moccasin: 16770229,
-    navajowhite: 16768685,
-    navy: 128,
-    oldlace: 16643558,
-    olive: 8421376,
-    olivedrab: 7048739,
-    orange: 16753920,
-    orangered: 16729344,
-    orchid: 14315734,
-    palegoldenrod: 15657130,
-    palegreen: 10025880,
-    paleturquoise: 11529966,
-    palevioletred: 14381203,
-    papayawhip: 16773077,
-    peachpuff: 16767673,
-    peru: 13468991,
-    pink: 16761035,
-    plum: 14524637,
-    powderblue: 11591910,
-    purple: 8388736,
-    rebeccapurple: 6697881,
-    red: 16711680,
-    rosybrown: 12357519,
-    royalblue: 4286945,
-    saddlebrown: 9127187,
-    salmon: 16416882,
-    sandybrown: 16032864,
-    seagreen: 3050327,
-    seashell: 16774638,
-    sienna: 10506797,
-    silver: 12632256,
-    skyblue: 8900331,
-    slateblue: 6970061,
-    slategray: 7372944,
-    slategrey: 7372944,
-    snow: 16775930,
-    springgreen: 65407,
-    steelblue: 4620980,
-    tan: 13808780,
-    teal: 32896,
-    thistle: 14204888,
-    tomato: 16737095,
-    turquoise: 4251856,
-    violet: 15631086,
-    wheat: 16113331,
-    white: 16777215,
-    whitesmoke: 16119285,
-    yellow: 16776960,
-    yellowgreen: 10145074
-  };
-  define_default(Color, color, {
-    copy(channels) {
-      return Object.assign(new this.constructor(), this, channels);
-    },
-    displayable() {
-      return this.rgb().displayable();
-    },
-    hex: color_formatHex,
-    // Deprecated! Use color.formatHex.
-    formatHex: color_formatHex,
-    formatHex8: color_formatHex8,
-    formatHsl: color_formatHsl,
-    formatRgb: color_formatRgb,
-    toString: color_formatRgb
-  });
   function color_formatHex() {
     return this.rgb().formatHex();
   }
@@ -22860,10 +23013,10 @@
   function color_formatRgb() {
     return this.rgb().formatRgb();
   }
-  function color(format) {
+  function color(format2) {
     var m2, l;
-    format = (format + "").trim().toLowerCase();
-    return (m2 = reHex.exec(format)) ? (l = m2[1].length, m2 = parseInt(m2[1], 16), l === 6 ? rgbn(m2) : l === 3 ? new Rgb(m2 >> 8 & 15 | m2 >> 4 & 240, m2 >> 4 & 15 | m2 & 240, (m2 & 15) << 4 | m2 & 15, 1) : l === 8 ? rgba(m2 >> 24 & 255, m2 >> 16 & 255, m2 >> 8 & 255, (m2 & 255) / 255) : l === 4 ? rgba(m2 >> 12 & 15 | m2 >> 8 & 240, m2 >> 8 & 15 | m2 >> 4 & 240, m2 >> 4 & 15 | m2 & 240, ((m2 & 15) << 4 | m2 & 15) / 255) : null) : (m2 = reRgbInteger.exec(format)) ? new Rgb(m2[1], m2[2], m2[3], 1) : (m2 = reRgbPercent.exec(format)) ? new Rgb(m2[1] * 255 / 100, m2[2] * 255 / 100, m2[3] * 255 / 100, 1) : (m2 = reRgbaInteger.exec(format)) ? rgba(m2[1], m2[2], m2[3], m2[4]) : (m2 = reRgbaPercent.exec(format)) ? rgba(m2[1] * 255 / 100, m2[2] * 255 / 100, m2[3] * 255 / 100, m2[4]) : (m2 = reHslPercent.exec(format)) ? hsla(m2[1], m2[2] / 100, m2[3] / 100, 1) : (m2 = reHslaPercent.exec(format)) ? hsla(m2[1], m2[2] / 100, m2[3] / 100, m2[4]) : named.hasOwnProperty(format) ? rgbn(named[format]) : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
+    format2 = (format2 + "").trim().toLowerCase();
+    return (m2 = reHex.exec(format2)) ? (l = m2[1].length, m2 = parseInt(m2[1], 16), l === 6 ? rgbn(m2) : l === 3 ? new Rgb(m2 >> 8 & 15 | m2 >> 4 & 240, m2 >> 4 & 15 | m2 & 240, (m2 & 15) << 4 | m2 & 15, 1) : l === 8 ? rgba(m2 >> 24 & 255, m2 >> 16 & 255, m2 >> 8 & 255, (m2 & 255) / 255) : l === 4 ? rgba(m2 >> 12 & 15 | m2 >> 8 & 240, m2 >> 8 & 15 | m2 >> 4 & 240, m2 >> 4 & 15 | m2 & 240, ((m2 & 15) << 4 | m2 & 15) / 255) : null) : (m2 = reRgbInteger.exec(format2)) ? new Rgb(m2[1], m2[2], m2[3], 1) : (m2 = reRgbPercent.exec(format2)) ? new Rgb(m2[1] * 255 / 100, m2[2] * 255 / 100, m2[3] * 255 / 100, 1) : (m2 = reRgbaInteger.exec(format2)) ? rgba(m2[1], m2[2], m2[3], m2[4]) : (m2 = reRgbaPercent.exec(format2)) ? rgba(m2[1] * 255 / 100, m2[2] * 255 / 100, m2[3] * 255 / 100, m2[4]) : (m2 = reHslPercent.exec(format2)) ? hsla(m2[1], m2[2] / 100, m2[3] / 100, 1) : (m2 = reHslaPercent.exec(format2)) ? hsla(m2[1], m2[2] / 100, m2[3] / 100, m2[4]) : named.hasOwnProperty(format2) ? rgbn(named[format2]) : format2 === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
   }
   function rgbn(n) {
     return new Rgb(n >> 16 & 255, n >> 8 & 255, n & 255, 1);
@@ -22887,31 +23040,6 @@
     this.b = +b;
     this.opacity = +opacity;
   }
-  define_default(Rgb, rgb, extend(Color, {
-    brighter(k) {
-      k = k == null ? brighter : Math.pow(brighter, k);
-      return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
-    },
-    darker(k) {
-      k = k == null ? darker : Math.pow(darker, k);
-      return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
-    },
-    rgb() {
-      return this;
-    },
-    clamp() {
-      return new Rgb(clampi(this.r), clampi(this.g), clampi(this.b), clampa(this.opacity));
-    },
-    displayable() {
-      return -0.5 <= this.r && this.r < 255.5 && (-0.5 <= this.g && this.g < 255.5) && (-0.5 <= this.b && this.b < 255.5) && (0 <= this.opacity && this.opacity <= 1);
-    },
-    hex: rgb_formatHex,
-    // Deprecated! Use color.formatHex.
-    formatHex: rgb_formatHex,
-    formatHex8: rgb_formatHex8,
-    formatRgb: rgb_formatRgb,
-    toString: rgb_formatRgb
-  }));
   function rgb_formatHex() {
     return `#${hex(this.r)}${hex(this.g)}${hex(this.b)}`;
   }
@@ -22965,35 +23093,6 @@
     this.l = +l;
     this.opacity = +opacity;
   }
-  define_default(Hsl, hsl, extend(Color, {
-    brighter(k) {
-      k = k == null ? brighter : Math.pow(brighter, k);
-      return new Hsl(this.h, this.s, this.l * k, this.opacity);
-    },
-    darker(k) {
-      k = k == null ? darker : Math.pow(darker, k);
-      return new Hsl(this.h, this.s, this.l * k, this.opacity);
-    },
-    rgb() {
-      var h = this.h % 360 + (this.h < 0) * 360, s = isNaN(h) || isNaN(this.s) ? 0 : this.s, l = this.l, m2 = l + (l < 0.5 ? l : 1 - l) * s, m1 = 2 * l - m2;
-      return new Rgb(
-        hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
-        hsl2rgb(h, m1, m2),
-        hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
-        this.opacity
-      );
-    },
-    clamp() {
-      return new Hsl(clamph(this.h), clampt(this.s), clampt(this.l), clampa(this.opacity));
-    },
-    displayable() {
-      return (0 <= this.s && this.s <= 1 || isNaN(this.s)) && (0 <= this.l && this.l <= 1) && (0 <= this.opacity && this.opacity <= 1);
-    },
-    formatHsl() {
-      const a2 = clampa(this.opacity);
-      return `${a2 === 1 ? "hsl(" : "hsla("}${clamph(this.h)}, ${clampt(this.s) * 100}%, ${clampt(this.l) * 100}%${a2 === 1 ? ")" : `, ${a2})`}`;
-    }
-  }));
   function clamph(value) {
     value = (value || 0) % 360;
     return value < 0 ? value + 360 : value;
@@ -23004,11 +23103,255 @@
   function hsl2rgb(h, m1, m2) {
     return (h < 60 ? m1 + (m2 - m1) * h / 60 : h < 180 ? m2 : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60 : m1) * 255;
   }
+  var darker, brighter, reI, reN, reP, reHex, reRgbInteger, reRgbPercent, reRgbaInteger, reRgbaPercent, reHslPercent, reHslaPercent, named;
+  var init_color = __esm({
+    "node_modules/d3-color/src/color.js"() {
+      init_define();
+      darker = 0.7;
+      brighter = 1 / darker;
+      reI = "\\s*([+-]?\\d+)\\s*";
+      reN = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)\\s*";
+      reP = "\\s*([+-]?(?:\\d*\\.)?\\d+(?:[eE][+-]?\\d+)?)%\\s*";
+      reHex = /^#([0-9a-f]{3,8})$/;
+      reRgbInteger = new RegExp(`^rgb\\(${reI},${reI},${reI}\\)$`);
+      reRgbPercent = new RegExp(`^rgb\\(${reP},${reP},${reP}\\)$`);
+      reRgbaInteger = new RegExp(`^rgba\\(${reI},${reI},${reI},${reN}\\)$`);
+      reRgbaPercent = new RegExp(`^rgba\\(${reP},${reP},${reP},${reN}\\)$`);
+      reHslPercent = new RegExp(`^hsl\\(${reN},${reP},${reP}\\)$`);
+      reHslaPercent = new RegExp(`^hsla\\(${reN},${reP},${reP},${reN}\\)$`);
+      named = {
+        aliceblue: 15792383,
+        antiquewhite: 16444375,
+        aqua: 65535,
+        aquamarine: 8388564,
+        azure: 15794175,
+        beige: 16119260,
+        bisque: 16770244,
+        black: 0,
+        blanchedalmond: 16772045,
+        blue: 255,
+        blueviolet: 9055202,
+        brown: 10824234,
+        burlywood: 14596231,
+        cadetblue: 6266528,
+        chartreuse: 8388352,
+        chocolate: 13789470,
+        coral: 16744272,
+        cornflowerblue: 6591981,
+        cornsilk: 16775388,
+        crimson: 14423100,
+        cyan: 65535,
+        darkblue: 139,
+        darkcyan: 35723,
+        darkgoldenrod: 12092939,
+        darkgray: 11119017,
+        darkgreen: 25600,
+        darkgrey: 11119017,
+        darkkhaki: 12433259,
+        darkmagenta: 9109643,
+        darkolivegreen: 5597999,
+        darkorange: 16747520,
+        darkorchid: 10040012,
+        darkred: 9109504,
+        darksalmon: 15308410,
+        darkseagreen: 9419919,
+        darkslateblue: 4734347,
+        darkslategray: 3100495,
+        darkslategrey: 3100495,
+        darkturquoise: 52945,
+        darkviolet: 9699539,
+        deeppink: 16716947,
+        deepskyblue: 49151,
+        dimgray: 6908265,
+        dimgrey: 6908265,
+        dodgerblue: 2003199,
+        firebrick: 11674146,
+        floralwhite: 16775920,
+        forestgreen: 2263842,
+        fuchsia: 16711935,
+        gainsboro: 14474460,
+        ghostwhite: 16316671,
+        gold: 16766720,
+        goldenrod: 14329120,
+        gray: 8421504,
+        green: 32768,
+        greenyellow: 11403055,
+        grey: 8421504,
+        honeydew: 15794160,
+        hotpink: 16738740,
+        indianred: 13458524,
+        indigo: 4915330,
+        ivory: 16777200,
+        khaki: 15787660,
+        lavender: 15132410,
+        lavenderblush: 16773365,
+        lawngreen: 8190976,
+        lemonchiffon: 16775885,
+        lightblue: 11393254,
+        lightcoral: 15761536,
+        lightcyan: 14745599,
+        lightgoldenrodyellow: 16448210,
+        lightgray: 13882323,
+        lightgreen: 9498256,
+        lightgrey: 13882323,
+        lightpink: 16758465,
+        lightsalmon: 16752762,
+        lightseagreen: 2142890,
+        lightskyblue: 8900346,
+        lightslategray: 7833753,
+        lightslategrey: 7833753,
+        lightsteelblue: 11584734,
+        lightyellow: 16777184,
+        lime: 65280,
+        limegreen: 3329330,
+        linen: 16445670,
+        magenta: 16711935,
+        maroon: 8388608,
+        mediumaquamarine: 6737322,
+        mediumblue: 205,
+        mediumorchid: 12211667,
+        mediumpurple: 9662683,
+        mediumseagreen: 3978097,
+        mediumslateblue: 8087790,
+        mediumspringgreen: 64154,
+        mediumturquoise: 4772300,
+        mediumvioletred: 13047173,
+        midnightblue: 1644912,
+        mintcream: 16121850,
+        mistyrose: 16770273,
+        moccasin: 16770229,
+        navajowhite: 16768685,
+        navy: 128,
+        oldlace: 16643558,
+        olive: 8421376,
+        olivedrab: 7048739,
+        orange: 16753920,
+        orangered: 16729344,
+        orchid: 14315734,
+        palegoldenrod: 15657130,
+        palegreen: 10025880,
+        paleturquoise: 11529966,
+        palevioletred: 14381203,
+        papayawhip: 16773077,
+        peachpuff: 16767673,
+        peru: 13468991,
+        pink: 16761035,
+        plum: 14524637,
+        powderblue: 11591910,
+        purple: 8388736,
+        rebeccapurple: 6697881,
+        red: 16711680,
+        rosybrown: 12357519,
+        royalblue: 4286945,
+        saddlebrown: 9127187,
+        salmon: 16416882,
+        sandybrown: 16032864,
+        seagreen: 3050327,
+        seashell: 16774638,
+        sienna: 10506797,
+        silver: 12632256,
+        skyblue: 8900331,
+        slateblue: 6970061,
+        slategray: 7372944,
+        slategrey: 7372944,
+        snow: 16775930,
+        springgreen: 65407,
+        steelblue: 4620980,
+        tan: 13808780,
+        teal: 32896,
+        thistle: 14204888,
+        tomato: 16737095,
+        turquoise: 4251856,
+        violet: 15631086,
+        wheat: 16113331,
+        white: 16777215,
+        whitesmoke: 16119285,
+        yellow: 16776960,
+        yellowgreen: 10145074
+      };
+      define_default(Color, color, {
+        copy(channels) {
+          return Object.assign(new this.constructor(), this, channels);
+        },
+        displayable() {
+          return this.rgb().displayable();
+        },
+        hex: color_formatHex,
+        // Deprecated! Use color.formatHex.
+        formatHex: color_formatHex,
+        formatHex8: color_formatHex8,
+        formatHsl: color_formatHsl,
+        formatRgb: color_formatRgb,
+        toString: color_formatRgb
+      });
+      define_default(Rgb, rgb, extend(Color, {
+        brighter(k) {
+          k = k == null ? brighter : Math.pow(brighter, k);
+          return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+        },
+        darker(k) {
+          k = k == null ? darker : Math.pow(darker, k);
+          return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+        },
+        rgb() {
+          return this;
+        },
+        clamp() {
+          return new Rgb(clampi(this.r), clampi(this.g), clampi(this.b), clampa(this.opacity));
+        },
+        displayable() {
+          return -0.5 <= this.r && this.r < 255.5 && (-0.5 <= this.g && this.g < 255.5) && (-0.5 <= this.b && this.b < 255.5) && (0 <= this.opacity && this.opacity <= 1);
+        },
+        hex: rgb_formatHex,
+        // Deprecated! Use color.formatHex.
+        formatHex: rgb_formatHex,
+        formatHex8: rgb_formatHex8,
+        formatRgb: rgb_formatRgb,
+        toString: rgb_formatRgb
+      }));
+      define_default(Hsl, hsl, extend(Color, {
+        brighter(k) {
+          k = k == null ? brighter : Math.pow(brighter, k);
+          return new Hsl(this.h, this.s, this.l * k, this.opacity);
+        },
+        darker(k) {
+          k = k == null ? darker : Math.pow(darker, k);
+          return new Hsl(this.h, this.s, this.l * k, this.opacity);
+        },
+        rgb() {
+          var h = this.h % 360 + (this.h < 0) * 360, s = isNaN(h) || isNaN(this.s) ? 0 : this.s, l = this.l, m2 = l + (l < 0.5 ? l : 1 - l) * s, m1 = 2 * l - m2;
+          return new Rgb(
+            hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
+            hsl2rgb(h, m1, m2),
+            hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
+            this.opacity
+          );
+        },
+        clamp() {
+          return new Hsl(clamph(this.h), clampt(this.s), clampt(this.l), clampa(this.opacity));
+        },
+        displayable() {
+          return (0 <= this.s && this.s <= 1 || isNaN(this.s)) && (0 <= this.l && this.l <= 1) && (0 <= this.opacity && this.opacity <= 1);
+        },
+        formatHsl() {
+          const a2 = clampa(this.opacity);
+          return `${a2 === 1 ? "hsl(" : "hsla("}${clamph(this.h)}, ${clampt(this.s) * 100}%, ${clampt(this.l) * 100}%${a2 === 1 ? ")" : `, ${a2})`}`;
+        }
+      }));
+    }
+  });
+
+  // node_modules/d3-color/src/index.js
+  var init_src6 = __esm({
+    "node_modules/d3-color/src/index.js"() {
+      init_color();
+    }
+  });
 
   // node_modules/d3-interpolate/src/basis.js
-  function basis(t1, v0, v1, v2, v3) {
-    var t2 = t1 * t1, t3 = t2 * t1;
-    return ((1 - 3 * t1 + 3 * t2 - t3) * v0 + (4 - 6 * t2 + 3 * t3) * v1 + (1 + 3 * t1 + 3 * t2 - 3 * t3) * v2 + t3 * v3) / 6;
+  function basis(t12, v0, v1, v2, v3) {
+    var t2 = t12 * t12, t3 = t2 * t12;
+    return ((1 - 3 * t12 + 3 * t2 - t3) * v0 + (4 - 6 * t2 + 3 * t3) * v1 + (1 + 3 * t12 + 3 * t2 - 3 * t3) * v2 + t3 * v3) / 6;
   }
   function basis_default(values) {
     var n = values.length - 1;
@@ -23017,6 +23360,10 @@
       return basis((t - i / n) * n, v0, v1, v2, v3);
     };
   }
+  var init_basis = __esm({
+    "node_modules/d3-interpolate/src/basis.js"() {
+    }
+  });
 
   // node_modules/d3-interpolate/src/basisClosed.js
   function basisClosed_default(values) {
@@ -23026,9 +23373,19 @@
       return basis((t - i / n) * n, v0, v1, v2, v3);
     };
   }
+  var init_basisClosed = __esm({
+    "node_modules/d3-interpolate/src/basisClosed.js"() {
+      init_basis();
+    }
+  });
 
   // node_modules/d3-interpolate/src/constant.js
-  var constant_default2 = (x3) => () => x3;
+  var constant_default2;
+  var init_constant2 = __esm({
+    "node_modules/d3-interpolate/src/constant.js"() {
+      constant_default2 = (x3) => () => x3;
+    }
+  });
 
   // node_modules/d3-interpolate/src/color.js
   function linear(a2, d) {
@@ -23050,23 +23407,13 @@
     var d = b - a2;
     return d ? linear(a2, d) : constant_default2(isNaN(a2) ? b : a2);
   }
+  var init_color2 = __esm({
+    "node_modules/d3-interpolate/src/color.js"() {
+      init_constant2();
+    }
+  });
 
   // node_modules/d3-interpolate/src/rgb.js
-  var rgb_default = (function rgbGamma(y3) {
-    var color2 = gamma(y3);
-    function rgb2(start2, end) {
-      var r = color2((start2 = rgb(start2)).r, (end = rgb(end)).r), g = color2(start2.g, end.g), b = color2(start2.b, end.b), opacity = nogamma(start2.opacity, end.opacity);
-      return function(t) {
-        start2.r = r(t);
-        start2.g = g(t);
-        start2.b = b(t);
-        start2.opacity = opacity(t);
-        return start2 + "";
-      };
-    }
-    rgb2.gamma = rgbGamma;
-    return rgb2;
-  })(1);
   function rgbSpline(spline) {
     return function(colors) {
       var n = colors.length, r = new Array(n), g = new Array(n), b = new Array(n), i, color2;
@@ -23088,8 +23435,32 @@
       };
     };
   }
-  var rgbBasis = rgbSpline(basis_default);
-  var rgbBasisClosed = rgbSpline(basisClosed_default);
+  var rgb_default, rgbBasis, rgbBasisClosed;
+  var init_rgb = __esm({
+    "node_modules/d3-interpolate/src/rgb.js"() {
+      init_src6();
+      init_basis();
+      init_basisClosed();
+      init_color2();
+      rgb_default = (function rgbGamma(y3) {
+        var color2 = gamma(y3);
+        function rgb2(start2, end) {
+          var r = color2((start2 = rgb(start2)).r, (end = rgb(end)).r), g = color2(start2.g, end.g), b = color2(start2.b, end.b), opacity = nogamma(start2.opacity, end.opacity);
+          return function(t) {
+            start2.r = r(t);
+            start2.g = g(t);
+            start2.b = b(t);
+            start2.opacity = opacity(t);
+            return start2 + "";
+          };
+        }
+        rgb2.gamma = rgbGamma;
+        return rgb2;
+      })(1);
+      rgbBasis = rgbSpline(basis_default);
+      rgbBasisClosed = rgbSpline(basisClosed_default);
+    }
+  });
 
   // node_modules/d3-interpolate/src/number.js
   function number_default(a2, b) {
@@ -23097,10 +23468,12 @@
       return a2 * (1 - t) + b * t;
     };
   }
+  var init_number = __esm({
+    "node_modules/d3-interpolate/src/number.js"() {
+    }
+  });
 
   // node_modules/d3-interpolate/src/string.js
-  var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g;
-  var reB = new RegExp(reA.source, "g");
   function zero(b) {
     return function() {
       return b;
@@ -23139,17 +23512,16 @@
       return s.join("");
     });
   }
+  var reA, reB;
+  var init_string = __esm({
+    "node_modules/d3-interpolate/src/string.js"() {
+      init_number();
+      reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g;
+      reB = new RegExp(reA.source, "g");
+    }
+  });
 
   // node_modules/d3-interpolate/src/transform/decompose.js
-  var degrees = 180 / Math.PI;
-  var identity = {
-    translateX: 0,
-    translateY: 0,
-    rotate: 0,
-    skewX: 0,
-    scaleX: 1,
-    scaleY: 1
-  };
   function decompose_default(a2, b, c2, d, e, f) {
     var scaleX, scaleY, skewX;
     if (scaleX = Math.sqrt(a2 * a2 + b * b)) a2 /= scaleX, b /= scaleX;
@@ -23165,9 +23537,22 @@
       scaleY
     };
   }
+  var degrees, identity;
+  var init_decompose = __esm({
+    "node_modules/d3-interpolate/src/transform/decompose.js"() {
+      degrees = 180 / Math.PI;
+      identity = {
+        translateX: 0,
+        translateY: 0,
+        rotate: 0,
+        skewX: 0,
+        scaleX: 1,
+        scaleY: 1
+      };
+    }
+  });
 
   // node_modules/d3-interpolate/src/transform/parse.js
-  var svgNode;
   function parseCss(value) {
     const m2 = new (typeof DOMMatrix === "function" ? DOMMatrix : WebKitCSSMatrix)(value + "");
     return m2.isIdentity ? identity : decompose_default(m2.a, m2.b, m2.c, m2.d, m2.e, m2.f);
@@ -23180,6 +23565,12 @@
     value = value.matrix;
     return decompose_default(value.a, value.b, value.c, value.d, value.e, value.f);
   }
+  var svgNode;
+  var init_parse = __esm({
+    "node_modules/d3-interpolate/src/transform/parse.js"() {
+      init_decompose();
+    }
+  });
 
   // node_modules/d3-interpolate/src/transform/index.js
   function interpolateTransform(parse, pxComma, pxParen, degParen) {
@@ -23233,11 +23624,17 @@
       };
     };
   }
-  var interpolateTransformCss = interpolateTransform(parseCss, "px, ", "px)", "deg)");
-  var interpolateTransformSvg = interpolateTransform(parseSvg, ", ", ")", ")");
+  var interpolateTransformCss, interpolateTransformSvg;
+  var init_transform = __esm({
+    "node_modules/d3-interpolate/src/transform/index.js"() {
+      init_number();
+      init_parse();
+      interpolateTransformCss = interpolateTransform(parseCss, "px, ", "px)", "deg)");
+      interpolateTransformSvg = interpolateTransform(parseSvg, ", ", ")", ")");
+    }
+  });
 
   // node_modules/d3-interpolate/src/zoom.js
-  var epsilon2 = 1e-12;
   function cosh(x3) {
     return ((x3 = Math.exp(x3)) + 1 / x3) / 2;
   }
@@ -23247,54 +23644,58 @@
   function tanh(x3) {
     return ((x3 = Math.exp(2 * x3)) - 1) / (x3 + 1);
   }
-  var zoom_default = (function zoomRho(rho, rho2, rho4) {
-    function zoom(p0, p1) {
-      var ux0 = p0[0], uy0 = p0[1], w0 = p0[2], ux1 = p1[0], uy1 = p1[1], w1 = p1[2], dx = ux1 - ux0, dy = uy1 - uy0, d2 = dx * dx + dy * dy, i, S;
-      if (d2 < epsilon2) {
-        S = Math.log(w1 / w0) / rho;
-        i = function(t) {
-          return [
-            ux0 + t * dx,
-            uy0 + t * dy,
-            w0 * Math.exp(rho * t * S)
-          ];
+  var epsilon2, zoom_default;
+  var init_zoom = __esm({
+    "node_modules/d3-interpolate/src/zoom.js"() {
+      epsilon2 = 1e-12;
+      zoom_default = (function zoomRho(rho, rho2, rho4) {
+        function zoom(p0, p1) {
+          var ux0 = p0[0], uy0 = p0[1], w0 = p0[2], ux1 = p1[0], uy1 = p1[1], w1 = p1[2], dx = ux1 - ux0, dy = uy1 - uy0, d2 = dx * dx + dy * dy, i, S;
+          if (d2 < epsilon2) {
+            S = Math.log(w1 / w0) / rho;
+            i = function(t) {
+              return [
+                ux0 + t * dx,
+                uy0 + t * dy,
+                w0 * Math.exp(rho * t * S)
+              ];
+            };
+          } else {
+            var d1 = Math.sqrt(d2), b0 = (w1 * w1 - w0 * w0 + rho4 * d2) / (2 * w0 * rho2 * d1), b1 = (w1 * w1 - w0 * w0 - rho4 * d2) / (2 * w1 * rho2 * d1), r0 = Math.log(Math.sqrt(b0 * b0 + 1) - b0), r1 = Math.log(Math.sqrt(b1 * b1 + 1) - b1);
+            S = (r1 - r0) / rho;
+            i = function(t) {
+              var s = t * S, coshr0 = cosh(r0), u = w0 / (rho2 * d1) * (coshr0 * tanh(rho * s + r0) - sinh(r0));
+              return [
+                ux0 + u * dx,
+                uy0 + u * dy,
+                w0 * coshr0 / cosh(rho * s + r0)
+              ];
+            };
+          }
+          i.duration = S * 1e3 * rho / Math.SQRT2;
+          return i;
+        }
+        zoom.rho = function(_) {
+          var _1 = Math.max(1e-3, +_), _2 = _1 * _1, _4 = _2 * _2;
+          return zoomRho(_1, _2, _4);
         };
-      } else {
-        var d1 = Math.sqrt(d2), b0 = (w1 * w1 - w0 * w0 + rho4 * d2) / (2 * w0 * rho2 * d1), b1 = (w1 * w1 - w0 * w0 - rho4 * d2) / (2 * w1 * rho2 * d1), r0 = Math.log(Math.sqrt(b0 * b0 + 1) - b0), r1 = Math.log(Math.sqrt(b1 * b1 + 1) - b1);
-        S = (r1 - r0) / rho;
-        i = function(t) {
-          var s = t * S, coshr0 = cosh(r0), u = w0 / (rho2 * d1) * (coshr0 * tanh(rho * s + r0) - sinh(r0));
-          return [
-            ux0 + u * dx,
-            uy0 + u * dy,
-            w0 * coshr0 / cosh(rho * s + r0)
-          ];
-        };
-      }
-      i.duration = S * 1e3 * rho / Math.SQRT2;
-      return i;
+        return zoom;
+      })(Math.SQRT2, 2, 4);
     }
-    zoom.rho = function(_) {
-      var _1 = Math.max(1e-3, +_), _2 = _1 * _1, _4 = _2 * _2;
-      return zoomRho(_1, _2, _4);
-    };
-    return zoom;
-  })(Math.SQRT2, 2, 4);
+  });
+
+  // node_modules/d3-interpolate/src/index.js
+  var init_src7 = __esm({
+    "node_modules/d3-interpolate/src/index.js"() {
+      init_number();
+      init_string();
+      init_transform();
+      init_zoom();
+      init_rgb();
+    }
+  });
 
   // node_modules/d3-timer/src/timer.js
-  var frame = 0;
-  var timeout = 0;
-  var interval = 0;
-  var pokeDelay = 1e3;
-  var taskHead;
-  var taskTail;
-  var clockLast = 0;
-  var clockNow = 0;
-  var clockSkew = 0;
-  var clock = typeof performance === "object" && performance.now ? performance : Date;
-  var setFrame = typeof window === "object" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(f) {
-    setTimeout(f, 17);
-  };
   function now() {
     return clockNow || (setFrame(clearNow), clockNow = clock.now() + clockSkew);
   }
@@ -23304,28 +23705,6 @@
   function Timer() {
     this._call = this._time = this._next = null;
   }
-  Timer.prototype = timer.prototype = {
-    constructor: Timer,
-    restart: function(callback, delay, time) {
-      if (typeof callback !== "function") throw new TypeError("callback is not a function");
-      time = (time == null ? now() : +time) + (delay == null ? 0 : +delay);
-      if (!this._next && taskTail !== this) {
-        if (taskTail) taskTail._next = this;
-        else taskHead = this;
-        taskTail = this;
-      }
-      this._call = callback;
-      this._time = time;
-      sleep();
-    },
-    stop: function() {
-      if (this._call) {
-        this._call = null;
-        this._time = Infinity;
-        sleep();
-      }
-    }
-  };
   function timer(callback, delay, time) {
     var t = new Timer();
     t.restart(callback, delay, time);
@@ -23357,17 +23736,17 @@
     if (delay > pokeDelay) clockSkew -= delay, clockLast = now2;
   }
   function nap() {
-    var t0, t1 = taskHead, t2, time = Infinity;
-    while (t1) {
-      if (t1._call) {
-        if (time > t1._time) time = t1._time;
-        t0 = t1, t1 = t1._next;
+    var t02, t12 = taskHead, t2, time = Infinity;
+    while (t12) {
+      if (t12._call) {
+        if (time > t12._time) time = t12._time;
+        t02 = t12, t12 = t12._next;
       } else {
-        t2 = t1._next, t1._next = null;
-        t1 = t0 ? t0._next = t2 : taskHead = t2;
+        t2 = t12._next, t12._next = null;
+        t12 = t02 ? t02._next = t2 : taskHead = t2;
       }
     }
-    taskTail = t0;
+    taskTail = t02;
     sleep(time);
   }
   function sleep(time) {
@@ -23382,6 +23761,44 @@
       frame = 1, setFrame(wake);
     }
   }
+  var frame, timeout, interval, pokeDelay, taskHead, taskTail, clockLast, clockNow, clockSkew, clock, setFrame;
+  var init_timer = __esm({
+    "node_modules/d3-timer/src/timer.js"() {
+      frame = 0;
+      timeout = 0;
+      interval = 0;
+      pokeDelay = 1e3;
+      clockLast = 0;
+      clockNow = 0;
+      clockSkew = 0;
+      clock = typeof performance === "object" && performance.now ? performance : Date;
+      setFrame = typeof window === "object" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(f) {
+        setTimeout(f, 17);
+      };
+      Timer.prototype = timer.prototype = {
+        constructor: Timer,
+        restart: function(callback, delay, time) {
+          if (typeof callback !== "function") throw new TypeError("callback is not a function");
+          time = (time == null ? now() : +time) + (delay == null ? 0 : +delay);
+          if (!this._next && taskTail !== this) {
+            if (taskTail) taskTail._next = this;
+            else taskHead = this;
+            taskTail = this;
+          }
+          this._call = callback;
+          this._time = time;
+          sleep();
+        },
+        stop: function() {
+          if (this._call) {
+            this._call = null;
+            this._time = Infinity;
+            sleep();
+          }
+        }
+      };
+    }
+  });
 
   // node_modules/d3-timer/src/timeout.js
   function timeout_default(callback, delay, time) {
@@ -23393,17 +23810,21 @@
     }, delay, time);
     return t;
   }
+  var init_timeout = __esm({
+    "node_modules/d3-timer/src/timeout.js"() {
+      init_timer();
+    }
+  });
+
+  // node_modules/d3-timer/src/index.js
+  var init_src8 = __esm({
+    "node_modules/d3-timer/src/index.js"() {
+      init_timer();
+      init_timeout();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/schedule.js
-  var emptyOn = dispatch_default("start", "end", "cancel", "interrupt");
-  var emptyTween = [];
-  var CREATED = 0;
-  var SCHEDULED = 1;
-  var STARTING = 2;
-  var STARTED = 3;
-  var RUNNING = 4;
-  var ENDING = 5;
-  var ENDED = 6;
   function schedule_default(node, name, id2, index2, group, timing) {
     var schedules = node.__transition;
     if (!schedules) node.__transition = {};
@@ -23504,6 +23925,22 @@
       delete node.__transition;
     }
   }
+  var emptyOn, emptyTween, CREATED, SCHEDULED, STARTING, STARTED, RUNNING, ENDING, ENDED;
+  var init_schedule = __esm({
+    "node_modules/d3-transition/src/transition/schedule.js"() {
+      init_src3();
+      init_src8();
+      emptyOn = dispatch_default("start", "end", "cancel", "interrupt");
+      emptyTween = [];
+      CREATED = 0;
+      SCHEDULED = 1;
+      STARTING = 2;
+      STARTED = 3;
+      RUNNING = 4;
+      ENDING = 5;
+      ENDED = 6;
+    }
+  });
 
   // node_modules/d3-transition/src/interrupt.js
   function interrupt_default(node, name) {
@@ -23523,6 +23960,11 @@
     }
     if (empty2) delete node.__transition;
   }
+  var init_interrupt = __esm({
+    "node_modules/d3-transition/src/interrupt.js"() {
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/selection/interrupt.js
   function interrupt_default2(name) {
@@ -23530,6 +23972,11 @@
       interrupt_default(this, name);
     });
   }
+  var init_interrupt2 = __esm({
+    "node_modules/d3-transition/src/selection/interrupt.js"() {
+      init_interrupt();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/tween.js
   function tweenRemove(id2, name) {
@@ -23591,12 +24038,23 @@
       return get2(node, id2).value[name];
     };
   }
+  var init_tween = __esm({
+    "node_modules/d3-transition/src/transition/tween.js"() {
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/interpolate.js
   function interpolate_default(a2, b) {
     var c2;
     return (typeof b === "number" ? number_default : b instanceof color ? rgb_default : (c2 = color(b)) ? (b = c2, rgb_default) : string_default)(a2, b);
   }
+  var init_interpolate = __esm({
+    "node_modules/d3-transition/src/transition/interpolate.js"() {
+      init_src6();
+      init_src7();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/attr.js
   function attrRemove2(name) {
@@ -23647,6 +24105,14 @@
     var fullname = namespace_default(name), i = fullname === "transform" ? interpolateTransformSvg : interpolate_default;
     return this.attrTween(name, typeof value === "function" ? (fullname.local ? attrFunctionNS2 : attrFunction2)(fullname, i, tweenValue(this, "attr." + name, value)) : value == null ? (fullname.local ? attrRemoveNS2 : attrRemove2)(fullname) : (fullname.local ? attrConstantNS2 : attrConstant2)(fullname, i, value));
   }
+  var init_attr2 = __esm({
+    "node_modules/d3-transition/src/transition/attr.js"() {
+      init_src7();
+      init_src4();
+      init_tween();
+      init_interpolate();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/attrTween.js
   function attrInterpolate(name, i) {
@@ -23660,21 +24126,21 @@
     };
   }
   function attrTweenNS(fullname, value) {
-    var t0, i0;
+    var t02, i0;
     function tween() {
       var i = value.apply(this, arguments);
-      if (i !== i0) t0 = (i0 = i) && attrInterpolateNS(fullname, i);
-      return t0;
+      if (i !== i0) t02 = (i0 = i) && attrInterpolateNS(fullname, i);
+      return t02;
     }
     tween._value = value;
     return tween;
   }
   function attrTween(name, value) {
-    var t0, i0;
+    var t02, i0;
     function tween() {
       var i = value.apply(this, arguments);
-      if (i !== i0) t0 = (i0 = i) && attrInterpolate(name, i);
-      return t0;
+      if (i !== i0) t02 = (i0 = i) && attrInterpolate(name, i);
+      return t02;
     }
     tween._value = value;
     return tween;
@@ -23687,6 +24153,11 @@
     var fullname = namespace_default(name);
     return this.tween(key, (fullname.local ? attrTweenNS : attrTween)(fullname, value));
   }
+  var init_attrTween = __esm({
+    "node_modules/d3-transition/src/transition/attrTween.js"() {
+      init_src4();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/delay.js
   function delayFunction(id2, value) {
@@ -23703,6 +24174,11 @@
     var id2 = this._id;
     return arguments.length ? this.each((typeof value === "function" ? delayFunction : delayConstant)(id2, value)) : get2(this.node(), id2).delay;
   }
+  var init_delay = __esm({
+    "node_modules/d3-transition/src/transition/delay.js"() {
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/duration.js
   function durationFunction(id2, value) {
@@ -23719,6 +24195,11 @@
     var id2 = this._id;
     return arguments.length ? this.each((typeof value === "function" ? durationFunction : durationConstant)(id2, value)) : get2(this.node(), id2).duration;
   }
+  var init_duration = __esm({
+    "node_modules/d3-transition/src/transition/duration.js"() {
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/ease.js
   function easeConstant(id2, value) {
@@ -23731,6 +24212,11 @@
     var id2 = this._id;
     return arguments.length ? this.each(easeConstant(id2, value)) : get2(this.node(), id2).ease;
   }
+  var init_ease = __esm({
+    "node_modules/d3-transition/src/transition/ease.js"() {
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/easeVarying.js
   function easeVarying(id2, value) {
@@ -23744,6 +24230,11 @@
     if (typeof value !== "function") throw new Error();
     return this.each(easeVarying(this._id, value));
   }
+  var init_easeVarying = __esm({
+    "node_modules/d3-transition/src/transition/easeVarying.js"() {
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/filter.js
   function filter_default2(match) {
@@ -23757,6 +24248,12 @@
     }
     return new Transition(subgroups, this._parents, this._name, this._id);
   }
+  var init_filter2 = __esm({
+    "node_modules/d3-transition/src/transition/filter.js"() {
+      init_src4();
+      init_transition2();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/merge.js
   function merge_default2(transition2) {
@@ -23773,6 +24270,11 @@
     }
     return new Transition(merges, this._parents, this._name, this._id);
   }
+  var init_merge2 = __esm({
+    "node_modules/d3-transition/src/transition/merge.js"() {
+      init_transition2();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/on.js
   function start(name) {
@@ -23794,6 +24296,11 @@
     var id2 = this._id;
     return arguments.length < 2 ? get2(this.node(), id2).on.on(name) : this.each(onFunction(id2, name, listener));
   }
+  var init_on2 = __esm({
+    "node_modules/d3-transition/src/transition/on.js"() {
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/remove.js
   function removeFunction(id2) {
@@ -23806,6 +24313,10 @@
   function remove_default2() {
     return this.on("end.remove", removeFunction(this._id));
   }
+  var init_remove2 = __esm({
+    "node_modules/d3-transition/src/transition/remove.js"() {
+    }
+  });
 
   // node_modules/d3-transition/src/transition/select.js
   function select_default3(select) {
@@ -23822,6 +24333,13 @@
     }
     return new Transition(subgroups, this._parents, name, id2);
   }
+  var init_select3 = __esm({
+    "node_modules/d3-transition/src/transition/select.js"() {
+      init_src4();
+      init_transition2();
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/selectAll.js
   function selectAll_default2(select) {
@@ -23842,12 +24360,25 @@
     }
     return new Transition(subgroups, parents, name, id2);
   }
+  var init_selectAll2 = __esm({
+    "node_modules/d3-transition/src/transition/selectAll.js"() {
+      init_src4();
+      init_transition2();
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/selection.js
-  var Selection2 = selection_default.prototype.constructor;
   function selection_default2() {
     return new Selection2(this._groups, this._parents);
   }
+  var Selection2;
+  var init_selection2 = __esm({
+    "node_modules/d3-transition/src/transition/selection.js"() {
+      init_src4();
+      Selection2 = selection_default.prototype.constructor;
+    }
+  });
 
   // node_modules/d3-transition/src/transition/style.js
   function styleNull(name, interpolate) {
@@ -23889,6 +24420,15 @@
     var i = (name += "") === "transform" ? interpolateTransformCss : interpolate_default;
     return value == null ? this.styleTween(name, styleNull(name, i)).on("end.style." + name, styleRemove2(name)) : typeof value === "function" ? this.styleTween(name, styleFunction2(name, i, tweenValue(this, "style." + name, value))).each(styleMaybeRemove(this._id, name)) : this.styleTween(name, styleConstant2(name, i, value), priority).on("end.style." + name, null);
   }
+  var init_style2 = __esm({
+    "node_modules/d3-transition/src/transition/style.js"() {
+      init_src7();
+      init_src4();
+      init_schedule();
+      init_tween();
+      init_interpolate();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/styleTween.js
   function styleInterpolate(name, i, priority) {
@@ -23913,6 +24453,10 @@
     if (typeof value !== "function") throw new Error();
     return this.tween(key, styleTween(name, value, priority == null ? "" : priority));
   }
+  var init_styleTween = __esm({
+    "node_modules/d3-transition/src/transition/styleTween.js"() {
+    }
+  });
 
   // node_modules/d3-transition/src/transition/text.js
   function textConstant2(value) {
@@ -23929,6 +24473,11 @@
   function text_default2(value) {
     return this.tween("text", typeof value === "function" ? textFunction2(tweenValue(this, "text", value)) : textConstant2(value == null ? "" : value + ""));
   }
+  var init_text2 = __esm({
+    "node_modules/d3-transition/src/transition/text.js"() {
+      init_tween();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/textTween.js
   function textInterpolate(i) {
@@ -23937,11 +24486,11 @@
     };
   }
   function textTween(value) {
-    var t0, i0;
+    var t02, i0;
     function tween() {
       var i = value.apply(this, arguments);
-      if (i !== i0) t0 = (i0 = i) && textInterpolate(i);
-      return t0;
+      if (i !== i0) t02 = (i0 = i) && textInterpolate(i);
+      return t02;
     }
     tween._value = value;
     return tween;
@@ -23953,6 +24502,10 @@
     if (typeof value !== "function") throw new Error();
     return this.tween(key, textTween(value));
   }
+  var init_textTween = __esm({
+    "node_modules/d3-transition/src/transition/textTween.js"() {
+    }
+  });
 
   // node_modules/d3-transition/src/transition/transition.js
   function transition_default() {
@@ -23972,6 +24525,12 @@
     }
     return new Transition(groups, this._parents, name, id1);
   }
+  var init_transition = __esm({
+    "node_modules/d3-transition/src/transition/transition.js"() {
+      init_transition2();
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/end.js
   function end_default() {
@@ -23993,9 +24552,13 @@
       if (size === 0) resolve();
     });
   }
+  var init_end = __esm({
+    "node_modules/d3-transition/src/transition/end.js"() {
+      init_schedule();
+    }
+  });
 
   // node_modules/d3-transition/src/transition/index.js
-  var id = 0;
   function Transition(groups, parents, name, id2) {
     this._groups = groups;
     this._parents = parents;
@@ -24008,53 +24571,84 @@
   function newId() {
     return ++id;
   }
-  var selection_prototype = selection_default.prototype;
-  Transition.prototype = transition.prototype = {
-    constructor: Transition,
-    select: select_default3,
-    selectAll: selectAll_default2,
-    selectChild: selection_prototype.selectChild,
-    selectChildren: selection_prototype.selectChildren,
-    filter: filter_default2,
-    merge: merge_default2,
-    selection: selection_default2,
-    transition: transition_default,
-    call: selection_prototype.call,
-    nodes: selection_prototype.nodes,
-    node: selection_prototype.node,
-    size: selection_prototype.size,
-    empty: selection_prototype.empty,
-    each: selection_prototype.each,
-    on: on_default2,
-    attr: attr_default2,
-    attrTween: attrTween_default,
-    style: style_default2,
-    styleTween: styleTween_default,
-    text: text_default2,
-    textTween: textTween_default,
-    remove: remove_default2,
-    tween: tween_default,
-    delay: delay_default,
-    duration: duration_default,
-    ease: ease_default,
-    easeVarying: easeVarying_default,
-    end: end_default,
-    [Symbol.iterator]: selection_prototype[Symbol.iterator]
-  };
+  var id, selection_prototype;
+  var init_transition2 = __esm({
+    "node_modules/d3-transition/src/transition/index.js"() {
+      init_src4();
+      init_attr2();
+      init_attrTween();
+      init_delay();
+      init_duration();
+      init_ease();
+      init_easeVarying();
+      init_filter2();
+      init_merge2();
+      init_on2();
+      init_remove2();
+      init_select3();
+      init_selectAll2();
+      init_selection2();
+      init_style2();
+      init_styleTween();
+      init_text2();
+      init_textTween();
+      init_transition();
+      init_tween();
+      init_end();
+      id = 0;
+      selection_prototype = selection_default.prototype;
+      Transition.prototype = transition.prototype = {
+        constructor: Transition,
+        select: select_default3,
+        selectAll: selectAll_default2,
+        selectChild: selection_prototype.selectChild,
+        selectChildren: selection_prototype.selectChildren,
+        filter: filter_default2,
+        merge: merge_default2,
+        selection: selection_default2,
+        transition: transition_default,
+        call: selection_prototype.call,
+        nodes: selection_prototype.nodes,
+        node: selection_prototype.node,
+        size: selection_prototype.size,
+        empty: selection_prototype.empty,
+        each: selection_prototype.each,
+        on: on_default2,
+        attr: attr_default2,
+        attrTween: attrTween_default,
+        style: style_default2,
+        styleTween: styleTween_default,
+        text: text_default2,
+        textTween: textTween_default,
+        remove: remove_default2,
+        tween: tween_default,
+        delay: delay_default,
+        duration: duration_default,
+        ease: ease_default,
+        easeVarying: easeVarying_default,
+        end: end_default,
+        [Symbol.iterator]: selection_prototype[Symbol.iterator]
+      };
+    }
+  });
 
   // node_modules/d3-ease/src/cubic.js
   function cubicInOut(t) {
     return ((t *= 2) <= 1 ? t * t * t : (t -= 2) * t * t + 2) / 2;
   }
+  var init_cubic = __esm({
+    "node_modules/d3-ease/src/cubic.js"() {
+    }
+  });
+
+  // node_modules/d3-ease/src/index.js
+  var init_src9 = __esm({
+    "node_modules/d3-ease/src/index.js"() {
+      init_cubic();
+    }
+  });
 
   // node_modules/d3-transition/src/selection/transition.js
-  var defaultTiming = {
-    time: null,
-    // Set on use.
-    delay: 0,
-    duration: 250,
-    ease: cubicInOut
-  };
   function inherit(node, id2) {
     var timing;
     while (!(timing = node.__transition) || !(timing = timing[id2])) {
@@ -24080,52 +24674,153 @@
     }
     return new Transition(groups, this._parents, name, id2);
   }
+  var defaultTiming;
+  var init_transition3 = __esm({
+    "node_modules/d3-transition/src/selection/transition.js"() {
+      init_transition2();
+      init_schedule();
+      init_src9();
+      init_src8();
+      defaultTiming = {
+        time: null,
+        // Set on use.
+        delay: 0,
+        duration: 250,
+        ease: cubicInOut
+      };
+    }
+  });
 
   // node_modules/d3-transition/src/selection/index.js
-  selection_default.prototype.interrupt = interrupt_default2;
-  selection_default.prototype.transition = transition_default2;
+  var init_selection3 = __esm({
+    "node_modules/d3-transition/src/selection/index.js"() {
+      init_src4();
+      init_interrupt2();
+      init_transition3();
+      selection_default.prototype.interrupt = interrupt_default2;
+      selection_default.prototype.transition = transition_default2;
+    }
+  });
+
+  // node_modules/d3-transition/src/index.js
+  var init_src10 = __esm({
+    "node_modules/d3-transition/src/index.js"() {
+      init_selection3();
+      init_interrupt();
+    }
+  });
+
+  // node_modules/d3-brush/src/constant.js
+  var init_constant3 = __esm({
+    "node_modules/d3-brush/src/constant.js"() {
+    }
+  });
+
+  // node_modules/d3-brush/src/event.js
+  var init_event = __esm({
+    "node_modules/d3-brush/src/event.js"() {
+    }
+  });
+
+  // node_modules/d3-brush/src/noevent.js
+  var init_noevent2 = __esm({
+    "node_modules/d3-brush/src/noevent.js"() {
+    }
+  });
 
   // node_modules/d3-brush/src/brush.js
-  var { abs, max, min } = Math;
   function number1(e) {
     return [+e[0], +e[1]];
   }
   function number2(e) {
     return [number1(e[0]), number1(e[1])];
   }
-  var X = {
-    name: "x",
-    handles: ["w", "e"].map(type),
-    input: function(x3, e) {
-      return x3 == null ? null : [[+x3[0], e[0][1]], [+x3[1], e[1][1]]];
-    },
-    output: function(xy) {
-      return xy && [xy[0][0], xy[1][0]];
-    }
-  };
-  var Y = {
-    name: "y",
-    handles: ["n", "s"].map(type),
-    input: function(y3, e) {
-      return y3 == null ? null : [[e[0][0], +y3[0]], [e[1][0], +y3[1]]];
-    },
-    output: function(xy) {
-      return xy && [xy[0][1], xy[1][1]];
-    }
-  };
-  var XY = {
-    name: "xy",
-    handles: ["n", "w", "e", "s", "nw", "ne", "sw", "se"].map(type),
-    input: function(xy) {
-      return xy == null ? null : number2(xy);
-    },
-    output: function(xy) {
-      return xy;
-    }
-  };
   function type(t) {
     return { type: t };
   }
+  var abs, max, min, X, Y, XY;
+  var init_brush = __esm({
+    "node_modules/d3-brush/src/brush.js"() {
+      init_src10();
+      init_constant3();
+      init_event();
+      init_noevent2();
+      ({ abs, max, min } = Math);
+      X = {
+        name: "x",
+        handles: ["w", "e"].map(type),
+        input: function(x3, e) {
+          return x3 == null ? null : [[+x3[0], e[0][1]], [+x3[1], e[1][1]]];
+        },
+        output: function(xy) {
+          return xy && [xy[0][0], xy[1][0]];
+        }
+      };
+      Y = {
+        name: "y",
+        handles: ["n", "s"].map(type),
+        input: function(y3, e) {
+          return y3 == null ? null : [[e[0][0], +y3[0]], [e[1][0], +y3[1]]];
+        },
+        output: function(xy) {
+          return xy && [xy[0][1], xy[1][1]];
+        }
+      };
+      XY = {
+        name: "xy",
+        handles: ["n", "w", "e", "s", "nw", "ne", "sw", "se"].map(type),
+        input: function(xy) {
+          return xy == null ? null : number2(xy);
+        },
+        output: function(xy) {
+          return xy;
+        }
+      };
+    }
+  });
+
+  // node_modules/d3-brush/src/index.js
+  var init_src11 = __esm({
+    "node_modules/d3-brush/src/index.js"() {
+      init_brush();
+    }
+  });
+
+  // node_modules/d3-path/src/index.js
+  var init_src12 = __esm({
+    "node_modules/d3-path/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-chord/src/index.js
+  var init_src13 = __esm({
+    "node_modules/d3-chord/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-contour/src/index.js
+  var init_src14 = __esm({
+    "node_modules/d3-contour/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-delaunay/src/index.js
+  var init_src15 = __esm({
+    "node_modules/d3-delaunay/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-dsv/src/index.js
+  var init_src16 = __esm({
+    "node_modules/d3-dsv/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-fetch/src/index.js
+  var init_src17 = __esm({
+    "node_modules/d3-fetch/src/index.js"() {
+    }
+  });
 
   // node_modules/d3-force/src/center.js
   function center_default(x3, y3) {
@@ -24155,6 +24850,10 @@
     };
     return force;
   }
+  var init_center = __esm({
+    "node_modules/d3-force/src/center.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/add.js
   function add_default(d) {
@@ -24202,6 +24901,10 @@
     }
     return this;
   }
+  var init_add = __esm({
+    "node_modules/d3-quadtree/src/add.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/cover.js
   function cover_default(x3, y3) {
@@ -24238,6 +24941,10 @@
     this._y1 = y1;
     return this;
   }
+  var init_cover = __esm({
+    "node_modules/d3-quadtree/src/cover.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/data.js
   function data_default2() {
@@ -24249,11 +24956,19 @@
     });
     return data;
   }
+  var init_data2 = __esm({
+    "node_modules/d3-quadtree/src/data.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/extent.js
   function extent_default(_) {
     return arguments.length ? this.cover(+_[0][0], +_[0][1]).cover(+_[1][0], +_[1][1]) : isNaN(this._x0) ? void 0 : [[this._x0, this._y0], [this._x1, this._y1]];
   }
+  var init_extent = __esm({
+    "node_modules/d3-quadtree/src/extent.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/quad.js
   function quad_default(node, x0, y0, x1, y1) {
@@ -24263,6 +24978,10 @@
     this.x1 = x1;
     this.y1 = y1;
   }
+  var init_quad = __esm({
+    "node_modules/d3-quadtree/src/quad.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/find.js
   function find_default(x3, y3, radius) {
@@ -24301,6 +25020,11 @@
     }
     return data;
   }
+  var init_find = __esm({
+    "node_modules/d3-quadtree/src/find.js"() {
+      init_quad();
+    }
+  });
 
   // node_modules/d3-quadtree/src/remove.js
   function remove_default3(d) {
@@ -24331,11 +25055,19 @@
     for (var i = 0, n = data.length; i < n; ++i) this.remove(data[i]);
     return this;
   }
+  var init_remove3 = __esm({
+    "node_modules/d3-quadtree/src/remove.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/root.js
   function root_default() {
     return this._root;
   }
+  var init_root = __esm({
+    "node_modules/d3-quadtree/src/root.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/size.js
   function size_default2() {
@@ -24347,6 +25079,10 @@
     });
     return size;
   }
+  var init_size2 = __esm({
+    "node_modules/d3-quadtree/src/size.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/visit.js
   function visit_default(callback) {
@@ -24363,6 +25099,11 @@
     }
     return this;
   }
+  var init_visit = __esm({
+    "node_modules/d3-quadtree/src/visit.js"() {
+      init_quad();
+    }
+  });
 
   // node_modules/d3-quadtree/src/visitAfter.js
   function visitAfter_default(callback) {
@@ -24384,6 +25125,11 @@
     }
     return this;
   }
+  var init_visitAfter = __esm({
+    "node_modules/d3-quadtree/src/visitAfter.js"() {
+      init_quad();
+    }
+  });
 
   // node_modules/d3-quadtree/src/x.js
   function defaultX(d) {
@@ -24392,6 +25138,10 @@
   function x_default(_) {
     return arguments.length ? (this._x = _, this) : this._x;
   }
+  var init_x = __esm({
+    "node_modules/d3-quadtree/src/x.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/y.js
   function defaultY(d) {
@@ -24400,6 +25150,10 @@
   function y_default(_) {
     return arguments.length ? (this._y = _, this) : this._y;
   }
+  var init_y = __esm({
+    "node_modules/d3-quadtree/src/y.js"() {
+    }
+  });
 
   // node_modules/d3-quadtree/src/quadtree.js
   function quadtree(nodes, x3, y3) {
@@ -24420,36 +25174,60 @@
     while (leaf = leaf.next) next = next.next = { data: leaf.data };
     return copy;
   }
-  var treeProto = quadtree.prototype = Quadtree.prototype;
-  treeProto.copy = function() {
-    var copy = new Quadtree(this._x, this._y, this._x0, this._y0, this._x1, this._y1), node = this._root, nodes, child;
-    if (!node) return copy;
-    if (!node.length) return copy._root = leaf_copy(node), copy;
-    nodes = [{ source: node, target: copy._root = new Array(4) }];
-    while (node = nodes.pop()) {
-      for (var i = 0; i < 4; ++i) {
-        if (child = node.source[i]) {
-          if (child.length) nodes.push({ source: child, target: node.target[i] = new Array(4) });
-          else node.target[i] = leaf_copy(child);
+  var treeProto;
+  var init_quadtree = __esm({
+    "node_modules/d3-quadtree/src/quadtree.js"() {
+      init_add();
+      init_cover();
+      init_data2();
+      init_extent();
+      init_find();
+      init_remove3();
+      init_root();
+      init_size2();
+      init_visit();
+      init_visitAfter();
+      init_x();
+      init_y();
+      treeProto = quadtree.prototype = Quadtree.prototype;
+      treeProto.copy = function() {
+        var copy = new Quadtree(this._x, this._y, this._x0, this._y0, this._x1, this._y1), node = this._root, nodes, child;
+        if (!node) return copy;
+        if (!node.length) return copy._root = leaf_copy(node), copy;
+        nodes = [{ source: node, target: copy._root = new Array(4) }];
+        while (node = nodes.pop()) {
+          for (var i = 0; i < 4; ++i) {
+            if (child = node.source[i]) {
+              if (child.length) nodes.push({ source: child, target: node.target[i] = new Array(4) });
+              else node.target[i] = leaf_copy(child);
+            }
+          }
         }
-      }
+        return copy;
+      };
+      treeProto.add = add_default;
+      treeProto.addAll = addAll;
+      treeProto.cover = cover_default;
+      treeProto.data = data_default2;
+      treeProto.extent = extent_default;
+      treeProto.find = find_default;
+      treeProto.remove = remove_default3;
+      treeProto.removeAll = removeAll;
+      treeProto.root = root_default;
+      treeProto.size = size_default2;
+      treeProto.visit = visit_default;
+      treeProto.visitAfter = visitAfter_default;
+      treeProto.x = x_default;
+      treeProto.y = y_default;
     }
-    return copy;
-  };
-  treeProto.add = add_default;
-  treeProto.addAll = addAll;
-  treeProto.cover = cover_default;
-  treeProto.data = data_default2;
-  treeProto.extent = extent_default;
-  treeProto.find = find_default;
-  treeProto.remove = remove_default3;
-  treeProto.removeAll = removeAll;
-  treeProto.root = root_default;
-  treeProto.size = size_default2;
-  treeProto.visit = visit_default;
-  treeProto.visitAfter = visitAfter_default;
-  treeProto.x = x_default;
-  treeProto.y = y_default;
+  });
+
+  // node_modules/d3-quadtree/src/index.js
+  var init_src18 = __esm({
+    "node_modules/d3-quadtree/src/index.js"() {
+      init_quadtree();
+    }
+  });
 
   // node_modules/d3-force/src/constant.js
   function constant_default4(x3) {
@@ -24457,11 +25235,19 @@
       return x3;
     };
   }
+  var init_constant4 = __esm({
+    "node_modules/d3-force/src/constant.js"() {
+    }
+  });
 
   // node_modules/d3-force/src/jiggle.js
   function jiggle_default(random) {
     return (random() - 0.5) * 1e-6;
   }
+  var init_jiggle = __esm({
+    "node_modules/d3-force/src/jiggle.js"() {
+    }
+  });
 
   // node_modules/d3-force/src/collide.js
   function x(d) {
@@ -24535,6 +25321,13 @@
     };
     return force;
   }
+  var init_collide = __esm({
+    "node_modules/d3-force/src/collide.js"() {
+      init_src18();
+      init_constant4();
+      init_jiggle();
+    }
+  });
 
   // node_modules/d3-force/src/link.js
   function index(d) {
@@ -24617,15 +25410,26 @@
     };
     return force;
   }
+  var init_link = __esm({
+    "node_modules/d3-force/src/link.js"() {
+      init_constant4();
+      init_jiggle();
+    }
+  });
 
   // node_modules/d3-force/src/lcg.js
-  var a = 1664525;
-  var c = 1013904223;
-  var m = 4294967296;
   function lcg_default() {
     let s = 1;
     return () => (s = (a * s + c) % m) / m;
   }
+  var a, c, m;
+  var init_lcg = __esm({
+    "node_modules/d3-force/src/lcg.js"() {
+      a = 1664525;
+      c = 1013904223;
+      m = 4294967296;
+    }
+  });
 
   // node_modules/d3-force/src/simulation.js
   function x2(d) {
@@ -24634,8 +25438,6 @@
   function y2(d) {
     return d.y;
   }
-  var initialRadius = 10;
-  var initialAngle = Math.PI * (3 - Math.sqrt(5));
   function simulation_default(nodes) {
     var simulation, alpha = 1, alphaMin = 1e-3, alphaDecay = 1 - Math.pow(alphaMin, 1 / 300), alphaTarget = 0, velocityDecay = 0.6, forces = /* @__PURE__ */ new Map(), stepper = timer(step), event = dispatch_default("tick", "end"), random = lcg_default();
     if (nodes == null) nodes = [];
@@ -24735,6 +25537,16 @@
       }
     };
   }
+  var initialRadius, initialAngle;
+  var init_simulation = __esm({
+    "node_modules/d3-force/src/simulation.js"() {
+      init_src3();
+      init_src8();
+      init_lcg();
+      initialRadius = 10;
+      initialAngle = Math.PI * (3 - Math.sqrt(5));
+    }
+  });
 
   // node_modules/d3-force/src/manyBody.js
   function manyBody_default() {
@@ -24814,9 +25626,1181 @@
     };
     return force;
   }
+  var init_manyBody = __esm({
+    "node_modules/d3-force/src/manyBody.js"() {
+      init_src18();
+      init_constant4();
+      init_jiggle();
+      init_simulation();
+    }
+  });
+
+  // node_modules/d3-force/src/index.js
+  var init_src19 = __esm({
+    "node_modules/d3-force/src/index.js"() {
+      init_center();
+      init_collide();
+      init_link();
+      init_manyBody();
+      init_simulation();
+    }
+  });
+
+  // node_modules/d3-format/src/formatDecimal.js
+  function formatDecimal_default(x3) {
+    return Math.abs(x3 = Math.round(x3)) >= 1e21 ? x3.toLocaleString("en").replace(/,/g, "") : x3.toString(10);
+  }
+  function formatDecimalParts(x3, p) {
+    if ((i = (x3 = p ? x3.toExponential(p - 1) : x3.toExponential()).indexOf("e")) < 0) return null;
+    var i, coefficient = x3.slice(0, i);
+    return [
+      coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient,
+      +x3.slice(i + 1)
+    ];
+  }
+  var init_formatDecimal = __esm({
+    "node_modules/d3-format/src/formatDecimal.js"() {
+    }
+  });
+
+  // node_modules/d3-format/src/exponent.js
+  function exponent_default(x3) {
+    return x3 = formatDecimalParts(Math.abs(x3)), x3 ? x3[1] : NaN;
+  }
+  var init_exponent = __esm({
+    "node_modules/d3-format/src/exponent.js"() {
+      init_formatDecimal();
+    }
+  });
+
+  // node_modules/d3-format/src/formatGroup.js
+  function formatGroup_default(grouping, thousands) {
+    return function(value, width) {
+      var i = value.length, t = [], j = 0, g = grouping[0], length = 0;
+      while (i > 0 && g > 0) {
+        if (length + g + 1 > width) g = Math.max(1, width - length);
+        t.push(value.substring(i -= g, i + g));
+        if ((length += g + 1) > width) break;
+        g = grouping[j = (j + 1) % grouping.length];
+      }
+      return t.reverse().join(thousands);
+    };
+  }
+  var init_formatGroup = __esm({
+    "node_modules/d3-format/src/formatGroup.js"() {
+    }
+  });
+
+  // node_modules/d3-format/src/formatNumerals.js
+  function formatNumerals_default(numerals) {
+    return function(value) {
+      return value.replace(/[0-9]/g, function(i) {
+        return numerals[+i];
+      });
+    };
+  }
+  var init_formatNumerals = __esm({
+    "node_modules/d3-format/src/formatNumerals.js"() {
+    }
+  });
+
+  // node_modules/d3-format/src/formatSpecifier.js
+  function formatSpecifier(specifier) {
+    if (!(match = re.exec(specifier))) throw new Error("invalid format: " + specifier);
+    var match;
+    return new FormatSpecifier({
+      fill: match[1],
+      align: match[2],
+      sign: match[3],
+      symbol: match[4],
+      zero: match[5],
+      width: match[6],
+      comma: match[7],
+      precision: match[8] && match[8].slice(1),
+      trim: match[9],
+      type: match[10]
+    });
+  }
+  function FormatSpecifier(specifier) {
+    this.fill = specifier.fill === void 0 ? " " : specifier.fill + "";
+    this.align = specifier.align === void 0 ? ">" : specifier.align + "";
+    this.sign = specifier.sign === void 0 ? "-" : specifier.sign + "";
+    this.symbol = specifier.symbol === void 0 ? "" : specifier.symbol + "";
+    this.zero = !!specifier.zero;
+    this.width = specifier.width === void 0 ? void 0 : +specifier.width;
+    this.comma = !!specifier.comma;
+    this.precision = specifier.precision === void 0 ? void 0 : +specifier.precision;
+    this.trim = !!specifier.trim;
+    this.type = specifier.type === void 0 ? "" : specifier.type + "";
+  }
+  var re;
+  var init_formatSpecifier = __esm({
+    "node_modules/d3-format/src/formatSpecifier.js"() {
+      re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
+      formatSpecifier.prototype = FormatSpecifier.prototype;
+      FormatSpecifier.prototype.toString = function() {
+        return this.fill + this.align + this.sign + this.symbol + (this.zero ? "0" : "") + (this.width === void 0 ? "" : Math.max(1, this.width | 0)) + (this.comma ? "," : "") + (this.precision === void 0 ? "" : "." + Math.max(0, this.precision | 0)) + (this.trim ? "~" : "") + this.type;
+      };
+    }
+  });
+
+  // node_modules/d3-format/src/formatTrim.js
+  function formatTrim_default(s) {
+    out: for (var n = s.length, i = 1, i0 = -1, i1; i < n; ++i) {
+      switch (s[i]) {
+        case ".":
+          i0 = i1 = i;
+          break;
+        case "0":
+          if (i0 === 0) i0 = i;
+          i1 = i;
+          break;
+        default:
+          if (!+s[i]) break out;
+          if (i0 > 0) i0 = 0;
+          break;
+      }
+    }
+    return i0 > 0 ? s.slice(0, i0) + s.slice(i1 + 1) : s;
+  }
+  var init_formatTrim = __esm({
+    "node_modules/d3-format/src/formatTrim.js"() {
+    }
+  });
+
+  // node_modules/d3-format/src/formatPrefixAuto.js
+  function formatPrefixAuto_default(x3, p) {
+    var d = formatDecimalParts(x3, p);
+    if (!d) return x3 + "";
+    var coefficient = d[0], exponent = d[1], i = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1, n = coefficient.length;
+    return i === n ? coefficient : i > n ? coefficient + new Array(i - n + 1).join("0") : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i) : "0." + new Array(1 - i).join("0") + formatDecimalParts(x3, Math.max(0, p + i - 1))[0];
+  }
+  var prefixExponent;
+  var init_formatPrefixAuto = __esm({
+    "node_modules/d3-format/src/formatPrefixAuto.js"() {
+      init_formatDecimal();
+    }
+  });
+
+  // node_modules/d3-format/src/formatRounded.js
+  function formatRounded_default(x3, p) {
+    var d = formatDecimalParts(x3, p);
+    if (!d) return x3 + "";
+    var coefficient = d[0], exponent = d[1];
+    return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1) : coefficient + new Array(exponent - coefficient.length + 2).join("0");
+  }
+  var init_formatRounded = __esm({
+    "node_modules/d3-format/src/formatRounded.js"() {
+      init_formatDecimal();
+    }
+  });
+
+  // node_modules/d3-format/src/formatTypes.js
+  var formatTypes_default;
+  var init_formatTypes = __esm({
+    "node_modules/d3-format/src/formatTypes.js"() {
+      init_formatDecimal();
+      init_formatPrefixAuto();
+      init_formatRounded();
+      formatTypes_default = {
+        "%": (x3, p) => (x3 * 100).toFixed(p),
+        "b": (x3) => Math.round(x3).toString(2),
+        "c": (x3) => x3 + "",
+        "d": formatDecimal_default,
+        "e": (x3, p) => x3.toExponential(p),
+        "f": (x3, p) => x3.toFixed(p),
+        "g": (x3, p) => x3.toPrecision(p),
+        "o": (x3) => Math.round(x3).toString(8),
+        "p": (x3, p) => formatRounded_default(x3 * 100, p),
+        "r": formatRounded_default,
+        "s": formatPrefixAuto_default,
+        "X": (x3) => Math.round(x3).toString(16).toUpperCase(),
+        "x": (x3) => Math.round(x3).toString(16)
+      };
+    }
+  });
+
+  // node_modules/d3-format/src/identity.js
+  function identity_default(x3) {
+    return x3;
+  }
+  var init_identity = __esm({
+    "node_modules/d3-format/src/identity.js"() {
+    }
+  });
+
+  // node_modules/d3-format/src/locale.js
+  function locale_default(locale3) {
+    var group = locale3.grouping === void 0 || locale3.thousands === void 0 ? identity_default : formatGroup_default(map.call(locale3.grouping, Number), locale3.thousands + ""), currencyPrefix = locale3.currency === void 0 ? "" : locale3.currency[0] + "", currencySuffix = locale3.currency === void 0 ? "" : locale3.currency[1] + "", decimal = locale3.decimal === void 0 ? "." : locale3.decimal + "", numerals = locale3.numerals === void 0 ? identity_default : formatNumerals_default(map.call(locale3.numerals, String)), percent = locale3.percent === void 0 ? "%" : locale3.percent + "", minus = locale3.minus === void 0 ? "\u2212" : locale3.minus + "", nan = locale3.nan === void 0 ? "NaN" : locale3.nan + "";
+    function newFormat(specifier) {
+      specifier = formatSpecifier(specifier);
+      var fill = specifier.fill, align = specifier.align, sign = specifier.sign, symbol = specifier.symbol, zero2 = specifier.zero, width = specifier.width, comma = specifier.comma, precision = specifier.precision, trim = specifier.trim, type2 = specifier.type;
+      if (type2 === "n") comma = true, type2 = "g";
+      else if (!formatTypes_default[type2]) precision === void 0 && (precision = 12), trim = true, type2 = "g";
+      if (zero2 || fill === "0" && align === "=") zero2 = true, fill = "0", align = "=";
+      var prefix = symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type2) ? "0" + type2.toLowerCase() : "", suffix = symbol === "$" ? currencySuffix : /[%p]/.test(type2) ? percent : "";
+      var formatType = formatTypes_default[type2], maybeSuffix = /[defgprs%]/.test(type2);
+      precision = precision === void 0 ? 6 : /[gprs]/.test(type2) ? Math.max(1, Math.min(21, precision)) : Math.max(0, Math.min(20, precision));
+      function format2(value) {
+        var valuePrefix = prefix, valueSuffix = suffix, i, n, c2;
+        if (type2 === "c") {
+          valueSuffix = formatType(value) + valueSuffix;
+          value = "";
+        } else {
+          value = +value;
+          var valueNegative = value < 0 || 1 / value < 0;
+          value = isNaN(value) ? nan : formatType(Math.abs(value), precision);
+          if (trim) value = formatTrim_default(value);
+          if (valueNegative && +value === 0 && sign !== "+") valueNegative = false;
+          valuePrefix = (valueNegative ? sign === "(" ? sign : minus : sign === "-" || sign === "(" ? "" : sign) + valuePrefix;
+          valueSuffix = (type2 === "s" ? prefixes[8 + prefixExponent / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : "");
+          if (maybeSuffix) {
+            i = -1, n = value.length;
+            while (++i < n) {
+              if (c2 = value.charCodeAt(i), 48 > c2 || c2 > 57) {
+                valueSuffix = (c2 === 46 ? decimal + value.slice(i + 1) : value.slice(i)) + valueSuffix;
+                value = value.slice(0, i);
+                break;
+              }
+            }
+          }
+        }
+        if (comma && !zero2) value = group(value, Infinity);
+        var length = valuePrefix.length + value.length + valueSuffix.length, padding = length < width ? new Array(width - length + 1).join(fill) : "";
+        if (comma && zero2) value = group(padding + value, padding.length ? width - valueSuffix.length : Infinity), padding = "";
+        switch (align) {
+          case "<":
+            value = valuePrefix + value + valueSuffix + padding;
+            break;
+          case "=":
+            value = valuePrefix + padding + value + valueSuffix;
+            break;
+          case "^":
+            value = padding.slice(0, length = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length);
+            break;
+          default:
+            value = padding + valuePrefix + value + valueSuffix;
+            break;
+        }
+        return numerals(value);
+      }
+      format2.toString = function() {
+        return specifier + "";
+      };
+      return format2;
+    }
+    function formatPrefix2(specifier, value) {
+      var f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier)), e = Math.max(-8, Math.min(8, Math.floor(exponent_default(value) / 3))) * 3, k = Math.pow(10, -e), prefix = prefixes[8 + e / 3];
+      return function(value2) {
+        return f(k * value2) + prefix;
+      };
+    }
+    return {
+      format: newFormat,
+      formatPrefix: formatPrefix2
+    };
+  }
+  var map, prefixes;
+  var init_locale = __esm({
+    "node_modules/d3-format/src/locale.js"() {
+      init_exponent();
+      init_formatGroup();
+      init_formatNumerals();
+      init_formatSpecifier();
+      init_formatTrim();
+      init_formatTypes();
+      init_formatPrefixAuto();
+      init_identity();
+      map = Array.prototype.map;
+      prefixes = ["y", "z", "a", "f", "p", "n", "\xB5", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y"];
+    }
+  });
+
+  // node_modules/d3-format/src/defaultLocale.js
+  function defaultLocale(definition) {
+    locale = locale_default(definition);
+    format = locale.format;
+    formatPrefix = locale.formatPrefix;
+    return locale;
+  }
+  var locale, format, formatPrefix;
+  var init_defaultLocale = __esm({
+    "node_modules/d3-format/src/defaultLocale.js"() {
+      init_locale();
+      defaultLocale({
+        thousands: ",",
+        grouping: [3],
+        currency: ["$", ""]
+      });
+    }
+  });
+
+  // node_modules/d3-format/src/index.js
+  var init_src20 = __esm({
+    "node_modules/d3-format/src/index.js"() {
+      init_defaultLocale();
+    }
+  });
+
+  // node_modules/d3-geo/src/index.js
+  var init_src21 = __esm({
+    "node_modules/d3-geo/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-hierarchy/src/index.js
+  var init_src22 = __esm({
+    "node_modules/d3-hierarchy/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-polygon/src/index.js
+  var init_src23 = __esm({
+    "node_modules/d3-polygon/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-random/src/index.js
+  var init_src24 = __esm({
+    "node_modules/d3-random/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-time/src/interval.js
+  function timeInterval(floori, offseti, count, field) {
+    function interval2(date) {
+      return floori(date = arguments.length === 0 ? /* @__PURE__ */ new Date() : /* @__PURE__ */ new Date(+date)), date;
+    }
+    interval2.floor = (date) => {
+      return floori(date = /* @__PURE__ */ new Date(+date)), date;
+    };
+    interval2.ceil = (date) => {
+      return floori(date = new Date(date - 1)), offseti(date, 1), floori(date), date;
+    };
+    interval2.round = (date) => {
+      const d0 = interval2(date), d1 = interval2.ceil(date);
+      return date - d0 < d1 - date ? d0 : d1;
+    };
+    interval2.offset = (date, step) => {
+      return offseti(date = /* @__PURE__ */ new Date(+date), step == null ? 1 : Math.floor(step)), date;
+    };
+    interval2.range = (start2, stop, step) => {
+      const range = [];
+      start2 = interval2.ceil(start2);
+      step = step == null ? 1 : Math.floor(step);
+      if (!(start2 < stop) || !(step > 0)) return range;
+      let previous;
+      do
+        range.push(previous = /* @__PURE__ */ new Date(+start2)), offseti(start2, step), floori(start2);
+      while (previous < start2 && start2 < stop);
+      return range;
+    };
+    interval2.filter = (test) => {
+      return timeInterval((date) => {
+        if (date >= date) while (floori(date), !test(date)) date.setTime(date - 1);
+      }, (date, step) => {
+        if (date >= date) {
+          if (step < 0) while (++step <= 0) {
+            while (offseti(date, -1), !test(date)) {
+            }
+          }
+          else while (--step >= 0) {
+            while (offseti(date, 1), !test(date)) {
+            }
+          }
+        }
+      });
+    };
+    if (count) {
+      interval2.count = (start2, end) => {
+        t0.setTime(+start2), t1.setTime(+end);
+        floori(t0), floori(t1);
+        return Math.floor(count(t0, t1));
+      };
+      interval2.every = (step) => {
+        step = Math.floor(step);
+        return !isFinite(step) || !(step > 0) ? null : !(step > 1) ? interval2 : interval2.filter(field ? (d) => field(d) % step === 0 : (d) => interval2.count(0, d) % step === 0);
+      };
+    }
+    return interval2;
+  }
+  var t0, t1;
+  var init_interval = __esm({
+    "node_modules/d3-time/src/interval.js"() {
+      t0 = /* @__PURE__ */ new Date();
+      t1 = /* @__PURE__ */ new Date();
+    }
+  });
+
+  // node_modules/d3-time/src/duration.js
+  var durationSecond, durationMinute, durationHour, durationDay, durationWeek, durationMonth, durationYear;
+  var init_duration2 = __esm({
+    "node_modules/d3-time/src/duration.js"() {
+      durationSecond = 1e3;
+      durationMinute = durationSecond * 60;
+      durationHour = durationMinute * 60;
+      durationDay = durationHour * 24;
+      durationWeek = durationDay * 7;
+      durationMonth = durationDay * 30;
+      durationYear = durationDay * 365;
+    }
+  });
+
+  // node_modules/d3-time/src/day.js
+  var timeDay, timeDays, utcDay, utcDays, unixDay, unixDays;
+  var init_day = __esm({
+    "node_modules/d3-time/src/day.js"() {
+      init_interval();
+      init_duration2();
+      timeDay = timeInterval(
+        (date) => date.setHours(0, 0, 0, 0),
+        (date, step) => date.setDate(date.getDate() + step),
+        (start2, end) => (end - start2 - (end.getTimezoneOffset() - start2.getTimezoneOffset()) * durationMinute) / durationDay,
+        (date) => date.getDate() - 1
+      );
+      timeDays = timeDay.range;
+      utcDay = timeInterval((date) => {
+        date.setUTCHours(0, 0, 0, 0);
+      }, (date, step) => {
+        date.setUTCDate(date.getUTCDate() + step);
+      }, (start2, end) => {
+        return (end - start2) / durationDay;
+      }, (date) => {
+        return date.getUTCDate() - 1;
+      });
+      utcDays = utcDay.range;
+      unixDay = timeInterval((date) => {
+        date.setUTCHours(0, 0, 0, 0);
+      }, (date, step) => {
+        date.setUTCDate(date.getUTCDate() + step);
+      }, (start2, end) => {
+        return (end - start2) / durationDay;
+      }, (date) => {
+        return Math.floor(date / durationDay);
+      });
+      unixDays = unixDay.range;
+    }
+  });
+
+  // node_modules/d3-time/src/week.js
+  function timeWeekday(i) {
+    return timeInterval((date) => {
+      date.setDate(date.getDate() - (date.getDay() + 7 - i) % 7);
+      date.setHours(0, 0, 0, 0);
+    }, (date, step) => {
+      date.setDate(date.getDate() + step * 7);
+    }, (start2, end) => {
+      return (end - start2 - (end.getTimezoneOffset() - start2.getTimezoneOffset()) * durationMinute) / durationWeek;
+    });
+  }
+  function utcWeekday(i) {
+    return timeInterval((date) => {
+      date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 7 - i) % 7);
+      date.setUTCHours(0, 0, 0, 0);
+    }, (date, step) => {
+      date.setUTCDate(date.getUTCDate() + step * 7);
+    }, (start2, end) => {
+      return (end - start2) / durationWeek;
+    });
+  }
+  var timeSunday, timeMonday, timeTuesday, timeWednesday, timeThursday, timeFriday, timeSaturday, timeSundays, timeMondays, timeTuesdays, timeWednesdays, timeThursdays, timeFridays, timeSaturdays, utcSunday, utcMonday, utcTuesday, utcWednesday, utcThursday, utcFriday, utcSaturday, utcSundays, utcMondays, utcTuesdays, utcWednesdays, utcThursdays, utcFridays, utcSaturdays;
+  var init_week = __esm({
+    "node_modules/d3-time/src/week.js"() {
+      init_interval();
+      init_duration2();
+      timeSunday = timeWeekday(0);
+      timeMonday = timeWeekday(1);
+      timeTuesday = timeWeekday(2);
+      timeWednesday = timeWeekday(3);
+      timeThursday = timeWeekday(4);
+      timeFriday = timeWeekday(5);
+      timeSaturday = timeWeekday(6);
+      timeSundays = timeSunday.range;
+      timeMondays = timeMonday.range;
+      timeTuesdays = timeTuesday.range;
+      timeWednesdays = timeWednesday.range;
+      timeThursdays = timeThursday.range;
+      timeFridays = timeFriday.range;
+      timeSaturdays = timeSaturday.range;
+      utcSunday = utcWeekday(0);
+      utcMonday = utcWeekday(1);
+      utcTuesday = utcWeekday(2);
+      utcWednesday = utcWeekday(3);
+      utcThursday = utcWeekday(4);
+      utcFriday = utcWeekday(5);
+      utcSaturday = utcWeekday(6);
+      utcSundays = utcSunday.range;
+      utcMondays = utcMonday.range;
+      utcTuesdays = utcTuesday.range;
+      utcWednesdays = utcWednesday.range;
+      utcThursdays = utcThursday.range;
+      utcFridays = utcFriday.range;
+      utcSaturdays = utcSaturday.range;
+    }
+  });
+
+  // node_modules/d3-time/src/year.js
+  var timeYear, timeYears, utcYear, utcYears;
+  var init_year = __esm({
+    "node_modules/d3-time/src/year.js"() {
+      init_interval();
+      timeYear = timeInterval((date) => {
+        date.setMonth(0, 1);
+        date.setHours(0, 0, 0, 0);
+      }, (date, step) => {
+        date.setFullYear(date.getFullYear() + step);
+      }, (start2, end) => {
+        return end.getFullYear() - start2.getFullYear();
+      }, (date) => {
+        return date.getFullYear();
+      });
+      timeYear.every = (k) => {
+        return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : timeInterval((date) => {
+          date.setFullYear(Math.floor(date.getFullYear() / k) * k);
+          date.setMonth(0, 1);
+          date.setHours(0, 0, 0, 0);
+        }, (date, step) => {
+          date.setFullYear(date.getFullYear() + step * k);
+        });
+      };
+      timeYears = timeYear.range;
+      utcYear = timeInterval((date) => {
+        date.setUTCMonth(0, 1);
+        date.setUTCHours(0, 0, 0, 0);
+      }, (date, step) => {
+        date.setUTCFullYear(date.getUTCFullYear() + step);
+      }, (start2, end) => {
+        return end.getUTCFullYear() - start2.getUTCFullYear();
+      }, (date) => {
+        return date.getUTCFullYear();
+      });
+      utcYear.every = (k) => {
+        return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : timeInterval((date) => {
+          date.setUTCFullYear(Math.floor(date.getUTCFullYear() / k) * k);
+          date.setUTCMonth(0, 1);
+          date.setUTCHours(0, 0, 0, 0);
+        }, (date, step) => {
+          date.setUTCFullYear(date.getUTCFullYear() + step * k);
+        });
+      };
+      utcYears = utcYear.range;
+    }
+  });
+
+  // node_modules/d3-time/src/index.js
+  var init_src25 = __esm({
+    "node_modules/d3-time/src/index.js"() {
+      init_day();
+      init_week();
+      init_year();
+    }
+  });
+
+  // node_modules/d3-time-format/src/locale.js
+  function localDate(d) {
+    if (0 <= d.y && d.y < 100) {
+      var date = new Date(-1, d.m, d.d, d.H, d.M, d.S, d.L);
+      date.setFullYear(d.y);
+      return date;
+    }
+    return new Date(d.y, d.m, d.d, d.H, d.M, d.S, d.L);
+  }
+  function utcDate(d) {
+    if (0 <= d.y && d.y < 100) {
+      var date = new Date(Date.UTC(-1, d.m, d.d, d.H, d.M, d.S, d.L));
+      date.setUTCFullYear(d.y);
+      return date;
+    }
+    return new Date(Date.UTC(d.y, d.m, d.d, d.H, d.M, d.S, d.L));
+  }
+  function newDate(y3, m2, d) {
+    return { y: y3, m: m2, d, H: 0, M: 0, S: 0, L: 0 };
+  }
+  function formatLocale(locale3) {
+    var locale_dateTime = locale3.dateTime, locale_date = locale3.date, locale_time = locale3.time, locale_periods = locale3.periods, locale_weekdays = locale3.days, locale_shortWeekdays = locale3.shortDays, locale_months = locale3.months, locale_shortMonths = locale3.shortMonths;
+    var periodRe = formatRe(locale_periods), periodLookup = formatLookup(locale_periods), weekdayRe = formatRe(locale_weekdays), weekdayLookup = formatLookup(locale_weekdays), shortWeekdayRe = formatRe(locale_shortWeekdays), shortWeekdayLookup = formatLookup(locale_shortWeekdays), monthRe = formatRe(locale_months), monthLookup = formatLookup(locale_months), shortMonthRe = formatRe(locale_shortMonths), shortMonthLookup = formatLookup(locale_shortMonths);
+    var formats = {
+      "a": formatShortWeekday,
+      "A": formatWeekday,
+      "b": formatShortMonth,
+      "B": formatMonth,
+      "c": null,
+      "d": formatDayOfMonth,
+      "e": formatDayOfMonth,
+      "f": formatMicroseconds,
+      "g": formatYearISO,
+      "G": formatFullYearISO,
+      "H": formatHour24,
+      "I": formatHour12,
+      "j": formatDayOfYear,
+      "L": formatMilliseconds,
+      "m": formatMonthNumber,
+      "M": formatMinutes,
+      "p": formatPeriod,
+      "q": formatQuarter,
+      "Q": formatUnixTimestamp,
+      "s": formatUnixTimestampSeconds,
+      "S": formatSeconds,
+      "u": formatWeekdayNumberMonday,
+      "U": formatWeekNumberSunday,
+      "V": formatWeekNumberISO,
+      "w": formatWeekdayNumberSunday,
+      "W": formatWeekNumberMonday,
+      "x": null,
+      "X": null,
+      "y": formatYear,
+      "Y": formatFullYear,
+      "Z": formatZone,
+      "%": formatLiteralPercent
+    };
+    var utcFormats = {
+      "a": formatUTCShortWeekday,
+      "A": formatUTCWeekday,
+      "b": formatUTCShortMonth,
+      "B": formatUTCMonth,
+      "c": null,
+      "d": formatUTCDayOfMonth,
+      "e": formatUTCDayOfMonth,
+      "f": formatUTCMicroseconds,
+      "g": formatUTCYearISO,
+      "G": formatUTCFullYearISO,
+      "H": formatUTCHour24,
+      "I": formatUTCHour12,
+      "j": formatUTCDayOfYear,
+      "L": formatUTCMilliseconds,
+      "m": formatUTCMonthNumber,
+      "M": formatUTCMinutes,
+      "p": formatUTCPeriod,
+      "q": formatUTCQuarter,
+      "Q": formatUnixTimestamp,
+      "s": formatUnixTimestampSeconds,
+      "S": formatUTCSeconds,
+      "u": formatUTCWeekdayNumberMonday,
+      "U": formatUTCWeekNumberSunday,
+      "V": formatUTCWeekNumberISO,
+      "w": formatUTCWeekdayNumberSunday,
+      "W": formatUTCWeekNumberMonday,
+      "x": null,
+      "X": null,
+      "y": formatUTCYear,
+      "Y": formatUTCFullYear,
+      "Z": formatUTCZone,
+      "%": formatLiteralPercent
+    };
+    var parses = {
+      "a": parseShortWeekday,
+      "A": parseWeekday,
+      "b": parseShortMonth,
+      "B": parseMonth,
+      "c": parseLocaleDateTime,
+      "d": parseDayOfMonth,
+      "e": parseDayOfMonth,
+      "f": parseMicroseconds,
+      "g": parseYear,
+      "G": parseFullYear,
+      "H": parseHour24,
+      "I": parseHour24,
+      "j": parseDayOfYear,
+      "L": parseMilliseconds,
+      "m": parseMonthNumber,
+      "M": parseMinutes,
+      "p": parsePeriod,
+      "q": parseQuarter,
+      "Q": parseUnixTimestamp,
+      "s": parseUnixTimestampSeconds,
+      "S": parseSeconds,
+      "u": parseWeekdayNumberMonday,
+      "U": parseWeekNumberSunday,
+      "V": parseWeekNumberISO,
+      "w": parseWeekdayNumberSunday,
+      "W": parseWeekNumberMonday,
+      "x": parseLocaleDate,
+      "X": parseLocaleTime,
+      "y": parseYear,
+      "Y": parseFullYear,
+      "Z": parseZone,
+      "%": parseLiteralPercent
+    };
+    formats.x = newFormat(locale_date, formats);
+    formats.X = newFormat(locale_time, formats);
+    formats.c = newFormat(locale_dateTime, formats);
+    utcFormats.x = newFormat(locale_date, utcFormats);
+    utcFormats.X = newFormat(locale_time, utcFormats);
+    utcFormats.c = newFormat(locale_dateTime, utcFormats);
+    function newFormat(specifier, formats2) {
+      return function(date) {
+        var string = [], i = -1, j = 0, n = specifier.length, c2, pad2, format2;
+        if (!(date instanceof Date)) date = /* @__PURE__ */ new Date(+date);
+        while (++i < n) {
+          if (specifier.charCodeAt(i) === 37) {
+            string.push(specifier.slice(j, i));
+            if ((pad2 = pads[c2 = specifier.charAt(++i)]) != null) c2 = specifier.charAt(++i);
+            else pad2 = c2 === "e" ? " " : "0";
+            if (format2 = formats2[c2]) c2 = format2(date, pad2);
+            string.push(c2);
+            j = i + 1;
+          }
+        }
+        string.push(specifier.slice(j, i));
+        return string.join("");
+      };
+    }
+    function newParse(specifier, Z) {
+      return function(string) {
+        var d = newDate(1900, void 0, 1), i = parseSpecifier(d, specifier, string += "", 0), week, day;
+        if (i != string.length) return null;
+        if ("Q" in d) return new Date(d.Q);
+        if ("s" in d) return new Date(d.s * 1e3 + ("L" in d ? d.L : 0));
+        if (Z && !("Z" in d)) d.Z = 0;
+        if ("p" in d) d.H = d.H % 12 + d.p * 12;
+        if (d.m === void 0) d.m = "q" in d ? d.q : 0;
+        if ("V" in d) {
+          if (d.V < 1 || d.V > 53) return null;
+          if (!("w" in d)) d.w = 1;
+          if ("Z" in d) {
+            week = utcDate(newDate(d.y, 0, 1)), day = week.getUTCDay();
+            week = day > 4 || day === 0 ? utcMonday.ceil(week) : utcMonday(week);
+            week = utcDay.offset(week, (d.V - 1) * 7);
+            d.y = week.getUTCFullYear();
+            d.m = week.getUTCMonth();
+            d.d = week.getUTCDate() + (d.w + 6) % 7;
+          } else {
+            week = localDate(newDate(d.y, 0, 1)), day = week.getDay();
+            week = day > 4 || day === 0 ? timeMonday.ceil(week) : timeMonday(week);
+            week = timeDay.offset(week, (d.V - 1) * 7);
+            d.y = week.getFullYear();
+            d.m = week.getMonth();
+            d.d = week.getDate() + (d.w + 6) % 7;
+          }
+        } else if ("W" in d || "U" in d) {
+          if (!("w" in d)) d.w = "u" in d ? d.u % 7 : "W" in d ? 1 : 0;
+          day = "Z" in d ? utcDate(newDate(d.y, 0, 1)).getUTCDay() : localDate(newDate(d.y, 0, 1)).getDay();
+          d.m = 0;
+          d.d = "W" in d ? (d.w + 6) % 7 + d.W * 7 - (day + 5) % 7 : d.w + d.U * 7 - (day + 6) % 7;
+        }
+        if ("Z" in d) {
+          d.H += d.Z / 100 | 0;
+          d.M += d.Z % 100;
+          return utcDate(d);
+        }
+        return localDate(d);
+      };
+    }
+    function parseSpecifier(d, specifier, string, j) {
+      var i = 0, n = specifier.length, m2 = string.length, c2, parse;
+      while (i < n) {
+        if (j >= m2) return -1;
+        c2 = specifier.charCodeAt(i++);
+        if (c2 === 37) {
+          c2 = specifier.charAt(i++);
+          parse = parses[c2 in pads ? specifier.charAt(i++) : c2];
+          if (!parse || (j = parse(d, string, j)) < 0) return -1;
+        } else if (c2 != string.charCodeAt(j++)) {
+          return -1;
+        }
+      }
+      return j;
+    }
+    function parsePeriod(d, string, i) {
+      var n = periodRe.exec(string.slice(i));
+      return n ? (d.p = periodLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseShortWeekday(d, string, i) {
+      var n = shortWeekdayRe.exec(string.slice(i));
+      return n ? (d.w = shortWeekdayLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseWeekday(d, string, i) {
+      var n = weekdayRe.exec(string.slice(i));
+      return n ? (d.w = weekdayLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseShortMonth(d, string, i) {
+      var n = shortMonthRe.exec(string.slice(i));
+      return n ? (d.m = shortMonthLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseMonth(d, string, i) {
+      var n = monthRe.exec(string.slice(i));
+      return n ? (d.m = monthLookup.get(n[0].toLowerCase()), i + n[0].length) : -1;
+    }
+    function parseLocaleDateTime(d, string, i) {
+      return parseSpecifier(d, locale_dateTime, string, i);
+    }
+    function parseLocaleDate(d, string, i) {
+      return parseSpecifier(d, locale_date, string, i);
+    }
+    function parseLocaleTime(d, string, i) {
+      return parseSpecifier(d, locale_time, string, i);
+    }
+    function formatShortWeekday(d) {
+      return locale_shortWeekdays[d.getDay()];
+    }
+    function formatWeekday(d) {
+      return locale_weekdays[d.getDay()];
+    }
+    function formatShortMonth(d) {
+      return locale_shortMonths[d.getMonth()];
+    }
+    function formatMonth(d) {
+      return locale_months[d.getMonth()];
+    }
+    function formatPeriod(d) {
+      return locale_periods[+(d.getHours() >= 12)];
+    }
+    function formatQuarter(d) {
+      return 1 + ~~(d.getMonth() / 3);
+    }
+    function formatUTCShortWeekday(d) {
+      return locale_shortWeekdays[d.getUTCDay()];
+    }
+    function formatUTCWeekday(d) {
+      return locale_weekdays[d.getUTCDay()];
+    }
+    function formatUTCShortMonth(d) {
+      return locale_shortMonths[d.getUTCMonth()];
+    }
+    function formatUTCMonth(d) {
+      return locale_months[d.getUTCMonth()];
+    }
+    function formatUTCPeriod(d) {
+      return locale_periods[+(d.getUTCHours() >= 12)];
+    }
+    function formatUTCQuarter(d) {
+      return 1 + ~~(d.getUTCMonth() / 3);
+    }
+    return {
+      format: function(specifier) {
+        var f = newFormat(specifier += "", formats);
+        f.toString = function() {
+          return specifier;
+        };
+        return f;
+      },
+      parse: function(specifier) {
+        var p = newParse(specifier += "", false);
+        p.toString = function() {
+          return specifier;
+        };
+        return p;
+      },
+      utcFormat: function(specifier) {
+        var f = newFormat(specifier += "", utcFormats);
+        f.toString = function() {
+          return specifier;
+        };
+        return f;
+      },
+      utcParse: function(specifier) {
+        var p = newParse(specifier += "", true);
+        p.toString = function() {
+          return specifier;
+        };
+        return p;
+      }
+    };
+  }
+  function pad(value, fill, width) {
+    var sign = value < 0 ? "-" : "", string = (sign ? -value : value) + "", length = string.length;
+    return sign + (length < width ? new Array(width - length + 1).join(fill) + string : string);
+  }
+  function requote(s) {
+    return s.replace(requoteRe, "\\$&");
+  }
+  function formatRe(names) {
+    return new RegExp("^(?:" + names.map(requote).join("|") + ")", "i");
+  }
+  function formatLookup(names) {
+    return new Map(names.map((name, i) => [name.toLowerCase(), i]));
+  }
+  function parseWeekdayNumberSunday(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 1));
+    return n ? (d.w = +n[0], i + n[0].length) : -1;
+  }
+  function parseWeekdayNumberMonday(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 1));
+    return n ? (d.u = +n[0], i + n[0].length) : -1;
+  }
+  function parseWeekNumberSunday(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.U = +n[0], i + n[0].length) : -1;
+  }
+  function parseWeekNumberISO(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.V = +n[0], i + n[0].length) : -1;
+  }
+  function parseWeekNumberMonday(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.W = +n[0], i + n[0].length) : -1;
+  }
+  function parseFullYear(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 4));
+    return n ? (d.y = +n[0], i + n[0].length) : -1;
+  }
+  function parseYear(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.y = +n[0] + (+n[0] > 68 ? 1900 : 2e3), i + n[0].length) : -1;
+  }
+  function parseZone(d, string, i) {
+    var n = /^(Z)|([+-]\d\d)(?::?(\d\d))?/.exec(string.slice(i, i + 6));
+    return n ? (d.Z = n[1] ? 0 : -(n[2] + (n[3] || "00")), i + n[0].length) : -1;
+  }
+  function parseQuarter(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 1));
+    return n ? (d.q = n[0] * 3 - 3, i + n[0].length) : -1;
+  }
+  function parseMonthNumber(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.m = n[0] - 1, i + n[0].length) : -1;
+  }
+  function parseDayOfMonth(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.d = +n[0], i + n[0].length) : -1;
+  }
+  function parseDayOfYear(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 3));
+    return n ? (d.m = 0, d.d = +n[0], i + n[0].length) : -1;
+  }
+  function parseHour24(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.H = +n[0], i + n[0].length) : -1;
+  }
+  function parseMinutes(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.M = +n[0], i + n[0].length) : -1;
+  }
+  function parseSeconds(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 2));
+    return n ? (d.S = +n[0], i + n[0].length) : -1;
+  }
+  function parseMilliseconds(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 3));
+    return n ? (d.L = +n[0], i + n[0].length) : -1;
+  }
+  function parseMicroseconds(d, string, i) {
+    var n = numberRe.exec(string.slice(i, i + 6));
+    return n ? (d.L = Math.floor(n[0] / 1e3), i + n[0].length) : -1;
+  }
+  function parseLiteralPercent(d, string, i) {
+    var n = percentRe.exec(string.slice(i, i + 1));
+    return n ? i + n[0].length : -1;
+  }
+  function parseUnixTimestamp(d, string, i) {
+    var n = numberRe.exec(string.slice(i));
+    return n ? (d.Q = +n[0], i + n[0].length) : -1;
+  }
+  function parseUnixTimestampSeconds(d, string, i) {
+    var n = numberRe.exec(string.slice(i));
+    return n ? (d.s = +n[0], i + n[0].length) : -1;
+  }
+  function formatDayOfMonth(d, p) {
+    return pad(d.getDate(), p, 2);
+  }
+  function formatHour24(d, p) {
+    return pad(d.getHours(), p, 2);
+  }
+  function formatHour12(d, p) {
+    return pad(d.getHours() % 12 || 12, p, 2);
+  }
+  function formatDayOfYear(d, p) {
+    return pad(1 + timeDay.count(timeYear(d), d), p, 3);
+  }
+  function formatMilliseconds(d, p) {
+    return pad(d.getMilliseconds(), p, 3);
+  }
+  function formatMicroseconds(d, p) {
+    return formatMilliseconds(d, p) + "000";
+  }
+  function formatMonthNumber(d, p) {
+    return pad(d.getMonth() + 1, p, 2);
+  }
+  function formatMinutes(d, p) {
+    return pad(d.getMinutes(), p, 2);
+  }
+  function formatSeconds(d, p) {
+    return pad(d.getSeconds(), p, 2);
+  }
+  function formatWeekdayNumberMonday(d) {
+    var day = d.getDay();
+    return day === 0 ? 7 : day;
+  }
+  function formatWeekNumberSunday(d, p) {
+    return pad(timeSunday.count(timeYear(d) - 1, d), p, 2);
+  }
+  function dISO(d) {
+    var day = d.getDay();
+    return day >= 4 || day === 0 ? timeThursday(d) : timeThursday.ceil(d);
+  }
+  function formatWeekNumberISO(d, p) {
+    d = dISO(d);
+    return pad(timeThursday.count(timeYear(d), d) + (timeYear(d).getDay() === 4), p, 2);
+  }
+  function formatWeekdayNumberSunday(d) {
+    return d.getDay();
+  }
+  function formatWeekNumberMonday(d, p) {
+    return pad(timeMonday.count(timeYear(d) - 1, d), p, 2);
+  }
+  function formatYear(d, p) {
+    return pad(d.getFullYear() % 100, p, 2);
+  }
+  function formatYearISO(d, p) {
+    d = dISO(d);
+    return pad(d.getFullYear() % 100, p, 2);
+  }
+  function formatFullYear(d, p) {
+    return pad(d.getFullYear() % 1e4, p, 4);
+  }
+  function formatFullYearISO(d, p) {
+    var day = d.getDay();
+    d = day >= 4 || day === 0 ? timeThursday(d) : timeThursday.ceil(d);
+    return pad(d.getFullYear() % 1e4, p, 4);
+  }
+  function formatZone(d) {
+    var z = d.getTimezoneOffset();
+    return (z > 0 ? "-" : (z *= -1, "+")) + pad(z / 60 | 0, "0", 2) + pad(z % 60, "0", 2);
+  }
+  function formatUTCDayOfMonth(d, p) {
+    return pad(d.getUTCDate(), p, 2);
+  }
+  function formatUTCHour24(d, p) {
+    return pad(d.getUTCHours(), p, 2);
+  }
+  function formatUTCHour12(d, p) {
+    return pad(d.getUTCHours() % 12 || 12, p, 2);
+  }
+  function formatUTCDayOfYear(d, p) {
+    return pad(1 + utcDay.count(utcYear(d), d), p, 3);
+  }
+  function formatUTCMilliseconds(d, p) {
+    return pad(d.getUTCMilliseconds(), p, 3);
+  }
+  function formatUTCMicroseconds(d, p) {
+    return formatUTCMilliseconds(d, p) + "000";
+  }
+  function formatUTCMonthNumber(d, p) {
+    return pad(d.getUTCMonth() + 1, p, 2);
+  }
+  function formatUTCMinutes(d, p) {
+    return pad(d.getUTCMinutes(), p, 2);
+  }
+  function formatUTCSeconds(d, p) {
+    return pad(d.getUTCSeconds(), p, 2);
+  }
+  function formatUTCWeekdayNumberMonday(d) {
+    var dow = d.getUTCDay();
+    return dow === 0 ? 7 : dow;
+  }
+  function formatUTCWeekNumberSunday(d, p) {
+    return pad(utcSunday.count(utcYear(d) - 1, d), p, 2);
+  }
+  function UTCdISO(d) {
+    var day = d.getUTCDay();
+    return day >= 4 || day === 0 ? utcThursday(d) : utcThursday.ceil(d);
+  }
+  function formatUTCWeekNumberISO(d, p) {
+    d = UTCdISO(d);
+    return pad(utcThursday.count(utcYear(d), d) + (utcYear(d).getUTCDay() === 4), p, 2);
+  }
+  function formatUTCWeekdayNumberSunday(d) {
+    return d.getUTCDay();
+  }
+  function formatUTCWeekNumberMonday(d, p) {
+    return pad(utcMonday.count(utcYear(d) - 1, d), p, 2);
+  }
+  function formatUTCYear(d, p) {
+    return pad(d.getUTCFullYear() % 100, p, 2);
+  }
+  function formatUTCYearISO(d, p) {
+    d = UTCdISO(d);
+    return pad(d.getUTCFullYear() % 100, p, 2);
+  }
+  function formatUTCFullYear(d, p) {
+    return pad(d.getUTCFullYear() % 1e4, p, 4);
+  }
+  function formatUTCFullYearISO(d, p) {
+    var day = d.getUTCDay();
+    d = day >= 4 || day === 0 ? utcThursday(d) : utcThursday.ceil(d);
+    return pad(d.getUTCFullYear() % 1e4, p, 4);
+  }
+  function formatUTCZone() {
+    return "+0000";
+  }
+  function formatLiteralPercent() {
+    return "%";
+  }
+  function formatUnixTimestamp(d) {
+    return +d;
+  }
+  function formatUnixTimestampSeconds(d) {
+    return Math.floor(+d / 1e3);
+  }
+  var pads, numberRe, percentRe, requoteRe;
+  var init_locale2 = __esm({
+    "node_modules/d3-time-format/src/locale.js"() {
+      init_src25();
+      pads = { "-": "", "_": " ", "0": "0" };
+      numberRe = /^\s*\d+/;
+      percentRe = /^%/;
+      requoteRe = /[\\^$*+?|[\]().{}]/g;
+    }
+  });
+
+  // node_modules/d3-time-format/src/defaultLocale.js
+  function defaultLocale2(definition) {
+    locale2 = formatLocale(definition);
+    timeFormat = locale2.format;
+    timeParse = locale2.parse;
+    utcFormat = locale2.utcFormat;
+    utcParse = locale2.utcParse;
+    return locale2;
+  }
+  var locale2, timeFormat, timeParse, utcFormat, utcParse;
+  var init_defaultLocale2 = __esm({
+    "node_modules/d3-time-format/src/defaultLocale.js"() {
+      init_locale2();
+      defaultLocale2({
+        dateTime: "%x, %X",
+        date: "%-m/%-d/%Y",
+        time: "%-I:%M:%S %p",
+        periods: ["AM", "PM"],
+        days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        shortDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      });
+    }
+  });
+
+  // node_modules/d3-time-format/src/index.js
+  var init_src26 = __esm({
+    "node_modules/d3-time-format/src/index.js"() {
+      init_defaultLocale2();
+    }
+  });
+
+  // node_modules/d3-scale/src/index.js
+  var init_src27 = __esm({
+    "node_modules/d3-scale/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-scale-chromatic/src/index.js
+  var init_src28 = __esm({
+    "node_modules/d3-scale-chromatic/src/index.js"() {
+    }
+  });
+
+  // node_modules/d3-shape/src/index.js
+  var init_src29 = __esm({
+    "node_modules/d3-shape/src/index.js"() {
+    }
+  });
 
   // node_modules/d3-zoom/src/constant.js
-  var constant_default5 = (x3) => () => x3;
+  var constant_default5;
+  var init_constant5 = __esm({
+    "node_modules/d3-zoom/src/constant.js"() {
+      constant_default5 = (x3) => () => x3;
+    }
+  });
 
   // node_modules/d3-zoom/src/event.js
   function ZoomEvent(type2, {
@@ -24833,6 +26817,10 @@
       _: { value: dispatch2 }
     });
   }
+  var init_event2 = __esm({
+    "node_modules/d3-zoom/src/event.js"() {
+    }
+  });
 
   // node_modules/d3-zoom/src/transform.js
   function Transform(k, x3, y3) {
@@ -24840,48 +26828,53 @@
     this.x = x3;
     this.y = y3;
   }
-  Transform.prototype = {
-    constructor: Transform,
-    scale: function(k) {
-      return k === 1 ? this : new Transform(this.k * k, this.x, this.y);
-    },
-    translate: function(x3, y3) {
-      return x3 === 0 & y3 === 0 ? this : new Transform(this.k, this.x + this.k * x3, this.y + this.k * y3);
-    },
-    apply: function(point) {
-      return [point[0] * this.k + this.x, point[1] * this.k + this.y];
-    },
-    applyX: function(x3) {
-      return x3 * this.k + this.x;
-    },
-    applyY: function(y3) {
-      return y3 * this.k + this.y;
-    },
-    invert: function(location) {
-      return [(location[0] - this.x) / this.k, (location[1] - this.y) / this.k];
-    },
-    invertX: function(x3) {
-      return (x3 - this.x) / this.k;
-    },
-    invertY: function(y3) {
-      return (y3 - this.y) / this.k;
-    },
-    rescaleX: function(x3) {
-      return x3.copy().domain(x3.range().map(this.invertX, this).map(x3.invert, x3));
-    },
-    rescaleY: function(y3) {
-      return y3.copy().domain(y3.range().map(this.invertY, this).map(y3.invert, y3));
-    },
-    toString: function() {
-      return "translate(" + this.x + "," + this.y + ") scale(" + this.k + ")";
-    }
-  };
-  var identity2 = new Transform(1, 0, 0);
-  transform.prototype = Transform.prototype;
   function transform(node) {
     while (!node.__zoom) if (!(node = node.parentNode)) return identity2;
     return node.__zoom;
   }
+  var identity2;
+  var init_transform2 = __esm({
+    "node_modules/d3-zoom/src/transform.js"() {
+      Transform.prototype = {
+        constructor: Transform,
+        scale: function(k) {
+          return k === 1 ? this : new Transform(this.k * k, this.x, this.y);
+        },
+        translate: function(x3, y3) {
+          return x3 === 0 & y3 === 0 ? this : new Transform(this.k, this.x + this.k * x3, this.y + this.k * y3);
+        },
+        apply: function(point) {
+          return [point[0] * this.k + this.x, point[1] * this.k + this.y];
+        },
+        applyX: function(x3) {
+          return x3 * this.k + this.x;
+        },
+        applyY: function(y3) {
+          return y3 * this.k + this.y;
+        },
+        invert: function(location) {
+          return [(location[0] - this.x) / this.k, (location[1] - this.y) / this.k];
+        },
+        invertX: function(x3) {
+          return (x3 - this.x) / this.k;
+        },
+        invertY: function(y3) {
+          return (y3 - this.y) / this.k;
+        },
+        rescaleX: function(x3) {
+          return x3.copy().domain(x3.range().map(this.invertX, this).map(x3.invert, x3));
+        },
+        rescaleY: function(y3) {
+          return y3.copy().domain(y3.range().map(this.invertY, this).map(y3.invert, y3));
+        },
+        toString: function() {
+          return "translate(" + this.x + "," + this.y + ") scale(" + this.k + ")";
+        }
+      };
+      identity2 = new Transform(1, 0, 0);
+      transform.prototype = Transform.prototype;
+    }
+  });
 
   // node_modules/d3-zoom/src/noevent.js
   function nopropagation2(event) {
@@ -24891,6 +26884,10 @@
     event.preventDefault();
     event.stopImmediatePropagation();
   }
+  var init_noevent3 = __esm({
+    "node_modules/d3-zoom/src/noevent.js"() {
+    }
+  });
 
   // node_modules/d3-zoom/src/zoom.js
   function defaultFilter(event) {
@@ -24948,8 +26945,8 @@
     };
     zoom.scaleTo = function(selection2, k, p, event) {
       zoom.transform(selection2, function() {
-        var e = extent.apply(this, arguments), t0 = this.__zoom, p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p, p1 = t0.invert(p0), k1 = typeof k === "function" ? k.apply(this, arguments) : k;
-        return constrain(translate(scale(t0, k1), p0, p1), e, translateExtent);
+        var e = extent.apply(this, arguments), t02 = this.__zoom, p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p, p1 = t02.invert(p0), k1 = typeof k === "function" ? k.apply(this, arguments) : k;
+        return constrain(translate(scale(t02, k1), p0, p1), e, translateExtent);
       }, p, event);
     };
     zoom.translateBy = function(selection2, x3, y3, event) {
@@ -25098,10 +27095,10 @@
     }
     function dblclicked(event, ...args) {
       if (!filter2.apply(this, arguments)) return;
-      var t0 = this.__zoom, p0 = pointer_default(event.changedTouches ? event.changedTouches[0] : event, this), p1 = t0.invert(p0), k1 = t0.k * (event.shiftKey ? 0.5 : 2), t1 = constrain(translate(scale(t0, k1), p0, p1), extent.apply(this, args), translateExtent);
+      var t02 = this.__zoom, p0 = pointer_default(event.changedTouches ? event.changedTouches[0] : event, this), p1 = t02.invert(p0), k1 = t02.k * (event.shiftKey ? 0.5 : 2), t12 = constrain(translate(scale(t02, k1), p0, p1), extent.apply(this, args), translateExtent);
       noevent_default3(event);
-      if (duration > 0) select_default2(this).transition().duration(duration).call(schedule, t1, p0, event);
-      else select_default2(this).call(zoom.transform, t1, p0, event);
+      if (duration > 0) select_default2(this).transition().duration(duration).call(schedule, t12, p0, event);
+      else select_default2(this).call(zoom.transform, t12, p0, event);
     }
     function touchstarted(event, ...args) {
       if (!filter2.apply(this, arguments)) return;
@@ -25206,272 +27203,359 @@
     };
     return zoom;
   }
+  var init_zoom2 = __esm({
+    "node_modules/d3-zoom/src/zoom.js"() {
+      init_src3();
+      init_src5();
+      init_src7();
+      init_src4();
+      init_src10();
+      init_constant5();
+      init_event2();
+      init_transform2();
+      init_noevent3();
+    }
+  });
+
+  // node_modules/d3-zoom/src/index.js
+  var init_src30 = __esm({
+    "node_modules/d3-zoom/src/index.js"() {
+      init_zoom2();
+      init_transform2();
+    }
+  });
+
+  // node_modules/d3/src/index.js
+  var init_src31 = __esm({
+    "node_modules/d3/src/index.js"() {
+      init_src();
+      init_src2();
+      init_src11();
+      init_src13();
+      init_src6();
+      init_src14();
+      init_src15();
+      init_src3();
+      init_src5();
+      init_src16();
+      init_src9();
+      init_src17();
+      init_src19();
+      init_src20();
+      init_src21();
+      init_src22();
+      init_src7();
+      init_src12();
+      init_src23();
+      init_src18();
+      init_src24();
+      init_src27();
+      init_src28();
+      init_src4();
+      init_src29();
+      init_src25();
+      init_src26();
+      init_src8();
+      init_src10();
+      init_src30();
+    }
+  });
 
   // src/components/GraphView.tsx
-  var import_jsx_runtime2 = __toESM(require_jsx_runtime());
-  var GraphView = () => {
-    const [data, setData] = (0, import_react.useState)(null);
-    const [error, setError] = (0, import_react.useState)(null);
-    const svgRef = (0, import_react.useRef)(null);
-    const [dimensions, setDimensions] = (0, import_react.useState)({ width: 0, height: 0 });
-    const containerRef = (0, import_react.useRef)(null);
-    const MINIMAL_NODE_SIZE = 8;
-    const MAX_NODE_SIZE = 12;
-    const ACTIVE_RADIUS_FACTOR = 1.5;
-    const STROKE = 1;
-    const FONT_SIZE = 14;
-    const TICKS = 200;
-    const FONT_BASELINE = 25;
-    const MAX_LABEL_LENGTH = 30;
-    (0, import_react.useEffect)(() => {
-      console.log("[GraphView] Starting fetch for /graph.json");
-      fetch("/graph.json").then((res) => {
-        console.log("[GraphView] Response received:", res.status);
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        return res.text();
-      }).then((text) => {
-        console.log("[GraphView] Data length:", text.length);
-        try {
-          const json = JSON.parse(text);
-          setData(json);
-        } catch (e) {
-          throw new Error("Invalid JSON response");
-        }
-      }).catch((err) => {
-        console.error("[GraphView] Fetch failed:", err);
-        setError(err.message);
-      });
-    }, []);
-    (0, import_react.useEffect)(() => {
-      const updateDimensions = () => {
-        if (containerRef.current) {
-          setDimensions({
-            width: containerRef.current.offsetWidth,
-            height: window.innerHeight * 0.6
+  var GraphView_exports = {};
+  __export(GraphView_exports, {
+    default: () => GraphView_default
+  });
+  var import_react, import_jsx_runtime2, GraphView, GraphView_default;
+  var init_GraphView = __esm({
+    "src/components/GraphView.tsx"() {
+      "use strict";
+      import_react = __toESM(require_react());
+      init_src31();
+      import_jsx_runtime2 = __toESM(require_jsx_runtime());
+      GraphView = () => {
+        const [data, setData] = (0, import_react.useState)(null);
+        const [error, setError] = (0, import_react.useState)(null);
+        const svgRef = (0, import_react.useRef)(null);
+        const [dimensions, setDimensions] = (0, import_react.useState)({ width: 0, height: 0 });
+        const containerRef = (0, import_react.useRef)(null);
+        const MINIMAL_NODE_SIZE = 8;
+        const MAX_NODE_SIZE = 12;
+        const ACTIVE_RADIUS_FACTOR = 1.5;
+        const STROKE = 1;
+        const FONT_SIZE = 14;
+        const TICKS = 200;
+        const FONT_BASELINE = 25;
+        const MAX_LABEL_LENGTH = 30;
+        (0, import_react.useEffect)(() => {
+          console.log("[GraphView] Starting fetch for /graph.json");
+          fetch("/graph.json").then((res) => {
+            console.log("[GraphView] Response received:", res.status);
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.text();
+          }).then((text) => {
+            console.log("[GraphView] Data length:", text.length);
+            try {
+              const json = JSON.parse(text);
+              setData(json);
+            } catch (e) {
+              throw new Error("Invalid JSON response");
+            }
+          }).catch((err) => {
+            console.error("[GraphView] Fetch failed:", err);
+            setError(err.message);
           });
+        }, []);
+        (0, import_react.useEffect)(() => {
+          const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+              if (entry.target === containerRef.current) {
+                setDimensions({
+                  width: entry.contentRect.width,
+                  height: window.innerHeight * 0.6
+                });
+              }
+            }
+          });
+          if (containerRef.current) {
+            resizeObserver.observe(containerRef.current);
+          }
+          return () => resizeObserver.disconnect();
+        }, []);
+        (0, import_react.useEffect)(() => {
+          if (!data || !svgRef.current || dimensions.width === 0) return;
+          const svg = select_default2(svgRef.current);
+          svg.selectAll("*").remove();
+          const { width, height } = dimensions;
+          const nodes = data.nodes.map((d) => ({ ...d }));
+          const edges = data.edges.map((d) => ({ ...d }));
+          const getNodeSize = (id2) => {
+            const connections = edges.filter(
+              (e) => (typeof e.source === "string" ? e.source === id2 : e.source.id === id2) || (typeof e.target === "string" ? e.target === id2 : e.target.id === id2)
+            ).length;
+            let weight = 3 * Math.sqrt(connections + 1);
+            return Math.max(MINIMAL_NODE_SIZE, Math.min(MAX_NODE_SIZE, weight));
+          };
+          const g = svg.append("g");
+          const zoom = zoom_default2().scaleExtent([0.1, 4]).on("zoom", (event) => {
+            g.attr("transform", event.transform);
+          });
+          svg.call(zoom);
+          const simulation = simulation_default(nodes).force("link", link_default(edges).id((d) => d.id).distance(150)).force("charge", manyBody_default().strength(-300)).force("center", center_default(width / 2, height / 2)).force("collision", collide_default().radius(80));
+          const isNodeIsolated = (id2) => !edges.some(
+            (e) => (typeof e.source === "string" ? e.source === id2 : e.source.id === id2) || (typeof e.target === "string" ? e.target === id2 : e.target.id === id2)
+          );
+          const isolatedNodes = nodes.filter((n) => isNodeIsolated(n.id));
+          if (isolatedNodes.length > 0) {
+            const radius = Math.min(width, height) / 2.5;
+            const angleStep = 2 * Math.PI / isolatedNodes.length;
+            isolatedNodes.forEach((node2, i) => {
+              node2.fx = width / 2 + radius * Math.cos(i * angleStep);
+              node2.fy = height / 2 + radius * Math.sin(i * angleStep);
+            });
+          }
+          const link = g.append("g").attr("class", "links").selectAll("line").data(edges).enter().append("line").attr("stroke", "var(--border)").attr("stroke-opacity", 0.6).attr("stroke-width", STROKE);
+          const node = g.append("g").attr("class", "nodes").selectAll("circle").data(nodes).enter().append("circle").attr("r", (d) => getNodeSize(d.id)).attr("fill", (d) => window.location.pathname.includes(d.path) ? "var(--accent)" : "var(--muted)").attr("stroke", (d) => isNodeIsolated(d.id) ? "var(--accent)" : "none").attr("stroke-width", (d) => isNodeIsolated(d.id) ? 2 : 0).attr("cursor", "pointer").on("click", (event, d) => {
+            window.location.href = d.path;
+          });
+          const label = g.append("g").attr("class", "labels").selectAll("text").data(nodes).enter().append("text").text((d) => d.label.length > MAX_LABEL_LENGTH ? d.label.substring(0, MAX_LABEL_LENGTH) + "..." : d.label).attr("font-size", FONT_SIZE).attr("font-family", "var(--font-mono)").attr("fill", "var(--foreground)").attr("text-anchor", "middle").attr("cursor", "pointer").on("click", (event, d) => {
+            window.location.href = d.path;
+          });
+          node.on("mouseover", function(event, d) {
+            const neighbors = /* @__PURE__ */ new Set([d.id]);
+            edges.forEach((e) => {
+              const sId = typeof e.source === "string" ? e.source : e.source.id;
+              const tId = typeof e.target === "string" ? e.target : e.target.id;
+              if (sId === d.id) neighbors.add(tId);
+              if (tId === d.id) neighbors.add(sId);
+            });
+            node.style("opacity", (n) => neighbors.has(n.id) ? 1 : 0.2);
+            label.style("opacity", (n) => neighbors.has(n.id) ? 1 : 0.2);
+            link.style("opacity", (l) => {
+              const sId = typeof l.source === "string" ? l.source : l.source.id;
+              const tId = typeof l.target === "string" ? l.target : l.target.id;
+              return sId === d.id || tId === d.id ? 1 : 0.1;
+            });
+            select_default2(this).attr("r", getNodeSize(d.id) * ACTIVE_RADIUS_FACTOR);
+          }).on("mouseout", function(event, d) {
+            node.style("opacity", 1);
+            label.style("opacity", 1);
+            link.style("opacity", 0.6);
+            select_default2(this).attr("r", getNodeSize(d.id));
+          });
+          simulation.on("tick", () => {
+            link.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y).attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
+            node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+            label.attr("x", (d) => d.x).attr("y", (d) => d.y - FONT_BASELINE);
+          });
+          for (let i = 0; i < TICKS; i++) simulation.tick();
+        }, [dimensions, data]);
+        if (error) {
+          return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "w-full h-96 flex items-center justify-center border border-red-500 rounded-lg bg-red-900/10 text-red-500 font-mono", children: [
+            "Error loading graph: ",
+            error
+          ] });
         }
+        if (!data) {
+          return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { ref: containerRef, className: "w-full h-96 bg-surface animate-pulse flex items-center justify-center border border-border rounded-lg", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "text-muted font-mono", children: "Loading Graph Data..." }) });
+        }
+        return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { ref: containerRef, className: "w-full bg-surface border border-border rounded-lg overflow-hidden my-8", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+          "svg",
+          {
+            ref: svgRef,
+            width: dimensions.width,
+            height: dimensions.height,
+            className: "cursor-move"
+          }
+        ) });
       };
-      window.addEventListener("resize", updateDimensions);
-      updateDimensions();
-      return () => window.removeEventListener("resize", updateDimensions);
-    }, []);
-    (0, import_react.useEffect)(() => {
-      if (!data || !svgRef.current || dimensions.width === 0) return;
-      const svg = select_default2(svgRef.current);
-      svg.selectAll("*").remove();
-      const { width, height } = dimensions;
-      const nodes = data.nodes.map((d) => ({ ...d }));
-      const edges = data.edges.map((d) => ({ ...d }));
-      const getNodeSize = (id2) => {
-        const connections = edges.filter(
-          (e) => (typeof e.source === "string" ? e.source === id2 : e.source.id === id2) || (typeof e.target === "string" ? e.target === id2 : e.target.id === id2)
-        ).length;
-        let weight = 3 * Math.sqrt(connections + 1);
-        return Math.max(MINIMAL_NODE_SIZE, Math.min(MAX_NODE_SIZE, weight));
-      };
-      const g = svg.append("g");
-      const zoom = zoom_default2().scaleExtent([0.1, 4]).on("zoom", (event) => {
-        g.attr("transform", event.transform);
-      });
-      svg.call(zoom);
-      const simulation = simulation_default(nodes).force("link", link_default(edges).id((d) => d.id).distance(150)).force("charge", manyBody_default().strength(-300)).force("center", center_default(width / 2, height / 2)).force("collision", collide_default().radius(80));
-      const isNodeIsolated = (id2) => !edges.some(
-        (e) => (typeof e.source === "string" ? e.source === id2 : e.source.id === id2) || (typeof e.target === "string" ? e.target === id2 : e.target.id === id2)
-      );
-      const isolatedNodes = nodes.filter((n) => isNodeIsolated(n.id));
-      if (isolatedNodes.length > 0) {
-        const radius = Math.min(width, height) / 2.5;
-        const angleStep = 2 * Math.PI / isolatedNodes.length;
-        isolatedNodes.forEach((node2, i) => {
-          node2.fx = width / 2 + radius * Math.cos(i * angleStep);
-          node2.fy = height / 2 + radius * Math.sin(i * angleStep);
-        });
-      }
-      const link = g.append("g").attr("class", "links").selectAll("line").data(edges).enter().append("line").attr("stroke", "var(--border)").attr("stroke-opacity", 0.6).attr("stroke-width", STROKE);
-      const node = g.append("g").attr("class", "nodes").selectAll("circle").data(nodes).enter().append("circle").attr("r", (d) => getNodeSize(d.id)).attr("fill", (d) => window.location.pathname.includes(d.path) ? "var(--accent)" : "var(--muted)").attr("stroke", (d) => isNodeIsolated(d.id) ? "var(--accent)" : "none").attr("stroke-width", (d) => isNodeIsolated(d.id) ? 2 : 0).attr("cursor", "pointer").on("click", (event, d) => {
-        window.location.href = d.path;
-      });
-      const label = g.append("g").attr("class", "labels").selectAll("text").data(nodes).enter().append("text").text((d) => d.label.length > MAX_LABEL_LENGTH ? d.label.substring(0, MAX_LABEL_LENGTH) + "..." : d.label).attr("font-size", FONT_SIZE).attr("font-family", "var(--font-mono)").attr("fill", "var(--foreground)").attr("text-anchor", "middle").attr("cursor", "pointer").on("click", (event, d) => {
-        window.location.href = d.path;
-      });
-      node.on("mouseover", function(event, d) {
-        const neighbors = /* @__PURE__ */ new Set([d.id]);
-        edges.forEach((e) => {
-          const sId = typeof e.source === "string" ? e.source : e.source.id;
-          const tId = typeof e.target === "string" ? e.target : e.target.id;
-          if (sId === d.id) neighbors.add(tId);
-          if (tId === d.id) neighbors.add(sId);
-        });
-        node.style("opacity", (n) => neighbors.has(n.id) ? 1 : 0.2);
-        label.style("opacity", (n) => neighbors.has(n.id) ? 1 : 0.2);
-        link.style("opacity", (l) => {
-          const sId = typeof l.source === "string" ? l.source : l.source.id;
-          const tId = typeof l.target === "string" ? l.target : l.target.id;
-          return sId === d.id || tId === d.id ? 1 : 0.1;
-        });
-        select_default2(this).attr("r", getNodeSize(d.id) * ACTIVE_RADIUS_FACTOR);
-      }).on("mouseout", function(event, d) {
-        node.style("opacity", 1);
-        label.style("opacity", 1);
-        link.style("opacity", 0.6);
-        select_default2(this).attr("r", getNodeSize(d.id));
-      });
-      simulation.on("tick", () => {
-        link.attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y).attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
-        node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
-        label.attr("x", (d) => d.x).attr("y", (d) => d.y - FONT_BASELINE);
-      });
-      for (let i = 0; i < TICKS; i++) simulation.tick();
-    }, [dimensions, data]);
-    if (error) {
-      return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)("div", { className: "w-full h-96 flex items-center justify-center border border-red-500 rounded-lg bg-red-900/10 text-red-500 font-mono", children: [
-        "Error loading graph: ",
-        error
-      ] });
+      GraphView_default = GraphView;
     }
-    if (!data) {
-      return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { ref: containerRef, className: "w-full h-96 bg-surface animate-pulse flex items-center justify-center border border-border rounded-lg", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { className: "text-muted font-mono", children: "Loading Graph Data..." }) });
-    }
-    return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { ref: containerRef, className: "w-full bg-surface border border-border rounded-lg overflow-hidden my-8", children: /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-      "svg",
-      {
-        ref: svgRef,
-        width: dimensions.width,
-        height: dimensions.height,
-        className: "cursor-move"
-      }
-    ) });
-  };
-  var GraphView_default = GraphView;
+  });
 
   // src/components/SearchCmdK.tsx
-  var import_react2 = __toESM(require_react());
-  var import_jsx_runtime3 = __toESM(require_jsx_runtime());
-  var SearchCmdK = () => {
-    const [isOpen, setIsOpen] = (0, import_react2.useState)(false);
-    const [query, setQuery] = (0, import_react2.useState)("");
-    const [results, setResults] = (0, import_react2.useState)([]);
-    const [selectedIndex, setSelectedIndex] = (0, import_react2.useState)(0);
-    const [data, setData] = (0, import_react2.useState)([]);
-    const inputRef = (0, import_react2.useRef)(null);
-    (0, import_react2.useEffect)(() => {
-      const handleKeyDown = (e) => {
-        if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-          e.preventDefault();
-          setIsOpen((prev) => !prev);
-        }
-        if (e.key === "Escape") {
-          setIsOpen(false);
-        }
+  var SearchCmdK_exports = {};
+  __export(SearchCmdK_exports, {
+    default: () => SearchCmdK_default
+  });
+  var import_react2, import_jsx_runtime3, SearchCmdK, SearchCmdK_default;
+  var init_SearchCmdK = __esm({
+    "src/components/SearchCmdK.tsx"() {
+      "use strict";
+      import_react2 = __toESM(require_react());
+      import_jsx_runtime3 = __toESM(require_jsx_runtime());
+      SearchCmdK = () => {
+        const [isOpen, setIsOpen] = (0, import_react2.useState)(false);
+        const [query, setQuery] = (0, import_react2.useState)("");
+        const [results, setResults] = (0, import_react2.useState)([]);
+        const [selectedIndex, setSelectedIndex] = (0, import_react2.useState)(0);
+        const [data, setData] = (0, import_react2.useState)([]);
+        const inputRef = (0, import_react2.useRef)(null);
+        (0, import_react2.useEffect)(() => {
+          const handleKeyDown = (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+              e.preventDefault();
+              setIsOpen((prev) => !prev);
+            }
+            if (e.key === "Escape") {
+              setIsOpen(false);
+            }
+          };
+          window.addEventListener("keydown", handleKeyDown);
+          return () => window.removeEventListener("keydown", handleKeyDown);
+        }, []);
+        (0, import_react2.useEffect)(() => {
+          if (isOpen && data.length === 0) {
+            fetch("/search.json").then((res) => res.json()).then((json) => setData(json)).catch((err) => console.error("Failed to load search index", err));
+          }
+        }, [isOpen]);
+        (0, import_react2.useEffect)(() => {
+          if (!query) {
+            setResults([]);
+            return;
+          }
+          const lowerQuery = query.toLowerCase();
+          const filtered = data.filter(
+            (item) => item.title.toLowerCase().includes(lowerQuery) || item.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
+          ).slice(0, 10);
+          setResults(filtered);
+          setSelectedIndex(0);
+        }, [query, data]);
+        (0, import_react2.useEffect)(() => {
+          if (isOpen) {
+            setTimeout(() => inputRef.current?.focus(), 50);
+          }
+        }, [isOpen]);
+        const handleInputKeyDown = (e) => {
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setSelectedIndex((prev) => (prev + 1) % results.length);
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setSelectedIndex((prev) => (prev - 1 + results.length) % results.length);
+          } else if (e.key === "Enter") {
+            e.preventDefault();
+            if (results[selectedIndex]) {
+              window.location.href = results[selectedIndex].url;
+            }
+          }
+        };
+        if (!isOpen) return null;
+        return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "fixed inset-0 z-50 flex items-start justify-center pt-[20vh] bg-black/50 backdrop-blur-sm", onClick: () => setIsOpen(false), children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
+          "div",
+          {
+            className: "w-full max-w-xl bg-surface border border-border rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-100",
+            onClick: (e) => e.stopPropagation(),
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center border-b border-border px-4", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("svg", { className: "w-5 h-5 text-muted mr-3", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+                  "input",
+                  {
+                    ref: inputRef,
+                    type: "text",
+                    className: "w-full h-14 bg-transparent text-lg text-foreground placeholder-muted focus:outline-none font-mono",
+                    placeholder: "Search notes...",
+                    value: query,
+                    onChange: (e) => setQuery(e.target.value),
+                    onKeyDown: handleInputKeyDown
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "text-xs text-muted border border-border px-2 py-1 rounded", children: "ESC" })
+              ] }),
+              results.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "py-2 max-h-[60vh] overflow-y-auto", children: results.map((result, index2) => /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
+                "div",
+                {
+                  className: `px-4 py-3 cursor-pointer flex items-center justify-between ${index2 === selectedIndex ? "bg-accent/10" : "hover:bg-accent/5"}`,
+                  onClick: () => window.location.href = result.url,
+                  onMouseEnter: () => setSelectedIndex(index2),
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: `text-sm font-medium ${index2 === selectedIndex ? "text-accent" : "text-foreground"}`, children: result.title }),
+                      /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "text-xs text-muted mt-0.5 flex items-center gap-2", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "uppercase tracking-wider opacity-70", children: result.type }),
+                        result.tags?.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(import_jsx_runtime3.Fragment, { children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u2022" }),
+                          /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: result.tags.join(", ") })
+                        ] })
+                      ] })
+                    ] }),
+                    index2 === selectedIndex && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("svg", { className: "w-4 h-4 text-accent", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M9 5l7 7-7 7" }) })
+                  ]
+                },
+                result.url
+              )) }),
+              query && results.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "p-8 text-center text-muted text-sm", children: [
+                'No results found for "',
+                query,
+                '"'
+              ] }),
+              !query && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "p-4 text-xs text-muted text-center border-t border-border bg-bg/50", children: [
+                "Type to search \u2022 ",
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-foreground", children: "\u2191\u2193" }),
+                " to navigate \u2022 ",
+                /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-foreground", children: "\u21B5" }),
+                " to select"
+              ] })
+            ]
+          }
+        ) });
       };
-      window.addEventListener("keydown", handleKeyDown);
-      return () => window.removeEventListener("keydown", handleKeyDown);
-    }, []);
-    (0, import_react2.useEffect)(() => {
-      if (isOpen && data.length === 0) {
-        fetch("/search.json").then((res) => res.json()).then((json) => setData(json)).catch((err) => console.error("Failed to load search index", err));
-      }
-    }, [isOpen]);
-    (0, import_react2.useEffect)(() => {
-      if (!query) {
-        setResults([]);
-        return;
-      }
-      const lowerQuery = query.toLowerCase();
-      const filtered = data.filter(
-        (item) => item.title.toLowerCase().includes(lowerQuery) || item.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
-      ).slice(0, 10);
-      setResults(filtered);
-      setSelectedIndex(0);
-    }, [query, data]);
-    (0, import_react2.useEffect)(() => {
-      if (isOpen) {
-        setTimeout(() => inputRef.current?.focus(), 50);
-      }
-    }, [isOpen]);
-    const handleInputKeyDown = (e) => {
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        setSelectedIndex((prev) => (prev + 1) % results.length);
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        setSelectedIndex((prev) => (prev - 1 + results.length) % results.length);
-      } else if (e.key === "Enter") {
-        e.preventDefault();
-        if (results[selectedIndex]) {
-          window.location.href = results[selectedIndex].url;
-        }
-      }
-    };
-    if (!isOpen) return null;
-    return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "fixed inset-0 z-50 flex items-start justify-center pt-[20vh] bg-black/50 backdrop-blur-sm", onClick: () => setIsOpen(false), children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
-      "div",
-      {
-        className: "w-full max-w-xl bg-surface border border-border rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-100",
-        onClick: (e) => e.stopPropagation(),
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "flex items-center border-b border-border px-4", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("svg", { className: "w-5 h-5 text-muted mr-3", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" }) }),
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
-              "input",
-              {
-                ref: inputRef,
-                type: "text",
-                className: "w-full h-14 bg-transparent text-lg text-foreground placeholder-muted focus:outline-none font-mono",
-                placeholder: "Search notes...",
-                value: query,
-                onChange: (e) => setQuery(e.target.value),
-                onKeyDown: handleInputKeyDown
-              }
-            ),
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "text-xs text-muted border border-border px-2 py-1 rounded", children: "ESC" })
-          ] }),
-          results.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: "py-2 max-h-[60vh] overflow-y-auto", children: results.map((result, index2) => /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
-            "div",
-            {
-              className: `px-4 py-3 cursor-pointer flex items-center justify-between ${index2 === selectedIndex ? "bg-accent/10" : "hover:bg-accent/5"}`,
-              onClick: () => window.location.href = result.url,
-              onMouseEnter: () => setSelectedIndex(index2),
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("div", { className: `text-sm font-medium ${index2 === selectedIndex ? "text-accent" : "text-foreground"}`, children: result.title }),
-                  /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "text-xs text-muted mt-0.5 flex items-center gap-2", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "uppercase tracking-wider opacity-70", children: result.type }),
-                    result.tags?.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(import_jsx_runtime3.Fragment, { children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: "\u2022" }),
-                      /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { children: result.tags.join(", ") })
-                    ] })
-                  ] })
-                ] }),
-                index2 === selectedIndex && /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("svg", { className: "w-4 h-4 text-accent", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M9 5l7 7-7 7" }) })
-              ]
-            },
-            result.url
-          )) }),
-          query && results.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "p-8 text-center text-muted text-sm", children: [
-            'No results found for "',
-            query,
-            '"'
-          ] }),
-          !query && /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("div", { className: "p-4 text-xs text-muted text-center border-t border-border bg-bg/50", children: [
-            "Type to search \u2022 ",
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-foreground", children: "\u2191\u2193" }),
-            " to navigate \u2022 ",
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)("span", { className: "text-foreground", children: "\u21B5" }),
-            " to select"
-          ] })
-        ]
-      }
-    ) });
-  };
-  var SearchCmdK_default = SearchCmdK;
+      SearchCmdK_default = SearchCmdK;
+    }
+  });
 
   // src/main.tsx
+  var import_react3 = __toESM(require_react());
+  var import_client = __toESM(require_client());
   var import_jsx_runtime4 = __toESM(require_jsx_runtime());
+  var HelloGarden2 = import_react3.default.lazy(() => Promise.resolve().then(() => (init_HelloGarden(), HelloGarden_exports)));
+  var GraphView2 = import_react3.default.lazy(() => Promise.resolve().then(() => (init_GraphView(), GraphView_exports)));
+  var SearchCmdK2 = import_react3.default.lazy(() => Promise.resolve().then(() => (init_SearchCmdK(), SearchCmdK_exports)));
   var components = {
-    HelloGarden: HelloGarden_default,
-    GraphView: GraphView_default,
-    SearchCmdK: SearchCmdK_default
+    HelloGarden: HelloGarden2,
+    GraphView: GraphView2,
+    SearchCmdK: SearchCmdK2
   };
   var mountIslands = () => {
     const islands = document.querySelectorAll("[data-island]");
@@ -25485,7 +27569,9 @@
             console.error("[Garden] React Error:", error, errorInfo);
           }
         });
-        root2.render(/* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Component, { ...props }));
+        root2.render(
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react3.Suspense, { fallback: null, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Component, { ...props }) })
+        );
       }
     });
   };
@@ -25497,10 +27583,10 @@
 })();
 /*! Bundled license information:
 
-scheduler/cjs/scheduler.development.js:
+react/cjs/react.development.js:
   (**
    * @license React
-   * scheduler.development.js
+   * react.development.js
    *
    * Copyright (c) Meta Platforms, Inc. and affiliates.
    *
@@ -25508,10 +27594,10 @@ scheduler/cjs/scheduler.development.js:
    * LICENSE file in the root directory of this source tree.
    *)
 
-react/cjs/react.development.js:
+scheduler/cjs/scheduler.development.js:
   (**
    * @license React
-   * react.development.js
+   * scheduler.development.js
    *
    * Copyright (c) Meta Platforms, Inc. and affiliates.
    *

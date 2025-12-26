@@ -60,18 +60,22 @@ const GraphView: React.FC = () => {
 
   // 2. Handle Resize
   useEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        setDimensions({
-          width: containerRef.current.offsetWidth,
-          height: window.innerHeight * 0.6
-        });
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === containerRef.current) {
+          setDimensions({
+            width: entry.contentRect.width,
+            height: window.innerHeight * 0.6
+          });
+        }
       }
-    };
+    });
 
-    window.addEventListener('resize', updateDimensions);
-    updateDimensions();
-    return () => window.removeEventListener('resize', updateDimensions);
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+
+    return () => resizeObserver.disconnect();
   }, []);
 
   // 3. Render D3 Graph
