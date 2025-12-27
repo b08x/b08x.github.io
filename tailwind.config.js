@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: 'class',
   content: [
     './_includes/**/*.html',
     './_layouts/**/*.html',
@@ -10,8 +11,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['var(--font-mono)'],
-        prose: ['var(--font-prose)'],
+        mono: ['var(--font-mono)', 'Courier New', 'Courier', 'monospace'],
+        prose: ['var(--font-prose)', 'Courier New', 'Courier', 'monospace'],
+        sans: ['var(--font-prose)', 'Courier New', 'Courier', 'monospace'],
       },
       colors: {
         // Core theme colors (from _theme-variables.scss)
@@ -61,12 +63,9 @@ module.exports = {
         DEFAULT: 'var(--radius)',
       },
       transitionDuration: {
-        fast: '150ms',
-        DEFAULT: '300ms',
-        slow: '500ms',
-      },
-      transitionTimingFunction: {
-        DEFAULT: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        fast: 'var(--transition-fast)',
+        DEFAULT: 'var(--transition-base)',
+        slow: 'var(--transition-slow)',
       },
     }
   },

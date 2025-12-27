@@ -9,139 +9,152 @@
    ======================================== */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* ===  Terminal Color Palette === */
-  /* WCAG AA Compliance Audit (Last verified: 2025-12-26)
-   * All color combinations tested and PASS WCAG AA standards:
-   * - Muted (#888888) on Background (#0a0a0a): 5.58:1 ✓ PASS
-   * - Muted (#888888) on Surface (#111111):    5.33:1 ✓ PASS
-   * - Foreground (#e5e5e5) on Background:     15.72:1 ✓ PASS
-   * Minimum required: 4.5:1 for normal text, 3:1 for large text
-   */
-  --background: #0a0a0a;
-  /* Nearly black background */
-  --foreground: #e5e5e5;
-  /* Light gray text */
-  --surface: #111111;
-  /* Component backgrounds */
-  --border: #333333;
-  /* Subtle borders */
-  --muted: #888888;
-  /* Secondary/muted text */
-  --accent: #ff6600;
-  /* Warm orange accent */
+  /* ===  Light Monospace Color Palette === */
+  --background: #f0f0f0;
+  --foreground: #333333;
+  --surface: #ffffff;
+  --border: #bdc3c7;
+  --muted: #7f8c8d;
+  --accent: #3498db;
 
-  /* === Extended Terminal Palette === */
+  /* === Extended Palette === */
   --card: var(--surface);
   --card-foreground: var(--foreground);
-  --popover: #1a1a1a;
+  --popover: #ffffff;
   --popover-foreground: var(--foreground);
 
   /* === Primary & Secondary === */
-  --primary: var(--accent);
+  --primary: #3498db;
   --primary-foreground: #ffffff;
-  --secondary: var(--surface);
-  --secondary-foreground: var(--foreground);
+  --secondary: #ecf0f1;
+  --secondary-foreground: #2c3e50;
 
   /* === Muted & Accent === */
-  --muted-bg: var(--surface);
+  --muted-bg: #ecf0f1;
   --muted-foreground: var(--muted);
-  --accent-bg: rgba(255, 102, 0, 0.1);
+  --accent-bg: rgba(52, 152, 219, 0.1);
   --accent-foreground: var(--accent);
 
   /* === Destructive/Error === */
-  --destructive: #ef4444;
+  --destructive: #e74c3c;
   --destructive-foreground: #ffffff;
 
   /* === Borders & Inputs === */
-  --input: #222222;
-  --ring: var(--accent);
+  --input: #ffffff;
+  --ring: var(--primary);
 
   /* === Sidebar Specific === */
-  --sidebar: var(--background);
+  --sidebar: #ffffff;
   --sidebar-foreground: var(--foreground);
-  --sidebar-primary: var(--accent);
+  --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: var(--surface);
+  --sidebar-accent: #f0f3f4;
   --sidebar-accent-foreground: var(--foreground);
   --sidebar-border: var(--border);
-  --sidebar-ring: var(--accent);
+  --sidebar-ring: var(--primary);
 
   /* === Charts & Data Visualization === */
-  --chart-1: #ff6600;
-  /* Orange */
-  --chart-2: #6ab0ff;
-  /* Blue */
-  --chart-3: #50c878;
-  /* Green */
-  --chart-4: #ffaa00;
-  /* Yellow */
-  --chart-5: #ff4466;
-  /* Red */
-
-  /* === Mermaid Diagram Colors === */
-  --mermaid-primary: var(--chart-2);
-  /* Cyan */
-  --mermaid-secondary: var(--chart-5);
-  /* Pink */
-  --mermaid-tertiary: var(--border);
-  /* Grey */
-  --mermaid-edge: var(--foreground);
-  --mermaid-node-bg: var(--background);
+  --chart-1: #3498db;
+  --chart-2: #2ecc71;
+  --chart-3: #f1c40f;
+  --chart-4: #e67e22;
+  --chart-5: #e74c3c;
 
   /* === Design Tokens === */
-  --radius: 0.5rem;
+  --radius: 20px;
 
-  /* === Legacy Variable Mappings (for backwards compatibility) === */
+  /* === Legacy Variable Mappings === */
   --bg-primary: var(--background);
   --bg-secondary: var(--surface);
-  --bg-tertiary: #1a1a1a;
-  --bg-code: #0f0f0f;
+  --bg-tertiary: #ecf0f1;
+  --bg-code: #f8f9fa;
 
   --text-primary: var(--foreground);
   --text-secondary: var(--muted);
-  --text-tertiary: #666666;
+  --text-tertiary: #95a5a6;
   --text-muted: var(--muted);
 
   --border-primary: var(--border);
-  --border-secondary: #222222;
+  --border-secondary: #dcdde1;
 
-  --link-base: var(--accent);
-  --link-hover: #ff8533;
-  --link-active: var(--accent);
+  --link-base: var(--primary);
+  --link-hover: #2980b9;
+  --link-active: #1c598a;
 
   --ui-icon: var(--muted);
-  --ui-focus: var(--accent);
-  --ui-hover: rgba(255, 102, 0, 0.1);
+  --ui-focus: var(--primary);
+  --ui-hover: rgba(52, 152, 219, 0.1);
 
   /* === Typography === */
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
-  --font-prose: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Courier New', 'Courier', monospace;
+  --font-prose: 'Courier New', 'Courier', monospace;
   --font-size-base: 16px;
-  --line-height-base: 1.7;
+  --line-height-base: 1.6;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* === Spacing Scale (8px base) === */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
+  /* === Spacing Scale === */
+  --space-xs: 0.3125rem;
+  --space-sm: 0.625rem;
+  --space-md: 1.25rem;
+  --space-lg: 1.875rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 3.75rem;
 
   /* === Border Radius === */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
 
   /* === Transitions === */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+}
+
+/* ========================================
+   DARK THEME OVERRIDES
+   ======================================== */
+
+.dark {
+  color-scheme: dark;
+
+  --background: #1a1a1a;
+  --foreground: #e0e0e0;
+  --surface: #252525;
+  --border: #444444;
+  --muted: #888888;
+  --accent: #3498db;
+
+  --card: var(--surface);
+  --popover: #2c2c2c;
+
+  --primary: #3498db;
+  --secondary: #2c2c2c;
+  --secondary-foreground: #e0e0e0;
+
+  --muted-bg: #2c2c2c;
+  --accent-bg: rgba(52, 152, 219, 0.2);
+
+  --input: #1a1a1a;
+
+  --sidebar: #121212;
+  --sidebar-accent: #1a1a1a;
+  --sidebar-border: #333333;
+
+  --bg-tertiary: #252525;
+  --bg-code: #121212;
+  --text-tertiary: #666666;
+  --border-secondary: #333333;
+
+  --link-hover: #5dade2;
+  --link-active: #2e86c1;
+
+  --ui-hover: rgba(52, 152, 219, 0.2);
 }
 
 /* ========================================

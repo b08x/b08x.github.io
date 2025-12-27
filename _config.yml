@@ -1,16 +1,5 @@
 title: syncopated notes
-include:
-  [
-    "_pages",
-    "projects",
-    "logs",
-    "docs",
-    "Containerfile",
-    "docker-compose.yml",
-    "CLAUDE.md",
-    "LICENSE",
-    "README.md",
-  ]
+include: ["_pages", "projects"]
 exclude:
   - .gitignore
   - bin
@@ -18,6 +7,13 @@ exclude:
   - package-lock.json
   - postcss.config.js
   - README.md
+  - b08x.github.io.code-workspace
+  - logs/
+  - docs/
+  - Containerfile
+  - docker-compose.yml
+  - CLAUDE.md
+  - LICENSE
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ""
 
