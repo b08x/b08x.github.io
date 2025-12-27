@@ -7,7 +7,7 @@ layout: default
   <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr_280px] xl:grid-cols-[380px_1fr_320px] gap-6">
 
     <!-- LEFT SIDEBAR: Source Guide -->
-    <aside class="source-guide bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto">
+    <aside class="source-guide bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 lg:sticky lg:top-6 lg:self-start">
       <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">Source guide</h2>
 
       {% if page.summary %}
@@ -89,7 +89,7 @@ layout: default
     </main>
 
     <!-- RIGHT SIDEBAR: Notebook Guide -->
-    <aside class="notebook-guide lg:sticky lg:top-6 lg:self-start lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto space-y-6">
+    <aside class="notebook-guide lg:sticky lg:top-6 lg:self-start space-y-6">
 
       <!-- Help Me Create + Suggested Questions + Chat (React Island) -->
       {% assign questions = page.suggested_questions | default: empty %}
@@ -114,3 +114,58 @@ layout: default
 
   </div>
 </div>
+
+<style>
+/* Responsive adjustments */
+@media (max-width: 1023px) {
+  .notebook-container > div {
+    /* On tablet/mobile, stack everything vertically */
+    grid-template-columns: 1fr;
+  }
+
+  .source-guide,
+  .notebook-guide {
+    position: static !important;
+  }
+}
+
+/* Smooth scrolling for sticky sidebars */
+@media (min-width: 1024px) {
+  .source-guide,
+  .notebook-guide {
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .source-guide::-webkit-scrollbar,
+  .notebook-guide::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .source-guide::-webkit-scrollbar-thumb,
+  .notebook-guide::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.3);
+    border-radius: 2px;
+  }
+}
+
+/* Loading state animation */
+[data-island] > div {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Stop animation once React mounts */
+[data-island].mounted > div {
+  animation: none;
+}
+</style>
