@@ -6,12 +6,18 @@ const HelloGarden = React.lazy(() => import('./components/HelloGarden'));
 const GraphView = React.lazy(() => import('./components/GraphView'));
 const SearchCmdK = React.lazy(() => import('./components/SearchCmdK'));
 const VideoPlayer = React.lazy(() => import('./components/VideoPlayer'));
+const NotesGrid = React.lazy(() => import('./components/NotesGrid'));
+const AudioPlayer = React.lazy(() => import('./components/AudioPlayer'));
+const NotebookGuide = React.lazy(() => import('./components/NotebookGuide'));
 
 const components: Record<string, React.ComponentType<any>> = {
   HelloGarden,
   GraphView,
   SearchCmdK,
   VideoPlayer,
+  NotesGrid,
+  AudioPlayer,
+  NotebookGuide,
 };
 
 const mountIslands = () => {
