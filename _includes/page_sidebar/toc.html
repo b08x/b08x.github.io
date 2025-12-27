@@ -1,65 +1,55 @@
-<nav class="toc-widget" aria-labelledby="toc-heading">
+<nav class="p-4 bg-surface rounded-lg border border-border" aria-labelledby="toc-heading">
   <h3
     id="toc-heading"
-    class="text-sm font-semibold uppercase mb-3"
-    style="color: var(--text-secondary)"
+    class="text-sm font-bold uppercase mb-3 text-muted"
   >
-    <i class="fas fa-list mr-2"></i>On This Page
+    <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+    </svg>
+    On This Page
   </h3>
 
-  <ul id="toc-list" class="space-y-2 text-sm">
+  <ul id="toc-list" class="space-y-2 text-sm list-none p-0 m-0">
     <!-- Populated by JavaScript -->
   </ul>
 </nav>
 
 <style>
-  .toc-widget {
-    padding: var(--space-md);
-    background: var(--bg-secondary);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-primary);
-  }
-
-  #toc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .toc-widget a {
+  #toc-list a {
     display: block;
     padding: 0.25rem 0.5rem;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     text-decoration: none;
     border-left: 2px solid transparent;
-    transition: all var(--transition-fast);
-    border-radius: var(--radius-sm);
+    transition: all 150ms ease;
+    border-radius: 0.25rem;
   }
 
-  .toc-widget a:hover {
-    color: var(--link-hover);
-    background: var(--ui-hover);
+  #toc-list a:hover {
+    color: var(--text-accent);
+    background: var(--bg-surface);
   }
 
-  .toc-widget a.active {
-    color: var(--link-base);
-    border-left-color: var(--link-base);
-    background: var(--ui-hover);
-    font-weight: var(--font-weight-semibold);
+  #toc-list a.active {
+    color: var(--text-accent);
+    border-left-color: var(--text-accent);
+    background: rgba(var(--accent-rgb), 0.1);
+    font-weight: 600;
   }
 
-  .toc-widget a:focus-visible {
-    outline: 2px solid var(--ui-focus);
+  #toc-list a:focus-visible {
+    outline: 2px solid var(--text-accent);
     outline-offset: 2px;
   }
 
-  .toc-widget .toc-h3 {
+  #toc-list .toc-h3 {
     padding-left: 1rem;
     font-size: 0.85em;
-    color: var(--text-tertiary);
+    opacity: 0.7;
   }
 
-  .toc-widget .toc-h3.active {
-    color: var(--link-base);
+  #toc-list .toc-h3.active {
+    color: var(--text-accent);
+    opacity: 1;
   }
 </style>

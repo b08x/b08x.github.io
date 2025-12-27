@@ -181,6 +181,16 @@ layout: base-shell
         </div>
         {% endif %}
 
+        {% if page.right_sidebar contains 'media' %}
+        <!-- Media Widgets -->
+        {% include page_sidebar/media_widgets.html %}
+        {% endif %}
+
+        {% if page.right_sidebar contains 'references' %}
+        <!-- References -->
+        {% include page_sidebar/references.html %}
+        {% endif %}
+
       </div>
     </aside>
     {% endif %}
