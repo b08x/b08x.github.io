@@ -1337,7 +1337,7 @@
           return dispatcher;
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var React4 = require_react(), Internals = {
+        var React8 = require_react(), Internals = {
           d: {
             f: noop2,
             r: function() {
@@ -1355,7 +1355,7 @@
           },
           p: 0,
           findDOMNode: null
-        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
+        }, REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), ReactSharedInternals = React8.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE;
         "function" === typeof Map && null != Map.prototype && "function" === typeof Map.prototype.forEach && "function" === typeof Set && null != Set.prototype && "function" === typeof Set.prototype.clear && "function" === typeof Set.prototype.forEach || console.error(
           "React depends on Map and Set built-in types. Make sure that you load a polyfill in older browsers. https://reactjs.org/link/react-polyfills"
         );
@@ -2890,7 +2890,7 @@
           "number" === type2 && getActiveElement(node.ownerDocument) === node || node.defaultValue === "" + value || (node.defaultValue = "" + value);
         }
         function validateOptionProps(element, props) {
-          null == props.value && ("object" === typeof props.children && null !== props.children ? React4.Children.forEach(props.children, function(child) {
+          null == props.value && ("object" === typeof props.children && null !== props.children ? React8.Children.forEach(props.children, function(child) {
             null == child || "string" === typeof child || "number" === typeof child || "bigint" === typeof child || didWarnInvalidChild || (didWarnInvalidChild = true, console.error(
               "Cannot infer the option value of complex children. Pass a `value` prop or use a plain string as children to <option>."
             ));
@@ -18522,14 +18522,14 @@
           ));
         }
         "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-        var Scheduler = require_scheduler(), React4 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
+        var Scheduler = require_scheduler(), React8 = require_react(), ReactDOM = require_react_dom(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.element"), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
         /* @__PURE__ */ Symbol.for("react.scope");
         var REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity");
         /* @__PURE__ */ Symbol.for("react.legacy_hidden");
         /* @__PURE__ */ Symbol.for("react.tracing_marker");
         var REACT_MEMO_CACHE_SENTINEL = /* @__PURE__ */ Symbol.for("react.memo_cache_sentinel");
         /* @__PURE__ */ Symbol.for("react.view_transition");
-        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
+        var MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), isArrayImpl = Array.isArray, ReactSharedInternals = React8.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, ReactDOMSharedInternals = ReactDOM.__DOM_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, NotPending = Object.freeze({
           pending: false,
           data: null,
           method: null,
@@ -21317,7 +21317,7 @@
           }
         };
         (function() {
-          var isomorphicReactPackageVersion = React4.version;
+          var isomorphicReactPackageVersion = React8.version;
           if ("19.2.3" !== isomorphicReactPackageVersion)
             throw Error(
               'Incompatible React versions: The "react" and "react-dom" packages must have the exact same version. Instead got:\n  - react:      ' + (isomorphicReactPackageVersion + "\n  - react-dom:  19.2.3\nLearn more: https://react.dev/warnings/version-mismatch")
@@ -21671,18 +21671,18 @@
         function isValidElement(object) {
           return "object" === typeof object && null !== object && object.$$typeof === REACT_ELEMENT_TYPE;
         }
-        var React4 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React4.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
+        var React8 = require_react(), REACT_ELEMENT_TYPE = /* @__PURE__ */ Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = /* @__PURE__ */ Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = /* @__PURE__ */ Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = /* @__PURE__ */ Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = /* @__PURE__ */ Symbol.for("react.profiler"), REACT_CONSUMER_TYPE = /* @__PURE__ */ Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = /* @__PURE__ */ Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = /* @__PURE__ */ Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = /* @__PURE__ */ Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = /* @__PURE__ */ Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = /* @__PURE__ */ Symbol.for("react.memo"), REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy"), REACT_ACTIVITY_TYPE = /* @__PURE__ */ Symbol.for("react.activity"), REACT_CLIENT_REFERENCE = /* @__PURE__ */ Symbol.for("react.client.reference"), ReactSharedInternals = React8.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, hasOwnProperty = Object.prototype.hasOwnProperty, isArrayImpl = Array.isArray, createTask = console.createTask ? console.createTask : function() {
           return null;
         };
-        React4 = {
+        React8 = {
           react_stack_bottom_frame: function(callStackForError) {
             return callStackForError();
           }
         };
         var specialPropKeyWarningShown;
         var didWarnAboutElementRef = {};
-        var unknownOwnerDebugStack = React4.react_stack_bottom_frame.bind(
-          React4,
+        var unknownOwnerDebugStack = React8.react_stack_bottom_frame.bind(
+          React8,
           UnknownOwner
         )();
         var unknownOwnerDebugTask = createTask(getTaskName(UnknownOwner));
@@ -27545,33 +27545,693 @@
     }
   });
 
+  // src/components/VideoPlayer.tsx
+  var VideoPlayer_exports = {};
+  __export(VideoPlayer_exports, {
+    default: () => VideoPlayer_default
+  });
+  var import_react3, import_jsx_runtime4, VideoPlayer, VideoPlayer_default;
+  var init_VideoPlayer = __esm({
+    "src/components/VideoPlayer.tsx"() {
+      "use strict";
+      import_react3 = __toESM(require_react());
+      import_jsx_runtime4 = __toESM(require_jsx_runtime());
+      VideoPlayer = ({
+        videoUrl,
+        segments,
+        transcript = [],
+        title = "Video Tutorial"
+      }) => {
+        const videoRef = (0, import_react3.useRef)(null);
+        const [currentTime, setCurrentTime] = (0, import_react3.useState)(0);
+        const [isPlaying, setIsPlaying] = (0, import_react3.useState)(false);
+        const [playbackRate, setPlaybackRate] = (0, import_react3.useState)(1);
+        const [activeSegment, setActiveSegment] = (0, import_react3.useState)(null);
+        const [activeAction, setActiveAction] = (0, import_react3.useState)(null);
+        const [searchQuery, setSearchQuery] = (0, import_react3.useState)("");
+        (0, import_react3.useEffect)(() => {
+          const video = videoRef.current;
+          if (!video) return;
+          const handleTimeUpdate = () => {
+            setCurrentTime(video.currentTime);
+          };
+          const handlePlay = () => setIsPlaying(true);
+          const handlePause = () => setIsPlaying(false);
+          video.addEventListener("timeupdate", handleTimeUpdate);
+          video.addEventListener("play", handlePlay);
+          video.addEventListener("pause", handlePause);
+          return () => {
+            video.removeEventListener("timeupdate", handleTimeUpdate);
+            video.removeEventListener("play", handlePlay);
+            video.removeEventListener("pause", handlePause);
+          };
+        }, []);
+        (0, import_react3.useEffect)(() => {
+          const current = segments.find(
+            (seg) => currentTime >= seg.startTime && currentTime < seg.endTime
+          );
+          setActiveSegment(current || null);
+          if (current) {
+            const recentAction = [...current.actions].reverse().find((action) => currentTime >= action.timestamp);
+            setActiveAction(recentAction || null);
+          } else {
+            setActiveAction(null);
+          }
+        }, [currentTime, segments]);
+        const jumpToTime = (time) => {
+          if (videoRef.current) {
+            videoRef.current.currentTime = time;
+            videoRef.current.play();
+          }
+        };
+        const formatTime = (seconds) => {
+          const mins = Math.floor(seconds / 60);
+          const secs = Math.floor(seconds % 60);
+          return `${mins}:${secs.toString().padStart(2, "0")}`;
+        };
+        const changePlaybackRate = (rate) => {
+          setPlaybackRate(rate);
+          if (videoRef.current) {
+            videoRef.current.playbackRate = rate;
+          }
+        };
+        const filteredTranscript = transcript.filter(
+          (item) => item.text.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "video-player-container", style: {
+          display: "flex",
+          gap: "var(--spacing-6)",
+          flexDirection: "row",
+          minHeight: "600px"
+        }, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+            flex: "0 0 60%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--spacing-4)"
+          }, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+            background: "var(--bg-secondary)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius-lg)",
+            padding: "var(--spacing-4)"
+          }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h2", { style: {
+              color: "var(--text-primary)",
+              marginBottom: "var(--spacing-3)",
+              fontSize: "1.25rem",
+              fontWeight: 600
+            }, children: title }),
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+              "video",
+              {
+                ref: videoRef,
+                src: videoUrl,
+                controls: true,
+                style: {
+                  width: "100%",
+                  borderRadius: "var(--radius-md)",
+                  background: "#000"
+                }
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+              display: "flex",
+              gap: "var(--spacing-3)",
+              marginTop: "var(--spacing-3)",
+              alignItems: "center"
+            }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { style: {
+                color: "var(--text-secondary)",
+                fontSize: "0.875rem",
+                fontWeight: 500
+              }, children: "Speed:" }),
+              [0.5, 0.75, 1, 1.25, 1.5, 2].map((rate) => /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+                "button",
+                {
+                  onClick: () => changePlaybackRate(rate),
+                  style: {
+                    padding: "var(--spacing-2) var(--spacing-3)",
+                    borderRadius: "var(--radius-md)",
+                    border: "1px solid var(--border)",
+                    background: playbackRate === rate ? "var(--link-base)" : "var(--surface)",
+                    color: playbackRate === rate ? "#fff" : "var(--text-primary)",
+                    cursor: "pointer",
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
+                    transition: "all 150ms"
+                  },
+                  children: [
+                    rate,
+                    "x"
+                  ]
+                },
+                rate
+              ))
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+              marginTop: "var(--spacing-3)",
+              color: "var(--text-tertiary)",
+              fontSize: "0.875rem"
+            }, children: [
+              "Current: ",
+              formatTime(currentTime),
+              activeSegment && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { style: { marginLeft: "var(--spacing-2)" }, children: [
+                "\u2022 ",
+                activeSegment.title
+              ] })
+            ] })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+            flex: "0 0 40%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--spacing-4)"
+          }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+              background: "var(--bg-secondary)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-lg)",
+              padding: "var(--spacing-4)",
+              maxHeight: "300px",
+              overflowY: "auto"
+            }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h3", { style: {
+                color: "var(--text-primary)",
+                fontSize: "1rem",
+                fontWeight: 600,
+                marginBottom: "var(--spacing-3)"
+              }, children: "Actionable Steps" }),
+              activeSegment ? /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                  color: "var(--link-base)",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  marginBottom: "var(--spacing-3)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em"
+                }, children: activeSegment.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: { display: "flex", flexDirection: "column", gap: "var(--spacing-2)" }, children: activeSegment.actions.map((action, idx) => {
+                  const isPast = action.timestamp < currentTime;
+                  const isCurrent = action === activeAction;
+                  return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+                    "div",
+                    {
+                      onClick: () => jumpToTime(action.timestamp),
+                      style: {
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: "var(--spacing-2)",
+                        padding: "var(--spacing-2)",
+                        borderRadius: "var(--radius-md)",
+                        cursor: "pointer",
+                        background: isCurrent ? "var(--ui-hover)" : "transparent",
+                        border: isCurrent ? "1px solid var(--link-base)" : "1px solid transparent",
+                        transition: "all 150ms"
+                      },
+                      children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+                          width: "20px",
+                          height: "20px",
+                          borderRadius: "50%",
+                          border: `2px solid ${isPast ? "var(--link-base)" : "var(--border)"}`,
+                          background: isPast ? "var(--link-base)" : "transparent",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                          marginTop: "2px"
+                        }, children: [
+                          isPast && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("svg", { width: "12", height: "12", viewBox: "0 0 12 12", fill: "none", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("path", { d: "M2 6L5 9L10 3", stroke: "#fff", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }) }),
+                          isCurrent && !isPast && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                            width: "8px",
+                            height: "8px",
+                            borderRadius: "50%",
+                            background: "var(--link-base)",
+                            animation: "pulse 2s ease-in-out infinite"
+                          } })
+                        ] }),
+                        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: { flex: 1 }, children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                            color: "var(--text-primary)",
+                            fontSize: "0.875rem",
+                            fontWeight: isCurrent ? 600 : 400
+                          }, children: action.description }),
+                          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                            color: "var(--text-tertiary)",
+                            fontSize: "0.75rem",
+                            marginTop: "2px",
+                            fontFamily: "monospace"
+                          }, children: formatTime(action.timestamp) })
+                        ] })
+                      ]
+                    },
+                    idx
+                  );
+                }) })
+              ] }) : /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                color: "var(--text-tertiary)",
+                fontSize: "0.875rem",
+                textAlign: "center",
+                padding: "var(--spacing-4)"
+              }, children: "Play the video to see actionable steps" })
+            ] }),
+            transcript.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+              background: "var(--bg-secondary)",
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-lg)",
+              padding: "var(--spacing-4)",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column"
+            }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("h3", { style: {
+                color: "var(--text-primary)",
+                fontSize: "1rem",
+                fontWeight: 600,
+                marginBottom: "var(--spacing-3)"
+              }, children: "Full Transcript" }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+                "input",
+                {
+                  type: "text",
+                  placeholder: "Search transcript...",
+                  value: searchQuery,
+                  onChange: (e) => setSearchQuery(e.target.value),
+                  style: {
+                    width: "100%",
+                    padding: "var(--spacing-2)",
+                    borderRadius: "var(--radius-md)",
+                    border: "1px solid var(--border)",
+                    background: "var(--surface)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.875rem",
+                    marginBottom: "var(--spacing-3)"
+                  }
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                flex: 1,
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: "var(--spacing-2)"
+              }, children: filteredTranscript.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+                "div",
+                {
+                  onClick: () => jumpToTime(item.timestamp),
+                  style: {
+                    padding: "var(--spacing-2)",
+                    borderRadius: "var(--radius-md)",
+                    cursor: "pointer",
+                    background: Math.abs(currentTime - item.timestamp) < 2 ? "var(--ui-hover)" : "transparent",
+                    transition: "background 150ms"
+                  },
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { style: {
+                      color: "var(--link-base)",
+                      fontSize: "0.75rem",
+                      fontFamily: "monospace",
+                      marginBottom: "4px"
+                    }, children: [
+                      "[",
+                      formatTime(item.timestamp),
+                      "]"
+                    ] }),
+                    /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { style: {
+                      color: "var(--text-primary)",
+                      fontSize: "0.875rem",
+                      lineHeight: 1.5
+                    }, children: item.text })
+                  ]
+                },
+                idx
+              )) })
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("style", { children: `
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      ` })
+        ] });
+      };
+      VideoPlayer_default = VideoPlayer;
+    }
+  });
+
+  // src/components/NotesGrid.tsx
+  var NotesGrid_exports = {};
+  __export(NotesGrid_exports, {
+    default: () => NotesGrid_default
+  });
+  var import_react4, import_jsx_runtime5, NotesGrid, NotesGrid_default;
+  var init_NotesGrid = __esm({
+    "src/components/NotesGrid.tsx"() {
+      "use strict";
+      import_react4 = __toESM(require_react());
+      import_jsx_runtime5 = __toESM(require_jsx_runtime());
+      NotesGrid = ({ notes }) => {
+        const [selectedNotes, setSelectedNotes] = (0, import_react4.useState)(/* @__PURE__ */ new Set());
+        const [showAddNote, setShowAddNote] = (0, import_react4.useState)(false);
+        const toggleNote = (id2) => {
+          const newSelected = new Set(selectedNotes);
+          if (newSelected.has(id2)) {
+            newSelected.delete(id2);
+          } else {
+            newSelected.add(id2);
+          }
+          setSelectedNotes(newSelected);
+        };
+        const selectAll = () => {
+          if (selectedNotes.size === notes.length) {
+            setSelectedNotes(/* @__PURE__ */ new Set());
+          } else {
+            setSelectedNotes(new Set(notes.map((n) => n.id)));
+          }
+        };
+        return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "notes-grid-container", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex gap-3 mb-6", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+              "button",
+              {
+                onClick: () => setShowAddNote(!showAddNote),
+                className: "px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium",
+                children: "Add note"
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+              "button",
+              {
+                onClick: selectAll,
+                className: "px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium",
+                children: selectedNotes.size === notes.length ? "Deselect all" : "Select all"
+              }
+            ),
+            selectedNotes.size > 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { className: "px-4 py-2 text-sm text-gray-600 dark:text-gray-400 flex items-center", children: [
+              selectedNotes.size,
+              " selected"
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4", children: notes.map((note) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+            "div",
+            {
+              className: `
+              p-5 rounded-lg border transition-all cursor-pointer
+              ${selectedNotes.has(note.id) ? "border-blue-500 bg-blue-50 dark:bg-blue-950" : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:shadow-md"}
+            `,
+              onClick: () => toggleNote(note.id),
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100", children: note.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-sm text-gray-600 dark:text-gray-400 mb-3", children: note.description }),
+                note.items && note.items.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("ul", { className: "text-sm text-gray-700 dark:text-gray-300 mb-3 space-y-1 list-disc list-inside", children: note.items.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("li", { children: item }, idx)) }),
+                note.citations && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-xs text-gray-500 dark:text-gray-400", children: [
+                  note.citations,
+                  " citations"
+                ] })
+              ]
+            },
+            note.id
+          )) })
+        ] });
+      };
+      NotesGrid_default = NotesGrid;
+    }
+  });
+
+  // src/components/AudioPlayer.tsx
+  var AudioPlayer_exports = {};
+  __export(AudioPlayer_exports, {
+    default: () => AudioPlayer_default
+  });
+  var import_react5, import_jsx_runtime6, AudioPlayer, AudioPlayer_default;
+  var init_AudioPlayer = __esm({
+    "src/components/AudioPlayer.tsx"() {
+      "use strict";
+      import_react5 = __toESM(require_react());
+      import_jsx_runtime6 = __toESM(require_jsx_runtime());
+      AudioPlayer = ({ audioUrl, title = "Audio Overview" }) => {
+        const audioRef = (0, import_react5.useRef)(null);
+        const [isPlaying, setIsPlaying] = (0, import_react5.useState)(false);
+        const [currentTime, setCurrentTime] = (0, import_react5.useState)(0);
+        const [duration, setDuration] = (0, import_react5.useState)(0);
+        const [playbackRate, setPlaybackRate] = (0, import_react5.useState)(1);
+        (0, import_react5.useEffect)(() => {
+          const audio = audioRef.current;
+          if (!audio) return;
+          const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
+          const handleLoadedMetadata = () => setDuration(audio.duration);
+          const handlePlay = () => setIsPlaying(true);
+          const handlePause = () => setIsPlaying(false);
+          const handleEnded = () => setIsPlaying(false);
+          audio.addEventListener("timeupdate", handleTimeUpdate);
+          audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+          audio.addEventListener("play", handlePlay);
+          audio.addEventListener("pause", handlePause);
+          audio.addEventListener("ended", handleEnded);
+          return () => {
+            audio.removeEventListener("timeupdate", handleTimeUpdate);
+            audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+            audio.removeEventListener("play", handlePlay);
+            audio.removeEventListener("pause", handlePause);
+            audio.removeEventListener("ended", handleEnded);
+          };
+        }, []);
+        const togglePlay = () => {
+          if (audioRef.current) {
+            if (isPlaying) {
+              audioRef.current.pause();
+            } else {
+              audioRef.current.play();
+            }
+          }
+        };
+        const changePlaybackRate = (rate) => {
+          setPlaybackRate(rate);
+          if (audioRef.current) {
+            audioRef.current.playbackRate = rate;
+          }
+        };
+        const formatTime = (seconds) => {
+          if (isNaN(seconds)) return "0:00";
+          const mins = Math.floor(seconds / 60);
+          const secs = Math.floor(seconds % 60);
+          return `${mins}:${secs.toString().padStart(2, "0")}`;
+        };
+        const handleSeek = (e) => {
+          const time = parseFloat(e.target.value);
+          setCurrentTime(time);
+          if (audioRef.current) {
+            audioRef.current.currentTime = time;
+          }
+        };
+        const progress = duration > 0 ? currentTime / duration * 100 : 0;
+        return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "audio-player-container bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h3", { className: "text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100", children: "Audio Overview" }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("audio", { ref: audioRef, src: audioUrl, preload: "metadata" }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-sm text-gray-700 dark:text-gray-300 mb-4 line-clamp-2", children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "mb-3", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+              "input",
+              {
+                type: "range",
+                min: "0",
+                max: duration || 100,
+                value: currentTime,
+                onChange: handleSeek,
+                className: "w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer",
+                style: {
+                  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${progress}%, #e5e7eb ${progress}%, #e5e7eb 100%)`
+                }
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: formatTime(currentTime) }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: formatTime(duration) })
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex items-center gap-3 mb-3", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+              "button",
+              {
+                onClick: togglePlay,
+                className: "w-10 h-10 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors",
+                children: isPlaying ? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("svg", { className: "w-5 h-5", fill: "currentColor", viewBox: "0 0 20 20", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("path", { fillRule: "evenodd", d: "M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z", clipRule: "evenodd" }) }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("svg", { className: "w-5 h-5", fill: "currentColor", viewBox: "0 0 20 20", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("path", { fillRule: "evenodd", d: "M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z", clipRule: "evenodd" }) })
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "flex gap-1", children: [0.75, 1, 1.25, 1.5, 2].map((rate) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+              "button",
+              {
+                onClick: () => changePlaybackRate(rate),
+                className: `
+                px-2 py-1 text-xs rounded transition-colors
+                ${playbackRate === rate ? "bg-blue-600 text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"}
+              `,
+                children: [
+                  rate,
+                  "x"
+                ]
+              },
+              rate
+            )) })
+          ] })
+        ] });
+      };
+      AudioPlayer_default = AudioPlayer;
+    }
+  });
+
+  // src/components/NotebookGuide.tsx
+  var NotebookGuide_exports = {};
+  __export(NotebookGuide_exports, {
+    default: () => NotebookGuide_default
+  });
+  var import_react6, import_jsx_runtime7, NotebookGuide, NotebookGuide_default;
+  var init_NotebookGuide = __esm({
+    "src/components/NotebookGuide.tsx"() {
+      "use strict";
+      import_react6 = __toESM(require_react());
+      import_jsx_runtime7 = __toESM(require_jsx_runtime());
+      NotebookGuide = ({
+        suggestedQuestions = [],
+        onGenerateContent = () => {
+        }
+      }) => {
+        const [chatInput, setChatInput] = (0, import_react6.useState)("");
+        const [showChat, setShowChat] = (0, import_react6.useState)(false);
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          if (chatInput.trim()) {
+            console.log("Chat submitted:", chatInput);
+            setChatInput("");
+          }
+        };
+        const contentTypes = [
+          { id: "faq", label: "FAQ", icon: "\u2753" },
+          { id: "study-guide", label: "Study Guide", icon: "\u{1F4D6}" },
+          { id: "timeline", label: "Timeline", icon: "\u{1F4CA}" },
+          { id: "briefing", label: "Briefing Doc", icon: "\u{1F4C4}" },
+          { id: "toc", label: "Table of Contents", icon: "\u{1F4CB}" }
+        ];
+        return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "notebook-guide-container space-y-6", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h3", { className: "text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100", children: "Help me create" }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "grid grid-cols-1 gap-2", children: contentTypes.map((type2) => /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+              "button",
+              {
+                onClick: () => onGenerateContent(type2.id),
+                className: "flex items-center gap-2 px-3 py-2 text-sm text-left bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-colors",
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-base", children: type2.icon }),
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-gray-700 dark:text-gray-300", children: type2.label })
+                ]
+              },
+              type2.id
+            )) })
+          ] }),
+          suggestedQuestions.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h3", { className: "text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100", children: "Suggested questions" }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("ul", { className: "space-y-2", children: suggestedQuestions.map((question, idx) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+              "button",
+              {
+                onClick: () => setChatInput(question),
+                className: "text-sm text-left text-blue-600 dark:text-blue-400 hover:underline",
+                children: question
+              }
+            ) }, idx)) })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+              "button",
+              {
+                onClick: () => setShowChat(!showChat),
+                className: "w-full flex items-center justify-between text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100",
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "Chat" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-xs text-gray-500 dark:text-gray-400", children: showChat ? "\u25BC" : "\u25B6" })
+                ]
+              }
+            ),
+            showChat && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "space-y-3", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("form", { onSubmit: handleSubmit, className: "flex gap-2", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+                  "input",
+                  {
+                    type: "text",
+                    value: chatInput,
+                    onChange: (e) => setChatInput(e.target.value),
+                    placeholder: "Start typing...",
+                    className: "flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+                  "button",
+                  {
+                    type: "submit",
+                    className: "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium",
+                    children: "\u2192"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "text-xs text-gray-500 dark:text-gray-400", children: "NotebookLM may still sometimes give inaccurate responses, so you may want to confirm any facts independently." })
+            ] })
+          ] })
+        ] });
+      };
+      NotebookGuide_default = NotebookGuide;
+    }
+  });
+
   // src/main.tsx
-  var import_react3 = __toESM(require_react());
+  var import_react7 = __toESM(require_react());
   var import_client = __toESM(require_client());
-  var import_jsx_runtime4 = __toESM(require_jsx_runtime());
-  var HelloGarden2 = import_react3.default.lazy(() => Promise.resolve().then(() => (init_HelloGarden(), HelloGarden_exports)));
-  var GraphView2 = import_react3.default.lazy(() => Promise.resolve().then(() => (init_GraphView(), GraphView_exports)));
-  var SearchCmdK2 = import_react3.default.lazy(() => Promise.resolve().then(() => (init_SearchCmdK(), SearchCmdK_exports)));
+  var import_jsx_runtime8 = __toESM(require_jsx_runtime());
+  var HelloGarden2 = import_react7.default.lazy(() => Promise.resolve().then(() => (init_HelloGarden(), HelloGarden_exports)));
+  var GraphView2 = import_react7.default.lazy(() => Promise.resolve().then(() => (init_GraphView(), GraphView_exports)));
+  var SearchCmdK2 = import_react7.default.lazy(() => Promise.resolve().then(() => (init_SearchCmdK(), SearchCmdK_exports)));
+  var VideoPlayer2 = import_react7.default.lazy(() => Promise.resolve().then(() => (init_VideoPlayer(), VideoPlayer_exports)));
+  var NotesGrid2 = import_react7.default.lazy(() => Promise.resolve().then(() => (init_NotesGrid(), NotesGrid_exports)));
+  var AudioPlayer2 = import_react7.default.lazy(() => Promise.resolve().then(() => (init_AudioPlayer(), AudioPlayer_exports)));
+  var NotebookGuide2 = import_react7.default.lazy(() => Promise.resolve().then(() => (init_NotebookGuide(), NotebookGuide_exports)));
   var components = {
     HelloGarden: HelloGarden2,
     GraphView: GraphView2,
-    SearchCmdK: SearchCmdK2
+    SearchCmdK: SearchCmdK2,
+    VideoPlayer: VideoPlayer2,
+    NotesGrid: NotesGrid2,
+    AudioPlayer: AudioPlayer2,
+    NotebookGuide: NotebookGuide2
   };
   var mountIslands = () => {
     const islands = document.querySelectorAll("[data-island]");
+    console.log(`[Garden] Found ${islands.length} islands to mount`);
     islands.forEach((container) => {
       const componentName = container.getAttribute("data-island");
+      console.log(`[Garden] Attempting to mount island: ${componentName}`);
       if (componentName && components[componentName]) {
         const Component = components[componentName];
-        const props = JSON.parse(container.getAttribute("data-props") || "{}");
+        let props = {};
+        try {
+          const propsAttr = container.getAttribute("data-props");
+          if (propsAttr) {
+            const sanitizedProps = propsAttr.replace(/[\u201C\u201D]/g, '"').replace(/[\u2018\u2019]/g, "'");
+            props = JSON.parse(sanitizedProps);
+          }
+        } catch (e) {
+          console.error(`[Garden] Failed to parse props for island ${componentName}:`, e);
+          console.error(`[Garden] Raw props content:`, container.getAttribute("data-props"));
+        }
         const root2 = (0, import_client.createRoot)(container, {
           onUncaughtError: (error, errorInfo) => {
-            console.error("[Garden] React Error:", error, errorInfo);
+            console.error(`[Garden] React Error in island ${componentName}:`, error, errorInfo);
           }
         });
         root2.render(
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(import_react3.Suspense, { fallback: null, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Component, { ...props }) })
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_react7.Suspense, { fallback: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { children: "Loading component..." }), children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Component, { ...props }) })
         );
+        console.log(`[Garden] Successfully rendered island: ${componentName}`);
+      } else {
+        console.warn(`[Garden] Component "${componentName}" not found in registry`);
       }
     });
   };
