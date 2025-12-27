@@ -1,219 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-{% include head.html %}
-<style>
-  body {
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  .active-wiki-link {
-    color: var(--accent) !important;
-    border-left-color: var(--accent) !important;
-    background-color: rgba(255, 102, 0, 0.1);
-  }
-</style>
+---
+layout: terminal-layout
+---
 
-<body class="bg-background text-foreground min-h-screen font-mono antialiased">
+<!-- Wiki-specific content injected from terminal-layout -->
+<!-- Wiki pages are rendered in the main content area of terminal-layout -->
 
-  <!-- #container -->
-  <div id="container" class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
+<!-- Wiki Header (Custom for wiki layout) -->
+<header class="mb-12">
+  {% assign wiki_data = site.data.wikis[page.wiki_id] %}
+  <h1 class="text-4xl font-prose font-bold mb-4 text-foreground">
+    {{ page.title }}
+  </h1>
+  <div class="text-sm font-mono flex gap-4 text-muted">
+    <span>
+      <span class="opacity-50">Generated:</span> {{ wiki_data.metadata.generated_at | date: "%Y-%m-%d" }}
+    </span>
+    <span>
+      <span class="opacity-50">Pages:</span> {{ wiki_data.metadata.page_count }}
+    </span>
+  </div>
+</header>
 
-    <!-- #header -->
-    <header id="header" class="flex-none border-b" style="border-color: var(--border);">
-      {% include terminal-header.html %}
-    </header>
-
-    <!-- Flex Wrapper for Columns -->
-    <div class="flex-grow flex flex-col lg:flex-row gap-8 py-10">
-
-      <!-- Left Sidebar: Wiki Navigation -->
-      <aside id="wiki-nav" class="w-full lg:w-64 lg:flex-shrink-0">
-        <div class="sticky top-8">
-          <h3 class="text-xs font-bold uppercase tracking-wider mb-4" style="color: var(--muted);">Wiki Pages</h3>
-          <nav>
-            <ul class="space-y-1">
-              {% assign wiki_data = site.data.wikis[page.wiki_id] %}
-              {% for wp in wiki_data.pages %}
-              <li>
-                <a href="#{{ wp.id }}" 
-                   class="block py-2 px-3 text-sm border-l-2 transition-all hover:bg-surface wiki-nav-link"
-                   style="color: var(--muted); border-left-color: transparent;"
-                   data-page-id="{{ wp.id }}">
-                  {{ wp.title }}
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-          </nav>
-
-          <div class="mt-12 pt-6 border-t" style="border-color: var(--border);">
-            <a href="{{ site.baseurl }}/" class="block text-sm font-mono transition-colors" style="color: var(--muted);"
-              onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">
-              ← Back to Garden
-            </a>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Main Content -->
-      <main id="content" class="flex-1 min-w-0">
-        
-        <!-- Wiki Header -->
-        <header class="mb-12">
-          <h1 class="text-4xl font-prose font-bold mb-4" style="color: var(--foreground);">
-            {{ page.title }}
-          </h1>
-          <div class="text-sm font-mono flex gap-4" style="color: var(--muted);">
-            <span>
-              <span class="opacity-50">Generated:</span> {{ wiki_data.metadata.generated_at | date: "%Y-%m-%d" }}
-            </span>
-            <span>
-              <span class="opacity-50">Pages:</span> {{ wiki_data.metadata.page_count }}
-            </span>
-          </div>
-        </header>
-
-        <!-- Wiki Pages -->
-        <div class="wiki-content prose font-prose max-w-none">
-          {% for wp in wiki_data.pages %}
-          <section id="{{ wp.id }}" class="mb-24 scroll-mt-24">
-            <h2 class="text-3xl font-bold mb-8 border-b pb-2" style="border-color: var(--border); color: var(--foreground);">
-              {{ wp.title }}
-            </h2>
-            <div class="wiki-page-body">
-              {{ wp.content | markdownify }}
-            </div>
-
-            {% if wp.filePaths.size > 0 or wp.relatedPages.size > 0 %}
-            <footer class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
-              {% if wp.filePaths.size > 0 %}
-              <div class="p-4 rounded border" style="background-color: var(--surface); border-color: var(--border);">
-                <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Source Context</div>
-                <div class="flex flex-wrap gap-2">
-                  {% for fp in wp.filePaths %}
-                  <span class="px-2 py-0.5 text-[11px] border rounded-sm" style="border-color: var(--border); background-color: var(--background);">
-                    {{ fp }}
-                  </span>
-                  {% endfor %}
-                </div>
-              </div>
-              {% endif %}
-
-              {% if wp.relatedPages.size > 0 %}
-              <div class="p-4 rounded border" style="background-color: var(--surface); border-color: var(--border);">
-                <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Related Pages</div>
-                <div class="flex flex-wrap gap-2">
-                  {% for rp in wp.relatedPages %}
-                  <a href="#{{ rp }}" class="px-2 py-0.5 text-[11px] border rounded-sm hover:border-accent hover:text-accent transition-colors" style="border-color: var(--border); background-color: var(--background);">
-                    {{ rp | replace: "-", " " | capitalize }}
-                  </a>
-                  {% endfor %}
-                </div>
-              </div>
-              {% endif %}
-            </footer>
-            {% endif %}
-          </section>
-          {% endfor %}
-        </div>
-
-      </main>
-
-      <!-- Right Sidebar: TOC -->
-      <aside id="toc-sidebar" class="hidden xl:block w-64 lg:flex-shrink-0">
-        <div class="sticky top-8">
-          <h3 class="text-xs font-bold uppercase tracking-wider mb-4" style="color: var(--muted);">Table of Contents</h3>
-          <terminal-toc></terminal-toc>
-        </div>
-      </aside>
-
+<!-- Wiki Pages -->
+<div class="wiki-content prose font-prose max-w-none">
+  {% for wp in wiki_data.pages %}
+  <section id="{{ wp.id }}" class="mb-24 scroll-mt-24">
+    <h2 class="text-3xl font-bold mb-8 border-b border-border pb-2 text-foreground">
+      {{ wp.title }}
+    </h2>
+    <div class="wiki-page-body">
+      {{ wp.content | markdownify }}
     </div>
 
-    <!-- #footer -->
-    <footer id="footer" class="flex-none py-8 border-t" style="border-color: var(--border);">
-      {% include footer.html %}
+    {% if wp.filePaths.size > 0 or wp.relatedPages.size > 0 %}
+    <footer class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+      {% if wp.filePaths.size > 0 %}
+      <div class="p-4 rounded border bg-surface border-border">
+        <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Source Context</div>
+        <div class="flex flex-wrap gap-2">
+          {% for fp in wp.filePaths %}
+          <span class="px-2 py-0.5 text-[11px] border border-border bg-background rounded-sm">
+            {{ fp }}
+          </span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if wp.relatedPages.size > 0 %}
+      <div class="p-4 rounded border bg-surface border-border">
+        <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Related Pages</div>
+        <div class="flex flex-wrap gap-2">
+          {% for rp in wp.relatedPages %}
+          <a href="#{{ rp }}" class="px-2 py-0.5 text-[11px] border border-border bg-background rounded-sm hover:border-accent hover:text-accent transition-colors">
+            {{ rp | replace: "-", " " | capitalize }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
     </footer>
-
-  </div>
-
-  <!-- Web Component for TOC -->
-  <script src="{{ site.baseurl }}/assets/js/components/terminal-toc.js" defer></script>
-
-  <!-- Garden Widgets (React Islands) -->
-  <div data-island="SearchCmdK"></div>
-  <script src="{{ '/assets/js/dist/garden-widgets.js' | relative_url }}"></script>
-
-  <!-- Wiki Interactive Script -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const navLinks = document.querySelectorAll(".wiki-nav-link");
-      const sections = document.querySelectorAll("section[id]");
-
-      function updateActiveLink() {
-        let current = "";
-        sections.forEach((section) => {
-          const sectionTop = section.offsetTop;
-          if (window.pageYOffset >= sectionTop - 150) {
-            current = section.getAttribute("id");
-          }
-        });
-
-        navLinks.forEach((link) => {
-          link.classList.remove("active-wiki-link");
-          if (link.getAttribute("href").slice(1) === current) {
-            link.classList.add("active-wiki-link");
-          }
-        });
-      }
-
-      window.addEventListener("scroll", updateActiveLink);
-      updateActiveLink();
-    });
-  </script>
-
-  <!-- Code Block Copy Buttons -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll("pre code").forEach((codeBlock) => {
-        const pre = codeBlock.parentElement;
-        if (pre.querySelector(".copy-btn")) return;
-
-        if (!pre.parentElement.classList.contains("code-block")) {
-          const wrapper = document.createElement("div");
-          wrapper.className = "code-block relative p-4 rounded-lg my-6";
-          wrapper.style.backgroundColor = "var(--bg-code)";
-          pre.parentElement.insertBefore(wrapper, pre);
-          wrapper.appendChild(pre);
-        }
-
-        const button = document.createElement("button");
-        button.className = "copy-btn absolute top-3 right-3 px-3 py-1 rounded text-xs font-mono transition-all";
-        button.style.backgroundColor = "var(--surface)";
-        button.style.color = "var(--foreground)";
-        button.style.border = "1px solid var(--border)";
-        button.textContent = "Copy";
-
-        button.addEventListener("click", () => {
-          const code = codeBlock.textContent;
-          navigator.clipboard.writeText(code).then(() => {
-            button.textContent = "Copied!";
-            button.style.color = "var(--accent)";
-            setTimeout(() => {
-              button.textContent = "Copy";
-              button.style.color = "var(--foreground)";
-            }, 2000);
-          });
-        });
-
-        pre.parentElement.appendChild(button);
-      });
-    });
-  </script>
-
-</body>
-
-</html>
+    {% endif %}
+  </section>
+  {% endfor %}
+</div>
