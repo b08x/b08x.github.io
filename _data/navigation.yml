@@ -3,6 +3,8 @@ primary:
     url: "/"
   - title: "Projects"
     url: "/projects"
+  - title: "Wikis"
+    url: "/wikis"
   - title: "About"
     url: "/about"
 
