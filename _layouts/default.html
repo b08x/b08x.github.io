@@ -1,32 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-{% include head.html %}
+---
+layout: base-shell
+---
 
-<body class="bg-background text-foreground min-h-screen font-mono">
+<!--
+DEPRECATED: This layout is deprecated in favor of using base-shell directly.
+Maintained for backward compatibility only.
+Please update your pages to use:
+- base-shell (for raw shell)
+- terminal-layout (for terminal-style layouts with sidebars)
+- content-layout (for simple content pages)
+-->
 
-  <!-- #container -->
-  <div id="container" class="w-full px-0 flex flex-col min-h-screen">
-
-    <!-- #header -->
-    <header id="header" class="flex-none py-6 border-b" style="border-color: var(--border);">
-      {% include nav.html %}
-    </header>
-
-    <!-- Main Content Area -->
-    <main id="content" class="flex-grow py-10">
-      {{ content }}
-    </main>
-
-    <!-- #footer -->
-    <footer id="footer" class="flex-none py-8 border-t px-4 sm:px-6 lg:px-8" style="border-color: var(--border);">
-      {% include footer.html %}
-    </footer>
-
-  </div>
-
-  {% include link-previews.html wrapperQuerySelector="content" %}
-  <div data-island="SearchCmdK"></div>
-  <script src="{{ '/assets/js/dist/garden-widgets.js' | relative_url }}"></script>
-</body>
-
-</html>
+{{ content }}
