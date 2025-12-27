@@ -117,6 +117,47 @@
 }
 
 /* ========================================
+   DARK THEME OVERRIDES
+   ======================================== */
+
+.dark {
+  color-scheme: dark;
+
+  --background: #1a1a1a;
+  --foreground: #e0e0e0;
+  --surface: #252525;
+  --border: #444444;
+  --muted: #888888;
+  --accent: #3498db;
+
+  --card: var(--surface);
+  --popover: #2c2c2c;
+
+  --primary: #3498db;
+  --secondary: #2c2c2c;
+  --secondary-foreground: #e0e0e0;
+
+  --muted-bg: #2c2c2c;
+  --accent-bg: rgba(52, 152, 219, 0.2);
+
+  --input: #1a1a1a;
+
+  --sidebar: #121212;
+  --sidebar-accent: #1a1a1a;
+  --sidebar-border: #333333;
+
+  --bg-tertiary: #252525;
+  --bg-code: #121212;
+  --text-tertiary: #666666;
+  --border-secondary: #333333;
+
+  --link-hover: #5dade2;
+  --link-active: #2e86c1;
+
+  --ui-hover: rgba(52, 152, 219, 0.2);
+}
+
+/* ========================================
    GLOBAL ELEMENT STYLING
    ======================================== */
 

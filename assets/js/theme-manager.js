@@ -57,21 +57,18 @@ class ThemeManager {
    * Complexity: O(1) - Single class toggle triggers CSS cascade
    */
   applyTheme(theme) {
-    // Use requestAnimationFrame to batch DOM updates
-    requestAnimationFrame(() => {
-      if (theme === 'dark') {
-        this.htmlElement.classList.add(this.DARK_CLASS);
-      } else {
-        this.htmlElement.classList.remove(this.DARK_CLASS);
-      }
+    if (theme === 'dark') {
+      this.htmlElement.classList.add(this.DARK_CLASS);
+    } else {
+      this.htmlElement.classList.remove(this.DARK_CLASS);
+    }
 
-      localStorage.setItem(this.STORAGE_KEY, theme);
+    localStorage.setItem(this.STORAGE_KEY, theme);
 
-      // Dispatch custom event for components that need to react
-      window.dispatchEvent(new CustomEvent('themechange', {
-        detail: { theme }
-      }));
-    });
+    // Dispatch custom event for components that need to react
+    window.dispatchEvent(new CustomEvent('themechange', {
+      detail: { theme }
+    }));
   }
 
   /**

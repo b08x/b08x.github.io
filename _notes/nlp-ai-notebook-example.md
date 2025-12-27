@@ -8,7 +8,7 @@ key_topics:
   - Code generation
   - Part of speech
   - Semantic relations
-video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+video_url: "https://youtu.be/6VIMu5JHpgc"
 video_title: "The Future of NLP: Will AI Replace Linguists?"
 audio_url: "/assets/audio/nlp-overview.mp3"
 audio_title: "The Future of NLP: Will AI Replace Linguists?"
