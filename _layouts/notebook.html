@@ -1,0 +1,171 @@
+---
+layout: default
+---
+
+<div class="notebook-container max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Responsive Grid: Stacks on mobile, 3 columns on desktop -->
+  <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr_280px] xl:grid-cols-[380px_1fr_320px] gap-6">
+
+    <!-- LEFT SIDEBAR: Source Guide -->
+    <aside class="source-guide bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 lg:sticky lg:top-6 lg:self-start">
+      <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">Source guide</h2>
+
+      {% if page.summary %}
+      <div class="summary mb-6">
+        <h3 class="text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Summary</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+          {{ page.summary }}
+        </p>
+      </div>
+      {% endif %}
+
+      {% if page.key_topics %}
+      <div class="key-topics">
+        <h3 class="text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Key Topics</h3>
+        <ul class="space-y-1">
+          {% for topic in page.key_topics %}
+          <li class="text-sm text-gray-600 dark:text-gray-400 pl-4 relative before:content-['•'] before:absolute before:left-0">
+            {{ topic }}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="notes-and-video space-y-6">
+
+      <!-- Video Section (if video_url is provided) -->
+      {% if page.video_url %}
+      <div class="video-section bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
+        <div class="aspect-video mb-4 bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden">
+          {% if page.video_url contains 'youtube.com' or page.video_url contains 'youtu.be' %}
+            <!-- Extract YouTube ID and embed -->
+            {% assign video_id = page.video_url | split: 'v=' | last | split: '&' | first %}
+            {% if page.video_url contains 'youtu.be' %}
+              {% assign video_id = page.video_url | split: '.be/' | last | split: '?' | first %}
+            {% endif %}
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/{{ video_id }}"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          {% else %}
+            <video class="w-full h-full" controls>
+              <source src="{{ page.video_url }}" type="video/mp4">
+            </video>
+          {% endif %}
+        </div>
+        {% if page.video_title %}
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          {{ page.video_title }}
+        </h3>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <!-- Notes Grid (React Island) -->
+      {% if page.notes %}
+      <div class="saved-notes">
+        {% capture notes_data %}{"notes": {{ page.notes | jsonify }}}{% endcapture %}
+        <div data-island="NotesGrid" data-props='{{ notes_data | escape }}'>
+          <!-- Placeholder for React component -->
+          <div class="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
+            <span class="text-gray-500 dark:text-gray-400 font-mono text-sm">Loading notes...</span>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Custom Content -->
+      <div class="prose prose-sm max-w-none dark:prose-invert">
+        {{ content }}
+      </div>
+
+    </main>
+
+    <!-- RIGHT SIDEBAR: Notebook Guide -->
+    <aside class="notebook-guide lg:sticky lg:top-6 lg:self-start space-y-6">
+
+      <!-- Help Me Create + Suggested Questions + Chat (React Island) -->
+      {% assign questions = page.suggested_questions | default: empty %}
+      <div data-island="NotebookGuide" data-props='{"suggestedQuestions": {{ questions | jsonify }}}'>
+        <!-- Placeholder -->
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
+          <span class="text-gray-500 dark:text-gray-400 font-mono text-sm">Loading guide...</span>
+        </div>
+      </div>
+
+      <!-- Audio Overview (React Island if audio_url provided) -->
+      {% if page.audio_url %}
+      <div data-island="AudioPlayer" data-props='{"audioUrl": "{{ page.audio_url }}", "title": "{{ page.audio_title | default: page.title }}"}'>
+        <!-- Placeholder -->
+        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 text-center">
+          <span class="text-gray-500 dark:text-gray-400 font-mono text-sm">Loading audio player...</span>
+        </div>
+      </div>
+      {% endif %}
+
+    </aside>
+
+  </div>
+</div>
+
+<style>
+/* Responsive adjustments */
+@media (max-width: 1023px) {
+  .notebook-container > div {
+    /* On tablet/mobile, stack everything vertically */
+    grid-template-columns: 1fr;
+  }
+
+  .source-guide,
+  .notebook-guide {
+    position: static !important;
+  }
+}
+
+/* Smooth scrolling for sticky sidebars */
+@media (min-width: 1024px) {
+  .source-guide,
+  .notebook-guide {
+    max-height: calc(100vh - 3rem);
+    overflow-y: auto;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .source-guide::-webkit-scrollbar,
+  .notebook-guide::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .source-guide::-webkit-scrollbar-thumb,
+  .notebook-guide::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.3);
+    border-radius: 2px;
+  }
+}
+
+/* Loading state animation */
+[data-island] > div {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Stop animation once React mounts */
+[data-island].mounted > div {
+  animation: none;
+}
+</style>
