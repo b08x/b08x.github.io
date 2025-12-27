@@ -1,0 +1,267 @@
+---
+layout: base-shell
+---
+
+<div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-10">
+
+  <!-- Responsive Grid Container -->
+  <div class="flex flex-col lg:flex-row gap-8">
+
+    <!-- Left Sidebar (Optional) -->
+    {% if page.left_sidebar %}
+    <aside
+      id="left-sidebar"
+      class="w-full lg:w-64 lg:flex-shrink-0"
+      aria-label="Navigation sidebar"
+    >
+      <div class="lg:sticky lg:top-8 lg:self-start">
+
+        {% if page.left_sidebar == 'wiki-nav' %}
+          <!-- Wiki Navigation Pattern -->
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+            Wiki Pages
+          </h3>
+          <nav>
+            <ul class="space-y-1">
+              {% assign wiki_data = site.data.wikis[page.wiki_id] %}
+              {% for wp in wiki_data.pages %}
+              <li>
+                <a
+                  href="#{{ wp.id }}"
+                  class="block py-2 px-3 text-sm border-l-2 border-transparent text-muted transition-all hover:bg-surface hover:border-accent wiki-nav-link"
+                  data-page-id="{{ wp.id }}"
+                >
+                  {{ wp.title }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </nav>
+
+          <div class="mt-12 pt-6 border-t border-border">
+            <a
+              href="{{ site.baseurl }}/"
+              class="block text-sm font-mono text-muted hover:text-accent transition-colors"
+            >
+              ← Back to Garden
+            </a>
+          </div>
+        {% endif %}
+
+        {% if page.left_sidebar == 'terminal-sidebar' %}
+          <!-- Standard Navigation Sidebar -->
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+            Navigation
+          </h3>
+          {% include terminal-sidebar.html %}
+        {% endif %}
+
+        {% if page.left_sidebar == 'knowledgebase-toc' %}
+          <!-- Knowledgebase TOC -->
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-6 text-muted">
+            Knowledgebase
+          </h3>
+          <nav id="kb-toc" class="space-y-2">
+            <!-- Dynamically populated by JS -->
+          </nav>
+
+          {% if page.resources %}
+          <div class="mt-10 pt-10 border-t border-border">
+            <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+              Resources
+            </h4>
+            <div class="space-y-4">
+              {% for item in page.resources %}
+              <div class="flex items-center gap-2 text-sm">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
+                <a href="{{ item.url }}" class="text-muted hover:text-accent transition-colors">
+                  {{ item.title }}
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        {% endif %}
+
+      </div>
+    </aside>
+    {% endif %}
+
+    <!-- Main Content Column -->
+    <main
+      id="main-content-column"
+      class="flex-1 min-w-0"
+      aria-label="Main content"
+    >
+
+      <!-- Page Header -->
+      <header class="mb-12">
+        <h1 class="text-3xl md:text-4xl font-prose font-bold mb-4 text-foreground">
+          {{ page.title }}
+        </h1>
+
+        <!-- Metadata (Conditional) -->
+        {% if page.show_metadata != false %}
+        <div class="text-sm font-mono text-muted">
+          {% if page.last_modified_at %}
+          <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" class="inline-block mr-4">
+            <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            {{ page.last_modified_at | date: "%Y-%m-%d" }}
+          </time>
+          {% endif %}
+
+          {% if page.tags and page.tags.size > 0 %}
+          <div class="mt-3 flex flex-wrap gap-2">
+            {% for tag in page.tags %}
+            <span class="px-2 py-1 text-xs border border-border bg-surface rounded">
+              {{ tag }}
+            </span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+      </header>
+
+      <!-- Article Content -->
+      <article class="prose font-prose max-w-none">
+        <div id="notes-entry-container">
+          {{ content }}
+        </div>
+      </article>
+
+      <!-- React Island: GraphView (Conditional) -->
+      {% if page.show_graph %}
+      <section class="mt-16 pt-10 border-t border-border">
+        <h2 class="text-xl font-mono font-bold mb-6 text-foreground">
+          Knowledge Graph
+        </h2>
+        <p class="mb-6 text-base font-prose text-muted">
+          Here are all the notes in this garden, along with their links, visualized as a graph.
+        </p>
+        <div data-island="GraphView"></div>
+      </section>
+      {% endif %}
+
+    </main>
+
+    <!-- Right Sidebar (Optional) -->
+    {% if page.right_sidebar %}
+    <aside
+      id="right-sidebar"
+      class="w-full lg:w-80 lg:flex-shrink-0 {% if page.right_sidebar_xl_only %}hidden xl:block{% endif %}"
+      aria-label="Table of contents and related content"
+    >
+      <div class="lg:sticky lg:top-8 lg:self-start space-y-10">
+
+        {% if page.right_sidebar contains 'toc' %}
+        <!-- Table of Contents -->
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+            Table of Contents
+          </h3>
+          <terminal-toc></terminal-toc>
+        </div>
+        {% endif %}
+
+        {% if page.right_sidebar contains 'related' %}
+        <!-- Related Pages -->
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+            Related Notes
+          </h3>
+          <div class="space-y-2">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </aside>
+    {% endif %}
+
+  </div>
+
+</div>
+
+<!-- Web Component: Terminal TOC -->
+<script src="{{ site.baseurl }}/assets/js/components/terminal-toc.js" defer></script>
+
+<!-- Wiki Navigation Active State Script (if wiki layout) -->
+{% if page.left_sidebar == 'wiki-nav' %}
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll(".wiki-nav-link");
+    const sections = document.querySelectorAll("section[id]");
+
+    function updateActiveLink() {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (window.pageYOffset >= sectionTop - 150) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("border-accent", "bg-surface/50", "text-accent");
+        link.classList.add("border-transparent", "text-muted");
+
+        if (link.getAttribute("href").slice(1) === current) {
+          link.classList.remove("border-transparent", "text-muted");
+          link.classList.add("border-accent", "bg-surface/50", "text-accent");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", updateActiveLink);
+    updateActiveLink();
+  });
+</script>
+{% endif %}
+
+<!-- Knowledgebase Paginator (if knowledgebase layout) -->
+{% if page.left_sidebar == 'knowledgebase-toc' %}
+<link rel="stylesheet" href="{{ '/assets/css/knowledgebase.css' | relative_url }}">
+<script src="{{ '/assets/js/knowledgebase-paginator.js' | relative_url }}" defer></script>
+{% endif %}
+
+<!-- Code Block Copy Buttons -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("pre code").forEach((codeBlock) => {
+      const pre = codeBlock.parentElement;
+      if (pre.querySelector(".copy-btn")) return;
+
+      if (!pre.parentElement.classList.contains("code-block")) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "code-block relative p-4 rounded-lg my-6 bg-surface";
+        pre.parentElement.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+      }
+
+      const button = document.createElement("button");
+      button.className = "copy-btn absolute top-3 right-3 px-3 py-1 rounded text-xs font-mono transition-all bg-surface text-foreground border border-border hover:border-accent";
+      button.textContent = "Copy";
+
+      button.addEventListener("click", () => {
+        const code = codeBlock.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          button.textContent = "Copied!";
+          button.classList.add("text-accent");
+          setTimeout(() => {
+            button.textContent = "Copy";
+            button.classList.remove("text-accent");
+          }, 2000);
+        });
+      });
+
+      pre.parentElement.appendChild(button);
+    });
+  });
+</script>

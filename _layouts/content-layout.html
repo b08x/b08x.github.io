@@ -1,0 +1,38 @@
+---
+layout: base-shell
+---
+
+<div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10">
+
+  {% if page.show_hero %}
+  <!-- Hero Section (Optional) -->
+  <header class="mb-16 text-center">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-foreground">
+      {{ page.title }}
+    </h1>
+    {% if page.subtitle %}
+    <p class="text-xl md:text-2xl text-muted leading-relaxed max-w-3xl mx-auto">
+      {{ page.subtitle }}
+    </p>
+    {% endif %}
+  </header>
+  {% else %}
+  <!-- Standard Header -->
+  <header class="mb-12">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+      {{ page.title }}
+    </h1>
+    {% if page.description %}
+    <p class="text-lg text-muted">
+      {{ page.description }}
+    </p>
+    {% endif %}
+  </header>
+  {% endif %}
+
+  <!-- Main Content -->
+  <article class="prose prose-base lg:prose-lg xl:prose-xl max-w-none font-prose">
+    {{ content }}
+  </article>
+
+</div>
