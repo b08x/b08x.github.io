@@ -9,6 +9,7 @@ const VideoPlayer = React.lazy(() => import('./components/VideoPlayer'));
 const NotesGrid = React.lazy(() => import('./components/NotesGrid'));
 const AudioPlayer = React.lazy(() => import('./components/AudioPlayer'));
 const NotebookGuide = React.lazy(() => import('./components/NotebookGuide'));
+const KnowledgebaseCarousel = React.lazy(() => import('./components/KnowledgebaseCarousel'));
 
 const components: Record<string, React.ComponentType<any>> = {
   HelloGarden,
@@ -18,6 +19,7 @@ const components: Record<string, React.ComponentType<any>> = {
   NotesGrid,
   AudioPlayer,
   NotebookGuide,
+  KnowledgebaseCarousel,
 };
 
 const mountIslands = () => {

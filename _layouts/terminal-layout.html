@@ -9,81 +9,74 @@ layout: base-shell
 
     <!-- Left Sidebar (Optional) -->
     {% if page.left_sidebar %}
-    <aside
-      id="left-sidebar"
-      class="w-full lg:w-64 lg:flex-shrink-0"
-      aria-label="Navigation sidebar"
-    >
+    <aside id="left-sidebar" class="w-full lg:w-64 lg:flex-shrink-0" aria-label="Navigation sidebar">
       <div class="lg:sticky lg:top-8 lg:self-start">
 
         {% if page.left_sidebar == 'wiki-nav' %}
-          <!-- Wiki Navigation Pattern -->
-          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
-            Wiki Pages
-          </h3>
-          <nav>
-            <ul class="space-y-1">
-              {% assign wiki_data = site.data.wikis[page.wiki_id] %}
-              {% for wp in wiki_data.pages %}
-              <li>
-                <a
-                  href="#{{ wp.id }}"
-                  class="block py-2 px-3 text-sm border-l-2 border-transparent text-muted transition-all hover:bg-surface hover:border-accent wiki-nav-link"
-                  data-page-id="{{ wp.id }}"
-                >
-                  {{ wp.title }}
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-          </nav>
+        <!-- Wiki Navigation Pattern -->
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+          Wiki Pages
+        </h3>
+        <nav>
+          <ul class="space-y-1">
+            {% assign wiki_id = page.wiki_id %}
+            {% assign wiki_data = site.data.wikis[wiki_id] %}
+            {% for wp in wiki_data.pages %}
+            <li>
+              <a href="{{ site.baseurl }}/wikis/{{ wiki_id }}/{{ wp.id | slugify }}/"
+                class="block py-2 px-3 text-sm border-l-2 {% if page.page_id == wp.id %}border-accent bg-surface/50 text-accent{% else %}border-transparent text-muted{% endif %} transition-all hover:bg-surface hover:border-accent wiki-nav-link"
+                data-page-id="{{ wp.id }}">
+                {{ wp.title }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
 
-          <div class="mt-12 pt-6 border-t border-border">
-            <a
-              href="{{ site.baseurl }}/"
-              class="block text-sm font-mono text-muted hover:text-accent transition-colors"
-            >
-              ← Back to Garden
-            </a>
-          </div>
+        <div class="mt-12 pt-6 border-t border-border">
+          <a href="{{ site.baseurl }}/" class="block text-sm font-mono text-muted hover:text-accent transition-colors">
+            ← Back to Garden
+          </a>
+        </div>
         {% endif %}
 
         {% if page.left_sidebar == 'terminal-sidebar' %}
-          <!-- Standard Navigation Sidebar -->
-          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
-            Navigation
-          </h3>
-          {% include terminal-sidebar.html %}
+        <!-- Standard Navigation Sidebar -->
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+          Navigation
+        </h3>
+        {% include terminal-sidebar.html %}
         {% endif %}
 
         {% if page.left_sidebar == 'knowledgebase-toc' %}
-          <!-- Knowledgebase TOC -->
-          <h3 class="text-xs font-bold uppercase tracking-wider mb-6 text-muted">
-            Knowledgebase
-          </h3>
-          <nav id="kb-toc" class="space-y-2">
-            <!-- Dynamically populated by JS -->
-          </nav>
+        <!-- Knowledgebase TOC -->
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-6 text-muted">
+          Knowledgebase
+        </h3>
+        <nav id="kb-toc" class="space-y-2">
+          <!-- Dynamically populated by JS -->
+        </nav>
 
-          {% if page.resources %}
-          <div class="mt-10 pt-10 border-t border-border">
-            <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
-              Resources
-            </h4>
-            <div class="space-y-4">
-              {% for item in page.resources %}
-              <div class="flex items-center gap-2 text-sm">
-                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                </svg>
-                <a href="{{ item.url }}" class="text-muted hover:text-accent transition-colors">
-                  {{ item.title }}
-                </a>
-              </div>
-              {% endfor %}
+        {% if page.resources %}
+        <div class="mt-10 pt-10 border-t border-border">
+          <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+            Resources
+          </h4>
+          <div class="space-y-4">
+            {% for item in page.resources %}
+            <div class="flex items-center gap-2 text-sm">
+              <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+              <a href="{{ item.url }}" class="text-muted hover:text-accent transition-colors">
+                {{ item.title }}
+              </a>
             </div>
+            {% endfor %}
           </div>
-          {% endif %}
+        </div>
+        {% endif %}
         {% endif %}
 
       </div>
@@ -91,11 +84,7 @@ layout: base-shell
     {% endif %}
 
     <!-- Main Content Column -->
-    <main
-      id="main-content-column"
-      class="flex-1 min-w-0"
-      aria-label="Main content"
-    >
+    <main id="main-content-column" class="flex-1 min-w-0" aria-label="Main content">
 
       <!-- Page Header -->
       <header class="mb-12">
@@ -109,7 +98,8 @@ layout: base-shell
           {% if page.last_modified_at %}
           <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" class="inline-block mr-4">
             <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             {{ page.last_modified_at | date: "%Y-%m-%d" }}
           </time>
@@ -152,11 +142,9 @@ layout: base-shell
 
     <!-- Right Sidebar (Optional) -->
     {% if page.right_sidebar %}
-    <aside
-      id="right-sidebar"
+    <aside id="right-sidebar"
       class="w-full lg:w-80 lg:flex-shrink-0 {% if page.right_sidebar_xl_only %}hidden xl:block{% endif %}"
-      aria-label="Table of contents and related content"
-    >
+      aria-label="Table of contents and related content">
       <div class="lg:sticky lg:top-8 lg:self-start space-y-10">
 
         {% if page.right_sidebar contains 'toc' %}
@@ -203,7 +191,7 @@ layout: base-shell
 <script src="{{ site.baseurl }}/assets/js/components/terminal-toc.js" defer></script>
 
 <!-- Wiki Navigation Active State Script (if wiki layout) -->
-{% if page.left_sidebar == 'wiki-nav' %}
+{% if page.layout == 'wiki' %}
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.querySelectorAll(".wiki-nav-link");
@@ -219,12 +207,16 @@ layout: base-shell
       });
 
       navLinks.forEach((link) => {
-        link.classList.remove("border-accent", "bg-surface/50", "text-accent");
-        link.classList.add("border-transparent", "text-muted");
+        // Only update if we are on the single-page wiki view
+        const href = link.getAttribute("href");
+        if (href.startsWith("#")) {
+          link.classList.remove("border-accent", "bg-surface/50", "text-accent");
+          link.classList.add("border-transparent", "text-muted");
 
-        if (link.getAttribute("href").slice(1) === current) {
-          link.classList.remove("border-transparent", "text-muted");
-          link.classList.add("border-accent", "bg-surface/50", "text-accent");
+          if (href.slice(1) === current) {
+            link.classList.remove("border-transparent", "text-muted");
+            link.classList.add("border-accent", "bg-surface/50", "text-accent");
+          }
         }
       });
     }
@@ -235,10 +227,62 @@ layout: base-shell
 </script>
 {% endif %}
 
-<!-- Knowledgebase Paginator (if knowledgebase layout) -->
+<!-- Knowledgebase TOC Integration (if knowledgebase layout) -->
 {% if page.left_sidebar == 'knowledgebase-toc' %}
 <link rel="stylesheet" href="{{ '/assets/css/knowledgebase.css' | relative_url }}">
-<script src="{{ '/assets/js/knowledgebase-paginator.js' | relative_url }}" defer></script>
+<script>
+  // Knowledgebase TOC Integration Script
+  // Dynamically generates TOC from carousel slides and syncs with active slide
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const tocContainer = document.getElementById('kb-toc');
+    if (!tocContainer) return;
+
+    // Generate TOC when slides are ready
+    window.addEventListener('kb-slides-ready', (e) => {
+      const { slides } = e.detail;
+
+      // Clear existing TOC
+      tocContainer.innerHTML = '';
+
+      // Generate TOC links
+      slides.forEach((slide, index) => {
+        const link = document.createElement('a');
+        link.href = `#${slide.id}`;
+        link.className = 'kb-nav-link block py-2 px-3 text-sm border-l-2 border-transparent text-muted transition-all hover:bg-surface hover:border-accent';
+        link.textContent = slide.title;
+        link.dataset.slideIndex = String(index);
+
+        // Handle click to navigate to slide
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          window.dispatchEvent(new CustomEvent('kb-toc-click', {
+            detail: { slideIndex: index, slideId: slide.id }
+          }));
+        });
+
+        tocContainer.appendChild(link);
+      });
+    });
+
+    // Update TOC active state when slide changes
+    window.addEventListener('kb-slide-change', (e) => {
+      const { slideIndex } = e.detail;
+
+      // Update TOC link active states
+      const tocLinks = tocContainer.querySelectorAll('.kb-nav-link');
+      tocLinks.forEach((link, index) => {
+        if (index === slideIndex) {
+          link.classList.add('border-accent', 'text-accent', 'bg-surface', 'font-semibold');
+          link.classList.remove('border-transparent', 'text-muted');
+        } else {
+          link.classList.remove('border-accent', 'text-accent', 'bg-surface', 'font-semibold');
+          link.classList.add('border-transparent', 'text-muted');
+        }
+      });
+    });
+  });
+</script>
 {% endif %}
 
 <!-- Code Block Copy Buttons -->
