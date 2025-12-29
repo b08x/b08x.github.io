@@ -1,0 +1,56 @@
+---
+layout: terminal-layout
+---
+
+<header class="mb-12">
+    {% assign wiki_data = site.data.wikis[page.wiki_id] %}
+    <h1 class="text-4xl font-prose font-bold mb-4 text-foreground">
+        {{ page.title }}
+    </h1>
+    <div class="text-sm font-mono flex gap-4 text-muted">
+        <span>
+            <span class="opacity-50">Wiki:</span> <a href="{{ site.baseurl }}/wikis/{{ page.wiki_id }}/"
+                class="hover:text-accent">{{ page.wiki_id | replace: "-", " " | capitalize }}</a>
+        </span>
+        <span>
+            <span class="opacity-50">Generated:</span> {{ wiki_data.metadata.generated_at | date: "%Y-%m-%d" }}
+        </span>
+    </div>
+</header>
+
+<div class="wiki-content prose font-prose max-w-none">
+    <div class="wiki-page-body">
+        {{ content }}
+    </div>
+
+    {% if page.file_paths.size > 0 or page.related_pages.size > 0 %}
+    <footer class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+        {% if page.file_paths.size > 0 %}
+        <div class="p-4 rounded border bg-surface border-border">
+            <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Source Context</div>
+            <div class="flex flex-wrap gap-2">
+                {% for fp in page.file_paths %}
+                <span class="px-2 py-0.5 text-[11px] border border-border bg-background rounded-sm">
+                    {{ fp }}
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if page.related_pages.size > 0 %}
+        <div class="p-4 rounded border bg-surface border-border">
+            <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Related Pages</div>
+            <div class="flex flex-wrap gap-2">
+                {% for rp in page.related_pages %}
+                <a href="{{ site.baseurl }}/wikis/{{ page.wiki_id }}/{{ rp }}/"
+                    class="px-2 py-0.5 text-[11px] border border-border bg-background rounded-sm hover:border-accent hover:text-accent transition-colors">
+                    {{ rp | replace: "-", " " | capitalize }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </footer>
+    {% endif %}
+</div>
