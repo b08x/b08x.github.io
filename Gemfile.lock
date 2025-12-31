@@ -181,7 +181,7 @@ GEM
     reverse_markdown (3.0.1)
       nokogiri
     rexml (3.4.4)
-    rouge (4.6.1)
+    rouge (4.7.0)
     rubocop (1.57.2)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
