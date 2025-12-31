@@ -80,6 +80,7 @@ defaults:
     values:
       layout: null
   - scope:
-      path: "_notes/**/*.md"
+      path: "_notes"
     values:
       layout: "terminal-note"
+      show_graph: true

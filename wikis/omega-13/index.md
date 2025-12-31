@@ -12,6 +12,7 @@ pagination:
   has_next: false
   previous_page_url:
   next_page_url:
+show_graph: true
 repository: https://github.com/b08x/omega-13
 generated_at: '2025-12-29T02:01:00.453045'
 total_wiki_pages: 12

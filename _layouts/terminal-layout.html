@@ -4,11 +4,11 @@ layout: base-shell
 
 {% assign container_width = page.container_max_width | default: "mx-auto" %}
 {% unless container_width contains 'max-w-' %}
-  {% if page.right_sidebar %}
-    {% assign container_width = container_width | append: " max-w-screen-2xl" %}
-  {% else %}
-    {% assign container_width = container_width | append: " max-w-screen-xl" %}
-  {% endif %}
+{% if page.right_sidebar %}
+{% assign container_width = container_width | append: " max-w-screen-2xl" %}
+{% else %}
+{% assign container_width = container_width | append: " max-w-screen-xl" %}
+{% endif %}
 {% endunless %}
 
 <div class="container {{ container_width }} px-4 sm:px-6 lg:px-8 py-10">
@@ -136,7 +136,10 @@ layout: base-shell
       </article>
 
       <!-- React Island: GraphView (Conditional) -->
-      {% if page.show_graph %}
+      {% assign show_graph = page.show_graph %}
+      {% if show_graph == nil %}{% assign show_graph = layout.show_graph %}{% endif %}
+
+      {% if show_graph %}
       <section class="mt-16 pt-10 border-t border-border">
         <h2 class="text-xl font-mono font-bold mb-6 text-foreground">
           Knowledge Graph

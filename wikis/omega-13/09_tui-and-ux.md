@@ -8,7 +8,7 @@ left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
-show_graph: false
+show_graph: true
 related_pages:
 - id: configuration-and-hotkeys
   url: "/wikis/omega-13/11-configuration-and-hotkeys/"

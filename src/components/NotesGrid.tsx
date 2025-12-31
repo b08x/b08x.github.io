@@ -6,6 +6,7 @@ interface Note {
   description: string;
   citations?: number;
   items?: string[];
+  url?: string;
 }
 
 interface NotesGridProps {
@@ -69,9 +70,23 @@ const NotesGrid: React.FC<NotesGridProps> = ({ notes }) => {
             `}
             onClick={() => toggleNote(note.id)}
           >
-            <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-              {note.title}
-            </h3>
+            <div className="flex justify-between items-start mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                {note.title}
+              </h3>
+              {note.url && (
+                <a
+                  href={note.url}
+                  className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 p-1"
+                  onClick={(e) => e.stopPropagation()}
+                  title="View full note"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              )}
+            </div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
               {note.description}
             </p>

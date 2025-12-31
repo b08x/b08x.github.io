@@ -27942,7 +27942,19 @@
             `,
               onClick: () => toggleNote(note.id),
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100", children: note.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex justify-between items-start mb-2", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold text-gray-900 dark:text-gray-100", children: note.title }),
+                  note.url && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+                    "a",
+                    {
+                      href: note.url,
+                      className: "text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 p-1",
+                      onClick: (e) => e.stopPropagation(),
+                      title: "View full note",
+                      children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", { className: "w-5 h-5", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" }) })
+                    }
+                  )
+                ] }),
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-sm text-gray-600 dark:text-gray-400 mb-3", children: note.description }),
                 note.items && note.items.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("ul", { className: "text-sm text-gray-700 dark:text-gray-300 mb-3 space-y-1 list-disc list-inside", children: note.items.map((item, idx) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("li", { children: item }, idx)) }),
                 note.citations && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-xs text-gray-500 dark:text-gray-400", children: [
