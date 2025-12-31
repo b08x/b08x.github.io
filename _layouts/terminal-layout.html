@@ -2,7 +2,16 @@
 layout: base-shell
 ---
 
-<div class="container mx-auto {% if page.right_sidebar %}max-w-screen-2xl{% else %}max-w-screen-xl{% endif %} px-4 sm:px-6 lg:px-8 py-10">
+{% assign container_width = page.container_max_width | default: "mx-auto" %}
+{% unless container_width contains 'max-w-' %}
+  {% if page.right_sidebar %}
+    {% assign container_width = container_width | append: " max-w-screen-2xl" %}
+  {% else %}
+    {% assign container_width = container_width | append: " max-w-screen-xl" %}
+  {% endif %}
+{% endunless %}
+
+<div class="container {{ container_width }} px-4 sm:px-6 lg:px-8 py-10">
 
   <!-- Responsive Grid Container -->
   <div class="flex flex-col lg:flex-row gap-8">
@@ -84,7 +93,8 @@ layout: base-shell
     {% endif %}
 
     <!-- Main Content Column -->
-    <main id="main-content-column" class="flex-1 min-w-0 max-w-content" aria-label="Main content">
+    {% assign content_width = page.content_max_width | default: "max-w-content" %}
+    <main id="main-content-column" class="flex-1 min-w-0 {{ content_width }}" aria-label="Main content">
 
       <!-- Page Header -->
       <header class="mb-12">

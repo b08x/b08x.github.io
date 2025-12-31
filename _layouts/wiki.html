@@ -1,5 +1,7 @@
 ---
 layout: terminal-layout
+container_max_width: max-w-notebook
+content_max_width: max-w-none
 ---
 
 {% comment %}
@@ -196,6 +198,7 @@ Expects front-matter with pagination metadata and pages array.
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -203,6 +206,7 @@ Expects front-matter with pagination metadata and pages array.
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
