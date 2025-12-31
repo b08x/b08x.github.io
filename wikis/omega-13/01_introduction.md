@@ -3,16 +3,22 @@ layout: wiki-page
 title: Introduction to Omega-13
 wiki_id: omega-13
 page_id: introduction
-permalink: "/wikis/omega-13/introduction/"
+permalink: "/wikis/omega-13/01-introduction/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- getting-started
+- id: getting-started
+  url: "/wikis/omega-13/02-getting-started/"
+  title: Getting Started
 file_paths:
 - README.md
+pagination:
+  next:
+    title: Getting Started
+    url: "/wikis/omega-13/02-getting-started/"
 ---
 
 <details>

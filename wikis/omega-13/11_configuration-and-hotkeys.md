@@ -3,17 +3,26 @@ layout: wiki-page
 title: Configuration & Global Hotkeys
 wiki_id: omega-13
 page_id: configuration-and-hotkeys
-permalink: "/wikis/omega-13/configuration-and-hotkeys/"
+permalink: "/wikis/omega-13/11-configuration-and-hotkeys/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- getting-started
+- id: getting-started
+  url: "/wikis/omega-13/02-getting-started/"
+  title: Getting Started
 file_paths:
 - src/omega13/config.py
 - src/omega13/hotkeys.py
+pagination:
+  previous:
+    title: Session Management & Data Flow
+    url: "/wikis/omega-13/10-session-management/"
+  next:
+    title: Whisper Server Deployment
+    url: "/wikis/omega-13/12-whisper-server-deployment/"
 ---
 
 <details>

@@ -3,17 +3,26 @@ layout: wiki-page
 title: TUI Components & UX
 wiki_id: omega-13
 page_id: tui-and-ux
-permalink: "/wikis/omega-13/tui-and-ux/"
+permalink: "/wikis/omega-13/09-tui-and-ux/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- configuration-and-hotkeys
+- id: configuration-and-hotkeys
+  url: "/wikis/omega-13/11-configuration-and-hotkeys/"
+  title: Configuration And Hotkeys
 file_paths:
 - src/omega13/ui.py
 - src/omega13/app.py
+pagination:
+  previous:
+    title: Transcription & Whisper Integration
+    url: "/wikis/omega-13/08-transcription-service/"
+  next:
+    title: Session Management & Data Flow
+    url: "/wikis/omega-13/10-session-management/"
 ---
 
 <details>

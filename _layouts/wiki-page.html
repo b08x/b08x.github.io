@@ -1,12 +1,14 @@
 ---
 layout: terminal-layout
+left_sidebar: wiki-nav
+right_sidebar: toc
 ---
 
 <header class="mb-12">
     {% assign wiki_data = site.data.wikis[page.wiki_id] %}
-    <h1 class="text-4xl font-prose font-bold mb-4 text-foreground">
+    <!-- <h1 class="text-4xl font-prose font-bold mb-4 text-foreground">
         {{ page.title }}
-    </h1>
+    </h1> -->
     <div class="text-sm font-mono flex gap-4 text-muted">
         <span>
             <span class="opacity-50">Wiki:</span> <a href="{{ site.baseurl }}/wikis/{{ page.wiki_id }}/"
@@ -23,8 +25,52 @@ layout: terminal-layout
         {{ content }}
     </div>
 
+    {% if page.pagination.previous or page.pagination.next %}
+    <nav class="wiki-pagination mt-12 mb-8" aria-label="Wiki page navigation">
+        <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 border border-border bg-surface rounded">
+            <!-- Previous Page -->
+            <div class="w-full sm:w-auto">
+                {% if page.pagination.previous %}
+                <a href="{{ site.baseurl }}{{ page.pagination.previous.url }}"
+                    class="inline-flex flex-col items-start gap-1 p-4 border border-border bg-background rounded hover:border-accent hover:text-accent transition-all group w-full sm:min-w-[200px]"
+                    rel="prev">
+                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-50">Previous</span>
+                    <span
+                        class="text-sm font-prose font-semibold line-clamp-1 italic text-muted group-hover:text-accent">{{
+                        page.pagination.previous.title }}</span>
+                </a>
+                {% else %}
+                <div class="p-4 border border-border/30 bg-background/50 rounded opacity-30 w-full sm:min-w-[200px]">
+                    <span class="text-[10px] font-mono uppercase tracking-widest">Previous (None)</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Next Page -->
+            <div class="w-full sm:w-auto">
+                {% if page.pagination.next %}
+                <a href="{{ site.baseurl }}{{ page.pagination.next.url }}"
+                    class="inline-flex flex-col items-end gap-1 p-4 border border-border bg-background rounded hover:border-accent hover:text-accent transition-all group text-right w-full sm:min-w-[200px]"
+                    rel="next">
+                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-50">Next</span>
+                    <span
+                        class="text-sm font-prose font-semibold line-clamp-1 italic text-muted group-hover:text-accent">{{
+                        page.pagination.next.title }}</span>
+                </a>
+                {% else %}
+                <div
+                    class="p-4 border border-border/30 bg-background/50 rounded opacity-30 text-right w-full sm:min-w-[200px]">
+                    <span class="text-[10px] font-mono uppercase tracking-widest">Next (None)</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
     {% if page.file_paths.size > 0 or page.related_pages.size > 0 %}
-    <footer class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <footer class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
         {% if page.file_paths.size > 0 %}
         <div class="p-4 rounded border bg-surface border-border">
             <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Source Context</div>
@@ -43,10 +89,16 @@ layout: terminal-layout
             <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Related Pages</div>
             <div class="flex flex-wrap gap-2">
                 {% for rp in page.related_pages %}
-                <a href="{{ site.baseurl }}/wikis/{{ page.wiki_id }}/{{ rp }}/"
+                {% if rp.url %}
+                <a href="{{ site.baseurl }}{{ rp.url }}"
                     class="px-2 py-0.5 text-[11px] border border-border bg-background rounded-sm hover:border-accent hover:text-accent transition-colors">
-                    {{ rp | replace: "-", " " | capitalize }}
+                    {{ rp.title }}
                 </a>
+                {% else %}
+                <span class="px-2 py-0.5 text-[11px] border border-border bg-background rounded-sm opacity-50">
+                    {{ rp.id | replace: "-", " " | capitalize }}
+                </span>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

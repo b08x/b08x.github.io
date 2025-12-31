@@ -68,9 +68,6 @@ collections:
   projects:
     output: true
     permalink: /:slug
-  wikis:
-    output: true
-    permalink: /:slug
 
 # Default layout for all pages
 defaults:

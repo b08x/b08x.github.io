@@ -22,84 +22,84 @@ pages:
   importance: high
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/app.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/app.py...'
-  url: "/wikis/omega-13/introduction/"
+  url: "/wikis/omega-13/01-introduction/"
 - id: getting-started
   title: Getting Started
   slug: getting-started
   importance: high
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/app.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/app.py...'
-  url: "/wikis/omega-13/getting-started/"
+  url: "/wikis/omega-13/02-getting-started/"
 - id: core-architecture
   title: Core Architecture Overview
   slug: core-architecture
   importance: high
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/app.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/app.py...'
-  url: "/wikis/omega-13/core-architecture/"
+  url: "/wikis/omega-13/03-core-architecture/"
 - id: audio-engine-design
   title: Audio Engine & Ring Buffers
   slug: audio-engine-design
   importance: high
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/audio.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/audio.py...'
-  url: "/wikis/omega-13/audio-engine-design/"
+  url: "/wikis/omega-13/04-audio-engine-design/"
 - id: recording-lifecycle
   title: Recording State Machine
   slug: recording-lifecycle
   importance: medium
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/app.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/app.py...'
-  url: "/wikis/omega-13/recording-lifecycle/"
+  url: "/wikis/omega-13/05-recording-lifecycle/"
 - id: retroactive-recording
   title: Retroactive Recording Mechanism
   slug: retroactive-recording
   importance: high
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/audio.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/audio.py...'
-  url: "/wikis/omega-13/retroactive-recording/"
+  url: "/wikis/omega-13/06-retroactive-recording/"
 - id: voice-activity-detection
   title: Voice-Activated Auto-Record (VAD)
   slug: voice-activity-detection
   importance: medium
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/app.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/app.py...'
-  url: "/wikis/omega-13/voice-activity-detection/"
+  url: "/wikis/omega-13/07-voice-activity-detection/"
 - id: transcription-service
   title: Transcription & Whisper Integration
   slug: transcription-service
   importance: high
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/transcription.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/transcription.py...'
-  url: "/wikis/omega-13/transcription-service/"
+  url: "/wikis/omega-13/08-transcription-service/"
 - id: tui-and-ux
   title: TUI Components & UX
   slug: tui-and-ux
   importance: medium
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/ui.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/ui.py...'
-  url: "/wikis/omega-13/tui-and-ux/"
+  url: "/wikis/omega-13/09-tui-and-ux/"
 - id: session-management
   title: Session Management & Data Flow
   slug: session-management
   importance: medium
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/session.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/session.py...'
-  url: "/wikis/omega-13/session-management/"
+  url: "/wikis/omega-13/10-session-management/"
 - id: configuration-and-hotkeys
   title: Configuration & Global Hotkeys
   slug: configuration-and-hotkeys
   importance: medium
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: src/omega13/config.pyhttps://github.com/b08x/omega-13/blob/main/src/omega13/config.py...'
-  url: "/wikis/omega-13/configuration-and-hotkeys/"
+  url: "/wikis/omega-13/11-configuration-and-hotkeys/"
 - id: whisper-server-deployment
   title: Whisper Server Deployment
   slug: whisper-server-deployment
   importance: high
   excerpt: 'Relevant source files The following files were used as context for generating
     this wiki page: compose.ymlhttps://github.com/b08x/omega-13/blob/main/compose.yml...'
-  url: "/wikis/omega-13/whisper-server-deployment/"
+  url: "/wikis/omega-13/12-whisper-server-deployment/"
 ---
 
 <!-- Paginated wiki index: page 1 of 1 -->

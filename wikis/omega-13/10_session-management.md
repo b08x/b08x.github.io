@@ -3,17 +3,26 @@ layout: wiki-page
 title: Session Management & Data Flow
 wiki_id: omega-13
 page_id: session-management
-permalink: "/wikis/omega-13/session-management/"
+permalink: "/wikis/omega-13/10-session-management/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- recording-lifecycle
+- id: recording-lifecycle
+  url: "/wikis/omega-13/05-recording-lifecycle/"
+  title: Recording Lifecycle
 file_paths:
 - src/omega13/session.py
 - tests/test_incremental_save.py
+pagination:
+  previous:
+    title: TUI Components & UX
+    url: "/wikis/omega-13/09-tui-and-ux/"
+  next:
+    title: Configuration & Global Hotkeys
+    url: "/wikis/omega-13/11-configuration-and-hotkeys/"
 ---
 
 <details>

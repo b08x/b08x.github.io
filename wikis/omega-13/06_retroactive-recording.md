@@ -3,16 +3,25 @@ layout: wiki-page
 title: Retroactive Recording Mechanism
 wiki_id: omega-13
 page_id: retroactive-recording
-permalink: "/wikis/omega-13/retroactive-recording/"
+permalink: "/wikis/omega-13/06-retroactive-recording/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- audio-engine-design
+- id: audio-engine-design
+  url: "/wikis/omega-13/04-audio-engine-design/"
+  title: Audio Engine Design
 file_paths:
 - src/omega13/audio.py
+pagination:
+  previous:
+    title: Recording State Machine
+    url: "/wikis/omega-13/05-recording-lifecycle/"
+  next:
+    title: Voice-Activated Auto-Record (VAD)
+    url: "/wikis/omega-13/07-voice-activity-detection/"
 ---
 
 <details>

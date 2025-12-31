@@ -3,18 +3,29 @@ layout: wiki-page
 title: Core Architecture Overview
 wiki_id: omega-13
 page_id: core-architecture
-permalink: "/wikis/omega-13/core-architecture/"
+permalink: "/wikis/omega-13/03-core-architecture/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- audio-engine-design
-- transcription-service
+- id: audio-engine-design
+  url: "/wikis/omega-13/04-audio-engine-design/"
+  title: Audio Engine Design
+- id: transcription-service
+  url: "/wikis/omega-13/08-transcription-service/"
+  title: Transcription Service
 file_paths:
 - src/omega13/app.py
 - CLAUDE.md
+pagination:
+  previous:
+    title: Getting Started
+    url: "/wikis/omega-13/02-getting-started/"
+  next:
+    title: Audio Engine & Ring Buffers
+    url: "/wikis/omega-13/04-audio-engine-design/"
 ---
 
 <details>

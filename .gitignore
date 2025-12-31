@@ -22,7 +22,6 @@ _site/
 .qodo/
 .claude/
 logs/
-projects/
 .ruby-lsp/
 *.code-workspace
 

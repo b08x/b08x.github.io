@@ -3,16 +3,25 @@ layout: wiki-page
 title: Voice-Activated Auto-Record (VAD)
 wiki_id: omega-13
 page_id: voice-activity-detection
-permalink: "/wikis/omega-13/voice-activity-detection/"
+permalink: "/wikis/omega-13/07-voice-activity-detection/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- recording-lifecycle
+- id: recording-lifecycle
+  url: "/wikis/omega-13/05-recording-lifecycle/"
+  title: Recording Lifecycle
 file_paths:
 - src/omega13/signal_detector.py
+pagination:
+  previous:
+    title: Retroactive Recording Mechanism
+    url: "/wikis/omega-13/06-retroactive-recording/"
+  next:
+    title: Transcription & Whisper Integration
+    url: "/wikis/omega-13/08-transcription-service/"
 ---
 
 <details>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prosodic Text Converter Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Lato:wght@300;400;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom scrollbar for a premium feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #A0D2EB; /* Lighter blue for scrollbar */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8FC1D4; /* Slightly darker on hover */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0E1A2B', /* Dark blue for header */
+                        'primary-light': '#F7F7F7', /* Light gray for main background */
+                        'accent-teal': '#32CDCD',   /* Deep teal for highlights and accents */
+                        'card-bg': '#FFFFFF',      /* Crisp white for section backgrounds */
+                        'text-default': '#333333', /* Dark gray for body text */
+                        'text-muted': '#666666',   /* Muted gray for secondary text */
+                        'code-bg': '#F0F4F8',      /* Light blue-gray for code blocks and distinct cards */
+                        'priority-high': '#EF4444', /* Red for high priority */
+                        'priority-medium': '#F59E0B', /* Orange for medium priority */
+                        'priority-low': '#10B981', /* Green for low priority (not directly used but part of palette) */
+                    },
+                    fontFamily: {
+                        display: ['Montserrat', 'sans-serif'],
+                        body: ['Lato', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'slide-in-up': 'slideInUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 },
+                        },
+                        slideInUp: {
+                            '0%': { opacity: 0, transform: 'translateY(20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-primary-light text-text-default font-body leading-relaxed animate-fade-in">
+
+    <!-- Header -->
+    <header class="bg-primary-dark text-white shadow-lg py-4 px-6 md:px-12 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <h1 class="font-display text-2xl md:text-3xl font-extrabold flex items-center gap-2">
+                <span class="text-accent-teal">/</span> SIFT <span class="text-accent-teal">/</span> Project Dashboard
+            </h1>
+            <p class="text-text-muted text-sm md:text-base hidden sm:block">Codebase Analysis Report</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 py-8 md:py-12">
+        <!-- Introduction Section -->
+        <section class="mb-12 animate-slide-in-up">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-primary-dark mb-6 text-center md:text-left">
+                Prosodic Text Converter Overview
+            </h2>
+            <p class="text-lg text-text-default mb-8 max-w-3xl mx-auto md:mx-0">
+                This report provides a comprehensive analysis of the "Prosodic Text Converter" Ruby application, detailing its architecture, key strengths, and identified areas for improvement, alongside a prioritized backlog of tasks and crucial user stories.
+            </p>
+
+            <!-- Original Codebase Context Block -->
+            <div class="bg-code-bg rounded-lg p-6 shadow-md border border-gray-200 mt-8 max-w-4xl mx-auto md:mx-0 animate-fade-in">
+                <h3 class="font-display text-xl font-semibold text-primary-dark mb-4 border-b border-gray-300 pb-2 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-accent-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    Original Codebase Context
+                </h3>
+                <pre class="font-mono text-sm text-text-default overflow-x-auto bg-gray-50 p-4 rounded-md border border-gray-200"><code>
+Uploaded On: 2023-10-26
+Version: 1.0.0 (Initial Scan)
+Source Repository: github.com/ruby-llm/prosodic-text-converter
+Analyzer: SIFT AI Codebase Scanner
+Scan Type: Comprehensive Static Analysis
+Last Updated: 2024-04-23
+                </code></pre>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 gap-12">
+            <!-- Codebase Overview Section -->
+            <section class="bg-card-bg rounded-xl shadow-xl p-8 md:p-10 animate-slide-in-up">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-primary-dark mb-6 border-b-2 border-accent-teal pb-4">
+                    <span class="text-accent-teal">#</span> Codebase Overview: Prosodic Text Converter
+                </h2>
+                <div class="space-y-6 text-text-default">
+                    <p>
+                        The Prosodic Text Converter is a Ruby application that transforms text into natural-sounding Speech Synthesis Markup Language (SSML) using Large Language Models (LLMs) and audio analysis. It supports multiple LLM providers, audio analysis backends, and offers both command-line (CLI) and interactive terminal (TUI) interfaces. The architecture is modular, organized within <code class="font-mono bg-gray-100 px-1 rounded">lib/prosodic-text-converter/</code> into <code class="font-mono bg-gray-100 px-1 rounded">audio</code>, <code class="font-mono bg-gray-100 px-1 rounded">analysis</code>, <code class="font-mono bg-gray-100 px-1 rounded">text</code>, and <code class="font-mono bg-gray-100 px-1 rounded">conversion</code> modules.
+                    </p>
+
+                    <h3 class="font-display text-2xl font-semibold text-primary-dark mt-8 mb-4">High-Level Architecture:</h3>
+                    <ul class="list-disc pl-5 space-y-3">
+                        <li><strong class="text-accent-teal">Core Logic (<code class="font-mono">Converter</code>, <code class="font-mono">SSMLFormatter</code>):</strong> Manages text-to-SSML conversion, integrating linguistic analysis and LLM interaction.</li>
+                        <li><strong class="text-accent-teal">Audio Processing (<code class="font-mono">SpectrogramGenerator</code>, <code class="font-mono">SpectrogramAnalyzer</code>, <code class="font-mono">PitchAnalyzerFactory</code>):</strong> Handles audio file conversion (SoX), spectrogram generation (MiniMagick), and pitch analysis (Aubio, Sonic Annotator).</li>
+                        <li><strong class="text-accent-teal">LLM Integration (<code class="font-mono">LLMConverter</code>, <code class="font-mono">SpeechPatternRewriter</code>):</strong> Uses <code class="font-mono">ruby_llm</code> for multi-provider LLM support (OpenAI, Anthropic, Google Gemini, Ollama), generating prosodic markup and rephrasing text based on Systemic Functional Linguistics (SFL) principles.</li>
+                        <li><strong class="text-accent-teal">Speech Synthesis (<code class="font-mono">SpeechSynthesizer</code>, <code class="font-mono">ElevenLabsFormatter</code>):</strong> Integrates with external APIs like ElevenLabs for generating final audio, managing SSML and voice selection.</li>
+                        <li><strong class="text-accent-teal">Text Analysis (<code class="font-mono">TextAnalyzer</code>):</strong> Provides linguistic context using <code class="font-mono">lingua</code> and <code class="font-mono">pragmatic_tokenizer</code> for sentence segmentation, tokenization, and syllable counting.</li>
+                        <li><strong class="text-accent-teal">Configuration (<code class="font-mono">Config</code>):</strong> Manages settings from <code class="font-mono">defaults.yml</code>, environment variables, and CLI arguments via <code class="font-mono">tty-config</code>.</li>
+                        <li><strong class="text-accent-teal">User Interfaces (<code class="font-mono">CLI</code>, <code class="font-mono">TUI</code>):</strong> Offers flexible interaction methods.</li>
+                        <li><strong class="text-accent-teal">Deployment:</strong> Supported by Docker for consistent execution environments.</li>
+                    </ul>
+
+                    <h3 class="font-display text-2xl font-semibold text-primary-dark mt-8 mb-4">Key Strengths:</h3>
+                    <ul class="list-disc pl-5 space-y-3">
+                        <li><strong class="text-accent-teal">Extensible Backend Support:</strong> Employs a factory pattern for pitch analysis and the <code class="font-mono">ruby_llm</code> gem for flexible LLM provider integration.</li>
+                        <li><strong class="text-accent-teal">Robust Third-Party Integration:</strong> Orchestrates <code class="font-mono">SoX</code>, <code class="font-mono">Aubio</code>, <code class="font-mono">Sonic Annotator</code>, <code class="font-mono">MiniMagick</code>, and ElevenLabs API for comprehensive audio, image, and speech synthesis.</li>
+                        <li><strong class="text-accent-teal">Advanced Prosody Extraction & Rewriting:</strong> Features audio-guided prosodic pattern extraction and intelligent text rewriting using LLMs based on SFL principles for nuanced speech synthesis.</li>
+                        <li><strong class="text-accent-teal">Layered Configuration:</strong> Provides a clear and flexible configuration hierarchy.</li>
+                        <li><strong class="text-accent-teal">Comprehensive NLP:</strong> Leverages <code class="font-mono">lingua</code> and <code class="font-mono">pragmatic_tokenizer</code> for foundational linguistic processing.</li>
+                    </ul>
+
+                    <h3 class="font-display text-2xl font-semibold text-primary-dark mt-8 mb-4">Identified Areas for Improvement:</h3>
+                    <ul class="list-disc pl-5 space-y-3">
+                        <li class="text-priority-high"><strong class="text-primary-dark">Security Vulnerabilities:</strong> Critical command injection and path traversal vulnerabilities due to insufficient input sanitization. Potential XXE risk from inconsistent XML parsing options.</li>
+                        <li class="text-priority-high"><strong class="text-primary-dark">LLM Security & Robustness:</strong> Inherent prompt injection risk; mitigations need enhancement (e.g., sophisticated semantic similarity, input/output filtering).</li>
+                        <li class="text-priority-medium"><strong class="text-primary-dark">Resource Management:</strong> Potential for resource exhaustion and high LLM costs with large inputs, requiring explicit limits and cost-aware strategies.</li>
+                        <li class="text-priority-medium"><strong class="text-primary-dark">Feature Completeness:</strong> Sophisticated analysis methods in <code class="font-mono">SpeechPatternExtractor</code> are placeholders, limiting prosodic pattern analysis depth.</li>
+                        <li class="text-priority-high"><strong class="text-primary-dark">Dependency Management:</strong> A formal process for continuous updates, vulnerability scanning, and documentation of security implications is needed.</li>
+                        <li class="text-priority-medium"><strong class="text-primary-dark">Configuration Security:</strong> <code class="font-mono">Dotenv.load(overwrite: true)</code> behavior may lead to unintended overwrites of production environment variables.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Backlog of Tasks Section -->
+            <section class="bg-card-bg rounded-xl shadow-xl p-8 md:p-10 animate-slide-in-up">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-primary-dark mb-6 border-b-2 border-accent-teal pb-4">
+                    <span class="text-accent-teal">#</span> Backlog of Tasks
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Task 1 -->
+                    <div class="task-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display text-xl font-semibold text-primary-dark leading-tight group-hover:text-accent-teal transition-colors">
+                                1. Implement <code class="font-mono">Shellwords.shellescape</code>
+                            </h3>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full bg-priority-high text-white">High</span>
+                        </div>
+                        <p class="text-text-muted text-sm mb-4">
+                            Apply <code class="font-mono">Shellwords.shellescape</code> to user-controlled inputs passed to external shell commands in <code class="font-mono">sonic-annotator</code> and <code class="font-mono">sox</code> calls.
+                        </p>
+                        <ul class="text-sm space-y-1 text-text-default">
+                            <li><strong class="text-primary-dark">Affected:</strong> <code class="font-mono text-xs">SonicAnnotatorPitchAnalyzer</code>, <code class="font-mono text-xs">SpectrogramGenerator</code></li>
+                            <li><strong class="text-primary-dark">Effort:</strong> Small</li>
+                        </ul>
+                    </div>
+
+                    <!-- Task 2 -->
+                    <div class="task-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display text-xl font-semibold text-primary-dark leading-tight group-hover:text-accent-teal transition-colors">
+                                2. Canonicalize and Restrict Paths
+                            </h3>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full bg-priority-high text-white">High</span>
+                        </div>
+                        <p class="text-text-muted text-sm mb-4">
+                            Implement <code class="font-mono">Pathname#cleanpath</code>, <code class="font-mono">File.absolute_path</code>, and <code class="font-mono">File.expand_path</code> for user-supplied paths.
+                        </p>
+                        <ul class="text-sm space-y-1 text-text-default">
+                            <li><strong class="text-primary-dark">Affected:</strong> <code class="font-mono text-xs">CLI</code>, <code class="font-mono text-xs">SpectrogramAnalyzer</code>, <code class="font-mono text-xs">SpeechSynthesizer</code>, <code class="font-mono text-xs">TUI</code></li>
+                            <li><strong class="text-primary-dark">Effort:</strong> Medium</li>
+                        </ul>
+                    </div>
+
+                    <!-- Task 3 -->
+                    <div class="task-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display text-xl font-semibold text-primary-dark leading-tight group-hover:text-accent-teal transition-colors">
+                                3. Review <code class="font-mono">Dotenv.load</code> Behavior
+                            </h3>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full bg-priority-medium text-white">Medium</span>
+                        </div>
+                        <p class="text-text-muted text-sm mb-4">
+                            Re-evaluate <code class="font-mono">Dotenv.load(overwrite: true)</code> usage to prioritize existing environment variables.
+                        </p>
+                        <ul class="text-sm space-y-1 text-text-default">
+                            <li><strong class="text-primary-dark">Affected:</strong> <code class="font-mono text-xs">Config</code> class, deployment scripts</li>
+                            <li><strong class="text-primary-dark">Effort:</strong> Small</li>
+                        </ul>
+                    </div>
+
+                    <!-- Task 4 -->
+                    <div class="task-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display text-xl font-semibold text-primary-dark leading-tight group-hover:text-accent-teal transition-colors">
+                                4. Verify XXE Prevention
+                            </h3>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full bg-priority-medium text-white">Medium</span>
+                        </div>
+                        <p class="text-text-muted text-sm mb-4">
+                            Ensure external entity resolution is explicitly disabled for untrusted SSML content in <code class="font-mono">Nokogiri</code> calls.
+                        </p>
+                        <ul class="text-sm space-y-1 text-text-default">
+                            <li><strong class="text-primary-dark">Affected:</strong> <code class="font-mono text-xs">SSMLFormatter</code>, <code class="font-mono text-xs">ElevenLabsFormatter</code></li>
+                            <li><strong class="text-primary-dark">Effort:</strong> Small</li>
+                        </ul>
+                    </div>
+
+                    <!-- Task 5 -->
+                    <div class="task-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display text-xl font-semibold text-primary-dark leading-tight group-hover:text-accent-teal transition-colors">
+                                5. Enhance Prompt Injection Mitigations
+                            </h3>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full bg-priority-high text-white">High</span>
+                        </div>
+                        <p class="text-text-muted text-sm mb-4">
+                            Upgrade <code class="font-mono">validate_meaning_preservation</code> with sophisticated semantic similarity models and input/output filtering.
+                        </p>
+                        <ul class="text-sm space-y-1 text-text-default">
+                            <li><strong class="text-primary-dark">Affected:</strong> <code class="font-mono text-xs">LLMConverter</code>, <code class="font-mono text-xs">SpeechPatternRewriter</code></li>
+                            <li><strong class="text-primary-dark">Effort:</strong> Large</li>
+                        </ul>
+                    </div>
+
+                    <!-- Task 6 -->
+                    <div class="task-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display text-xl font-semibold text-primary-dark leading-tight group-hover:text-accent-teal transition-colors">
+                                6. Implement Explicit Resource Limits
+                            </h3>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full bg-priority-medium text-white">Medium</span>
+                        </div>
+                        <p class="text-text-muted text-sm mb-4">
+                            Introduce explicit size/duration limits for audio files and spectrograms to prevent resource exhaustion.
+                        </p>
+                        <ul class="text-sm space-y-1 text-text-default">
+                            <li><strong class="text-primary-dark">Affected:</strong> <code class="font-mono text-xs">SpectrogramGenerator</code>, <code class="font-mono text-xs">SpectrogramAnalyzer</code>, <code class="font-mono text-xs">Converter</code></li>
+                            <li><strong class="text-primary-dark">Effort:</strong> Medium</li>
+                        </ul>
+                    </div>
+
+                    <!-- Task 7 -->
+                    <div class="task-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display text-xl font-semibold text-primary-dark leading-tight group-hover:text-accent-teal transition-colors">
+                                7. Establish Dependency Security Management
+                            </h3>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full bg-priority-high text-white">High</span>
+                        </div>
+                        <p class="text-text-muted text-sm mb-4">
+                            Formulate a policy for regularly updating dependencies and integrate automated vulnerability scanning.
+                        </p>
+                        <ul class="text-sm space-y-1 text-text-default">
+                            <li><strong class="text-primary-dark">Affected:</strong> Entire codebase, CI/CD pipeline</li>
+                            <li><strong class="text-primary-dark">Effort:</strong> Large (ongoing)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Task 8 -->
+                    <div class="task-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display text-xl font-semibold text-primary-dark leading-tight group-hover:text-accent-teal transition-colors">
+                                8. Fully Implement Sophisticated Analysis
+                            </h3>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full bg-priority-high text-white">High</span>
+                        </div>
+                        <p class="text-text-muted text-sm mb-4">
+                            Develop robust signal processing/ML algorithms for placeholder analysis methods in <code class="font-mono">SpeechPatternExtractor</code>.
+                        </p>
+                        <ul class="text-sm space-y-1 text-text-default">
+                            <li><strong class="text-primary-dark">Affected:</strong> <code class="font-mono text-xs">SpeechPatternExtractor</code></li>
+                            <li><strong class="text-primary-dark">Effort:</strong> Large</li>
+                        </ul>
+                    </div>
+
+                    <!-- Task 9 -->
+                    <div class="task-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-display text-xl font-semibold text-primary-dark leading-tight group-hover:text-accent-teal transition-colors">
+                                9. Implement LLM Token-Based Cost Estimation
+                            </h3>
+                            <span class="px-3 py-1 text-sm font-semibold rounded-full bg-priority-medium text-white">Medium</span>
+                        </div>
+                        <p class="text-text-muted text-sm mb-4">
+                            Introduce mechanisms for token-based cost estimation and early exit strategies for LLM calls.
+                        </p>
+                        <ul class="text-sm space-y-1 text-text-default">
+                            <li><strong class="text-primary-dark">Affected:</strong> <code class="font-mono text-xs">LLMConverter</code>, <code class="font-mono text-xs">SpeechPatternRewriter</code></li>
+                            <li><strong class="text-primary-dark">Effort:</strong> Medium</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Stories Section -->
+            <section class="bg-card-bg rounded-xl shadow-xl p-8 md:p-10 animate-slide-in-up">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-primary-dark mb-6 border-b-2 border-accent-teal pb-4">
+                    <span class="text-accent-teal">#</span> User Stories
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- User Story 1 -->
+                    <div class="user-story-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal text-white mr-3">Security Engineer</span>
+                        </div>
+                        <p class="text-text-default leading-relaxed">
+                            As a Security Engineer, I want all external command executions to properly escape user-controlled inputs, so that I can prevent command injection vulnerabilities.
+                        </p>
+                    </div>
+
+                    <!-- User Story 2 -->
+                    <div class="user-story-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal text-white mr-3">Developer</span>
+                        </div>
+                        <p class="text-text-default leading-relaxed">
+                            As a Developer, I want all user-supplied file paths to be canonicalized and restricted to a secure base directory, so that the application is protected against path traversal attacks.
+                        </p>
+                    </div>
+
+                    <!-- User Story 3 -->
+                    <div class="user-story-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal text-white mr-3">Operations Engineer</span>
+                        </div>
+                        <p class="text-text-default leading-relaxed">
+                            As an Operations Engineer, I want sensitive environment variables in production to take precedence over <code class="font-mono">.env</code> file settings, so that configuration is secure and predictable.
+                        </p>
+                    </div>
+
+                    <!-- User Story 4 -->
+                    <div class="user-story-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal text-white mr-3">Security Engineer</span>
+                        </div>
+                        <p class="text-text-default leading-relaxed">
+                            As a Security Engineer, I want all XML/SSML parsing to explicitly disable external entity resolution, so that the application is protected from XXE vulnerabilities.
+                        </p>
+                    </div>
+
+                    <!-- User Story 5 -->
+                    <div class="user-story-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal text-white mr-3">User</span>
+                        </div>
+                        <p class="text-text-default leading-relaxed">
+                            As a User, I want LLM interactions to be robustly filtered for malicious inputs and outputs, so that I receive safe and reliable responses and my data is protected.
+                        </p>
+                    </div>
+
+                    <!-- User Story 6 -->
+                    <div class="user-story-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal text-white mr-3">System Administrator</span>
+                        </div>
+                        <p class="text-text-default leading-relaxed">
+                            As a System Administrator, I want explicit size and duration limits on audio and spectrogram files, so that system resources are protected from exhaustion and costs are managed.
+                        </p>
+                    </div>
+
+                    <!-- User Story 7 -->
+                    <div class="user-story-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal text-white mr-3">Security Lead</span>
+                        </div>
+                        <p class="text-text-default leading-relaxed">
+                            As a Security Lead, I want all project dependencies to be regularly scanned for vulnerabilities and kept up-to-date, with comprehensive documentation, so that our software supply chain remains secure.
+                        </p>
+                    </div>
+
+                    <!-- User Story 8 -->
+                    <div class="user-story-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal text-white mr-3">System Administrator</span>
+                        </div>
+                        <p class="text-text-default leading-relaxed">
+                            As a System Administrator, I want LLM interactions to estimate token costs and use early exit strategies, so that I can manage API expenses and optimize processing time.
+                        </p>
+                    </div>
+
+                    <!-- User Story 9 -->
+                    <div class="user-story-card p-6 bg-code-bg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 group">
+                        <div class="flex items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-accent-teal text-white mr-3">Linguistic Researcher</span>
+                        </div>
+                        <p class="text-text-default leading-relaxed">
+                            As a Linguistic Researcher, I want <code class="font-mono">SpeechPatternExtractor</code> to fully implement advanced analysis methods (e.g., MFCCs, robust pitch tracking), so that I can obtain highly accurate and detailed prosodic insights for text rewriting.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- No footer content as per strict instructions -->
+
+</body>
+</html>

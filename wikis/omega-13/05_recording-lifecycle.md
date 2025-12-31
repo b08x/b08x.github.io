@@ -3,16 +3,25 @@ layout: wiki-page
 title: Recording State Machine
 wiki_id: omega-13
 page_id: recording-lifecycle
-permalink: "/wikis/omega-13/recording-lifecycle/"
+permalink: "/wikis/omega-13/05-recording-lifecycle/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- voice-activity-detection
+- id: voice-activity-detection
+  url: "/wikis/omega-13/07-voice-activity-detection/"
+  title: Voice Activity Detection
 file_paths:
 - src/omega13/recording_controller.py
+pagination:
+  previous:
+    title: Audio Engine & Ring Buffers
+    url: "/wikis/omega-13/04-audio-engine-design/"
+  next:
+    title: Retroactive Recording Mechanism
+    url: "/wikis/omega-13/06-retroactive-recording/"
 ---
 
 <details>

@@ -2,7 +2,7 @@
 layout: base-shell
 ---
 
-<div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-10">
+<div class="container mx-auto {% if page.right_sidebar %}max-w-screen-2xl{% else %}max-w-screen-xl{% endif %} px-4 sm:px-6 lg:px-8 py-10">
 
   <!-- Responsive Grid Container -->
   <div class="flex flex-col lg:flex-row gap-8">
@@ -84,7 +84,7 @@ layout: base-shell
     {% endif %}
 
     <!-- Main Content Column -->
-    <main id="main-content-column" class="flex-1 min-w-0" aria-label="Main content">
+    <main id="main-content-column" class="flex-1 min-w-0 max-w-content" aria-label="Main content">
 
       <!-- Page Header -->
       <header class="mb-12">

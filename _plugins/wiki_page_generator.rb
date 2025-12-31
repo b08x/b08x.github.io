@@ -18,24 +18,48 @@ module Jekyll
       site.data['wikis'].each do |wiki_id, wiki_data|
         next unless wiki_data['pages']
 
-        # Generate individual wiki pages (existing functionality)
-        wiki_data['pages'].each do |page_data|
-          generate_page(site, wiki_id, page_data)
+        # Pre-calculate permalinks for all pages in this wiki
+        pages = wiki_data['pages']
+        permalink_map = {}
+        pages.each_with_index do |page_data, index|
+          page_id = page_data['id']
+          slug = validate_slug(Jekyll::Utils.slugify(page_id))
+          num = (index + 1).to_s.rjust(2, '0')
+          permalink_map[page_id] = {
+            'slug' => slug,
+            'number' => num,
+            'permalink' => "/wikis/#{wiki_id}/#{num}-#{slug}/"
+          }
         end
 
-        # Generate paginated index pages (new functionality)
-        generate_paginated_index(site, wiki_id, wiki_data)
+        # Generate individual wiki pages
+        pages.each_with_index do |page_data, index|
+          prev_page = index > 0 ? pages[index - 1] : nil
+          next_page = index < pages.length - 1 ? pages[index + 1] : nil
+          
+          generate_page(site, wiki_id, page_data, prev_page, next_page, permalink_map)
+        end
+
+        # Generate paginated index pages
+        generate_paginated_index(site, wiki_id, wiki_data, permalink_map)
+
+        # Cleanup old structure if it exists
+        cleanup_old_directories(site, wiki_id, permalink_map.values.map { |v| v['slug'] })
       end
     end
 
     private
 
     # ========================================
-    # INDIVIDUAL PAGE GENERATION (UNCHANGED)
+    # INDIVIDUAL PAGE GENERATION
     # ========================================
 
-    def generate_page(site, wiki_id, page_data)
-      page_id = page_data['id']
+    def generate_page(site, wiki_id, page_data, prev_page, next_page, permalink_map)
+      page_info = permalink_map[page_data['id']]
+      slug = page_info['slug']
+      num = page_info['number']
+      permalink = page_info['permalink']
+      
       title = page_data['title']
       content_body = page_data['content'] || ""
 
@@ -43,34 +67,58 @@ module Jekyll
       content_body = content_body.gsub(/```mermaid\b/, '```mermaid!')
       content_body = content_body.gsub(/```plantuml\b/, '```plantuml!')
 
-      # Use Jekyll's Utils.slugify to ensure consistent slug generation
-      slug = validate_slug(Jekyll::Utils.slugify(page_id))
-
-      dir = File.join('wikis', wiki_id, slug)
-      filename = 'index.md'
+      dir = File.join('wikis', wiki_id)
+      filename = "#{num}_#{slug}.md"
       path = File.join(site.source, dir, filename)
 
       # Ensure the directory exists
       FileUtils.mkdir_p(File.join(site.source, dir))
 
       # Metadata
-      related_pages = page_data['relatedPages'] || []
+      related_pages_raw = page_data['relatedPages'] || []
+      related_pages = related_pages_raw.map do |rp_id|
+        info = permalink_map[rp_id]
+        if info
+          { 'id' => rp_id, 'url' => info['permalink'], 'title' => rp_id.split('-').map(&:capitalize).join(' ') }
+        else
+          { 'id' => rp_id }
+        end
+      end
+
       file_paths = page_data['filePaths'] || []
+
+      # Pagination metadata for individual page
+      pagination_data = {}
+      if prev_page
+        prev_info = permalink_map[prev_page['id']]
+        pagination_data['previous'] = {
+          'title' => prev_page['title'],
+          'url' => prev_info['permalink']
+        }
+      end
+      if next_page
+        next_info = permalink_map[next_page['id']]
+        pagination_data['next'] = {
+          'title' => next_page['title'],
+          'url' => next_info['permalink']
+        }
+      end
 
       # Front matter content
       front_matter = {
         'layout' => 'wiki-page',
         'title' => title,
         'wiki_id' => wiki_id,
-        'page_id' => page_id,
-        'permalink' => "/wikis/#{wiki_id}/#{slug}/",
+        'page_id' => page_data['id'],
+        'permalink' => permalink,
         'left_sidebar' => 'wiki-nav',
         'right_sidebar' => 'toc',
         'right_sidebar_xl_only' => true,
         'show_metadata' => false,
         'show_graph' => false,
         'related_pages' => related_pages,
-        'file_paths' => file_paths
+        'file_paths' => file_paths,
+        'pagination' => pagination_data
       }
 
       # Combine front matter and content
@@ -84,7 +132,7 @@ module Jekyll
     # PAGINATED INDEX GENERATION (NEW)
     # ========================================
 
-    def generate_paginated_index(site, wiki_id, wiki_data)
+    def generate_paginated_index(site, wiki_id, wiki_data, permalink_map)
       pages = wiki_data['pages']
       metadata = wiki_data['metadata'] || {}
 
@@ -97,7 +145,7 @@ module Jekyll
 
       segments.each_with_index do |segment, index|
         page_num = index + 1
-        write_paginated_page(site, wiki_id, segment, page_num, total_pages, metadata)
+        write_paginated_page(site, wiki_id, segment, page_num, total_pages, metadata, permalink_map)
         Jekyll.logger.debug "WikiPageGenerator:", "Generated page #{page_num}/#{total_pages} for '#{wiki_id}'"
       end
 
@@ -109,7 +157,7 @@ module Jekyll
       pages.each_slice(per_page).to_a
     end
 
-    def write_paginated_page(site, wiki_id, segment, page_num, total_pages, wiki_metadata)
+    def write_paginated_page(site, wiki_id, segment, page_num, total_pages, wiki_metadata, permalink_map)
       # Determine directory path
       if page_num == 1
         dir = File.join('wikis', wiki_id)
@@ -131,15 +179,15 @@ module Jekyll
       # Build page items with enriched data
       page_items = segment.map do |page_data|
         page_id = page_data['id']
-        slug = validate_slug(Jekyll::Utils.slugify(page_id))
+        page_info = permalink_map[page_id]
 
         {
           'id' => page_id,
           'title' => page_data['title'],
-          'slug' => slug,
+          'slug' => page_info['slug'],
           'importance' => page_data['importance'] || 'medium',
           'excerpt' => extract_excerpt(page_data['content']),
-          'url' => "/wikis/#{wiki_id}/#{slug}/"
+          'url' => page_info['permalink']
         }
       end
 
@@ -214,6 +262,19 @@ module Jekyll
         stripped[0...length].gsub(/\s+\S*$/, "") + "..."
       else
         stripped
+      end
+    end
+
+    def cleanup_old_directories(site, wiki_id, slugs)
+      wiki_dir = File.join(site.source, 'wikis', wiki_id)
+      return unless Dir.exist?(wiki_dir)
+
+      slugs.each do |slug|
+        slug_dir = File.join(wiki_dir, slug)
+        if Dir.exist?(slug_dir)
+          Jekyll.logger.info "WikiPageGenerator:", "Cleaning up old directory: #{slug_dir}"
+          FileUtils.rm_rf(slug_dir)
+        end
       end
     end
 

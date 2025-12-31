@@ -3,18 +3,27 @@ layout: wiki-page
 title: Getting Started
 wiki_id: omega-13
 page_id: getting-started
-permalink: "/wikis/omega-13/getting-started/"
+permalink: "/wikis/omega-13/02-getting-started/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- whisper-server-deployment
+- id: whisper-server-deployment
+  url: "/wikis/omega-13/12-whisper-server-deployment/"
+  title: Whisper Server Deployment
 file_paths:
 - bootstrap.sh
 - README.md
 - pyproject.toml
+pagination:
+  previous:
+    title: Introduction to Omega-13
+    url: "/wikis/omega-13/01-introduction/"
+  next:
+    title: Core Architecture Overview
+    url: "/wikis/omega-13/03-core-architecture/"
 ---
 
 <details>

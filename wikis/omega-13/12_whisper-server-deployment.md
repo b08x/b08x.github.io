@@ -3,17 +3,23 @@ layout: wiki-page
 title: Whisper Server Deployment
 wiki_id: omega-13
 page_id: whisper-server-deployment
-permalink: "/wikis/omega-13/whisper-server-deployment/"
+permalink: "/wikis/omega-13/12-whisper-server-deployment/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- transcription-service
+- id: transcription-service
+  url: "/wikis/omega-13/08-transcription-service/"
+  title: Transcription Service
 file_paths:
 - Containerfile
 - compose.yml
+pagination:
+  previous:
+    title: Configuration & Global Hotkeys
+    url: "/wikis/omega-13/11-configuration-and-hotkeys/"
 ---
 
 <details>

@@ -3,17 +3,26 @@ layout: wiki-page
 title: Transcription & Whisper Integration
 wiki_id: omega-13
 page_id: transcription-service
-permalink: "/wikis/omega-13/transcription-service/"
+permalink: "/wikis/omega-13/08-transcription-service/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- whisper-server-deployment
+- id: whisper-server-deployment
+  url: "/wikis/omega-13/12-whisper-server-deployment/"
+  title: Whisper Server Deployment
 file_paths:
 - src/omega13/transcription.py
 - compose.yml
+pagination:
+  previous:
+    title: Voice-Activated Auto-Record (VAD)
+    url: "/wikis/omega-13/07-voice-activity-detection/"
+  next:
+    title: TUI Components & UX
+    url: "/wikis/omega-13/09-tui-and-ux/"
 ---
 
 <details>

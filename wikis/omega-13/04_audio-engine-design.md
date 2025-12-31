@@ -3,16 +3,25 @@ layout: wiki-page
 title: Audio Engine & Ring Buffers
 wiki_id: omega-13
 page_id: audio-engine-design
-permalink: "/wikis/omega-13/audio-engine-design/"
+permalink: "/wikis/omega-13/04-audio-engine-design/"
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
 show_graph: false
 related_pages:
-- retroactive-recording
+- id: retroactive-recording
+  url: "/wikis/omega-13/06-retroactive-recording/"
+  title: Retroactive Recording
 file_paths:
 - src/omega13/audio.py
+pagination:
+  previous:
+    title: Core Architecture Overview
+    url: "/wikis/omega-13/03-core-architecture/"
+  next:
+    title: Recording State Machine
+    url: "/wikis/omega-13/05-recording-lifecycle/"
 ---
 
 <details>
