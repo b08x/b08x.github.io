@@ -1,33 +1,38 @@
 // Obsidian-style Callouts
-// Updated for dark terminal theme with CSS variables
+// Unified with terminal theme and design tokens
 
 .callout {
-  margin: 1.5em 0;
+  margin: 1.5rem 0;
   padding: 0;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: rgba(17, 17, 17, 0.5); // var(--surface) with opacity
-  border-left: 4px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   .callout-title {
     display: flex;
     align-items: center;
-    gap: 0.5em;
-    padding: 0.75em 1em;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
     font-weight: 600;
-    background: rgba(26, 26, 26, 0.5);
     font-family: var(--font-mono);
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9em;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
   .callout-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-
-    &::before {
-      content: "ℹ";
-      font-size: 1.2em;
-    }
+    font-style: normal;
   }
 
   .callout-title-inner {
@@ -35,9 +40,11 @@
   }
 
   .callout-content {
-    padding: 1em 1em 1em 2.5em;
+    padding: 1rem 1.25rem;
     font-family: var(--font-prose);
     color: var(--foreground);
+    line-height: 1.6;
+    font-size: 1rem;
 
     p:first-child {
       margin-top: 0;
@@ -46,154 +53,157 @@
     p:last-child {
       margin-bottom: 0;
     }
+
+    code {
+      background: var(--background);
+      border-color: var(--border);
+    }
   }
 }
 
-// Callout type colors and icons (brightened for dark background)
+// --- Callout Type Variances ---
+// Colors matched to syntax highlighting and chart palette
 
-.callout[data-callout="note"] {
+// 1. Info / Note (Blue)
+.callout[data-callout="note"],
+.callout[data-callout="info"],
+.callout[data-callout="todo"] {
   border-left-color: #6ab0ff;
+
   .callout-title {
-    background: rgba(106, 176, 255, 0.15);
-    color: #8fc7ff;
-  }
-  .callout-icon::before {
-    content: "✎";
+    background: rgba(106, 176, 255, 0.1);
     color: #6ab0ff;
   }
+
+  .callout-icon::before {
+    content: "ℹ";
+  }
 }
 
+.callout[data-callout="note"] .callout-icon::before {
+  content: "✎";
+}
+
+.callout[data-callout="todo"] .callout-icon::before {
+  content: "☐";
+}
+
+// 2. Abstract / Summary (Cyan/Teal)
 .callout[data-callout="abstract"],
 .callout[data-callout="summary"],
 .callout[data-callout="tldr"] {
   border-left-color: #00d4ff;
+
   .callout-title {
-    background: rgba(0, 212, 255, 0.15);
-    color: #5ce6ff;
-  }
-  .callout-icon::before {
-    content: "⚡";
+    background: rgba(0, 212, 255, 0.1);
     color: #00d4ff;
   }
-}
 
-.callout[data-callout="info"] {
-  border-left-color: #6ab0ff;
-  .callout-title {
-    background: rgba(106, 176, 255, 0.15);
-    color: #8fc7ff;
-  }
   .callout-icon::before {
-    content: "ℹ";
-    color: #6ab0ff;
+    content: "⚡";
   }
 }
 
-.callout[data-callout="todo"] {
-  border-left-color: #6ab0ff;
-  .callout-title {
-    background: rgba(106, 176, 255, 0.15);
-    color: #8fc7ff;
-  }
-  .callout-icon::before {
-    content: "☐";
-    color: #6ab0ff;
-  }
-}
-
+// 3. Tip / Success (Emerald/Green)
 .callout[data-callout="tip"],
 .callout[data-callout="hint"],
-.callout[data-callout="important"] {
-  border-left-color: #00ffb3;
-  .callout-title {
-    background: rgba(0, 255, 179, 0.15);
-    color: #5cffd6;
-  }
-  .callout-icon::before {
-    content: "🔥";
-    color: #00ffb3;
-  }
-}
-
+.callout[data-callout="important"],
 .callout[data-callout="success"],
 .callout[data-callout="check"],
 .callout[data-callout="done"] {
   border-left-color: #50c878;
+
   .callout-title {
-    background: rgba(80, 200, 120, 0.15);
-    color: #7ce6a4;
+    background: rgba(80, 200, 120, 0.1);
+    color: #50c878;
   }
+
   .callout-icon::before {
     content: "✓";
-    color: #50c878;
   }
 }
 
+.callout[data-callout="tip"] .callout-icon::before,
+.callout[data-callout="hint"] .callout-icon::before,
+.callout[data-callout="important"] .callout-icon::before {
+  content: "🔥";
+}
+
+// 4. Question / Help (Amber/Yellow)
 .callout[data-callout="question"],
 .callout[data-callout="help"],
 .callout[data-callout="faq"] {
   border-left-color: #ffaa00;
+
   .callout-title {
-    background: rgba(255, 170, 0, 0.15);
-    color: #ffc966;
+    background: rgba(255, 170, 0, 0.1);
+    color: #ffaa00;
   }
+
   .callout-icon::before {
     content: "?";
-    color: #ffaa00;
   }
 }
 
+// 5. Warning / Caution (Orange)
 .callout[data-callout="warning"],
 .callout[data-callout="caution"],
 .callout[data-callout="attention"] {
-  border-left-color: #ff9933;
+  border-left-color: #ff8533;
+
   .callout-title {
-    background: rgba(255, 153, 51, 0.15);
-    color: #ffb366;
+    background: rgba(255, 133, 51, 0.1);
+    color: #ff8533;
   }
+
   .callout-icon::before {
     content: "⚠";
-    color: #ff9933;
   }
 }
 
+// 6. Failure / Error / Bug (Red/Destructive)
 .callout[data-callout="failure"],
 .callout[data-callout="fail"],
 .callout[data-callout="missing"],
 .callout[data-callout="error"],
 .callout[data-callout="bug"] {
   border-left-color: #ff4466;
+
   .callout-title {
-    background: rgba(255, 68, 102, 0.15);
-    color: #ff7799;
-  }
-  .callout-icon::before {
-    content: "✗";
+    background: rgba(255, 68, 102, 0.1);
     color: #ff4466;
   }
+
+  .callout-icon::before {
+    content: "✗";
+  }
 }
 
+// 7. Example (Purple)
 .callout[data-callout="example"] {
   border-left-color: #b37de8;
+
   .callout-title {
-    background: rgba(179, 125, 232, 0.15);
-    color: #c9a0f0;
+    background: rgba(179, 125, 232, 0.1);
+    color: #b37de8;
   }
+
   .callout-icon::before {
     content: "◈";
-    color: #b37de8;
   }
 }
 
+// 8. Quote / Cite (Muted/Grey)
 .callout[data-callout="quote"],
 .callout[data-callout="cite"] {
   border-left-color: var(--muted);
+
   .callout-title {
-    background: rgba(136, 136, 136, 0.15);
+    background: rgba(127, 140, 141, 0.1);
     color: var(--muted);
   }
+
   .callout-icon::before {
     content: "\201C";
-    color: var(--muted);
   }
 }

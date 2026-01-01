@@ -20,10 +20,21 @@ def process_callouts(doc)
 
   # Match blockquotes containing callout syntax: <blockquote><p>[!type]...
   # Pattern handles various HTML formatting from markdown conversion
-  doc.output = doc.output.gsub(%r{<blockquote>\s*<p>\[!(\w+)\]([^<]*)<br\s*/?>\s*(.+?)</p>\s*</blockquote>}m) do
+  doc.output = doc.output.gsub(%r{<blockquote>\s*<p>\[!(\w+)\](.*?)</p>\s*</blockquote>}m) do
     callout_type = Regexp.last_match(1).downcase
-    title_text = Regexp.last_match(2).strip
-    content_html = Regexp.last_match(3).strip
+    inner_html = Regexp.last_match(2).strip
+
+    # Split title and content based on <br> or newline
+    if inner_html =~ %r{^(.*?)<br\s*/?>(.*)$}m
+      title_text = $1.strip
+      content_html = $2.strip
+    elsif inner_html =~ %r{^(.*?)\n(.*)$}m
+      title_text = $1.strip
+      content_html = $2.strip
+    else
+      title_text = inner_html
+      content_html = ""
+    end
 
     # Use type as title if no custom title provided
     title = title_text.empty? ? callout_type.capitalize : title_text
@@ -39,7 +50,7 @@ def process_callouts(doc)
           <div class="callout-title-inner">#{title}</div>
         </div>
         <div class="callout-content">
-          #{content_html}
+          <p>#{content_html}</p>
         </div>
       </div>
     HTML
