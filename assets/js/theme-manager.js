@@ -28,22 +28,18 @@ class ThemeManager {
 
   /**
    * Resolve theme based on priority hierarchy
+   * Priority: localStorage > prefers-color-scheme > default (light)
    * Returns: 'light' | 'dark'
    * Complexity: O(1)
    */
   resolveTheme() {
-    // Priority 1: Explicit class already set
-    if (this.htmlElement.classList.contains(this.DARK_CLASS)) {
-      return 'dark';
-    }
-
-    // Priority 2: Stored preference
+    // Priority 1: Stored preference
     const storedTheme = localStorage.getItem(this.STORAGE_KEY);
     if (storedTheme === 'light' || storedTheme === 'dark') {
       return storedTheme;
     }
 
-    // Priority 3: OS preference (dark mode)
+    // Priority 2: OS preference (dark mode)
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       return 'dark';
     }
@@ -100,7 +96,7 @@ class ThemeManager {
     });
 
     // Set initial button state
-    const currentTheme = this.htmlElement.getAttribute(this.ATTRIBUTE) || 'dark';
+    const currentTheme = this.getCurrentTheme();
     this.updateToggleButtonState(currentTheme);
   }
 
