@@ -37,36 +37,6 @@ layout: default
 
     <!-- MAIN CONTENT AREA -->
     <main class="notes-and-video space-y-6">
-
-      <!-- Video Section (if video_url is provided) -->
-      {% if page.video_url %}
-      <div class="video-section bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-        <div class="aspect-video mb-4 bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden">
-          {% if page.video_url contains 'youtube.com' or page.video_url contains 'youtu.be' %}
-          <!-- Extract YouTube ID and embed -->
-          {% assign video_id = page.video_url | split: 'v=' | last | split: '&' | first %}
-          {% if page.video_url contains 'youtu.be' %}
-          {% assign video_id = page.video_url | split: '.be/' | last | split: '?' | first %}
-          {% endif %}
-          <iframe class="w-full h-full" src="https://www.youtube.com/embed/{{ video_id }}" title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
-          {% else %}
-          <video class="w-full h-full" controls>
-            <source src="{{ page.video_url }}" type="video/mp4">
-          </video>
-          {% endif %}
-        </div>
-        {% if page.video_title %}
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
-          {{ page.video_title }}
-        </h3>
-        {% endif %}
-      </div>
-      {% endif %}
-
       <!-- Notes Grid (React Island) -->
       {% assign notebook_slug = page.path | split: "/" | last | split: "." | first %}
       {% assign sub_notes = site.notes | where: "notebook_id", notebook_slug %}
@@ -86,7 +56,8 @@ layout: default
         {% endfor %}
         ]{% endcapture %}
 
-        {% capture notes_data %}{"notes": {{ notes_json }}}{% endcapture %}
+        {% capture notes_data %}{"notes": {{ notes_json | strip }}, "videoUrl": {{ page.video_url | jsonify }},
+        "videoTitle": {{ page.video_title | jsonify }}}{% endcapture %}
         <div data-island="NotesGrid" data-props='{{ notes_data | escape }}'>
           <!-- Placeholder for React component -->
           <div

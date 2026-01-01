@@ -27891,9 +27891,34 @@
       "use strict";
       import_react4 = __toESM(require_react());
       import_jsx_runtime5 = __toESM(require_jsx_runtime());
-      NotesGrid = ({ notes }) => {
+      NotesGrid = ({ notes = [], videoUrl, videoTitle }) => {
         const [activeNoteId, setActiveNoteId] = (0, import_react4.useState)(null);
-        const activeNote = notes.find((n) => n.id === activeNoteId);
+        const activeNote = notes?.find((n) => n.id === activeNoteId);
+        const renderVideo = () => {
+          if (!videoUrl || activeNoteId) return null;
+          let youtubeId = "";
+          if (videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be")) {
+            if (videoUrl.includes("v=")) {
+              youtubeId = videoUrl.split("v=")[1].split("&")[0];
+            } else if (videoUrl.includes(".be/")) {
+              youtubeId = videoUrl.split(".be/")[1].split("?")[0];
+            }
+          }
+          return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "video-section bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "aspect-video mb-4 bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden", children: youtubeId ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+              "iframe",
+              {
+                className: "w-full h-full",
+                src: `https://www.youtube.com/embed/${youtubeId}`,
+                title: "YouTube video player",
+                frameBorder: "0",
+                allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+                allowFullScreen: true
+              }
+            ) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("video", { className: "w-full h-full", controls: true, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("source", { src: videoUrl, type: "video/mp4" }) }) }),
+            videoTitle && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold text-gray-900 dark:text-gray-100", children: videoTitle })
+          ] });
+        };
         if (activeNote) {
           return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "note-detail-view bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 shadow-sm", children: [
             /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
@@ -27918,25 +27943,28 @@
             ] }) })
           ] });
         }
-        return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "notes-grid-container", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4", children: notes.map((note) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
-          "div",
-          {
-            className: "p-5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:shadow-md transition-all cursor-pointer group",
-            onClick: () => setActiveNoteId(note.id),
-            children: [
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex justify-between items-start mb-2", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors", children: note.title }),
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", { className: "w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9 5l7 7-7 7" }) })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-3", children: note.description }),
-              note.citations && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-xs text-gray-500 dark:text-gray-400", children: [
-                note.citations,
-                " citations"
-              ] })
-            ]
-          },
-          note.id
-        )) }) });
+        return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "space-y-6", children: [
+          renderVideo(),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "notes-grid-container", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4", children: notes.map((note) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+            "div",
+            {
+              className: "p-5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:shadow-md transition-all cursor-pointer group",
+              onClick: () => setActiveNoteId(note.id),
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex justify-between items-start mb-2", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors", children: note.title }),
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", { className: "w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9 5l7 7-7 7" }) })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-3", children: note.description }),
+                note.citations && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-xs text-gray-500 dark:text-gray-400", children: [
+                  note.citations,
+                  " citations"
+                ] })
+              ]
+            },
+            note.id
+          )) }) })
+        ] });
       };
       NotesGrid_default = NotesGrid;
     }
