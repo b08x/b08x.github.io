@@ -50,7 +50,7 @@ layout: default
         "description": {{ sn.description | jsonify }},
         "url": {{ sn.url | relative_url | jsonify }},
         "citations": {{ sn.citations | default: 0 | jsonify }},
-        "content": {{ sn.content | jsonify }}
+        "content": {{ sn.content | markdownify | jsonify }}
         }{% unless forloop.last %},{% endunless %}
         {% endfor %}
         ]{% endcapture %}
