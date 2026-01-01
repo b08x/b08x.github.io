@@ -75,20 +75,20 @@ const NotesGrid: React.FC<NotesGridProps> = ({ notes = [], videoUrl, videoTitle 
 
         <header className="mb-8">
           <h2 className="text-3xl font-bold text-foreground mb-4">{activeNote.title}</h2>
-          <p className="text-lg text-foreground/80 leading-relaxed">{activeNote.description}</p>
+          <p className="text-lg text-foreground/90 leading-relaxed">{activeNote.description}</p>
         </header>
 
-        <div className="prose dark:prose-invert max-w-none text-foreground/90">
+        <div className="prose dark:prose-invert max-w-none text-foreground">
           {activeNote.content ? (
             <div dangerouslySetInnerHTML={{ __html: activeNote.content }} />
           ) : (
-            <p className="text-foreground/40 italic">No content available for this note.</p>
+            <p className="text-foreground/50 italic">No content available for this note.</p>
           )}
         </div>
 
         {activeNote.citations && activeNote.citations > 0 && (
           <footer className="mt-8 pt-6 border-t border-border">
-            <p className="text-sm text-foreground/50">
+            <p className="text-sm text-foreground/60">
               {activeNote.citations} citations found in source transcript
             </p>
           </footer>
@@ -116,11 +116,11 @@ const NotesGrid: React.FC<NotesGridProps> = ({ notes = [], videoUrl, videoTitle 
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </div>
-              <p className="text-sm text-foreground/60 mb-3 line-clamp-3">
+              <p className="text-sm text-foreground/75 mb-3 line-clamp-3">
                 {note.description}
               </p>
               {note.citations && (
-                <p className="text-xs text-foreground/40 font-mono">
+                <p className="text-xs text-foreground/50 font-mono">
                   {note.citations} citations
                 </p>
               )}

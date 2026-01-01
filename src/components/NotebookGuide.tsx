@@ -43,7 +43,7 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
               className="flex items-center gap-2 px-3 py-2 text-sm text-left bg-background hover:bg-accent/10 rounded-lg border border-transparent hover:border-accent/30 transition-all group"
             >
               <span className="text-base">{type.icon}</span>
-              <span className="text-foreground/80 group-hover:text-accent transition-colors">{type.label}</span>
+              <span className="text-foreground/90 group-hover:text-accent transition-colors">{type.label}</span>
             </button>
           ))}
         </div>
@@ -77,7 +77,7 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
           className="w-full flex items-center justify-between text-sm font-semibold mb-3 text-foreground"
         >
           <span>Chat</span>
-          <span className="text-xs text-foreground/40">
+          <span className="text-xs text-foreground/60">
             {showChat ? '▼' : '▶'}
           </span>
         </button>
@@ -90,7 +90,7 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 placeholder="Start typing..."
-                className="flex-1 px-3 py-2 text-sm border border-border rounded-lg bg-background text-foreground placeholder-foreground/30 focus:outline-none focus:ring-1 focus:ring-accent"
+                className="flex-1 px-3 py-2 text-sm border border-border rounded-lg bg-background text-foreground placeholder-foreground/45 focus:outline-none focus:ring-1 focus:ring-accent"
               />
               <button
                 type="submit"
@@ -99,7 +99,7 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
                 →
               </button>
             </form>
-            <p className="text-xs text-foreground/40 italic">
+            <p className="text-xs text-foreground/60 italic">
               NotebookLM may still sometimes give inaccurate responses, so you may want to confirm any facts independently.
             </p>
           </div>

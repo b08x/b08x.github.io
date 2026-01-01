@@ -27934,10 +27934,10 @@
             ),
             /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("header", { className: "mb-8", children: [
               /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-3xl font-bold text-foreground mb-4", children: activeNote.title }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-lg text-foreground/80 leading-relaxed", children: activeNote.description })
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-lg text-foreground/90 leading-relaxed", children: activeNote.description })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "prose dark:prose-invert max-w-none text-foreground/90", children: activeNote.content ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { dangerouslySetInnerHTML: { __html: activeNote.content } }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-foreground/40 italic", children: "No content available for this note." }) }),
-            activeNote.citations && activeNote.citations > 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("footer", { className: "mt-8 pt-6 border-t border-border", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-sm text-foreground/50", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "prose dark:prose-invert max-w-none text-foreground", children: activeNote.content ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { dangerouslySetInnerHTML: { __html: activeNote.content } }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-foreground/50 italic", children: "No content available for this note." }) }),
+            activeNote.citations && activeNote.citations > 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("footer", { className: "mt-8 pt-6 border-t border-border", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-sm text-foreground/60", children: [
               activeNote.citations,
               " citations found in source transcript"
             ] }) })
@@ -27955,8 +27955,8 @@
                   /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold text-foreground group-hover:text-accent transition-colors", children: note.title }),
                   /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", { className: "w-5 h-5 text-foreground/30 group-hover:text-accent transition-colors", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9 5l7 7-7 7" }) })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-sm text-foreground/60 mb-3 line-clamp-3", children: note.description }),
-                note.citations && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-xs text-foreground/40 font-mono", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-sm text-foreground/75 mb-3 line-clamp-3", children: note.description }),
+                note.citations && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-xs text-foreground/50 font-mono", children: [
                   note.citations,
                   " citations"
                 ] })
@@ -28040,7 +28040,7 @@
         return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "audio-player-container bg-surface rounded-lg border border-border p-4", children: [
           /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h3", { className: "text-sm font-semibold mb-3 text-foreground", children: "Audio Overview" }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("audio", { ref: audioRef, src: audioUrl, preload: "metadata" }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-sm text-foreground/60 mb-4 line-clamp-2", children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-sm text-foreground/75 mb-4 line-clamp-2", children: title }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "mb-3", children: [
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
               "input",
@@ -28056,7 +28056,7 @@
                 }
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex justify-between text-xs text-foreground/40 mt-1", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex justify-between text-xs text-foreground/60 mt-1", children: [
               /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: formatTime(currentTime) }),
               /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: formatTime(duration) })
             ] })
@@ -28076,7 +28076,7 @@
                 onClick: () => changePlaybackRate(rate),
                 className: `
                 px-2 py-1 text-xs rounded transition-colors border
-                ${playbackRate === rate ? "bg-accent border-accent text-white" : "bg-background border-border text-foreground/60 hover:bg-accent/10 hover:border-accent/30"}
+                ${playbackRate === rate ? "bg-accent border-accent text-white" : "bg-background border-border text-foreground/80 hover:bg-accent/10 hover:border-accent/30"}
               `,
                 children: [
                   rate,
@@ -28134,7 +28134,7 @@
                 className: "flex items-center gap-2 px-3 py-2 text-sm text-left bg-background hover:bg-accent/10 rounded-lg border border-transparent hover:border-accent/30 transition-all group",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-base", children: type2.icon }),
-                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-foreground/80 group-hover:text-accent transition-colors", children: type2.label })
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-foreground/90 group-hover:text-accent transition-colors", children: type2.label })
                 ]
               },
               type2.id
@@ -28159,7 +28159,7 @@
                 className: "w-full flex items-center justify-between text-sm font-semibold mb-3 text-foreground",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "Chat" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-xs text-foreground/40", children: showChat ? "\u25BC" : "\u25B6" })
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-xs text-foreground/60", children: showChat ? "\u25BC" : "\u25B6" })
                 ]
               }
             ),
@@ -28172,7 +28172,7 @@
                     value: chatInput,
                     onChange: (e) => setChatInput(e.target.value),
                     placeholder: "Start typing...",
-                    className: "flex-1 px-3 py-2 text-sm border border-border rounded-lg bg-background text-foreground placeholder-foreground/30 focus:outline-none focus:ring-1 focus:ring-accent"
+                    className: "flex-1 px-3 py-2 text-sm border border-border rounded-lg bg-background text-foreground placeholder-foreground/45 focus:outline-none focus:ring-1 focus:ring-accent"
                   }
                 ),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
@@ -28184,7 +28184,7 @@
                   }
                 )
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "text-xs text-foreground/40 italic", children: "NotebookLM may still sometimes give inaccurate responses, so you may want to confirm any facts independently." })
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "text-xs text-foreground/60 italic", children: "NotebookLM may still sometimes give inaccurate responses, so you may want to confirm any facts independently." })
             ] })
           ] })
         ] });

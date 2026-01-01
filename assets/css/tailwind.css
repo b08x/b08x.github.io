@@ -1,6 +1,25 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
+@theme {
+    --color-prose-body: var(--foreground);
+    --color-prose-headings: var(--foreground);
+    --color-prose-lead: var(--foreground);
+    --color-prose-links: var(--accent);
+    --color-prose-bold: var(--foreground);
+    --color-prose-counters: var(--muted);
+    --color-prose-bullets: var(--muted);
+    --color-prose-hr: var(--border);
+    --color-prose-quotes: var(--foreground);
+    --color-prose-quote-borders: var(--accent);
+    --color-prose-captions: var(--muted);
+    --color-prose-code: var(--foreground);
+    --color-prose-pre-code: var(--foreground);
+    --color-prose-pre-bg: var(--bg-code);
+    --color-prose-th-borders: var(--border);
+    --color-prose-td-borders: var(--border);
+}
+
 @layer components {
 
     /* Backlink Box - migrated from _style.scss */

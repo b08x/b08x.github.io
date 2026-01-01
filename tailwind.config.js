@@ -211,7 +211,7 @@ module.exports = {
     require('@tailwindcss/typography'),
 
     // Custom Plugin: Scrollbar Utilities (Tailwind v4 compatible)
-    function({ addUtilities }) {
+    function ({ addUtilities }) {
       const scrollbarUtilities = {
         '.scrollbar-thin': {
           'scrollbar-width': 'thin',

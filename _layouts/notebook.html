@@ -13,8 +13,8 @@ layout: default
 
       {% if page.summary %}
       <div class="summary mb-6">
-        <h3 class="text-sm font-semibold mb-2 text-foreground/80">Summary</h3>
-        <p class="text-sm text-foreground/60 leading-relaxed">
+        <h3 class="text-sm font-semibold mb-2 text-foreground/90">Summary</h3>
+        <p class="text-sm text-foreground/75 leading-relaxed">
           {{ page.summary }}
         </p>
       </div>
@@ -22,10 +22,10 @@ layout: default
 
       {% if page.key_topics %}
       <div class="key-topics">
-        <h3 class="text-sm font-semibold mb-2 text-foreground/80">Key Topics</h3>
+        <h3 class="text-sm font-semibold mb-2 text-foreground/90">Key Topics</h3>
         <ul class="space-y-1">
           {% for topic in page.key_topics %}
-          <li class="text-sm text-foreground/60 pl-4 relative before:content-['•'] before:absolute before:left-0">
+          <li class="text-sm text-foreground/75 pl-4 relative before:content-['•'] before:absolute before:left-0">
             {{ topic }}
           </li>
           {% endfor %}
@@ -60,7 +60,7 @@ layout: default
         <div data-island="NotesGrid" data-props='{{ notes_data | escape }}'>
           <!-- Placeholder for React component -->
           <div class="bg-surface rounded-lg border border-border p-8 text-center">
-            <span class="text-foreground/40 font-mono text-sm">Loading notes...</span>
+            <span class="text-foreground/50 font-mono text-sm">Loading notes...</span>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ layout: default
       <div data-island="NotebookGuide" data-props='{"suggestedQuestions": {{ questions | jsonify }}}'>
         <!-- Placeholder -->
         <div class="bg-surface rounded-lg border border-border p-8 text-center">
-          <span class="text-foreground/40 font-mono text-sm">Loading guide...</span>
+          <span class="text-foreground/50 font-mono text-sm">Loading guide...</span>
         </div>
       </div>
 
@@ -92,7 +92,7 @@ layout: default
         data-props='{"audioUrl": "{{ page.audio_url }}", "title": "{{ page.audio_title | default: page.title }}"}'>
         <!-- Placeholder -->
         <div class="bg-surface rounded-lg border border-border p-6 text-center">
-          <span class="text-foreground/40 font-mono text-sm">Loading audio player...</span>
+          <span class="text-foreground/50 font-mono text-sm">Loading audio player...</span>
         </div>
       </div>
       {% endif %}

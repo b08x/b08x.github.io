@@ -12,13 +12,13 @@ show_graph: true
     <!-- <h1 class="text-4xl font-prose font-bold mb-4 text-foreground">
         {{ page.title }}
     </h1> -->
-    <div class="text-sm font-mono flex gap-4 text-muted">
+    <div class="text-sm font-mono flex gap-4 text-foreground/75">
         <span>
-            <span class="opacity-50">Wiki:</span> <a href="{{ site.baseurl }}/wikis/{{ page.wiki_id }}/"
+            <span class="opacity-70">Wiki:</span> <a href="{{ site.baseurl }}/wikis/{{ page.wiki_id }}/"
                 class="hover:text-accent">{{ page.wiki_id | replace: "-", " " | capitalize }}</a>
         </span>
         <span>
-            <span class="opacity-50">Generated:</span> {{ wiki_data.metadata.generated_at | date: "%Y-%m-%d" }}
+            <span class="opacity-70">Generated:</span> {{ wiki_data.metadata.generated_at | date: "%Y-%m-%d" }}
         </span>
     </div>
 </header>
@@ -38,9 +38,9 @@ show_graph: true
                 <a href="{{ site.baseurl }}{{ page.pagination.previous.url }}"
                     class="inline-flex flex-col items-start gap-1 p-4 border border-border bg-background rounded hover:border-accent hover:text-accent transition-all group w-full sm:min-w-[200px]"
                     rel="prev">
-                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-50">Previous</span>
+                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-70">Previous</span>
                     <span
-                        class="text-sm font-prose font-semibold line-clamp-1 italic text-muted group-hover:text-accent">{{
+                        class="text-sm font-prose font-semibold line-clamp-1 italic text-foreground/75 group-hover:text-accent">{{
                         page.pagination.previous.title }}</span>
                 </a>
                 {% else %}
@@ -56,9 +56,9 @@ show_graph: true
                 <a href="{{ site.baseurl }}{{ page.pagination.next.url }}"
                     class="inline-flex flex-col items-end gap-1 p-4 border border-border bg-background rounded hover:border-accent hover:text-accent transition-all group text-right w-full sm:min-w-[200px]"
                     rel="next">
-                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-50">Next</span>
+                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-70">Next</span>
                     <span
-                        class="text-sm font-prose font-semibold line-clamp-1 italic text-muted group-hover:text-accent">{{
+                        class="text-sm font-prose font-semibold line-clamp-1 italic text-foreground/75 group-hover:text-accent">{{
                         page.pagination.next.title }}</span>
                 </a>
                 {% else %}
@@ -76,7 +76,7 @@ show_graph: true
     <footer class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
         {% if page.file_paths.size > 0 %}
         <div class="p-4 rounded border bg-surface border-border">
-            <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Source Context</div>
+            <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-70">Source Context</div>
             <div class="flex flex-wrap gap-2">
                 {% for fp in page.file_paths %}
                 <span class="px-2 py-0.5 text-[11px] border border-border bg-background rounded-sm">
@@ -89,7 +89,7 @@ show_graph: true
 
         {% if page.related_pages.size > 0 %}
         <div class="p-4 rounded border bg-surface border-border">
-            <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-50">Related Pages</div>
+            <div class="text-[10px] font-bold uppercase tracking-widest mb-3 opacity-70">Related Pages</div>
             <div class="flex flex-wrap gap-2">
                 {% for rp in page.related_pages %}
                 {% if rp.url %}

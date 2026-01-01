@@ -23,7 +23,7 @@ layout: base-shell
 
         {% if page.left_sidebar == 'wiki-nav' %}
         <!-- Wiki Navigation Pattern -->
-        <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
           Wiki Pages
         </h3>
         <nav>
@@ -33,7 +33,7 @@ layout: base-shell
             {% for wp in wiki_data.pages %}
             <li>
               <a href="{{ site.baseurl }}/wikis/{{ wiki_id }}/{{ wp.id | slugify }}/"
-                class="block py-2 px-3 text-sm border-l-2 {% if page.page_id == wp.id %}border-accent bg-surface/50 text-accent{% else %}border-transparent text-muted{% endif %} transition-all hover:bg-surface hover:border-accent wiki-nav-link"
+                class="block py-2 px-3 text-sm border-l-2 {% if page.page_id == wp.id %}border-accent bg-surface/50 text-accent{% else %}border-transparent text-foreground/75{% endif %} transition-all hover:bg-surface hover:border-accent wiki-nav-link"
                 data-page-id="{{ wp.id }}">
                 {{ wp.title }}
               </a>
@@ -43,7 +43,8 @@ layout: base-shell
         </nav>
 
         <div class="mt-12 pt-6 border-t border-border">
-          <a href="{{ site.baseurl }}/" class="block text-sm font-mono text-muted hover:text-accent transition-colors">
+          <a href="{{ site.baseurl }}/"
+            class="block text-sm font-mono text-foreground/70 hover:text-accent transition-colors">
             ← Back to Garden
           </a>
         </div>
@@ -51,7 +52,7 @@ layout: base-shell
 
         {% if page.left_sidebar == 'terminal-sidebar' %}
         <!-- Standard Navigation Sidebar -->
-        <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
           Navigation
         </h3>
         {% include terminal-sidebar.html %}
@@ -59,7 +60,7 @@ layout: base-shell
 
         {% if page.left_sidebar == 'knowledgebase-toc' %}
         <!-- Knowledgebase TOC -->
-        <h3 class="text-xs font-bold uppercase tracking-wider mb-6 text-muted">
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-6 text-foreground/80">
           Knowledgebase
         </h3>
         <nav id="kb-toc" class="space-y-2">
@@ -68,7 +69,7 @@ layout: base-shell
 
         {% if page.resources %}
         <div class="mt-10 pt-10 border-t border-border">
-          <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+          <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
             Resources
           </h4>
           <div class="space-y-4">
@@ -78,7 +79,7 @@ layout: base-shell
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
               </svg>
-              <a href="{{ item.url }}" class="text-muted hover:text-accent transition-colors">
+              <a href="{{ item.url }}" class="text-foreground/75 hover:text-accent transition-colors">
                 {{ item.title }}
               </a>
             </div>
@@ -104,7 +105,7 @@ layout: base-shell
 
         <!-- Metadata (Conditional) -->
         {% if page.show_metadata != false %}
-        <div class="text-sm font-mono text-muted">
+        <div class="text-sm font-mono text-foreground/70">
           {% if page.last_modified_at %}
           <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" class="inline-block mr-4">
             <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,7 +145,7 @@ layout: base-shell
         <h2 class="text-xl font-mono font-bold mb-6 text-foreground">
           Knowledge Graph
         </h2>
-        <p class="mb-6 text-base font-prose text-muted">
+        <p class="mb-6 text-base font-prose text-foreground/80">
           Here are all the notes in this garden, along with their links, visualized as a graph.
         </p>
         <div data-island="GraphView"></div>
@@ -163,7 +164,7 @@ layout: base-shell
         {% if page.right_sidebar contains 'toc' %}
         <!-- Table of Contents -->
         <div>
-          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
             Table of Contents
           </h3>
           <terminal-toc></terminal-toc>
@@ -173,7 +174,7 @@ layout: base-shell
         {% if page.right_sidebar contains 'related' %}
         <!-- Related Pages -->
         <div>
-          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-muted">
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
             Related Notes
           </h3>
           <div class="space-y-2">
@@ -224,10 +225,10 @@ layout: base-shell
         const href = link.getAttribute("href");
         if (href.startsWith("#")) {
           link.classList.remove("border-accent", "bg-surface/50", "text-accent");
-          link.classList.add("border-transparent", "text-muted");
+          link.classList.add("border-transparent", "text-foreground/75");
 
           if (href.slice(1) === current) {
-            link.classList.remove("border-transparent", "text-muted");
+            link.classList.remove("border-transparent", "text-foreground/75");
             link.classList.add("border-accent", "bg-surface/50", "text-accent");
           }
         }
@@ -262,7 +263,7 @@ layout: base-shell
       slides.forEach((slide, index) => {
         const link = document.createElement('a');
         link.href = `#${slide.id}`;
-        link.className = 'kb-nav-link block py-2 px-3 text-sm border-l-2 border-transparent text-muted transition-all hover:bg-surface hover:border-accent';
+        link.className = 'kb-nav-link block py-2 px-3 text-sm border-l-2 border-transparent text-foreground/75 transition-all hover:bg-surface hover:border-accent';
         link.textContent = slide.title;
         link.dataset.slideIndex = String(index);
 
@@ -290,7 +291,7 @@ layout: base-shell
           link.classList.remove('border-transparent', 'text-muted');
         } else {
           link.classList.remove('border-accent', 'text-accent', 'bg-surface', 'font-semibold');
-          link.classList.add('border-transparent', 'text-muted');
+          link.classList.add('border-transparent', 'text-foreground/75');
         }
       });
     });

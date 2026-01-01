@@ -79,7 +79,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title = "Audio Over
 
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
 
-      <p className="text-sm text-foreground/60 mb-4 line-clamp-2">
+      <p className="text-sm text-foreground/75 mb-4 line-clamp-2">
         {title}
       </p>
 
@@ -96,7 +96,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title = "Audio Over
             background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${progress}%, var(--border) ${progress}%, var(--border) 100%)`
           }}
         />
-        <div className="flex justify-between text-xs text-foreground/40 mt-1">
+        <div className="flex justify-between text-xs text-foreground/60 mt-1">
           <span>{formatTime(currentTime)}</span>
           <span>{formatTime(duration)}</span>
         </div>
@@ -128,7 +128,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title = "Audio Over
                 px-2 py-1 text-xs rounded transition-colors border
                 ${playbackRate === rate
                   ? 'bg-accent border-accent text-white'
-                  : 'bg-background border-border text-foreground/60 hover:bg-accent/10 hover:border-accent/30'
+                  : 'bg-background border-border text-foreground/80 hover:bg-accent/10 hover:border-accent/30'
                 }
               `}
             >
