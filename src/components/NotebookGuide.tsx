@@ -7,7 +7,7 @@ interface NotebookGuideProps {
 
 const NotebookGuide: React.FC<NotebookGuideProps> = ({
   suggestedQuestions = [],
-  onGenerateContent = () => {}
+  onGenerateContent = () => { }
 }) => {
   const [chatInput, setChatInput] = useState('');
   const [showChat, setShowChat] = useState(false);
@@ -31,8 +31,8 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
   return (
     <div className="notebook-guide-container space-y-6">
       {/* Help Me Create */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
-        <h3 className="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">
+      <div className="bg-surface rounded-lg border border-border p-4">
+        <h3 className="text-sm font-semibold mb-3 text-foreground">
           Help me create
         </h3>
         <div className="grid grid-cols-1 gap-2">
@@ -40,10 +40,10 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
             <button
               key={type.id}
               onClick={() => onGenerateContent(type.id)}
-              className="flex items-center gap-2 px-3 py-2 text-sm text-left bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-3 py-2 text-sm text-left bg-background hover:bg-accent/10 rounded-lg border border-transparent hover:border-accent/30 transition-all group"
             >
               <span className="text-base">{type.icon}</span>
-              <span className="text-gray-700 dark:text-gray-300">{type.label}</span>
+              <span className="text-foreground/80 group-hover:text-accent transition-colors">{type.label}</span>
             </button>
           ))}
         </div>
@@ -51,8 +51,8 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
 
       {/* Suggested Questions */}
       {suggestedQuestions.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
-          <h3 className="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">
+        <div className="bg-surface rounded-lg border border-border p-4">
+          <h3 className="text-sm font-semibold mb-3 text-foreground">
             Suggested questions
           </h3>
           <ul className="space-y-2">
@@ -60,7 +60,7 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
               <li key={idx}>
                 <button
                   onClick={() => setChatInput(question)}
-                  className="text-sm text-left text-blue-600 dark:text-blue-400 hover:underline"
+                  className="text-sm text-left text-accent hover:underline"
                 >
                   {question}
                 </button>
@@ -71,13 +71,13 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
       )}
 
       {/* Chat Section */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+      <div className="bg-surface rounded-lg border border-border p-4">
         <button
           onClick={() => setShowChat(!showChat)}
-          className="w-full flex items-center justify-between text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100"
+          className="w-full flex items-center justify-between text-sm font-semibold mb-3 text-foreground"
         >
           <span>Chat</span>
-          <span className="text-xs text-gray-500 dark:text-gray-400">
+          <span className="text-xs text-foreground/40">
             {showChat ? '▼' : '▶'}
           </span>
         </button>
@@ -90,16 +90,16 @@ const NotebookGuide: React.FC<NotebookGuideProps> = ({
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 placeholder="Start typing..."
-                className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 px-3 py-2 text-sm border border-border rounded-lg bg-background text-foreground placeholder-foreground/30 focus:outline-none focus:ring-1 focus:ring-accent"
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+                className="px-4 py-2 bg-accent hover:bg-accent/80 text-white rounded-lg transition-colors font-medium"
               >
                 →
               </button>
             </form>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
+            <p className="text-xs text-foreground/40 italic">
               NotebookLM may still sometimes give inaccurate responses, so you may want to confirm any facts independently.
             </p>
           </div>

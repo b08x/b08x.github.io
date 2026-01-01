@@ -72,14 +72,14 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title = "Audio Over
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="audio-player-container bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
-      <h3 className="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">
+    <div className="audio-player-container bg-surface rounded-lg border border-border p-4">
+      <h3 className="text-sm font-semibold mb-3 text-foreground">
         Audio Overview
       </h3>
 
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
 
-      <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 line-clamp-2">
+      <p className="text-sm text-foreground/60 mb-4 line-clamp-2">
         {title}
       </p>
 
@@ -91,12 +91,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title = "Audio Over
           max={duration || 100}
           value={currentTime}
           onChange={handleSeek}
-          className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+          className="w-full h-2 bg-background rounded-lg appearance-none cursor-pointer"
           style={{
-            background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${progress}%, #e5e7eb ${progress}%, #e5e7eb 100%)`
+            background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${progress}%, var(--border) ${progress}%, var(--border) 100%)`
           }}
         />
-        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+        <div className="flex justify-between text-xs text-foreground/40 mt-1">
           <span>{formatTime(currentTime)}</span>
           <span>{formatTime(duration)}</span>
         </div>
@@ -106,7 +106,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title = "Audio Over
       <div className="flex items-center gap-3 mb-3">
         <button
           onClick={togglePlay}
-          className="w-10 h-10 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors"
+          className="w-10 h-10 flex items-center justify-center bg-accent hover:bg-accent/80 text-white rounded-full transition-colors"
         >
           {isPlaying ? (
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -125,10 +125,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title = "Audio Over
               key={rate}
               onClick={() => changePlaybackRate(rate)}
               className={`
-                px-2 py-1 text-xs rounded transition-colors
+                px-2 py-1 text-xs rounded transition-colors border
                 ${playbackRate === rate
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  ? 'bg-accent border-accent text-white'
+                  : 'bg-background border-border text-foreground/60 hover:bg-accent/10 hover:border-accent/30'
                 }
               `}
             >

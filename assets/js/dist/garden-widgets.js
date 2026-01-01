@@ -27904,8 +27904,8 @@
               youtubeId = videoUrl.split(".be/")[1].split("?")[0];
             }
           }
-          return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "video-section bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "aspect-video mb-4 bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden", children: youtubeId ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+          return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "video-section bg-surface rounded-lg border border-border p-6 mb-6", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "aspect-video mb-4 bg-background rounded-lg overflow-hidden", children: youtubeId ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
               "iframe",
               {
                 className: "w-full h-full",
@@ -27916,16 +27916,16 @@
                 allowFullScreen: true
               }
             ) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("video", { className: "w-full h-full", controls: true, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("source", { src: videoUrl, type: "video/mp4" }) }) }),
-            videoTitle && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold text-gray-900 dark:text-gray-100", children: videoTitle })
+            videoTitle && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold text-foreground", children: videoTitle })
           ] });
         };
         if (activeNote) {
-          return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "note-detail-view bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 shadow-sm", children: [
+          return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "note-detail-view bg-surface rounded-lg border border-border p-8", children: [
             /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
               "button",
               {
                 onClick: () => setActiveNoteId(null),
-                className: "mb-6 flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors",
+                className: "mb-6 flex items-center text-sm font-medium text-accent hover:text-accent/80 transition-colors",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", { className: "w-5 h-5 mr-1", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M15 19l-7-7 7-7" }) }),
                   "Back to notes"
@@ -27933,11 +27933,11 @@
               }
             ),
             /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("header", { className: "mb-8", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4", children: activeNote.title }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-lg text-gray-600 dark:text-gray-400 leading-relaxed", children: activeNote.description })
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-3xl font-bold text-foreground mb-4", children: activeNote.title }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-lg text-foreground/80 leading-relaxed", children: activeNote.description })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "prose dark:prose-invert max-w-none", children: activeNote.content ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { dangerouslySetInnerHTML: { __html: activeNote.content } }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-gray-500 italic", children: "No content available for this note." }) }),
-            activeNote.citations && activeNote.citations > 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("footer", { className: "mt-8 pt-6 border-t border-gray-100 dark:border-gray-700", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-sm text-gray-500 dark:text-gray-400", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "prose dark:prose-invert max-w-none text-foreground/90", children: activeNote.content ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { dangerouslySetInnerHTML: { __html: activeNote.content } }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-foreground/40 italic", children: "No content available for this note." }) }),
+            activeNote.citations && activeNote.citations > 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("footer", { className: "mt-8 pt-6 border-t border-border", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-sm text-foreground/50", children: [
               activeNote.citations,
               " citations found in source transcript"
             ] }) })
@@ -27948,15 +27948,15 @@
           /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "notes-grid-container", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4", children: notes.map((note) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
             "div",
             {
-              className: "p-5 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:shadow-md transition-all cursor-pointer group",
+              className: "p-5 rounded-lg border border-border bg-surface hover:border-accent/50 transition-all cursor-pointer group",
               onClick: () => setActiveNoteId(note.id),
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex justify-between items-start mb-2", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors", children: note.title }),
-                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", { className: "w-5 h-5 text-gray-400 group-hover:text-blue-500 transition-colors", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9 5l7 7-7 7" }) })
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { className: "text-lg font-semibold text-foreground group-hover:text-accent transition-colors", children: note.title }),
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("svg", { className: "w-5 h-5 text-foreground/30 group-hover:text-accent transition-colors", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M9 5l7 7-7 7" }) })
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-3", children: note.description }),
-                note.citations && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-xs text-gray-500 dark:text-gray-400", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "text-sm text-foreground/60 mb-3 line-clamp-3", children: note.description }),
+                note.citations && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("p", { className: "text-xs text-foreground/40 font-mono", children: [
                   note.citations,
                   " citations"
                 ] })
@@ -28037,10 +28037,10 @@
           }
         };
         const progress = duration > 0 ? currentTime / duration * 100 : 0;
-        return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "audio-player-container bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h3", { className: "text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100", children: "Audio Overview" }),
+        return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "audio-player-container bg-surface rounded-lg border border-border p-4", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h3", { className: "text-sm font-semibold mb-3 text-foreground", children: "Audio Overview" }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("audio", { ref: audioRef, src: audioUrl, preload: "metadata" }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-sm text-gray-700 dark:text-gray-300 mb-4 line-clamp-2", children: title }),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "text-sm text-foreground/60 mb-4 line-clamp-2", children: title }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "mb-3", children: [
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
               "input",
@@ -28050,13 +28050,13 @@
                 max: duration || 100,
                 value: currentTime,
                 onChange: handleSeek,
-                className: "w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer",
+                className: "w-full h-2 bg-background rounded-lg appearance-none cursor-pointer",
                 style: {
-                  background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${progress}%, #e5e7eb ${progress}%, #e5e7eb 100%)`
+                  background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${progress}%, var(--border) ${progress}%, var(--border) 100%)`
                 }
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex justify-between text-xs text-foreground/40 mt-1", children: [
               /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: formatTime(currentTime) }),
               /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: formatTime(duration) })
             ] })
@@ -28066,7 +28066,7 @@
               "button",
               {
                 onClick: togglePlay,
-                className: "w-10 h-10 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors",
+                className: "w-10 h-10 flex items-center justify-center bg-accent hover:bg-accent/80 text-white rounded-full transition-colors",
                 children: isPlaying ? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("svg", { className: "w-5 h-5", fill: "currentColor", viewBox: "0 0 20 20", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("path", { fillRule: "evenodd", d: "M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z", clipRule: "evenodd" }) }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("svg", { className: "w-5 h-5", fill: "currentColor", viewBox: "0 0 20 20", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("path", { fillRule: "evenodd", d: "M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z", clipRule: "evenodd" }) })
               }
             ),
@@ -28075,8 +28075,8 @@
               {
                 onClick: () => changePlaybackRate(rate),
                 className: `
-                px-2 py-1 text-xs rounded transition-colors
-                ${playbackRate === rate ? "bg-blue-600 text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"}
+                px-2 py-1 text-xs rounded transition-colors border
+                ${playbackRate === rate ? "bg-accent border-accent text-white" : "bg-background border-border text-foreground/60 hover:bg-accent/10 hover:border-accent/30"}
               `,
                 children: [
                   rate,
@@ -28125,41 +28125,41 @@
           { id: "toc", label: "Table of Contents", icon: "\u{1F4CB}" }
         ];
         return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "notebook-guide-container space-y-6", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h3", { className: "text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100", children: "Help me create" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-surface rounded-lg border border-border p-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h3", { className: "text-sm font-semibold mb-3 text-foreground", children: "Help me create" }),
             /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "grid grid-cols-1 gap-2", children: contentTypes.map((type2) => /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
               "button",
               {
                 onClick: () => onGenerateContent(type2.id),
-                className: "flex items-center gap-2 px-3 py-2 text-sm text-left bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-colors",
+                className: "flex items-center gap-2 px-3 py-2 text-sm text-left bg-background hover:bg-accent/10 rounded-lg border border-transparent hover:border-accent/30 transition-all group",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-base", children: type2.icon }),
-                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-gray-700 dark:text-gray-300", children: type2.label })
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-foreground/80 group-hover:text-accent transition-colors", children: type2.label })
                 ]
               },
               type2.id
             )) })
           ] }),
-          suggestedQuestions.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h3", { className: "text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100", children: "Suggested questions" }),
+          suggestedQuestions.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-surface rounded-lg border border-border p-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h3", { className: "text-sm font-semibold mb-3 text-foreground", children: "Suggested questions" }),
             /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("ul", { className: "space-y-2", children: suggestedQuestions.map((question, idx) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
               "button",
               {
                 onClick: () => setChatInput(question),
-                className: "text-sm text-left text-blue-600 dark:text-blue-400 hover:underline",
+                className: "text-sm text-left text-accent hover:underline",
                 children: question
               }
             ) }, idx)) })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "bg-surface rounded-lg border border-border p-4", children: [
             /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
               "button",
               {
                 onClick: () => setShowChat(!showChat),
-                className: "w-full flex items-center justify-between text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100",
+                className: "w-full flex items-center justify-between text-sm font-semibold mb-3 text-foreground",
                 children: [
                   /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "Chat" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-xs text-gray-500 dark:text-gray-400", children: showChat ? "\u25BC" : "\u25B6" })
+                  /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "text-xs text-foreground/40", children: showChat ? "\u25BC" : "\u25B6" })
                 ]
               }
             ),
@@ -28172,19 +28172,19 @@
                     value: chatInput,
                     onChange: (e) => setChatInput(e.target.value),
                     placeholder: "Start typing...",
-                    className: "flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className: "flex-1 px-3 py-2 text-sm border border-border rounded-lg bg-background text-foreground placeholder-foreground/30 focus:outline-none focus:ring-1 focus:ring-accent"
                   }
                 ),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
                   "button",
                   {
                     type: "submit",
-                    className: "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium",
+                    className: "px-4 py-2 bg-accent hover:bg-accent/80 text-white rounded-lg transition-colors font-medium",
                     children: "\u2192"
                   }
                 )
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "text-xs text-gray-500 dark:text-gray-400", children: "NotebookLM may still sometimes give inaccurate responses, so you may want to confirm any facts independently." })
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "text-xs text-foreground/40 italic", children: "NotebookLM may still sometimes give inaccurate responses, so you may want to confirm any facts independently." })
             ] })
           ] })
         ] });
