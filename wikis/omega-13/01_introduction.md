@@ -4,6 +4,7 @@ title: Introduction to Omega-13
 wiki_id: omega-13
 page_id: introduction
 permalink: "/wikis/omega-13/01-introduction/"
+repository: https://github.com/b08x/omega-13
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
@@ -14,7 +15,8 @@ related_pages:
   url: "/wikis/omega-13/02-getting-started/"
   title: Getting Started
 file_paths:
-- README.md
+- path: README.md
+  url: https://github.com/b08x/omega-13/blob/main/README.md
 pagination:
   next:
     title: 02-getting-started
@@ -37,7 +39,7 @@ The following files were used as context for generating this wiki page:
 
 Omega-13 is a retroactive audio recording and transcription system designed to capture audio data that occurred prior to the initiation of a recording command. The system operates as a terminal user interface (TUI) application that maintains a continuous rolling buffer of audio in memory, allowing users to "recover" the preceding 13 seconds of audio.
 
-Sources: [README.md](), [src/omega13/app.py]()
+Sources: [README.md](https://github.com/b08x/omega-13/blob/main/README.md), [src/omega13/app.py](https://github.com/b08x/omega-13/blob/main/src/omega13/app.py)
 
 ## System Architecture and Mechanism
 
@@ -53,7 +55,7 @@ The system is built on a modular architecture where the `Omega13App` coordinates
 | `ConfigManager` | Handles persistent JSON-based settings and hardware port mappings. |
 | `Omega13App` | Provides the Textual-based TUI and binds global hotkeys to system actions. |
 
-Sources: [src/omega13/audio.py:#L18-L25](), [src/omega13/session.py](), [src/omega13/config.py:#L11-L20](), [src/omega13/app.py:#L45-L65]()
+Sources: [src/omega13/audio.py:#L18-L25](https://github.com/b08x/omega-13/blob/main/src/omega13/audio.py#L18-L25), [src/omega13/session.py](https://github.com/b08x/omega-13/blob/main/src/omega13/session.py), [src/omega13/config.py:#L11-L20](https://github.com/b08x/omega-13/blob/main/src/omega13/config.py#L11-L20), [src/omega13/app.py:#L45-L65](https://github.com/b08x/omega-13/blob/main/src/omega13/app.py#L45-L65)
 
 ## Audio Processing Flow
 
@@ -72,7 +74,7 @@ graph TD
 
 The "stitcher" logic is a clever way to handle the temporal shift, though it relies heavily on the `writer_thread` keeping up with the `record_queue`. If the queue overflows (maxsize=200), audio data is simply lost—a shitty but pragmatic constraint for a real-time system.
 
-Sources: [src/omega13/audio.py:#L36-L55](), [README.md]()
+Sources: [src/omega13/audio.py:#L36-L55](https://github.com/b08x/omega-13/blob/main/src/omega13/audio.py#L36-L55), [README.md](https://github.com/b08x/omega-13/blob/main/README.md)
 
 ## Session and Transcription Lifecycle
 
@@ -101,7 +103,7 @@ sequenceDiagram
     A->>A: Update UI & Copy to Clipboard
 ```
 
-Sources: [src/omega13/app.py:#L120-L140](), [src/omega13/transcription.py:#L45-L60](), [README.md]()
+Sources: [src/omega13/app.py:#L120-L140](https://github.com/b08x/omega-13/blob/main/src/omega13/app.py#L120-L140), [src/omega13/transcription.py:#L45-L60](https://github.com/b08x/omega-13/blob/main/src/omega13/transcription.py#L45-L60), [README.md](https://github.com/b08x/omega-13/blob/main/README.md)
 
 ## Structural Observations and Inconsistencies
 
@@ -110,7 +112,7 @@ A notable structural pattern is the system's dependency on external environmenta
 - **Transcription Redundancy:** The `Session` class contains a word-based deduplication algorithm in `add_transcription`. This suggests that the underlying transcription service or the way audio is fed to it occasionally produces overlapping text segments, requiring the application layer to clean up the mess.
 - **Silent Failures:** The `AudioEngine` checks for signal levels to prevent "empty" recordings. If the VU meter doesn't move, the capture is blocked. While this prevents disk bloat, it introduces a failure state where the user might think they are recording when they are not, simply because the input gain was too low.
 
-Sources: [src/omega13/session.py:#L1-L30](), [src/omega13/app.py:#L150-L170](), [README.md]()
+Sources: [src/omega13/session.py:#L1-L30](https://github.com/b08x/omega-13/blob/main/src/omega13/session.py#L1-L30), [src/omega13/app.py:#L150-L170](https://github.com/b08x/omega-13/blob/main/src/omega13/app.py#L150-L170), [README.md](https://github.com/b08x/omega-13/blob/main/README.md)
 
 ## Configuration and Persistence
 
@@ -122,7 +124,7 @@ The `ConfigManager` defaults to `~/.config/omega13/config.json`. It tracks hardw
 | `server_url` | `http://localhost:8080` | The endpoint for the Whisper Docker container. |
 | `buffer_duration` | 13 | Hardcoded constant for the "time machine" effect. |
 
-Sources: [src/omega13/config.py:#L25-L40](), [src/omega13/audio.py:#L14]()
+Sources: [src/omega13/config.py:#L25-L40](https://github.com/b08x/omega-13/blob/main/src/omega13/config.py#L25-L40), [src/omega13/audio.py:#L14](https://github.com/b08x/omega-13/blob/main/src/omega13/audio.py#L14)
 
 ## Conclusion
 

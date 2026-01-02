@@ -4,6 +4,7 @@ title: Transcription & Whisper Integration
 wiki_id: omega-13
 page_id: transcription-service
 permalink: "/wikis/omega-13/08-transcription-service/"
+repository: https://github.com/b08x/omega-13
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
@@ -14,8 +15,10 @@ related_pages:
   url: "/wikis/omega-13/12-whisper-server-deployment/"
   title: Whisper Server Deployment
 file_paths:
-- src/omega13/transcription.py
-- compose.yml
+- path: src/omega13/transcription.py
+  url: https://github.com/b08x/omega-13/blob/main/src/omega13/transcription.py
+- path: compose.yml
+  url: https://github.com/b08x/omega-13/blob/main/compose.yml
 pagination:
   previous:
     title: 07-voice-activity-detection
@@ -46,6 +49,7 @@ The transcription system in Omega-13 functions as a decoupled, asynchronous pipe
 The integration is built around the `TranscriptionService` class, which manages the lifecycle of transcription requests. The flow begins when the `Omega13App` triggers a recording stop, resulting in a saved audio file that is then dispatched to the service.
 
 ### Transcription Pipeline Flow
+
 The following diagram illustrates the sequence from audio finalization to text delivery.
 
 ```mermaid!
@@ -72,9 +76,11 @@ Sources: `[src/omega13/transcription.py:#L83-L110]`, `[src/omega13/app.py:#L145-
 ## 2. Core Components and Mechanisms
 
 ### TranscriptionService
+
 This class encapsulates the HTTP logic and threading required to interact with the Whisper backend. It uses a `threading.Thread` with `daemon=False` to ensure that transcription tasks are not abruptly killed during application exit, though it implements a `_shutdown_event` for cooperative termination.
 
 **Key Attributes:**
+
 | Attribute | Description | Source |
 | :--- | :--- | :--- |
 | `server_url` | Base URL for the whisper-server (default: `http://localhost:8080`) | `[src/omega13/transcription.py:#L36]` |
@@ -82,6 +88,7 @@ This class encapsulates the HTTP logic and threading required to interact with t
 | `timeout` | 600-second limit for inference requests | `[src/omega13/transcription.py:#L38]` |
 
 ### Data Structures
+
 The system utilizes a `TranscriptionResult` dataclass to pass structured information back to the UI.
 ```python
 @dataclass
@@ -100,6 +107,7 @@ Sources: `[src/omega13/transcription.py:#L24-L31]`
 A critical, albeit slightly annoying, architectural detail is how the system handles overlapping audio. Since Omega-13 captures "13 seconds before" the trigger, consecutive recordings often contain redundant speech. The `Session` class in `session.py` attempts to fix this shit by performing word-based suffix-prefix matching.
 
 ### Deduplication Logic
+
 The `add_transcription` method compares the new text against the last five entries in the session history. It identifies the longest overlapping word sequence and strips it from the new segment before saving.
 
 ```python
@@ -107,6 +115,7 @@ history_context = " ".join(self.transcriptions[-5:]).split()
 new_words = new_text.split()
 
 # Find the longest suffix of history that matches the prefix of new_words
+
 max_overlap = 0
 for i in range(1, min(len(history_context), len(new_words)) + 1):
     if history_context[-i:] == new_words[:i]:

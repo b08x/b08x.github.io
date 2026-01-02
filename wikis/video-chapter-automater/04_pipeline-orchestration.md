@@ -4,6 +4,7 @@ title: Pipeline Orchestration
 wiki_id: video-chapter-automater
 page_id: pipeline-orchestration
 permalink: "/wikis/video-chapter-automater/04-pipeline-orchestration/"
+repository: https://github.com/b08x/video-chapter-automater
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
@@ -14,9 +15,12 @@ related_pages:
   url: "/wikis/video-chapter-automater/07-preprocessing-stages/"
   title: Preprocessing Stages
 file_paths:
-- src/video_chapter_automater/pipeline/orchestrator.py
-- src/video_chapter_automater/pipeline/config.py
-- src/video_chapter_automater/pipeline/stage.py
+- path: src/video_chapter_automater/pipeline/orchestrator.py
+  url: https://github.com/b08x/video-chapter-automater/blob/main/src/video_chapter_automater/pipeline/orchestrator.py
+- path: src/video_chapter_automater/pipeline/config.py
+  url: https://github.com/b08x/video-chapter-automater/blob/main/src/video_chapter_automater/pipeline/config.py
+- path: src/video_chapter_automater/pipeline/stage.py
+  url: https://github.com/b08x/video-chapter-automater/blob/main/src/video_chapter_automater/pipeline/stage.py
 pagination:
   previous:
     title: 03-core-architecture
@@ -102,6 +106,7 @@ Sources: `[src/video_chapter_automater/pipeline/orchestrator.py:#L128-L195]`, `[
 Pipeline behavior is dictated by `PipelineConfig`, which aggregates multiple `StageConfig` objects. The system supports three distinct stages, though the orchestration logic implies a functional hierarchy where video encoding often precedes extraction tasks.
 
 ### Available Pipeline Stages
+
 - **VIDEO_ENCODING**: Re-encodes video using GPU acceleration or specific codecs.
 - **AUDIO_EXTRACTION**: Extracts 16kHz mono WAV files for transcription.
 - **SCENE_EXTRACTION**: Extracts visual frames for scene detection.
@@ -109,6 +114,7 @@ Pipeline behavior is dictated by `PipelineConfig`, which aggregates multiple `St
 Sources: `[src/video_chapter_automater/pipeline/config.py:#L26-L36]`, `[src/video_chapter_automater/output/manager.py:#L14-L25]`
 
 ### Execution Modes
+
 The `ExecutionMode` enum defines how the system handles the progression of stages:
 1. **SEQUENTIAL**: Standard one-by-one execution.
 2. **RESILIENT**: Continues execution even if individual stages fail.
@@ -121,6 +127,7 @@ Sources: `[src/video_chapter_automater/pipeline/config.py:#L39-L49]`, `[src/vide
 The `OutputManager` enforces a standardized directory structure. A recurring pattern in the architecture is the use of a "project folder" which, if provided, nests all outputs under a specific subdirectory, effectively isolating different processing runs.
 
 ### Directory Structure Mapping
+
 The `OutputManager` maintains a mapping between `OutputType` and physical subdirectories:
 - `video/`: Re-encoded video files.
 - `audio/`: Extracted WAV files.
@@ -131,6 +138,7 @@ The `OutputManager` maintains a mapping between `OutputType` and physical subdir
 Sources: `[src/video_chapter_automater/output/manager.py:#L90-L105]`, `[src/video_chapter_automater/output/manager.py:#L123-L135]`
 
 ### The Manifest Mechanism
+
 Upon successful completion, the orchestrator triggers `_generate_manifest`. This function aggregates `StageResult` data, including execution duration and output paths, into a JSON file stored in the `metadata/` directory. This serves as the single source of truth for the processed state of a video.
 
 Sources: `[src/video_chapter_automater/pipeline/orchestrator.py:#L215-L242]`

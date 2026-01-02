@@ -38,12 +38,15 @@ module Jekyll
           page_data['generated_permalink'] = permalink_info['permalink']
         end
 
+        # Metadata for the wiki
+        repo_url = wiki_data.dig('metadata', 'repository')
+
         # Generate individual wiki pages
         pages.each_with_index do |page_data, index|
           prev_page = index > 0 ? pages[index - 1] : nil
           next_page = index < pages.length - 1 ? pages[index + 1] : nil
           
-          generate_page(site, wiki_id, page_data, prev_page, next_page, permalink_map)
+          generate_page(site, wiki_id, page_data, prev_page, next_page, permalink_map, repo_url)
         end
 
         # Generate paginated index pages
@@ -60,7 +63,7 @@ module Jekyll
     # INDIVIDUAL PAGE GENERATION
     # ========================================
 
-    def generate_page(site, wiki_id, page_data, prev_page, next_page, permalink_map)
+    def generate_page(site, wiki_id, page_data, prev_page, next_page, permalink_map, repo_url)
       page_info = permalink_map[page_data['id']]
       slug = page_info['slug']
       num = page_info['number']
@@ -72,6 +75,32 @@ module Jekyll
       # Transformations for jekyll-spaceship
       content_body = content_body.gsub(/```mermaid\b/, '```mermaid!')
       content_body = content_body.gsub(/```plantuml\b/, '```plantuml!')
+
+      # Prepend repository address to inline source links like [path.py:L10-L20]()
+      if repo_url
+        clean_repo_url = repo_url.chomp('/')
+        content_body = content_body.gsub(/\[([^\]]+\.(?:py|md|sh|rb|js|ts|tsx|json|html|yml)(?::#?L[^\]]*)?)\]\(\)/) do |_match|
+          path_and_line = Regexp.last_match(1)
+          # Split path and line if present (e.g., path.py:#L10-L20 or path.py:L10-L20)
+          path, line = path_and_line.split(':', 2)
+          
+          if line
+            # GitHub uses #L1-L2 format. Ensure it starts with #L
+            clean_line = line.gsub(/^#?L?/, '#L')
+            full_path = "#{path}#{clean_line}"
+          else
+            full_path = path
+          end
+          
+          "[#{path_and_line}](#{clean_repo_url}/blob/main/#{full_path})"
+        end
+      end
+
+      # Ensure blank lines before and after headers if missing
+      content_body = content_body.gsub(/^(#+ .*)(\n)([^#\n])/, "\\1\n\n\\3")
+      
+      # Ensure blank lines before tables only if not already part of a table
+      content_body = content_body.gsub(/([^\n|])\n\|/, "\\1\n\n|")
 
       dir = File.join('wikis', wiki_id)
       filename = "#{num}_#{slug}.md"
@@ -91,7 +120,23 @@ module Jekyll
         end
       end
 
-      file_paths = page_data['filePaths'] || []
+      # Prepend repository address to source file links
+      file_paths_raw = page_data['filePaths'] || []
+      file_paths = file_paths_raw.map do |fp|
+        if repo_url && !fp.empty?
+          # Assuming GitHub format for now: repo_url/blob/main/path
+          # We check if it's already a full URL just in case
+          if fp.start_with?('http')
+            { 'path' => fp, 'url' => fp }
+          else
+            clean_repo_url = repo_url.chomp('/')
+            full_url = "#{clean_repo_url}/blob/main/#{fp}"
+            { 'path' => fp, 'url' => full_url }
+          end
+        else
+          { 'path' => fp }
+        end
+      end
 
       # Pagination metadata for individual page
       pagination_data = {}
@@ -117,6 +162,7 @@ module Jekyll
         'wiki_id' => wiki_id,
         'page_id' => page_data['id'],
         'permalink' => permalink,
+        'repository' => repo_url,
         'left_sidebar' => 'wiki-nav',
         'right_sidebar' => 'toc',
         'right_sidebar_xl_only' => true,

@@ -4,6 +4,7 @@ title: Introduction
 wiki_id: video-chapter-automater
 page_id: introduction
 permalink: "/wikis/video-chapter-automater/01-introduction/"
+repository: https://github.com/b08x/video-chapter-automater
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
@@ -17,8 +18,10 @@ related_pages:
   url: "/wikis/video-chapter-automater/03-core-architecture/"
   title: Core Architecture
 file_paths:
-- README.md
-- src/video_chapter_automater/__init__.py
+- path: README.md
+  url: https://github.com/b08x/video-chapter-automater/blob/main/README.md
+- path: src/video_chapter_automater/__init__.py
+  url: https://github.com/b08x/video-chapter-automater/blob/main/src/video_chapter_automater/__init__.py
 pagination:
   next:
     title: 02-getting-started
@@ -49,6 +52,7 @@ The system's behavior is governed by a `PipelineOrchestrator` that manages `Stag
 The core of the system is the pipeline mechanism, which transitions a raw video file through various states of extraction and metadata generation.
 
 ### Pipeline Execution Flow
+
 The `PipelineOrchestrator` is the primary controller. It initializes the `OutputManager` and iterates through a list of `StageConfig` objects. The execution mode determines how failures are handled, specifically through `SEQUENTIAL` or `RESILIENT` modes.
 
 ```mermaid!
@@ -84,6 +88,7 @@ Sources: `[src/video_chapter_automater/output/manager.py:L106-L135]`, `[src/vide
 The system utilizes a rigid directory structure to organize the artifacts of the preprocessing stages. This structure is enforced by the `OutputManager`, which maps `OutputType` enums to specific subdirectories.
 
 ### Directory Structure Mapping
+
 The system automatically generates a structured hierarchy under a base directory (defaulting to `./vca_output`).
 
 - **video/**: Re-encoded video files.
@@ -95,10 +100,12 @@ The system automatically generates a structured hierarchy under a base directory
 Sources: `[src/video_chapter_automater/output/manager.py:L13-L55]`, `[src/video_chapter_automater/output/manager.py:L137-L148]`
 
 ### The Manifest Mechanism
+
 Upon successful pipeline completion, the orchestrator generates a manifest. This file acts as the "source of truth" for a specific processing run, containing timestamps, paths to all generated outputs, and processing statistics.
 
 ```python
 # Conceptual structure of manifest generation
+
 def _generate_manifest(self, input_path: Path, stage_results: List[StageResult], duration: float):
     # Aggregates metadata from all stages into a single JSON file
     pass
@@ -110,6 +117,7 @@ Sources: `[src/video_chapter_automater/pipeline/orchestrator.py:L80-L85]`, `[src
 The `SetupWizard` and `ApplicationPaths` handle the system's "pre-flight" state. The `SetupWizard` uses a TUI (Text User Interface) to guide users through GPU detection and dependency installation.
 
 ### Configuration Hierarchy
+
 1. **UserPreferences**: High-level settings (GPU preference, output format, parallel processing).
 2. **PipelineConfig**: Low-level execution settings (Stage ordering, cleanup policies, project naming).
 3. **StageConfig**: Specific parameters for individual operations (Scene detection thresholds, codecs).
@@ -117,6 +125,7 @@ The `SetupWizard` and `ApplicationPaths` handle the system's "pre-flight" state.
 Sources: `[src/video_chapter_automater/setup_wizard.py:L62-L85]`, `[src/video_chapter_automater/pipeline/config.py:L55-L75]`
 
 ### Observed Structural Inconsistencies
+
 The system presents an interesting contradiction in its parallel processing implementation. While `ExecutionMode.PARALLEL` is defined in the configuration and exposed in the `UserPreferences`, the `PipelineOrchestrator` contains a fucking placeholder that defaults parallel requests back to sequential execution. This reveals a design that is architecturally "ready" for concurrency but functionally restricted to synchronous flows in its current iteration.
 
 Sources: `[src/video_chapter_automater/pipeline/config.py:L43-L45]`, `[src/video_chapter_automater/pipeline/orchestrator.py:L72-L75]`

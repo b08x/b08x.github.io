@@ -4,6 +4,7 @@ title: CLI Reference
 wiki_id: video-chapter-automater
 page_id: cli-reference
 permalink: "/wikis/video-chapter-automater/11-cli-reference/"
+repository: https://github.com/b08x/video-chapter-automater
 left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
@@ -14,8 +15,10 @@ related_pages:
   url: "/wikis/video-chapter-automater/02-getting-started/"
   title: Getting Started
 file_paths:
-- src/video_chapter_automater/cli.py
-- src/video_chapter_automater/cli_pipeline.py
+- path: src/video_chapter_automater/cli.py
+  url: https://github.com/b08x/video-chapter-automater/blob/main/src/video_chapter_automater/cli.py
+- path: src/video_chapter_automater/cli_pipeline.py
+  url: https://github.com/b08x/video-chapter-automater/blob/main/src/video_chapter_automater/cli_pipeline.py
 pagination:
   previous:
     title: 10-docker-integration
@@ -38,6 +41,7 @@ The following files were used as context for generating this wiki page:
 # CLI Reference
 
 ## Introduction
+
 The Command Line Interface (CLI) for Video Chapter Automater (VCA) serves as the primary entry point for orchestrating video preprocessing and chapter generation workflows. The system exposes two distinct operational paths: a standard entry point (`vca`) and an advanced pipeline controller (`vca-pipeline`). These interfaces manage the transition from user input to the internal execution engines, handling system validation, GPU detection, and multi-stage pipeline configuration.
 
 Sources: `src/video_chapter_automater/cli.py`, `src/video_chapter_automater/cli_pipeline.py`
@@ -47,6 +51,7 @@ Sources: `src/video_chapter_automater/cli.py`, `src/video_chapter_automater/cli_
 The system utilizes `argparse` to define its command-line surface. The entry points are bifurcated based on the complexity of the required task.
 
 ### Standard CLI (`vca`)
+
 The standard CLI is designed for general-purpose execution, offering modes ranging from "simple" to "enhanced" TUI experiences. It manages high-level flags for system inspection (GPU info, configuration) and triggers the interactive setup wizard.
 
 | Argument | Function | System Impact |
@@ -59,6 +64,7 @@ The standard CLI is designed for general-purpose execution, offering modes rangi
 Sources: `src/video_chapter_automater/cli.py:#L27-L55`, `src/video_chapter_automater/cli.py:#L66-L85`
 
 ### Pipeline CLI (`vca-pipeline`)
+
 The pipeline CLI provides granular control over the `PipelineOrchestrator`. It allows users to toggle specific stages such as video re-encoding, audio extraction, and scene detection.
 
 ```mermaid!
@@ -74,6 +80,7 @@ graph TD
 Sources: `src/video_chapter_automater/cli_pipeline.py:#L62-L105`
 
 ## System Initialization and Setup Wizard
+
 The `setup_wizard.py` module handles the initial state of the system. It uses an interactive TUI to validate the environment. Despite presenting itself as a "wizard," it functions as a hard gate for system dependencies like FFmpeg and GPU drivers.
 
 The setup process follows a rigid state machine defined by the `SetupStep` Enum:
@@ -89,6 +96,7 @@ The setup process follows a rigid state machine defined by the `SetupStep` Enum:
 Sources: `src/video_chapter_automater/setup_wizard.py:#L43-L52`
 
 ## Pipeline Orchestration Flow
+
 When `vca-pipeline` is invoked, the `PipelineOrchestrator` manages the lifecycle of `Stage` objects. The flow is strictly sequential by default, though the code references a "RESILIENT" mode that supposedly continues on failure—a design choice that suggests a tolerance for partial data that might be fucking useless for subsequent stages.
 
 ```mermaid!
@@ -116,6 +124,7 @@ sequenceDiagram
 Sources: `src/video_chapter_automater/pipeline/orchestrator.py:#L53-L100`, `src/video_chapter_automater/pipeline/orchestrator.py:#L210-L235`
 
 ## Configuration and Output Mapping
+
 The CLI maps user flags to the `PipelineConfig` and `OutputManager`. The `OutputManager` creates a standardized directory structure, which is ironically documented via a `create_readme` method that writes a static string to a file—a mechanism that ensures the user is told what the directories are, even if the processing fails to populate them.
 
 | Output Type | Directory | Description |
@@ -128,6 +137,7 @@ The CLI maps user flags to the `PipelineConfig` and `OutputManager`. The `Output
 Sources: `src/video_chapter_automater/output/manager.py:#L15-L35`, `src/video_chapter_automater/pipeline/config.py:#L66-L85`
 
 ## Structural Observations
+
 The CLI implementation reveals a heavy dependency on the `Rich` library for terminal presentation. In `cli.py`, the system attempts to import `Rich` and falls back to a `None` console, yet several subsequent logic paths assume a functional UI, creating a potential for runtime friction if the environment is stripped. 
 
 Furthermore, the `PipelineOrchestrator` includes a `PARALLEL` execution mode labeled as a "future enhancement," meaning the current CLI flags for parallel processing in `UserPreferences` are effectively cosmetic placeholders that do not influence the actual execution logic in the provided source.
@@ -135,4 +145,5 @@ Furthermore, the `PipelineOrchestrator` includes a `PARALLEL` execution mode lab
 Sources: `src/video_chapter_automater/cli.py:#L11-L24`, `src/video_chapter_automater/pipeline/orchestrator.py:#L88-L92`, `src/video_chapter_automater/setup_wizard.py:#L65-L75`
 
 ## Conclusion
+
 The CLI Reference defines a system that prioritizes structured output and user-facing feedback through TUI components. The interaction between `cli_pipeline.py` and `PipelineOrchestrator` ensures that video processing is treated as a series of discrete, configurable stages, while the `OutputManager` enforces a rigid file system hierarchy for all generated artifacts.
