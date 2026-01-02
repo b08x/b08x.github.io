@@ -19,10 +19,10 @@ file_paths:
 - pyproject.toml
 pagination:
   previous:
-    title: Introduction to Omega-13
+    title: 01-introduction
     url: "/wikis/omega-13/01-introduction/"
   next:
-    title: Core Architecture Overview
+    title: 03-core-architecture
     url: "/wikis/omega-13/03-core-architecture/"
 ---
 

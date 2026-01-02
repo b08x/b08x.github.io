@@ -18,10 +18,10 @@ file_paths:
 - src/omega13/hotkeys.py
 pagination:
   previous:
-    title: Session Management & Data Flow
+    title: 10-session-management
     url: "/wikis/omega-13/10-session-management/"
   next:
-    title: Whisper Server Deployment
+    title: 12-whisper-server-deployment
     url: "/wikis/omega-13/12-whisper-server-deployment/"
 ---
 

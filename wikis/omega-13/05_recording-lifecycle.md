@@ -17,10 +17,10 @@ file_paths:
 - src/omega13/recording_controller.py
 pagination:
   previous:
-    title: Audio Engine & Ring Buffers
+    title: 04-audio-engine-design
     url: "/wikis/omega-13/04-audio-engine-design/"
   next:
-    title: Retroactive Recording Mechanism
+    title: 06-retroactive-recording
     url: "/wikis/omega-13/06-retroactive-recording/"
 ---
 

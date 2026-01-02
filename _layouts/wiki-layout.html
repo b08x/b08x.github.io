@@ -24,10 +24,10 @@ layout: base-shell
                         {% assign wiki_data = site.data.wikis[wiki_id] %}
                         {% for wp in wiki_data.pages %}
                         <li>
-                            <a href="{{ site.baseurl }}/wikis/{{ wiki_id }}/{{ wp.id | slugify }}/"
+                            <a href="{{ site.baseurl }}{{ wp.generated_permalink }}"
                                 class="block py-2 px-3 text-sm border-l-2 {% if page.page_id == wp.id %}border-accent bg-surface/50 text-accent{% else %}border-transparent text-foreground/75{% endif %} transition-all hover:bg-surface hover:border-accent wiki-nav-link"
                                 data-page-id="{{ wp.id }}">
-                                {{ wp.title }}
+                                {% if wp.number %}{{ wp.number }}_{% endif %}{{ wp.slug }}
                             </a>
                         </li>
                         {% endfor %}

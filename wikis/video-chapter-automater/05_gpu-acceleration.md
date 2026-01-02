@@ -18,10 +18,10 @@ file_paths:
 - src/video_chapter_automater/preprocessing/strategies/codec_strategies.py
 pagination:
   previous:
-    title: Pipeline Orchestration
+    title: 04-pipeline-orchestration
     url: "/wikis/video-chapter-automater/04-pipeline-orchestration/"
   next:
-    title: Scene Detection & Chapter Conversion
+    title: 06-scene-detection-logic
     url: "/wikis/video-chapter-automater/06-scene-detection-logic/"
 ---
 

@@ -19,10 +19,10 @@ file_paths:
 - src/video_chapter_automater/preprocessing/strategies/hash_strategies.py
 pagination:
   previous:
-    title: Scene Detection & Chapter Conversion
+    title: 06-scene-detection-logic
     url: "/wikis/video-chapter-automater/06-scene-detection-logic/"
   next:
-    title: Output Management
+    title: '08-output-organization'
     url: "/wikis/video-chapter-automater/08-output-organization/"
 ---
 

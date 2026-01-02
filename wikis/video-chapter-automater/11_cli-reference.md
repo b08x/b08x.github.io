@@ -18,7 +18,7 @@ file_paths:
 - src/video_chapter_automater/cli_pipeline.py
 pagination:
   previous:
-    title: Docker Deployment
+    title: 10-docker-integration
     url: "/wikis/video-chapter-automater/10-docker-integration/"
 ---
 

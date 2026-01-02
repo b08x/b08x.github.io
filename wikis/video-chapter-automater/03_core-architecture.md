@@ -21,10 +21,10 @@ file_paths:
 - src/video_chapter_automater/main.py
 pagination:
   previous:
-    title: Getting Started
+    title: 02-getting-started
     url: "/wikis/video-chapter-automater/02-getting-started/"
   next:
-    title: Pipeline Orchestration
+    title: 04-pipeline-orchestration
     url: "/wikis/video-chapter-automater/04-pipeline-orchestration/"
 ---
 

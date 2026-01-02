@@ -19,10 +19,10 @@ file_paths:
 - src/video_chapter_automater/pipeline/stage.py
 pagination:
   previous:
-    title: Core Architecture
+    title: 03-core-architecture
     url: "/wikis/video-chapter-automater/03-core-architecture/"
   next:
-    title: GPU Acceleration & Detection
+    title: 05-gpu-acceleration
     url: "/wikis/video-chapter-automater/05-gpu-acceleration/"
 ---
 

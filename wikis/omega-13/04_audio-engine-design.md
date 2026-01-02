@@ -17,10 +17,10 @@ file_paths:
 - src/omega13/audio.py
 pagination:
   previous:
-    title: Core Architecture Overview
+    title: 03-core-architecture
     url: "/wikis/omega-13/03-core-architecture/"
   next:
-    title: Recording State Machine
+    title: 05-recording-lifecycle
     url: "/wikis/omega-13/05-recording-lifecycle/"
 ---
 

@@ -19,6 +19,7 @@ total_wiki_pages: 11
 pages:
 - id: introduction
   title: Introduction
+  number: '01'
   slug: introduction
   importance: high
   excerpt: Relevant source files The following files were used as context for generating
@@ -26,6 +27,7 @@ pages:
   url: "/wikis/video-chapter-automater/01-introduction/"
 - id: getting-started
   title: Getting Started
+  number: '02'
   slug: getting-started
   importance: high
   excerpt: Relevant source files The following files were used as context for generating
@@ -33,6 +35,7 @@ pages:
   url: "/wikis/video-chapter-automater/02-getting-started/"
 - id: core-architecture
   title: Core Architecture
+  number: '03'
   slug: core-architecture
   importance: high
   excerpt: Relevant source files The following files were used as context for generating
@@ -40,6 +43,7 @@ pages:
   url: "/wikis/video-chapter-automater/03-core-architecture/"
 - id: pipeline-orchestration
   title: Pipeline Orchestration
+  number: '04'
   slug: pipeline-orchestration
   importance: medium
   excerpt: Relevant source files The following files were used as context for generating
@@ -47,6 +51,7 @@ pages:
   url: "/wikis/video-chapter-automater/04-pipeline-orchestration/"
 - id: gpu-acceleration
   title: GPU Acceleration & Detection
+  number: '05'
   slug: gpu-acceleration
   importance: high
   excerpt: Relevant source files The following files were used as context for generating
@@ -54,6 +59,7 @@ pages:
   url: "/wikis/video-chapter-automater/05-gpu-acceleration/"
 - id: scene-detection-logic
   title: Scene Detection & Chapter Conversion
+  number: '06'
   slug: scene-detection-logic
   importance: medium
   excerpt: Relevant source files The following files were used as context for generating
@@ -61,6 +67,7 @@ pages:
   url: "/wikis/video-chapter-automater/06-scene-detection-logic/"
 - id: preprocessing-stages
   title: Preprocessing Stages
+  number: '07'
   slug: preprocessing-stages
   importance: medium
   excerpt: Relevant source files The following files were used as context for generating
@@ -68,6 +75,7 @@ pages:
   url: "/wikis/video-chapter-automater/07-preprocessing-stages/"
 - id: output-organization
   title: Output Management
+  number: '08'
   slug: output-organization
   importance: medium
   excerpt: Relevant source files The following files were used as context for generating
@@ -75,6 +83,7 @@ pages:
   url: "/wikis/video-chapter-automater/08-output-organization/"
 - id: configuration-system
   title: Configuration & App Paths
+  number: '09'
   slug: configuration-system
   importance: low
   excerpt: Relevant source files The following files were used as context for generating
@@ -82,6 +91,7 @@ pages:
   url: "/wikis/video-chapter-automater/09-configuration-system/"
 - id: docker-integration
   title: Docker Deployment
+  number: '10'
   slug: docker-integration
   importance: medium
   excerpt: 'Relevant source files The following files were used as context for generating
@@ -89,6 +99,7 @@ pages:
   url: "/wikis/video-chapter-automater/10-docker-integration/"
 - id: cli-reference
   title: CLI Reference
+  number: '11'
   slug: cli-reference
   importance: high
   excerpt: Relevant source files The following files were used as context for generating

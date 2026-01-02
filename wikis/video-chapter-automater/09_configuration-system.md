@@ -18,10 +18,10 @@ file_paths:
 - src/video_chapter_automater/platform_dirs.py
 pagination:
   previous:
-    title: Output Management
+    title: '08-output-organization'
     url: "/wikis/video-chapter-automater/08-output-organization/"
   next:
-    title: Docker Deployment
+    title: 10-docker-integration
     url: "/wikis/video-chapter-automater/10-docker-integration/"
 ---
 

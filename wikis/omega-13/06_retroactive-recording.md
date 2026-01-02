@@ -17,10 +17,10 @@ file_paths:
 - src/omega13/audio.py
 pagination:
   previous:
-    title: Recording State Machine
+    title: 05-recording-lifecycle
     url: "/wikis/omega-13/05-recording-lifecycle/"
   next:
-    title: Voice-Activated Auto-Record (VAD)
+    title: 07-voice-activity-detection
     url: "/wikis/omega-13/07-voice-activity-detection/"
 ---
 

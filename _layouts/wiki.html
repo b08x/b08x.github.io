@@ -79,7 +79,7 @@ Expects front-matter with pagination metadata and pages array.
           <header class="mb-3">
             <h2
               class="text-base font-prose font-semibold text-foreground group-hover:text-accent transition-colors line-clamp-2 mb-2">
-              {{ wiki_page.title }}
+              {% if wiki_page.number %}{{ wiki_page.number }}-{% endif %}{{ wiki_page.slug }}
             </h2>
 
             {% if wiki_page.importance %}

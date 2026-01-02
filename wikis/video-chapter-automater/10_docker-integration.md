@@ -17,10 +17,10 @@ file_paths:
 - README.md
 pagination:
   previous:
-    title: Configuration & App Paths
+    title: '09-configuration-system'
     url: "/wikis/video-chapter-automater/09-configuration-system/"
   next:
-    title: CLI Reference
+    title: 11-cli-reference
     url: "/wikis/video-chapter-automater/11-cli-reference/"
 ---
 

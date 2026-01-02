@@ -18,10 +18,10 @@ file_paths:
 - tests/test_incremental_save.py
 pagination:
   previous:
-    title: TUI Components & UX
+    title: '09-tui-and-ux'
     url: "/wikis/omega-13/09-tui-and-ux/"
   next:
-    title: Configuration & Global Hotkeys
+    title: 11-configuration-and-hotkeys
     url: "/wikis/omega-13/11-configuration-and-hotkeys/"
 ---
 

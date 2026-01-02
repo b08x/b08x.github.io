@@ -18,10 +18,10 @@ file_paths:
 - compose.yml
 pagination:
   previous:
-    title: Voice-Activated Auto-Record (VAD)
+    title: 07-voice-activity-detection
     url: "/wikis/omega-13/07-voice-activity-detection/"
   next:
-    title: TUI Components & UX
+    title: '09-tui-and-ux'
     url: "/wikis/omega-13/09-tui-and-ux/"
 ---
 

@@ -21,7 +21,7 @@ file_paths:
 - src/video_chapter_automater/__init__.py
 pagination:
   next:
-    title: Getting Started
+    title: 02-getting-started
     url: "/wikis/video-chapter-automater/02-getting-started/"
 ---
 

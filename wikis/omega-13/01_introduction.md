@@ -17,7 +17,7 @@ file_paths:
 - README.md
 pagination:
   next:
-    title: Getting Started
+    title: 02-getting-started
     url: "/wikis/omega-13/02-getting-started/"
 ---
 

@@ -18,10 +18,10 @@ file_paths:
 - src/omega13/app.py
 pagination:
   previous:
-    title: Transcription & Whisper Integration
+    title: '08-transcription-service'
     url: "/wikis/omega-13/08-transcription-service/"
   next:
-    title: Session Management & Data Flow
+    title: 10-session-management
     url: "/wikis/omega-13/10-session-management/"
 ---
 

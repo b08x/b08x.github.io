@@ -25,11 +25,17 @@ module Jekyll
           page_id = page_data['id']
           slug = validate_slug(Jekyll::Utils.slugify(page_id))
           num = (index + 1).to_s.rjust(2, '0')
-          permalink_map[page_id] = {
+          permalink_info = {
             'slug' => slug,
             'number' => num,
             'permalink' => "/wikis/#{wiki_id}/#{num}-#{slug}/"
           }
+          permalink_map[page_id] = permalink_info
+          
+          # Enrich the original data for use in layouts
+          page_data['number'] = num
+          page_data['slug'] = slug
+          page_data['generated_permalink'] = permalink_info['permalink']
         end
 
         # Generate individual wiki pages
@@ -92,14 +98,14 @@ module Jekyll
       if prev_page
         prev_info = permalink_map[prev_page['id']]
         pagination_data['previous'] = {
-          'title' => prev_page['title'],
+          'title' => "#{prev_info['number']}-#{prev_info['slug']}",
           'url' => prev_info['permalink']
         }
       end
       if next_page
         next_info = permalink_map[next_page['id']]
         pagination_data['next'] = {
-          'title' => next_page['title'],
+          'title' => "#{next_info['number']}-#{next_info['slug']}",
           'url' => next_info['permalink']
         }
       end
@@ -176,7 +182,6 @@ module Jekyll
       # Build pagination metadata
       pagination_meta = build_pagination_metadata(page_num, total_pages, wiki_id)
 
-      # Build page items with enriched data
       page_items = segment.map do |page_data|
         page_id = page_data['id']
         page_info = permalink_map[page_id]
@@ -184,6 +189,7 @@ module Jekyll
         {
           'id' => page_id,
           'title' => page_data['title'],
+          'number' => page_info['number'],
           'slug' => page_info['slug'],
           'importance' => page_data['importance'] || 'medium',
           'excerpt' => extract_excerpt(page_data['content']),

@@ -17,10 +17,10 @@ file_paths:
 - src/video_chapter_automater/output/manager.py
 pagination:
   previous:
-    title: Preprocessing Stages
+    title: 07-preprocessing-stages
     url: "/wikis/video-chapter-automater/07-preprocessing-stages/"
   next:
-    title: Configuration & App Paths
+    title: '09-configuration-system'
     url: "/wikis/video-chapter-automater/09-configuration-system/"
 ---
 

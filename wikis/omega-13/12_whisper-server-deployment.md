@@ -18,7 +18,7 @@ file_paths:
 - compose.yml
 pagination:
   previous:
-    title: Configuration & Global Hotkeys
+    title: 11-configuration-and-hotkeys
     url: "/wikis/omega-13/11-configuration-and-hotkeys/"
 ---
 

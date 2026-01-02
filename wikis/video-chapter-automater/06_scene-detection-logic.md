@@ -18,10 +18,10 @@ file_paths:
 - src/video_chapter_automater/preprocessing/scene_extractor.py
 pagination:
   previous:
-    title: GPU Acceleration & Detection
+    title: 05-gpu-acceleration
     url: "/wikis/video-chapter-automater/05-gpu-acceleration/"
   next:
-    title: Preprocessing Stages
+    title: 07-preprocessing-stages
     url: "/wikis/video-chapter-automater/07-preprocessing-stages/"
 ---
 

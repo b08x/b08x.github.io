@@ -17,10 +17,10 @@ file_paths:
 - src/omega13/signal_detector.py
 pagination:
   previous:
-    title: Retroactive Recording Mechanism
+    title: 06-retroactive-recording
     url: "/wikis/omega-13/06-retroactive-recording/"
   next:
-    title: Transcription & Whisper Integration
+    title: '08-transcription-service'
     url: "/wikis/omega-13/08-transcription-service/"
 ---
 

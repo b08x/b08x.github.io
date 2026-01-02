@@ -21,10 +21,10 @@ file_paths:
 - CLAUDE.md
 pagination:
   previous:
-    title: Getting Started
+    title: 02-getting-started
     url: "/wikis/omega-13/02-getting-started/"
   next:
-    title: Audio Engine & Ring Buffers
+    title: 04-audio-engine-design
     url: "/wikis/omega-13/04-audio-engine-design/"
 ---
 

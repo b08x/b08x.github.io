@@ -21,10 +21,10 @@ file_paths:
 - src/video_chapter_automater/cli.py
 pagination:
   previous:
-    title: Introduction
+    title: 01-introduction
     url: "/wikis/video-chapter-automater/01-introduction/"
   next:
-    title: Core Architecture
+    title: 03-core-architecture
     url: "/wikis/video-chapter-automater/03-core-architecture/"
 ---
 
