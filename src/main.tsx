@@ -10,6 +10,7 @@ const NotesGrid = React.lazy(() => import('./components/NotesGrid'));
 const AudioPlayer = React.lazy(() => import('./components/AudioPlayer'));
 const NotebookGuide = React.lazy(() => import('./components/NotebookGuide'));
 const KnowledgebaseCarousel = React.lazy(() => import('./components/KnowledgebaseCarousel'));
+const MermaidViewer = React.lazy(() => import('./components/MermaidViewer'));
 
 const components: Record<string, React.ComponentType<any>> = {
   HelloGarden,
@@ -20,6 +21,7 @@ const components: Record<string, React.ComponentType<any>> = {
   AudioPlayer,
   NotebookGuide,
   KnowledgebaseCarousel,
+  MermaidViewer,
 };
 
 const mountIslands = () => {
@@ -66,8 +68,70 @@ const mountIslands = () => {
   });
 };
 
+const enhanceMermaidDiagrams = () => {
+  // Find static mermaid diagrams rendered by jekyll-spaceship (as img tags)
+  const mermaidImages = document.querySelectorAll('img.mermaid');
+  console.log(`[Garden] Found ${mermaidImages.length} mermaid diagrams to enhance`);
+
+  mermaidImages.forEach((img) => {
+    try {
+      // Extract encoded diagram from mermaid.ink URL
+      const src = img.getAttribute('src') || '';
+      const match = src.match(/mermaid\.ink\/svg\/(.+)$/);
+      if (!match) {
+        console.warn('[Garden] Could not parse mermaid.ink URL:', src);
+        return;
+      }
+
+      // Decode base64 payload from mermaid.ink (URL-safe base64)
+      const encoded = match[1];
+
+      // Convert URL-safe base64 to standard base64
+      const standardBase64 = encoded
+        .replace(/-/g, '+')
+        .replace(/_/g, '/');
+
+      // Add padding if needed
+      const paddedBase64 = standardBase64 + '=='.substring(0, (4 - standardBase64.length % 4) % 4);
+
+      const decoded = atob(paddedBase64);
+      const data = JSON.parse(decoded);
+      const code = data.code;
+
+      if (!code) {
+        console.warn('[Garden] No code found in mermaid data:', data);
+        return;
+      }
+
+      // Create island container
+      const island = document.createElement('div');
+      island.setAttribute('data-island', 'MermaidViewer');
+      island.setAttribute('data-props', JSON.stringify({ code }));
+
+      // Replace static image with island
+      const parent = img.parentElement;
+      if (parent) {
+        parent.replaceWith(island);
+        console.log(`[Garden] Enhanced mermaid diagram (${code.substring(0, 50)}...)`);
+      }
+    } catch (err) {
+      console.warn('[Garden] Failed to enhance mermaid diagram, keeping static version:', err);
+      // Leave static image in place on error
+    }
+  });
+
+  // Re-run island mounting for new MermaidViewer islands
+  if (mermaidImages.length > 0) {
+    mountIslands();
+  }
+};
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', mountIslands);
+  document.addEventListener('DOMContentLoaded', () => {
+    mountIslands();
+    enhanceMermaidDiagrams();
+  });
 } else {
   mountIslands();
+  enhanceMermaidDiagrams();
 }
