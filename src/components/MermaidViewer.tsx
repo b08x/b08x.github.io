@@ -64,7 +64,8 @@ const MermaidViewer: React.FC<MermaidViewerProps> = ({
       const container = containerRef.current;
       if (!container) return;
 
-      const svg = d3.select(container).select('svg');
+      // Select SVG from the svg-content div
+      const svg = d3.select(container).select('.svg-content svg');
       if (svg.empty()) {
         console.warn('[MermaidViewer] SVG not found in container');
         return;
@@ -72,6 +73,11 @@ const MermaidViewer: React.FC<MermaidViewerProps> = ({
 
       const svgNode = svg.node() as SVGSVGElement;
       if (!svgNode) return;
+
+      // Ensure SVG fills container properly
+      svg.style('width', '100%')
+         .style('height', 'auto')
+         .style('display', 'block');
 
       console.log('[MermaidViewer] Setting up zoom for SVG:', svgNode);
 
@@ -165,10 +171,10 @@ const MermaidViewer: React.FC<MermaidViewerProps> = ({
       >
         {/* Controls Overlay */}
         {showControls && (
-          <div className="absolute top-2 right-2 flex gap-2 bg-surface/95 border border-border rounded p-1 shadow-lg z-10">
+          <div className="absolute top-2 right-2 flex gap-2 bg-surface/95 border border-border rounded p-1 shadow-lg z-10 pointer-events-none">
             <button
               onClick={handleZoomIn}
-              className="p-2 hover:bg-accent/10 hover:text-accent rounded transition-colors"
+              className="p-2 hover:bg-accent/10 hover:text-accent rounded transition-colors pointer-events-auto"
               title="Zoom In"
               aria-label="Zoom In"
             >
@@ -188,7 +194,7 @@ const MermaidViewer: React.FC<MermaidViewerProps> = ({
             </button>
             <button
               onClick={handleZoomOut}
-              className="p-2 hover:bg-accent/10 hover:text-accent rounded transition-colors"
+              className="p-2 hover:bg-accent/10 hover:text-accent rounded transition-colors pointer-events-auto"
               title="Zoom Out"
               aria-label="Zoom Out"
             >
@@ -208,7 +214,7 @@ const MermaidViewer: React.FC<MermaidViewerProps> = ({
             </button>
             <button
               onClick={handleReset}
-              className="p-2 hover:bg-accent/10 hover:text-accent rounded transition-colors"
+              className="p-2 hover:bg-accent/10 hover:text-accent rounded transition-colors pointer-events-auto"
               title="Reset View"
               aria-label="Reset View"
             >
@@ -229,7 +235,7 @@ const MermaidViewer: React.FC<MermaidViewerProps> = ({
             {allowModal && (
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="p-2 hover:bg-accent/10 hover:text-accent rounded transition-colors border-l border-border ml-1 pl-3"
+                className="p-2 hover:bg-accent/10 hover:text-accent rounded transition-colors border-l border-border ml-1 pl-3 pointer-events-auto"
                 title="Expand Full Screen"
                 aria-label="Expand Full Screen"
               >
@@ -252,7 +258,10 @@ const MermaidViewer: React.FC<MermaidViewerProps> = ({
         )}
 
         {/* SVG Content */}
-        <div dangerouslySetInnerHTML={{ __html: svgCode }} />
+        <div
+          className="svg-content w-full min-h-[300px]"
+          dangerouslySetInnerHTML={{ __html: svgCode }}
+        />
       </div>
 
       {/* Full-Screen Modal */}
