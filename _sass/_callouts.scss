@@ -8,7 +8,7 @@
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left-width: 4px;
+  border-left-width: 1px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   .callout-title {
@@ -68,10 +68,10 @@
 .callout[data-callout="note"],
 .callout[data-callout="info"],
 .callout[data-callout="todo"] {
-  border-left-color: #6ab0ff;
+  // border-left-color: #6ab0ff;
 
   .callout-title {
-    background: rgba(106, 176, 255, 0.1);
+    // background: rgba(106, 176, 255, 0.1);
     color: #6ab0ff;
   }
 
@@ -92,10 +92,10 @@
 .callout[data-callout="abstract"],
 .callout[data-callout="summary"],
 .callout[data-callout="tldr"] {
-  border-left-color: #00d4ff;
+  // border-left-color: #00d4ff;
 
   .callout-title {
-    background: rgba(0, 212, 255, 0.1);
+    // background: rgba(0, 212, 255, 0.1);
     color: #00d4ff;
   }
 
@@ -111,10 +111,10 @@
 .callout[data-callout="success"],
 .callout[data-callout="check"],
 .callout[data-callout="done"] {
-  border-left-color: #50c878;
+  // border-left-color: #50c878;
 
   .callout-title {
-    background: rgba(80, 200, 120, 0.1);
+    // background: rgba(80, 200, 120, 0.1);
     color: #50c878;
   }
 
@@ -133,10 +133,10 @@
 .callout[data-callout="question"],
 .callout[data-callout="help"],
 .callout[data-callout="faq"] {
-  border-left-color: #ffaa00;
+  // border-left-color: #ffaa00;
 
   .callout-title {
-    background: rgba(255, 170, 0, 0.1);
+    // background: rgba(255, 170, 0, 0.1);
     color: #ffaa00;
   }
 
@@ -149,10 +149,10 @@
 .callout[data-callout="warning"],
 .callout[data-callout="caution"],
 .callout[data-callout="attention"] {
-  border-left-color: #ff8533;
+  // border-left-color: #ff8533;
 
   .callout-title {
-    background: rgba(255, 133, 51, 0.1);
+    // background: rgba(255, 133, 51, 0.1);
     color: #ff8533;
   }
 
@@ -167,10 +167,10 @@
 .callout[data-callout="missing"],
 .callout[data-callout="error"],
 .callout[data-callout="bug"] {
-  border-left-color: #ff4466;
+  // border-left-color: #ff4466;
 
   .callout-title {
-    background: rgba(255, 68, 102, 0.1);
+    // background: rgba(255, 68, 102, 0.1);
     color: #ff4466;
   }
 
@@ -181,10 +181,10 @@
 
 // 7. Example (Purple)
 .callout[data-callout="example"] {
-  border-left-color: #b37de8;
+  // border-left-color: #b37de8;
 
   .callout-title {
-    background: rgba(179, 125, 232, 0.1);
+    // background: rgba(179, 125, 232, 0.1);
     color: #b37de8;
   }
 
@@ -196,10 +196,10 @@
 // 8. Quote / Cite (Muted/Grey)
 .callout[data-callout="quote"],
 .callout[data-callout="cite"] {
-  border-left-color: var(--muted);
+  // border-left-color: var(--muted);
 
   .callout-title {
-    background: rgba(127, 140, 141, 0.1);
+    // background: rgba(127, 140, 141, 0.1);
     color: var(--muted);
   }
 
