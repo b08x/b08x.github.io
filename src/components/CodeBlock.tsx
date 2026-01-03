@@ -179,7 +179,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           margin: 0,
           padding: '1.25rem',
           background: 'transparent',
-          borderRadius: 'var(--radius-lg, 0.5rem)',
+          borderRadius: 'var(--radius-sm, 0.5rem)',
         }}
         codeTagProps={{
           style: {
