@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { getSyntaxTheme } from '../utils/syntaxTheme';
+import {
+  SiJavascript, SiTypescript, SiPython, SiRuby, SiGnubash,
+  SiMarkdown, SiReact, SiCss3, SiSass, SiHtml5, SiGo, SiRust, SiC, SiCplusplus
+} from 'react-icons/si';
+import { VscJson, VscSettings, VscDatabase, VscCode } from 'react-icons/vsc';
+import { FaJava } from 'react-icons/fa';
 
 interface CodeBlockProps {
   code: string;
@@ -137,6 +143,30 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     ? language
     : 'text';
 
+  const LANGUAGE_ICONS: Record<string, React.ReactNode> = {
+    javascript: <SiJavascript />,
+    typescript: <SiTypescript />,
+    python: <SiPython />,
+    ruby: <SiRuby />,
+    bash: <SiGnubash />,
+    markdown: <SiMarkdown />,
+    json: <VscJson />,
+    yaml: <VscSettings />,
+    jsx: <SiReact />,
+    tsx: <SiReact />,
+    css: <SiCss3 />,
+    scss: <SiSass />,
+    html: <SiHtml5 />,
+    sql: <VscDatabase />,
+    go: <SiGo />,
+    rust: <SiRust />,
+    java: <FaJava />,
+    c: <SiC />,
+    cpp: <SiCplusplus />,
+  };
+
+  const LanguageIcon = LANGUAGE_ICONS[normalizedLanguage] || <VscCode />;
+
   // Memoize highlighted code to prevent re-renders
   const highlightedCode = useMemo(
     () => (
@@ -149,6 +179,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           margin: 0,
           padding: '1.25rem',
           background: 'transparent',
+          borderRadius: 'var(--radius-lg, 0.5rem)',
         }}
         codeTagProps={{
           style: {
@@ -164,7 +195,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   );
 
   return (
-    <div className="code-block-wrapper relative my-8 group shadow-sm rounded-md overflow-hidden bg-surface border border-border">
+    <div className="code-block-wrapper relative my-8 group shadow-sm rounded-lg overflow-hidden bg-surface border border-border">
       {/* Header with File Name, Language and Copy Button */}
       <div className="bg-background border-b border-border px-4 py-3 text-[10px] font-mono text-muted flex items-center justify-between uppercase tracking-wider">
         <div className="flex items-center gap-3">
@@ -174,9 +205,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
               <div className="w-1 h-3 bg-border/50 rounded-full" />
             </>
           )}
-          <span className="text-accent/60 font-bold bg-accent/5 px-2 py-0.5 rounded border border-accent/10">
-            {normalizedLanguage}
-          </span>
+          <div
+            className="flex items-center text-accent/70"
+            title={normalizedLanguage}
+          >
+            <span className="text-lg">
+              {LanguageIcon}
+            </span>
+          </div>
         </div>
 
         {/* Copy button - Moved to header */}
