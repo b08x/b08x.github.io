@@ -195,7 +195,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   );
 
   return (
-    <div className="code-block-wrapper relative my-8 group shadow-sm rounded-lg overflow-hidden bg-surface border border-border">
+    <div className="code-block-wrapper relative my-8 group shadow-sm rounded-md overflow-hidden bg-surface border border-border">
       {/* Header with File Name, Language and Copy Button */}
       <div className="bg-background border-b border-border px-4 py-3 text-[10px] font-mono text-muted flex items-center justify-between uppercase tracking-wider">
         <div className="flex items-center gap-3">
