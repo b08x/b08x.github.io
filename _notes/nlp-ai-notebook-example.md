@@ -18,6 +18,14 @@ suggested_questions:
   - "In what ways does the research presented in these sources suggest a future where AI NLP tools complement or even replace linguists' work?"
 ---
 
+[[Introduction to NLP]]
+[[Getting Started with NLP]]
+[[NLP Models]]
+[[Code Generation]]
+[[Part of Speech]]
+[[Semantic Relations]]
+[[Text Segmentation]]
+
 ## Additional Context
 
 This notebook explores the evolving relationship between natural language processing (NLP) and the field of linguistics. As AI models become increasingly sophisticated in their ability to analyze and generate human language, questions arise about the future role of linguists and the potential for AI to automate or augment traditional linguistic analysis.

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import CodeBlock from './CodeBlock';
+import { extractCodeBlocks, hasCodeBlocks, replaceCodeBlocksWithIslands } from '../utils/codeProcessor';
 
 interface Note {
   id: string;
@@ -20,6 +22,90 @@ const NotesGrid: React.FC<NotesGridProps> = ({ notes = [], videoUrl, videoTitle 
   const [activeNoteId, setActiveNoteId] = useState<string | null>(null);
 
   const activeNote = notes?.find(n => n.id === activeNoteId);
+
+  /**
+   * Process note content to extract code blocks and render them with CodeBlock component
+   * Returns array of content segments: either HTML strings or CodeBlock components
+   */
+  const processNoteContent = useCallback((html: string): React.ReactNode[] => {
+    if (!hasCodeBlocks(html)) {
+      // No code blocks, render as-is with dangerouslySetInnerHTML
+      return [
+        <div
+          key="content-0"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      ];
+    }
+
+    // Extract code blocks
+    const codeBlocks = extractCodeBlocks(html);
+
+    if (codeBlocks.length === 0) {
+      // No code blocks found, render as-is
+      return [
+        <div
+          key="content-0"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      ];
+    }
+
+    // Parse original HTML to find and replace code blocks
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const contentNodes: React.ReactNode[] = [];
+    let codeBlockIndex = 0;
+
+    // Find all code containers
+    const codeContainers = Array.from(doc.querySelectorAll('div[class*="language-"]'));
+
+    codeContainers.forEach((container, idx) => {
+      const block = codeBlocks[codeBlockIndex];
+      if (block) {
+        // Create a marker element to replace the code container
+        const marker = doc.createElement('div');
+        marker.setAttribute('data-code-block-marker', String(codeBlockIndex));
+        container.replaceWith(marker);
+        codeBlockIndex++;
+      }
+    });
+
+    // Split HTML by markers and create React nodes
+    const htmlString = doc.body.innerHTML;
+    const parts = htmlString.split(/<div data-code-block-marker="(\d+)"><\/div>/);
+
+    parts.forEach((part, idx) => {
+      if (idx % 2 === 0) {
+        // Regular HTML content
+        if (part.trim()) {
+          contentNodes.push(
+            <div
+              key={`html-${idx}`}
+              dangerouslySetInnerHTML={{ __html: part }}
+            />
+          );
+        }
+      } else {
+        // Code block marker index
+        const blockIdx = parseInt(part, 10);
+        const block = codeBlocks[blockIdx];
+        if (block) {
+          contentNodes.push(
+            <CodeBlock
+              key={`code-${blockIdx}`}
+              code={block.code}
+              language={block.language}
+              fileName={block.fileName}
+              showLineNumbers={false}
+            />
+          );
+        }
+      }
+    });
+
+    return contentNodes;
+  }, []);
 
   const renderVideo = () => {
     if (!videoUrl || activeNoteId) return null;
@@ -80,7 +166,7 @@ const NotesGrid: React.FC<NotesGridProps> = ({ notes = [], videoUrl, videoTitle 
 
         <div className="prose dark:prose-invert max-w-none text-foreground">
           {activeNote.content ? (
-            <div dangerouslySetInnerHTML={{ __html: activeNote.content }} />
+            <>{processNoteContent(activeNote.content)}</>
           ) : (
             <p className="text-foreground/50 italic">No content available for this note.</p>
           )}

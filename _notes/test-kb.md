@@ -9,6 +9,8 @@ resources:
     url: "/design-system"
 ---
 
+# do headings here count
+
 ## Introduction to the System
 
 This knowledgebase layout is designed for detail without sacrificing readability. We use a carousel-style pagination to break long documents into manageable chunks.
@@ -38,6 +40,34 @@ We also support audio and video for walkthroughs:
   </audio>
 </div>
 
+## Code Examples
+
+Here's how to implement a simple React component:
+
+```javascript
+import React from 'react';
+
+const HelloWorld = () => {
+  return <h1>Hello, World!</h1>;
+};
+
+export default HelloWorld;
+```
+
+And here's a Python example:
+
+```python
+def fibonacci(n):
+    """Generate Fibonacci sequence up to n."""
+    a, b = 0, 1
+    while a < n:
+        print(a, end=' ')
+        a, b = b, a+b
+    print()
+
+fibonacci(100)
+```
+
 ## Best Practices
 
 Documentation should be updated alongside code changes. Our goal is to provide a "ServiceNow" level of detail with "Apple" level of polish.
@@ -45,3 +75,13 @@ Documentation should be updated alongside code changes. Our goal is to provide a
 1. **Detail**: Include every step.
 2. **Context**: Why are we doing this?
 3. **Verification**: How do we know it works?
+
+Here's how to verify your setup with a bash command:
+
+```bash
+#!/bin/bash
+# Check system dependencies
+command -v node >/dev/null 2>&1 || { echo "Node.js required"; exit 1; }
+command -v npm >/dev/null 2>&1 || { echo "npm required"; exit 1; }
+echo "All dependencies installed!"
+```
