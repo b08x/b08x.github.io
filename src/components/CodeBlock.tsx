@@ -5,7 +5,7 @@ import {
   SiJavascript, SiTypescript, SiPython, SiRuby, SiGnubash,
   SiMarkdown, SiReact, SiCss3, SiSass, SiHtml5, SiGo, SiRust, SiC, SiCplusplus
 } from 'react-icons/si';
-import { VscJson, VscSettings, VscDatabase, VscCode } from 'react-icons/vsc';
+import { VscJson, VscSettings, VscDatabase, VscCode, VscCheck, VscCopy } from 'react-icons/vsc';
 import { FaJava } from 'react-icons/fa';
 
 interface CodeBlockProps {
@@ -13,6 +13,7 @@ interface CodeBlockProps {
   language: string;
   showLineNumbers?: boolean;
   fileName?: string;
+  startingLineNumber?: number;
 }
 
 /**
@@ -33,10 +34,85 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
   language,
   showLineNumbers = false,
-  fileName,
+  fileName: propFileName,
+  startingLineNumber = 1,
 }) => {
   const [copied, setCopied] = useState(false);
   const [currentTheme, setCurrentTheme] = useState(() => getSyntaxTheme());
+  const [isInList, setIsInList] = useState(false);
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+
+  // Detect if component is inside a list (ul or ol)
+  useEffect(() => {
+    if (wrapperRef.current) {
+      const listItem = wrapperRef.current.closest('li');
+      if (listItem) {
+        setIsInList(true);
+      }
+    }
+  }, []);
+
+  // Determine actual filename and whether to strip first line
+  const { displayFileName, processedCode } = useMemo(() => {
+    let activeFileName = propFileName;
+
+    // Split into lines to analyze indentation and content
+    const lines = code.split('\n');
+
+    // 1. Find the common indentation (excluding search for filename)
+    // This helps handle code blocks indented in markdown lists
+    let minIndent = Infinity;
+    lines.forEach(line => {
+      if (line.trim().length > 0) {
+        const match = line.match(/^(\s*)/);
+        const indent = match ? match[1].length : 0;
+        if (indent < minIndent) minIndent = indent;
+      }
+    });
+
+    if (minIndent === Infinity) minIndent = 0;
+
+    // 2. Normalize by removing common indentation
+    const normalizedLines = lines.map(line =>
+      line.length >= minIndent ? line.slice(minIndent) : line.trimStart()
+    );
+
+    let finalCodeLines = [...normalizedLines];
+
+    // 3. Detect filename from first line of normalized code
+    if (finalCodeLines.length > 0) {
+      const firstLine = finalCodeLines[0].trim();
+
+      const patterns = [
+        /^#\s+(.+)$/,
+        /^\/\/\s+(.+)$/,
+        /^\/\*\s*(.+)\s*\*\/$/,
+        /^<!--\s*(.+)\s*-->$/,
+        /^--\s+(.+)$/,
+      ];
+
+      for (const pattern of patterns) {
+        const match = firstLine.match(pattern);
+        if (match && match[1]) {
+          const detected = match[1].trim();
+          // If detected matches the prop, or if prop is missing and detected looks like a file
+          if (detected === propFileName || (!propFileName && (detected.includes('.') || detected.includes('/')))) {
+            activeFileName = detected;
+            finalCodeLines = finalCodeLines.slice(1);
+            break;
+          }
+        }
+      }
+    }
+
+    // Join back and trim leading/trailing empty lines only, preserving internal indentation
+    const joined = finalCodeLines.join('\n').replace(/^[\r\n]+|[\r\n\s]+$/g, '');
+
+    return {
+      displayFileName: activeFileName,
+      processedCode: joined
+    };
+  }, [code, propFileName]);
 
   // Watch for dark mode changes using MutationObserver pattern
   useEffect(() => {
@@ -66,16 +142,16 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
 
   // Copy to clipboard handler using a more robust method
   const handleCopy = async () => {
-    if (!code) return;
+    if (!processedCode) return;
 
     try {
       // Try the modern API first
       if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(code);
+        await navigator.clipboard.writeText(processedCode);
       } else {
         // Fallback for non-secure contexts or older browsers
         const textArea = document.createElement("textarea");
-        textArea.value = code;
+        textArea.value = processedCode;
         textArea.style.position = "fixed";
         textArea.style.left = "-9999px";
         textArea.style.top = "0";
@@ -108,7 +184,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   };
 
   // Handle empty code blocks
-  if (!code || code.trim().length === 0) {
+  if (!processedCode || processedCode.trim().length === 0) {
     return (
       <div className="bg-surface border border-border rounded-lg p-4 text-muted font-mono text-sm my-4">
         <em>Empty code block</em>
@@ -174,6 +250,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         language={normalizedLanguage}
         style={currentTheme}
         showLineNumbers={showLineNumbers}
+        startingLineNumber={startingLineNumber}
         wrapLines={true}
         customStyle={{
           margin: 0,
@@ -188,23 +265,21 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           },
         }}
       >
-        {code}
+        {processedCode}
       </SyntaxHighlighter>
     ),
-    [code, normalizedLanguage, showLineNumbers, currentTheme]
+    [processedCode, normalizedLanguage, showLineNumbers, currentTheme]
   );
 
   return (
-    <div className="code-block-wrapper relative my-8 group shadow-sm rounded-md overflow-hidden bg-surface border border-border">
-      {/* Header with File Name, Language and Copy Button */}
-      <div className="bg-background border-b border-border px-4 py-3 text-[10px] font-mono text-muted flex items-center justify-between uppercase tracking-wider">
+    <div
+      ref={wrapperRef}
+      className={`code-block-wrapper relative group shadow-sm rounded-md overflow-hidden bg-surface border border-border ${isInList ? 'my-3' : 'my-8'
+        }`}
+    >
+      {/* Header with Language Icon, File Name and Copy Button */}
+      <div className="bg-background border-b border-border px-4 py-2 flex items-center justify-between tracking-wide">
         <div className="flex items-center gap-3">
-          {fileName && (
-            <>
-              <span className="text-foreground/40 hover:text-foreground/70 transition-colors cursor-default">{fileName}</span>
-              <div className="w-1 h-3 bg-border/50 rounded-full" />
-            </>
-          )}
           <div
             className="flex items-center text-accent/70"
             title={normalizedLanguage}
@@ -213,33 +288,24 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
               {LanguageIcon}
             </span>
           </div>
+
+          {displayFileName && (
+            <div className="flex items-center text-foreground/90 font-medium text-[12px]">
+              <span className="truncate max-w-[300px]">{displayFileName}</span>
+            </div>
+          )}
         </div>
 
         {/* Copy button - Moved to header */}
         <button
           onClick={handleCopy}
-          aria-label={copied ? 'Code copied' : 'Copy code to clipboard'}
-          className={`flex items-center gap-2 px-3 py-1 rounded-md border transition-all duration-300 
-            ${copied
-              ? 'bg-chart-2/10 border-chart-2/50 text-chart-2'
-              : 'bg-surface/50 border-border text-muted hover:border-accent hover:text-accent hover:bg-accent/5'
-            } 
-            focus:outline-none focus:ring-1 focus:ring-accent/50 hover:scale-[1.02] active:scale-[0.98]`}
+          className="flex items-center justify-center w-8 h-8 rounded border border-border bg-surface hover:bg-background transition-colors text-muted hover:text-foreground group/btn shadow-sm"
+          title={copied ? "Copied!" : "Copy code"}
         >
           {copied ? (
-            <>
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              <span className="text-[10px] font-bold uppercase tracking-wider">Copied</span>
-            </>
+            <VscCheck className="text-accent" size={20} />
           ) : (
-            <>
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-              <span className="text-[10px] font-bold uppercase tracking-wider">Copy</span>
-            </>
+            <VscCopy className="group-hover/btn:text-accent transition-colors" size={20} />
           )}
         </button>
       </div>
