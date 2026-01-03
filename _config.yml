@@ -17,6 +17,9 @@ exclude:
   - docker-compose.yml
   - CLAUDE.md
   - LICENSE
+  - implement/
+  - refactor/
+  - scripts/
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ""
 

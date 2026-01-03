@@ -893,7 +893,7 @@
     --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
     --tw-prose-invert-th-borders: oklch(44.6% 0.03 256.802);
     --tw-prose-invert-td-borders: oklch(37.3% 0.034 259.733);
-    font-size: 1rem;
+    /* font-size: 1rem; */
     line-height: 1.75;
 
     :where(picture > img):not(:where([class~="not-prose"], [class~="not-prose"] *)) {

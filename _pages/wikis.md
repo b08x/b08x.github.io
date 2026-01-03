@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /wikis/
+permalink: /wikis
 title: Project Wikis
 ---
 

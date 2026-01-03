@@ -1,0 +1,79 @@
+/* Font definitions */
+
+// Font imports for Mononoki (for headings)
+@font-face {
+  font-family: 'Mononoki';
+  src: url('../assets/fonts/mononoki-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mononoki';
+  src: url('../assets/fonts/mononoki-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mononoki';
+  src: url('../assets/fonts/mononoki-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mononoki';
+  src: url('../assets/fonts/mononoki-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Font imports for Hack (for body text)
+@font-face {
+  font-family: 'Hack';
+  src: url('../assets/fonts/Hack-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('../assets/fonts/Hack-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('../assets/fonts/Hack-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('../assets/fonts/Hack-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+// // Font variables
+// $heading-font-family: 'Mononoki', 'Courier New', monospace;
+// // $body-font-family: 'Hack', 'Consolas', monospace;
+// $body-font-family: ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+// Suggesting a standard sans-serif stack for headings:
+// $heading-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+// Suggesting the same stack for body text (common practice):
+// $body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+// You could choose slightly different sans-serif fonts for headings vs body if you prefer.

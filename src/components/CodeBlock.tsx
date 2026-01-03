@@ -153,6 +153,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         codeTagProps={{
           style: {
             fontFamily: 'var(--font-mono)',
+            whiteSpace: 'pre-wrap',
           },
         }}
       >
