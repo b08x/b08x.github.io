@@ -209,7 +209,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
             className="flex items-center text-accent/70"
             title={normalizedLanguage}
           >
-            <span className="text-lg">
+            <span className="text-xl">
               {LanguageIcon}
             </span>
           </div>

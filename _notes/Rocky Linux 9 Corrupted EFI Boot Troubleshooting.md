@@ -37,23 +37,28 @@ In this case, Rocky 9 is the host OS. First, boot into a Rocky 9-Workstation UEF
 
 After chrooting, reinstall relevant grub/efi related packages; Mount efivarfs. This is a common requirement inside a `chroot` to communicate with the UEFI firmware.
 
-Use `grub2-install` to place the GRUB bootloader files on your EFI partition and create a new EFI boot entry. The `--bootloader-id` option assigns a name to the boot entry, such as `rocky`.
-
-> \[!caution\]  
-> These notes assume that UEFI Secure Boot is *disabled* -- seek additional information if the host requires Secure Boot
-
 ```bash
 [root@localhost-live /] dnf reinstall grub2-common grub2-efi-* shim*
 
 [root@localhost-live /] mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 ```
 
+Use `grub2-install` to place the GRUB bootloader files on your EFI partition and create a new EFI boot entry. The `--bootloader-id` option assigns a name to the boot entry, such as `rocky`.
+
+> \[!caution\]  
+> These notes assume that UEFI Secure Boot is *disabled* -- seek additional information if the host requires Secure Boot
+
+
 **Installing Grub:**
 
-```bash
-[root@localhost-live /] grub2-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=rocky --recheck
+```shell
+[root@localhost-live /] grub2-install --target=x86_64-efi \
+--efi-directory=/boot/efi --bootloader-id=rocky --recheck
+
 Installing for x86_64-efi platform.
+
 grub2-install: error: This utility should not be used for EFI platforms because it does not support UEFI Secure Boot. If you really wish to proceed, invoke the --force option.
+
 Make sure Secure Boot is disabled before proceeding.
 ```
 
@@ -61,8 +66,11 @@ Make sure Secure Boot is disabled before proceeding.
 > The `--force` option is used because Secure Boot is assumed to be disabled. If Secure Boot is enabled, stop here and investigate the correct procedure.\*\*
 
 ```bash
-[root@localhost-live /] grub2-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=rocky --recheck --force
+[root@localhost-live /] grub2-install --target=x86_64-efi \
+--efi-directory=/boot/efi --bootloader-id=rocky --recheck --force
+
 Installing for x86_64-efi platform.
+
 Installation finished. No error reported.
 ```
 

@@ -4,9 +4,9 @@
   "description": "[![Deploy Jekyll site to Pages](https://github.com/b08x/b08x.github.io/actions/workflows/jekyll.yml/badge.svg)](https://github.com/b08x/b08x.github.io/actions/workflows/jekyll.yml)",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel watch:js watch:worker dev:jekyll",
-    "dev:jekyll": "bundle exec jekyll clean && bundle exec jekyll serve --incremental --livereload",
-    "build": "npm-run-all build:js build:worker build:jekyll",
+    "dev": "npm-run-all --parallel watch:js dev:jekyll",
+    "dev:jekyll": "bundle exec jekyll clean && bundle exec jekyll serve --incremental",
+    "build": "npm-run-all build:js build:jekyll",
     "build:js": "esbuild src/main.tsx --bundle --outfile=assets/js/dist/garden-widgets.js --minify --sourcemap --target=es2020",
     "build:worker": "esbuild src/components/graph.worker.ts --bundle --outfile=assets/js/dist/graph.worker.js --minify --sourcemap --target=es2020",
     "build:jekyll": "bundle exec jekyll clean && bundle exec jekyll build",
