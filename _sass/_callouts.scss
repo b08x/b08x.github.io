@@ -33,6 +33,7 @@
     height: 20px;
     flex-shrink: 0;
     font-style: normal;
+    font-size: x-large;
   }
 
   .callout-title-inner {
@@ -42,6 +43,7 @@
   .callout-content {
     padding: 1rem 1.25rem;
     font-family: var(--font-prose);
+    font-style: italic;
     color: var(--foreground);
     line-height: 1.6;
     font-size: 1rem;

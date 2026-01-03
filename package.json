@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-run-all --parallel watch:js dev:jekyll",
-    "dev:jekyll": "bundle exec jekyll clean && bundle exec jekyll serve --incremental --livereload",
+    "dev:jekyll": "bundle exec jekyll clean && bundle exec jekyll serve --incremental",
     "build": "npm-run-all build:js build:jekyll",
     "build:js": "esbuild src/main.tsx --bundle --outfile=assets/js/dist/garden-widgets.js --minify --sourcemap --target=es2020",
     "build:jekyll": "bundle exec jekyll clean && bundle exec jekyll build",
