@@ -117,9 +117,8 @@ Once an image is preprocessed into a numerical format, the next step is to feed 
 
 For vision tasks, `Informers.rb` offers several pre-defined pipelines, including `image-classification`, `object-detection`, and `image-feature-extraction`.10 The term "feature extraction" is synonymous with generating an embedding vector.10
 
-Ruby
 
-```shell
+```ruby
 require 'informers'
 
 # Initialize a pipeline for generating image embeddings
@@ -194,35 +193,35 @@ The setup process is straightforward and follows standard Rails conventions:
 
 1. **Enable the Extension:** A database migration is used to enable the `vector` extension in PostgreSQL.4
 
-```ruby
-    # db/migrate/enable_pgvector_extension.rb
-    class EnablePgvector < ActiveRecord::Migration[7.1]
-      def change
-        enable_extension "vector"
-      end
-    end
-```
+      ```ruby
+          # db/migrate/enable_pgvector_extension.rb
+          class EnablePgvector < ActiveRecord::Migration[7.1]
+            def change
+              enable_extension "vector"
+            end
+          end
+      ```
 
 2. **Add a Vector Column:** Another migration adds a column of type `vector` to the desired model's table. It is critical to specify the `limit` (or `dimensions`), which must match the output dimension of the embedding model being used.4
 
-```ruby
-    # db/migrate/add_embedding_to_photos.rb
-    class AddEmbeddingToPhotos < ActiveRecord::Migration[7.1]
-      def change
-        add_column :photos, :embedding, :vector, limit: 512 # e.g., for a CLIP model
-      end
-    end
-```
+      ```ruby
+          # db/migrate/add_embedding_to_photos.rb
+          class AddEmbeddingToPhotos < ActiveRecord::Migration[7.1]
+            def change
+              add_column :photos, :embedding, :vector, limit: 512 # e.g., for a CLIP model
+            end
+          end
+      ```
 
 3. **Configure the Model:** The `has_neighbors` macro is added to the ActiveRecord model, linking it to the embedding column.4
 
-```ruby
-    # app/models/photo.rb
-    class Photo < ApplicationRecord
-      has_one_attached :image
-      has_neighbors :embedding
-    end
-```
+      ```ruby
+          # app/models/photo.rb
+          class Photo < ApplicationRecord
+            has_one_attached :image
+            has_neighbors :embedding
+          end
+      ```
 
 Once set up, storing an embedding is as simple as assigning the vector (as a Ruby `Array` of floats) to the model attribute and saving the record.12 The `neighbor` gem provides a `nearest_neighbors` scope for querying. This scope can be called on an instance to find its neighbors or on the class to find items similar to an external query vector. It supports standard distance metrics like `euclidean`, `cosine`, and `inner_product`.4
 
@@ -246,42 +245,42 @@ The standard `redis-rb` gem does not include high-level abstractions for RediSea
 
 1. **Creating an Index (`FT.CREATE`):** An index schema must be defined first. This schema specifies the fields to be indexed, including the `VECTOR` field with its algorithm (e.g., `FLAT` or `HNSW`), data type, dimensions, and distance metric.3
 
-```ruby
-    require 'redis'
-    redis = Redis.new
-    
-    schema =
-    
-    redis.call("FT.CREATE", "my_image_index", "ON", "HASH", "PREFIX", "1", "image:", *schema)
-```
+      ```ruby
+          require 'redis'
+          redis = Redis.new
+          
+          schema =
+          
+          redis.call("FT.CREATE", "my_image_index", "ON", "HASH", "PREFIX", "1", "image:", *schema)
+      ```
 
 2. **Storing Data:** Data is stored in Redis Hashes. The vector embedding must be converted from a Ruby array of floats into a binary string using `Array#pack` before being stored.51
 
-```ruby
-    # vector is a Ruby Array of floats
-    binary_embedding = vector.pack('f*')
-    redis.hset("image:123", {
-      "filename" => "foo.jpg",
-      "image_embedding" => binary_embedding
-    })
-```
+      ```ruby
+          # vector is a Ruby Array of floats
+          binary_embedding = vector.pack('f*')
+          redis.hset("image:123", {
+            "filename" => "foo.jpg",
+            "image_embedding" => binary_embedding
+          })
+      ```
 
 3. **Performing a Search (`FT.SEARCH`):** A K-Nearest Neighbor (KNN) search is performed using a specialized query syntax. The query vector must also be passed as a binary blob via the `PARAMS` argument.51
 
-```ruby
-    # query_vector is a Ruby Array of floats
-    binary_query_vector = query_vector.pack('f*')
-    
-    query_string = "(*)=>"
-    
-    # Using redis-rb's ability to handle named arguments for complex commands
-    results = redis.call(
-      "FT.SEARCH", "my_image_index", query_string,
-      "PARAMS", 2, "query_blob", binary_query_vector,
-      "SORTBY", "vector_score",
-      "DIALECT", 2
-    )
-```
+      ```ruby
+          # query_vector is a Ruby Array of floats
+          binary_query_vector = query_vector.pack('f*')
+          
+          query_string = "(*)=>"
+          
+          # Using redis-rb's ability to handle named arguments for complex commands
+          results = redis.call(
+            "FT.SEARCH", "my_image_index", query_string,
+            "PARAMS", 2, "query_blob", binary_query_vector,
+            "SORTBY", "vector_score",
+            "DIALECT", 2
+          )
+      ```
 
 The choice between these two database solutions represents a classic architectural trade-off. The `neighbor` and `pgvector` combination offers unparalleled simplicity and integration for Rails developers, treating embeddings as a native feature of ActiveRecord. This is the pragmatic choice for most applications. In contrast, Redis with RediSearch provides a specialized, high-performance engine that may offer superior speed and scalability for applications where vector search is the core, mission-critical function. However, this performance comes at the cost of increased operational complexity and a less mature client ecosystem in Ruby, requiring developers to work closer to the raw Redis protocol, manually handling schema creation, data serialization, and query construction.
 
@@ -293,36 +292,36 @@ To synthesize the concepts from the previous sections, this section outlines a c
 
 1. **Initialize the Rails Application:** Create a new Rails application and add the necessary gems to the `Gemfile`.
 
-```ruby
-    # Gemfile
-    gem 'pg'
-    gem 'image_processing'
-    gem 'ruby-vips'
-    gem 'informers'
-    gem 'neighbor'
-```
+      ```ruby
+      # Gemfile
+      gem 'pg'
+      gem 'image_processing'
+      gem 'ruby-vips'
+      gem 'informers'
+      gem 'neighbor'
+      ```
 
 2. **Configure Active Storage:** Install Active Storage to handle image uploads.
 
-```shell
-rails active_storage:install
-```
+      ```shell
+      rails active_storage:install
+      ```
 
 3. **Create the Model and Migrations:** Generate a model, for example `Photo`, and create the migrations to enable `pgvector` and add the vector column.
 
-```ruby
-    rails g model Photo title:string
-    # db/migrate/..._enable_pgvector.rb
-    enable_extension "vector"
-    # db/migrate/..._add_embedding_to_photos.rb
-    add_column :photos, :embedding, :vector, limit: 512 # Dimension must match the model
-```
+      ```ruby
+          rails g model Photo title:string
+          # db/migrate/..._enable_pgvector.rb
+          enable_extension "vector"
+          # db/migrate/..._add_embedding_to_photos.rb
+          add_column :photos, :embedding, :vector, limit: 512 # Dimension must match the model
+      ```
 
 4. **Run Migrations:** Apply the changes to the database.
 
-```ruby
-    rails db:migrate
-```
+      ```ruby
+          rails db:migrate
+      ```
 
 ### The Model and Background Job
 
@@ -330,49 +329,49 @@ To avoid blocking web requests during the potentially time-consuming embedding p
 
 1. **Configure the Model:** In the `Photo` model, set up the Active Storage attachment and the `neighbor` integration. Use an `after_commit` callback to enqueue the embedding job after a photo is successfully created.
 
-```ruby
-    # app/models/photo.rb
-    class Photo < ApplicationRecord
-      has_one_attached :image
-      has_neighbors :embedding
-    
-      after_commit :generate_embedding, on: :create
-    
-      private
-    
-      def generate_embedding
-        GenerateEmbeddingJob.perform_later(self)
-      end
-    end
-```
+      ```ruby
+          # app/models/photo.rb
+          class Photo < ApplicationRecord
+            has_one_attached :image
+            has_neighbors :embedding
+          
+            after_commit :generate_embedding, on: :create
+          
+            private
+          
+            def generate_embedding
+              GenerateEmbeddingJob.perform_later(self)
+            end
+          end
+      ```
 
 2. **Create the Background Job:** This job will perform the core logic of generating and saving the embedding.
 
-```ruby
-    # app/jobs/generate_embedding_job.rb
-    class GenerateEmbeddingJob < ApplicationJob
-      queue_as :default
-    
-      # Lazily instantiate the pipeline to avoid loading it on every job
-      cattr_accessor :embedding_pipeline do
-        Informers.pipeline("image-feature-extraction", "openai/clip-vit-base-patch32")
-      end
-    
-      def perform(photo)
-        # Ensure the image blob is attached
-        return unless photo.image.attached?
-    
-        # Active Storage provides a temporary path to the file
-        photo.image.blob.open do |tempfile|
-          # Generate the embedding vector
-          vector = self.class.embedding_pipeline.call(tempfile.path)
-    
-          # Update the record with the new embedding
-          photo.update!(embedding: vector)
-        end
-      end
-    end
-```
+      ```ruby
+          # app/jobs/generate_embedding_job.rb
+          class GenerateEmbeddingJob < ApplicationJob
+            queue_as :default
+          
+            # Lazily instantiate the pipeline to avoid loading it on every job
+            cattr_accessor :embedding_pipeline do
+              Informers.pipeline("image-feature-extraction", "openai/clip-vit-base-patch32")
+            end
+          
+            def perform(photo)
+              # Ensure the image blob is attached
+              return unless photo.image.attached?
+          
+              # Active Storage provides a temporary path to the file
+              photo.image.blob.open do |tempfile|
+                # Generate the embedding vector
+                vector = self.class.embedding_pipeline.call(tempfile.path)
+          
+                # Update the record with the new embedding
+                photo.update!(embedding: vector)
+              end
+            end
+          end
+      ```
 
 ### The Search Controller
 
@@ -410,40 +409,40 @@ Finally, set up the routes and views to provide a user interface.
 
 1. **Routes:**
 
-```ruby
-    # config/routes.rb
-    Rails.application.routes.draw do
-      root "photos#index"
-      resources :photos, only: [:index, :new, :create]
-      resource :search, only: [:new, :create]
-    end
-```
+      ```ruby
+          # config/routes.rb
+          Rails.application.routes.draw do
+            root "photos#index"
+            resources :photos, only: [:index, :new, :create]
+            resource :search, only: [:new, :create]
+          end
+      ```
 
 2. **Search Form View:**
 
-```html
-    <h1>Visual Search</h1>
-    <%= form_with url: search_path, method: :post, multipart: true do |form| %>
-      <%= form.label :query_image, "Upload an image to find similar photos:" %>
-      <%= form.file_field :query_image, accept: "image/*" %>
-      <%= form.submit "Search" %>
-    <% end %>
-```
+      ```html
+          <h1>Visual Search</h1>
+          <%= form_with url: search_path, method: :post, multipart: true do |form| %>
+            <%= form.label :query_image, "Upload an image to find similar photos:" %>
+            <%= form.file_field :query_image, accept: "image/*" %>
+            <%= form.submit "Search" %>
+          <% end %>
+      ```
 
 3. **Results View:**
 
-```html
-    <h1>Search Results</h1>
-    
-    <h2>Query Image:</h2>
-    <img src="data:image/jpeg;base64,<%= Base64.strict_encode64(@query_image_data) %>" width="200">
-    
-    <h2>Similar Photos:</h2>
-    <% @results.each do |photo| %>
-      <%= image_tag photo.image.variant(resize_to_limit: ) %>
-      <p>Similarity Score: <%= photo.neighbor_distance %></p>
-    <% end %>
-```
+      ```html
+          <h1>Search Results</h1>
+          
+          <h2>Query Image:</h2>
+          <img src="data:image/jpeg;base64,<%= Base64.strict_encode64(@query_image_data) %>" width="200">
+          
+          <h2>Similar Photos:</h2>
+          <% @results.each do |photo| %>
+            <%= image_tag photo.image.variant(resize_to_limit: ) %>
+            <p>Similarity Score: <%= photo.neighbor_distance %></p>
+          <% end %>
+      ```
 
 This end-to-end example demonstrates how the various components of the Ruby ML stack work in concert to deliver a powerful, modern AI feature within a conventional Rails application.
 
