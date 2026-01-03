@@ -128,12 +128,76 @@ const enhanceMermaidDiagrams = () => {
   }
 };
 
+const enhanceCodeBlocks = () => {
+  // Find all Rouge-generated code containers
+  const containers = document.querySelectorAll('div[class*="language-"].highlighter-rouge');
+  console.log(`[Garden] Found ${containers.length} code blocks to enhance`);
+
+  if (containers.length === 0) return;
+
+  // Language mapping for common aliases
+  const LANGUAGE_ALIASES: Record<string, string> = {
+    js: 'javascript',
+    ts: 'typescript',
+    py: 'python',
+    rb: 'ruby',
+    yml: 'yaml',
+    sh: 'bash',
+    shell: 'bash',
+    zsh: 'bash',
+    md: 'markdown',
+  };
+
+  containers.forEach((container) => {
+    try {
+      const codeElement = container.querySelector('pre code');
+      if (!codeElement) return;
+
+      const code = codeElement.textContent || '';
+
+      // Extract language from class name
+      const classNames = container.className.split(' ');
+      const languageClass = classNames.find((cls) => cls.startsWith('language-'));
+      let language = languageClass ? languageClass.replace('language-', '') : 'text';
+
+      // Apply aliases
+      language = LANGUAGE_ALIASES[language] || language;
+
+      // Extract optional file name from data attribute
+      const fileName = container.getAttribute('data-filename') || undefined;
+
+      // Create island container
+      const island = document.createElement('div');
+      island.setAttribute('data-island', 'CodeBlock');
+      island.setAttribute(
+        'data-props',
+        JSON.stringify({
+          code: code.trim(),
+          language,
+          fileName,
+          showLineNumbers: false,
+        })
+      );
+
+      // Replace original container
+      container.replaceWith(island);
+    } catch (err) {
+      console.warn('[Garden] Failed to enhance code block:', err);
+    }
+  });
+
+  // Re-run island mounting for new CodeBlock islands
+  mountIslands();
+};
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
+    enhanceCodeBlocks();
     mountIslands();
     enhanceMermaidDiagrams();
   });
 } else {
+  enhanceCodeBlocks();
   mountIslands();
   enhanceMermaidDiagrams();
 }
