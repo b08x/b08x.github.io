@@ -9,6 +9,8 @@ resources:
     url: "/design-system"
 ---
 
+# do headings here count
+
 ## Introduction to the System
 
 This knowledgebase layout is designed for detail without sacrificing readability. We use a carousel-style pagination to break long documents into manageable chunks.

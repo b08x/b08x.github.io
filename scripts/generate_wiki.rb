@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+# This script generates Jekyll wiki pages from JSON data files exported from DeepWiki-Open generated wikis, located in `_data/wikis`.
+# It handles slug generation, pagination, repository link transformation, and cross-linking between wiki pages.
+#
+# @author b08x
+# @version 1.1.0
+
 require 'jekyll'
 require 'fileutils'
 require 'json'
@@ -10,10 +16,19 @@ require 'yaml'
 ITEMS_PER_PAGE = 12
 RESERVED_SLUGS = ['page'].freeze
 
+# Converts a string into a URL-friendly slug.
+#
+# @param string [String] the string to slugify
+# @return [String] the slugified string
 def slugify(string)
   Jekyll::Utils.slugify(string)
 end
 
+# Validates a slug against a list of reserved keywords.
+# If the slug is reserved, it appends '-content' to avoid conflicts.
+#
+# @param slug [String] the slug to validate
+# @return [String] the validated (and possibly modified) slug
 def validate_slug(slug)
   if RESERVED_SLUGS.include?(slug)
     puts "Warning: Page slug '#{slug}' conflicts with reserved keyword. Using '#{slug}-content' instead."
@@ -22,6 +37,11 @@ def validate_slug(slug)
   slug
 end
 
+# Extracts a text excerpt from content by stripping HTML and Markdown tags.
+#
+# @param content [String] the raw content string
+# @param length [Integer] the approximate length of the excerpt
+# @return [String] the cleaned and truncated excerpt
 def extract_excerpt(content, length = 200)
   return "" if content.nil? || content.empty?
   
@@ -45,11 +65,22 @@ def extract_excerpt(content, length = 200)
   end
 end
 
+# Slices a list of pages into segments for pagination.
+#
+# @param pages [Array<Hash>] the collection of page data
+# @param per_page [Integer] number of items per page
+# @return [Array<Array<Hash>>] an array of page segments
 def calculate_pagination_segments(pages, per_page)
   return [] if pages.nil? || pages.empty?
   pages.each_slice(per_page).to_a
 end
 
+# Builds pagination metadata for a specific index page.
+#
+# @param page_num [Integer] the current page number
+# @param total_pages [Integer] the total number of pages
+# @param wiki_id [String] the identifier for the wiki
+# @return [Hash] the pagination metadata
 def build_pagination_metadata(page_num, total_pages, wiki_id)
   has_previous = page_num > 1
   has_next = page_num < total_pages
@@ -78,6 +109,16 @@ def build_pagination_metadata(page_num, total_pages, wiki_id)
   }
 end
 
+# Generates an individual Markdown page for a wiki entry.
+#
+# @param source_dir [String] the root directory of the site
+# @param wiki_id [String] the identifier for the wiki
+# @param page_data [Hash] the data for the specific page
+# @param prev_page [Hash, nil] the data for the previous page
+# @param next_page [Hash, nil] the data for the next page
+# @param permalink_map [Hash] map of page IDs to their calculated permalinks and slugs
+# @param repo_url [String, nil] the base URL for the repository
+# @return [void]
 def generate_page(source_dir, wiki_id, page_data, prev_page, next_page, permalink_map, repo_url)
   page_info = permalink_map[page_data['id']]
   slug = page_info['slug']
@@ -195,6 +236,16 @@ def generate_page(source_dir, wiki_id, page_data, prev_page, next_page, permalin
   File.write(path, file_content)
 end
 
+# Writes a paginated index page for the wiki.
+#
+# @param source_dir [String] the root directory of the site
+# @param wiki_id [String] the identifier for the wiki
+# @param segment [Array<Hash>] the list of pages for this index page
+# @param page_num [Integer] the current page number
+# @param total_pages [Integer] the total number of pages
+# @param wiki_metadata [Hash] metadata for the entire wiki
+# @param permalink_map [Hash] map of page IDs to calculated path info
+# @return [void]
 def write_paginated_page(source_dir, wiki_id, segment, page_num, total_pages, wiki_metadata, permalink_map)
   # Determine directory path
   if page_num == 1
@@ -253,6 +304,12 @@ def write_paginated_page(source_dir, wiki_id, segment, page_num, total_pages, wi
   File.write(path, file_content)
 end
 
+# Removes old directory-based structures to ensure the new flat structure is clean.
+#
+# @param source_dir [String] the root directory of the site
+# @param wiki_id [String] the identifier for the wiki
+# @param slugs [Array<String>] list of slugs to check for old directories
+# @return [void]
 def cleanup_old_directories(source_dir, wiki_id, slugs)
   wiki_dir = File.join(source_dir, 'wikis', wiki_id)
   return unless Dir.exist?(wiki_dir)
@@ -266,6 +323,9 @@ def cleanup_old_directories(source_dir, wiki_id, slugs)
   end
 end
 
+# Main execution entry point. Loads all JSON wiki definitions and triggers generation.
+#
+# @return [void]
 def main
   source_dir = Dir.pwd
   data_dir = File.join(source_dir, '_data', 'wikis')
