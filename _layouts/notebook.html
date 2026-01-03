@@ -57,7 +57,7 @@ layout: default
 
         {% capture notes_data %}{"notes": {{ notes_json | strip }}, "videoUrl": {{ page.video_url | jsonify }},
         "videoTitle": {{ page.video_title | jsonify }}}{% endcapture %}
-        <div data-island="NotesGrid" data-props='{{ notes_data | escape }}'>
+        <div data-island="NotesGrid" data-props='{{ notes_data | strip | base64_encode }}'>
           <!-- Placeholder for React component -->
           <div class="bg-surface rounded-lg border border-border p-8 text-center">
             <span class="text-foreground/50 font-mono text-sm">Loading notes...</span>
@@ -79,7 +79,7 @@ layout: default
 
       <!-- Help Me Create + Suggested Questions + Chat (React Island) -->
       {% assign questions = page.suggested_questions | default: empty %}
-      <div data-island="NotebookGuide" data-props='{"suggestedQuestions": {{ questions | jsonify }}}'>
+      <div data-island="NotebookGuide" data-props='{{ questions | jsonify | base64_encode }}'>
         <!-- Placeholder -->
         <div class="bg-surface rounded-lg border border-border p-8 text-center">
           <span class="text-foreground/50 font-mono text-sm">Loading guide...</span>
@@ -88,8 +88,9 @@ layout: default
 
       <!-- Audio Overview (React Island if audio_url provided) -->
       {% if page.audio_url %}
-      <div data-island="AudioPlayer"
-        data-props='{"audioUrl": "{{ page.audio_url }}", "title": "{{ page.audio_title | default: page.title }}"}'>
+      {% capture audio_props %}{"audioUrl": "{{ page.audio_url }}", "title": "{{ page.audio_title | default: page.title
+      | escape }}"}{% endcapture %}
+      <div data-island="AudioPlayer" data-props='{{ audio_props | base64_encode }}'>
         <!-- Placeholder -->
         <div class="bg-surface rounded-lg border border-border p-6 text-center">
           <span class="text-foreground/50 font-mono text-sm">Loading audio player...</span>

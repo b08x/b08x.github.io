@@ -26,6 +26,41 @@ const components: Record<string, React.ComponentType<any>> = {
   CodeBlock,
 };
 
+// Helper to decode Base64 accurately with UTF-8 support
+const decodeProps = (encoded: string): any => {
+  try {
+    // Try parsing as raw JSON first (for backward compatibility)
+    if (encoded.trim().startsWith('{') || encoded.trim().startsWith('[')) {
+      return JSON.parse(encoded);
+    }
+
+    // Otherwise treat as Base64
+    const binaryString = atob(encoded);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    const decoded = new TextDecoder().decode(bytes);
+    return JSON.parse(decoded);
+  } catch (e: any) {
+    console.error('[Garden] Failed to decode props:', e);
+    // Fallback to raw parsing if it wasn't valid base64 but maybe it was a string that didn't start with {
+    try {
+      return JSON.parse(encoded);
+    } catch (inner) {
+      throw new Error(`Props decoding failed: ${e.message}`);
+    }
+  }
+};
+
+// Helper to encode Base64 with UTF-8 support
+const encodeProps = (props: any): string => {
+  const json = JSON.stringify(props);
+  const bytes = new TextEncoder().encode(json);
+  const binaryString = Array.from(bytes, (byte) => String.fromCharCode(byte)).join('');
+  return btoa(binaryString);
+};
+
 const mountIslands = () => {
   const islands = document.querySelectorAll('[data-island]');
   console.log(`[Garden] Found ${islands.length} islands to mount`);
@@ -41,11 +76,7 @@ const mountIslands = () => {
       try {
         const propsAttr = container.getAttribute('data-props');
         if (propsAttr) {
-          // Replace potential smart quotes if they crept in
-          const sanitizedProps = propsAttr
-            .replace(/[\u201C\u201D]/g, '"')
-            .replace(/[\u2018\u2019]/g, "'");
-          props = JSON.parse(sanitizedProps);
+          props = decodeProps(propsAttr);
         }
       } catch (e) {
         console.error(`[Garden] Failed to parse props for island ${componentName}:`, e);
@@ -108,7 +139,7 @@ const enhanceMermaidDiagrams = () => {
       // Create island container
       const island = document.createElement('div');
       island.setAttribute('data-island', 'MermaidViewer');
-      island.setAttribute('data-props', JSON.stringify({ code }));
+      island.setAttribute('data-props', encodeProps({ code }));
 
       // Replace static image with island
       const parent = img.parentElement;
@@ -171,7 +202,7 @@ const enhanceCodeBlocks = () => {
       island.setAttribute('data-island', 'CodeBlock');
       island.setAttribute(
         'data-props',
-        JSON.stringify({
+        encodeProps({
           code: code.trim(),
           language,
           fileName,

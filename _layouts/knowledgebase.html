@@ -7,11 +7,8 @@ left_sidebar: knowledgebase-toc
 <div id="kb-content-source" style="display: none;">{{ content }}</div>
 
 <!-- React Island: KnowledgebaseCarousel -->
-<div
-  data-island="KnowledgebaseCarousel"
-  data-props='{"contentElementId":"kb-content-source"}'
-  class="flex-grow flex flex-col"
->
+{% capture kb_props %}{"contentElementId":"kb-content-source"}{% endcapture %}
+<div data-island="KnowledgebaseCarousel" data-props='{{ kb_props | base64_encode }}' class="flex-grow flex flex-col">
   <!-- Loading placeholder (replaced by React component) -->
   <div class="flex-grow flex items-center justify-center">
     <div class="bg-surface border border-border rounded-lg p-8 text-center">
