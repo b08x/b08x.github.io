@@ -1,5 +1,8 @@
 title: syncopated notes
 include: ["_pages", "projects", "wikis"]
+
+wiki_page_generator:
+  enabled: false
 exclude:
   - .gitignore
   - bin

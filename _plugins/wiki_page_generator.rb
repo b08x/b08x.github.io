@@ -14,6 +14,12 @@ module Jekyll
 
     def generate(site)
       return unless site.data['wikis']
+      
+      config = site.config['wiki_page_generator'] || {}
+      if config['enabled'] == false
+        Jekyll.logger.info "WikiPageGenerator:", "Skipping generation as it is disabled in _config.yml"
+        return
+      end
 
       site.data['wikis'].each do |wiki_id, wiki_data|
         next unless wiki_data['pages']
