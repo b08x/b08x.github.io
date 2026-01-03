@@ -164,9 +164,9 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   );
 
   return (
-    <div className="code-block-wrapper relative my-8 group shadow-lg rounded-lg">
+    <div className="code-block-wrapper relative my-8 group shadow-sm rounded-md overflow-hidden bg-surface border border-border">
       {/* Header with File Name, Language and Copy Button */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-900 border border-border rounded-t-lg px-4 py-2 text-[10px] font-mono text-muted flex items-center justify-between uppercase tracking-[0.15em]">
+      <div className="bg-background border-b border-border px-4 py-3 text-[10px] font-mono text-muted flex items-center justify-between uppercase tracking-wider">
         <div className="flex items-center gap-3">
           {fileName && (
             <>
@@ -208,9 +208,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         </button>
       </div>
 
-      {/* Code container - Added subtle mesh background effect */}
-      <div className="relative border border-t-0 border-border rounded-b-lg overflow-hidden bg-slate-950/40 backdrop-blur-sm">
-        <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] pointer-events-none" />
+      {/* Code container */}
+      <div className="relative overflow-hidden">
 
         {/* Syntax highlighted code */}
         <div className="syntax-highlighter-container relative z-10">
