@@ -198,7 +198,38 @@ const enhanceCodeBlocks = () => {
       language = LANGUAGE_ALIASES[language] || language;
 
       // Extract optional file name from data attribute
-      const fileName = container.getAttribute('data-filename') || undefined;
+      let fileName = container.getAttribute('data-filename') || undefined;
+
+      // Fallback: detect from first line if not found in attribute
+      if (!fileName) {
+        const firstLine = code.split('\n')[0]?.trim();
+        if (firstLine) {
+          const patterns = [
+            /^#\s+(.+)$/,             // # filename
+            /^\/\/\s+(.+)$/,         // // filename
+            /^\/\*\s*(.+)\s*\*\/$/,   // /* filename */
+            /^<!--\s*(.+)\s*-->$/,    // <!-- filename -->
+            /^--\s+(.+)$/,           // -- filename
+          ];
+
+          for (const pattern of patterns) {
+            const match = firstLine.match(pattern);
+            if (match && match[1]) {
+              const detected = match[1].trim();
+              if (detected.includes('.') || detected.includes('/')) {
+                fileName = detected;
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      // Extract line number info
+      const showLineNumbers = container.classList.contains('line-numbers') ||
+        container.hasAttribute('data-line-numbers');
+      const startLineAttr = container.getAttribute('data-start');
+      const startingLineNumber = startLineAttr ? parseInt(startLineAttr, 10) : 1;
 
       // Create island container
       const island = document.createElement('div');
@@ -206,10 +237,11 @@ const enhanceCodeBlocks = () => {
       island.setAttribute(
         'data-props',
         encodeProps({
-          code: code.trim(),
+          code: code,
           language,
           fileName,
-          showLineNumbers: false,
+          showLineNumbers,
+          startingLineNumber,
         })
       );
 

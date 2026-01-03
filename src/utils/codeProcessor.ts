@@ -45,6 +45,43 @@ export const hasCodeBlocks = (html: string): boolean => {
 };
 
 /**
+ * Detect a filename from the first line of a code block
+ * Looks for patterns like # filename, // filename, or /* filename *\/
+ *
+ * @param code - Raw code string
+ * @returns detected filename or undefined
+ */
+export const detectFileName = (code: string): string | undefined => {
+  const lines = code.split('\n');
+  if (lines.length === 0) return undefined;
+
+  const firstLine = lines[0].trim();
+
+  // Patterns for various languages
+  const patterns = [
+    /^#\s+(.+)$/,             // # filename (Ruby, Python, Shell, YAML)
+    /^\/\/\s+(.+)$/,         // // filename (JS, TS, C, C++, Go)
+    /^\/\*\s*(.+)\s*\*\/$/,   // /* filename */ (CSS, JS)
+    /^<!--\s*(.+)\s*-->$/,    // <!-- filename --> (HTML, MD)
+    /^--\s+(.+)$/,           // -- filename (SQL, Lua)
+  ];
+
+  for (const pattern of patterns) {
+    const match = firstLine.match(pattern);
+    if (match && match[1]) {
+      const fileName = match[1].trim();
+      // Basic validation: should look like a filename (not just a comment)
+      // We look for a dot or a path separator
+      if (fileName.includes('.') || fileName.includes('/')) {
+        return fileName;
+      }
+    }
+  }
+
+  return undefined;
+};
+
+/**
  * Extract code blocks from HTML content
  *
  * Parses HTML looking for Rouge-generated code blocks:
@@ -90,13 +127,18 @@ export const extractCodeBlocks = (html: string): CodeBlock[] => {
       const codeElement = container.querySelector('pre code');
       if (!codeElement) return;
 
-      const code = codeElement.textContent || '';
+      let code = codeElement.textContent || '';
 
       // Extract optional file name from data attribute
-      const fileName = container.getAttribute('data-filename') || undefined;
+      let fileName = container.getAttribute('data-filename') || undefined;
+
+      // If no data-filename, try to detect from first line
+      if (!fileName) {
+        fileName = detectFileName(code);
+      }
 
       codeBlocks.push({
-        code: code.trim(),
+        code,
         language,
         index,
         fileName,
