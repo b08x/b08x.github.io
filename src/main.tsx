@@ -11,6 +11,7 @@ const AudioPlayer = React.lazy(() => import('./components/AudioPlayer'));
 const NotebookGuide = React.lazy(() => import('./components/NotebookGuide'));
 const KnowledgebaseCarousel = React.lazy(() => import('./components/KnowledgebaseCarousel'));
 const MermaidViewer = React.lazy(() => import('./components/MermaidViewer'));
+const CodeBlock = React.lazy(() => import('./components/CodeBlock'));
 
 const components: Record<string, React.ComponentType<any>> = {
   HelloGarden,
@@ -22,6 +23,7 @@ const components: Record<string, React.ComponentType<any>> = {
   NotebookGuide,
   KnowledgebaseCarousel,
   MermaidViewer,
+  CodeBlock,
 };
 
 const mountIslands = () => {
