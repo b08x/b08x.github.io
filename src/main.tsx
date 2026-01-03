@@ -12,6 +12,8 @@ const NotebookGuide = React.lazy(() => import('./components/NotebookGuide'));
 const KnowledgebaseCarousel = React.lazy(() => import('./components/KnowledgebaseCarousel'));
 const MermaidViewer = React.lazy(() => import('./components/MermaidViewer'));
 const CodeBlock = React.lazy(() => import('./components/CodeBlock'));
+const ReactPlayerIsland = React.lazy(() => import('./components/ReactPlayerIsland'));
+
 
 const components: Record<string, React.ComponentType<any>> = {
   HelloGarden,
@@ -24,6 +26,7 @@ const components: Record<string, React.ComponentType<any>> = {
   KnowledgebaseCarousel,
   MermaidViewer,
   CodeBlock,
+  ReactPlayerIsland,
 };
 
 // Helper to decode Base64 accurately with UTF-8 support
