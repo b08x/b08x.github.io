@@ -62,8 +62,10 @@ const encodeProps = (props: any): string => {
 };
 
 const mountIslands = () => {
-  const islands = document.querySelectorAll('[data-island]');
-  console.log(`[Garden] Found ${islands.length} islands to mount`);
+  const islands = document.querySelectorAll('[data-island]:not([data-mounted="true"])');
+  if (islands.length > 0) {
+    console.log(`[Garden] Found ${islands.length} new islands to mount`);
+  }
 
   islands.forEach((container) => {
     const componentName = container.getAttribute('data-island');
@@ -94,6 +96,7 @@ const mountIslands = () => {
           <Component {...props} />
         </Suspense>
       );
+      container.setAttribute('data-mounted', 'true');
       console.log(`[Garden] Successfully rendered island: ${componentName}`);
     } else {
       console.warn(`[Garden] Component "${componentName}" not found in registry`);
