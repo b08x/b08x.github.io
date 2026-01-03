@@ -217,6 +217,7 @@ pre code {
   border: none;
   color: var(--foreground);
   font-weight: var(--font-weight-semibold);
+  white-space: pre-wrap !important;
 }
 
 /* === Borders and Dividers === */
