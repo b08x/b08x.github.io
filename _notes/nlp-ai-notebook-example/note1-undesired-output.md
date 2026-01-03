@@ -8,6 +8,8 @@ notebook_id: "nlp-ai-notebook-example"
 
 I have successfully refactored the note card rendering in the notebook view to correctly display Markdown content as HTML. I've verified the fix in the browser and provided a walkthrough of the changes.
 
+{% reactplayer https://www.youtube.com/watch?v=Ptk_1Dc2iPY %}
+
 
 ### Key points
 - The transcript doesn't present a single, definitive solution to the problem of undesired output.
