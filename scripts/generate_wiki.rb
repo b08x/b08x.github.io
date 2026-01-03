@@ -158,7 +158,7 @@ def generate_page(source_dir, wiki_id, page_data, prev_page, next_page, permalin
   # Ensure blank lines before tables only if not already part of a table
   content_body = content_body.gsub(/([^\n|])\n\|/, "\\1\n\n|")
 
-  dir = File.join('wikis', wiki_id)
+  dir = File.join('_wikis', wiki_id)
   filename = "#{num}_#{slug}.md"
   path = File.join(source_dir, dir, filename)
 
@@ -223,7 +223,7 @@ def generate_page(source_dir, wiki_id, page_data, prev_page, next_page, permalin
     'right_sidebar' => 'toc',
     'right_sidebar_xl_only' => true,
     'show_metadata' => false,
-    'show_graph' => true,
+    'show_graph' => false,
     'related_pages' => related_pages,
     'file_paths' => file_paths,
     'pagination' => pagination_data
@@ -249,10 +249,10 @@ end
 def write_paginated_page(source_dir, wiki_id, segment, page_num, total_pages, wiki_metadata, permalink_map)
   # Determine directory path
   if page_num == 1
-    dir = File.join('wikis', wiki_id)
+    dir = File.join('_wikis', wiki_id)
     permalink = "/wikis/#{wiki_id}/"
   else
-    dir = File.join('wikis', wiki_id, 'page', page_num.to_s)
+    dir = File.join('_wikis', wiki_id, 'page', page_num.to_s)
     permalink = "/wikis/#{wiki_id}/page/#{page_num}/"
   end
 
@@ -287,7 +287,7 @@ def write_paginated_page(source_dir, wiki_id, segment, page_num, total_pages, wi
     'wiki_id' => wiki_id,
     'permalink' => permalink,
     'pagination' => pagination_meta,
-    'show_graph' => true,
+    'show_graph' => false,
     'repository' => wiki_metadata['repository'],
     'generated_at' => wiki_metadata['generated_at'],
     'total_wiki_pages' => wiki_metadata['page_count'],

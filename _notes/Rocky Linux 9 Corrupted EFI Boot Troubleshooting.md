@@ -7,6 +7,7 @@ tags:
 - grub
 - rocky-linux-9
 title: Rocky Linux 9 Corrupted EFI Boot Troubleshooting
+permalink: /notes/linux/rocky-linux-9-corrupted-efi-boot-troubleshooting
 ---
 
 So the problem occurs is after a power outage on a host with a weak or low CMOS battery, A sudden loss of power, combined with a failing battery, will cause the NVRAM to lose its stored settings including the EFI Boot entries required for system boot.
