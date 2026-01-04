@@ -13,6 +13,11 @@ const KnowledgebaseCarousel = React.lazy(() => import('./components/Knowledgebas
 const MermaidViewer = React.lazy(() => import('./components/MermaidViewer'));
 const CodeBlock = React.lazy(() => import('./components/CodeBlock'));
 const ReactPlayerIsland = React.lazy(() => import('./components/ReactPlayerIsland'));
+const CanvasControls = React.lazy(() => import('./components/CanvasControls'));
+const OutputPanel = React.lazy(() => import('./components/OutputPanel'));
+const NodeEditor = React.lazy(() => import('./components/NodeEditor'));
+const CanvasExporter = React.lazy(() => import('./components/CanvasExporter'));
+const CanvasMinimap = React.lazy(() => import('./components/CanvasMinimap'));
 
 
 const components: Record<string, React.ComponentType<any>> = {
@@ -27,6 +32,11 @@ const components: Record<string, React.ComponentType<any>> = {
   MermaidViewer,
   CodeBlock,
   ReactPlayerIsland,
+  CanvasControls,
+  OutputPanel,
+  NodeEditor,
+  CanvasExporter,
+  CanvasMinimap,
 };
 
 // Helper to decode Base64 accurately with UTF-8 support

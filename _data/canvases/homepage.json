@@ -1,0 +1,90 @@
+{
+  "nodes": [
+    {
+      "id": "central-hub",
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 400,
+      "height": 200,
+      "text": "# b08x.github.io\n\nA digital garden of technical notes and explorations"
+    },
+    {
+      "id": "about",
+      "type": "file",
+      "file": "_pages/index.md",
+      "x": -429,
+      "y": -40.477,
+      "width": 400,
+      "height": 600,
+      "color": "1"
+    },
+    {
+      "id": "notes",
+      "type": "link",
+      "url": "/notes",
+      "x": 130,
+      "y": 95,
+      "width": 400,
+      "height": 300,
+      "color": "2",
+      "text": "Notes Collection"
+    },
+    {
+      "id": "wikis",
+      "type": "link",
+      "url": "/wikis",
+      "x": -583,
+      "y": 255,
+      "width": 400,
+      "height": 300,
+      "color": "3",
+      "text": "Wikis Collection"
+    },
+    {
+      "id": "projects",
+      "type": "link",
+      "url": "/projects",
+      "x": 119,
+      "y": 280,
+      "width": 400,
+      "height": 300,
+      "color": "4",
+      "text": "Projects"
+    }
+  ],
+  "edges": [
+    {
+      "id": "hub-to-about",
+      "fromNode": "central-hub",
+      "fromSide": "left",
+      "toNode": "about",
+      "toSide": "right",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "hub-to-notes",
+      "fromNode": "central-hub",
+      "fromSide": "right",
+      "toNode": "notes",
+      "toSide": "left",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "hub-to-wikis",
+      "fromNode": "central-hub",
+      "fromSide": "bottom",
+      "toNode": "wikis",
+      "toSide": "top",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "hub-to-projects",
+      "fromNode": "central-hub",
+      "fromSide": "bottom",
+      "toNode": "projects",
+      "toSide": "top",
+      "toEnd": "arrow"
+    }
+  ]
+}

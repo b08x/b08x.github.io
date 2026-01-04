@@ -30,4 +30,3 @@ logs/
 .code-packager-csv-config
 *.csv
 refactor/
-**/implement/
