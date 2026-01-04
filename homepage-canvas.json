@@ -2,4 +2,4 @@
 layout: null
 permalink: /homepage-canvas.json
 ---
-{{ site.data.canvases.homepage | jsonify }}
+{{ site.data.canvases.homepage | render_liquid | jsonify }}

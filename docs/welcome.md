@@ -1,3 +1,6 @@
+---
+permalink: /docs/welcome.md
+---
 
 # Welcome! 🌱
 

@@ -267,7 +267,7 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
 
       {isLink ? (
         <a
-          href={node.url}
+          href={(node.url || null) as any}
           className="flex flex-col h-full w-full p-4 hover:bg-accent/5 transition-colors no-underline group"
           onClick={(e) => {
             if (e.defaultPrevented) return;
@@ -299,6 +299,11 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
               <Markdown
                 rehypePlugins={[rehypeHighlight, rehypeRaw]}
                 remarkPlugins={[remarkGfm, remarkFrontmatter]}
+                components={{
+                  a: ({ node: _node, ...props }) => (
+                    <a {...props} href={(props.href || null) as any} />
+                  )
+                }}
               >
                 {displayContent}
               </Markdown>
@@ -334,7 +339,7 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
             window.addEventListener('mouseup', onMouseUp);
           }}
         >
-          <svg viewBox="0 0 10 10" className="w-3 h-3 fill-muted opacity-50">
+          <svg viewBox="0 0 10 10" className="w-3 h-3 fill-muted opacity-50" style={{ width: '12px', height: '12px', display: 'block' }}>
             <path d="M0 10 L10 10 L10 0 Z" />
           </svg>
         </div>
@@ -355,12 +360,16 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
   const [scale, setScale] = useState(1);
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const zoomRef = useRef<any>(null);
 
   useEffect(() => {
     fetch(url)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+        return res.json();
+      })
       .then(data => {
         setNodes(data.nodes || []);
         setEdges(data.edges || []);
@@ -368,6 +377,7 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
       })
       .catch(err => {
         console.error("[Garden] Failed to load canvas data:", err);
+        setError(err.message);
         setLoading(false);
       });
   }, [url]);
@@ -422,6 +432,16 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
     return (
       <div className="flex items-center justify-center w-full h-full text-emerald-400 font-mono animate-pulse">
         Initializing System Map...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-full text-red-500 font-mono p-4 border border-red-900 bg-red-950/20 rounded-lg">
+        <div className="text-xl mb-2">SYSTEM ERROR</div>
+        <div className="text-sm opacity-80">{error}</div>
+        <div className="mt-4 text-xs opacity-50">Check homepage-canvas.json for syntax errors</div>
       </div>
     );
   }
