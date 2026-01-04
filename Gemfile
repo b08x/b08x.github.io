@@ -19,7 +19,7 @@ group :jekyll_plugins do
   gem 'jekyll-pandoc'
   gem 'jekyll_picture_tag'
   gem 'jekyll-postcss-v2'
-  gem 'jekyll-react-player'
+  # gem 'jekyll-react-player'
   gem 'jekyll-sass-converter'
   gem 'jekyll-seo-tag'
   gem 'jekyll-sitemap'
