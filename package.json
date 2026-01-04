@@ -47,6 +47,7 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
+    "react-jsoncanvas": "github:Digital-Tvilling/react-jsoncanvas",
     "react-player": "^2.16.0",
     "react-syntax-highlighter": "^15.6.0"
   }

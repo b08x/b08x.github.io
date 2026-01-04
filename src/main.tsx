@@ -18,6 +18,7 @@ const OutputPanel = React.lazy(() => import('./components/OutputPanel'));
 const NodeEditor = React.lazy(() => import('./components/NodeEditor'));
 const CanvasExporter = React.lazy(() => import('./components/CanvasExporter'));
 const CanvasMinimap = React.lazy(() => import('./components/CanvasMinimap'));
+const JsonCanvasViewer = React.lazy(() => import('./components/JsonCanvasViewer'));
 
 
 const components: Record<string, React.ComponentType<any>> = {
@@ -37,6 +38,7 @@ const components: Record<string, React.ComponentType<any>> = {
   NodeEditor,
   CanvasExporter,
   CanvasMinimap,
+  JsonCanvasViewer,
 };
 
 // Helper to decode Base64 accurately with UTF-8 support
