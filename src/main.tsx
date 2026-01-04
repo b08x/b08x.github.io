@@ -1,3 +1,5 @@
+// B08X_DEBUG_MARKER_20260104
+console.log("[Garden] Bundle version: 20260104-01");
 import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 

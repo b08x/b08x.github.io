@@ -5,13 +5,14 @@
 
 <body id="home" class="m-0 p-0 w-screen h-screen overflow-hidden bg-slate-950">
 
-  <div id="root" 
-       data-island="JsonCanvasViewer" 
-       data-props='{"url": "/homepage-canvas.json"}'
-       class="w-full h-full">
+  <div id="root" data-island="JsonCanvasViewer" data-props='{"url": "/homepage-canvas.json"}' class="w-full h-full">
   </div>
 
-  <script src="{{ '/assets/js/dist/garden-widgets.js' | relative_url }}" defer></script>
+  <div data-island="CanvasControls"></div>
+  <div data-island="CanvasMinimap"></div>
+  <div data-island="OutputPanel"></div>
+
+  <script src="{{ '/assets/js/dist/garden-widgets-v2.js' | relative_url }}" defer></script>
 </body>
 
 </html>
