@@ -1,3 +1,5 @@
+// B08X_DEBUG_MARKER_20260104
+console.log("[Garden] Bundle version: 20260104-01");
 import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -18,6 +20,7 @@ const OutputPanel = React.lazy(() => import('./components/OutputPanel'));
 const NodeEditor = React.lazy(() => import('./components/NodeEditor'));
 const CanvasExporter = React.lazy(() => import('./components/CanvasExporter'));
 const CanvasMinimap = React.lazy(() => import('./components/CanvasMinimap'));
+const JsonCanvasViewer = React.lazy(() => import('./components/JsonCanvasViewer'));
 
 
 const components: Record<string, React.ComponentType<any>> = {
@@ -37,6 +40,7 @@ const components: Record<string, React.ComponentType<any>> = {
   NodeEditor,
   CanvasExporter,
   CanvasMinimap,
+  JsonCanvasViewer,
 };
 
 // Helper to decode Base64 accurately with UTF-8 support

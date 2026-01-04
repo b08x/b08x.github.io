@@ -85,7 +85,9 @@
   <div id="app-container" class="flex flex-col min-h-screen">
 
     <!-- Header -->
-    <header id="site-header" class="sticky top-0 z-50 flex-none border-b border-border bg-background transition-transform duration-300 ease-in-out" role="banner">
+    <header id="site-header"
+      class="sticky top-0 z-50 flex-none border-b border-border bg-background transition-transform duration-300 ease-in-out"
+      role="banner">
       {% include terminal-header.html %}
     </header>
 
@@ -110,7 +112,7 @@
   <!-- Scripts -->
   <script src="{{ '/assets/js/theme-manager.js' | relative_url }}"></script>
   <script src="{{ '/assets/js/scroll-header.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/dist/garden-widgets.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/dist/garden-widgets-v2.js' | relative_url }}" defer></script>
 
   {% if page.custom_js %}
   {% for script in page.custom_js %}

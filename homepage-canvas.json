@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /homepage-canvas.json
+---
+{{ site.data.canvases.homepage | render_liquid | jsonify }}
