@@ -7,12 +7,12 @@
       "y": 0,
       "width": 400,
       "height": 200,
-      "text": "# b08x.github.io\n\nA digital garden of technical notes and explorations"
+      "text": "# b08x.github.io\n\nA digital garden of technical notes and explorations\\{% assign recent_notes = site.notes | sort: \"last_modified_at_timestamp\" | reverse %}\n"
     },
     {
       "id": "about",
       "type": "file",
-      "file": "_pages/index.md",
+      "file": "docs/welcome.md",
       "x": -429,
       "y": -40.477,
       "width": 400,

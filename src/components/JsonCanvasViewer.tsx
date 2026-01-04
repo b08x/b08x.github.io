@@ -186,12 +186,36 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
   const latestOnMove = useRef(onMove);
   const latestNode = useRef(node);
   const latestScale = useRef(scale);
+  const [fetchedContent, setFetchedContent] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     latestOnMove.current = onMove;
     latestNode.current = node;
     latestScale.current = scale;
   }, [onMove, node, scale]);
+
+  useEffect(() => {
+    if (node.type === 'file' && node.file) {
+      setIsLoading(true);
+      // Try to fetch the file content. 
+      // Note: This might need adjustment based on how the server hosts these files.
+      fetch(node.file)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+          return res.text();
+        })
+        .then(text => {
+          setFetchedContent(text);
+          setIsLoading(false);
+        })
+        .catch(err => {
+          console.warn(`[Canvas] Failed to fetch file ${node.file}:`, err);
+          setFetchedContent(`*Could not load file content from ${node.file}*`);
+          setIsLoading(false);
+        });
+    }
+  }, [node.file, node.type]);
 
   useEffect(() => {
     if (!nodeRef.current) return;
@@ -211,22 +235,28 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
     };
   }, []); // Stable attachment
 
+  const isLink = node.type === 'link';
+  const isResizable = node.type !== 'link';
+
+  const displayContent = node.type === 'file' ? (fetchedContent || '') : (node.text || node.url || '');
+
   return (
     <div
       ref={nodeRef}
       id={node.id}
-      className={`node absolute rounded border-2 select-none shadow-lg transition-transform duration-75`}
+      className={`node absolute rounded border-2 select-none shadow-lg transition-transform duration-75 ${isLink ? 'link-card overflow-hidden' : ''}`}
       style={{
         left: (node.x * scale) + translateX,
         top: (node.y * scale) + translateY,
         width: node.width * scale,
         height: node.height * scale,
         borderColor: colors[node.color || ''] || 'var(--border)',
-        backgroundColor: 'var(--surface)',
+        backgroundColor: isLink ? 'var(--surface)' : 'var(--background)',
         zIndex: 20,
         overflow: 'hidden',
         cursor: 'grab',
-        // Use transform for smoother movement? Actually absolute top/left is fine if scale is involved.
+        display: 'flex',
+        flexDirection: 'column'
       }}
     >
       {node.type === 'group' && (
@@ -234,52 +264,81 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
           {node.label}
         </div>
       )}
-      <div className="p-4 h-full overflow-auto">
-        {node.label && node.type !== 'group' && (
-          <h3 className="text-sm font-bold mb-2 border-b border-border pb-1" style={{ fontSize: `${scale * 14}px` }}>
-            {node.label}
+
+      {isLink ? (
+        <a
+          href={node.url}
+          className="flex flex-col h-full w-full p-4 hover:bg-accent/5 transition-colors no-underline group"
+          onClick={(e) => {
+            if (e.defaultPrevented) return;
+            // Prevent navigation if dragged (though drag usually prevents click)
+          }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            <span className="text-accent text-[10px] uppercase tracking-widest font-bold">External Link</span>
+          </div>
+          <h3 className="text-foreground font-bold mb-2 group-hover:text-accent transition-colors" style={{ fontSize: `${scale * 16}px` }}>
+            {node.text || node.label || 'View Link'}
           </h3>
-        )}
-        <div className="markdown-content text-foreground prose prose-invert max-w-none" style={{ fontSize: `${scale * 12}px` }}>
-          <Markdown
-            rehypePlugins={[rehypeHighlight, rehypeRaw]}
-            remarkPlugins={[remarkGfm, remarkFrontmatter]}
-          >
-            {node.file || node.text || node.url || ''}
-          </Markdown>
+          <div className="mt-auto text-muted text-[10px] truncate opacity-50">
+            {node.url}
+          </div>
+        </a>
+      ) : (
+        <div className="p-4 h-full overflow-auto">
+          {node.label && node.type !== 'group' && (
+            <h3 className="text-sm font-bold mb-2 border-b border-border pb-1" style={{ fontSize: `${scale * 14}px` }}>
+              {node.label}
+            </h3>
+          )}
+          <div className="markdown-content text-foreground prose prose-invert max-w-none" style={{ fontSize: `${scale * 12}px` }}>
+            {isLoading ? (
+              <div className="animate-pulse text-muted italic">Loading content...</div>
+            ) : (
+              <Markdown
+                rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                remarkPlugins={[remarkGfm, remarkFrontmatter]}
+              >
+                {displayContent}
+              </Markdown>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Resize Handle */}
-      <div
-        className="absolute bottom-0 right-0 w-6 h-6 cursor-nwse-resize hover:bg-accent/20 transition-colors flex items-center justify-center pointer-events-auto"
-        onMouseDown={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const startX = e.clientX;
-          const startY = e.clientY;
-          const startWidth = node.width;
-          const startHeight = node.height;
+      {isResizable && (
+        <div
+          className="absolute bottom-0 right-0 w-6 h-6 cursor-nwse-resize hover:bg-accent/20 transition-colors flex items-center justify-center pointer-events-auto"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const startX = e.clientX;
+            const startY = e.clientY;
+            const startWidth = node.width;
+            const startHeight = node.height;
 
-          const onMouseMove = (moveEvent: MouseEvent) => {
-            const dw = (moveEvent.clientX - startX) / scale;
-            const dh = (moveEvent.clientY - startY) / scale;
-            onResize(node.id, Math.max(100, startWidth + dw), Math.max(100, startHeight + dh));
-          };
+            const onMouseMove = (moveEvent: MouseEvent) => {
+              const dw = (moveEvent.clientX - startX) / scale;
+              const dh = (moveEvent.clientY - startY) / scale;
+              onResize(node.id, Math.max(100, startWidth + dw), Math.max(100, startHeight + dh));
+            };
 
-          const onMouseUp = () => {
-            window.removeEventListener('mousemove', onMouseMove);
-            window.removeEventListener('mouseup', onMouseUp);
-          };
+            const onMouseUp = () => {
+              window.removeEventListener('mousemove', onMouseMove);
+              window.removeEventListener('mouseup', onMouseUp);
+            };
 
-          window.addEventListener('mousemove', onMouseMove);
-          window.addEventListener('mouseup', onMouseUp);
-        }}
-      >
-        <svg viewBox="0 0 10 10" className="w-3 h-3 fill-muted opacity-50">
-          <path d="M0 10 L10 10 L10 0 Z" />
-        </svg>
-      </div>
+            window.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('mouseup', onMouseUp);
+          }}
+        >
+          <svg viewBox="0 0 10 10" className="w-3 h-3 fill-muted opacity-50">
+            <path d="M0 10 L10 10 L10 0 Z" />
+          </svg>
+        </div>
+      )}
     </div>
   );
 };
