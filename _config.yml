@@ -12,7 +12,6 @@ exclude:
   - README.md
   - b08x.github.io.code-workspace
   - logs/
-  - docs/
   - Containerfile
   - docker-compose.yml
   - CLAUDE.md
@@ -77,6 +76,7 @@ collections:
   wikis:
     output: true
     permalink: /wikis/:slug
+
 # Default layout for all pages
 defaults:
   - scope:
