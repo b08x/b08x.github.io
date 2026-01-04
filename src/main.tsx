@@ -11,6 +11,7 @@ const AudioPlayer = React.lazy(() => import('./components/AudioPlayer'));
 const NotebookGuide = React.lazy(() => import('./components/NotebookGuide'));
 const KnowledgebaseCarousel = React.lazy(() => import('./components/KnowledgebaseCarousel'));
 const MermaidViewer = React.lazy(() => import('./components/MermaidViewer'));
+const CodeBlock = React.lazy(() => import('./components/CodeBlock'));
 
 const components: Record<string, React.ComponentType<any>> = {
   HelloGarden,
@@ -22,11 +23,49 @@ const components: Record<string, React.ComponentType<any>> = {
   NotebookGuide,
   KnowledgebaseCarousel,
   MermaidViewer,
+  CodeBlock,
+};
+
+// Helper to decode Base64 accurately with UTF-8 support
+const decodeProps = (encoded: string): any => {
+  try {
+    // Try parsing as raw JSON first (for backward compatibility)
+    if (encoded.trim().startsWith('{') || encoded.trim().startsWith('[')) {
+      return JSON.parse(encoded);
+    }
+
+    // Otherwise treat as Base64
+    const binaryString = atob(encoded);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    const decoded = new TextDecoder().decode(bytes);
+    return JSON.parse(decoded);
+  } catch (e: any) {
+    console.error('[Garden] Failed to decode props:', e);
+    // Fallback to raw parsing if it wasn't valid base64 but maybe it was a string that didn't start with {
+    try {
+      return JSON.parse(encoded);
+    } catch (inner) {
+      throw new Error(`Props decoding failed: ${e.message}`);
+    }
+  }
+};
+
+// Helper to encode Base64 with UTF-8 support
+const encodeProps = (props: any): string => {
+  const json = JSON.stringify(props);
+  const bytes = new TextEncoder().encode(json);
+  const binaryString = Array.from(bytes, (byte) => String.fromCharCode(byte)).join('');
+  return btoa(binaryString);
 };
 
 const mountIslands = () => {
-  const islands = document.querySelectorAll('[data-island]');
-  console.log(`[Garden] Found ${islands.length} islands to mount`);
+  const islands = document.querySelectorAll('[data-island]:not([data-mounted="true"])');
+  if (islands.length > 0) {
+    console.log(`[Garden] Found ${islands.length} new islands to mount`);
+  }
 
   islands.forEach((container) => {
     const componentName = container.getAttribute('data-island');
@@ -39,11 +78,7 @@ const mountIslands = () => {
       try {
         const propsAttr = container.getAttribute('data-props');
         if (propsAttr) {
-          // Replace potential smart quotes if they crept in
-          const sanitizedProps = propsAttr
-            .replace(/[\u201C\u201D]/g, '"')
-            .replace(/[\u2018\u2019]/g, "'");
-          props = JSON.parse(sanitizedProps);
+          props = decodeProps(propsAttr);
         }
       } catch (e) {
         console.error(`[Garden] Failed to parse props for island ${componentName}:`, e);
@@ -61,6 +96,7 @@ const mountIslands = () => {
           <Component {...props} />
         </Suspense>
       );
+      container.setAttribute('data-mounted', 'true');
       console.log(`[Garden] Successfully rendered island: ${componentName}`);
     } else {
       console.warn(`[Garden] Component "${componentName}" not found in registry`);
@@ -106,7 +142,7 @@ const enhanceMermaidDiagrams = () => {
       // Create island container
       const island = document.createElement('div');
       island.setAttribute('data-island', 'MermaidViewer');
-      island.setAttribute('data-props', JSON.stringify({ code }));
+      island.setAttribute('data-props', encodeProps({ code }));
 
       // Replace static image with island
       const parent = img.parentElement;
@@ -126,12 +162,76 @@ const enhanceMermaidDiagrams = () => {
   }
 };
 
+const enhanceCodeBlocks = () => {
+  // Find all Rouge-generated code containers
+  const containers = document.querySelectorAll('div[class*="language-"].highlighter-rouge');
+  console.log(`[Garden] Found ${containers.length} code blocks to enhance`);
+
+  if (containers.length === 0) return;
+
+  // Language mapping for common aliases
+  const LANGUAGE_ALIASES: Record<string, string> = {
+    js: 'javascript',
+    ts: 'typescript',
+    py: 'python',
+    rb: 'ruby',
+    yml: 'yaml',
+    sh: 'bash',
+    shell: 'bash',
+    zsh: 'bash',
+    md: 'markdown',
+  };
+
+  containers.forEach((container) => {
+    try {
+      const codeElement = container.querySelector('pre code');
+      if (!codeElement) return;
+
+      const code = codeElement.textContent || '';
+
+      // Extract language from class name
+      const classNames = container.className.split(' ');
+      const languageClass = classNames.find((cls) => cls.startsWith('language-'));
+      let language = languageClass ? languageClass.replace('language-', '') : 'text';
+
+      // Apply aliases
+      language = LANGUAGE_ALIASES[language] || language;
+
+      // Extract optional file name from data attribute
+      const fileName = container.getAttribute('data-filename') || undefined;
+
+      // Create island container
+      const island = document.createElement('div');
+      island.setAttribute('data-island', 'CodeBlock');
+      island.setAttribute(
+        'data-props',
+        encodeProps({
+          code: code.trim(),
+          language,
+          fileName,
+          showLineNumbers: false,
+        })
+      );
+
+      // Replace original container
+      container.replaceWith(island);
+    } catch (err) {
+      console.warn('[Garden] Failed to enhance code block:', err);
+    }
+  });
+
+  // Re-run island mounting for new CodeBlock islands
+  mountIslands();
+};
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
+    enhanceCodeBlocks();
     mountIslands();
     enhanceMermaidDiagrams();
   });
 } else {
+  enhanceCodeBlocks();
   mountIslands();
   enhanceMermaidDiagrams();
 }

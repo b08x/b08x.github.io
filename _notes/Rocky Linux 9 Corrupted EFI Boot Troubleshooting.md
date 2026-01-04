@@ -7,6 +7,7 @@ tags:
 - grub
 - rocky-linux-9
 title: Rocky Linux 9 Corrupted EFI Boot Troubleshooting
+permalink: /notes/linux/rocky-linux-9-corrupted-efi-boot-troubleshooting
 ---
 
 So the problem occurs is after a power outage on a host with a weak or low CMOS battery, A sudden loss of power, combined with a failing battery, will cause the NVRAM to lose its stored settings including the EFI Boot entries required for system boot.
@@ -18,7 +19,7 @@ In this case, Rocky 9 is the host OS. First, boot into a Rocky 9-Workstation UEF
 
 **Mounting Partitions & Chroot**
 
-``` shell
+```bash
 [root@localhost-live ~] mkdir -pv /mnt/boot/efi
 
 [root@localhost-live ~] mount /dev/sdb3 /mnt
@@ -41,7 +42,7 @@ Use `grub2-install` to place the GRUB bootloader files on your EFI partition a
 > \[!caution\]  
 > These notes assume that UEFI Secure Boot is *disabled* -- seek additional information if the host requires Secure Boot
 
-``` bash
+```bash
 [root@localhost-live /] dnf reinstall grub2-common grub2-efi-* shim*
 
 [root@localhost-live /] mount -t efivarfs efivarfs /sys/firmware/efi/efivars
@@ -49,7 +50,7 @@ Use `grub2-install` to place the GRUB bootloader files on your EFI partition a
 
 **Installing Grub:**
 
-``` shell
+```bash
 [root@localhost-live /] grub2-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=rocky --recheck
 Installing for x86_64-efi platform.
 grub2-install: error: This utility should not be used for EFI platforms because it does not support UEFI Secure Boot. If you really wish to proceed, invoke the --force option.
@@ -59,7 +60,7 @@ Make sure Secure Boot is disabled before proceeding.
 > \[!attention\]  
 > The `--force` option is used because Secure Boot is assumed to be disabled. If Secure Boot is enabled, stop here and investigate the correct procedure.\*\*
 
-``` shell
+```bash
 [root@localhost-live /] grub2-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=rocky --recheck --force
 Installing for x86_64-efi platform.
 Installation finished. No error reported.
@@ -69,7 +70,7 @@ Installation finished. No error reported.
 
 Finally, generate a new GRUB configuration file, exit the `chroot` environment, and reboot:
 
-``` shell
+```bash
 [root@localhost-live /] grub2-mkconfig -o /boot/grub2/grub.cfg
 Generating grub configuration file ...
 grub2-probe: error: cannot find a GRUB drive for /dev/sdd1.  Check your device.map.

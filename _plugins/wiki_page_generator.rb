@@ -14,6 +14,9 @@ module Jekyll
 
     def generate(site)
       return unless site.data['wikis']
+      
+      config = site.config['wiki_page_generator'] || {}
+      enabled = config['enabled'] != false
 
       site.data['wikis'].each do |wiki_id, wiki_data|
         next unless wiki_data['pages']
@@ -32,10 +35,16 @@ module Jekyll
           }
           permalink_map[page_id] = permalink_info
           
-          # Enrich the original data for use in layouts
+          # Enrich the original data for use in layouts (ALWAYS DO THIS)
           page_data['number'] = num
           page_data['slug'] = slug
           page_data['generated_permalink'] = permalink_info['permalink']
+        end
+
+        # Skip actual file generation if disabled
+        unless enabled
+          Jekyll.logger.info "WikiPageGenerator:", "Skipping file generation for '#{wiki_id}' as it is disabled in _config.yml"
+          next
         end
 
         # Metadata for the wiki
@@ -167,7 +176,7 @@ module Jekyll
         'right_sidebar' => 'toc',
         'right_sidebar_xl_only' => true,
         'show_metadata' => false,
-        'show_graph' => true,
+        'show_graph' => false,
         'related_pages' => related_pages,
         'file_paths' => file_paths,
         'pagination' => pagination_data
@@ -250,7 +259,7 @@ module Jekyll
         'wiki_id' => wiki_id,
         'permalink' => permalink,
         'pagination' => pagination_meta,
-        'show_graph' => true,
+        'show_graph' => false,
         'repository' => wiki_metadata['repository'],
         'generated_at' => wiki_metadata['generated_at'],
         'total_wiki_pages' => wiki_metadata['page_count'],

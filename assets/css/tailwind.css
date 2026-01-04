@@ -51,4 +51,9 @@
     .theme-toggle-btn:active {
         @apply scale-95;
     }
+
+    /* Scroll-Up Navigation Header - Auto-hiding header on scroll */
+    #site-header.header-hidden {
+        transform: translateY(-100%);
+    }
 }

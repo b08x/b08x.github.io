@@ -15,7 +15,7 @@ module.exports = {
       // ===================================
       fontFamily: {
         mono: ['var(--font-mono)', 'Courier New', 'Courier', 'monospace'],
-        prose: ['var(--font-prose)', 'Courier New', 'Courier', 'monospace'],
+        prose: ['var(--font-prose)', 'Hack', 'Consolas', 'monospace'],
         sans: ['var(--font-prose)', 'Courier New', 'Courier', 'monospace'],
       },
 

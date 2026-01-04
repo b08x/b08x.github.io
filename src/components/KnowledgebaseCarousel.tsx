@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import CodeBlock from './CodeBlock';
+import { extractCodeBlocks, hasCodeBlocks, replaceCodeBlocksWithIslands } from '../utils/codeProcessor';
 
 /**
  * Represents a single slide in the knowledgebase carousel
@@ -112,6 +114,98 @@ const KnowledgebaseCarousel: React.FC<KnowledgebaseCarouselProps> = ({
     });
 
     return slides;
+  }, []);
+
+  /**
+   * Process slide content to extract code blocks and render them with CodeBlock component
+   * Returns array of content segments: either HTML strings or CodeBlock components
+   */
+  const processSlideContent = useCallback((html: string): React.ReactNode[] => {
+    console.log('[KB Carousel] Processing slide content, length:', html.length);
+    console.log('[KB Carousel] Has code blocks:', hasCodeBlocks(html));
+
+    if (!hasCodeBlocks(html)) {
+      // No code blocks, render as-is with dangerouslySetInnerHTML
+      return [
+        <div
+          key="content-0"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      ];
+    }
+
+    // Extract code blocks
+    const codeBlocks = extractCodeBlocks(html);
+    console.log('[KB Carousel] Extracted code blocks:', codeBlocks.length, codeBlocks);
+
+    if (codeBlocks.length === 0) {
+      // No code blocks found, render as-is
+      return [
+        <div
+          key="content-0"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      ];
+    }
+
+    // Parse original HTML to find and replace code blocks
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const contentNodes: React.ReactNode[] = [];
+    let codeBlockIndex = 0;
+
+    // Find all code containers
+    const codeContainers = Array.from(doc.querySelectorAll('div[class*="language-"]'));
+
+    codeContainers.forEach((container, idx) => {
+      const block = codeBlocks[codeBlockIndex];
+      if (block) {
+        // Create a marker element to replace the code container
+        const marker = doc.createElement('div');
+        marker.setAttribute('data-code-block-marker', String(codeBlockIndex));
+        container.replaceWith(marker);
+        codeBlockIndex++;
+      }
+    });
+
+    // Split HTML by markers and create React nodes
+    const htmlString = doc.body.innerHTML;
+    const parts = htmlString.split(/<div data-code-block-marker="(\d+)"><\/div>/);
+
+    console.log('[KB Carousel] HTML parts:', parts.length);
+
+    parts.forEach((part, idx) => {
+      if (idx % 2 === 0) {
+        // Regular HTML content
+        if (part.trim()) {
+          contentNodes.push(
+            <div
+              key={`html-${idx}`}
+              dangerouslySetInnerHTML={{ __html: part }}
+            />
+          );
+        }
+      } else {
+        // Code block marker index
+        const blockIdx = parseInt(part, 10);
+        const block = codeBlocks[blockIdx];
+        if (block) {
+          console.log('[KB Carousel] Rendering CodeBlock:', block.language);
+          contentNodes.push(
+            <CodeBlock
+              key={`code-${blockIdx}`}
+              code={block.code}
+              language={block.language}
+              fileName={block.fileName}
+              showLineNumbers={false}
+            />
+          );
+        }
+      }
+    });
+
+    console.log('[KB Carousel] Content nodes created:', contentNodes.length);
+    return contentNodes;
   }, []);
 
   /**
@@ -313,10 +407,9 @@ const KnowledgebaseCarousel: React.FC<KnowledgebaseCarouselProps> = ({
               aria-label={`Section ${index + 1}: ${slide.title}`}
               aria-hidden={index !== currentSlide}
             >
-              <div
-                className="prose prose-lg font-prose max-w-none"
-                dangerouslySetInnerHTML={{ __html: slide.content }}
-              />
+              <div className="prose prose-lg font-prose max-w-none">
+                {processSlideContent(slide.content)}
+              </div>
             </div>
           ))}
         </div>

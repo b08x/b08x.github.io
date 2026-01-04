@@ -1,6 +1,46 @@
 # Syncopated Notes
 
-A hybrid digital garden built with **Jekyll** (Static) and **React** (Interactive Islands), featuring a dark terminal aesthetic and bidirectional linking for knowledge management.
+[![Deploy Jekyll site to Pages](https://github.com/b08x/b08x.github.io/actions/workflows/jekyll.yml/badge.svg)](https://github.com/b08x/b08x.github.io/actions/workflows/jekyll.yml)
+
+> A digital garden experiment integrating React islands with Jekyll, exploring the intersection of static site generation and modern interactive components.
+
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Quick Start](#quick-start)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Building for Production](#building-for-production)
+- [Project Structure](#project-structure)
+- [Architecture](#architecture)
+  - [Jekyll Foundation](#jekyll-foundation)
+  - [React Island Architecture](#react-island-architecture)
+  - [Custom Jekyll Plugins](#custom-jekyll-plugins)
+  - [Wiki System](#wiki-system)
+- [Key Technologies](#key-technologies)
+- [Component Library](#component-library)
+- [Content Creation](#content-creation)
+  - [Writing Notes](#writing-notes)
+  - [Creating Wiki Pages](#creating-wiki-pages)
+  - [Using React Components](#using-react-components)
+- [Customization](#customization)
+  - [Theming](#theming)
+  - [Adding New Components](#adding-new-components)
+  - [Custom Plugins](#custom-plugins)
+- [Deployment](#deployment)
+- [Development Workflow](#development-workflow)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+
+
+
+
+
+## Overview
 
 ![Terminal Theme](https://img.shields.io/badge/theme-dark%20terminal-ff6600)
 ![Jekyll](https://img.shields.io/badge/jekyll-4.3+-red)
@@ -8,588 +48,737 @@ A hybrid digital garden built with **Jekyll** (Static) and **React** (Interactiv
 ![esbuild](https://img.shields.io/badge/build-esbuild-FFCF00)
 ![Tailwind CSS](https://img.shields.io/badge/tailwind-4.x-38bdf8)
 
-## 🏗️ Architecture: The Static-Dynamic Hybrid
+**Syncopated Notes** is a digital garden built on Jekyll with React islands for interactive components. It combines the simplicity and SEO benefits of static site generation with the rich interactivity of modern JavaScript frameworks.
 
-This project implements a **progressive enhancement architecture** using the "Islands" pattern, balancing static-first rendering with selective client-side interactivity.
+The site is designed as a personal knowledge base and note-taking system, featuring:
+- A collection of markdown notes with bidirectional linking
+- An interactive wiki system with pagination
+- Rich media support (video, audio, diagrams)
+- Syntax-highlighted code blocks with copy functionality
+- Interactive knowledge base carousels
+- Graph visualization of note connections
 
-### Core Philosophy
+**Built with vibe-coding principles using `claude-code` and `gemini-cli`**, this project represents an experiment in AI-assisted development and progressive enhancement.
 
-**Static-First Foundation (Jekyll)**
-- All content, navigation, and layouts are pre-rendered at build time to static HTML
-- 100% SEO-friendly with zero JavaScript required for content consumption
-- Fast initial page loads with no client-side framework overhead
-- Works perfectly with JavaScript disabled
+**Base Template:** [Digital Garden Jekyll Template](https://github.com/maximevaillancourt/digital-garden-jekyll-template)
 
-**Dynamic Islands (React)**
-- Interactive widgets are **selectively hydrated** on demand
-- Each island is an isolated React component that mounts into a `data-island` element
-- Islands share no state with each other, maintaining independence and reducing bundle size
-- Uses **React 19** with Suspense for lazy-loading components
+---
 
-### Available Islands
+## Key Features
 
-| Island | Purpose | Data Source | Location |
-|--------|---------|-------------|----------|
-| `GraphView` | Interactive D3.js force-directed knowledge graph | `/graph.json` | `src/components/GraphView.tsx` |
-| `SearchCmdK` | Global fuzzy search with `Cmd+K` shortcut | `/search.json` | `src/components/SearchCmdK.tsx` |
-| `VideoPlayer` | Custom video player with controls | Props (inline) | `src/components/VideoPlayer.tsx` |
-| `NotesGrid` | Filterable grid of notes/projects | Props (inline) | `src/components/NotesGrid.tsx` |
-| `AudioPlayer` | Audio playback component | Props (inline) | `src/components/AudioPlayer.tsx` |
-| `NotebookGuide` | Jupyter notebook navigation | Props (inline) | `src/components/NotebookGuide.tsx` |
+### Content Management
+- **Digital Garden Notes**: Markdown-based notes with automatic bidirectional linking
+- **Wiki System**: Multi-page wikis with automated pagination (12 items/page)
+- **Rich Media**: Embedded video tutorials, audio players, and interactive diagrams
+- **Code Highlighting**: Syntax highlighting for 19+ programming languages with copy-to-clipboard
+- **Search**: Command palette search (Cmd/Ctrl+K) with real-time filtering
 
-### Data Bridge: Jekyll → React
+### Interactive Components
+- **React Islands**: Progressive enhancement with island architecture
+- **12 React Components**: From simple code blocks to complex video players
+- **Interactive Diagrams**: Zoomable/pannable Mermaid diagrams and D3 force graphs
+- **Theme Awareness**: Automatic dark/light mode synchronization
+- **Accessibility**: Full keyboard navigation, ARIA labels, screen reader support
 
-Jekyll plugins generate **static JSON endpoints** at build time, which React islands fetch to hydrate their state:
+### Jekyll Enhancements
+- **8 Custom Plugins**: Bidirectional links, Obsidian callouts, wiki generation, and more
+- **16 Layout Templates**: Specialized layouts for different content types
+- **Automatic Processing**: Code block enhancement, Mermaid diagram rendering
+- **SEO Optimization**: Jekyll SEO tags, sitemaps, RSS feeds
 
-```yaml
-# Build-time generated files
-/graph.json       # Full node/edge graph (generated by bidirectional_links_generator.rb)
-/search.json      # Lightweight search index (generated by Liquid template)
-```
+### Developer Experience
+- **TypeScript**: Full type safety for React components
+- **Live Reload**: Instant preview with Jekyll LiveReload + esbuild watch mode
+- **Modern Build Tools**: esbuild for JavaScript, Tailwind CSS for styling
+- **Extensive Documentation**: Component README with 1,800+ lines of API docs
 
-**Data Flow:**
+---
 
-```
-Jekyll Build
-    ├─> _plugins/bidirectional_links_generator.rb
-    │       └─> Generates _includes/notes_graph.json
-    │           └─> Exposed as /graph.json endpoint
-    │
-    └─> search.json (Liquid template)
-        └─> Iterates over site.notes + site.projects
-            └─> Creates search index with title/url/tags
-
-React Hydration
-    ├─> GraphView fetches /graph.json
-    │       └─> Renders D3 force-directed graph
-    │
-    └─> SearchCmdK fetches /search.json
-        └─> Powers fuzzy search with Fuse.js
-```
-
-### Island Mounting System
-
-**How Islands Work** (`src/main.tsx`):
-
-1. **Component Registration**: All island components are registered in a lookup object
-   ```typescript
-   const components = {
-     HelloGarden,
-     GraphView,
-     SearchCmdK,
-     VideoPlayer,
-     NotesGrid,
-     AudioPlayer,
-     NotebookGuide,
-   };
-   ```
-
-2. **Discovery**: On page load, the system scans for `[data-island]` elements
-   ```typescript
-   const islands = document.querySelectorAll('[data-island]');
-   ```
-
-3. **Props Parsing**: Each island can receive JSON props via `data-props` attribute
-   ```typescript
-   const propsAttr = container.getAttribute('data-props');
-   const props = JSON.parse(propsAttr);
-   ```
-
-4. **Hydration**: React creates a root for each island and renders the component
-   ```typescript
-   const root = createRoot(container);
-   root.render(<Component {...props} />);
-   ```
-
-**Example Usage in Jekyll Templates:**
-
-```html
-<!-- Simple island (no props) -->
-<div data-island="SearchCmdK"></div>
-
-<!-- Island with props -->
-<div data-island="VideoPlayer"
-     data-props='{"src": "/assets/video.mp4", "autoplay": false}'></div>
-```
-
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
-*   **Ruby 3.3+** (managed via RVM with gemset `b08xgithubio`)
-*   **Node.js 20+**
-*   **Bundler** for Ruby dependencies
-*   **npm** for JavaScript dependencies
 
-### Development (Unified)
+**Required:**
+- Ruby 3.0+ with Bundler
+- Node.js 18+ with npm
+- Git
 
-The development workflow runs **two parallel processes**:
+**Optional:**
+- Netlify CLI (for deployment testing)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/b08x/b08x.github.io.git
+cd b08x.github.io
+
+# Install Ruby dependencies
+bundle install
+
+# Install Node dependencies
+npm install
+```
+
+### Development
+
+Run concurrent development servers:
+
+```bash
+# Terminal 1: React component watcher (esbuild)
+npm run watch:js
+
+# Terminal 2: Jekyll development server with LiveReload
+npm run dev:jekyll
+```
+
+Or use the combined command:
 
 ```bash
 npm run dev
 ```
 
-**What this does:**
+Visit `http://localhost:4000` to see your site.
 
-| Process | Command | Output |
-|---------|---------|--------|
-| Jekyll Server | `bundle exec jekyll serve --incremental --livereload` | `http://localhost:4000` |
-| React Watcher | `esbuild src/main.tsx --watch` | `assets/js/dist/garden-widgets.js` |
-
-**Development Features:**
-- **Incremental builds**: Jekyll only rebuilds changed files
-- **LiveReload**: Browser auto-refreshes on file changes (port `35729`)
-- **Hot module replacement**: esbuild rebuilds React bundle on save
-- **Source maps**: Enabled for debugging React components
-
-### Production Build
+### Building for Production
 
 ```bash
+# Build React components
+npm run build:js
+
+# Build Jekyll site
+npm run build:jekyll
+
+# Or build everything
 npm run build
 ```
 
-**Build Pipeline:**
+Output will be in `_site/` directory.
+
+---
+
+## Project Structure
 
 ```
-npm run build
-├─> npm run build:js
-│   └─> esbuild src/main.tsx --bundle --minify --sourcemap
-│       └─> Output: assets/js/dist/garden-widgets.js (optimized)
+b08x.github.io/
+├── _config.yml                 # Jekyll configuration
+├── package.json                # Node dependencies & scripts
+├── Gemfile                     # Ruby dependencies
+├── tailwind.config.js          # Tailwind CSS configuration
+├── postcss.config.js           # PostCSS configuration
 │
-└─> bundle exec jekyll build
-    ├─> Sass Compilation (_sass/ → _site/assets/css/)
-    ├─> PostCSS Processing (Tailwind v4 → autoprefixer)
-    ├─> Jekyll Plugin Execution
-    │   ├─> bidirectional_links_generator.rb (creates graph data)
-    │   ├─> obsidian_callouts.rb (converts callout syntax)
-    │   ├─> empty_front_matter_note_injector.rb (adds YAML)
-    │   └─> last_modified_at_generator.rb (tracks Git dates)
-    │
-    └─> Static Site Output (_site/)
+├── _layouts/                   # Jekyll layout templates (16 files)
+│   ├── default.html            # Base layout
+│   ├── home.html               # Homepage layout
+│   ├── terminal-note.html      # Note detail view
+│   ├── wiki.html               # Wiki index with pagination
+│   ├── wiki-page.html          # Wiki detail view
+│   └── ...                     # Other specialized layouts
+│
+├── _includes/                  # Reusable Jekyll partials
+│   └── page_sidebar/           # Sidebar components
+│
+├── _plugins/                   # Custom Jekyll plugins (8 files)
+│   ├── bidirectional_links_generator.rb
+│   ├── wiki_page_generator.rb  # Wiki pagination system
+│   ├── obsidian_callouts.rb
+│   └── ...
+│
+├── _sass/                      # Sass stylesheets
+│   └── _archived/              # Legacy styles
+│
+├── _notes/                     # Markdown notes (digital garden)
+│   ├── *.md                    # Individual notes
+│   └── nlp-ai-notebook-example/
+│
+├── _data/                      # Jekyll data files
+│   └── wikis/                  # Wiki JSON data
+│       └── *.json              # Wiki page collections
+│
+├── _pages/                     # Static pages
+│   ├── index.md                # Homepage
+│   ├── about.md                # About page
+│   └── ...
+│
+├── src/                        # React components source
+│   ├── main.tsx                # Component registry & island hydration
+│   ├── components/             # React components (12 files)
+│   │   ├── CodeBlock.tsx
+│   │   ├── VideoPlayer.tsx
+│   │   ├── MermaidViewer.tsx
+│   │   ├── KnowledgebaseCarousel.tsx
+│   │   └── ...
+│   └── utils/                  # Utility functions
+│       └── syntaxTheme.ts      # Syntax theme selector
+│
+├── assets/                     # Static assets
+│   ├── css/                    # Compiled CSS
+│   ├── js/                     # JavaScript bundles
+│   │   └── dist/
+│   │       └── garden-widgets.js  # React component bundle
+│   ├── fonts/                  # Custom fonts (Mononoki, Hack)
+│   ├── audio/                  # Audio files
+│   └── videos/                 # Video files
+│
+└── README.md                   # This file
+```
 
-## 🎨 Theme & Design System
+---
 
-### Aesthetic: "Cyber-Brutalist Terminal"
+## Architecture
 
-**Typography:**
-- **UI/Code:** `JetBrains Mono` (monospace)
-- **Prose:** `Inter` (variable font for optimal rendering)
+### Jekyll Foundation
 
-**Color System:**
+**Jekyll** serves as the static site generator, converting markdown files to HTML:
+- **Collections**: Notes (`_notes`) and projects (`_projects`)
+- **Plugins**: Custom Ruby plugins extend Jekyll functionality
+- **Liquid Templates**: Dynamic content rendering with Jekyll/Liquid syntax
+- **Front Matter**: YAML metadata for pages and posts
 
-The theme uses **CSS custom properties** defined in `_sass/_theme-variables.scss`:
+**Key Configurations** (`_config.yml`):
+- `permalink: pretty` - Clean URLs without `.html` extensions
+- `collections` - Notes and projects output as pages
+- `exclude` - Ignores build artifacts and development files
 
-```scss
-:root {
-  --background: #0a0a0a;       // True black
-  --foreground: #e5e5e5;       // Off-white text
-  --accent: #ff6600;           // Orange accent
-  --border: #333333;           // Subtle borders
-  --code-bg: #1a1a1a;          // Code block background
+### React Island Architecture
+
+The project uses **island architecture** for progressive enhancement:
+
+```
+┌─────────────────────────────────────────────────┐
+│ Static HTML (Jekyll-generated)                  │
+│                                                  │
+│  ┌──────────────┐    ┌──────────────┐           │
+│  │ React Island │    │ React Island │           │
+│  │ (CodeBlock)  │    │ (VideoPlayer)│           │
+│  └──────────────┘    └──────────────┘           │
+│                                                  │
+│  Static content                                  │
+│                                                  │
+│  ┌──────────────┐                               │
+│  │ React Island │                               │
+│  │ (GraphView)  │                               │
+│  └──────────────┘                               │
+└─────────────────────────────────────────────────┘
+```
+
+**How It Works:**
+1. Jekyll generates static HTML with `data-island` markers
+2. Browser loads page with static content (instant, SEO-friendly)
+3. `garden-widgets.js` loads asynchronously
+4. Component registry scans for `[data-island]` elements
+5. React hydrates only marked elements, preserving surrounding HTML
+
+**Benefits:**
+- **Fast Initial Load**: No JavaScript required for first paint
+- **SEO-Friendly**: Search engines see complete HTML
+- **Progressive Enhancement**: Works without JS, enhanced with it
+- **Selective Interactivity**: React only where needed
+
+**Example Island:**
+```html
+<!-- Jekyll generates this -->
+<div data-island="CodeBlock" data-props='{
+  "code": "console.log(\"Hello\");",
+  "language": "javascript"
+}'></div>
+
+<!-- React hydrates it to interactive component -->
+```
+
+### Custom Jekyll Plugins
+
+**8 Custom Plugins** extend Jekyll functionality:
+
+| Plugin | Purpose | LOC |
+|--------|---------|-----|
+| `bidirectional_links_generator.rb` | Creates automatic backlinks between notes | ~150 |
+| `wiki_page_generator.rb` | Generates paginated wiki indices from JSON | ~250 |
+| `obsidian_callouts.rb` | Converts Obsidian-style callouts to HTML | ~100 |
+| `empty_front_matter_note_injector.rb` | Adds front matter to notes without it | ~50 |
+| `embed_tweets.rb` | Embeds Twitter content | ~75 |
+| `open_external_links_in_new_tab.rb` | Opens external links in new tabs | ~50 |
+| `markdown-highlighter.rb` | Enhanced markdown syntax highlighting | ~100 |
+| `last_modified_at_generator.rb` | Tracks file modification dates | ~75 |
+
+**Featured Plugin: Wiki Page Generator**
+
+Transforms wiki data from JSON into paginated static pages:
+
+```ruby
+# Configuration
+ITEMS_PER_PAGE = 12  # Pages per index
+
+# Input: _data/wikis/example.json
+{
+  "metadata": { "repository": "...", "page_count": 32 },
+  "pages": [/* wiki entries */]
 }
 
-[data-theme="light"] {
-  --background: #ffffff;
-  --foreground: #1a1a1a;
-  --accent: #ff6600;           // Accent stays consistent
-  --border: #e5e5e5;
-  --code-bg: #f5f5f5;
-}
+# Output:
+# - /wikis/example/index.html (page 1)
+# - /wikis/example/page/2/index.html (page 2)
+# - /wikis/example/{page_slug}/index.html (detail pages)
 ```
 
-**Theme Manager** (`assets/js/theme-manager.js`):
-- Persists theme choice to `localStorage['theme']`
-- Applies theme **before first paint** to prevent FOUC (Flash of Unstyled Content)
-- Initialized in `<head>` before `<body>` renders
-- Toggle button in `_includes/theme-toggle-button.html`
+See [Wiki Pagination Architecture](#wiki-system) for details.
 
-### Tailwind CSS v4 Integration
+### Wiki System
 
-**Configuration** (`tailwind.config.js`):
+The wiki system provides scalable pagination for large content collections:
 
-```javascript
-content: [
-  './_layouts/**/*.html',
-  './_includes/**/*.html',
-  './src/**/*.{ts,tsx}',        // React components
-  './_notes/**/*.md',            // Markdown content
-]
+**Architecture Components:**
+1. **Generator Plugin** (`_plugins/wiki_page_generator.rb`)
+   - Reads wiki data from `_data/wikis/{wiki_id}.json`
+   - Creates paginated index pages (12 items/page)
+   - Generates individual wiki entry detail pages
+   - Prevents slug conflicts with reserved words
+
+2. **Wiki Layout** (`_layouts/wiki.html`)
+   - Terminal-aesthetic grid layout (1-4 columns responsive)
+   - Pagination controls (Previous/Next + page indicator)
+   - Project metadata header
+   - Card-based display with importance badges and excerpts
+
+3. **Data Flow**:
+   ```
+   JSON Data → Generator Plugin → Front Matter → Liquid Template → Static HTML
+   ```
+
+**Front Matter Example:**
+```yaml
+layout: wiki
+title: "Example Wiki"
+wiki_id: "example"
+pagination:
+  current_page: 1
+  total_pages: 3
+  has_next: true
+  next_page_url: "/wikis/example/page/2/"
+pages:
+  - id: "page-1"
+    title: "Page Title"
+    excerpt: "First 200 chars..."
+    importance: "high"
+    url: "/wikis/example/page-1/"
 ```
 
-**Build Pipeline:**
+**User Experience:**
+- **Header**: Shows wiki scope, repository link, generation date
+- **Grid**: Card-based display with importance badges
+- **Pagination**: Previous/Next buttons with page number
+- **Accessibility**: Full keyboard navigation, ARIA labels
 
+---
+
+## Key Technologies
+
+### Frontend
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Jekyll** | 4.x | Static site generator |
+| **React** | 19.2.3 | UI components (island hydration) |
+| **TypeScript** | 5.9.3 | Type safety |
+| **Tailwind CSS** | 4.1.17 | Utility-first styling |
+| **esbuild** | 0.27.2 | JavaScript bundler |
+| **D3.js** | 7.9.0 | Data visualization |
+| **Mermaid** | 11.12.2 | Diagram generation |
+| **react-syntax-highlighter** | 15.6.0 | Code syntax highlighting |
+
+### Backend (Build-Time)
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **Ruby** | 3.0+ | Jekyll runtime |
+| **Bundler** | - | Ruby dependency management |
+| **Jekyll Plugins** | Various | Custom functionality |
+| **Nokogiri** | - | HTML parsing |
+| **Rouge** | - | Syntax highlighting |
+
+### Build Tools
+- **npm-run-all**: Parallel script execution
+- **PostCSS**: CSS processing
+- **Autoprefixer**: CSS vendor prefixing
+
+---
+
+## Component Library
+
+**12 Interactive React Components** with 2,558 total lines of code.
+
+**See [src/components/README.md](src/components/README.md)** for comprehensive documentation including:
+- Component APIs and props interfaces
+- Usage examples with code snippets
+- Architecture patterns (island hydration, theme sync)
+- Accessibility features
+- Troubleshooting guides
+
+**Component Overview:**
+
+| Component | LOC | Purpose |
+|-----------|-----|---------|
+| **VideoPlayer** | 410 | HLS video with segments, actions, transcript |
+| **KnowledgebaseCarousel** | 498 | H2-based content carousel with keyboard nav |
+| **MermaidViewer** | 280 | Interactive Mermaid diagrams with zoom/pan |
+| **GraphView** | 254 | D3 force-directed graph visualization |
+| **MermaidModal** | 249 | Full-screen Mermaid diagram modal |
+| **CodeBlock** | 224 | Syntax-highlighted code with copy button |
+| **NotesGrid** | 221 | Grid display for notes with detail view |
+| **SearchCmdK** | 153 | Command palette search (Cmd+K) |
+| **AudioPlayer** | 144 | Audio playback with waveform |
+| **NotebookGuide** | 112 | Guide/tutorial assistance |
+| **HelloGarden** | 13 | Demo/test component |
+
+---
+
+## Content Creation
+
+### Writing Notes
+
+Notes are markdown files in `_notes/` directory with YAML front matter:
+
+```markdown
+---
+title: My Note Title
+tags: [ruby, programming, web]
+---
+
+# My Note Title
+
+This is the content of my note.
+
+## Bidirectional Links
+
+Link to other notes with [[Note Title]] syntax.
+
+## Features
+- Automatic bidirectional linking
+- Tag organization
+- Last modified tracking
+- Graph visualization
 ```
-1. Sass Compilation (_sass/ → CSS)
-   └─> Loads theme variables as CSS custom properties
 
-2. PostCSS Processing (postcss.config.js)
-   ├─> @tailwindcss/postcss   (Tailwind v4 engine)
-   ├─> @tailwindcss/typography (Prose styling)
-   └─> autoprefixer           (Browser prefixes)
+**Features:**
+- **Bidirectional Links**: `[[Note Title]]` creates automatic backlinks
+- **Front Matter**: Optional YAML metadata (title, tags, date)
+- **Obsidian Compatibility**: Supports Obsidian-style callouts
+- **Auto-Enhancement**: Code blocks upgraded to interactive CodeBlock islands
 
-3. Jekyll Build
-   └─> Outputs to _site/assets/css/main.css
-```
+### Creating Wiki Pages
 
-**Why Tailwind v4?**
-- **Native CSS variable support** for theming
-- **Smaller bundle size** with oxide engine
-- **Better DX** with zero-config setup
-- **PostCSS-only** pipeline (no JIT compilation needed)
-
-## ✨ Features
-
-### Interactive (React Islands)
-*   **Knowledge Graph:** Zoomable D3.js force-directed graph visualizing note connections
-*   **Command Palette (`Cmd+K`):** Instant fuzzy search across all notes and projects
-*   **Video/Audio Players:** Custom media components with controls
-*   **Notes Grid:** Filterable, sortable grid view for content discovery
-
-### Core (Jekyll)
-*   **Bidirectional Linking:** `[[Note Title]]` syntax with automatic backlink detection
-*   **Obsidian Callouts:** Support for `> [!NOTE]`, `> [!WARNING]`, etc. blocks
-*   **Smart TOC:** Intersection Observer-based table of contents
-*   **Code Copy:** Automatic copy buttons for all code blocks
-*   **Jupyter Notebook Support:** Render `.ipynb` files with preserved outputs
-
-## 🔗 Bidirectional Linking System
-
-### How It Works
-
-The bidirectional linking system is powered by `_plugins/bidirectional_links_generator.rb` (111 lines), which runs during the Jekyll build process.
-
-**Algorithm Overview:**
-
-```
-For each note/page in the site:
-  For each other note/page:
-    1. Extract potential link targets (filename + title from front matter)
-    2. Create regex patterns for matching
-    3. Replace [[wiki-style]] links with HTML <a> tags
-    4. Track which notes link to which (build graph edges)
-  5. Convert remaining [[broken links]] to styled spans
-  6. Generate backlinks (reverse references)
-  7. Write graph.json for React visualization
-```
-
-**Link Syntax Supported:**
-
-| Syntax | Result | Example |
-|--------|--------|---------|
-| `[[Note Title]]` | Links using page title | `[[Ruby Metaprogramming]]` → Link to note with title "Ruby Metaprogramming" |
-| `[[filename]]` | Links using filename | `[[ruby-metaprogramming]]` → Same note, different syntax |
-| `[[Note Title\|custom]]` | Custom link label | `[[Ruby Metaprogramming\|learn more]]` → "learn more" |
-| `[[broken-link]]` | Invalid link (styled) | `[[Non-existent]]` → Grayed out with brackets visible |
-
-**Link Resolution Priority:**
-
-1. **Exact title match** from front matter (`title:` field)
-2. **Filename match** (case-insensitive, handles spaces/dashes)
-3. **Fallback to invalid link** (if no match found)
-
-### Graph Data Generation
-
-The plugin generates `_includes/notes_graph.json` with this structure:
+Add wiki data to `_data/wikis/{wiki-id}.json`:
 
 ```json
 {
-  "nodes": [
+  "metadata": {
+    "repository": "https://github.com/user/repo",
+    "generated_at": "2026-01-03T00:00:00Z",
+    "page_count": 12
+  },
+  "pages": [
     {
-      "id": "1149711711798...",  // Byte encoding of title
-      "path": "/note-slug",
-      "label": "Note Title"
-    }
-  ],
-  "edges": [
-    {
-      "source": "note-1-id",
-      "target": "note-2-id"
+      "id": "unique-id",
+      "title": "Page Title",
+      "content": "Full markdown or HTML content...",
+      "importance": "high",
+      "relatedPages": ["other-page-id"],
+      "filePaths": ["src/file.py"]
     }
   ]
 }
 ```
 
-**Performance Consideration:** This plugin has **O(n²) time complexity** (all notes × all notes), which means build time increases quadratically. For gardens with 100+ notes, consider optimizing with caching or incremental builds.
-
-### Backlinks
-
-Every note automatically receives a `backlinks` data attribute containing all notes that link to it:
-
-```liquid
-{% for backlink in page.backlinks %}
-  <a href="{{ backlink.url }}">{{ backlink.title }}</a>
-{% endfor %}
+Then rebuild:
+```bash
+jekyll build
 ```
 
-This powers the "Referenced by" section in the `terminal-note.html` layout (_layouts/terminal-note.html:67).
+Output:
+- Index pages: `/wikis/{wiki-id}/`, `/wikis/{wiki-id}/page/2/`, ...
+- Detail pages: `/wikis/{wiki-id}/{page-slug}/`
 
-## 📂 Directory Structure
+### Using React Components
 
+Embed React islands in any Jekyll page:
+
+```html
+<!-- Simple component -->
+<div data-island="HelloGarden" data-props='{"name": "Developer"}'></div>
+
+<!-- Complex component with Jekyll data -->
+{% assign videoProps = page.video | jsonify %}
+<div data-island="VideoPlayer" data-props='{{ videoProps }}'></div>
+
+<!-- Code block (auto-enhanced from Rouge) -->
+```javascript
+const greeting = "Hello, World!";
+console.log(greeting);
 ```
-b08x.github.io/
-├── _notes/                      # Digital garden content (Markdown)
-│   └── *.md                     # Notes with [[wiki-links]]
-│
-├── _projects/                   # Project showcase entries
-│   └── *.md                     # Project descriptions
-│
-├── _layouts/                    # Jekyll HTML templates
-│   ├── default.html             # Base layout (loads React bundle)
-│   ├── terminal-note.html       # Main reading layout
-│   ├── collapsible-sidebar.html # Sidebar with TOC
-│   ├── notebook.html            # Jupyter notebook rendering
-│   └── wiki.html                # Wiki-style layout
-│
-├── _includes/                   # Reusable Jekyll partials
-│   ├── head.html                # <head> metadata & theme init
-│   ├── nav.html                 # Navigation bar
-│   ├── footer.html              # Site footer
-│   ├── notes_graph.json         # Generated graph data (by plugin)
-│   └── theme-toggle-button.html # Dark/light mode switch
-│
-├── _plugins/                    # Custom Jekyll plugins (Ruby)
-│   ├── bidirectional_links_generator.rb  # Core linking system (111 lines)
-│   ├── obsidian_callouts.rb     # Callout block converter (47 lines)
-│   ├── empty_front_matter_note_injector.rb # Auto-add YAML
-│   ├── last_modified_at_generator.rb # Git-based edit dates
-│   └── markdown-highlighter.rb  # Syntax highlighting with Rouge
-│
-├── _sass/                       # Sass partials
-│   ├── _theme-variables.scss    # CSS custom properties (colors, fonts)
-│   ├── _callouts.scss           # Obsidian-style callout blocks
-│   └── _code.scss               # Code block styling
-│
-├── src/                         # React source code (TypeScript)
-│   ├── components/              # Island components
-│   │   ├── GraphView.tsx        # D3.js knowledge graph
-│   │   ├── SearchCmdK.tsx       # Cmd+K search palette
-│   │   ├── VideoPlayer.tsx      # Custom video player
-│   │   ├── AudioPlayer.tsx      # Audio playback
-│   │   ├── NotesGrid.tsx        # Grid view of notes
-│   │   └── NotebookGuide.tsx    # Jupyter navigation
-│   └── main.tsx                 # Island mount logic & registry
-│
-├── assets/
-│   ├── css/
-│   │   └── tailwind.css         # Tailwind v4 input file
-│   └── js/
-│       ├── dist/
-│       │   └── garden-widgets.js # Compiled React bundle (git-tracked)
-│       ├── theme-manager.js     # Dark/light theme logic
-│       └── collapsible-sidebar.js # Sidebar behavior
-│
-├── _site/                       # Jekyll build output (git-ignored)
-│
-├── graph.json                   # Jekyll template → /graph.json endpoint
-├── search.json                  # Jekyll template → /search.json endpoint
-│
-├── _config.yml                  # Jekyll configuration
-├── tailwind.config.js           # Tailwind v4 config
-├── postcss.config.js            # PostCSS pipeline
-├── tsconfig.json                # TypeScript config
-├── package.json                 # Node dependencies & build scripts
-└── Gemfile                      # Ruby dependencies
 ```
 
-**Key Files:**
+**Available Components:**
+See [Component Library](#component-library) or [src/components/README.md](src/components/README.md)
 
-| File | Purpose | Used By |
-|------|---------|---------|
-| `src/main.tsx` | React island registry & mounting | Browser (client-side) |
-| `_plugins/bidirectional_links_generator.rb` | Converts `[[links]]` to HTML, generates graph | Jekyll build |
-| `_layouts/default.html` | Base template that loads React bundle | All pages |
-| `_includes/notes_graph.json` | Graph data (nodes/edges) | GraphView island |
-| `search.json` | Search index template | SearchCmdK island |
-| `tailwind.config.js` | Scans `_layouts/`, `_includes/`, `src/` | PostCSS build |
+---
 
-## 🛠️ Adding New Islands
+## Customization
 
-**Step-by-step guide to creating a new React island:**
+### Theming
 
-1.  **Create the component** in `src/components/MyWidget.tsx`:
-    ```typescript
-    import React from 'react';
+Themes use CSS variables defined in `tailwind.config.js`:
 
-    interface MyWidgetProps {
-      title: string;
-      count?: number;
-    }
+```css
+:root {
+  --foreground: ...;     /* Primary text */
+  --background: ...;     /* Page background */
+  --accent: ...;         /* Primary accent */
+  --border: ...;         /* Border color */
+  --muted: ...;          /* Secondary text */
+}
 
-    export default function MyWidget({ title, count = 0 }: MyWidgetProps) {
-      return (
-        <div className="p-4 border border-accent">
-          <h2>{title}</h2>
-          <p>Count: {count}</p>
-        </div>
-      );
-    }
-    ```
-
-2.  **Register it** in `src/main.tsx`:
-    ```typescript
-    import MyWidget from './components/MyWidget';
-
-    const components = {
-      HelloGarden,
-      GraphView,
-      SearchCmdK,
-      MyWidget,  // Add your component here
-    };
-    ```
-
-3.  **Embed it** in any Jekyll template (`_layouts/*.html` or `_includes/*.html`):
-    ```html
-    <div data-island="MyWidget"
-         data-props='{"title": "Hello", "count": 42}'></div>
-    ```
-
-4.  **Rebuild** the React bundle:
-    ```bash
-    npm run build:js
-    # Or for development with hot reload:
-    npm run watch:js
-    ```
-
-**Best Practices:**
-- Keep islands **small and focused** (single responsibility)
-- Fetch data from Jekyll-generated JSON endpoints, not APIs
-- Use TypeScript for type safety
-- Lazy load components with `React.lazy()` (already configured in `main.tsx`)
-
-## 🚀 Deployment
-
-### GitHub Pages (via GitHub Actions)
-
-The site is automatically deployed via `.github/workflows/jekyll.yml` on every push to `main`.
-
-**Workflow Steps:**
-
-```yaml
-1. Checkout repository
-2. Install system dependencies:
-   - libvips-dev (image processing)
-   - imagemagick (image manipulation)
-   - jupyter-core, pandoc (notebook support)
-3. Setup Ruby with caching
-4. Setup Node.js with caching
-5. Install dependencies:
-   npm install && bundle install
-6. Build site:
-   jekyll build --baseurl "${{ base_path }}"
-7. Deploy to GitHub Pages
+.dark {
+  /* Dark mode overrides */
+}
 ```
 
-**Custom Plugins Caveat:**
+**Custom Fonts:**
+- **Mono**: Mononoki, Hack (for code and terminal aesthetic)
+- **Sans**: System UI fonts
+- **Prose**: Georgia (for long-form content)
 
-GitHub Pages normally runs in `--safe` mode, which disables custom plugins. This project uses **GitHub Actions** instead, which allows custom plugins to run during the build step before deployment.
+**Terminal Aesthetic Guidelines:**
+- Monospace fonts for UI elements
+- Border-based design (1px solid borders)
+- High contrast (WCAG AA minimum)
+- Rounded corners with `rounded-lg`
 
-### Alternative Deployment (Manual)
+### Adding New Components
+
+See [src/components/README.md](src/components/README.md) for step-by-step guide.
+
+**Quick steps:**
+1. Create `src/components/MyComponent.tsx`
+2. Register in `src/main.tsx`
+3. Build: `npm run build:js`
+4. Use: `<div data-island="MyComponent" data-props='...'></div>`
+
+### Custom Plugins
+
+Add Ruby plugins to `_plugins/` directory:
+
+```ruby
+module Jekyll
+  class MyPlugin < Generator
+    def generate(site)
+      # Plugin logic
+    end
+  end
+end
+```
+
+Rebuild Jekyll to activate.
+
+---
+
+## Deployment
+
+### Netlify (Recommended)
+
+**Deploy Settings:**
+- **Build Command**: `npm run build`
+- **Publish Directory**: `_site`
+- **Node Version**: 18+
+- **Ruby Version**: 3.0+
+
+**Environment Variables:**
+- `JEKYLL_ENV=production`
+
+### Manual Deployment
 
 ```bash
-# Build locally
+# Build production assets
 npm run build
 
-# Output in _site/
-# Deploy _site/ contents to any static host:
-# - Netlify
-# - Vercel
-# - AWS S3 + CloudFront
-# - Any web server
+# Upload _site/ directory to hosting
+rsync -avz _site/ user@server:/var/www/html/
 ```
 
-## 🔧 Technical Considerations
+### GitHub Pages
 
-### Performance
+**Not recommended** due to React component build requirements. GitHub Pages doesn't support custom build steps with npm.
 
-**Bundle Size:**
-- React bundle (`garden-widgets.js`): ~150KB minified
-- Lazy loading reduces initial load to <50KB
-- Code splitting by island component
+---
 
-**Build Times:**
-- Small gardens (<50 notes): <5 seconds
-- Medium gardens (50-100 notes): 10-20 seconds
-- Large gardens (>100 notes): 30+ seconds due to O(n²) linking algorithm
+## Development Workflow
 
-**Optimizations:**
-- Jekyll incremental builds (development only)
-- esbuild for fast React compilation
-- Tailwind v4 oxide engine for CSS
-- PostCSS caching disabled (prevents stale CSS issues)
+### Typical Development Session
 
-### Browser Support
-
-**Minimum Requirements:**
-- ES2020 JavaScript (esbuild target)
-- CSS custom properties (theme system)
-- `createRoot` API (React 19)
-
-**Supported:**
-- Chrome 88+
-- Firefox 78+
-- Safari 14+
-- Edge 88+
-
-### Accessibility
-
-- Semantic HTML5 elements
-- ARIA labels on interactive components
-- Keyboard navigation support (`Cmd+K` for search)
-- Color contrast meets WCAG AA standards
-- Screen reader tested
-
-### Security
-
-- Content Security Policy (CSP) compatible
-- No inline scripts (except theme init to prevent FOUC)
-- External links open with `rel="noopener noreferrer"`
-- No third-party analytics or tracking
-
-## 🐛 Troubleshooting
-
-**CSS not updating?**
 ```bash
-# Clear Jekyll cache and rebuild
-rm -rf .jekyll-cache _site/
-bundle exec jekyll build
+# 1. Start development servers
+npm run dev  # or separate terminals for watch:js + dev:jekyll
+
+# 2. Edit content
+# - Create/edit notes in _notes/
+# - Modify React components in src/components/
+# - Update Jekyll layouts in _layouts/
+
+# 3. Preview changes
+# - Visit http://localhost:4000
+# - LiveReload auto-refreshes on save
+
+# 4. Test in both themes
+# - Toggle dark/light mode in browser
+
+# 5. Build for production
+npm run build
 ```
 
-**React islands not mounting?**
+### Debugging
+
+**Browser Console:**
+Look for `[Garden]` logs showing island mounting:
+```
+[Garden] Found 3 islands to mount
+[Garden] Attempting to mount island: CodeBlock
+[Garden] Successfully rendered island: CodeBlock
+```
+
+**Common Issues:**
+- **Component not rendering**: Check registry in `main.tsx`
+- **Props not working**: Validate JSON syntax in `data-props`
+- **Theme not updating**: Implement MutationObserver pattern
+- **Build errors**: Check TypeScript types and imports
+
+See [Troubleshooting](#troubleshooting) for details.
+
+---
+
+## Troubleshooting
+
+### Component Not Rendering
+
+**Symptoms:**
+- Island `<div>` remains empty
+- No error in console
+
+**Solutions:**
+1. Verify component is in `main.tsx` registry
+2. Check `data-island` attribute matches component name (case-sensitive)
+3. Ensure `garden-widgets.js` is loaded
+4. Check browser console for errors
+
+### Props Not Working
+
+**Symptoms:**
+- Component renders but props are `undefined`
+- Component displays default values
+
+**Solutions:**
+1. Validate JSON syntax in `data-props`
+2. Check for smart quotes (Jekyll may convert them)
+3. Verify all required props are provided
+4. Check TypeScript interface for type mismatches
+
+**Debug:**
+```javascript
+// Browser console
+document.querySelectorAll('[data-island]').forEach(el => {
+  console.log('Island:', el.getAttribute('data-island'));
+  console.log('Props:', el.getAttribute('data-props'));
+});
+```
+
+### Theme Not Updating
+
+**Symptoms:**
+- Component doesn't respond to dark/light mode toggle
+
+**Solutions:**
+1. Implement MutationObserver pattern:
+   ```typescript
+   useEffect(() => {
+     const observer = new MutationObserver(() => {
+       setTheme(getTheme());
+     });
+     observer.observe(document.documentElement, {
+       attributes: true,
+       attributeFilter: ['class']
+     });
+     return () => observer.disconnect();
+   }, []);
+   ```
+2. Use CSS variables instead of hardcoded colors
+3. Test in both dark and light modes
+
+### Build Errors
+
+**Symptoms:**
+- `npm run build` fails with TypeScript errors
+
+**Solutions:**
+1. Check TypeScript types: `npx tsc --noEmit`
+2. Verify all imports have correct paths and extensions
+3. Install missing `@types/*` packages
+4. Clear caches: `rm -rf node_modules package-lock.json && npm install`
+
+**Common TypeScript Fixes:**
 ```bash
-# Check browser console for errors
-# Verify component name matches exactly (case-sensitive)
-# Ensure data-props is valid JSON (use single quotes around attribute)
+# Install missing type definitions
+npm install --save-dev @types/react @types/d3
 ```
 
-**Broken links after renaming notes?**
-```bash
-# The linking system uses both filename and front matter title
-# Update both, or use git mv to preserve history
-mv _notes/old-name.md _notes/new-name.md
-# Then update title: in front matter
-```
+---
 
-**Build errors in GitHub Actions?**
-```bash
-# Check .github/workflows/jekyll.yml
-# Ensure all system dependencies are installed
-# Test build locally with:
-JEKYLL_ENV=production bundle exec jekyll build
-```
+## Contributing
 
-## 📄 License
+Contributions welcome! This is a personal project, but improvements and suggestions are appreciated.
 
-Source code is available under the [MIT license](LICENSE.md).
+**Areas for Contribution:**
+- New React components
+- Jekyll plugin enhancements
+- Documentation improvements
+- Bug fixes
+- Performance optimizations
 
-## 🙏 Acknowledgments
+**Development Guidelines:**
+1. Follow TypeScript interfaces for type safety
+2. Use CSS variables for all theming
+3. Implement accessibility features (ARIA, keyboard nav)
+4. Test in both dark and light modes
+5. Update documentation with changes
 
-**Inspiration:**
-- [Obsidian](https://obsidian.md/) - Bidirectional linking and callout syntax
-- [Roam Research](https://roamresearch.com/) - Knowledge graph visualization
-- [Astro Islands](https://docs.astro.build/en/concepts/islands/) - Island architecture pattern
+---
 
-**Built with:**
-- [Jekyll](https://jekyllrb.com/) - Static site generator
-- [React 19](https://react.dev/) - UI library
-- [D3.js](https://d3js.org/) - Graph visualization
-- [Tailwind CSS v4](https://tailwindcss.com/) - Utility-first CSS
-- [esbuild](https://esbuild.github.io/) - JavaScript bundler
+## License
+
+This project builds upon the [Digital Garden Jekyll Template](https://github.com/maximevaillancourt/digital-garden-jekyll-template) foundation.
+
+**Original Template License:** MIT License
+**This Project:** MIT License (see LICENSE file)
+
+**Third-Party Dependencies:**
+See `package.json` and `Gemfile` for full list of dependencies and their licenses.
+
+---
+
+**Last Updated:** 2026-01-03
+**Maintainer:** [b08x](https://github.com/b08x)
+**Status:** Active Development
+**Architecture:** Jekyll + React Islands + Tailwind CSS
+
+**Site Purpose:** Personal digital garden and knowledge base exploring the intersection of static site generation and modern interactive components, built with AI-assisted vibe-coding principles.
+
+---
+
+## Acknowledgments
+
+- **Maxime Vaillancourt** - [Digital Garden Jekyll Template](https://github.com/maximevaillancourt/digital-garden-jekyll-template)
+- **Anthropic** - Claude AI for `claude-code` development assistance
+- **Google** - Gemini for `gemini-cli` development assistance
+- **Jekyll Community** - Static site generation framework
+- **React Team** - Island architecture inspiration
+
+---
+
+For detailed component documentation, see [src/components/README.md](src/components/README.md).
+
+For wiki architecture details, see [CLAUDE.md](CLAUDE.md) section 8.

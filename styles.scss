@@ -2,11 +2,17 @@
 ---
 
 // Core theme system - CSS custom properties for Tailwind and SASS integration
+@import "../_sass/fonts";
 @import "../_sass/theme-variables";
 
 // Specialized components not covered by Tailwind
 @import "../_sass/code";       // Rouge syntax highlighting
 @import "../_sass/callouts";   // Obsidian-style callouts
+
+// Scroll-Up Navigation Header - Auto-hiding header on scroll
+#site-header.header-hidden {
+  transform: translateY(-100%);
+}
 
 // Archived (Phase 4 - December 27, 2025):
 // - _normalize.scss → Tailwind Preflight handles CSS reset

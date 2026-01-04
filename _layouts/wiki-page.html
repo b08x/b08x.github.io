@@ -2,7 +2,7 @@
 layout: wiki-layout
 # Sidebar config handled by wiki-layout logic (if needed can be re-added params)
 content_max_width: max-w-none
-show_graph: true
+show_graph: false
 ---
 
 <header class="mb-12">
@@ -25,50 +25,6 @@ show_graph: true
     <div class="wiki-page-body">
         {{ content }}
     </div>
-
-    {% if page.pagination.previous or page.pagination.next %}
-    <nav class="wiki-pagination mt-12 mb-8" aria-label="Wiki page navigation">
-        <div
-            class="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 border border-border bg-surface rounded">
-            <!-- Previous Page -->
-            <div class="w-full sm:w-auto">
-                {% if page.pagination.previous %}
-                <a href="{{ site.baseurl }}{{ page.pagination.previous.url }}"
-                    class="inline-flex flex-col items-start gap-1 p-4 border border-border bg-background rounded hover:border-accent hover:text-accent transition-all group w-full sm:min-w-[200px]"
-                    rel="prev">
-                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-70">Previous</span>
-                    <span
-                        class="text-sm font-prose font-semibold line-clamp-1 italic text-foreground/75 group-hover:text-accent">{{
-                        page.pagination.previous.title }}</span>
-                </a>
-                {% else %}
-                <div class="p-4 border border-border/30 bg-background/50 rounded opacity-30 w-full sm:min-w-[200px]">
-                    <span class="text-[10px] font-mono uppercase tracking-widest">Previous (None)</span>
-                </div>
-                {% endif %}
-            </div>
-
-            <!-- Next Page -->
-            <div class="w-full sm:w-auto">
-                {% if page.pagination.next %}
-                <a href="{{ site.baseurl }}{{ page.pagination.next.url }}"
-                    class="inline-flex flex-col items-end gap-1 p-4 border border-border bg-background rounded hover:border-accent hover:text-accent transition-all group text-right w-full sm:min-w-[200px]"
-                    rel="next">
-                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-70">Next</span>
-                    <span
-                        class="text-sm font-prose font-semibold line-clamp-1 italic text-foreground/75 group-hover:text-accent">{{
-                        page.pagination.next.title }}</span>
-                </a>
-                {% else %}
-                <div
-                    class="p-4 border border-border/30 bg-background/50 rounded opacity-30 text-right w-full sm:min-w-[200px]">
-                    <span class="text-[10px] font-mono uppercase tracking-widest">Next (None)</span>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
-    {% endif %}
 
     {% if page.file_paths.size > 0 or page.related_pages.size > 0 %}
     <footer class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -112,5 +68,48 @@ show_graph: true
         </div>
         {% endif %}
     </footer>
+    {% endif %}
+    {% if page.pagination.previous or page.pagination.next %}
+    <nav class="wiki-pagination mt-12 mb-8" aria-label="Wiki page navigation">
+        <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 border border-border bg-surface rounded">
+            <!-- Previous Page -->
+            <div class="w-full sm:w-auto">
+                {% if page.pagination.previous %}
+                <a href="{{ site.baseurl }}{{ page.pagination.previous.url }}"
+                    class="inline-flex flex-col items-start gap-1 p-4 border border-border bg-background rounded hover:border-accent hover:text-accent transition-all group w-full sm:min-w-[200px]"
+                    rel="prev">
+                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-70">Previous</span>
+                    <span
+                        class="text-sm font-prose font-semibold line-clamp-1 italic text-foreground/75 group-hover:text-accent">{{
+                        page.pagination.previous.title }}</span>
+                </a>
+                {% else %}
+                <div class="p-4 border border-border/30 bg-background/50 rounded opacity-30 w-full sm:min-w-[200px]">
+                    <span class="text-[10px] font-mono uppercase tracking-widest">Previous (None)</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Next Page -->
+            <div class="w-full sm:w-auto">
+                {% if page.pagination.next %}
+                <a href="{{ site.baseurl }}{{ page.pagination.next.url }}"
+                    class="inline-flex flex-col items-end gap-1 p-4 border border-border bg-background rounded hover:border-accent hover:text-accent transition-all group text-right w-full sm:min-w-[200px]"
+                    rel="next">
+                    <span class="text-[10px] font-mono uppercase tracking-widest opacity-70">Next</span>
+                    <span
+                        class="text-sm font-prose font-semibold line-clamp-1 italic text-foreground/75 group-hover:text-accent">{{
+                        page.pagination.next.title }}</span>
+                </a>
+                {% else %}
+                <div
+                    class="p-4 border border-border/30 bg-background/50 rounded opacity-30 text-right w-full sm:min-w-[200px]">
+                    <span class="text-[10px] font-mono uppercase tracking-widest">Next (None)</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
     {% endif %}
 </div>

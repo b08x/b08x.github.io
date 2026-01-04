@@ -9,7 +9,7 @@ permalink: /video-tutorial-example/
 
 This page demonstrates the new **VideoPlayer** component with AI-generated timecoded captions for screencast walkthroughs.
 
-<div data-island="VideoPlayer" data-props='{
+{% capture video_props %}{
   "title": "Troubleshooting NPM Package Installation",
   "videoUrl": "/assets/videos/npm-tutorial.mp4",
   "segments": [
@@ -105,7 +105,8 @@ This page demonstrates the new **VideoPlayer** component with AI-generated timec
     { "timestamp": 395, "text": "Run a simple test server to confirm everything works." },
     { "timestamp": 410, "text": "Perfect! The installation is now complete and verified." }
   ]
-}'>
+}}{% endcapture %}
+<div data-island="VideoPlayer" data-props='{{ video_props | base64_encode }}'>
   <!-- VideoPlayer component will mount here -->
   <div style="padding: 2rem; text-align: center; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md);">
     <p style="color: var(--text-secondary);">Loading video player...</p>

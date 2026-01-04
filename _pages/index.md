@@ -7,7 +7,7 @@ permalink: /
 
 # Welcome! 🌱
 
-<p class="py-12 px-4 text-center text-foreground opacity-80 italic">
+<p class="py-4 px-2 text-left text-foreground opacity-80 italic">
   A collection of observations tied together with context
 </p>
 
