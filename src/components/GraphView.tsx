@@ -23,6 +23,10 @@ const GraphView: React.FC = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const workerRef = useRef<Worker | null>(null);
+  const [isCalculating, setIsCalculating] = useState(false);
+  const [calculatedData, setCalculatedData] = useState<{ nodes: Node[], edges: Edge[] } | null>(null);
+
 
   // Constants
   const MINIMAL_NODE_SIZE = 8;
@@ -86,15 +90,90 @@ const GraphView: React.FC = () => {
     svg.selectAll('*').remove(); // Clear for re-render
 
     const { width, height } = dimensions;
-    // Clone data to prevent D3 from mutating the state directly on re-renders
-    const nodes = data.nodes.map(d => ({ ...d }));
-    const edges = data.edges.map(d => ({ ...d }));
+
+    // Clear previous simulation results and show loading
+    setIsCalculating(true);
+
+    // Initialize worker if not exists
+    if (!workerRef.current) {
+      console.log('[GraphView] Initializing worker...');
+      workerRef.current = new Worker('/assets/js/dist/graph.worker.js');
+    }
+
+    const worker = workerRef.current;
+
+    worker.onmessage = (event) => {
+      console.log('[GraphView] Worker message received:', event.data);
+      const { nodes: calculatedNodes, edges: calculatedEdges, error: workerError } = event.data;
+
+      if (workerError) {
+        console.error('[GraphView] Worker reported error:', workerError);
+        setError(workerError);
+        setIsCalculating(false);
+        return;
+      }
+
+      setCalculatedData({ nodes: calculatedNodes, edges: calculatedEdges });
+      setIsCalculating(false);
+    };
+
+    worker.onerror = (err) => {
+      console.error('[GraphView] Worker error:', err);
+      setError(`Worker error: ${err.message || 'Unknown error'}`);
+      setIsCalculating(false);
+    };
+
+    console.log('[GraphView] Posting data to worker...', { nodeCount: data.nodes.length, edgeCount: data.edges.length });
+
+    worker.postMessage({
+      nodes: data.nodes.map(d => ({ ...d })),
+      edges: data.edges.map(d => ({ ...d })),
+      width,
+      height,
+      ticks: TICKS
+    });
+
+    return () => {
+      // Clear message handlers
+      if (workerRef.current) {
+        workerRef.current.onmessage = null;
+        workerRef.current.onerror = null;
+      }
+    };
+  }, [dimensions, data]);
+
+  // Handle Rendering separately
+  useEffect(() => {
+    if (calculatedData && svgRef.current && !isCalculating) {
+      console.log('[GraphView] Rendering graph with calculated data');
+      renderGraph(calculatedData.nodes, calculatedData.edges);
+    }
+  }, [calculatedData, dimensions, isCalculating]);
+
+  // Clean up worker on unmount
+  useEffect(() => {
+    return () => {
+      if (workerRef.current) {
+        console.log('[GraphView] Terminating worker on unmount');
+        workerRef.current.terminate();
+        workerRef.current = null;
+      }
+    };
+  }, []);
+
+  const renderGraph = (nodes: Node[], edges: Edge[]) => {
+    if (!svgRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    svg.selectAll('*').remove(); // Clear for re-render
+
+    const { width, height } = dimensions;
 
     // Helper to calculate node weight
     const getNodeSize = (id: string) => {
       const connections = edges.filter(e =>
-        (typeof e.source === 'string' ? e.source === id : e.source.id === id) ||
-        (typeof e.target === 'string' ? e.target === id : e.target.id === id)
+        (typeof e.source === 'string' ? e.source === id : (e.source as Node).id === id) ||
+        (typeof e.target === 'string' ? e.target === id : (e.target as Node).id === id)
       ).length;
       let weight = 3 * Math.sqrt(connections + 1);
       return Math.max(MINIMAL_NODE_SIZE, Math.min(MAX_NODE_SIZE, weight));
@@ -111,30 +190,12 @@ const GraphView: React.FC = () => {
 
     svg.call(zoom);
 
-    // Simulation Setup
-    const simulation = d3.forceSimulation<Node>(nodes)
-      .force('link', d3.forceLink<Node, Edge>(edges).id(d => d.id).distance(150))
-      .force('charge', d3.forceManyBody().strength(-300))
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(80));
-
     // Helper to check if a node is isolated (no connections)
     const isNodeIsolated = (id: string) =>
       !edges.some(e =>
-        (typeof e.source === 'string' ? e.source === id : e.source.id === id) ||
-        (typeof e.target === 'string' ? e.target === id : e.target.id === id)
+        (typeof e.source === 'string' ? e.source === id : (e.source as Node).id === id) ||
+        (typeof e.target === 'string' ? e.target === id : (e.target as Node).id === id)
       );
-
-    // Position isolated nodes in a circle around the edge
-    const isolatedNodes = nodes.filter(n => isNodeIsolated(n.id));
-    if (isolatedNodes.length > 0) {
-      const radius = Math.min(width, height) / 2.5;
-      const angleStep = (2 * Math.PI) / isolatedNodes.length;
-      isolatedNodes.forEach((node, i) => {
-        node.fx = width / 2 + radius * Math.cos(i * angleStep);
-        node.fy = height / 2 + radius * Math.sin(i * angleStep);
-      });
-    }
 
 
     // Links
@@ -203,26 +264,24 @@ const GraphView: React.FC = () => {
       d3.select(this).attr('r', getNodeSize(d.id));
     });
 
-    simulation.on('tick', () => {
-      link
-        .attr('x1', d => (d.source as Node).x!)
-        .attr('y1', d => (d.source as Node).y!)
-        .attr('x2', d => (d.target as Node).x!)
-        .attr('y2', d => (d.target as Node).y!);
+    // Initial Ticks (Removed as we run them in the worker)
+    // for (let i = 0; i < TICKS; i++) simulation.tick();
 
-      node
-        .attr('cx', d => d.x!)
-        .attr('cy', d => d.y!);
+    // Position elements
+    link
+      .attr('x1', d => (d.source as Node).x!)
+      .attr('y1', d => (d.source as Node).y!)
+      .attr('x2', d => (d.target as Node).x!)
+      .attr('y2', d => (d.target as Node).y!);
 
-      label
-        .attr('x', d => d.x!)
-        .attr('y', d => d.y! - FONT_BASELINE);
-    });
+    node
+      .attr('cx', d => d.x!)
+      .attr('cy', d => d.y!);
 
-    // Run simulation
-    for (let i = 0; i < TICKS; i++) simulation.tick();
-
-  }, [dimensions, data]);
+    label
+      .attr('x', d => d.x!)
+      .attr('y', d => d.y! - FONT_BASELINE);
+  };
 
   if (error) {
     return (
@@ -232,21 +291,20 @@ const GraphView: React.FC = () => {
     );
   }
 
-  if (!data) {
-    return (
-      <div ref={containerRef} className="w-full h-96 bg-surface animate-pulse flex items-center justify-center border border-border rounded-lg">
-        <span className="text-muted font-mono">Loading Graph Data...</span>
-      </div>
-    );
-  }
-
   return (
-    <div ref={containerRef} className="w-full bg-surface border border-border rounded-lg overflow-hidden my-8">
+    <div ref={containerRef} className="w-full bg-surface border border-border rounded-lg overflow-hidden my-8 relative min-h-[400px]">
+      {(isCalculating || !data) && (
+        <div className="absolute inset-0 z-10 bg-surface/50 backdrop-blur-sm flex items-center justify-center">
+          <span className="text-muted font-mono animate-pulse">
+            {!data ? 'Loading Graph Data...' : 'Calculating Graph Positions...'}
+          </span>
+        </div>
+      )}
       <svg
         ref={svgRef}
         width={dimensions.width}
         height={dimensions.height}
-        className="cursor-move"
+        className={`cursor-move transition-opacity duration-300 ${isCalculating ? 'opacity-20' : 'opacity-100'}`}
       />
     </div>
   );

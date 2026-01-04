@@ -93,8 +93,6 @@ GEM
       jekyll (>= 3.0)
       pandoc-ruby (~> 2.0, >= 2.0.0)
     jekyll-postcss-v2 (1.0.2)
-    jekyll-react-player (0.21.2)
-      jekyll (>= 2.0)
     jekyll-sass-converter (3.1.0)
       sass-embedded (~> 1.75)
     jekyll-seo-tag (2.8.0)
@@ -168,7 +166,7 @@ GEM
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
     prism (1.7.0)
-    public_suffix (7.0.0)
+    public_suffix (7.0.1)
     racc (1.8.1)
     rainbow (3.1.1)
     rake (13.3.1)
@@ -280,7 +278,6 @@ DEPENDENCIES
   jekyll-paginate-v2
   jekyll-pandoc
   jekyll-postcss-v2
-  jekyll-react-player
   jekyll-sass-converter
   jekyll-seo-tag
   jekyll-sitemap

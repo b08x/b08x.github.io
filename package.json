@@ -8,8 +8,10 @@
     "dev:jekyll": "bundle exec jekyll clean && bundle exec jekyll serve --incremental",
     "build": "npm-run-all build:js build:jekyll",
     "build:js": "esbuild src/main.tsx --bundle --outfile=assets/js/dist/garden-widgets.js --minify --sourcemap --target=es2020",
+    "build:worker": "esbuild src/components/graph.worker.ts --bundle --outfile=assets/js/dist/graph.worker.js --minify --sourcemap --target=es2020",
     "build:jekyll": "bundle exec jekyll clean && bundle exec jekyll build",
     "watch:js": "esbuild src/main.tsx --bundle --outfile=assets/js/dist/garden-widgets.js --sourcemap --target=es2020 --watch",
+    "watch:worker": "esbuild src/components/graph.worker.ts --bundle --outfile=assets/js/dist/graph.worker.js --sourcemap --target=es2020 --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
