@@ -75,14 +75,14 @@ The site is designed as a personal knowledge base and note-taking system, featur
 
 ### Interactive Components
 - **React Islands**: Progressive enhancement with island architecture
-- **12 React Components**: From simple code blocks to complex video players
+- **18 React Components**: From simple code blocks to complex video players and canvas viewers
 - **Interactive Diagrams**: Zoomable/pannable Mermaid diagrams and D3 force graphs
 - **Theme Awareness**: Automatic dark/light mode synchronization
 - **Accessibility**: Full keyboard navigation, ARIA labels, screen reader support
 
 ### Jekyll Enhancements
-- **8 Custom Plugins**: Bidirectional links, Obsidian callouts, wiki generation, and more
-- **16 Layout Templates**: Specialized layouts for different content types
+- **11 Custom Plugins**: Bidirectional links, Obsidian callouts, wiki generation, and more
+- **17 Layout Templates**: Specialized layouts for different content types
 - **Automatic Processing**: Code block enhancement, Mermaid diagram rendering
 - **SEO Optimization**: Jekyll SEO tags, sitemaps, RSS feeds
 
@@ -90,7 +90,7 @@ The site is designed as a personal knowledge base and note-taking system, featur
 - **TypeScript**: Full type safety for React components
 - **Live Reload**: Instant preview with Jekyll LiveReload + esbuild watch mode
 - **Modern Build Tools**: esbuild for JavaScript, Tailwind CSS for styling
-- **Extensive Documentation**: Component README with 1,800+ lines of API docs
+- **Extensive Documentation**: Component README with comprehensive API docs
 
 ---
 
@@ -167,7 +167,7 @@ b08x.github.io/
 ├── tailwind.config.js          # Tailwind CSS configuration
 ├── postcss.config.js           # PostCSS configuration
 │
-├── _layouts/                   # Jekyll layout templates (16 files)
+├── _layouts/                   # Jekyll layout templates (17 files)
 │   ├── default.html            # Base layout
 │   ├── home.html               # Homepage layout
 │   ├── terminal-note.html      # Note detail view
@@ -178,7 +178,7 @@ b08x.github.io/
 ├── _includes/                  # Reusable Jekyll partials
 │   └── page_sidebar/           # Sidebar components
 │
-├── _plugins/                   # Custom Jekyll plugins (8 files)
+├── _plugins/                   # Custom Jekyll plugins (11 files)
 │   ├── bidirectional_links_generator.rb
 │   ├── wiki_page_generator.rb  # Wiki pagination system
 │   ├── obsidian_callouts.rb
@@ -202,7 +202,7 @@ b08x.github.io/
 │
 ├── src/                        # React components source
 │   ├── main.tsx                # Component registry & island hydration
-│   ├── components/             # React components (12 files)
+│   ├── components/             # React components (18 files)
 │   │   ├── CodeBlock.tsx
 │   │   ├── VideoPlayer.tsx
 │   │   ├── MermaidViewer.tsx
@@ -288,18 +288,21 @@ The project uses **island architecture** for progressive enhancement:
 
 ### Custom Jekyll Plugins
 
-**8 Custom Plugins** extend Jekyll functionality:
+**11 Custom Plugins** extend Jekyll functionality:
 
 | Plugin | Purpose | LOC |
 |--------|---------|-----|
-| `bidirectional_links_generator.rb` | Creates automatic backlinks between notes | ~150 |
-| `wiki_page_generator.rb` | Generates paginated wiki indices from JSON | ~250 |
+| `wiki_page_generator.rb` | Generates paginated wiki indices from JSON | ~352 |
+| `bidirectional_links_generator.rb` | Creates automatic backlinks between notes | ~114 |
 | `obsidian_callouts.rb` | Converts Obsidian-style callouts to HTML | ~100 |
 | `empty_front_matter_note_injector.rb` | Adds front matter to notes without it | ~50 |
-| `embed_tweets.rb` | Embeds Twitter content | ~75 |
-| `open_external_links_in_new_tab.rb` | Opens external links in new tabs | ~50 |
-| `markdown-highlighter.rb` | Enhanced markdown syntax highlighting | ~100 |
 | `last_modified_at_generator.rb` | Tracks file modification dates | ~75 |
+| `markdown-highlighter.rb` | Enhanced markdown syntax highlighting | ~100 |
+| `open_external_links_in_new_tab.rb` | Opens external links in new tabs | ~50 |
+| `embed_tweets.rb` | Embeds Twitter content | ~75 |
+| `render_liquid.rb` | Renders Liquid tags in markdown content | ~50 |
+| `base64_filter.rb` | Base64 encoding filter for templates | ~30 |
+| `jekyll-react-player.rb` | React player integration plugin | ~40 |
 
 **Featured Plugin: Wiki Page Generator**
 
@@ -403,7 +406,7 @@ pages:
 
 ## Component Library
 
-**12 Interactive React Components** with 2,558 total lines of code.
+**18 Interactive React Components** with 4,084 total lines of code.
 
 **See [src/components/README.md](src/components/README.md)** for comprehensive documentation including:
 - Component APIs and props interfaces
@@ -416,16 +419,23 @@ pages:
 
 | Component | LOC | Purpose |
 |-----------|-----|---------|
-| **VideoPlayer** | 410 | HLS video with segments, actions, transcript |
 | **KnowledgebaseCarousel** | 498 | H2-based content carousel with keyboard nav |
+| **JsonCanvasViewer** | 483 | Canvas file visualization and editing |
+| **VideoPlayer** | 410 | HLS video with segments, actions, transcript |
+| **CodeBlock** | 325 | Syntax-highlighted code with copy button |
+| **GraphView** | 312 | D3 force-directed graph visualization |
 | **MermaidViewer** | 280 | Interactive Mermaid diagrams with zoom/pan |
-| **GraphView** | 254 | D3 force-directed graph visualization |
 | **MermaidModal** | 249 | Full-screen Mermaid diagram modal |
-| **CodeBlock** | 224 | Syntax-highlighted code with copy button |
 | **NotesGrid** | 221 | Grid display for notes with detail view |
 | **SearchCmdK** | 153 | Command palette search (Cmd+K) |
 | **AudioPlayer** | 144 | Audio playback with waveform |
 | **NotebookGuide** | 112 | Guide/tutorial assistance |
+| **CanvasControls** | ~150 | Canvas viewer control panel |
+| **CanvasExporter** | ~120 | Canvas export functionality |
+| **CanvasMinimap** | ~100 | Canvas minimap navigation |
+| **OutputPanel** | ~80 | Canvas output display |
+| **NodeEditor** | ~200 | Canvas node editing |
+| **ReactPlayerIsland** | ~50 | React player wrapper component |
 | **HelloGarden** | 13 | Demo/test component |
 
 ---
@@ -760,7 +770,7 @@ See `package.json` and `Gemfile` for full list of dependencies and their license
 
 ---
 
-**Last Updated:** 2026-01-03
+**Last Updated:** 2026-01-07
 **Maintainer:** [b08x](https://github.com/b08x)
 **Status:** Active Development
 **Architecture:** Jekyll + React Islands + Tailwind CSS
