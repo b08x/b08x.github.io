@@ -51,6 +51,16 @@
       "height": 300,
       "color": "4",
       "text": "Projects"
+    },
+    {
+      "id": "knowledge-graph",
+      "type": "text",
+      "x": 50,
+      "y": 250,
+      "width": 400,
+      "height": 450,
+      "color": "5",
+      "text": "# Knowledge Graph\n\nInteractive visualization of note connections and relationships.\n\n<div data-island=\"GraphView\"></div>"
     }
   ],
   "edges": [
@@ -84,6 +94,14 @@
       "fromSide": "bottom",
       "toNode": "projects",
       "toSide": "top",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "hub-to-graph",
+      "fromNode": "central-hub",
+      "fromSide": "left",
+      "toNode": "knowledge-graph",
+      "toSide": "right",
       "toEnd": "arrow"
     }
   ]

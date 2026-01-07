@@ -23,7 +23,7 @@ base-shell.html (ROOT - 125 LOC)
 │   └── page.html
 │
 └── terminal-layout.html (290 LOC - unified sidebar layout)
-    │   └── Configurable left/right sidebars, TOC, GraphView
+    │   └── Configurable left/right sidebars, TOC
     │   └── Left sidebar modes: wiki-nav, terminal-sidebar, knowledgebase-toc
     │   └── Right sidebar modes: toc, related, media, references
     │   └── Container widths: max-w-notebook (wiki/sidebar), max-w-content-2col (default)
@@ -31,7 +31,7 @@ base-shell.html (ROOT - 125 LOC)
     │   └── Scripts: terminal-toc.js, knowledgebase.css
     │
     ├── terminal-note.html (default for _notes collection)
-    │       └── Sets: left_sidebar=terminal-sidebar, right_sidebar=toc, show_graph=true
+    │       └── Sets: left_sidebar=terminal-sidebar, right_sidebar=toc, show_graph=false (GraphView moved to canvas homepage)
     ├── note.html
     ├── page-sidebar.html
     │       └── Sets: right_sidebar=toc media references
@@ -45,7 +45,7 @@ base-shell.html (ROOT - 125 LOC)
 
 STANDALONE (no parent):
 ├── canvas.html          - JsonCanvas viewer (includes head.html directly)
-├── canvas-home.html     - Canvas homepage (includes head.html directly)
+├── canvas-home.html     - Canvas homepage with GraphView node (includes head.html directly)
 └── docs.html            - Documentation (uses jcanvas/* includes)
 ```
 
@@ -83,7 +83,7 @@ right_sidebar_xl_only: true  # hide on smaller screens
 container_max_width: max-w-notebook  # or max-w-content-2col (default)
 content_max_width: max-w-content
 show_metadata: true
-show_graph: true
+show_graph: false  # GraphView now on canvas homepage
 hide_header: false  # set true to hide page header
 ---
 ```

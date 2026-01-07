@@ -33,7 +33,7 @@ components/
 | Video playback | `VideoPlayer.tsx` | HLS via react-player |
 | Syntax highlighting | `CodeBlock.tsx` | react-syntax-highlighter |
 | Diagrams | `MermaidViewer.tsx` | Mermaid library + zoom/pan |
-| Graph visualization | `GraphView.tsx` | D3 force simulation |
+| Graph visualization | `GraphView.tsx` | D3 force simulation (on canvas homepage) |
 | Search | `SearchCmdK.tsx` | Cmd/Ctrl+K trigger |
 | Canvas system | `JsonCanvasViewer.tsx` + `Canvas*.tsx` | react-jsoncanvas |
 

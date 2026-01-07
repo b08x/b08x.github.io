@@ -1,6 +1,6 @@
 primary:
   - title: "Notes"
-    url: "/"
+    url: "/notes"
   - title: "Projects"
     url: "/projects"
   - title: "Wikis"

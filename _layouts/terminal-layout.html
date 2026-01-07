@@ -147,21 +147,7 @@ layout: base-shell
         </div>
       </article>
 
-      <!-- React Island: GraphView (Conditional) -->
-      {% assign show_graph = page.show_graph %}
-      {% if show_graph == nil %}{% assign show_graph = layout.show_graph %}{% endif %}
-
-      {% if show_graph %}
-      <section class="mt-16 pt-10 border-t border-border">
-        <h2 class="text-xl font-mono font-bold mb-6 text-foreground">
-          Knowledge Graph
-        </h2>
-        <p class="mb-6 text-base font-prose text-foreground/80">
-          Here are all the notes in this garden, along with their links, visualized as a graph.
-        </p>
-        <div data-island="GraphView"></div>
-      </section>
-      {% endif %}
+      <!-- GraphView moved to canvas homepage -->
 
     </main>
 
