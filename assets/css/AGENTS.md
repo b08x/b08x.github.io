@@ -1,6 +1,6 @@
 # assets/css/ - CSS Architecture
 
-Dual-build CSS system combining Jekyll SCSS processing with Tailwind CSS 4.x utilities. Terminal aesthetic theme with dual light/dark mode support.
+Dual-build CSS system combining Jekyll SCSS processing with Tailwind CSS 4.x utilities. IDE/editor aesthetic theme with dual light/dark mode support.
 
 ## STRUCTURE
 
@@ -65,7 +65,7 @@ assets/css/
 ## UNIQUE STYLES
 
 **IDE/Editor Aesthetic:**
-- Monospace fonts for UI (`--font-mono`: Hack, Mononoki, Consolas)
+- Monospace fonts for UI (`--font-mono`: JetBrains Mono, Hack, Mononoki)
 - Border-based layout (1px solid `--border`)
 - High contrast colors (WCAG AA compliant)
 - Minimal rounded corners (`--radius: 20px`)

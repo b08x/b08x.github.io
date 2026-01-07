@@ -1,6 +1,6 @@
 # _layouts/ - Jekyll Layout Templates
 
-17 layout files with consolidated inheritance hierarchy. High-contrast IDE/editor aesthetic shared across all.
+17 layout files with consolidated inheritance hierarchy. High-contrast IDE/editor aesthetic shared across all. Recent refactoring: renamed from "terminal-*" nomenclature (commit f4c913e).
 
 ## HIERARCHY MAP
 
@@ -123,3 +123,12 @@ hide_header: false  # set true to hide page header
 |--------|--------|-----------|
 | `default.html` | Unnecessary passthrough | Use `base-shell` directly |
 | `wiki-layout.html` | Duplicate of sidebar-layout | Use `sidebar-layout` with `wiki-nav` sidebar |
+
+## RENAMED FILES (commit f4c913e)
+
+| Old Name | New Name | Reason |
+|----------|----------|--------|
+| `terminal-layout.html` | `sidebar-layout.html` | Removed misleading "terminal" nomenclature |
+| `terminal-note.html` | `note-sidebar.html` | Clearer purpose indication |
+
+Variable renamed: `terminal-sidebar` → `navigation-sidebar` in left_sidebar mode.

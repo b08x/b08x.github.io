@@ -1,12 +1,12 @@
 # PROJECT KNOWLEDGE BASE
 
 **Generated:** 2026-01-07
-**Commit:** 609db48
-**Branch:** main
+**Commit:** 3493ddc
+**Branch:** development
 
 ## OVERVIEW
 
-Jekyll static site with React island architecture for interactive components. Digital garden + wiki system with terminal aesthetic, using esbuild bundling and Tailwind CSS.
+Jekyll static site with React island architecture for interactive components. Digital garden + wiki system with IDE/editor aesthetic, using esbuild bundling and Tailwind CSS. Self-hosted fonts (JetBrains Mono, Inter).
 
 ## STRUCTURE
 
@@ -37,6 +37,7 @@ Jekyll static site with React island architecture for interactive components. Di
 | Customize syntax theme | `src/utils/syntaxTheme.ts` | React-syntax-highlighter themes |
 | Modify styles | `_sass/` for SCSS, `tailwind.config.js` for utilities | IDE/editor aesthetic variables |
 | Debug islands | Browser console `[Garden]` prefix | Shows mount/render status |
+| Font files | `assets/fonts/` | JetBrains Mono + Inter (self-hosted, woff2/ttf) |
 
 ## CODE MAP
 

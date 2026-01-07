@@ -1,6 +1,6 @@
 # src/components/ - React Islands
 
-18 React components using island architecture for progressive enhancement.
+18 React components using island architecture for progressive enhancement. IDE/editor aesthetic with CSS variable theming.
 
 ## STRUCTURE
 

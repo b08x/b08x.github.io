@@ -1,13 +1,13 @@
 # _includes/ - Reusable Jekyll Partials
 
-13 include files across 3 subdirectories. Unified Tailwind styling.
+14 include files across 3 subdirectories. Unified Tailwind styling. Recent refactoring: renamed from "terminal-*" nomenclature (commit f4c913e).
 
 ## STRUCTURE
 
 ```
 _includes/
-├── header.html             # Site header with nav + theme toggle (29 LOC)
-├── sidebar.html            # Recent notes navigation - pure Tailwind (24 LOC)
+├── header.html             # Site header with nav + theme toggle (29 LOC) - renamed from terminal-header.html
+├── sidebar.html            # Recent notes navigation - pure Tailwind (24 LOC) - renamed from terminal-sidebar.html
 ├── footer.html             # Minimal footer text (2 LOC)
 ├── nav.html                # Alternate simple nav (4 LOC)
 ├── head.html               # Full <head> tag for standalone layouts
@@ -153,3 +153,10 @@ sources:
 | Include | Reason | Replacement |
 |---------|--------|-------------|
 | `page_sidebar/toc.html` | Duplicate functionality | Use `<sidebar-toc>` web component |
+
+## RENAMED INCLUDES (commit f4c913e)
+
+| Old Name | New Name | Reason |
+|----------|----------|--------|
+| `terminal-header.html` | `header.html` | Removed misleading "terminal" nomenclature |
+| `terminal-sidebar.html` | `sidebar.html` | Clearer purpose indication |
