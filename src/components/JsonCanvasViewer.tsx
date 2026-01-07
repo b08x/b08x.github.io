@@ -384,9 +384,17 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
         return res.json();
       })
       .then(data => {
-        setNodes(data.nodes || []);
+        const loadedNodes: Node[] = data.nodes || [];
+        setNodes(loadedNodes);
         setEdges(data.edges || []);
         setLoading(false);
+
+        // Auto-fit to screen after loading
+        setTimeout(() => {
+          if (containerRef.current && loadedNodes.length > 0) {
+            fitToScreen(loadedNodes);
+          }
+        }, 100);
       })
       .catch(err => {
         console.error("[Garden] Failed to load canvas data:", err);
@@ -414,13 +422,19 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
       getPanOffset: () => panOffset,
       getCanvasData: () => ({ nodes, edges }),
       zoomIn: () => {
-        select(containerRef.current).transition().call(zoomBehavior.scaleBy, 1.2);
+        if (zoomRef.current) {
+          select(containerRef.current as any).transition().call(zoomBehavior.scaleBy as any, 1.2);
+        }
       },
       zoomOut: () => {
-        select(containerRef.current).transition().call(zoomBehavior.scaleBy, 0.8);
+        if (zoomRef.current) {
+          select(containerRef.current as any).transition().call(zoomBehavior.scaleBy as any, 0.8);
+        }
       },
       resetView: () => {
-        select(containerRef.current).transition().call(zoomBehavior.transform, zoomIdentity);
+        if (zoomRef.current) {
+          select(containerRef.current as any).transition().call(zoomBehavior.transform as any, zoomIdentity);
+        }
       },
       updateCanvas: (data: any) => {
         if (data.nodes) setNodes(data.nodes);
@@ -439,6 +453,41 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
 
   const handleResizeNode = useCallback((id: string, width: number, height: number) => {
     setNodes(prev => prev.map(n => n.id === id ? { ...n, width, height } : n));
+  }, []);
+
+  const fitToScreen = useCallback((nodesToFit: Node[]) => {
+    if (!containerRef.current || nodesToFit.length === 0) return;
+
+    const padding = 50;
+    const { width: containerWidth, height: containerHeight } = containerRef.current.getBoundingClientRect();
+
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    nodesToFit.forEach(node => {
+      minX = Math.min(minX, node.x);
+      minY = Math.min(minY, node.y);
+      maxX = Math.max(maxX, node.x + node.width);
+      maxY = Math.max(maxY, node.y + node.height);
+    });
+
+    const contentWidth = maxX - minX;
+    const contentHeight = maxY - minY;
+
+    const scaleX = (containerWidth - padding * 2) / contentWidth;
+    const scaleY = (containerHeight - padding * 2) / contentHeight;
+    const newScale = Math.min(Math.max(0.1, Math.min(scaleX, scaleY)), 1);
+
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+
+    const tx = containerWidth / 2 - centerX * newScale;
+    const ty = containerHeight / 2 - centerY * newScale;
+
+    if (zoomRef.current && containerRef.current) {
+      select(containerRef.current as any)
+        .transition()
+        .duration(750)
+        .call(zoomRef.current.transform as any, zoomIdentity.translate(tx, ty).scale(newScale));
+    }
   }, []);
 
   if (loading) {
