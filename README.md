@@ -230,6 +230,8 @@ b08x.github.io/
 - [_sass/AGENTS.md](_sass/AGENTS.md) - Theme system and CSS variables
 - [src/components/AGENTS.md](src/components/AGENTS.md) - React island components
 - [src/utils/AGENTS.md](src/utils/AGENTS.md) - TypeScript utilities for theme sync
+- [assets/js/AGENTS.md](assets/js/AGENTS.md) - Vanilla JS modules for progressive enhancement
+- [assets/css/AGENTS.md](assets/css/AGENTS.md) - CSS variables and styles
 
 ---
 
@@ -808,3 +810,6 @@ For detailed documentation:
 - **Plugins**: [_plugins/AGENTS.md](_plugins/AGENTS.md)
 - **Theme**: [_sass/AGENTS.md](_sass/AGENTS.md)
 - **Utilities**: [src/utils/AGENTS.md](src/utils/AGENTS.md)
+- **Vanilla JS**: [assets/js/AGENTS.md](assets/js/AGENTS.md)
+- **CSS**: [assets/css/AGENTS.md](assets/css/AGENTS.md)
+
