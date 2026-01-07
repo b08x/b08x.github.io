@@ -90,10 +90,16 @@ const Edges: React.FC<{
   scale: number;
   translateX: number;
   translateY: number;
-}> = ({ nodes, edges, scale, translateX, translateY }) => {
+  isResponsiveMode?: boolean;
+}> = ({ nodes, edges, scale, translateX, translateY, isResponsiveMode = false }) => {
   const [svgContent, setSvgContent] = useState<React.ReactNode[]>([]);
 
   useEffect(() => {
+    if (isResponsiveMode) {
+      setSvgContent([]);
+      return;
+    }
+
     const newPaths: React.ReactNode[] = [];
     edges.forEach((edge) => {
       const fromNodeData = nodes.find(n => n.id === edge.fromNode);
@@ -149,7 +155,7 @@ const Edges: React.FC<{
       }
     });
     setSvgContent(newPaths);
-  }, [nodes, edges, scale, translateX, translateY]);
+  }, [nodes, edges, scale, translateX, translateY, isResponsiveMode]);
 
   return (
     <svg id="canvas-edges" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 10 }}>
@@ -179,9 +185,10 @@ interface CanvasNodeProps {
   translateY: number;
   onMove: (id: string, x: number, y: number) => void;
   onResize: (id: string, w: number, h: number) => void;
+  isResponsiveMode?: boolean;
 }
 
-const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, translateY, onMove, onResize }) => {
+const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, translateY, onMove, onResize, isResponsiveMode = false }) => {
   const nodeRef = useRef<HTMLDivElement>(null);
   const latestOnMove = useRef(onMove);
   const latestNode = useRef(node);
@@ -231,13 +238,11 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
 
 
   useEffect(() => {
-    if (!nodeRef.current) return;
+    if (!nodeRef.current || isResponsiveMode) return;
 
     const dragHandler = drag<HTMLDivElement, any>()
       .subject(() => ({ x: latestNode.current.x, y: latestNode.current.y }))
       .on('drag', (event) => {
-        // event.x and event.y are the accumulated coordinates in the coordinate system of the subject
-        // since our subject is {x, y} of the node, D3 handles the delta accumulation for us.
         latestOnMove.current(latestNode.current.id, event.x, event.y);
       });
 
@@ -246,7 +251,7 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
     return () => {
       select(nodeRef.current).on('.drag', null);
     };
-  }, []); // Stable attachment
+  }, [isResponsiveMode]);
 
   const isLink = node.type === 'link';
   const isResizable = node.type !== 'link';
@@ -267,7 +272,7 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
         backgroundColor: isLink ? 'var(--surface)' : 'var(--background)',
         zIndex: 20,
         overflow: 'hidden',
-        cursor: 'grab',
+        cursor: isResponsiveMode ? 'default' : 'grab',
         display: 'flex',
         flexDirection: 'column'
       }}
@@ -326,7 +331,7 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
       )}
 
       {/* Resize Handle */}
-      {isResizable && (
+      {isResizable && !isResponsiveMode && (
         <div
           className="absolute bottom-0 right-0 w-6 h-6 cursor-nwse-resize hover:bg-accent/20 transition-colors flex items-center justify-center pointer-events-auto"
           onMouseDown={(e) => {
@@ -374,8 +379,40 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isResponsiveMode, setIsResponsiveMode] = useState(false);
+  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const zoomRef = useRef<any>(null);
+  const originalNodesRef = useRef<Node[]>([]);
+
+  const computeResponsiveLayout = useCallback((originalNodes: Node[], containerWidth: number): Node[] => {
+    const MOBILE_BREAKPOINT = 768;
+    const PADDING = 16;
+    const VERTICAL_GAP = 24;
+
+    if (containerWidth >= MOBILE_BREAKPOINT) {
+      return originalNodes;
+    }
+
+    const nodeWidth = containerWidth - (PADDING * 2);
+    let currentY = PADDING;
+
+    return originalNodes.map(node => {
+      const aspectRatio = node.height / node.width;
+      const nodeHeight = Math.max(100, Math.min(300, nodeWidth * aspectRatio));
+
+      const responsiveNode = {
+        ...node,
+        x: PADDING,
+        y: currentY,
+        width: nodeWidth,
+        height: nodeHeight
+      };
+
+      currentY += nodeHeight + VERTICAL_GAP;
+      return responsiveNode;
+    });
+  }, []);
 
   useEffect(() => {
     fetch(url)
@@ -385,14 +422,18 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
       })
       .then(data => {
         const loadedNodes: Node[] = data.nodes || [];
+        originalNodesRef.current = loadedNodes; // Store original positions
         setNodes(loadedNodes);
         setEdges(data.edges || []);
         setLoading(false);
 
-        // Auto-fit to screen after loading
+        // Auto-fit to screen after loading (only on desktop)
         setTimeout(() => {
           if (containerRef.current && loadedNodes.length > 0) {
-            fitToScreen(loadedNodes);
+            const width = containerRef.current.getBoundingClientRect().width;
+            if (width >= 768) {
+              fitToScreen(loadedNodes);
+            }
           }
         }, 100);
       })
@@ -406,6 +447,22 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
   useEffect(() => {
     if (!containerRef.current) return;
 
+    const container = containerRef.current;
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = entry.contentRect.width;
+        setContainerWidth(width);
+        setIsResponsiveMode(width < 768);
+
+        if (originalNodesRef.current.length > 0) {
+          const layoutNodes = computeResponsiveLayout(originalNodesRef.current, width);
+          setNodes(layoutNodes);
+        }
+      }
+    });
+
+    resizeObserver.observe(container);
+
     const zoomBehavior = zoom<HTMLDivElement, any>()
       .scaleExtent([0.1, 4])
       .on('zoom', (event) => {
@@ -414,7 +471,10 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
       });
 
     zoomRef.current = zoomBehavior;
-    select(containerRef.current).call(zoomBehavior);
+    
+    if (!isResponsiveMode) {
+      select(containerRef.current).call(zoomBehavior);
+    }
 
     // Provide API for other islands
     window.canvasAPI = {
@@ -445,7 +505,10 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
     // Emit event for state sync
     window.dispatchEvent(new CustomEvent('canvas:dataUpdate', { detail: { nodes, edges } }));
 
-  }, [nodes, edges, scale, panOffset]);
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [nodes, edges, scale, panOffset, isResponsiveMode, computeResponsiveLayout]);
 
   const handleMoveNode = useCallback((id: string, x: number, y: number) => {
     setNodes(prev => prev.map(n => n.id === id ? { ...n, x, y } : n));
@@ -511,8 +574,12 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full bg-slate-950 border border-slate-800 rounded-lg overflow-hidden relative"
-      style={{ minHeight: '80vh', cursor: 'grab' }}
+      className="w-full h-full bg-slate-950 border border-slate-800 rounded-lg relative"
+      style={{ 
+        minHeight: '80vh', 
+        cursor: isResponsiveMode ? 'default' : 'grab',
+        overflow: isResponsiveMode ? 'auto' : 'hidden'
+      }}
     >
       {/* Grid Background */}
       <div
@@ -525,17 +592,18 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
         }}
       />
 
-      <Edges nodes={nodes} edges={edges} scale={scale} translateX={panOffset.x} translateY={panOffset.y} />
+      <Edges nodes={nodes} edges={edges} scale={scale} translateX={panOffset.x} translateY={panOffset.y} isResponsiveMode={isResponsiveMode} />
 
       {nodes.map((node) => (
         <CanvasNode
           key={node.id}
           node={node}
-          scale={scale}
-          translateX={panOffset.x}
-          translateY={panOffset.y}
+          scale={isResponsiveMode ? 1 : scale}
+          translateX={isResponsiveMode ? 0 : panOffset.x}
+          translateY={isResponsiveMode ? 0 : panOffset.y}
           onMove={handleMoveNode}
           onResize={handleResizeNode}
+          isResponsiveMode={isResponsiveMode}
         />
       ))}
     </div>
