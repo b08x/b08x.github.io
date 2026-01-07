@@ -103,8 +103,7 @@ The site is designed as a personal knowledge base and note-taking system, featur
 - Node.js 18+ with npm
 - Git
 
-**Optional:**
-- Netlify CLI (for deployment testing)
+<!-- Removed Netlify CLI -->
 
 ### Installation
 
@@ -608,16 +607,15 @@ Rebuild Jekyll to activate.
 
 ## Deployment
 
-### Netlify (Recommended)
+### GitHub Pages (Recommended)
 
-**Deploy Settings:**
-- **Build Command**: `npm run build`
-- **Publish Directory**: `_site`
-- **Node Version**: 18+
-- **Ruby Version**: 3.0+
+This site is configured for automatic deployment to GitHub Pages via GitHub Actions.
 
-**Environment Variables:**
-- `JEKYLL_ENV=production`
+**Deployment Process:**
+1. Push changes to the `main` branch.
+2. The [Deploy Jekyll site to Pages](.github/workflows/jekyll.yml) workflow triggers automatically.
+3. The workflow builds React components (`npm run build`), then builds the Jekyll site.
+4. The site is deployed to GitHub Pages.
 
 ### Manual Deployment
 
@@ -628,10 +626,6 @@ npm run build
 # Upload _site/ directory to hosting
 rsync -avz _site/ user@server:/var/www/html/
 ```
-
-### GitHub Pages
-
-**Not recommended** due to React component build requirements. GitHub Pages doesn't support custom build steps with npm.
 
 ---
 
