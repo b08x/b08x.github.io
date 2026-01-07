@@ -7,11 +7,11 @@
     "dev": "npm-run-all --parallel watch:js dev:jekyll",
     "dev:jekyll": "bundle exec jekyll clean && bundle exec jekyll serve --incremental",
     "build": "npm-run-all build:js build:worker build:css build:jekyll",
-    "build:js": "esbuild src/main.tsx --bundle --outfile=assets/js/dist/garden-widgets-v2.js --minify --sourcemap --target=es2020 --jsx=automatic --alias:react=./node_modules/react --alias:react-dom=./node_modules/react-dom",
+    "build:js": "esbuild src/main.tsx --bundle --splitting --format=esm --outdir=assets/js/dist/ --entry-names=[name] --chunk-names=chunks/[name]-[hash] --minify --sourcemap --target=es2020 --jsx=automatic --alias:react=./node_modules/react --alias:react-dom=./node_modules/react-dom",
     "build:worker": "esbuild src/components/graph.worker.ts --bundle --outfile=assets/js/dist/graph.worker.js --minify --sourcemap --target=es2020",
     "build:css": "npx tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/compiled.css --minify",
     "build:jekyll": "bundle exec jekyll clean && bundle exec jekyll build",
-    "watch:js": "esbuild src/main.tsx --bundle --outfile=assets/js/dist/garden-widgets-v2.js --sourcemap --target=es2020 --watch --jsx=automatic --alias:react=./node_modules/react --alias:react-dom=./node_modules/react-dom",
+    "watch:js": "esbuild src/main.tsx --bundle --splitting --format=esm --outdir=assets/js/dist/ --entry-names=[name] --chunk-names=chunks/[name]-[hash] --sourcemap --target=es2020 --watch --jsx=automatic --alias:react=./node_modules/react --alias:react-dom=./node_modules/react-dom",
     "watch:worker": "esbuild src/components/graph.worker.ts --bundle --outfile=assets/js/dist/graph.worker.js --sourcemap --target=es2020 --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
