@@ -185,7 +185,6 @@ b08x.github.io/
 │   └── ...
 │
 ├── _sass/                      # Sass stylesheets
-│   └── _archived/              # Legacy styles
 │
 ├── _notes/                     # Markdown notes (digital garden)
 │   ├── *.md                    # Individual notes
@@ -290,19 +289,19 @@ The project uses **island architecture** for progressive enhancement:
 
 **11 Custom Plugins** extend Jekyll functionality:
 
-| Plugin | Purpose | LOC |
-|--------|---------|-----|
-| `wiki_page_generator.rb` | Generates paginated wiki indices from JSON | ~352 |
-| `bidirectional_links_generator.rb` | Creates automatic backlinks between notes | ~114 |
-| `obsidian_callouts.rb` | Converts Obsidian-style callouts to HTML | ~100 |
-| `empty_front_matter_note_injector.rb` | Adds front matter to notes without it | ~50 |
-| `last_modified_at_generator.rb` | Tracks file modification dates | ~75 |
-| `markdown-highlighter.rb` | Enhanced markdown syntax highlighting | ~100 |
-| `open_external_links_in_new_tab.rb` | Opens external links in new tabs | ~50 |
-| `embed_tweets.rb` | Embeds Twitter content | ~75 |
-| `render_liquid.rb` | Renders Liquid tags in markdown content | ~50 |
-| `base64_filter.rb` | Base64 encoding filter for templates | ~30 |
-| `jekyll-react-player.rb` | React player integration plugin | ~40 |
+| Plugin                                | Purpose                                    | LOC  |
+|---------------------------------------|--------------------------------------------|------|
+| `wiki_page_generator.rb`              | Generates paginated wiki indices from JSON | ~352 |
+| `bidirectional_links_generator.rb`    | Creates automatic backlinks between notes  | ~114 |
+| `obsidian_callouts.rb`                | Converts Obsidian-style callouts to HTML   | ~100 |
+| `empty_front_matter_note_injector.rb` | Adds front matter to notes without it      | ~50  |
+| `last_modified_at_generator.rb`       | Tracks file modification dates             | ~75  |
+| `markdown-highlighter.rb`             | Enhanced markdown syntax highlighting      | ~100 |
+| `open_external_links_in_new_tab.rb`   | Opens external links in new tabs           | ~50  |
+| `embed_tweets.rb`                     | Embeds Twitter content                     | ~75  |
+| `render_liquid.rb`                    | Renders Liquid tags in markdown content    | ~50  |
+| `base64_filter.rb`                    | Base64 encoding filter for templates       | ~30  |
+| `jekyll-react-player.rb`              | React player integration plugin            | ~40  |
 
 **Featured Plugin: Wiki Page Generator**
 
@@ -377,25 +376,25 @@ pages:
 ## Key Technologies
 
 ### Frontend
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Jekyll** | 4.x | Static site generator |
-| **React** | 19.2.3 | UI components (island hydration) |
-| **TypeScript** | 5.9.3 | Type safety |
-| **Tailwind CSS** | 4.1.17 | Utility-first styling |
-| **esbuild** | 0.27.2 | JavaScript bundler |
-| **D3.js** | 7.9.0 | Data visualization |
-| **Mermaid** | 11.12.2 | Diagram generation |
-| **react-syntax-highlighter** | 15.6.0 | Code syntax highlighting |
+| Technology                   | Version | Purpose                          |
+|------------------------------|---------|----------------------------------|
+| **Jekyll**                   | 4.x     | Static site generator            |
+| **React**                    | 19.2.3  | UI components (island hydration) |
+| **TypeScript**               | 5.9.3   | Type safety                      |
+| **Tailwind CSS**             | 4.1.17  | Utility-first styling            |
+| **esbuild**                  | 0.27.2  | JavaScript bundler               |
+| **D3.js**                    | 7.9.0   | Data visualization               |
+| **Mermaid**                  | 11.12.2 | Diagram generation               |
+| **react-syntax-highlighter** | 15.6.0  | Code syntax highlighting         |
 
 ### Backend (Build-Time)
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Ruby** | 3.0+ | Jekyll runtime |
-| **Bundler** | - | Ruby dependency management |
-| **Jekyll Plugins** | Various | Custom functionality |
-| **Nokogiri** | - | HTML parsing |
-| **Rouge** | - | Syntax highlighting |
+| Technology         | Version | Purpose                    |
+|--------------------|---------|----------------------------|
+| **Ruby**           | 3.0+    | Jekyll runtime             |
+| **Bundler**        | -       | Ruby dependency management |
+| **Jekyll Plugins** | Various | Custom functionality       |
+| **Nokogiri**       | -       | HTML parsing               |
+| **Rouge**          | -       | Syntax highlighting        |
 
 ### Build Tools
 - **npm-run-all**: Parallel script execution
@@ -417,26 +416,26 @@ pages:
 
 **Component Overview:**
 
-| Component | LOC | Purpose |
-|-----------|-----|---------|
-| **KnowledgebaseCarousel** | 498 | H2-based content carousel with keyboard nav |
-| **JsonCanvasViewer** | 483 | Canvas file visualization and editing |
-| **VideoPlayer** | 410 | HLS video with segments, actions, transcript |
-| **CodeBlock** | 325 | Syntax-highlighted code with copy button |
-| **GraphView** | 312 | D3 force-directed graph visualization |
-| **MermaidViewer** | 280 | Interactive Mermaid diagrams with zoom/pan |
-| **MermaidModal** | 249 | Full-screen Mermaid diagram modal |
-| **NotesGrid** | 221 | Grid display for notes with detail view |
-| **SearchCmdK** | 153 | Command palette search (Cmd+K) |
-| **AudioPlayer** | 144 | Audio playback with waveform |
-| **NotebookGuide** | 112 | Guide/tutorial assistance |
-| **CanvasControls** | ~150 | Canvas viewer control panel |
-| **CanvasExporter** | ~120 | Canvas export functionality |
-| **CanvasMinimap** | ~100 | Canvas minimap navigation |
-| **OutputPanel** | ~80 | Canvas output display |
-| **NodeEditor** | ~200 | Canvas node editing |
-| **ReactPlayerIsland** | ~50 | React player wrapper component |
-| **HelloGarden** | 13 | Demo/test component |
+| Component                 | LOC  | Purpose                                      |
+|---------------------------|------|----------------------------------------------|
+| **KnowledgebaseCarousel** | 498  | H2-based content carousel with keyboard nav  |
+| **JsonCanvasViewer**      | 483  | Canvas file visualization and editing        |
+| **VideoPlayer**           | 410  | HLS video with segments, actions, transcript |
+| **CodeBlock**             | 325  | Syntax-highlighted code with copy button     |
+| **GraphView**             | 312  | D3 force-directed graph visualization        |
+| **MermaidViewer**         | 280  | Interactive Mermaid diagrams with zoom/pan   |
+| **MermaidModal**          | 249  | Full-screen Mermaid diagram modal            |
+| **NotesGrid**             | 221  | Grid display for notes with detail view      |
+| **SearchCmdK**            | 153  | Command palette search (Cmd+K)               |
+| **AudioPlayer**           | 144  | Audio playback with waveform                 |
+| **NotebookGuide**         | 112  | Guide/tutorial assistance                    |
+| **CanvasControls**        | ~150 | Canvas viewer control panel                  |
+| **CanvasExporter**        | ~120 | Canvas export functionality                  |
+| **CanvasMinimap**         | ~100 | Canvas minimap navigation                    |
+| **OutputPanel**           | ~80  | Canvas output display                        |
+| **NodeEditor**            | ~200 | Canvas node editing                          |
+| **ReactPlayerIsland**     | ~50  | React player wrapper component               |
+| **HelloGarden**           | 13   | Demo/test component                          |
 
 ---
 
