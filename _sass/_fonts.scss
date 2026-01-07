@@ -66,6 +66,80 @@
   font-display: swap;
 }
 
+// Font imports for JetBrains Mono (for code/monospace)
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../assets/fonts/JetBrainsMono-300.woff2') format('woff2'),
+       url('../assets/fonts/JetBrainsMono-300.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../assets/fonts/JetBrainsMono-400.woff2') format('woff2'),
+       url('../assets/fonts/JetBrainsMono-400.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../assets/fonts/JetBrainsMono-500.woff2') format('woff2'),
+       url('../assets/fonts/JetBrainsMono-500.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../assets/fonts/JetBrainsMono-700.woff2') format('woff2'),
+       url('../assets/fonts/JetBrainsMono-700.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Font imports for Inter (for UI text)
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/Inter-400.woff2') format('woff2'),
+       url('../assets/fonts/Inter-400.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/Inter-500.woff2') format('woff2'),
+       url('../assets/fonts/Inter-500.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/Inter-600.woff2') format('woff2'),
+       url('../assets/fonts/Inter-600.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/Inter-700.woff2') format('woff2'),
+       url('../assets/fonts/Inter-700.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 // // Font variables
 // $heading-font-family: 'Mononoki', 'Courier New', monospace;
 // // $body-font-family: 'Hack', 'Consolas', monospace;
