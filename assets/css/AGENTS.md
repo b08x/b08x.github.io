@@ -47,7 +47,7 @@ assets/css/
 
 **Loading Order:**
 1. `compiled.css` - Always loaded (base-shell.html, head.html)
-2. `knowledgebase.css` - Conditional (terminal-layout.html)
+2. `knowledgebase.css` - Conditional (sidebar-layout.html)
 3. `jcanvas/style.css` - Conditional (docs.html)
 
 **Theme Integration:**
@@ -64,7 +64,7 @@ assets/css/
 
 ## UNIQUE STYLES
 
-**Terminal Aesthetic:**
+**IDE/Editor Aesthetic:**
 - Monospace fonts for UI (`--font-mono`: Hack, Mononoki, Consolas)
 - Border-based layout (1px solid `--border`)
 - High contrast colors (WCAG AA compliant)
@@ -78,7 +78,7 @@ assets/css/
 **Typography Hybrid:**
 - UI elements (nav, sidebar): Monospace (`--font-mono`)
 - Article content: Prose font (`--font-prose`)
-- Headings: Monospace (terminal aesthetic)
+- Headings: Monospace (IDE/editor aesthetic)
 
 ## COMMANDS
 

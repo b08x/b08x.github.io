@@ -32,10 +32,10 @@ Jekyll static site with React island architecture for interactive components. Di
 | Add React component | `src/components/` + register in `src/main.tsx` | Lazy-loaded, island pattern |
 | Modify wiki pagination | `_plugins/wiki_page_generator.rb` | ITEMS_PER_PAGE=12, RESERVED_SLUGS |
 | Add wiki content | `_data/wikis/{wiki-id}.json` then `jekyll build` | Auto-generates pages |
-| Edit note layout | `_layouts/terminal-note.html` | Default for _notes |
+| Edit note layout | `_layouts/note-sidebar.html` | Default for _notes |
 | Add bidirectional link | Use `[[Note Title]]` syntax in markdown | Auto-converted by plugin |
 | Customize syntax theme | `src/utils/syntaxTheme.ts` | React-syntax-highlighter themes |
-| Modify styles | `_sass/` for SCSS, `tailwind.config.js` for utilities | Terminal aesthetic variables |
+| Modify styles | `_sass/` for SCSS, `tailwind.config.js` for utilities | IDE/editor aesthetic variables |
 | Debug islands | Browser console `[Garden]` prefix | Shows mount/render status |
 
 ## CODE MAP
@@ -75,7 +75,7 @@ Jekyll static site with React island architecture for interactive components. Di
 - Auto-enhancement: Rouge code blocks → CodeBlock islands
 
 **Jekyll Collections:**
-- `_notes` → `/notes/:slug` (layout: terminal-note)
+- `_notes` → `/notes/:slug` (layout: note-sidebar)
 - `_wikis` → `/wikis/:slug` (generated, don't edit directly)
 - `_projects` → `/projects/:slug`
 

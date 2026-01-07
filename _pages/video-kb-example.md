@@ -1,5 +1,5 @@
 ---
-layout: terminal-layout
+layout: sidebar-layout
 right_sidebar: toc
 title: "Video Tutorial - NPM Package Installation"
 description: "Interactive screencast walkthrough for troubleshooting npm package installation"
