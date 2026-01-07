@@ -4,14 +4,16 @@ layout: base-shell
 
 {% assign container_width = page.container_max_width | default: "mx-auto" %}
 {% unless container_width contains 'max-w-' %}
-{% if page.right_sidebar %}
-{% assign container_width = container_width | append: " max-w-screen-2xl" %}
+{% if page.layout == 'wiki' or page.layout == 'wiki-page' %}
+{% assign container_width = container_width | append: " max-w-notebook" %}
+{% elsif page.right_sidebar %}
+{% assign container_width = container_width | append: " max-w-notebook" %}
 {% else %}
-{% assign container_width = container_width | append: " max-w-screen-xl" %}
+{% assign container_width = container_width | append: " max-w-content-2col" %}
 {% endif %}
 {% endunless %}
 
-<div class="container {{ container_width }} px-4 sm:px-6 lg:px-8 py-10">
+<div class="{{ container_width }} px-4 sm:px-6 lg:px-8 py-10">
 
   <!-- Responsive Grid Container -->
   <div class="flex flex-col lg:flex-row gap-8">
@@ -35,7 +37,7 @@ layout: base-shell
               <a href="{{ site.baseurl }}{{ wp.generated_permalink }}"
                 class="block py-2 px-3 text-sm border-l-2 {% if page.page_id == wp.id %}border-accent bg-surface/50 text-accent{% else %}border-transparent text-foreground/75{% endif %} transition-all hover:bg-surface hover:border-accent wiki-nav-link"
                 data-page-id="{{ wp.id }}">
-                {% if wp.number %}{{ wp.number }}-{% endif %}{{ wp.slug }}
+                {% if wp.number %}{{ wp.number }}_{% endif %}{{ wp.slug }}
               </a>
             </li>
             {% endfor %}
@@ -98,6 +100,7 @@ layout: base-shell
     <main id="main-content-column" class="flex-1 min-w-0 {{ content_width }}" aria-label="Main content">
 
       <!-- Page Header -->
+      {% unless page.hide_header %}
       <header class="mb-12">
         <h1 class="text-3xl md:text-4xl font-prose font-bold mb-4 text-foreground">
           {{ page.title }}
@@ -135,6 +138,7 @@ layout: base-shell
         </div>
         {% endif %}
       </header>
+      {% endunless %}
 
       <!-- Article Content -->
       <article class="prose font-prose max-w-none">
@@ -211,39 +215,48 @@ layout: base-shell
 <!-- Web Component: Terminal TOC -->
 <script src="{{ site.baseurl }}/assets/js/components/terminal-toc.js" defer></script>
 
-<!-- Wiki Navigation Active State Script (if wiki layout) -->
-{% if page.layout == 'wiki' %}
+<!-- Wiki Navigation Active State Script -->
+{% if page.layout == 'wiki' or page.layout == 'wiki-page' %}
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const navLinks = document.querySelectorAll(".wiki-nav-link");
+    const currentUrl = window.location.pathname;
+
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentUrl || (link.getAttribute('href') + '/') === currentUrl) {
+        link.classList.add("border-accent", "bg-surface/50", "text-accent");
+        link.classList.remove("border-transparent", "text-foreground/75");
+      }
+    });
+
+    // Handle single-page wiki sections if applicable
     const sections = document.querySelectorAll("section[id]");
-
-    function updateActiveLink() {
-      let current = "";
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= sectionTop - 150) {
-          current = section.getAttribute("id");
-        }
-      });
-
-      navLinks.forEach((link) => {
-        // Only update if we are on the single-page wiki view
-        const href = link.getAttribute("href");
-        if (href.startsWith("#")) {
-          link.classList.remove("border-accent", "bg-surface/50", "text-accent");
-          link.classList.add("border-transparent", "text-foreground/75");
-
-          if (href.slice(1) === current) {
-            link.classList.remove("border-transparent", "text-foreground/75");
-            link.classList.add("border-accent", "bg-surface/50", "text-accent");
+    if (sections.length > 0) {
+      function updateActiveLinkOnScroll() {
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (window.pageYOffset >= sectionTop - 150) {
+            current = section.getAttribute("id");
           }
-        }
-      });
-    }
+        });
 
-    window.addEventListener("scroll", updateActiveLink);
-    updateActiveLink();
+        navLinks.forEach((link) => {
+          const href = link.getAttribute("href");
+          if (href.startsWith("#")) {
+            link.classList.remove("border-accent", "bg-surface/50", "text-accent");
+            link.classList.add("border-transparent", "text-foreground/75");
+
+            if (href.slice(1) === current) {
+              link.classList.remove("border-transparent", "text-foreground/75");
+              link.classList.add("border-accent", "bg-surface/50", "text-accent");
+            }
+          }
+        });
+      }
+      window.addEventListener("scroll", updateActiveLinkOnScroll);
+      updateActiveLinkOnScroll();
+    }
   });
 </script>
 {% endif %}

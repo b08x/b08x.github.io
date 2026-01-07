@@ -1,4 +1,5 @@
 ---
+layout: content-layout
 permalink: /docs/welcome.md
 ---
 

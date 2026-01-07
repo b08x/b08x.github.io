@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: content-layout
 title: React Integration Test
 permalink: /react-test/
 ---

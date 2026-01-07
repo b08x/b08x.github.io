@@ -1,5 +1,6 @@
 ---
-layout: default
+layout: terminal-layout
+right_sidebar: toc
 title: "Video Tutorial - NPM Package Installation"
 description: "Interactive screencast walkthrough for troubleshooting npm package installation"
 permalink: /video-tutorial-example/

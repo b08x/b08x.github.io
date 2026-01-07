@@ -1,89 +1,46 @@
 {% if page.sources %}
 <div class="references-widget">
-  <h3
-    class="text-sm font-semibold uppercase mb-3"
-    style="color: var(--text-secondary)"
-  >
+  <h3 class="text-sm font-semibold uppercase mb-3 text-foreground">
     <i class="fas fa-bookmark mr-2"></i>References
   </h3>
 
-  <div
-    class="p-4 rounded"
-    style="background: var(--bg-secondary); border: 1px solid var(--border-primary)"
-  >
+  <div class="p-4 rounded bg-surface border border-border">
     <ul class="space-y-2">
       {% for source in page.sources %}
       <li>
-        <a
-          href="{{ source.url }}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-start gap-2 text-sm p-2 rounded transition-all"
-          style="color: var(--link-base); text-decoration: none"
-        >
-          <svg
-            class="w-4 h-4 mt-0.5 flex-shrink-0"
-            style="color: var(--text-secondary)"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+        <a href="{{ source.url }}" target="_blank" rel="noopener noreferrer"
+          class="flex items-start gap-2 text-sm p-2 rounded transition-all text-accent no-underline hover:bg-surface-hover">
+          <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {% if source.type == 'website' or source.type == 'url' %}
             <!-- Globe icon -->
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-            ></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+            </path>
             {% elsif source.type == 'documentation' or source.type == 'docs' %}
             <!-- Book icon -->
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            ></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+            </path>
             {% elsif source.type == 'article' or source.type == 'paper' %}
             <!-- Document icon -->
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            ></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+            </path>
             {% elsif source.type == 'github' or source.type == 'repository' %}
             <!-- Code icon -->
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-            ></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
             {% else %}
             <!-- Link icon (default) -->
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-            ></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+            </path>
             {% endif %}
           </svg>
           <span class="hover-underline">{{ source.title }}</span>
-          <svg
-            class="w-3 h-3 ml-auto flex-shrink-0"
-            style="color: var(--text-tertiary)"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-            ></path>
+          <svg class="w-3 h-3 ml-auto flex-shrink-0 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
           </svg>
         </a>
       </li>
@@ -94,7 +51,8 @@
 
 <style>
   .references-widget a:hover {
-    background: var(--ui-hover);
+    background: var(--surface);
+    opacity: 0.9;
   }
 
   .references-widget a:hover .hover-underline {
@@ -102,7 +60,7 @@
   }
 
   .references-widget a:focus-visible {
-    outline: 2px solid var(--ui-focus);
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
   }
 </style>

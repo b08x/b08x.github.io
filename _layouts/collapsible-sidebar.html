@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: base-shell
 ---
 <!-- Collapsible Sidebar Layout -->
 <!-- Full-screen container with optional video/background and fixed right sidebar -->
@@ -168,40 +168,37 @@ layout: default
   }
 
   /* Ensure body doesn't overflow */
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
   }
 </style>
 
-<div class="fullscreen-container" {% if page.poster %}style="background-image: url('{{ page.poster }}');"{% endif %}>
+<div class="fullscreen-container" {% if page.poster %}style="background-image: url('{{ page.poster }}');" {% endif %}>
   <!-- Main Content Area -->
   <div class="main-content-area" id="main-content">
     {% if page.video %}
-      <video autoplay loop muted playsinline>
-        {% if page.video.webm %}
-          <source src="{{ page.video.webm }}" type="video/webm" />
-        {% endif %}
-        {% if page.video.mp4 %}
-          <source src="{{ page.video.mp4 }}" type="video/mp4" />
-        {% endif %}
-        Your browser does not support the video tag.
-      </video>
+    <video autoplay loop muted playsinline>
+      {% if page.video.webm %}
+      <source src="{{ page.video.webm }}" type="video/webm" />
+      {% endif %}
+      {% if page.video.mp4 %}
+      <source src="{{ page.video.mp4 }}" type="video/mp4" />
+      {% endif %}
+      Your browser does not support the video tag.
+    </video>
     {% else %}
-      <!-- Main page content if no video -->
-      <div class="prose prose-lg max-w-none">
-        {% if page.main_content %}
-          {{ page.main_content }}
-        {% endif %}
-      </div>
+    <!-- Main page content if no video -->
+    <div class="prose prose-lg max-w-none">
+      {% if page.main_content %}
+      {{ page.main_content }}
+      {% endif %}
+    </div>
     {% endif %}
   </div>
 
   <!-- Sidebar Toggle Button -->
-  <button
-    id="sidebar-toggle"
-    class="sidebar-toggle-btn"
-    aria-label="Toggle sidebar"
-    aria-expanded="true"
+  <button id="sidebar-toggle" class="sidebar-toggle-btn" aria-label="Toggle sidebar" aria-expanded="true"
     aria-controls="right-sidebar">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -212,13 +209,13 @@ layout: default
   <aside id="right-sidebar" class="fixed-right-sidebar" role="complementary" aria-label="Navigation sidebar">
     <div class="sidebar-header">
       {% if page.sidebar_title %}
-        <h1>
-          {% if page.sidebar_link %}
-            <a class="internal-link" href="{{ page.sidebar_link }}">{{ page.sidebar_title }}</a>
-          {% else %}
-            {{ page.sidebar_title }}
-          {% endif %}
-        </h1>
+      <h1>
+        {% if page.sidebar_link %}
+        <a class="internal-link" href="{{ page.sidebar_link }}">{{ page.sidebar_title }}</a>
+        {% else %}
+        {{ page.sidebar_title }}
+        {% endif %}
+      </h1>
       {% endif %}
     </div>
 
@@ -229,7 +226,7 @@ layout: default
 
   <!-- Optional Decorative Mask -->
   {% if page.show_mask %}
-    <div class="decorative-mask"></div>
+  <div class="decorative-mask"></div>
   {% endif %}
 </div>
 
