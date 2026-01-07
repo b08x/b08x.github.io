@@ -161,13 +161,14 @@ Output will be in `_site/` directory.
 
 ```
 b08x.github.io/
+├── AGENTS.md                   # Root project knowledge base ✓
 ├── _config.yml                 # Jekyll configuration
 ├── package.json                # Node dependencies & scripts
 ├── Gemfile                     # Ruby dependencies
 ├── tailwind.config.js          # Tailwind CSS configuration
 ├── postcss.config.js           # PostCSS configuration
 │
-├── _layouts/                   # Jekyll layout templates (17 files)
+├── _layouts/                   # Jekyll layout templates (17 files) → [_layouts/AGENTS.md]
 │   ├── default.html            # Base layout
 │   ├── home.html               # Homepage layout
 │   ├── terminal-note.html      # Note detail view
@@ -175,16 +176,16 @@ b08x.github.io/
 │   ├── wiki-page.html          # Wiki detail view
 │   └── ...                     # Other specialized layouts
 │
-├── _includes/                  # Reusable Jekyll partials
+├── _includes/                  # Reusable Jekyll partials → [_includes/AGENTS.md]
 │   └── page_sidebar/           # Sidebar components
 │
-├── _plugins/                   # Custom Jekyll plugins (11 files)
+├── _plugins/                   # Custom Jekyll plugins (11 files) → [_plugins/AGENTS.md]
 │   ├── bidirectional_links_generator.rb
 │   ├── wiki_page_generator.rb  # Wiki pagination system
 │   ├── obsidian_callouts.rb
 │   └── ...
 │
-├── _sass/                      # Sass stylesheets
+├── _sass/                      # Sass stylesheets → [_sass/AGENTS.md]
 │
 ├── _notes/                     # Markdown notes (digital garden)
 │   ├── *.md                    # Individual notes
@@ -201,13 +202,13 @@ b08x.github.io/
 │
 ├── src/                        # React components source
 │   ├── main.tsx                # Component registry & island hydration
-│   ├── components/             # React components (18 files)
+│   ├── components/             # React components (18 files) → [src/components/AGENTS.md]
 │   │   ├── CodeBlock.tsx
 │   │   ├── VideoPlayer.tsx
 │   │   ├── MermaidViewer.tsx
 │   │   ├── KnowledgebaseCarousel.tsx
 │   │   └── ...
-│   └── utils/                  # Utility functions
+│   └── utils/                  # Utility functions → [src/utils/AGENTS.md]
 │       └── syntaxTheme.ts      # Syntax theme selector
 │
 ├── assets/                     # Static assets
@@ -221,6 +222,15 @@ b08x.github.io/
 │
 └── README.md                   # This file
 ```
+
+**Documentation Navigation:**
+- [./AGENTS.md](./AGENTS.md) - Root project knowledge base
+- [_layouts/AGENTS.md](_layouts/AGENTS.md) - Layout templates hierarchy
+- [_includes/AGENTS.md](_includes/AGENTS.md) - Reusable partials and sidebar widgets
+- [_plugins/AGENTS.md](_plugins/AGENTS.md) - Custom Jekyll plugins
+- [_sass/AGENTS.md](_sass/AGENTS.md) - Theme system and CSS variables
+- [src/components/AGENTS.md](src/components/AGENTS.md) - React island components
+- [src/utils/AGENTS.md](src/utils/AGENTS.md) - TypeScript utilities for theme sync
 
 ---
 
@@ -242,6 +252,8 @@ b08x.github.io/
 ### React Island Architecture
 
 The project uses **island architecture** for progressive enhancement:
+
+> **See [src/components/AGENTS.md](src/components/AGENTS.md) for component patterns, island registration, and theming conventions.**
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -289,6 +301,8 @@ The project uses **island architecture** for progressive enhancement:
 
 **11 Custom Plugins** extend Jekyll functionality:
 
+> **See [_plugins/AGENTS.md](_plugins/AGENTS.md) for plugin types, generator patterns, and anti-patterns.**
+
 | Plugin                                | Purpose                                    | LOC  |
 |---------------------------------------|--------------------------------------------|------|
 | `wiki_page_generator.rb`              | Generates paginated wiki indices from JSON | ~352 |
@@ -328,6 +342,8 @@ See [Wiki Pagination Architecture](#wiki-system) for details.
 ### Wiki System
 
 The wiki system provides scalable pagination for large content collections:
+
+> **See [_plugins/AGENTS.md](_plugins/AGENTS.md) for wiki pagination configuration, reserved slugs, and generator behavior.**
 
 **Architecture Components:**
 1. **Generator Plugin** (`_plugins/wiki_page_generator.rb`)
@@ -407,7 +423,7 @@ pages:
 
 **18 Interactive React Components** with 4,084 total lines of code.
 
-**See [src/components/README.md](src/components/README.md)** for comprehensive documentation including:
+**See [src/components/README.md](src/components/README.md) or [src/components/AGENTS.md](src/components/AGENTS.md)** for comprehensive documentation including:
 - Component APIs and props interfaces
 - Usage examples with code snippets
 - Architecture patterns (island hydration, theme sync)
@@ -535,6 +551,8 @@ See [Component Library](#component-library) or [src/components/README.md](src/co
 
 Themes use CSS variables defined in `tailwind.config.js`:
 
+> **See [_sass/AGENTS.md](_sass/AGENTS.md) for CSS variable definitions, dark mode overrides, and terminal aesthetic guidelines.**
+
 ```css
 :root {
   --foreground: ...;     /* Primary text */
@@ -562,7 +580,7 @@ Themes use CSS variables defined in `tailwind.config.js`:
 
 ### Adding New Components
 
-See [src/components/README.md](src/components/README.md) for step-by-step guide.
+See [src/components/README.md](src/components/README.md) or [src/components/AGENTS.md](src/components/AGENTS.md) for step-by-step guide.
 
 **Quick steps:**
 1. Create `src/components/MyComponent.tsx`
@@ -627,8 +645,9 @@ npm run dev  # or separate terminals for watch:js + dev:jekyll
 
 # 2. Edit content
 # - Create/edit notes in _notes/
-# - Modify React components in src/components/
-# - Update Jekyll layouts in _layouts/
+# - Modify React components in src/components/ → See [src/components/AGENTS.md](src/components/AGENTS.md)
+# - Update Jekyll layouts in _layouts/ → See [_layouts/AGENTS.md](_layouts/AGENTS.md)
+# - Edit partials in _includes/ → See [_includes/AGENTS.md](_includes/AGENTS.md)
 
 # 3. Preview changes
 # - Visit http://localhost:4000
@@ -788,4 +807,10 @@ See `package.json` and `Gemfile` for full list of dependencies and their license
 
 ---
 
-For detailed component documentation, see [src/components/README.md](src/components/README.md).
+For detailed documentation:
+- **Components**: [src/components/README.md](src/components/README.md) or [src/components/AGENTS.md](src/components/AGENTS.md)
+- **Layouts**: [_layouts/AGENTS.md](_layouts/AGENTS.md)
+- **Includes**: [_includes/AGENTS.md](_includes/AGENTS.md)
+- **Plugins**: [_plugins/AGENTS.md](_plugins/AGENTS.md)
+- **Theme**: [_sass/AGENTS.md](_sass/AGENTS.md)
+- **Utilities**: [src/utils/AGENTS.md](src/utils/AGENTS.md)
