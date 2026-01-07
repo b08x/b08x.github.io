@@ -1,8 +1,8 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-01-06
-**Commit:** aaeb14d
-**Branch:** development
+**Generated:** 2026-01-07
+**Commit:** 609db48
+**Branch:** main
 
 ## OVERVIEW
 
@@ -14,7 +14,7 @@ Jekyll static site with React island architecture for interactive components. Di
 ./
 ├── src/components/     # React islands (18 components) - see src/components/AGENTS.md
 ├── _plugins/           # Custom Jekyll plugins (11) - see _plugins/AGENTS.md
-├── _layouts/           # Jekyll templates (19 layouts) - see _layouts/AGENTS.md
+├── _layouts/           # Jekyll templates (17 layouts) - see _layouts/AGENTS.md
 ├── _includes/          # Reusable partials (14 files) - see _includes/AGENTS.md
 ├── _notes/             # Digital garden markdown content
 ├── _wikis/             # Generated wiki pages (from _data/wikis/*.json)
@@ -55,12 +55,16 @@ Jekyll static site with React island architecture for interactive components. Di
 **Key React Components:**
 | Component | LOC | Purpose |
 |-----------|-----|---------|
-| `VideoPlayer` | 410 | HLS video with segments, transcript |
 | `KnowledgebaseCarousel` | 498 | H2-based content carousel |
+| `JsonCanvasViewer` | 483 | Canvas file visualization |
+| `VideoPlayer` | 410 | HLS video with segments, transcript |
+| `CodeBlock` | 325 | Syntax highlighting + copy button |
+| `GraphView` | 312 | D3 force-directed note graph |
 | `MermaidViewer` | 280 | Interactive diagrams with zoom/pan |
-| `CodeBlock` | 224 | Syntax highlighting + copy button |
-| `GraphView` | 254 | D3 force-directed note graph |
-| `JsonCanvasViewer` | - | Canvas file visualization |
+| `MermaidModal` | 249 | Full-screen diagram modal |
+| `NotesGrid` | 221 | Grid display with detail view |
+| `SearchCmdK` | 153 | Command palette search |
+| `AudioPlayer` | 144 | Audio playback with waveform |
 
 ## CONVENTIONS
 
@@ -130,5 +134,6 @@ npm run build:jekyll           # jekyll clean && jekyll build
 - **wiki_page_generator disabled** in `_config.yml` (`wiki_page_generator.enabled: false`) - set to `true` to regenerate wiki pages
 - **Large compiled CSS** - `assets/css/compiled.css` inflates line counts; actual code ~5k lines
 - **React 19** - Uses `createRoot` API, lazy loading with Suspense
-- **No tests** - `npm test` returns error; consider adding Jest for components
+- **Minimal tests** - Only KnowledgebaseCarousel has tests (360 lines); other 17 components lack coverage
+- **Graph web worker** - `src/components/graph.worker.ts` handles force simulation off main thread
 
