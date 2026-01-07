@@ -780,5 +780,3 @@ See `package.json` and `Gemfile` for full list of dependencies and their license
 ---
 
 For detailed component documentation, see [src/components/README.md](src/components/README.md).
-
-For wiki architecture details, see [CLAUDE.md](CLAUDE.md) section 8.

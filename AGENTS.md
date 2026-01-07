@@ -129,4 +129,4 @@ npm run build:jekyll           # jekyll clean && jekyll build
 - **Large compiled CSS** - `assets/css/compiled.css` inflates line counts; actual code ~5k lines
 - **React 19** - Uses `createRoot` API, lazy loading with Suspense
 - **No tests** - `npm test` returns error; consider adding Jest for components
-- **Existing CLAUDE.md** - Contains detailed wiki pagination architecture docs (688 lines); this AGENTS.md provides quick-reference
+
