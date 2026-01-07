@@ -52,12 +52,12 @@ layout: base-shell
         </div>
         {% endif %}
 
-        {% if page.left_sidebar == 'terminal-sidebar' %}
+        {% if page.left_sidebar == 'navigation-sidebar' %}
         <!-- Standard Navigation Sidebar -->
         <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
           Navigation
         </h3>
-        {% include terminal-sidebar.html %}
+        {% include sidebar.html %}
         {% endif %}
 
         {% if page.left_sidebar == 'knowledgebase-toc' %}
@@ -198,8 +198,8 @@ layout: base-shell
 
 </div>
 
-<!-- Web Component: Terminal TOC -->
-<script src="{{ site.baseurl }}/assets/js/components/terminal-toc.js" defer></script>
+<!-- Web Component: Sidebar TOC -->
+<script src="{{ site.baseurl }}/assets/js/components/sidebar-toc.js" defer></script>
 
 <!-- Wiki Navigation Active State Script -->
 {% if page.layout == 'wiki' or page.layout == 'wiki-page' %}

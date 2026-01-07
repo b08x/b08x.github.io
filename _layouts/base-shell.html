@@ -33,13 +33,6 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
 
-  <!-- Fonts: JetBrains Mono (UI) + Inter (Prose) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
-
   <!-- Stylesheets: Load order critical - Variables (DNA) before Utilities (Muscle) -->
   <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/compiled.css' | relative_url }}?v={{ site.time | date: '%s' }}">
@@ -88,7 +81,7 @@
     <header id="site-header"
       class="sticky top-0 z-50 flex-none border-b border-border bg-background transition-transform duration-300 ease-in-out"
       role="banner">
-      {% include terminal-header.html %}
+      {% include header.html %}
     </header>
 
     <!-- Main Content Area (Layout-specific content injected here) -->

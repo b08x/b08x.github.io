@@ -14,7 +14,7 @@ assets/js/
 ├── scroll-header.js               # Auto-hiding header (75 LOC)
 ├── theme-manager.js               # Theme switching system (177 LOC)
 ├── components/
-│   └── terminal-toc.js           # Shadow DOM TOC Web Component (166 LOC)
+│   └── sidebar-toc.js            # Shadow DOM TOC Web Component (166 LOC) - renamed from terminal-toc.js
 └── dist/
     └── garden-widgets-v2.js       # Bundled React components (251,854 LOC, 10MB)
 ```
@@ -28,7 +28,7 @@ assets/js/
 | Sidebar behavior | `collapsible-sidebar.js`, `page-sidebar.js` | Toggle, persistence, scroll spy |
 | Header auto-hide | `scroll-header.js` | Scroll direction detection, requestAnimationFrame |
 | Knowledgebase pagination | `knowledgebase-paginator.js` | H2 splitting, carousel navigation |
-| Web Components | `components/terminal-toc.js` | Shadow DOM, custom element |
+| Web Components | `components/sidebar-toc.js` | Shadow DOM, custom element |
 
 ## CODE MAP
 
@@ -38,7 +38,7 @@ assets/js/
 | `window.themeManager` | Class | `theme-manager.js` | Theme toggle with system preference detection |
 | `window.collapsibleSidebar` | Class | `collapsible-sidebar.js` | Right sidebar state management |
 | `window.pageSidebar` | Class | `page-sidebar.js` | Left sidebar scroll spy + media controls |
-| `TerminalToc` | Custom Element | `components/terminal-toc.js` | Web Component with Shadow DOM TOC |
+| `SidebarToc` | Custom Element | `components/sidebar-toc.js` | Web Component with Shadow DOM TOC |
 
 ## CONVENTIONS
 

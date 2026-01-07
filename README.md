@@ -42,7 +42,7 @@
 
 ## Overview
 
-![Terminal Theme](https://img.shields.io/badge/theme-dark%20terminal-ff6600)
+![IDE/Editor Theme](https://img.shields.io/badge/theme-ide%2Feditor-ff6600)
 ![Jekyll](https://img.shields.io/badge/jekyll-4.3+-red)
 ![React](https://img.shields.io/badge/react-19-61DAFB)
 ![esbuild](https://img.shields.io/badge/build-esbuild-FFCF00)
@@ -170,7 +170,7 @@ b08x.github.io/
 ├── _layouts/                   # Jekyll layout templates (17 files) → [_layouts/AGENTS.md]
 │   ├── default.html            # Base layout
 │   ├── home.html               # Homepage layout
-│   ├── terminal-note.html      # Note detail view
+│   ├── note-sidebar.html       # Note detail view
 │   ├── wiki.html               # Wiki index with pagination
 │   ├── wiki-page.html          # Wiki detail view
 │   └── ...                     # Other specialized layouts
@@ -552,7 +552,7 @@ See [Component Library](#component-library) or [src/components/README.md](src/co
 
 Themes use CSS variables defined in `tailwind.config.js`:
 
-> **See [_sass/AGENTS.md](_sass/AGENTS.md) for CSS variable definitions, dark mode overrides, and terminal aesthetic guidelines.**
+> **See [_sass/AGENTS.md](_sass/AGENTS.md) for CSS variable definitions, dark mode overrides, and IDE/editor aesthetic guidelines.**
 
 ```css
 :root {
@@ -569,11 +569,11 @@ Themes use CSS variables defined in `tailwind.config.js`:
 ```
 
 **Custom Fonts:**
-- **Mono**: Mononoki, Hack (for code and terminal aesthetic)
+- **Mono**: Mononoki, Hack (for code and IDE/editor aesthetic)
 - **Sans**: System UI fonts
 - **Prose**: Georgia (for long-form content)
 
-**Terminal Aesthetic Guidelines:**
+**IDE/Editor Aesthetic Guidelines:**
 - Monospace fonts for UI elements
 - Border-based design (1px solid borders)
 - High contrast (WCAG AA minimum)

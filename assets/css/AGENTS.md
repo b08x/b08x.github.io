@@ -1,6 +1,6 @@
 # assets/css/ - CSS Architecture
 
-Dual-build CSS system combining Jekyll SCSS processing with Tailwind CSS 4.x utilities. Terminal aesthetic theme with dual light/dark mode support.
+Dual-build CSS system combining Jekyll SCSS processing with Tailwind CSS 4.x utilities. IDE/editor aesthetic theme with dual light/dark mode support.
 
 ## STRUCTURE
 
@@ -47,7 +47,7 @@ assets/css/
 
 **Loading Order:**
 1. `compiled.css` - Always loaded (base-shell.html, head.html)
-2. `knowledgebase.css` - Conditional (terminal-layout.html)
+2. `knowledgebase.css` - Conditional (sidebar-layout.html)
 3. `jcanvas/style.css` - Conditional (docs.html)
 
 **Theme Integration:**
@@ -64,8 +64,8 @@ assets/css/
 
 ## UNIQUE STYLES
 
-**Terminal Aesthetic:**
-- Monospace fonts for UI (`--font-mono`: Hack, Mononoki, Consolas)
+**IDE/Editor Aesthetic:**
+- Monospace fonts for UI (`--font-mono`: JetBrains Mono, Hack, Mononoki)
 - Border-based layout (1px solid `--border`)
 - High contrast colors (WCAG AA compliant)
 - Minimal rounded corners (`--radius: 20px`)
@@ -78,7 +78,7 @@ assets/css/
 **Typography Hybrid:**
 - UI elements (nav, sidebar): Monospace (`--font-mono`)
 - Article content: Prose font (`--font-prose`)
-- Headings: Monospace (terminal aesthetic)
+- Headings: Monospace (IDE/editor aesthetic)
 
 ## COMMANDS
 

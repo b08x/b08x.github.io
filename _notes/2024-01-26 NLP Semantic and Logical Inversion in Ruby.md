@@ -8,7 +8,7 @@ tags:
 - ruby
 - ruby-programming
 title: 2024-01-26 NLP Semantic and Logical Inversion in Ruby
-layout: terminal-note
+layout: note-sidebar
 ---
 
 See also: [[Rocky Linux 9 Corrupted EFI Boot Troubleshooting]]
