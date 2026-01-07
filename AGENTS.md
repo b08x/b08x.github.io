@@ -83,10 +83,12 @@ Jekyll static site with React island architecture for interactive components. Di
 }
 ```
 
-**Styling:**
-- Terminal aesthetic: monospace fonts, 1px borders, high contrast
-- CSS variables: `--foreground`, `--background`, `--accent`, `--border`, `--muted`
-- Tailwind 4.x with `@tailwindcss/postcss`
+**Styling (High-Contrast IDE Theme):**
+- **Theme**: Dual Light/Dark mode (activated by `.dark` class on `<html>`).
+- **Implementation**: All colors are managed via CSS variables defined in `_sass/_theme-variables.scss` and mapped to Tailwind utilities in `tailwind.config.js`.
+- **Aesthetic**: High contrast, 1px solid borders (`--border`), minimal rounded corners, and border-based layout.
+- **Typography**: Hybrid Monospace/Prose system. UI/Headings use custom monospace fonts (`Hack`, `Mononoki`); main article content uses monospace for a consistent digital garden feel.
+- **Tools**: Tailwind 4.x, SCSS, PostCSS.
 
 ## ANTI-PATTERNS (THIS PROJECT)
 
