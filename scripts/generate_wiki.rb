@@ -223,7 +223,6 @@ def generate_page(source_dir, wiki_id, page_data, prev_page, next_page, permalin
     'right_sidebar' => 'toc',
     'right_sidebar_xl_only' => true,
     'show_metadata' => false,
-    'show_graph' => false,
     'related_pages' => related_pages,
     'file_paths' => file_paths,
     'pagination' => pagination_data
@@ -287,7 +286,6 @@ def write_paginated_page(source_dir, wiki_id, segment, page_num, total_pages, wi
     'wiki_id' => wiki_id,
     'permalink' => permalink,
     'pagination' => pagination_meta,
-    'show_graph' => false,
     'repository' => wiki_metadata['repository'],
     'generated_at' => wiki_metadata['generated_at'],
     'total_wiki_pages' => wiki_metadata['page_count'],
