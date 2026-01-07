@@ -218,6 +218,19 @@ const CanvasNode: React.FC<CanvasNodeProps> = ({ node, scale, translateX, transl
   }, [node.file, node.type]);
 
   useEffect(() => {
+    if (!isLoading) {
+      // Small delay to ensure React has committed the markdown nodes to the DOM
+      const timer = setTimeout(() => {
+        if (window.mountIslands) {
+          window.mountIslands();
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading, fetchedContent]);
+
+
+  useEffect(() => {
     if (!nodeRef.current) return;
 
     const dragHandler = drag<HTMLDivElement, any>()

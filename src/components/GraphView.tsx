@@ -292,7 +292,8 @@ const GraphView: React.FC = () => {
   }
 
   return (
-    <div ref={containerRef} className="w-full bg-surface border border-border rounded-lg overflow-hidden my-8 relative min-h-[400px]">
+    <div ref={containerRef} className="w-full h-full bg-surface border border-border rounded-lg overflow-hidden relative min-h-[300px]">
+
       {(isCalculating || !data) && (
         <div className="absolute inset-0 z-10 bg-surface/50 backdrop-blur-sm flex items-center justify-center">
           <span className="text-muted font-mono animate-pulse">

@@ -12,7 +12,6 @@ pagination:
   has_next: false
   previous_page_url:
   next_page_url:
-show_graph: false
 repository: https://github.com/b08x/video-chapter-automater
 generated_at: '2025-12-31T19:48:53.466227'
 total_wiki_pages: 11

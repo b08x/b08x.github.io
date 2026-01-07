@@ -9,7 +9,6 @@ left_sidebar: wiki-nav
 right_sidebar: toc
 right_sidebar_xl_only: true
 show_metadata: false
-show_graph: false
 related_pages:
 - id: recording-lifecycle
   url: "/wikis/omega-13/05-recording-lifecycle/"

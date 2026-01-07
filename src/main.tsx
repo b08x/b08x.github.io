@@ -3,6 +3,14 @@ console.log("[Garden] Bundle version: 20260104-01");
 import React, { Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 
+declare global {
+  interface Window {
+    mountIslands: () => void;
+    canvasAPI?: any;
+  }
+}
+
+
 // Import components dynamically
 const HelloGarden = React.lazy(() => import('./components/HelloGarden'));
 const GraphView = React.lazy(() => import('./components/GraphView'));
@@ -120,6 +128,9 @@ const mountIslands = () => {
     }
   });
 };
+
+window.mountIslands = mountIslands;
+
 
 const enhanceMermaidDiagrams = () => {
   // Find static mermaid diagrams rendered by jekyll-spaceship (as img tags)
