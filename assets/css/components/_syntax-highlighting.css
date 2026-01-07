@@ -1,0 +1,84 @@
+@layer components {
+
+    .highlight {
+        background: var(--bg-code);
+        border: 1px solid var(--border);
+        padding: 1em;
+        border-radius: var(--radius-md);
+        font-size: 0.9em;
+        overflow: auto;
+        margin: 1em 0;
+    }
+
+    .highlight code {
+        padding: 0;
+        background: transparent;
+        border: none;
+        white-space: pre-wrap;
+    }
+
+    div.highlight {
+        display: grid;
+    }
+
+    .highlight .c { color: var(--muted); font-style: italic; }
+    .highlight .err { color: var(--chart-5); background-color: rgba(255, 68, 102, 0.15); }
+    .highlight .k { color: var(--accent); font-weight: bold; }
+    .highlight .o { color: var(--chart-1); font-weight: normal; }
+    .highlight .cm { color: var(--muted); font-style: italic; }
+    .highlight .cp { color: var(--muted); font-weight: bold; }
+    .highlight .c1 { color: var(--muted); font-style: italic; }
+    .highlight .cs { color: var(--muted); font-weight: bold; font-style: italic; }
+    .highlight .gd { color: var(--chart-5); background-color: rgba(255, 68, 102, 0.15); }
+    .highlight .gd .x { color: var(--chart-5); background-color: rgba(255, 68, 102, 0.2); }
+    .highlight .ge { font-style: italic; }
+    .highlight .gr { color: var(--chart-5); }
+    .highlight .gh { color: var(--foreground); font-weight: bold; }
+    .highlight .gi { color: var(--chart-3); background-color: rgba(80, 200, 120, 0.15); }
+    .highlight .gi .x { color: var(--chart-3); background-color: rgba(80, 200, 120, 0.2); }
+    .highlight .go { color: var(--muted); }
+    .highlight .gp { color: var(--muted); }
+    .highlight .gs { font-weight: bold; }
+    .highlight .gu { color: var(--accent); }
+    .highlight .gt { color: var(--chart-5); }
+    .highlight .kc { font-weight: bold; color: var(--accent); }
+    .highlight .kd { font-weight: bold; color: var(--accent); }
+    .highlight .kp { font-weight: bold; color: var(--accent); }
+    .highlight .kr { font-weight: bold; color: var(--accent); }
+    .highlight .kt { color: var(--chart-2); font-weight: bold; }
+    .highlight .m { color: var(--chart-2); }
+    .highlight .s { color: var(--chart-3); }
+    .highlight .na { color: var(--chart-4); }
+    .highlight .nb { color: var(--chart-2); }
+    .highlight .nc { color: var(--chart-4); font-weight: bold; }
+    .highlight .no { color: var(--chart-2); }
+    .highlight .ni { color: var(--chart-1); }
+    .highlight .ne { color: var(--chart-5); font-weight: bold; }
+    .highlight .nf { color: var(--chart-4); font-weight: bold; }
+    .highlight .nn { color: var(--muted); }
+    .highlight .nt { color: var(--chart-1); }
+    .highlight .nv { color: var(--chart-2); }
+    .highlight .ow { font-weight: normal; color: var(--chart-1); }
+    .highlight .w { color: var(--muted); }
+    .highlight .mf { color: var(--chart-2); }
+    .highlight .mh { color: var(--chart-2); }
+    .highlight .mi { color: var(--chart-2); }
+    .highlight .mo { color: var(--chart-2); }
+    .highlight .sb { color: var(--chart-3); }
+    .highlight .sc { color: var(--chart-3); }
+    .highlight .sd { color: var(--chart-3); }
+    .highlight .s2 { color: var(--chart-3); }
+    .highlight .se { color: var(--chart-3); }
+    .highlight .sh { color: var(--chart-3); }
+    .highlight .si { color: var(--chart-3); }
+    .highlight .sx { color: var(--chart-3); }
+    .highlight .sr { color: var(--chart-1); }
+    .highlight .s1 { color: var(--chart-3); }
+    .highlight .dl { color: var(--chart-3); }
+    .highlight .ss { color: var(--chart-1); }
+    .highlight .bp { color: var(--chart-2); }
+    .highlight .vc { color: var(--chart-2); }
+    .highlight .vg { color: var(--chart-2); }
+    .highlight .vi { color: var(--chart-2); }
+    .highlight .il { color: var(--chart-2); }
+}

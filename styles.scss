@@ -5,9 +5,6 @@
 @import "../_sass/fonts";
 @import "../_sass/theme-variables";
 
-// Specialized components not covered by Tailwind
-@import "../_sass/callouts";   // Obsidian-style callouts
-
 // Scroll-Up Navigation Header - Auto-hiding header on scroll
 #site-header.header-hidden {
   transform: translateY(-100%);
