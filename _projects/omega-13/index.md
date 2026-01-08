@@ -1,5 +1,5 @@
 ---
-layout: page-sidebar
+layout: page
 permalink: /projects/omega-13
 title: Omega 13
 right_sidebar: toc

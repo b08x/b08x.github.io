@@ -1,5 +1,5 @@
 ---
-layout: page-sidebar
+layout: page
 title: "Test Page with Sidebar"
 description: "This is a test page demonstrating the responsive sidebar layout with all widgets: TOC, audio player, video embeds, and references."
 permalink: /test-sidebar-layout

@@ -100,5 +100,4 @@ defaults:
   - scope:
       path: "_notes"
     values:
-      layout: "note-sidebar"
-      show_graph: true
+      layout: "note"

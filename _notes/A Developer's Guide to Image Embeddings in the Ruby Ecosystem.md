@@ -7,7 +7,6 @@ tags:
   - Embedding
   - Machine-Learning
 last updated: Saturday, January 3rd 2026, 7:01:42 am
-right_sidebar: toc
 layout: note
 ---
 

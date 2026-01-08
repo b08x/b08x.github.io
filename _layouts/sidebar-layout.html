@@ -4,7 +4,7 @@ layout: base-shell
 
 {% assign container_width = page.container_max_width | default: "mx-auto" %}
 {% unless container_width contains 'max-w-' %}
-{% if page.layout == 'wiki' or page.layout == 'wiki-page' or page.layout == 'note' %}
+{% if page.layout == 'wiki' or page.layout == 'wiki-page' or page.layout == 'note' or page.layout == 'page' %}
 {% assign container_width = container_width | append: " max-w-notebook" %}
 {% elsif page.right_sidebar %}
 {% assign container_width = container_width | append: " max-w-notebook" %}
@@ -25,9 +25,10 @@ layout: base-shell
   {% endif %}
 
   {% assign effective_right_sidebar = page.right_sidebar %}
-  {% if effective_right_sidebar == nil and page.layout == 'note' %}
-  {% comment %} Notes without explicit right_sidebar don't get one by default besides TOC if specified in note-sidebar
-  {% endcomment %}
+  {% if effective_right_sidebar == nil %}
+  {% if page.layout == 'note' or page.layout == 'page' %}
+  {% assign effective_right_sidebar = 'toc' %}
+  {% endif %}
   {% endif %}
 
   <!-- Responsive Grid Container -->
@@ -84,7 +85,7 @@ layout: base-shell
     {% if content_width == nil %}
     {% if page.layout == 'wiki-page' %}
     {% assign content_width = "max-w-none" %}
-    {% elsif page.layout == 'note' %}
+    {% elsif page.layout == 'note' or page.layout == 'page' %}
     {% if effective_left_sidebar or effective_right_sidebar %}
     {% assign content_width = "max-w-content" %}
     {% else %}
