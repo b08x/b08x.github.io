@@ -54,6 +54,7 @@ presets:
 
   # React lightbox preset - Auto-enhanced with react-photo-view component
   react-lightbox:
+    markup: picture
     formats: [webp, original]
     widths: [400, 800, 1200, 1600]
     dimension_attributes: true
