@@ -26,19 +26,19 @@ This library provides interactive React components for a Jekyll static site usin
 
 ### Component Inventory
 
-| Component | LOC | Complexity | Purpose |
-|-----------|-----|------------|---------|
-| **VideoPlayer** | 410 | Complex | HLS video with segments, actions, and transcript |
-| **KnowledgebaseCarousel** | 498 | Complex | Accessible H2-based content carousel with keyboard nav |
-| **MermaidViewer** | 280 | Complex | Interactive Mermaid diagrams with D3 zoom/pan |
-| **GraphView** | 254 | Complex | D3 force-directed graph visualization |
-| **MermaidModal** | 249 | Moderate | Full-screen Mermaid diagram modal |
-| **CodeBlock** | 224 | Moderate | Syntax-highlighted code with copy button |
-| **NotesGrid** | 221 | Moderate | Grid display for notes with detail view |
-| **SearchCmdK** | 153 | Moderate | Command palette search (Cmd+K) |
-| **AudioPlayer** | 144 | Moderate | Audio playback with waveform |
-| **NotebookGuide** | 112 | Simple | Guide/tutorial assistance component |
-| **HelloGarden** | 13 | Simple | Demo/test component |
+| Component                 | LOC | Complexity | Purpose                                                |
+|---------------------------|-----|------------|--------------------------------------------------------|
+| **VideoPlayer**           | 410 | Complex    | HLS video with segments, actions, and transcript       |
+| **KnowledgebaseCarousel** | 498 | Complex    | Accessible H2-based content carousel with keyboard nav |
+| **MermaidViewer**         | 280 | Complex    | Interactive Mermaid diagrams with D3 zoom/pan          |
+| **GraphView**             | 254 | Complex    | D3 force-directed graph visualization                  |
+| **MermaidModal**          | 249 | Moderate   | Full-screen Mermaid diagram modal                      |
+| **CodeBlock**             | 224 | Moderate   | Syntax-highlighted code with copy button               |
+| **NotesGrid**             | 221 | Moderate   | Grid display for notes with detail view                |
+| **SearchCmdK**            | 153 | Moderate   | Command palette search (Cmd+K)                         |
+| **AudioPlayer**           | 144 | Moderate   | Audio playback with waveform                           |
+| **NotebookGuide**         | 112 | Simple     | Guide/tutorial assistance component                    |
+| **HelloGarden**           | 13  | Simple     | Demo/test component                                    |
 
 **Total: 11 components, 2,558 lines of code**
 
@@ -47,7 +47,6 @@ This library provides interactive React components for a Jekyll static site usin
 - **Island Architecture**: Progressive enhancement with `data-island` hydration
 - **Theme-Aware**: Automatic dark/light mode synchronization via MutationObserver
 - **Accessibility**: ARIA labels, keyboard navigation, screen reader support
-- **Terminal Aesthetic**: Monospace fonts, border-based design, high contrast
 - **Type-Safe**: Full TypeScript with interfaces for all props
 - **Enhancement Pipelines**: Automatic upgrade of static content (Rouge → CodeBlock, Mermaid images → MermaidViewer)
 
@@ -879,7 +878,6 @@ javascript, typescript, python, ruby, bash, markdown, json, yaml, jsx, tsx, css,
 
 **Styling:**
 - Tailwind CSS utility classes
-- Terminal aesthetic (monospace fonts, border-based design)
 - Gradient header with metadata display
 - Custom mesh background for code area
 
@@ -1003,7 +1001,6 @@ interface NotebookGuideProps {
 
 **Key Features:**
 - Simple greeting message
-- Terminal aesthetic styling
 - Animated status indicator
 
 **Props Interface:**
@@ -1104,7 +1101,7 @@ useEffect(() => {
 - MermaidViewer (diagram colors)
 - MermaidModal (diagram colors)
 
-### Terminal Aesthetic Guidelines
+### Aesthetic Guidelines
 
 **Typography:**
 - Monospace fonts (Mononoki, Hack) for code and UI elements
@@ -1346,7 +1343,7 @@ Disable JavaScript in browser to verify progressive enhancement:
 - ✅ Provide sensible default prop values
 - ✅ Handle empty/error states gracefully
 - ✅ Use CSS variables for all colors
-- ✅ Follow terminal aesthetic guidelines
+- ✅ Follow aesthetic guidelines
 
 **Don't:**
 - ❌ Create tightly coupled components
@@ -1707,19 +1704,19 @@ const theme = getSyntaxTheme();
 
 ### Component Dependency Matrix
 
-| Component | React | TypeScript | D3 | Mermaid | Prism | HLS.js |
-|-----------|-------|------------|-----|---------|-------|--------|
-| VideoPlayer | ✅ | ✅ | ❌ | ❌ | ❌ | Optional |
-| AudioPlayer | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| MermaidViewer | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
-| MermaidModal | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
-| GraphView | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
-| KnowledgebaseCarousel | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| CodeBlock | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ |
-| NotesGrid | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| SearchCmdK | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| NotebookGuide | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| HelloGarden | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Component             | React | TypeScript | D3 | Mermaid | Prism | HLS.js   |
+|-----------------------|-------|------------|----|---------|-------|----------|
+| VideoPlayer           | ✅     | ✅          | ❌  | ❌       | ❌     | Optional |
+| AudioPlayer           | ✅     | ✅          | ❌  | ❌       | ❌     | ❌        |
+| MermaidViewer         | ✅     | ✅          | ✅  | ✅       | ❌     | ❌        |
+| MermaidModal          | ✅     | ✅          | ✅  | ✅       | ❌     | ❌        |
+| GraphView             | ✅     | ✅          | ✅  | ❌       | ❌     | ❌        |
+| KnowledgebaseCarousel | ✅     | ✅          | ❌  | ❌       | ❌     | ❌        |
+| CodeBlock             | ✅     | ✅          | ❌  | ❌       | ✅     | ❌        |
+| NotesGrid             | ✅     | ✅          | ❌  | ❌       | ❌     | ❌        |
+| SearchCmdK            | ✅     | ✅          | ❌  | ❌       | ❌     | ❌        |
+| NotebookGuide         | ✅     | ✅          | ❌  | ❌       | ❌     | ❌        |
+| HelloGarden           | ✅     | ✅          | ❌  | ❌       | ❌     | ❌        |
 
 ---
 
