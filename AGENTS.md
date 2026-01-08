@@ -45,6 +45,9 @@ Jekyll static site with React island architecture for interactive components. Di
 | Modify styles | `_sass/` for SCSS, `tailwind.config.js` for utilities | IDE/editor aesthetic variables |
 | Debug islands | Browser console `[Garden]` prefix | Shows mount/render status |
 | Font files | `assets/fonts/` | JetBrains Mono + Inter (self-hosted, woff2/ttf) |
+| Add responsive images | `{% picture preset image.jpg %}` in markdown | jekyll_picture_tag v2.1.3 |
+| Configure image presets | `_data/picture.yml` | Media queries, formats, widths |
+| Image lightbox | Wrap picture in `<a data-lightbox="gallery">` | Lightbox2 library |
 
 ## CODE MAP
 
@@ -102,13 +105,23 @@ Jekyll static site with React island architecture for interactive components. Di
 - **Typography**: Hybrid Monospace/Prose system. UI/Headings use custom monospace fonts (`Hack`, `Mononoki`); main article content uses monospace for a consistent digital garden feel.
 - **Tools**: Tailwind 4.x, SCSS, PostCSS.
 
+**Responsive Images (jekyll_picture_tag v2.1.3):**
+- **Source**: `assets/img/` → **Output**: `assets/img/generated/`
+- **Config**: `_config.yml` (global settings), `_data/picture.yml` (presets)
+- **Usage**: `{% picture jpt-webp image.jpg %}` generates WebP + JPEG fallback with responsive srcsets
+- **Presets**: `webp`, `avif`, `thumbnail`, `avatar`, `lazy` - customizable widths, formats, media queries
+- **Integration**: Lightbox2 wraps pictures in `<a data-lightbox="gallery">` for modal viewing
+- **Build-time**: Images optimized during `jekyll build`, cached in output directory
+
 ## ANTI-PATTERNS (THIS PROJECT)
 
 - **NEVER** edit files in `_wikis/` directly - generated from `_data/wikis/*.json`
 - **NEVER** use wiki page slugs matching reserved words (`page`) - auto-suffixed with `-content`
 - **NEVER** manually create pagination paths like `/wikis/{id}/page/{n}/index.md`
+- **NEVER** commit `assets/img/generated/` to git - build artifacts excluded
 - **AVOID** synchronous component imports in `main.tsx` - use `React.lazy()`
 - **AVOID** hardcoded colors in components - use CSS variables for theme support
+- **AVOID** using `{% picture %}` without preset name - specify preset (e.g., `jpt-webp`) for consistent output
 
 ## UNIQUE STYLES
 
@@ -121,6 +134,16 @@ const components = { ..., MyComponent };  // Add to registry
 **Mermaid Enhancement:** Static `img.mermaid` from jekyll-spaceship auto-converted to interactive `MermaidViewer` islands.
 
 **Code Block Enhancement:** Rouge-generated `div.highlighter-rouge` auto-converted to `CodeBlock` islands with copy button.
+
+**Picture Tag + React Lightbox Pattern:**
+```liquid
+<!-- Single image with zoom -->
+{% picture react-lightbox image.jpg --alt "Description" %}
+
+<!-- Gallery (multiple images) -->
+{% picture react-lightbox img1.jpg --picture data-gallery="project" %}
+{% picture react-lightbox img2.jpg --picture data-gallery="project" %}
+```
 
 ## COMMANDS
 
@@ -146,4 +169,8 @@ npm run build:jekyll           # jekyll clean && jekyll build
 - **Minimal tests** - Only KnowledgebaseCarousel has tests (360 lines); other 17 components lack coverage
 - **Graph web worker** - `src/components/graph.worker.ts` handles force simulation off main thread
 - **Build Pipeline**: Parallel esbuild (React + worker) + Jekyll (Ruby plugins + SCSS)
+- **Picture Tag Setup**: Recent (Jan 8 2026) - jekyll_picture_tag v2.1.3 configured with react-lightbox preset
+- **React Photo View**: Replaced Lightbox2 (Jan 8 2026) - modern React lightbox with zoom/pan/gallery support
+- **No Generated Images Yet**: `assets/img/generated/` not created until first `jekyll build` with picture tags
+- **ImageLightbox Component**: Auto-enhancement pattern (like CodeBlock) - finds `data-lightbox="true"` and hydrates
 

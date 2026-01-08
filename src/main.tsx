@@ -29,6 +29,7 @@ const NodeEditor = React.lazy(() => import('./components/NodeEditor'));
 const CanvasExporter = React.lazy(() => import('./components/CanvasExporter'));
 const CanvasMinimap = React.lazy(() => import('./components/CanvasMinimap'));
 const JsonCanvasViewer = React.lazy(() => import('./components/JsonCanvasViewer'));
+const ImageLightbox = React.lazy(() => import('./components/ImageLightbox'));
 
 
 const components: Record<string, React.ComponentType<any>> = {
@@ -49,6 +50,7 @@ const components: Record<string, React.ComponentType<any>> = {
   CanvasExporter,
   CanvasMinimap,
   JsonCanvasViewer,
+  ImageLightbox,
 };
 
 // Helper to decode Base64 accurately with UTF-8 support
@@ -190,8 +192,42 @@ const enhanceMermaidDiagrams = () => {
   }
 };
 
+const enhancePictureElements = () => {
+  const pictures = document.querySelectorAll('picture[data-lightbox="true"]');
+  console.log(`[Garden] Found ${pictures.length} images to enhance with lightbox`);
+
+  if (pictures.length === 0) return;
+
+  pictures.forEach((picture) => {
+    try {
+      const img = picture.querySelector('img');
+      if (!img) return;
+
+      const fullSrc = img.src.replace(/-\d+(-[a-f0-9]+)?\.(jpg|png|webp)$/i, '.$2');
+      const gallery = picture.getAttribute('data-gallery') || 'default';
+
+      const island = document.createElement('div');
+      island.setAttribute('data-island', 'ImageLightbox');
+      island.setAttribute(
+        'data-props',
+        encodeProps({
+          src: fullSrc,
+          thumbnail: img.src,
+          alt: img.alt || '',
+          gallery
+        })
+      );
+
+      picture.replaceWith(island);
+    } catch (err) {
+      console.warn('[Garden] Failed to enhance picture element:', err);
+    }
+  });
+
+  mountIslands();
+};
+
 const enhanceCodeBlocks = () => {
-  // Find all Rouge-generated code containers
   const containers = document.querySelectorAll('div[class*="language-"].highlighter-rouge');
   console.log(`[Garden] Found ${containers.length} code blocks to enhance`);
 
@@ -287,11 +323,13 @@ const enhanceCodeBlocks = () => {
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     enhanceCodeBlocks();
+    enhancePictureElements();
     mountIslands();
     enhanceMermaidDiagrams();
   });
 } else {
   enhanceCodeBlocks();
+  enhancePictureElements();
   mountIslands();
   enhanceMermaidDiagrams();
 }

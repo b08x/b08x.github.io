@@ -24,11 +24,13 @@ console.log("This should also be centered");
 
 ---
 
+## React Photo View Lightbox
 
-<a href="{{ site.url }}/assets/img/logo001.jpg" data-lightbox="gallery-name">
-  {% picture jpt-webp logo001.jpg %}
-</a>
+Single image with zoom:
+{% picture react-lightbox logo001.jpg --alt "Logo" %}
 
 ---
 
-{% picture jpt-webp logo001.jpg %}
+Gallery with multiple images:
+{% picture react-lightbox logo001.jpg --picture data-gallery="demo" --alt "Logo 1" %}
+{% picture react-lightbox image.jpg --picture data-gallery="demo" --alt "Image 2" %}

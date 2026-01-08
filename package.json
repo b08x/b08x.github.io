@@ -51,6 +51,7 @@
     "react-icons": "^5.5.0",
     "react-jsoncanvas": "github:Digital-Tvilling/react-jsoncanvas",
     "react-markdown": "^10.1.0",
+    "react-photo-view": "^1.2.7",
     "react-player": "^2.16.0",
     "react-syntax-highlighter": "^15.6.0",
     "rehype-highlight": "^7.0.2",

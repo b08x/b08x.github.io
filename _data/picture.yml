@@ -52,6 +52,15 @@ presets:
   webp:
     formats: [webp, original]
 
+  # React lightbox preset - Auto-enhanced with react-photo-view component
+  react-lightbox:
+    formats: [webp, original]
+    widths: [400, 800, 1200, 1600]
+    dimension_attributes: true
+    attributes:
+      picture: 'data-lightbox="true"'
+      img: 'loading="lazy"'
+
   # Avif is the new hotness coming down the pipe. Browser support is bad and they are slow to
   # generate, but you get good file sizes even compared to webp of similar quality.
   avif:
