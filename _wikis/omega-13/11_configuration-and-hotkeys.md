@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Configuration & Global Hotkeys
+hide_header: true
 wiki_id: omega-13
 page_id: configuration-and-hotkeys
 permalink: "/wikis/omega-13/11-configuration-and-hotkeys/"

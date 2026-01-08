@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Core Architecture
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: core-architecture
 permalink: "/wikis/video-chapter-automater/03-core-architecture/"

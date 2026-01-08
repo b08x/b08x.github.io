@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: TUI Components & UX
+hide_header: true
 wiki_id: omega-13
 page_id: tui-and-ux
 permalink: "/wikis/omega-13/09-tui-and-ux/"

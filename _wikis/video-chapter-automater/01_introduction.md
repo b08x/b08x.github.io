@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Introduction
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: introduction
 permalink: "/wikis/video-chapter-automater/01-introduction/"

@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: GPU Acceleration & Detection
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: gpu-acceleration
 permalink: "/wikis/video-chapter-automater/05-gpu-acceleration/"

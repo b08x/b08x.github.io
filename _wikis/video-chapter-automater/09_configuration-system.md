@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Configuration & App Paths
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: configuration-system
 permalink: "/wikis/video-chapter-automater/09-configuration-system/"

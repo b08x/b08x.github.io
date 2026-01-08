@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Preprocessing Stages
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: preprocessing-stages
 permalink: "/wikis/video-chapter-automater/07-preprocessing-stages/"

@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Pipeline Orchestration
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: pipeline-orchestration
 permalink: "/wikis/video-chapter-automater/04-pipeline-orchestration/"

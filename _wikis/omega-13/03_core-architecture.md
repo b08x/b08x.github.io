@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Core Architecture Overview
+hide_header: true
 wiki_id: omega-13
 page_id: core-architecture
 permalink: "/wikis/omega-13/03-core-architecture/"

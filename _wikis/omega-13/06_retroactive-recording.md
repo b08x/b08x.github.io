@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Retroactive Recording Mechanism
+hide_header: true
 wiki_id: omega-13
 page_id: retroactive-recording
 permalink: "/wikis/omega-13/06-retroactive-recording/"

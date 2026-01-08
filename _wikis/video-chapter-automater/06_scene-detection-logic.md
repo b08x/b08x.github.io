@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Scene Detection & Chapter Conversion
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: scene-detection-logic
 permalink: "/wikis/video-chapter-automater/06-scene-detection-logic/"

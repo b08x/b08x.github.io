@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Recording State Machine
+hide_header: true
 wiki_id: omega-13
 page_id: recording-lifecycle
 permalink: "/wikis/omega-13/05-recording-lifecycle/"

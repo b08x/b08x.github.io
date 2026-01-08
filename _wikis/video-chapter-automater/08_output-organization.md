@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Output Management
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: output-organization
 permalink: "/wikis/video-chapter-automater/08-output-organization/"

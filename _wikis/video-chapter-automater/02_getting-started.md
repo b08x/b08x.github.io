@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Getting Started
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: getting-started
 permalink: "/wikis/video-chapter-automater/02-getting-started/"

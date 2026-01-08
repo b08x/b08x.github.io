@@ -115,8 +115,3 @@ pages:
 ---
 
 <!-- Paginated wiki index: page 1 of 1 -->
-
-```python
-I have downgraded react-player to version 2.16.0, which is more compatible with your single-bundle setup. This should ensure the YouTube player (and others) are properly included in your JavaScript bundle.
-
-```

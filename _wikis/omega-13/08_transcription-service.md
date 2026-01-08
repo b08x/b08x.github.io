@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Transcription & Whisper Integration
+hide_header: true
 wiki_id: omega-13
 page_id: transcription-service
 permalink: "/wikis/omega-13/08-transcription-service/"

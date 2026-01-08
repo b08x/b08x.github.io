@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Getting Started
+hide_header: true
 wiki_id: omega-13
 page_id: getting-started
 permalink: "/wikis/omega-13/02-getting-started/"

@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: CLI Reference
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: cli-reference
 permalink: "/wikis/video-chapter-automater/11-cli-reference/"
