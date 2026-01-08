@@ -38,6 +38,8 @@ const CanvasExporter = React.lazy(() => import('./components/CanvasExporter'));
 const CanvasMinimap = React.lazy(() => import('./components/CanvasMinimap'));
 const JsonCanvasViewer = React.lazy(() => import('./components/JsonCanvasViewer'));
 const ImageLightbox = React.lazy(() => import('./components/ImageLightbox'));
+const DashboardIsland = React.lazy(() => import('./components/DashboardIsland'));
+
 
 
 const components: Record<string, React.ComponentType<any>> = {
@@ -59,6 +61,7 @@ const components: Record<string, React.ComponentType<any>> = {
   CanvasMinimap,
   JsonCanvasViewer,
   ImageLightbox,
+  DashboardIsland,
 };
 
 // Helper to decode Base64 accurately with UTF-8 support
@@ -108,12 +111,23 @@ const mountIslands = () => {
 
     if (componentName && components[componentName]) {
       const Component = components[componentName];
-      let props = {};
+      let props: any = {};
 
+      // 1. Collect all data- attributes as props (e.g., data-title -> title)
+      Array.from(container.attributes).forEach(attr => {
+        if (attr.name.startsWith('data-') &&
+          !['data-island', 'data-props', 'data-mounted'].includes(attr.name)) {
+          const propKey = attr.name.slice(5).replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+          props[propKey] = attr.value;
+        }
+      });
+
+      // 2. Merge with data-props if present (takes precedence)
       try {
         const propsAttr = container.getAttribute('data-props');
         if (propsAttr) {
-          props = decodeProps(propsAttr);
+          const decoded = decodeProps(propsAttr);
+          props = { ...props, ...decoded };
         }
       } catch (e) {
         console.error(`[Garden] Failed to parse props for island ${componentName}:`, e);

@@ -292,6 +292,7 @@ nav .link:hover {
 
 #readme {
   width: 480px;
+  height: fit-content;
   padding: 36px;
   z-index: 80;
 }

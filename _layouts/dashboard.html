@@ -1,0 +1,40 @@
+---
+layout: base-shell
+---
+
+<div class="min-h-screen bg-gray-900 text-gray-100 font-sans">
+
+    <!-- Navigation is handled by base-shell or injected here -->
+    <!-- Assuming base-shell provides the outer wrapper, we focus on content -->
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- React Island Container -->
+        <!-- 'data-island' matches the key in src/main.tsx components object -->
+        <!-- 'data-title' and 'data-description' are passed as props -->
+        <div data-island="DashboardIsland" data-title="{{ page.title }}" data-description="{{ page.description }}"
+            class="animate-fade-in min-h-[500px]">
+
+            <!-- Loading Fallback (matches IDE aesthetic) -->
+            <div class="space-y-6">
+                <div class="h-16 border-b border-gray-800 bg-gray-900/50"></div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="h-24 bg-gray-900 border border-gray-800 animate-pulse"></div>
+                    <div class="h-24 bg-gray-900 border border-gray-800 animate-pulse"></div>
+                    <div class="h-24 bg-gray-900 border border-gray-800 animate-pulse"></div>
+                    <div class="h-24 bg-gray-900 border border-gray-800 animate-pulse"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-6 h-64">
+                    <div class="col-span-2 bg-gray-900 border border-gray-800 animate-pulse"></div>
+                    <div class="bg-gray-900 border border-gray-800 animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Static Content Injection -->
+        <div class="mt-12 prose prose-invert prose-code:font-mono max-w-none border-t border-gray-800 pt-8">
+            {{ content }}
+        </div>
+
+    </main>
+</div>

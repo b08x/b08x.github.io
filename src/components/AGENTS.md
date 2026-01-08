@@ -1,28 +1,39 @@
 # src/components/ - React Islands
 
-18 React components using island architecture for progressive enhancement. IDE/editor aesthetic with CSS variable theming.
+**Generated:** 2026-01-09
+**Commit:** 72ff106
+**Branch:** development
+
+## OVERVIEW
+
+21 React components (4,013 LOC) using island architecture for progressive enhancement. IDE/editor aesthetic with CSS variable theming. All components lazy-loaded via `React.lazy()` in `../main.tsx` registry. 5 components use MutationObserver for theme synchronization.
 
 ## STRUCTURE
 
 ```
 components/
-├── __tests__/              # Component tests (minimal)
+├── __tests__/              # Minimal test coverage (1 file)
 ├── VideoPlayer.tsx         # HLS video with segments/transcript (410 LOC)
 ├── KnowledgebaseCarousel.tsx # H2-based content carousel (498 LOC)
+├── JsonCanvasViewer.tsx    # Canvas file viewer with D3 zoom/pan (483 LOC)
 ├── MermaidViewer.tsx       # Interactive diagrams zoom/pan (280 LOC)
 ├── MermaidModal.tsx        # Fullscreen diagram modal (249 LOC)
-├── GraphView.tsx           # D3 force-directed graph (254 LOC)
-├── CodeBlock.tsx           # Syntax highlight + copy (224 LOC)
+├── GraphView.tsx           # D3 force-directed graph (312 LOC)
+├── CodeBlock.tsx           # Syntax highlight + copy (325 LOC)
 ├── NotesGrid.tsx           # Grid display with detail (221 LOC)
 ├── SearchCmdK.tsx          # Command palette search (153 LOC)
 ├── AudioPlayer.tsx         # Audio with waveform (144 LOC)
 ├── NotebookGuide.tsx       # Guide/tutorial (112 LOC)
-├── JsonCanvasViewer.tsx    # Canvas file viewer
-├── Canvas*.tsx             # Canvas system (Controls, Exporter, Minimap)
-├── OutputPanel.tsx         # Canvas output panel
-├── NodeEditor.tsx          # Canvas node editor
-├── ReactPlayerIsland.tsx   # react-player wrapper
-└── HelloGarden.tsx         # Demo component (13 LOC)
+├── CanvasMinimap.tsx       # Canvas minimap navigation (159 LOC)
+├── CanvasExporter.tsx      # Canvas export functionality (80 LOC)
+├── CanvasControls.tsx      # Canvas control panel (64 LOC)
+├── OutputPanel.tsx         # Canvas output panel (106 LOC)
+├── NodeEditor.tsx          # Canvas node editor (74 LOC)
+├── ReactPlayerIsland.tsx   # react-player wrapper (42 LOC)
+├── ImageLightbox.tsx       # React Photo View lightbox
+├── PhotoProviderWrapper.tsx # Photo View context provider
+├── HelloGarden.tsx         # Demo component (13 LOC)
+└── graph.worker.ts         # D3 force simulation web worker (76 LOC)
 ```
 
 ## WHERE TO LOOK
@@ -33,9 +44,10 @@ components/
 | Video playback | `VideoPlayer.tsx` | HLS via react-player |
 | Syntax highlighting | `CodeBlock.tsx` | react-syntax-highlighter |
 | Diagrams | `MermaidViewer.tsx` | Mermaid library + zoom/pan |
-| Graph visualization | `GraphView.tsx` | D3 force simulation (on canvas homepage) |
+| Graph visualization | `GraphView.tsx` | D3 force simulation (web worker) |
 | Search | `SearchCmdK.tsx` | Cmd/Ctrl+K trigger |
 | Canvas system | `JsonCanvasViewer.tsx` + `Canvas*.tsx` | react-jsoncanvas |
+| Lightbox | `ImageLightbox.tsx` + `PhotoProviderWrapper.tsx` | React Photo View |
 
 ## CONVENTIONS
 
@@ -50,9 +62,11 @@ const MyComponent: React.FC<Props> = ({ prop1, prop2 }) => {
 export default MyComponent;
 ```
 
-**Theme Sync:** Components must observe `class` changes on `<html>` element for dark/light mode.
+**Theme Sync:** 5 components use MutationObserver watching `document.documentElement.classList` for dark/light mode changes.
 
-**Props Interface:** Define `interface Props {}` at top of file. Support both JSON and Base64 `data-props`.
+**Props Interface:** Define `interface Props {}` at top of file. Support both JSON and Base64 `data-props` via `decodeProps()` in main.tsx.
+
+**Registration:** All components registered in `../main.tsx` components object for island hydration.
 
 ## ANTI-PATTERNS
 
@@ -60,13 +74,54 @@ export default MyComponent;
 - **NEVER** hardcode colors - use CSS variables (`--foreground`, `--accent`, etc.)
 - **NEVER** skip error boundaries in complex components
 - **AVOID** direct DOM manipulation outside useEffect
+- **AVOID** inline styles when Tailwind utilities exist
 
 ## DEPENDENCIES
 
-- `react`, `react-dom` (v19)
-- `d3` - GraphView
-- `mermaid` - MermaidViewer
-- `react-player` - VideoPlayer, ReactPlayerIsland
-- `react-syntax-highlighter` - CodeBlock
-- `react-jsoncanvas` - JsonCanvasViewer
-- `react-markdown`, `rehype-*`, `remark-*` - Markdown rendering
+| Dependency | Components | Purpose |
+|------------|------------|---------|
+| `d3` (v7.9.0) | GraphView, JsonCanvasViewer, MermaidViewer, MermaidModal, graph.worker.ts | Data visualization, zoom/pan, force simulation |
+| `mermaid` (v11.12.2) | MermaidViewer, MermaidModal | Interactive diagram rendering |
+| `react-player` | VideoPlayer, ReactPlayerIsland | Video playback |
+| `react-photo-view` | ImageLightbox, PhotoProviderWrapper | Gallery lightbox |
+| `react-syntax-highlighter` (v15.6.0) | CodeBlock, OutputPanel | Syntax highlighting |
+| `react-markdown` + plugins | JsonCanvasViewer | Markdown rendering |
+
+## UNIQUE STYLES
+
+**Island Architecture:**
+- Static HTML generated by Jekyll with `data-island` markers
+- Browser loads page with static content (instant, SEO-friendly)
+- `garden-widgets-v2.js` loads asynchronously
+- Component registry scans for `[data-island]` elements
+- React hydrates only marked elements
+
+**Auto-Enhancement:**
+- Rouge-generated code blocks → CodeBlock islands
+- Mermaid images → MermaidViewer islands
+- Picture tags → ImageLightbox islands
+
+**Theme Synchronization:**
+```typescript
+useEffect(() => {
+  const observer = new MutationObserver(() => {
+    setTheme(getTheme());
+  });
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+  return () => observer.disconnect();
+}, []);
+```
+
+## NOTES
+
+- **Total components:** 21 (20 .tsx + 1 .ts web worker)
+- **Total LOC:** 4,013 lines
+- **Test coverage:** Minimal (1 test file for KnowledgebaseCarousel)
+- **Recent additions:** ImageLightbox, PhotoProviderWrapper (React Photo View integration)
+- **Recent refactoring:** GraphView moved to canvas homepage as movable node
+- **Web worker:** graph.worker.ts handles D3 force simulation off main thread
+- **No subdirectories:** Flat structure, all components at root level
+- **Island registry:** 20 components registered in main.tsx components object

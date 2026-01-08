@@ -1,5 +1,5 @@
 ---
-layout: canvas-home
+layout: dashboard
 title: Home
 id: home
 permalink: /
