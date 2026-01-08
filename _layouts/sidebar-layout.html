@@ -82,7 +82,7 @@ layout: base-shell
     <!-- Main Content Column -->
     {% assign content_width = page.content_max_width %}
     {% if content_width == nil %}
-    {% if page.layout == 'wiki' or page.layout == 'wiki-page' %}
+    {% if page.layout == 'wiki-page' %}
     {% assign content_width = "max-w-none" %}
     {% elsif page.layout == 'note' %}
     {% if effective_left_sidebar or effective_right_sidebar %}
