@@ -5,18 +5,26 @@ wiki_page_generator:
   enabled: false
 exclude:
   - .gitignore
+  - .containerignore
+  - .rubocop.yml
+  - .rubocop_todo.yml
+  - .ruby-gemset
+  - .ruby-version
+  - AGENTS.md
+  - b08x.github.io.code-workspace
   - bin
+  - cliff.toml
+  - Containerfile
+  - docker-compose.yml
+  - Gemfile
+  - Gemfile.lock
+  - implement/
+  - LICENSE
+  - logs/
   - node_modules
   - package-lock.json
   - postcss.config.js
   - README.md
-  - b08x.github.io.code-workspace
-  - logs/
-  - Containerfile
-  - docker-compose.yml
-  - CLAUDE.md
-  - LICENSE
-  - implement/
   - refactor/
   - scripts/
 # You may need to change the base URL depending on your deploy configuration.
