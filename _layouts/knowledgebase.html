@@ -1,18 +1,20 @@
 ---
-layout: sidebar-layout
-left_sidebar: knowledgebase-toc
+layout: base-shell
 ---
 
-<!-- Hidden content for React to read -->
-<div id="kb-content-source" style="display: none;">{{ content }}</div>
+<div class="max-w-notebook mx-auto px-4 sm:px-6 lg:px-8 h-[calc(100vh-165px)] overflow-hidden flex flex-col pb-12">
+  <!-- Hidden content for React to read -->
+  <div id="kb-content-source" style="display: none;">{{ content }}</div>
 
-<!-- React Island: KnowledgebaseCarousel -->
-{% capture kb_props %}{"contentElementId":"kb-content-source"}{% endcapture %}
-<div data-island="KnowledgebaseCarousel" data-props='{{ kb_props | base64_encode }}' class="flex-grow flex flex-col">
-  <!-- Loading placeholder (replaced by React component) -->
-  <div class="flex-grow flex items-center justify-center">
-    <div class="bg-surface border border-border rounded-lg p-8 text-center">
-      <span class="text-muted font-mono text-sm">Loading knowledgebase...</span>
+  <!-- React Island: KnowledgebaseCarousel -->
+  {% capture kb_props %}{"contentElementId":"kb-content-source"}{% endcapture %}
+  <div data-island="KnowledgebaseCarousel" data-props='{{ kb_props | base64_encode }}'
+    class="flex-grow flex flex-col min-h-0">
+    <!-- Loading placeholder (replaced by React component) -->
+    <div class="flex-grow flex items-center justify-center">
+      <div class="bg-surface border border-border rounded-lg p-8 text-center">
+        <span class="text-muted font-mono text-sm">Loading knowledgebase...</span>
+      </div>
     </div>
   </div>
 </div>

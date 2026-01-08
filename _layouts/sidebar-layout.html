@@ -75,37 +75,6 @@ layout: base-shell
         {% include sidebar.html %}
         {% endif %}
 
-        {% if effective_left_sidebar == 'knowledgebase-toc' %}
-        <!-- Knowledgebase TOC -->
-        <h3 class="text-xs font-bold uppercase tracking-wider mb-6 text-foreground/80">
-          Knowledgebase
-        </h3>
-        <nav id="kb-toc" class="space-y-2">
-          <!-- Dynamically populated by JS -->
-        </nav>
-
-        {% if page.resources %}
-        <div class="mt-10 pt-10 border-t border-border">
-          <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
-            Resources
-          </h4>
-          <div class="space-y-4">
-            {% for item in page.resources %}
-            <div class="flex items-center gap-2 text-sm">
-              <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-              </svg>
-              <a href="{{ item.url }}" class="text-foreground/75 hover:text-accent transition-colors">
-                {{ item.title }}
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-        {% endif %}
-        {% endif %}
-
       </div>
     </aside>
     {% endif %}
