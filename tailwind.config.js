@@ -10,9 +10,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // ===================================
-      // TERMINAL AESTHETIC FOUNDATION
-      // ===================================
       fontFamily: {
         mono: ['var(--font-mono)', 'Courier New', 'Courier', 'monospace'],
         prose: ['var(--font-prose)', 'Hack', 'Consolas', 'monospace'],

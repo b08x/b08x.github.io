@@ -4,7 +4,7 @@ layout: base-shell
 
 {% assign container_width = page.container_max_width | default: "mx-auto" %}
 {% unless container_width contains 'max-w-' %}
-{% if page.layout == 'wiki' or page.layout == 'wiki-page' %}
+{% if page.layout == 'wiki' or page.layout == 'wiki-page' or page.layout == 'note' %}
 {% assign container_width = container_width | append: " max-w-notebook" %}
 {% elsif page.right_sidebar %}
 {% assign container_width = container_width | append: " max-w-notebook" %}
@@ -15,15 +15,30 @@ layout: base-shell
 
 <div class="{{ container_width }} px-4 sm:px-6 lg:px-8 py-10">
 
+  <!-- Determine effective sidebars -->
+  {% assign effective_left_sidebar = page.left_sidebar %}
+  {% if effective_left_sidebar == nil and page.layout == 'note' %}
+  {% assign effective_left_sidebar = 'navigation-sidebar' %}
+  {% endif %}
+  {% if page.hide_left_sidebar %}
+  {% assign effective_left_sidebar = nil %}
+  {% endif %}
+
+  {% assign effective_right_sidebar = page.right_sidebar %}
+  {% if effective_right_sidebar == nil and page.layout == 'note' %}
+  {% comment %} Notes without explicit right_sidebar don't get one by default besides TOC if specified in note-sidebar
+  {% endcomment %}
+  {% endif %}
+
   <!-- Responsive Grid Container -->
   <div class="flex flex-col lg:flex-row gap-8">
 
     <!-- Left Sidebar (Optional) -->
-    {% if page.left_sidebar %}
+    {% if effective_left_sidebar %}
     <aside id="left-sidebar" class="w-full lg:w-64 lg:flex-shrink-0" aria-label="Navigation sidebar">
       <div class="lg:sticky lg:top-8 lg:self-start">
 
-        {% if page.left_sidebar == 'wiki-nav' %}
+        {% if effective_left_sidebar == 'wiki-nav' %}
         <!-- Wiki Navigation Pattern -->
         <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
           Wiki Pages
@@ -52,7 +67,7 @@ layout: base-shell
         </div>
         {% endif %}
 
-        {% if page.left_sidebar == 'navigation-sidebar' %}
+        {% if effective_left_sidebar == 'navigation-sidebar' %}
         <!-- Standard Navigation Sidebar -->
         <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
           Navigation
@@ -60,43 +75,25 @@ layout: base-shell
         {% include sidebar.html %}
         {% endif %}
 
-        {% if page.left_sidebar == 'knowledgebase-toc' %}
-        <!-- Knowledgebase TOC -->
-        <h3 class="text-xs font-bold uppercase tracking-wider mb-6 text-foreground/80">
-          Knowledgebase
-        </h3>
-        <nav id="kb-toc" class="space-y-2">
-          <!-- Dynamically populated by JS -->
-        </nav>
-
-        {% if page.resources %}
-        <div class="mt-10 pt-10 border-t border-border">
-          <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
-            Resources
-          </h4>
-          <div class="space-y-4">
-            {% for item in page.resources %}
-            <div class="flex items-center gap-2 text-sm">
-              <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-              </svg>
-              <a href="{{ item.url }}" class="text-foreground/75 hover:text-accent transition-colors">
-                {{ item.title }}
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-        {% endif %}
-        {% endif %}
-
       </div>
     </aside>
     {% endif %}
 
     <!-- Main Content Column -->
-    {% assign content_width = page.content_max_width | default: "max-w-content" %}
+    {% assign content_width = page.content_max_width %}
+    {% if content_width == nil %}
+    {% if page.layout == 'wiki-page' %}
+    {% assign content_width = "max-w-none" %}
+    {% elsif page.layout == 'note' %}
+    {% if effective_left_sidebar or effective_right_sidebar %}
+    {% assign content_width = "max-w-content" %}
+    {% else %}
+    {% assign content_width = "max-w-none" %}
+    {% endif %}
+    {% else %}
+    {% assign content_width = "max-w-content" %}
+    {% endif %}
+    {% endif %}
     <main id="main-content-column" class="flex-1 min-w-0 {{ content_width }}" aria-label="Main content">
 
       <!-- Page Header -->
@@ -152,13 +149,13 @@ layout: base-shell
     </main>
 
     <!-- Right Sidebar (Optional) -->
-    {% if page.right_sidebar %}
+    {% if effective_right_sidebar %}
     <aside id="right-sidebar"
       class="w-full lg:w-80 lg:flex-shrink-0 {% if page.right_sidebar_xl_only %}hidden xl:block{% endif %}"
       aria-label="Table of contents and related content">
       <div class="lg:sticky lg:top-8 lg:self-start space-y-10">
 
-        {% if page.right_sidebar contains 'toc' %}
+        {% if effective_right_sidebar contains 'toc' %}
         <!-- Table of Contents -->
         <div>
           <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">

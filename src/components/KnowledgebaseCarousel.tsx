@@ -401,8 +401,8 @@ const KnowledgebaseCarousel: React.FC<KnowledgebaseCarouselProps> = ({
           {slides.map((slide, index) => (
             <div
               key={slide.id}
-              ref={el => slideRefs.current[index] = el}
-              className="w-full flex-shrink-0 px-4 overflow-y-auto"
+              ref={el => { slideRefs.current[index] = el; }}
+              className="w-full flex-shrink-0 px-4 overflow-y-auto py-10"
               role="listitem"
               aria-label={`Section ${index + 1}: ${slide.title}`}
               aria-hidden={index !== currentSlide}
@@ -417,7 +417,7 @@ const KnowledgebaseCarousel: React.FC<KnowledgebaseCarouselProps> = ({
 
       {/* Navigation controls */}
       <nav
-        className="flex items-center justify-between mt-auto pt-8 border-t border-border bg-background z-10"
+        className="flex items-center justify-between mt-auto pt-8 pb-4 border-t border-border bg-background z-10"
         aria-label="Carousel navigation"
       >
         {/* Previous button */}
@@ -451,11 +451,10 @@ const KnowledgebaseCarousel: React.FC<KnowledgebaseCarouselProps> = ({
               key={slide.id}
               onClick={() => goToSlide(index)}
               disabled={isTransitioning}
-              className={`rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-accent ${
-                index === currentSlide
-                  ? 'bg-accent w-8 h-2'
-                  : 'bg-muted hover:bg-accent/50 w-2 h-2'
-              }`}
+              className={`rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-accent ${index === currentSlide
+                ? 'bg-accent w-8 h-2'
+                : 'bg-muted hover:bg-accent/50 w-2 h-2'
+                }`}
               aria-label={`Go to section ${index + 1}: ${slide.title}`}
               aria-current={index === currentSlide ? 'true' : 'false'}
               title={slide.title}
@@ -486,7 +485,7 @@ const KnowledgebaseCarousel: React.FC<KnowledgebaseCarouselProps> = ({
 
       {/* Progress indicator */}
       <div
-        className="text-center text-xs font-mono text-muted mt-4"
+        className="text-center text-xs font-mono text-muted mt-4 mb-4"
         aria-live="polite"
       >
         Section {currentSlide + 1} of {slides.length}

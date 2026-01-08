@@ -1,203 +1,202 @@
 ---
-layout: sidebar-layout
-left_sidebar: wiki-nav
-right_sidebar: toc
-show_graph: false
+layout: base-shell
 ---
 
+<div class="max-w-notebook mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
 
-{% comment %}
-Wiki Index Layout
-Displays paginated wiki index pages with terminal aesthetic.
-Expects front-matter with pagination metadata and pages array.
-{% endcomment %}
 
-<div class="wiki-index-container">
+  {% comment %}
+  Wiki Index Layout
+  Displays paginated wiki index pages with aesthetic.
+  Expects front-matter with pagination metadata and pages array.
+  {% endcomment %}
 
-  <!-- Wiki Header -->
-  <header class="mb-12">
-    {% assign wiki_data = site.data.wikis[page.wiki_id] %}
+  <div class="wiki-index-container">
 
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-      <div>
-        <h1 class="text-3xl md:text-4xl font-prose font-bold text-foreground mb-2">
-          {{ page.title }}
-        </h1>
-        <p class="text-sm font-mono text-foreground/75">
-          A comprehensive knowledge base for {{ page.wiki_id | replace: "-", " " | capitalize }}
-        </p>
+    <!-- Wiki Header -->
+    <header class="mb-12">
+      {% assign wiki_data = site.data.wikis[page.wiki_id] %}
+
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <div>
+          <h1 class="text-3xl md:text-4xl font-prose font-bold text-foreground mb-2">
+            {{ page.title }}
+          </h1>
+          <p class="text-sm font-mono text-foreground/75">
+            A comprehensive knowledge base for {{ page.wiki_id | replace: "-", " " | capitalize }}
+          </p>
+        </div>
+
+        {% if page.repository %}
+        <div class="flex items-center gap-2">
+          <a href="{{ page.repository }}" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-4 py-2 border border-border bg-surface rounded text-sm font-mono hover:border-accent hover:text-accent transition-colors">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                clip-rule="evenodd" />
+            </svg>
+            <span>View Repository</span>
+          </a>
+        </div>
+        {% endif %}
       </div>
 
-      {% if page.repository %}
-      <div class="flex items-center gap-2">
-        <a href="{{ page.repository }}" target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 border border-border bg-surface rounded text-sm font-mono hover:border-accent hover:text-accent transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill-rule="evenodd"
-              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-              clip-rule="evenodd" />
-          </svg>
-          <span>View Repository</span>
-        </a>
+      <!-- Metadata Bar -->
+      <div class="flex flex-wrap gap-4 text-xs font-mono text-foreground/70 border-t border-b border-border py-3">
+        <span>
+          <span class="opacity-70">Total Pages:</span>
+          <span class="text-foreground font-semibold">{{ page.total_wiki_pages | default: wiki_data.metadata.page_count
+            }}</span>
+        </span>
+
+        {% if page.pagination.enabled %}
+        <span>
+          <span class="opacity-70">Showing:</span>
+          <span class="text-foreground font-semibold">{{ page.pages.size }} on this page</span>
+        </span>
+        {% endif %}
+
+        {% if wiki_data.metadata.generated_at %}
+        <span>
+          <span class="opacity-70">Generated:</span>
+          <span class="text-foreground">{{ wiki_data.metadata.generated_at | date: "%Y-%m-%d %H:%M" }}</span>
+        </span>
+        {% endif %}
       </div>
-      {% endif %}
-    </div>
+    </header>
 
-    <!-- Metadata Bar -->
-    <div class="flex flex-wrap gap-4 text-xs font-mono text-foreground/70 border-t border-b border-border py-3">
-      <span>
-        <span class="opacity-70">Total Pages:</span>
-        <span class="text-foreground font-semibold">{{ page.total_wiki_pages | default: wiki_data.metadata.page_count
-          }}</span>
-      </span>
+    <!-- Wiki Pages Grid -->
+    <section class="wiki-pages-grid mb-12" aria-label="Wiki pages list">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {% for wiki_page in page.pages %}
+        <article class="wiki-page-card group">
+          <a href="{{ wiki_page.url | default: '/wikis/' }}"
+            class="block h-full p-5 border border-border bg-surface rounded hover:border-accent hover:shadow-lg transition-all duration-200">
 
-      {% if page.pagination.enabled %}
-      <span>
-        <span class="opacity-70">Showing:</span>
-        <span class="text-foreground font-semibold">{{ page.pages.size }} on this page</span>
-      </span>
-      {% endif %}
+            <!-- Card Header -->
+            <header class="mb-3">
+              <h2
+                class="text-base font-prose font-semibold text-foreground group-hover:text-accent transition-colors line-clamp-2 mb-2">
+                {% if wiki_page.number %}{{ wiki_page.number }}-{% endif %}{{ wiki_page.slug }}
+              </h2>
 
-      {% if wiki_data.metadata.generated_at %}
-      <span>
-        <span class="opacity-70">Generated:</span>
-        <span class="text-foreground">{{ wiki_data.metadata.generated_at | date: "%Y-%m-%d %H:%M" }}</span>
-      </span>
-      {% endif %}
-    </div>
-  </header>
-
-  <!-- Wiki Pages Grid -->
-  <section class="wiki-pages-grid mb-12" aria-label="Wiki pages list">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {% for wiki_page in page.pages %}
-      <article class="wiki-page-card group">
-        <a href="{{ wiki_page.url | default: '/wikis/' }}"
-          class="block h-full p-5 border border-border bg-surface rounded hover:border-accent hover:shadow-lg transition-all duration-200">
-
-          <!-- Card Header -->
-          <header class="mb-3">
-            <h2
-              class="text-base font-prose font-semibold text-foreground group-hover:text-accent transition-colors line-clamp-2 mb-2">
-              {% if wiki_page.number %}{{ wiki_page.number }}-{% endif %}{{ wiki_page.slug }}
-            </h2>
-
-            {% if wiki_page.importance %}
-            <div class="flex items-center gap-2">
-              <span class="inline-flex items-center px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded
+              {% if wiki_page.importance %}
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded
                 {% if wiki_page.importance == 'high' %}bg-accent/20 text-accent border border-accent/40{% endif %}
                 {% if wiki_page.importance == 'medium' %}bg-foreground/20 text-foreground/90 border border-border{% endif %}
                 {% if wiki_page.importance == 'low' %}bg-border/30 text-foreground/70 border border-border{% endif %}">
-                {{ wiki_page.importance }}
-              </span>
-            </div>
+                  {{ wiki_page.importance }}
+                </span>
+              </div>
+              {% endif %}
+            </header>
+
+            <!-- Card Body -->
+            {% if wiki_page.excerpt %}
+            <p
+              class="text-sm text-foreground/75 line-clamp-3 mb-3 font-prose leading-relaxed group-hover:text-foreground/90 transition-colors">
+              {{ wiki_page.excerpt | strip_html | truncate: 120 }}
+            </p>
             {% endif %}
-          </header>
 
-          <!-- Card Body -->
-          {% if wiki_page.excerpt %}
-          <p
-            class="text-sm text-foreground/75 line-clamp-3 mb-3 font-prose leading-relaxed group-hover:text-foreground/90 transition-colors">
-            {{ wiki_page.excerpt | strip_html | truncate: 120 }}
-          </p>
+            <!-- Card Footer -->
+            <footer class="mt-auto pt-3 border-t border-border/50">
+              <div
+                class="flex items-center gap-1 text-xs font-mono text-foreground/60 group-hover:text-accent transition-colors">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+                <span>Read more</span>
+              </div>
+            </footer>
+          </a>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Pagination Controls -->
+    {% if page.pagination.enabled and page.pagination.total_pages > 1 %}
+    <nav class="pagination-controls" aria-label="Wiki page navigation">
+      <div
+        class="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 border border-border bg-surface rounded">
+
+        <!-- Previous Button -->
+        <div class="w-full sm:w-auto">
+          {% if page.pagination.has_previous %}
+          <a href="{{ page.pagination.previous_page_url }}"
+            class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 border border-border bg-background rounded font-mono text-sm hover:border-accent hover:text-accent transition-colors"
+            rel="prev">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Previous</span>
+          </a>
+          {% else %}
+          <span
+            class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 border border-border/30 bg-background/50 rounded font-mono text-sm text-foreground/30 cursor-not-allowed">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Previous</span>
+          </span>
           {% endif %}
+        </div>
 
-          <!-- Card Footer -->
-          <footer class="mt-auto pt-3 border-t border-border/50">
-            <div
-              class="flex items-center gap-1 text-xs font-mono text-foreground/60 group-hover:text-accent transition-colors">
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-              <span>Read more</span>
-            </div>
-          </footer>
-        </a>
-      </article>
-      {% endfor %}
-    </div>
-  </section>
+        <!-- Page Indicator -->
+        <div class="flex items-center gap-2 text-sm font-mono">
+          <span class="text-foreground/70">Page</span>
+          <span class="px-3 py-1 border border-accent bg-accent/10 text-accent rounded font-semibold">
+            {{ page.pagination.current_page }}
+          </span>
+          <span class="text-foreground/70">of</span>
+          <span class="px-3 py-1 border border-border bg-background text-foreground rounded">
+            {{ page.pagination.total_pages }}
+          </span>
+        </div>
 
-  <!-- Pagination Controls -->
-  {% if page.pagination.enabled and page.pagination.total_pages > 1 %}
-  <nav class="pagination-controls" aria-label="Wiki page navigation">
-    <div
-      class="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 border border-border bg-surface rounded">
-
-      <!-- Previous Button -->
-      <div class="w-full sm:w-auto">
-        {% if page.pagination.has_previous %}
-        <a href="{{ page.pagination.previous_page_url }}"
-          class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 border border-border bg-background rounded font-mono text-sm hover:border-accent hover:text-accent transition-colors"
-          rel="prev">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          <span>Previous</span>
-        </a>
-        {% else %}
-        <span
-          class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 border border-border/30 bg-background/50 rounded font-mono text-sm text-foreground/30 cursor-not-allowed">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          <span>Previous</span>
-        </span>
-        {% endif %}
+        <!-- Next Button -->
+        <div class="w-full sm:w-auto">
+          {% if page.pagination.has_next %}
+          <a href="{{ page.pagination.next_page_url }}"
+            class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 border border-border bg-background rounded font-mono text-sm hover:border-accent hover:text-accent transition-colors"
+            rel="next">
+            <span>Next</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+          {% else %}
+          <span
+            class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 border border-border/30 bg-background/50 rounded font-mono text-sm text-foreground/30 cursor-not-allowed">
+            <span>Next</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+          {% endif %}
+        </div>
       </div>
+    </nav>
+    {% endif %}
 
-      <!-- Page Indicator -->
-      <div class="flex items-center gap-2 text-sm font-mono">
-        <span class="text-foreground/70">Page</span>
-        <span class="px-3 py-1 border border-accent bg-accent/10 text-accent rounded font-semibold">
-          {{ page.pagination.current_page }}
-        </span>
-        <span class="text-foreground/70">of</span>
-        <span class="px-3 py-1 border border-border bg-background text-foreground rounded">
-          {{ page.pagination.total_pages }}
-        </span>
-      </div>
+    <!-- Back to Home Link -->
+    <footer class="mt-12 pt-6 border-t border-border text-center">
+      <a href="{{ site.baseurl }}/"
+        class="inline-flex items-center gap-2 text-sm font-mono text-foreground/70 hover:text-accent transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>Back to Garden</span>
+      </a>
+    </footer>
 
-      <!-- Next Button -->
-      <div class="w-full sm:w-auto">
-        {% if page.pagination.has_next %}
-        <a href="{{ page.pagination.next_page_url }}"
-          class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 border border-border bg-background rounded font-mono text-sm hover:border-accent hover:text-accent transition-colors"
-          rel="next">
-          <span>Next</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </a>
-        {% else %}
-        <span
-          class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-4 py-2 border border-border/30 bg-background/50 rounded font-mono text-sm text-foreground/30 cursor-not-allowed">
-          <span>Next</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </span>
-        {% endif %}
-      </div>
-    </div>
-  </nav>
-  {% endif %}
-
-  <!-- Back to Home Link -->
-  <footer class="mt-12 pt-6 border-t border-border text-center">
-    <a href="{{ site.baseurl }}/"
-      class="inline-flex items-center gap-2 text-sm font-mono text-foreground/70 hover:text-accent transition-colors">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-      </svg>
-      <span>Back to Garden</span>
-    </a>
-  </footer>
-
+  </div>
 </div>
 
-<!-- Terminal Aesthetic Styling -->
 <style>
   /* Line clamp utilities for truncating text */
   .line-clamp-2 {

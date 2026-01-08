@@ -8,6 +8,7 @@ tags:
   - nlp
   - linguistic-analysis
 last updated: Sunday, January 4th 2026, 10:57:52 am
+layout: note
 ---
 
 > [!question] statement  
