@@ -1,10 +1,9 @@
 ---
-layout: page
+layout: page-sidebar
 permalink: /projects/omega-13
 title: Omega 13
+right_sidebar: toc
 ---
-
-## Omega 13
 
 ## About This Project
 

@@ -2,6 +2,7 @@
 layout: note
 title: "Test Note Layout"
 last_modified_at: 2025-12-26
+picture: logo001.jpg
 ---
 
 # Centered Note Test
@@ -20,4 +21,14 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 console.log("This should also be centered");
 ```
 
-<iframe src="https://claude.site/public/artifacts/b7c3a31f-3c7b-4ac7-9953-ccbc1a1bb668/embed" title="Claude Artifact" width="100%" height="600" frameborder="0" allow="clipboard-write" allowfullscreen></iframe>
+
+---
+
+
+<a href="{{ site.url }}/assets/img/logo001.jpg" data-lightbox="gallery-name">
+  {% picture jpt-webp logo001.jpg %}
+</a>
+
+---
+
+{% picture jpt-webp logo001.jpg %}
