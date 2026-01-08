@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Audio Engine & Ring Buffers
+hide_header: true
 wiki_id: omega-13
 page_id: audio-engine-design
 permalink: "/wikis/omega-13/04-audio-engine-design/"

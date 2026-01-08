@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Session Management & Data Flow
+hide_header: true
 wiki_id: omega-13
 page_id: session-management
 permalink: "/wikis/omega-13/10-session-management/"

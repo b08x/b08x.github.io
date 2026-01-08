@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Whisper Server Deployment
+hide_header: true
 wiki_id: omega-13
 page_id: whisper-server-deployment
 permalink: "/wikis/omega-13/12-whisper-server-deployment/"

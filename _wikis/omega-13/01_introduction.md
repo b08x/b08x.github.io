@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Introduction to Omega-13
+hide_header: true
 wiki_id: omega-13
 page_id: introduction
 permalink: "/wikis/omega-13/01-introduction/"

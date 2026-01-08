@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Voice-Activated Auto-Record (VAD)
+hide_header: true
 wiki_id: omega-13
 page_id: voice-activity-detection
 permalink: "/wikis/omega-13/07-voice-activity-detection/"

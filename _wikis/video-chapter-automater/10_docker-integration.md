@@ -1,6 +1,7 @@
 ---
 layout: wiki-page
 title: Docker Deployment
+hide_header: true
 wiki_id: video-chapter-automater
 page_id: docker-integration
 permalink: "/wikis/video-chapter-automater/10-docker-integration/"

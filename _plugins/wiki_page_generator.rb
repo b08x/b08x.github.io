@@ -168,6 +168,7 @@ module Jekyll
       front_matter = {
         'layout' => 'wiki-page',
         'title' => title,
+        'hide_header' => true,
         'wiki_id' => wiki_id,
         'page_id' => page_data['id'],
         'permalink' => permalink,
