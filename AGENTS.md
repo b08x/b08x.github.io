@@ -1,8 +1,8 @@
 # PROJECT KNOWLEDGE BASE
 
 **Generated:** 2026-01-08
-**Commit:** 9132597
-**Branch:** development
+**Commit:** 0b3ea67
+**Branch:** main
 
 ## OVERVIEW
 
@@ -12,17 +12,24 @@ Jekyll static site with React island architecture for interactive components. Di
 
 ```
 ./
-├── src/components/     # React islands (18 components) - see src/components/AGENTS.md
+├── src/
+│   ├── components/     # React islands (18 components) - see src/components/AGENTS.md
+│   ├── utils/          # Theme sync utilities - see src/utils/AGENTS.md
+│   └── main.tsx        # Island hydration entry point
 ├── _plugins/           # Custom Jekyll plugins (11) - see _plugins/AGENTS.md
 ├── _layouts/           # Jekyll templates (17 layouts) - see _layouts/AGENTS.md
 ├── _includes/          # Reusable partials (14 files) - see _includes/AGENTS.md
+├── _sass/              # SCSS theme system - see _sass/AGENTS.md
+├── assets/
+│   ├── js/             # Vanilla JS + React bundle - see assets/js/AGENTS.md
+│   ├── css/            # Compiled CSS + components - see assets/css/AGENTS.md
+│   ├── fonts/          # Self-hosted fonts (JetBrains Mono, Inter, Hack)
+│   └── [audio, videos, img]/
 ├── _notes/             # Digital garden markdown content
 ├── _wikis/             # Generated wiki pages (from _data/wikis/*.json)
 ├── _data/wikis/        # Wiki source JSON files
 ├── _pages/             # Static pages (about, index, projects)
-├── _sass/              # SCSS partials
-├── assets/             # Static assets (js/dist, css, fonts, img)
-└── src/main.tsx        # Island hydration entry point
+└── _projects/          # Project collection
 ```
 
 ## WHERE TO LOOK
@@ -132,9 +139,11 @@ npm run build:jekyll           # jekyll clean && jekyll build
 
 ## NOTES
 
+- **Project Scale**: 239 files, 554k LOC (62 files >500 lines)
 - **wiki_page_generator disabled** in `_config.yml` (`wiki_page_generator.enabled: false`) - set to `true` to regenerate wiki pages
-- **Large compiled CSS** - `assets/css/compiled.css` inflates line counts; actual code ~5k lines
+- **Large compiled CSS** - `assets/css/compiled.css` inflates line counts; actual code ~1k lines
 - **React 19** - Uses `createRoot` API, lazy loading with Suspense
 - **Minimal tests** - Only KnowledgebaseCarousel has tests (360 lines); other 17 components lack coverage
 - **Graph web worker** - `src/components/graph.worker.ts` handles force simulation off main thread
+- **Build Pipeline**: Parallel esbuild (React + worker) + Jekyll (Ruby plugins + SCSS)
 
