@@ -70,6 +70,12 @@ sass:
   sass_dir: _sass
   style: compressed
 
+picture:
+  source: "assets/img"
+  output: "assets/img/generated"
+  suppress_warnings: true
+  nomarkdown: false
+
 collections:
   notes:
     output: true
