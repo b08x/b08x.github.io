@@ -6,7 +6,15 @@ import { createRoot } from 'react-dom/client';
 declare global {
   interface Window {
     mountIslands: () => void;
-    canvasAPI?: any;
+    canvasAPI?: {
+      getScale: () => number;
+      getPanOffset: () => { x: number; y: number; };
+      getCanvasData: () => any;
+      zoomIn: () => void;
+      zoomOut: () => void;
+      resetView: () => void;
+      updateCanvas: (data: any) => void;
+    };
   }
 }
 
@@ -89,7 +97,7 @@ const encodeProps = (props: any): string => {
 };
 
 const mountIslands = () => {
-  const islands = document.querySelectorAll('[data-island]:not([data-mounted="true"])');
+  const islands = document.querySelectorAll('[data-island]:not([data-mounted="true"]):not([data-island="ImageLightbox"])');
   if (islands.length > 0) {
     console.log(`[Garden] Found ${islands.length} new islands to mount`);
   }
@@ -133,6 +141,50 @@ const mountIslands = () => {
 
 window.mountIslands = mountIslands;
 
+const mountPhotoProvider = () => {
+  const islands = document.querySelectorAll('[data-island="ImageLightbox"]');
+  if (islands.length === 0) return;
+
+  // Check if we already have a provider root
+  let providerRoot = document.getElementById('photo-provider-root');
+  if (providerRoot) return; // Already mounted
+
+  import('./components/PhotoProviderWrapper').then(({ PhotoProviderWrapper }) => {
+    providerRoot = document.createElement('div');
+    providerRoot.id = 'photo-provider-root';
+    document.body.appendChild(providerRoot);
+
+    const root = createRoot(providerRoot);
+
+    // Group islands by gallery for potential future needs, but for now just mount them all
+    // into the PhotoProvider context. They will be portaled back to their original nodes.
+    root.render(
+      <Suspense fallback={null}>
+        <PhotoProviderWrapper>
+          {Array.from(islands).map((island, idx) => {
+            const propsAttr = island.getAttribute('data-props');
+            let props = {};
+            try {
+              if (propsAttr) props = decodeProps(propsAttr);
+            } catch (e) {
+              console.error('Failed to parse ImageLightbox props:', e);
+            }
+
+            return (
+              <ImageLightbox
+                key={idx}
+                {...(props as any)}
+                container={island as HTMLElement}
+              />
+            );
+          })}
+        </PhotoProviderWrapper>
+      </Suspense>
+    );
+
+    islands.forEach(island => island.setAttribute('data-mounted', 'true'));
+  });
+};
 
 const enhanceMermaidDiagrams = () => {
   // Find static mermaid diagrams rendered by jekyll-spaceship (as img tags)
@@ -203,7 +255,18 @@ const enhancePictureElements = () => {
       const img = picture.querySelector('img');
       if (!img) return;
 
-      const fullSrc = img.src.replace(/-\d+(-[a-f0-9]+)?\.(jpg|png|webp)$/i, '.$2');
+      const sources = picture.querySelectorAll('source');
+      let fullSrc = img.src;
+
+      if (sources.length > 0) {
+        const lastSource = sources[sources.length - 1];
+        const srcset = lastSource.getAttribute('srcset');
+        if (srcset) {
+          const urls = srcset.split(',').map(s => s.trim().split(' ')[0]);
+          fullSrc = urls[urls.length - 1];
+        }
+      }
+
       const gallery = picture.getAttribute('data-gallery') || 'default';
 
       const island = document.createElement('div');
@@ -224,7 +287,7 @@ const enhancePictureElements = () => {
     }
   });
 
-  mountIslands();
+  mountPhotoProvider();
 };
 
 const enhanceCodeBlocks = () => {

@@ -1,0 +1,88 @@
+/* React Photo View Custom Overrides */
+
+/* Ensure modal portal is on top of everything */
+.PhotoView-Portal {
+  z-index: 9999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Photo slider container */
+.PhotoView-Slider {
+  background: transparent !important;
+}
+
+.photo-view-dark .PhotoView-Slider {
+  background: #1a1a1a !important;
+}
+
+.photo-view-light .PhotoView-Slider {
+  background: white !important;
+}
+
+/* Navigation arrows - theme-aware */
+.PhotoView-Slider__ArrowLeft,
+.PhotoView-Slider__ArrowRight {
+  color: var(--foreground) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  transition: all 0.2s ease !important;
+}
+
+.PhotoView-Slider__ArrowLeft:hover,
+.PhotoView-Slider__ArrowRight:hover {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: white !important;
+}
+
+/* Close button */
+.PhotoView-Slider__BannerWrap {
+  background: transparent !important;
+}
+
+.PhotoView-Slider__BannerWrap button {
+  color: var(--foreground) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0.375rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.PhotoView-Slider__BannerWrap button:hover {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: white !important;
+}
+
+/* Counter text */
+.PhotoView-Slider__Counter {
+  color: var(--foreground) !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0.375rem !important;
+  font-family: var(--font-mono) !important;
+  padding: 0.25rem 0.75rem !important;
+}
+
+/* Backdrop */
+.PhotoView-Slider__Backdrop {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Dark mode adjustments */
+.dark .PhotoView-Slider__Backdrop {
+  background: rgba(0, 0, 0, 0.95) !important;
+}
+
+/* Ensure images are centered and visible */
+.PhotoView__Photo {
+  max-width: 90vw !important;
+  max-height: 90vh !important;
+  object-fit: contain !important;
+}

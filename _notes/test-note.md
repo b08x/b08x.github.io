@@ -2,7 +2,6 @@
 layout: note
 title: "Test Note Layout"
 last_modified_at: 2025-12-26
-picture: logo001.jpg
 ---
 
 # Centered Note Test
@@ -17,12 +16,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-```javascript
-console.log("This should also be centered");
-```
-
-
----
 
 ## React Photo View Lightbox
 
