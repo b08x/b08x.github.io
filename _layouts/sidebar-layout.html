@@ -96,7 +96,14 @@ layout: base-shell
     {% endif %}
 
     <!-- Main Content Column -->
-    {% assign content_width = page.content_max_width | default: "max-w-content" %}
+    {% assign content_width = page.content_max_width %}
+    {% if content_width == nil %}
+    {% if page.layout == 'wiki' or page.layout == 'wiki-page' %}
+    {% assign content_width = "max-w-none" %}
+    {% else %}
+    {% assign content_width = "max-w-content" %}
+    {% endif %}
+    {% endif %}
     <main id="main-content-column" class="flex-1 min-w-0 {{ content_width }}" aria-label="Main content">
 
       <!-- Page Header -->
