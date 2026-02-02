@@ -1,5 +1,5 @@
 ---
-layout: dashboard
+layout: home
 title: Home
 id: home
 permalink: /
