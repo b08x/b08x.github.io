@@ -85,6 +85,7 @@ module.exports = {
         // Tier 2: Standard Content Layouts (2-column, single-column)
         'content-2col': '1280px',       // 2-column layouts (wiki on desktop, page-sidebar)
         'content': '896px',             // Standard content width (terminal-note, page)
+        'content': '1120px',       // Wider content for 2-column layouts
 
         // Tier 3: Compact Content Layouts
         'compact': '768px',             // Mobile-first narrow content

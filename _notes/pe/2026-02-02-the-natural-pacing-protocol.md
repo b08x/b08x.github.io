@@ -15,7 +15,9 @@ layout: note
 
 # SFL-Structured Prompt for Natural Pacing Protocol
 
-Interpersonal Scaffolding is essentially "relational noise" that obscures data. While derived from psychological theories intended to build trust by making AI seem empathetic, in technical contexts, it becomes a hindrance.
+
+In the current landscape of large language models, we are facing a profound communicative paradox. While these systems possess unprecedented technical power, they frequently operate as "conversational chameleons." Instead of adhering to rigid, low-noise technical instructions, they reflexively adapt their register to satisfy perceived social norms, prioritizing relational warmth over semantic fidelity.
+
 
 ## Prompt Text
 
