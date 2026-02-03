@@ -4,7 +4,9 @@ layout: base-shell
 
 {% assign container_width = page.container_max_width | default: "mx-auto" %}
 {% unless container_width contains 'max-w-' %}
-{% if page.layout == 'wiki' or page.layout == 'wiki-page' or page.layout == 'note' or page.layout == 'page' %}
+{% if page.layout == 'note' %}
+{% assign container_width = container_width | append: " max-w-[1650px]" %}
+{% elsif page.layout == 'wiki' or page.layout == 'wiki-page' or page.layout == 'page' %}
 {% assign container_width = container_width | append: " max-w-notebook" %}
 {% elsif page.right_sidebar %}
 {% assign container_width = container_width | append: " max-w-notebook" %}
@@ -18,7 +20,7 @@ layout: base-shell
   <!-- Determine effective sidebars -->
   {% assign effective_left_sidebar = page.left_sidebar %}
   {% if effective_left_sidebar == nil and page.layout == 'note' %}
-  {% assign effective_left_sidebar = 'navigation-sidebar' %}
+  {% assign effective_left_sidebar = 'toc' %}
   {% endif %}
   {% if page.hide_left_sidebar %}
   {% assign effective_left_sidebar = nil %}
@@ -26,7 +28,7 @@ layout: base-shell
 
   {% assign effective_right_sidebar = page.right_sidebar %}
   {% if effective_right_sidebar == nil %}
-  {% if page.layout == 'note' or page.layout == 'page' %}
+  {% if page.layout == 'page' %}
   {% assign effective_right_sidebar = 'toc' %}
   {% endif %}
   {% endif %}
@@ -74,6 +76,16 @@ layout: base-shell
           Navigation
         </h3>
         {% include sidebar.html %}
+        {% endif %}
+
+        {% if effective_left_sidebar == 'toc' %}
+        <!-- Table of Contents (Moved to Left) -->
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
+            Table of Contents
+          </h3>
+          <terminal-toc></terminal-toc>
+        </div>
         {% endif %}
 
       </div>
@@ -147,6 +159,18 @@ layout: base-shell
 
       <!-- GraphView moved to canvas homepage -->
 
+      {% if page.right_sidebar contains 'related' or page.layout == 'note' %}
+      <!-- Related Pages -->
+      <div class="mt-16 pt-8 border-t border-border">
+        <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
+          Related Notes
+        </h3>
+        <div class="space-y-2">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+      {% endif %}
+
     </main>
 
     <!-- Right Sidebar (Optional) -->
@@ -166,17 +190,7 @@ layout: base-shell
         </div>
         {% endif %}
 
-        {% if page.right_sidebar contains 'related' %}
-        <!-- Related Pages -->
-        <div>
-          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 text-foreground/80">
-            Related Notes
-          </h3>
-          <div class="space-y-2">
-            <!-- Dynamically populated -->
-          </div>
-        </div>
-        {% endif %}
+
 
         {% if page.right_sidebar contains 'media' %}
         <!-- Media Widgets -->
