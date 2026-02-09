@@ -5,7 +5,7 @@ layout: base-shell
 {% assign container_width = page.container_max_width | default: "mx-auto" %}
 {% unless container_width contains 'max-w-' %}
 {% if page.layout == 'note' %}
-{% assign container_width = container_width | append: " max-w-[1550px]" %}
+{% assign container_width = container_width | append: " max-w-[1450px]" %}
 {% elsif page.layout == 'wiki' or page.layout == 'wiki-page' or page.layout == 'page' %}
 {% assign container_width = container_width | append: " max-w-notebook" %}
 {% elsif page.right_sidebar %}
@@ -99,7 +99,7 @@ layout: base-shell
     {% assign content_width = "max-w-none" %}
     {% elsif page.layout == 'note' or page.layout == 'page' %}
     {% if effective_left_sidebar or effective_right_sidebar %}
-    {% assign content_width = "max-w-5xl" %}
+    {% assign content_width = "max-w-4xl" %}
     {% else %}
     {% assign content_width = "max-w-none" %}
     {% endif %}

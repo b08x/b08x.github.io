@@ -4,7 +4,7 @@ Dual-build CSS system combining Jekyll SCSS processing with Tailwind CSS 4.x uti
 
 ## STRUCTURE
 
-```
+```shell
 assets/css/
 ├── tailwind.css               # Tailwind entry point with @layer imports (26 LOC)
 ├── compiled.css                # Compiled Tailwind output (92KB, minified)
