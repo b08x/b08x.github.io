@@ -39,6 +39,7 @@ const CanvasMinimap = React.lazy(() => import('./components/CanvasMinimap'));
 const JsonCanvasViewer = React.lazy(() => import('./components/JsonCanvasViewer'));
 const ImageLightbox = React.lazy(() => import('./components/ImageLightbox'));
 const DashboardIsland = React.lazy(() => import('./components/DashboardIsland'));
+const PromptFlowDiagram = React.lazy(() => import('./components/PromptFlowDiagram'));
 
 
 
@@ -62,6 +63,7 @@ const components: Record<string, React.ComponentType<any>> = {
   JsonCanvasViewer,
   ImageLightbox,
   DashboardIsland,
+  PromptFlowDiagram,
 };
 
 // Helper to decode Base64 accurately with UTF-8 support
