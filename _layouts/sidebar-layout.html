@@ -33,13 +33,13 @@ layout: base-shell
   {% endif %}
   {% endif %}
 
-  <!-- Responsive Grid Container -->
-  <div class="flex flex-col lg:flex-row gap-8">
+  <!-- Responsive Grid Container: Mobile (1-col) → Tablet (2-col right) → Desktop (3-col) -->
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-terminal-2col-right xl:grid-cols-terminal-3col">
 
-    <!-- Left Sidebar (Optional) -->
+    <!-- Left Sidebar (Optional) - Hidden until XL breakpoint -->
     {% if effective_left_sidebar %}
-    <aside id="left-sidebar" class="w-full lg:w-64 lg:flex-shrink-0" aria-label="Navigation sidebar">
-      <div class="lg:sticky lg:top-8 lg:self-start">
+    <aside id="left-sidebar" class="hidden xl:block" aria-label="Navigation sidebar">
+      <div class="sticky top-20 h-[calc(100vh-theme(spacing.20))] overflow-y-auto scrollbar-thin">
 
         {% if effective_left_sidebar == 'wiki-nav' %}
         <!-- Wiki Navigation Pattern -->
@@ -107,7 +107,7 @@ layout: base-shell
     {% assign content_width = "max-w-content" %}
     {% endif %}
     {% endif %}
-    <main id="main-content-column" class="flex-1 min-w-0 {{ content_width }} mx-auto" aria-label="Main content">
+    <main id="main-content-column" class="col-span-1 min-w-0 {{ content_width }} mx-auto" aria-label="Main content">
 
       <!-- Page Header -->
       {% unless page.hide_header %}
@@ -173,12 +173,12 @@ layout: base-shell
 
     </main>
 
-    <!-- Right Sidebar (Optional) -->
+    <!-- Right Sidebar (Optional) - Visible on LG+ screens -->
     {% if effective_right_sidebar %}
     <aside id="right-sidebar"
-      class="w-full lg:w-80 lg:flex-shrink-0 {% if page.right_sidebar_xl_only %}hidden xl:block{% endif %}"
+      class="hidden lg:block {% if page.right_sidebar_xl_only %}xl:block{% endif %}"
       aria-label="Table of contents and related content">
-      <div class="lg:sticky lg:top-8 lg:self-start space-y-10">
+      <div class="sticky top-20 h-[calc(100vh-theme(spacing.20))] overflow-y-auto scrollbar-thin space-y-10">
 
         {% if effective_right_sidebar contains 'toc' %}
         <!-- Table of Contents -->
@@ -209,6 +209,11 @@ layout: base-shell
   </div>
 
 </div>
+
+<!-- Mobile Navigation Drawer (for accessing left sidebar on mobile/tablet) -->
+{% if effective_left_sidebar %}
+{% include mobile-nav-drawer.html %}
+{% endif %}
 
 <!-- Web Component: Sidebar TOC -->
 <script src="{{ site.baseurl }}/assets/js/components/sidebar-toc.js" defer></script>
