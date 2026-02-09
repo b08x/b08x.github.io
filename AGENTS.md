@@ -1,8 +1,8 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-01-08
-**Commit:** 72ff106
-**Branch:** development
+**Generated:** 2026-02-09
+**Commit:** 1769b89
+**Branch:** feature/three_col_grid
 
 ## OVERVIEW
 
@@ -13,9 +13,10 @@ Jekyll static site with React island architecture for interactive components. Di
 ```
 ./
 ├── src/
-│   ├── components/     # React islands (18 components) - see src/components/AGENTS.md
+│   ├── components/     # React islands (23 components) - see src/components/AGENTS.md
 │   ├── utils/          # Theme sync utilities - see src/utils/AGENTS.md
-│   └── main.tsx        # Island hydration entry point
+│   ├── types/          # TypeScript interfaces (prompt.ts)
+│   └── main.tsx        # Island hydration entry point - see src/AGENTS.md
 ├── _plugins/           # Custom Jekyll plugins (11) - see _plugins/AGENTS.md
 ├── _layouts/           # Jekyll templates (15 layouts) - see _layouts/AGENTS.md
 ├── _includes/          # Reusable partials (14 files) - see _includes/AGENTS.md
@@ -67,16 +68,18 @@ Jekyll static site with React island architecture for interactive components. Di
 **Key React Components:**
 | Component | LOC | Purpose |
 |-----------|-----|---------|
-| `JsonCanvasViewer` | 614 | Canvas file visualization with D3 zoom/pan |
+| `PromptFlowDiagram` | 924 | YAML-driven prompt flow visualizer with dual rendering modes |
+| `JsonCanvasViewer` | 613 | Canvas file visualization with D3 zoom/pan |
 | `KnowledgebaseCarousel` | 498 | H2-based content carousel with keyboard nav |
-| `VideoPlayer` | 411 | HLS video with segments, transcript search |
-| `CodeBlock` | 326 | Syntax highlighting + copy + theme sync |
-| `GraphView` | 314 | D3 force-directed note graph (web worker) |
-| `MermaidViewer` | 281 | Interactive diagrams with zoom/pan |
-| `MermaidModal` | 250 | Full-screen diagram modal |
-| `NotesGrid` | 222 | Grid display with detail view |
+| `VideoPlayer` | 410 | HLS video with segments, transcript search |
+| `CodeBlock` | 325 | Syntax highlighting + copy + theme sync |
+| `GraphView` | 312 | D3 force-directed note graph (web worker) |
+| `MermaidViewer` | 280 | Interactive diagrams with zoom/pan |
+| `MermaidModal` | 249 | Full-screen diagram modal |
+| `NotesGrid` | 221 | Grid display with detail view |
 | `SearchCmdK` | 153 | Command palette search (Cmd/Ctrl+K) |
 | `AudioPlayer` | 144 | Audio playback with waveform |
+| `DashboardIsland` | 80 | Dashboard widget container |
 
 ## CONVENTIONS
 
@@ -189,9 +192,10 @@ npm run build:jekyll           # jekyll clean && jekyll build
 
 ## NOTES
 
-- **Project Scale**: 239 files, 10.8k LOC (2 files >500 lines, max depth 5)
-- **Build Artifacts**: 3,448 esbuild chunks in `assets/js/dist/chunks/` from react-syntax-highlighter code splitting (language parsers + themes)
-- **Chunk Strategy**: esbuild auto-chunks dynamic imports - 4 chunks per language, ~650 core chunks, aggressive splitting for on-demand loading
+- **Project Scale**: 3,723 files, 553k LOC (64 files >500 lines, max depth 5)
+- **Build Artifacts**: 1,724 esbuild chunks in `assets/js/dist/chunks/` (862 JS + 862 source maps) from react-syntax-highlighter code splitting
+- **Chunk Strategy**: 14.2MB actual JS code - ~650 core app chunks, ~854 language parser chunks, ~320 theme variants
+- **Largest Components**: PromptFlowDiagram (924 LOC), JsonCanvasViewer (613 LOC), leia_pipeline demo (623 LOC)
 - **wiki_page_generator disabled** in `_config.yml` (`wiki_page_generator.enabled: false`) - set to `true` to regenerate
 - **Layout System**: Uses `sidebar-layout.html` as the primary layout with navigation sidebar
 - **React 19**: Uses `createRoot` API, lazy loading with Suspense

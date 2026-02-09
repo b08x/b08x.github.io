@@ -1,37 +1,39 @@
 # src/components/ - React Islands
 
-**Generated:** 2026-01-09
-**Commit:** 72ff106
-**Branch:** development
+**Generated:** 2026-02-09
+**Commit:** 1769b89
+**Branch:** feature/three_col_grid
 
 ## OVERVIEW
 
-21 React components (4,013 LOC) using island architecture for progressive enhancement. IDE/editor aesthetic with CSS variable theming. All components lazy-loaded via `React.lazy()` in `../main.tsx` registry. 5 components use MutationObserver for theme synchronization.
+23 React components (4,937 LOC) using island architecture for progressive enhancement. IDE/editor aesthetic with CSS variable theming. All components lazy-loaded via `React.lazy()` in `../main.tsx` registry. 5 components use MutationObserver for theme synchronization.
 
 ## STRUCTURE
 
 ```
 components/
 ├── __tests__/              # Minimal test coverage (1 file)
-├── VideoPlayer.tsx         # HLS video with segments/transcript (410 LOC)
+├── PromptFlowDiagram.tsx   # YAML-driven prompt flow visualizer (924 LOC)
+├── JsonCanvasViewer.tsx    # Canvas file viewer with D3 zoom/pan (613 LOC)
 ├── KnowledgebaseCarousel.tsx # H2-based content carousel (498 LOC)
-├── JsonCanvasViewer.tsx    # Canvas file viewer with D3 zoom/pan (483 LOC)
+├── VideoPlayer.tsx         # HLS video with segments/transcript (410 LOC)
+├── CodeBlock.tsx           # Syntax highlight + copy (325 LOC)
+├── GraphView.tsx           # D3 force-directed graph (312 LOC)
 ├── MermaidViewer.tsx       # Interactive diagrams zoom/pan (280 LOC)
 ├── MermaidModal.tsx        # Fullscreen diagram modal (249 LOC)
-├── GraphView.tsx           # D3 force-directed graph (312 LOC)
-├── CodeBlock.tsx           # Syntax highlight + copy (325 LOC)
 ├── NotesGrid.tsx           # Grid display with detail (221 LOC)
-├── SearchCmdK.tsx          # Command palette search (153 LOC)
-├── AudioPlayer.tsx         # Audio with waveform (144 LOC)
-├── NotebookGuide.tsx       # Guide/tutorial (112 LOC)
+├── NodeEditor.tsx          # Canvas node editor (200 LOC)
 ├── CanvasMinimap.tsx       # Canvas minimap navigation (159 LOC)
-├── CanvasExporter.tsx      # Canvas export functionality (80 LOC)
-├── CanvasControls.tsx      # Canvas control panel (64 LOC)
+├── SearchCmdK.tsx          # Command palette search (153 LOC)
+├── CanvasControls.tsx      # Canvas control panel (150 LOC)
+├── AudioPlayer.tsx         # Audio with waveform (144 LOC)
+├── CanvasExporter.tsx      # Canvas export functionality (120 LOC)
+├── NotebookGuide.tsx       # Guide/tutorial (112 LOC)
 ├── OutputPanel.tsx         # Canvas output panel (106 LOC)
-├── NodeEditor.tsx          # Canvas node editor (74 LOC)
+├── DashboardIsland.tsx     # Dashboard widget container (80 LOC)
+├── ImageLightbox.tsx       # React Photo View lightbox (60 LOC)
+├── PhotoProviderWrapper.tsx # Photo View context provider (40 LOC)
 ├── ReactPlayerIsland.tsx   # react-player wrapper (42 LOC)
-├── ImageLightbox.tsx       # React Photo View lightbox
-├── PhotoProviderWrapper.tsx # Photo View context provider
 ├── HelloGarden.tsx         # Demo component (13 LOC)
 └── graph.worker.ts         # D3 force simulation web worker (76 LOC)
 ```
@@ -48,6 +50,8 @@ components/
 | Search | `SearchCmdK.tsx` | Cmd/Ctrl+K trigger |
 | Canvas system | `JsonCanvasViewer.tsx` + `Canvas*.tsx` | react-jsoncanvas |
 | Lightbox | `ImageLightbox.tsx` + `PhotoProviderWrapper.tsx` | React Photo View |
+| Prompt flow | `PromptFlowDiagram.tsx` | YAML-driven visualization |
+| Dashboard | `DashboardIsland.tsx` | Widget container |
 
 ## CONVENTIONS
 
@@ -117,11 +121,12 @@ useEffect(() => {
 
 ## NOTES
 
-- **Total components:** 21 (20 .tsx + 1 .ts web worker)
-- **Total LOC:** 4,013 lines
+- **Total components:** 23 (22 .tsx + 1 .ts web worker)
+- **Total LOC:** 4,937 lines
 - **Test coverage:** Minimal (1 test file for KnowledgebaseCarousel)
-- **Recent additions:** ImageLightbox, PhotoProviderWrapper (React Photo View integration)
+- **Recent additions:** PromptFlowDiagram (924 LOC, YAML-driven prompt flow), DashboardIsland (80 LOC)
+- **Largest component:** PromptFlowDiagram at 924 lines (dual HardcodedExampleView + YAMLDrivenView)
 - **Recent refactoring:** GraphView moved to canvas homepage as movable node
 - **Web worker:** graph.worker.ts handles D3 force simulation off main thread
 - **No subdirectories:** Flat structure, all components at root level
-- **Island registry:** 20 components registered in main.tsx components object
+- **Island registry:** 20 components registered in main.tsx components object (DashboardIsland, PromptFlowDiagram added)
