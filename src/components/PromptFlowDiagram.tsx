@@ -1,10 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import {
+  PromptFlowDiagramProps,
+  ContextSource,
+  processYAMLToContextSources,
+  assembleFullPrompt
+} from '../types/prompt';
 
-interface Props {
-  initialStep?: number; // 0=Blank, 1=Basic, 2=Profile, 3=Memory, 4=Web, 5=RAG/Complete
+// ============================================================================
+// HARDCODED EXAMPLE VIEW (Original Implementation)
+// ============================================================================
+
+interface HardcodedExampleProps {
+  initialStep?: number;
 }
 
-const PromptFlowDiagram: React.FC<Props> = ({ initialStep = 0 }) => {
+const HardcodedExampleView: React.FC<HardcodedExampleProps> = ({ initialStep = 0 }) => {
   const [step, setStep] = useState(initialStep);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -20,11 +30,10 @@ const PromptFlowDiagram: React.FC<Props> = ({ initialStep = 0 }) => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Theme synchronization (Standard pattern from codebase)
+  // Theme synchronization
   useEffect(() => {
     const observer = new MutationObserver(() => {
       // CSS variables handle theme automatically
-      // This observer ensures re-render on theme changes if needed
     });
     if (document.documentElement) {
       observer.observe(document.documentElement, {
@@ -35,7 +44,6 @@ const PromptFlowDiagram: React.FC<Props> = ({ initialStep = 0 }) => {
     return () => observer.disconnect();
   }, []);
 
-  // Hand-drawn box style helper
   const sketchyStyle = {
     borderRadius: '255px 15px 225px 15px / 15px 225px 15px 255px',
     boxShadow: '2px 3px 5px rgba(0,0,0,0.05)'
@@ -542,6 +550,375 @@ const PromptFlowDiagram: React.FC<Props> = ({ initialStep = 0 }) => {
       `}</style>
     </div>
   );
+};
+
+// ============================================================================
+// YAML-DRIVEN VIEW (New Implementation)
+// ============================================================================
+
+const YAMLDrivenView: React.FC<PromptFlowDiagramProps> = (props) => {
+  const [step, setStep] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [hoveredSource, setHoveredSource] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Process YAML data into context sources
+  const contextSources = useMemo(() => processYAMLToContextSources(
+    props.yamlData,
+    props.visualizationConfig
+  ), [props.yamlData, props.visualizationConfig]);
+
+  const assembledPrompt = useMemo(() => assembleFullPrompt(contextSources), [contextSources]);
+
+  // Responsive breakpoint detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Theme synchronization
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      // CSS variables handle theme automatically
+    });
+    if (document.documentElement) {
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  const sketchyStyle = {
+    borderRadius: '255px 15px 225px 15px / 15px 225px 15px 255px',
+    boxShadow: '2px 3px 5px rgba(0,0,0,0.05)'
+  };
+
+  const nextStep = () => setStep((prev) => (prev < contextSources.length + 1 ? prev + 1 : 0));
+
+  const maxSteps = contextSources.length + 1; // +1 for the initial step
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        width: '100%',
+        maxWidth: '1280px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        padding: isMobile ? 'var(--spacing-4)' : 'var(--spacing-6)',
+        fontFamily: 'var(--font-sans)',
+        userSelect: 'none'
+      }}
+    >
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+        gap: 'var(--spacing-6)',
+        alignItems: 'start',
+        position: 'relative'
+      }}>
+
+        {/* LEFT COLUMN - CONTEXT SOURCES */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 'var(--spacing-4)',
+          gridColumn: isMobile ? '1' : '1',
+        }}>
+          {contextSources.map((source, index) => (
+            <div
+              key={source.id}
+              style={{
+                ...sketchyStyle,
+                border: `2px solid ${source.color}`,
+                borderRadius: sketchyStyle.borderRadius,
+                boxShadow: sketchyStyle.boxShadow,
+                padding: 'var(--spacing-3)',
+                background: 'var(--background)',
+                opacity: step > index ? 1 : 0,
+                transform: step > index ? 'translateX(0)' : 'translateX(-20px)',
+                transition: `opacity 500ms ${index * 100}ms, transform 500ms ${index * 100}ms`
+              }}
+            >
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                marginBottom: 'var(--spacing-2)'
+              }}>
+                <h3 style={{
+                  fontWeight: 600,
+                  color: source.color,
+                  fontSize: '0.875rem',
+                  margin: 0
+                }}>
+                  {source.label}
+                </h3>
+                {props.showTechniques !== false && (
+                  <div
+                    className="technique-badge"
+                    style={{
+                      position: 'relative',
+                      display: 'inline-block',
+                      padding: '0.25rem 0.5rem',
+                      borderRadius: '0.25rem',
+                      fontSize: '0.625rem',
+                      fontWeight: 600,
+                      color: 'white',
+                      backgroundColor: source.color,
+                      cursor: 'help'
+                    }}
+                    onMouseEnter={() => setHoveredSource(source.id)}
+                    onMouseLeave={() => setHoveredSource(null)}
+                  >
+                    {source.technique.name}
+
+                    {/* Tooltip */}
+                    {hoveredSource === source.id && (
+                      <div
+                        className="sfl-tooltip"
+                        style={{
+                          position: 'absolute',
+                          bottom: '100%',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          marginBottom: '0.5rem',
+                          padding: '0.75rem',
+                          background: 'var(--surface)',
+                          border: '1px solid var(--border)',
+                          borderRadius: 'var(--radius-md)',
+                          boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
+                          minWidth: '200px',
+                          maxWidth: '300px',
+                          zIndex: 50,
+                          fontSize: '0.75rem',
+                          fontWeight: 'normal',
+                          color: 'var(--foreground)',
+                          whiteSpace: 'normal',
+                          pointerEvents: 'none'
+                        }}
+                      >
+                        <p style={{ margin: '0.25rem 0' }}>
+                          <strong style={{ color: 'var(--accent)' }}>Technique:</strong> {source.technique.description}
+                        </p>
+                        {source.sfl && (
+                          <>
+                            {source.sfl.field && (
+                              <p style={{ margin: '0.25rem 0' }}>
+                                <strong style={{ color: 'var(--accent)' }}>Field:</strong> {source.sfl.field.topic}
+                              </p>
+                            )}
+                            {source.sfl.tenor && (
+                              <p style={{ margin: '0.25rem 0' }}>
+                                <strong style={{ color: 'var(--accent)' }}>Tenor:</strong> {source.sfl.tenor.aiPersona}
+                              </p>
+                            )}
+                            {source.sfl.mode && (
+                              <p style={{ margin: '0.25rem 0' }}>
+                                <strong style={{ color: 'var(--accent)' }}>Mode:</strong> {source.sfl.mode.outputFormat}
+                              </p>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              <p style={{
+                fontSize: '0.75rem',
+                marginTop: '0.25rem',
+                color: 'var(--foreground)',
+                lineHeight: 1.5,
+                whiteSpace: 'pre-wrap'
+              }}>
+                {source.content}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* MIDDLE COLUMN - ASSEMBLED PROMPT WINDOW */}
+        <div style={{
+          gridColumn: isMobile ? '1' : '2',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start'
+        }}>
+          <div style={{
+            textAlign: 'center',
+            marginBottom: 'var(--spacing-4)',
+            fontWeight: 600,
+            fontSize: '1rem',
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+            opacity: 0.8,
+            color: 'var(--foreground)'
+          }}>
+            Assembled System Prompt
+          </div>
+
+          <div
+            className="assembled-prompt-window"
+            style={{
+              ...sketchyStyle,
+              border: '3px solid var(--foreground)',
+              borderRadius: sketchyStyle.borderRadius,
+              boxShadow: sketchyStyle.boxShadow,
+              minHeight: '500px',
+              maxHeight: '700px',
+              padding: 'var(--spacing-4)',
+              display: 'flex',
+              flexDirection: 'column',
+              background: 'var(--background)',
+              overflow: 'hidden'
+            }}
+          >
+            <div style={{
+              borderBottom: '2px dashed var(--border)',
+              paddingBottom: 'var(--spacing-2)',
+              marginBottom: 'var(--spacing-3)',
+              fontSize: '0.875rem',
+              fontWeight: 600,
+              color: 'var(--foreground)'
+            }}>
+              {props.yamlData?.name || 'System Prompt'}
+            </div>
+
+            <div
+              className="prompt-content"
+              style={{
+                flex: 1,
+                overflow: 'auto'
+              }}
+            >
+              {step === 0 ? (
+                <p style={{
+                  textAlign: 'center',
+                  color: 'var(--text-secondary)',
+                  fontSize: '0.875rem',
+                  marginTop: 'var(--spacing-8)'
+                }}>
+                  Click "Inject Context" to build the prompt...
+                </p>
+              ) : (
+                <pre
+                  className="assembled-text"
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.75rem',
+                    lineHeight: 1.6,
+                    whiteSpace: 'pre-wrap',
+                    wordWrap: 'break-word',
+                    margin: 0,
+                    color: 'var(--foreground)'
+                  }}
+                >
+                  {assembleFullPrompt(contextSources.slice(0, step))}
+                </pre>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN - LLM */}
+        <div style={{
+          gridColumn: isMobile ? '1' : '3',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          paddingTop: isMobile ? 0 : '48px' // Align with "Assembled" title
+        }}>
+          <div
+            style={{
+              ...sketchyStyle,
+              border: '3px solid var(--foreground)',
+              borderRadius: sketchyStyle.borderRadius,
+              boxShadow: sketchyStyle.boxShadow,
+              height: isMobile ? '100px' : '200px',
+              width: isMobile ? '100%' : '120px',
+              display: 'flex',
+              flexDirection: isMobile ? 'row' : 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 'var(--spacing-2)',
+              background: 'var(--surface)',
+              opacity: step > 0 ? 1 : 0.3,
+              transition: 'opacity 500ms'
+            }}
+          >
+            <span style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--foreground)' }}>L</span>
+            <span style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--foreground)' }}>L</span>
+            <span style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--foreground)' }}>M</span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Controls */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: 'var(--spacing-6)',
+        gap: 'var(--spacing-4)',
+        alignItems: 'center',
+        flexWrap: 'wrap'
+      }}>
+        <button
+          onClick={nextStep}
+          style={{
+            padding: 'var(--spacing-2) var(--spacing-6)',
+            borderRadius: '9999px',
+            background: 'var(--accent)',
+            color: '#ffffff',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'opacity 150ms',
+            boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)',
+            fontWeight: 600,
+            fontSize: '0.875rem'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+        >
+          {step === maxSteps - 1 ? 'Reset Flow' : 'Inject Context'}
+        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+          {Array.from({ length: maxSteps }, (_, i) => (
+            <div
+              key={i}
+              style={{
+                height: '8px',
+                width: '8px',
+                borderRadius: '50%',
+                background: step >= i ? 'var(--accent)' : 'var(--border)',
+                transition: 'background 300ms'
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ============================================================================
+// ROUTER COMPONENT (Main Export)
+// ============================================================================
+
+const PromptFlowDiagram: React.FC<PromptFlowDiagramProps> = (props) => {
+  const isYAMLMode = !!(props.yamlData || props.visualizationConfig);
+  return isYAMLMode
+    ? <YAMLDrivenView {...props} />
+    : <HardcodedExampleView initialStep={props.initialStep} />;
 };
 
 export default PromptFlowDiagram;
