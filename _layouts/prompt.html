@@ -1,0 +1,48 @@
+---
+layout: base-shell
+---
+
+<article class="prompt-page max-w-7xl mx-auto px-4 py-8">
+
+  <!-- Page Title -->
+  <header class="mb-8">
+    <h1 class="text-4xl font-bold mb-2">{{ page.title }}</h1>
+    {% if page.last_updated %}
+    <p class="text-muted text-sm">Last updated: {{ page.last_updated }}</p>
+    {% endif %}
+  </header>
+
+  <!-- Markdown Content (includes embedded YAML blocks, analysis tables, etc.) -->
+  <div class="prose dark:prose-invert mb-12 max-w-none">
+    {{ content }}
+  </div>
+
+  <!-- React Island: PromptFlowDiagram -->
+  {% if page.prompt_data %}
+  {% capture prompt_props %}{
+    "yamlData": {{ page.prompt_data | jsonify }},
+    "showTechniques": {{ page.show_techniques | default: true }}
+    {% if page.exclude_components or page.include_only_components %}
+    ,"visualizationConfig": {
+      {% if page.exclude_components %}
+      "excludeKeys": {{ page.exclude_components | jsonify }}
+      {% endif %}
+      {% if page.include_only_components %}
+      {% if page.exclude_components %},{% endif %}
+      "includeOnlyKeys": {{ page.include_only_components | jsonify }}
+      {% endif %}
+    }
+    {% endif %}
+  }{% endcapture %}
+
+  <div
+    data-island="PromptFlowDiagram"
+    data-props='{{ prompt_props | strip | base64_encode }}'
+  >
+    <div class="bg-surface rounded-lg border border-border p-8 text-center">
+      <span class="text-muted font-mono">Loading prompt visualization...</span>
+    </div>
+  </div>
+  {% endif %}
+
+</article>

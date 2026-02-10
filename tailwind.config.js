@@ -125,16 +125,18 @@ module.exports = {
       // Grid Template Columns for Terminal Layouts
       gridTemplateColumns: {
         // 3-Column Layouts (wiki.html desktop XL)
-        'terminal-3col': '256px 1fr 256px',           // Balanced 3-column
-        'terminal-3col-lg': '300px 1fr 300px',        // Larger sidebars
+        'terminal-3col': '256px minmax(0, 1fr) 280px',           // Balanced 3-column with overflow protection
+        'terminal-3col-lg': '300px minmax(0, 1fr) 300px',        // Larger sidebars with overflow protection
 
         // Notebook Specialized Grids
-        'notebook-base': '320px 1fr 280px',           // Desktop (lg) - default
-        'notebook-xl': '380px 1fr 320px',             // Desktop XL - wider sidebars
+        'notebook-base': '320px minmax(0, 1fr) 280px',           // Desktop (lg) - default
+        'notebook-xl': '380px minmax(0, 1fr) 320px',             // Desktop XL - wider sidebars
 
         // 2-Column Layouts (page-sidebar, wiki tablet)
         'terminal-2col': '1fr 320px',                 // Content + right sidebar
         'terminal-2col-reverse': '320px 1fr',         // Left sidebar + content
+        'terminal-2col-left': '256px 1fr',            // Left sidebar + content (tablet)
+        'terminal-2col-right': '1fr 280px',           // Content + right sidebar (tablet)
 
         // Flexible 2-Column (for responsive)
         'terminal-2col-fluid': '1fr 25%',             // Content + fluid sidebar

@@ -30,5 +30,6 @@ logs/
 .code-packager-csv-config
 *.csv
 refactor/
+implement/
 
 assets/js/dist/

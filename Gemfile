@@ -41,3 +41,8 @@ end
 # gem 'jekyll-postcss', '~> 0.5.0'
 
 gem "racc", "~> 1.8"
+
+gem "pry", "~> 0.16.0"
+gem "pry-doc", "~> 1.7"
+
+gem "json_canvas", "~> 0.1.0"

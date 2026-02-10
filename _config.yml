@@ -83,6 +83,9 @@ collections:
   projects:
     output: true
     permalink: /projects/:slug
+  prompts:
+    output: true
+    permalink: /prompts/:slug
   wikis:
     output: true
     permalink: /wikis/:slug
