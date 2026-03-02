@@ -33,10 +33,10 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [] }) 
 
     return (
         <div className="h-full w-full flex flex-col bg-background text-foreground relative overflow-hidden">
-            <main className="flex-grow flex items-center justify-center p-4">
+            <main className="flex-grow flex items-stretch justify-stretch overflow-hidden">
                 <div
                     key={currentSlideIndex}
-                    className="w-full max-w-5xl px-8 py-12 prose prose-invert overflow-y-auto max-h-[calc(100vh-8rem)] scrollbar-terminal bg-surface/50 rounded-lg border border-border/50 shadow-2xl transition-all duration-300 ease-in-out"
+                    className="w-full h-full px-12 py-16 prose prose-invert max-w-none overflow-y-auto scrollbar-terminal transition-all duration-300 ease-in-out"
                     dangerouslySetInnerHTML={{ __html: slides[currentSlideIndex] }}
                 />
             </main>
