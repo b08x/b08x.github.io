@@ -33,3 +33,5 @@ refactor/
 implement/
 
 assets/js/dist/
+# Codemap
+.codemap/

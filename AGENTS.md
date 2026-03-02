@@ -36,7 +36,7 @@ Jekyll static site with React island architecture for interactive components. Di
 ## WHERE TO LOOK
 
 | Task | Location | Notes |
-|------|----------|-------|
+|------|----------|------- :|
 | Add React component | `src/components/` + register in `src/main.tsx` | Lazy-loaded, island pattern |
 | Modify wiki pagination | `_plugins/wiki_page_generator.rb` | ITEMS_PER_PAGE=12, RESERVED_SLUGS |
 | Add wiki content | `_data/wikis/{wiki-id}.json` then `jekyll build` | Auto-generates pages |
@@ -53,10 +53,12 @@ Jekyll static site with React island architecture for interactive components. Di
 ## CODE MAP
 
 **Entry Points:**
+
 - `src/main.tsx` - React island hydration, component registry, auto-enhancement pipelines
 - `_config.yml` - Jekyll configuration, collections, plugins, defaults
 
 **Key Ruby Plugins:**
+
 | Plugin | Purpose | Hook |
 |--------|---------|------|
 | `wiki_page_generator.rb` | Generates paginated wiki from JSON | Generator (:low) |
@@ -66,6 +68,7 @@ Jekyll static site with React island architecture for interactive components. Di
 | `empty_front_matter_note_injector.rb` | Auto-adds front matter to notes | Hook (:after_init) |
 
 **Key React Components:**
+
 | Component | LOC | Purpose |
 |-----------|-----|---------|
 | `PromptFlowDiagram` | 924 | YAML-driven prompt flow visualizer with dual rendering modes |
@@ -84,17 +87,20 @@ Jekyll static site with React island architecture for interactive components. Di
 ## CONVENTIONS
 
 **Island Architecture:**
+
 - Components registered in `src/main.tsx` `components` object
 - HTML: `<div data-island="ComponentName" data-props='...'></div>`
 - Props: JSON or Base64-encoded JSON (UTF-8 safe)
 - Auto-enhancement: Rouge code blocks → CodeBlock, Mermaid images → MermaidViewer, pictures → ImageLightbox
 
 **Jekyll Collections:**
+
 - `_notes` → `/notes/:slug` (layout: note.html with sidebar-layout)
 - `_wikis` → `/wikis/:slug` (generated from JSON, don't edit directly)
 - `_projects` → `/projects/:slug`
 
 **Wiki Data Format:**
+
 ```json
 {
   "metadata": { "repository": "...", "generated_at": "...", "page_count": N },
@@ -103,12 +109,14 @@ Jekyll static site with React island architecture for interactive components. Di
 ```
 
 **Layout Naming:**
+
 - Uses `sidebar-layout.html` as the primary layout with navigation sidebar
 - Individual content types use specific layouts like `note.html`
 - Navigation sidebar variable is named `navigation-sidebar`
 - Designed with IDE/editor aesthetic using monospace fonts and high-contrast styling
 
 **Styling (High-Contrast IDE Theme):**
+
 - **Theme**: Dual Light/Dark mode (activated by `.dark` class on `<html>`)
 - **Implementation**: CSS variables (`_sass/_theme-variables.scss`) → Tailwind utilities (`tailwind.config.js`)
 - **Aesthetic**: High contrast, 1px solid borders (`--border`), minimal rounded corners
@@ -116,6 +124,7 @@ Jekyll static site with React island architecture for interactive components. Di
 - **Tools**: Tailwind 4.x, SCSS, PostCSS
 
 **Responsive Images (jekyll_picture_tag v2.1.3):**
+
 - **Source**: `assets/img/` → **Output**: `assets/img/generated/`
 - **Config**: `_config.yml` (global), `_data/picture.yml` (presets)
 - **Usage**: `{% picture react-lightbox image.jpg %}` generates WebP + fallback with responsive srcsets
@@ -124,6 +133,7 @@ Jekyll static site with React island architecture for interactive components. Di
 - **Build-time**: Images optimized during `jekyll build`, cached in output directory
 
 **Theme Synchronization:**
+
 - **Vanilla JS**: `theme-manager.js` toggles `.dark` class, dispatches `themechange` events
 - **React**: Components use `MutationObserver` watching `document.documentElement.classList`
 - **Priority**: explicit preference > localStorage > OS `prefers-color-scheme` > light default
@@ -146,6 +156,7 @@ Jekyll static site with React island architecture for interactive components. Di
 ## UNIQUE STYLES
 
 **Component Registration Pattern:**
+
 ```typescript
 const MyComponent = React.lazy(() => import('./components/MyComponent'));
 const components = { ..., MyComponent };  // Add to registry
@@ -156,6 +167,7 @@ const components = { ..., MyComponent };  // Add to registry
 **Code Block Enhancement:** Rouge-generated `div.highlighter-rouge` auto-converted to `CodeBlock` islands with copy button.
 
 **Picture Tag + React Lightbox Pattern:**
+
 ```liquid
 <!-- Single image with zoom -->
 {% picture react-lightbox image.jpg --alt "Description" %}
@@ -166,11 +178,13 @@ const components = { ..., MyComponent };  // Add to registry
 ```
 
 **ImageLightbox Special Hydration:**
+
 - Unlike regular islands, uses `PhotoProvider` context for gallery management
 - Separate `mountPhotoProvider()` instead of standard `mountIslands()`
 - Uses `createPortal` to render components back to original DOM positions
 
 **Markdown Extensions:**
+
 - **Bidirectional Links**: `[[Note Title]]` → `<a class="internal-link">` with backlinks
 - **Obsidian Callouts**: `> [!type]` → `<div class="callout" data-callout="type">`
 - **Mermaid Diagrams**: ````mermaid` → static image → auto-enhanced to interactive viewer

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Algorithmic Ethos & Prompt Engineering Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Outfit', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        premium: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            gold: '#d4af37',
+                        },
+                        accent: {
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6',
+                            emerald: '#10b981',
+                        }
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f8f8;
+            color: #1e293b;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bento-item {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+        pre {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden pt-16 pb-8 px-6 lg:pt-32 lg:pb-16 bg-white">
+        <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-float"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-float" style="animation-delay: 2s"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wider text-blue-600 uppercase bg-blue-50 rounded-full">2025-2026 Strategic Guide</span>
+            <h1 class="text-5xl lg:text-7xl font-extrabold font-display mb-8 tracking-tight text-premium-900 leading-tight">
+                The Algorithmic <span class="gradient-text">Ethos of Diligence</span>
+            </h1>
+            <p class="text-xl text-slate-600 font-light leading-relaxed mb-10 max-w-2xl mx-auto">
+                Navigating the transition from deterministic execution to probabilistic AI orchestration with precision and ethics.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-5xl mx-auto px-6 pb-24 space-y-24">
+
+        <!-- Topic Cluster 1: The Diligence Triad -->
+        <section id="diligence-triad" class="space-y-12">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-px flex-1 bg-slate-200"></div>
+                <h2 class="text-3xl font-display font-bold text-slate-800 shrink-0">1. The Diligence Triad</h2>
+                <div class="h-px flex-1 bg-slate-200"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Creation -->
+                <div class="glass-card p-8 rounded-3xl bento-item">
+                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Creation Diligence</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">The "Who Let the Bots In?" Protocol. Focuses on input sanity checks, avoiding privacy leaks, and vetting data fed to LLMs.</p>
+                    <ul class="text-xs space-y-2 text-slate-500 font-medium">
+                        <li>• System Selection Algorithm</li>
+                        <li>• Contextual Threat Models</li>
+                        <li>• Ethical Compliance Overlays</li>
+                    </ul>
+                </div>
+
+                <!-- Transparency -->
+                <div class="glass-card p-8 rounded-3xl bento-item">
+                    <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Transparency Diligence</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">The Disclaimer Protocol. Granular disclosure depending on the Audience Matrix (Personal vs. Professional).</p>
+                    <ul class="text-xs space-y-2 text-slate-500 font-medium">
+                        <li>• Disclosure Granularity</li>
+                        <li>• Verification of AI Claims</li>
+                        <li>• Intellectual Integrity Check</li>
+                    </ul>
+                </div>
+
+                <!-- Deployment -->
+                <div class="glass-card p-8 rounded-3xl bento-item">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Deployment Diligence</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">The Verification Gambit. Fact-checking subroutines and bias audits before any AI output goes live.</p>
+                    <ul class="text-xs space-y-2 text-slate-500 font-medium">
+                        <li>• Fact-Checking Subroutines</li>
+                        <li>• Bias/Fairness Audits</li>
+                        <li>• Liability Safeguards</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Context Table Section -->
+        <section class="overflow-hidden glass-card rounded-3xl">
+            <div class="p-8 bg-slate-900 text-white">
+                <h2 class="text-2xl font-display font-bold">The Diligence Venn Diagram</h2>
+                <p class="text-slate-400 text-sm">Mapping stakes to requirements across various contexts.</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
+                            <th class="px-8 py-4 font-semibold">Context</th>
+                            <th class="px-8 py-4 font-semibold">Stakes</th>
+                            <th class="px-8 py-4 font-semibold">Requirements</th>
+                            <th class="px-8 py-4 font-semibold">Example</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm">
+                        <tr>
+                            <td class="px-8 py-6 font-bold text-slate-700 italic">Personal</td>
+                            <td class="px-8 py-6"><span class="px-2 py-1 bg-green-50 text-green-700 rounded text-xs">Low (rising)</span></td>
+                            <td class="px-8 py-6 text-slate-600">Minimal disclosure; personal ethics, privacy focus.</td>
+                            <td class="px-8 py-6 text-slate-500">"Used AI for vacation planning."</td>
+                        </tr>
+                        <tr>
+                            <td class="px-8 py-6 font-bold text-slate-700 italic">Academic</td>
+                            <td class="px-8 py-6"><span class="px-2 py-1 bg-yellow-50 text-yellow-700 rounded text-xs">Medium-High</span></td>
+                            <td class="px-8 py-6 text-slate-600">Full transparency; cite AI as co-author; peer review.</td>
+                            <td class="px-8 py-6 text-slate-500">"AI assisted in literature review (Appx C)."</td>
+                        </tr>
+                        <tr>
+                            <td class="px-8 py-6 font-bold text-slate-700 italic">Professional</td>
+                            <td class="px-8 py-6"><span class="px-2 py-1 bg-orange-50 text-orange-700 rounded text-xs">High (Risk)</span></td>
+                            <td class="px-8 py-6 text-slate-600">Legal-grade diligence; usage clauses in contracts.</td>
+                            <td class="px-8 py-6 text-slate-500">"AI outputs vetted by legal per Clause 4.2."</td>
+                        </tr>
+                        <tr>
+                            <td class="px-8 py-6 font-bold text-slate-700 italic">Regulated</td>
+                            <td class="px-8 py-6"><span class="px-2 py-1 bg-red-50 text-red-700 rounded text-xs">Extreme</span></td>
+                            <td class="px-8 py-6 text-slate-600">Formal audits, third-party validation, compliance logs.</td>
+                            <td class="px-8 py-6 text-slate-500">"FDA-approved AI model. See Attachment X."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Topic Cluster 2: The Dark Side -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-4xl font-display font-bold mb-6">The <span class="text-red-600">Dark Side</span> of Diligence</h2>
+                <p class="text-slate-600 mb-8 leading-relaxed italic border-l-4 border-red-500 pl-6">
+                    What happens when we ignore the firewall? The consequences of AI negligence aren't just technical—they're legal and reputational.
+                </p>
+                <div class="space-y-4">
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800">2.1 The Hallucination Heist</h4>
+                        <p class="text-sm text-slate-500">Citing invented clauses in court leading to perjury charges.</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800">2.2 The Bias Amplifier</h4>
+                        <p class="text-sm text-slate-500">Discriminatory screening leading to massive lawsuits.</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800">2.3 The Plagiarism Paradox</h4>
+                        <p class="text-sm text-slate-500">DMCA takedowns from regurgitated copyrighted text.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-slate-900 rounded-[3rem] p-10 text-white relative">
+                <div class="absolute -top-4 -right-4 w-24 h-24 bg-red-600/20 blur-2xl rounded-full"></div>
+                <h3 class="text-2xl font-display font-bold mb-6">Diligence Statement: The AI Hall Pass</h3>
+                <p class="text-slate-400 text-sm mb-6">"I, [Name], used [AI Tool] for [Task]. I checked the work. If it's wrong, it's on me."</p>
+                <ol class="space-y-4 text-sm font-light">
+                    <li class="flex gap-3"><span class="text-blue-400 font-bold">01.</span> Name the AI tool clearly.</li>
+                    <li class="flex gap-3"><span class="text-blue-400 font-bold">02.</span> Explicitly scope its contribution.</li>
+                    <li class="flex gap-3"><span class="text-blue-400 font-bold">03.</span> Disclose the human review process.</li>
+                    <li class="flex gap-3"><span class="text-blue-400 font-bold">04.</span> Assert ownership & responsibility.</li>
+                </ol>
+                <div class="mt-8 pt-6 border-t border-slate-700">
+                    <span class="text-xs uppercase tracking-widest text-slate-500 font-bold">Pro Tip</span>
+                    <p class="text-sm italic mt-2">Clarity over jargon. Transparency builds the trust you'll need when the AI eventually drifts.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- IT Admin 2026 Focus -->
+        <section class="bg-gradient-to-br from-blue-900 to-indigo-950 rounded-[2.5rem] p-12 text-white shadow-2xl">
+            <div class="max-w-3xl">
+                <h2 class="text-4xl font-display font-bold mb-6">IT Operations 2025-2026</h2>
+                <p class="text-blue-200 text-lg mb-12">The Shift from <span class="text-white font-bold underline decoration-blue-500">Deterministic</span> to <span class="text-white font-bold underline decoration-purple-500">Probabilistic</span> AI Orchestration.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h4 class="text-blue-400 font-bold text-sm uppercase tracking-widest">The Old Way (2020)</h4>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li>• Manual PowerShell Scripting</li>
+                            <li>• Reactive Troubleshooting</li>
+                            <li>• Siloed Toolsets</li>
+                            <li>• Knowledge trapped in tickets</li>
+                        </ul>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-purple-400 font-bold text-sm uppercase tracking-widest">The New Way (2026)</h4>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li>• Natural Language Orchestration</li>
+                            <li>• Probabilistic Diagnostic Paths</li>
+                            <li>• Unified Copilot Governance</li>
+                            <li>• Auto-generating KB from tickets</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prompt Engineering Precision -->
+        <section class="space-y-12">
+            <div class="text-center max-w-2xl mx-auto">
+                <h2 class="text-4xl font-display font-bold mb-4 leading-tight">Prompt Engineering as a <span class="gradient-text">Precision Discipline</span></h2>
+                <p class="text-slate-600">Advanced strategies to force the AI to "Think Like a Human" and produce actionable results.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- CoT Example Card -->
+                <div class="glass-card rounded-3xl p-8 border-l-8 border-blue-500">
+                    <h3 class="text-2xl font-bold mb-6">Chain-of-Thought (CoT)</h3>
+                    <p class="text-slate-600 text-sm mb-6">Forcing the AI to decompose, correlate, hypothesize, and remediate. This forensic workflow reduces hallucinations drastically.</p>
+                    <div class="space-y-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <div class="flex gap-4">
+                            <span class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs shrink-0">1</span>
+                            <div>
+                                <p class="text-xs font-bold uppercase text-slate-400">Step 01: Decomposition</p>
+                                <p class="text-sm font-medium">"Break down error 0x000000EF into kernel-level failures."</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs shrink-0">2</span>
+                            <div>
+                                <p class="text-xs font-bold uppercase text-slate-400">Step 02: Hypothesis</p>
+                                <p class="text-sm font-medium">"Rank 3 hypotheses for the root cause."</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs shrink-0">3</span>
+                            <div>
+                                <p class="text-xs font-bold uppercase text-slate-400">Step 03: Synthesis</p>
+                                <p class="text-sm font-medium">"For each hypothesis, propose a verification + fix."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Role Prompting Card -->
+                <div class="glass-card rounded-3xl p-8 border-l-8 border-purple-500">
+                    <h3 class="text-2xl font-bold mb-6">Role Prompting</h3>
+                    <p class="text-slate-600 text-sm mb-6">The "Persona" Hack. Assigning roles shapes output tone and expertise depth.</p>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="p-4 bg-purple-50 rounded-2xl">
+                            <p class="text-xs font-bold text-purple-700 uppercase mb-1">Senior Systems Architect</p>
+                            <p class="text-sm italic">"Act as a Senior SysAdmin. Write a script with Try-Catch verbose logging."</p>
+                        </div>
+                        <div class="p-4 bg-indigo-50 rounded-2xl">
+                            <p class="text-xs font-bold text-indigo-700 uppercase mb-1">Security Engineer</p>
+                            <p class="text-sm italic">"Review this script for hardcoded credentials or unsafe commands."</p>
+                        </div>
+                        <div class="p-4 bg-pink-50 rounded-2xl">
+                            <p class="text-xs font-bold text-pink-700 uppercase mb-1">Crisis Comm Manager</p>
+                            <p class="text-sm italic">"Draft an incident report. Tone: empathetic and transparent."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checklist Section -->
+        <section class="space-y-8">
+            <h2 class="text-3xl font-display font-bold text-center">The Diligence Workflow</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm flex items-start gap-4">
+                    <input type="checkbox" checked class="mt-1.5 w-5 h-5 accent-blue-600 rounded">
+                    <div>
+                        <h4 class="font-bold">Sanitize Inputs</h4>
+                        <p class="text-sm text-slate-500">Remove PII, confidential data, and biased prompts before submission.</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm flex items-start gap-4">
+                    <input type="checkbox" checked class="mt-1.5 w-5 h-5 accent-blue-600 rounded">
+                    <div>
+                        <h4 class="font-bold">Fact-Check Subroutines</h4>
+                        <p class="text-sm text-slate-500">Use fact databases or expert review for all generated claims.</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm flex items-start gap-4">
+                    <input type="checkbox" checked class="mt-1.5 w-5 h-5 accent-blue-600 rounded">
+                    <div>
+                        <h4 class="font-bold">Embed Disclosures</h4>
+                        <p class="text-sm text-slate-500">Include clear AI usage metadata in footers, appendices, or headers.</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm flex items-start gap-4">
+                    <input type="checkbox" checked class="mt-1.5 w-5 h-5 accent-blue-600 rounded">
+                    <div>
+                        <h4 class="font-bold">Bias/Fairness Audits</h4>
+                        <p class="text-sm text-slate-500">Use tools like IBM AI Fairness 360 to detect demographic skew.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Takeaways -->
+        <section class="relative p-12 bg-slate-950 rounded-[3rem] text-white overflow-hidden text-center">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                <div class="absolute -top-1/2 -left-1/2 w-full h-full bg-blue-600 rounded-full blur-[120px]"></div>
+                <div class="absolute -bottom-1/2 -right-1/2 w-full h-full bg-purple-600 rounded-full blur-[120px]"></div>
+            </div>
+            
+            <h2 class="text-4xl font-display font-bold mb-8">The <span class="text-blue-400">2026</span> Roadmap</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-blue-300 mb-2">Agent Mode</h3>
+                    <p class="text-slate-400 text-sm">AI evolves from chatbot to autonomous workforce. You govern, they execute.</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-purple-300 mb-2">Natural Admin</h3>
+                    <p class="text-slate-400 text-sm">Query your infrastructure in English. Get CSVs, scripts, and logs instantly.</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-emerald-300 mb-2">Ethics Economy</h3>
+                    <p class="text-slate-400 text-sm">Diligence becomes a market advantage and a legal requirement.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 inline-block p-1 px-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full">
+                <div class="px-8 py-3 bg-slate-900 rounded-full">
+                    <p class="text-sm font-bold tracking-widest uppercase">The Era of the Cognitive Architect</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toolkit Bento Grid -->
+        <section class="space-y-8">
+            <div class="flex justify-between items-end">
+                <h2 class="text-3xl font-display font-bold">The Diligence Toolkit</h2>
+                <span class="text-slate-400 text-sm font-medium">Essential Resources</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[600px] md:h-[400px]">
+                <div class="md:col-span-2 md:row-span-2 glass-card rounded-3xl p-8 flex flex-col justify-end bg-gradient-to-tr from-white to-blue-50">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-2">Bias Auditors</h3>
+                    <p class="text-slate-600 text-sm">IBM AI Fairness 360 & Google's What-If. Essential for preventing demographic skew in automated decision making.</p>
+                </div>
+                <div class="md:col-span-1 glass-card rounded-3xl p-6 bg-slate-900 text-white">
+                    <h4 class="font-bold text-emerald-400 mb-1">Fact-Check</h4>
+                    <p class="text-xs text-slate-400 leading-tight">Google Fact Check Explorer & ClaimBuster.</p>
+                </div>
+                <div class="md:col-span-1 glass-card rounded-3xl p-6 bg-white border border-slate-100">
+                    <h4 class="font-bold text-purple-600 mb-1">Plagiarism</h4>
+                    <p class="text-xs text-slate-500 leading-tight">Turnitin & Copyscape for originality.</p>
+                </div>
+                <div class="md:col-span-2 glass-card rounded-3xl p-6 flex items-center justify-between">
+                    <div>
+                        <h4 class="font-bold text-slate-800">Compliance Checkers</h4>
+                        <p class="text-xs text-slate-500">GDPR & HIPAA Scan Tools.</p>
+                    </div>
+                    <div class="h-10 w-10 rounded-full bg-slate-100 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.9L10 1.55l7.834 3.35a1 1 0 01.666.945V14a2 2 0 01-2 2h-1.5a1 1 0 010-2H15V5.985l-5-2.144-5 2.144V14h1.5a1 1 0 110 2H5a2 2 0 01-2-2V5.845a1 1 0 01.666-.945z" clip-rule="evenodd"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Micro-animations for bento items
+        document.querySelectorAll('.bento-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+        });
+
+        // Simple visibility observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

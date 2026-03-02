@@ -37,7 +37,6 @@ pagination:
 <summary>Relevant source files</summary>
 
 The following files were used as context for generating this wiki page:
-
 - [src/hooks/useWorkflowRunner.ts](src/hooks/useWorkflowRunner.ts)
 - [src/components/lab/TaskNode.tsx](src/components/lab/TaskNode.tsx)
 - [src/components/lab/modals/TaskDetailModal.tsx](src/components/lab/modals/TaskDetailModal.tsx)
@@ -62,21 +61,18 @@ State management in this system operates through a multi-layered architecture co
 The system partitions state into distinct domains with clear separation of concerns:
 
 **Workflow State** (useWorkflowRunner.ts):
-
 - `dataStore`: Immutable data store containing workflow inputs and outputs
 - `taskStates`: Map tracking execution status for each task (PENDING, COMPLETED, FAILED)
 - `isRunning`: Boolean flag indicating active workflow execution
 - `runFeedback`: Array of string messages providing execution feedback
 
 **User Configuration State** (SettingsPage.tsx):
-
 - `userApiKeys`: Object mapping AI providers to their respective API key values
 - `defaultProvider`: Enum value representing the default AI provider (Anthropic, Google, OpenAI, Mistral, OpenRouter)
 - `defaultModel`: String value representing the default model identifier
 - `apiKeyValidation`: Object tracking validation status for each provider key
 
 **Prompt Engineering State** (PromptFormModal.tsx, PromptDetailModal.tsx):
-
 - `sflAnalysis`: Object containing prompt analysis results with score, assessment, and issues array
 - `promptVariables`: Object mapping variable names to their input values
 - `isAnalyzing`: Boolean flag indicating active SFL analysis in progress
@@ -193,12 +189,12 @@ PromptDetailModal manages variable state through reactive input handling:
 ```typescript
 {variables.map((varName) => (
     <div key={varName}>
-        <label htmlFor={`var-$varName`} className="block text-sm font-medium text-gray-300 mb-1">{`{{$varName}}`}</label>
+        <label htmlFor={`var-${varName}`} className="block text-sm font-medium text-gray-300 mb-1">{`{{${varName}}}`}</label>
         <textarea
-            id={`var-$varName`}
+            id={`var-${varName}`}
             value={variableValues[varName] || ''}
             onChange={(e) => handleVariableChange(varName, e.target.value)}
-            placeholder={`Enter value for $varName...`}
+            placeholder={`Enter value for ${varName}...`}
             rows={2}
             className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-50"
         />

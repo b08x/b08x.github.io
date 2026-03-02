@@ -9,3 +9,5 @@ title: Project Wikis
 [[Video Chapter Automater Wiki]]
 
 [[SFL Prompt Studio v2 Wiki]]
+
+[[docs2db Wiki]]
