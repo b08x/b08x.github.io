@@ -30,6 +30,12 @@ function testPagination() {
 // ...
 ```
 
+{: .fragment }
+
+```ruby
+puts "Hello, world!"
+```
+
 ---
 
 # Slide 3: Image Test
