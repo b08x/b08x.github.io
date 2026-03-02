@@ -80,22 +80,24 @@
   <!-- Main Container -->
   <div id="app-container" class="flex flex-col min-h-screen">
 
-    <!-- Header -->
+    {% unless page.layout == 'presentation' %}
     <header id="site-header"
       class="sticky top-0 z-50 flex-none border-b border-border bg-background transition-transform duration-300 ease-in-out"
       role="banner">
       {% include header.html %}
     </header>
+    {% endunless %}
 
     <!-- Main Content Area (Layout-specific content injected here) -->
     <main id="main-content" class="flex-grow" role="main">
       {{ content }}
     </main>
 
-    <!-- Footer -->
+    {% unless page.layout == 'presentation' %}
     <footer id="site-footer" class="flex-none py-8 px-4 sm:px-6 lg:px-8 border-t border-border" role="contentinfo">
       {% include footer.html %}
     </footer>
+    {% endunless %}
 
   </div>
 
