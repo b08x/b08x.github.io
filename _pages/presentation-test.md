@@ -9,9 +9,14 @@ permalink: /test-presentation/
 This is the first slide of the presentation system.
 
 - Full-screen layout
+{: .fragment }
 - Sticky BGM control
+{: .fragment }
 - Keyboard navigation
+{: .fragment }
 
+something
+{: .fragment }
 ---
 
 # Slide 2: Code Block Test
@@ -36,5 +41,9 @@ function testPagination() {
 # Slide 4: Final Slide
 
 End of the test.
-[x] BGM Toggle
-[x] Keyboard Navigation
+{: .fragment }
+
+- [x] BGM Toggle
+{: .fragment }
+- [x] Keyboard Navigation
+{: .fragment }
