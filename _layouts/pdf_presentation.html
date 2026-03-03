@@ -1,0 +1,18 @@
+---
+layout: base-shell
+---
+
+{% capture slides_html %}
+{% for img in page.pdf_images %}
+<div class="pdf-slide-container w-full h-full flex items-center justify-center bg-black">
+  <img src="{{ img | relative_url }}" class="max-w-full max-h-full object-contain shadow-2xl" alt="Slide {{ forloop.index }}">
+</div>
+||SLIDE||
+{% endfor %}
+{% endcapture %}
+
+{% assign slides = slides_html | split: '||SLIDE||' %}
+
+<div id="presentation-root" class="w-screen h-screen overflow-hidden bg-background">
+    <div data-island="PresentationIsland" data-props='{ "slides": {{ slides | jsonify | escape }}, "isPdf": true }'></div>
+</div>

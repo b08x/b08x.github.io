@@ -3,9 +3,10 @@ import MediaControlBar from './MediaControlBar';
 
 interface PresentationIslandProps {
     slides: string[];
+    isPdf?: boolean;
 }
 
-const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [] }) => {
+const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], isPdf = false }) => {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(() => {
         if (typeof window !== 'undefined' && window.location.hash) {
             const hash = window.location.hash;
@@ -156,7 +157,8 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [] }) 
                 <div
                     ref={slideRef}
                     key={currentSlideIndex}
-                    className="w-full max-w-5xl max-h-full px-8 py-12 md:px-16 md:py-16 prose prose-invert prose-lg md:prose-2xl overflow-y-auto scrollbar-terminal transition-all duration-300 ease-in-out"
+                    className={`w-full h-full flex flex-col items-center justify-center transition-all duration-300 ease-in-out ${isPdf ? '' : 'max-w-5xl max-h-full px-8 py-12 md:px-16 md:py-16 prose prose-invert prose-lg md:prose-2xl overflow-y-auto scrollbar-terminal'
+                        }`}
                     dangerouslySetInnerHTML={{ __html: processedSlides[currentSlideIndex] }}
                 />
             </main>
