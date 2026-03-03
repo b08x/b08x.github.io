@@ -38,9 +38,7 @@ puts "Hello, world!"
 
 ---
 
-# Slide 3: Image Test
-
-![Testing Image](https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=1000)
+![Testing Image](https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=800&w=1000)
 
 ---
 
