@@ -40,6 +40,7 @@ const JsonCanvasViewer = React.lazy(() => import('./components/JsonCanvasViewer'
 const ImageLightbox = React.lazy(() => import('./components/ImageLightbox'));
 const DashboardIsland = React.lazy(() => import('./components/DashboardIsland'));
 const PromptFlowDiagram = React.lazy(() => import('./components/PromptFlowDiagram'));
+const PresentationIsland = React.lazy(() => import('./components/PresentationIsland'));
 
 
 
@@ -64,6 +65,7 @@ const components: Record<string, React.ComponentType<any>> = {
   ImageLightbox,
   DashboardIsland,
   PromptFlowDiagram,
+  PresentationIsland,
 };
 
 // Helper to decode Base64 accurately with UTF-8 support
