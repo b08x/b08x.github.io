@@ -8,7 +8,7 @@ module Jekyll
     priority :low
 
     def generate(site)
-      pdf_dir = File.join(site.source, '_pdfs')
+      pdf_dir = File.join(site.source, 'assets/pdf')
       return unless Dir.exist?(pdf_dir)
 
       output_base = File.join(site.source, 'assets/images/slides')
