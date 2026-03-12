@@ -4,7 +4,7 @@ layout: base-shell
 
 {% capture slides_html %}
 {% for img in page.pdf_images %}
-<div class="pdf-slide-container w-full h-full flex items-center justify-center bg-black">
+<div class="pdf-slide-container w-full h-full flex items-center justify-center bg-background">
   <img src="{{ img | relative_url }}" class="max-w-full max-h-full object-contain shadow-2xl" alt="Slide {{ forloop.index }}">
 </div>
 ||SLIDE||
