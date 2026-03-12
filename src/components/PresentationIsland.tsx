@@ -198,23 +198,6 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
         });
     }, [currentFragmentIndex, currentSlideIndex]);
 
-    // 3D Tilt Effect
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!containerRef.current || !slideRef.current) return;
-        const { clientX, clientY } = e;
-        const { innerWidth, innerHeight } = window;
-        
-        const xPos = (clientX / innerWidth) - 0.5;
-        const yPos = (clientY / innerHeight) - 0.5;
-        
-        slideRef.current.style.transform = `perspective(1000px) rotateY(${xPos * 4}deg) rotateX(${-yPos * 4}deg)`;
-    };
-
-    const handleMouseLeave = () => {
-        if (slideRef.current) {
-            slideRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
-        }
-    };
 
     // Particles system
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -275,24 +258,6 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
         };
     }, []);
 
-    // Cursor trail
-    const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-    const [trailPos, setTrailPos] = useState({ x: 0, y: 0 });
-
-    useEffect(() => {
-        const moveCursor = (e: MouseEvent) => {
-            setCursorPos({ x: e.clientX, y: e.clientY });
-        };
-        window.addEventListener('mousemove', moveCursor);
-        return () => window.removeEventListener('mousemove', moveCursor);
-    }, []);
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setTrailPos(cursorPos);
-        }, 80);
-        return () => clearTimeout(timeout);
-    }, [cursorPos]);
 
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -315,11 +280,9 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
     return (
         <div 
             ref={containerRef}
-            className="h-screen w-screen flex flex-col bg-background text-foreground relative overflow-hidden select-none cursor-none"
+            className="h-screen w-screen flex flex-col bg-background text-foreground relative overflow-hidden select-none"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
         >
             <audio ref={audioRef} src="/assets/audio/jazzyfrenchy.mp3" loop />
             <canvas 
@@ -360,30 +323,7 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
                     transform: scale(1.5);
                     background-color: var(--accent);
                 }
-                .custom-cursor {
-                    width: 8px;
-                    height: 8px;
-                    background: var(--accent);
-                    border-radius: 50%;
-                    position: fixed;
-                    pointer-events: none;
-                    z-index: 10000;
-                    transform: translate(-50%, -50%);
-                }
-                .cursor-trail {
-                    width: 32px;
-                    height: 32px;
-                    border: 1px solid var(--accent);
-                    border-radius: 50%;
-                    position: fixed;
-                    pointer-events: none;
-                    z-index: 9999;
-                    transform: translate(-50%, -50%);
-                    transition: all 0.1s ease-out;
-                    opacity: 0.3;
-                }
                 main {
-                    transform-style: preserve-3d;
                 }
                 .control-btn {
                     pointer-events: auto;
@@ -397,15 +337,6 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
                 }
             `}</style>
             
-            {/* Custom Cursor */}
-            <div 
-                className="custom-cursor" 
-                style={{ left: cursorPos.x, top: cursorPos.y }}
-            />
-            <div 
-                className="cursor-trail" 
-                style={{ left: trailPos.x, top: trailPos.y }}
-            />
 
             {/* Exit Link */}
             <button
