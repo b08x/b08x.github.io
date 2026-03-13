@@ -72,6 +72,7 @@
 - *(presentation)* Add PDF-to-slides generator and layout
 - *(presentation)* Enhance PresentationIsland with interactive features and UI refinements
 - *(canvas)* Overhaul system with server-side processing and Spec 1.0 compliance
+- *(projects)* Implement interactive island component and layout overhaul
 
 ### 🐛 Bug Fixes
 
@@ -156,6 +157,8 @@
 - Remove planning files and refine aesthetic nomenclature
 - *(config)* Expand jekyll exclude list and update AGENTS metadata
 - Remove DashboardIsland component and its layout, updating related documentation and island registry.
+- Updated changelog
+- Add jekyll-optional-front-matter and refine project dependencies
 
 ### ◀️ Revert
 
