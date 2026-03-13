@@ -555,7 +555,7 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center w-full h-full text-emerald-400 font-mono animate-pulse">
+      <div className="flex items-center justify-center w-full h-full text-accent font-mono animate-pulse">
         Initializing System Map...
       </div>
     );
@@ -563,7 +563,7 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center w-full h-full text-red-500 font-mono p-4 border border-red-900 bg-red-950/20 rounded-lg">
+      <div className="flex flex-col items-center justify-center w-full h-full text-red-500 font-mono p-4 border border-red-500/50 bg-red-500/10 rounded-md">
         <div className="text-xl mb-2">SYSTEM ERROR</div>
         <div className="text-sm opacity-80">{error}</div>
         <div className="mt-4 text-xs opacity-50">Check homepage-canvas.json for syntax errors</div>
@@ -574,12 +574,7 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full bg-slate-950 border border-slate-800 rounded-lg relative"
-      style={{ 
-        minHeight: '80vh', 
-        cursor: isResponsiveMode ? 'default' : 'grab',
-        overflow: isResponsiveMode ? 'auto' : 'hidden'
-      }}
+      className="w-full h-full min-h-[600px] bg-background border border-border rounded-md relative cursor-grab overflow-hidden"
     >
       {/* Grid Background */}
       <div

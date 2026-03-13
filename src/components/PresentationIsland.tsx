@@ -230,7 +230,12 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
 
         const animate = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(100, 100, 100, 0.2)';
+            
+            // Read the CSS variable for the border color so the particles match the system grid
+            const computedStyle = getComputedStyle(document.documentElement);
+            const borderColor = computedStyle.getPropertyValue('--border').trim() || '#333';
+            ctx.fillStyle = borderColor;
+            ctx.globalAlpha = 0.3; // Manage opacity here instead
             
             particles.forEach(p => {
                 p.x += p.vx;
@@ -280,7 +285,7 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
     return (
         <div 
             ref={containerRef}
-            className="h-screen w-screen flex flex-col bg-background text-foreground relative overflow-hidden select-none"
+            className="fixed inset-0 z-[100] flex flex-col bg-background text-foreground overflow-hidden select-none"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
@@ -352,7 +357,7 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
                     ref={slideRef}
                     key={currentSlideIndex}
                     className={`w-full h-full flex flex-col items-center justify-center transition-transform duration-200 ease-out ${
-                        isPdf ? '' : 'max-h-full px-8 py-12 md:px-16 md:py-16 prose prose-invert prose-lg md:prose-2xl overflow-y-auto scrollbar-terminal'
+                        isPdf ? '' : 'max-h-full px-8 py-12 md:px-16 md:py-16 prose dark:prose-invert prose-lg md:prose-2xl overflow-y-auto scrollbar-terminal'
                     }`}
                     style={{ maxWidth: '100vw' }}
                     dangerouslySetInnerHTML={{ __html: processedSlides[currentSlideIndex] }}

@@ -7,6 +7,6 @@ layout: base-shell
 <hr />', '||SLIDE||' | replace: '
 <hr />', '||SLIDE||' | replace: '<p>||SLIDE||</p>', '||SLIDE||' | split: '||SLIDE||' %}
 
-<div id="presentation-root" class="w-screen h-screen overflow-hidden bg-background">
+<div id="presentation-root">
     <div data-island="PresentationIsland" data-props='{ "slides": {{ slides | jsonify | escape }} }'></div>
 </div>
