@@ -35,7 +35,7 @@ layout: base-shell
     </aside>
 
     <!-- MAIN CONTENT AREA -->
-    <main class="notes-and-video space-y-6">
+    <div class="notes-and-video space-y-6">
       <!-- Notes Grid (React Island) -->
       {% assign notebook_slug = page.path | split: "/" | last | split: "." | first %}
       {% assign sub_notes = site.notes | where: "notebook_id", notebook_slug %}
@@ -71,7 +71,7 @@ layout: base-shell
         {{ content }}
       </div>
 
-    </main>
+    </div>
 
     <!-- RIGHT SIDEBAR: Notebook Guide -->
     <aside

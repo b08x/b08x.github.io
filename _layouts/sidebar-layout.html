@@ -107,7 +107,7 @@ layout: base-shell
     {% assign content_width = "max-w-content" %}
     {% endif %}
     {% endif %}
-    <main id="main-content-column" class="col-span-2 min-w-0 {{ content_width }} mx-auto" aria-label="Main content">
+    <div id="main-content-column" class="col-span-2 min-w-0 {{ content_width }} mx-auto">
 
       <!-- Page Header -->
       {% unless page.hide_header %}
@@ -171,7 +171,7 @@ layout: base-shell
       </div>
       {% endif %}
 
-    </main>
+    </div>
 
     <!-- Right Sidebar (Optional) - Visible on LG+ screens -->
     {% if effective_right_sidebar %}
@@ -320,8 +320,3 @@ layout: base-shell
   });
 </script>
 {% endif %}
-
-
-</body>
-
-</html>
