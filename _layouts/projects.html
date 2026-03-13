@@ -1,0 +1,42 @@
+---
+layout: base-shell
+---
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10 max-w-content-2col">
+  <header class="mb-12 border-b border-border pb-8">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="text-accent text-sm font-mono">[ROOT] /</span>
+      <h1 class="text-3xl md:text-4xl font-mono font-bold text-foreground inline">
+        {{ page.title }}
+      </h1>
+    </div>
+    <p class="text-lg text-foreground/75 font-prose max-w-2xl">
+      {{ page.subtitle }}
+    </p>
+  </header>
+
+  {%- capture projects_json -%}
+    [
+      {%- for project in site.projects -%}
+        {
+          "id": {{ project.url | slugify | jsonify }},
+          "title": {{ project.title | jsonify }},
+          "url": {{ project.url | relative_url | jsonify }},
+          "thumbnail": {% if project.image %}{{ project.image | relative_url | jsonify }}{% else %}"/assets/img/placeholder-project.jpg"{% endif %},
+          "summary": {{ project.content | strip_html | truncatewords: 30 | jsonify }},
+          "tags": {% if project.tags %}{{ project.tags | jsonify }}{% else %}[]{% endif %},
+          "field": {{ project.field | default: "N/A" | jsonify }},
+          "tenor": {{ project.tenor | default: "N/A" | jsonify }},
+          "mode": {{ project.mode | default: "N/A" | jsonify }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  {%- endcapture -%}
+
+  <div data-island="ProjectsIsland" 
+       data-props='{"projects": {{ projects_json | strip_newlines | escape }} }'>
+    <div class="flex items-center justify-center py-20">
+      <div class="animate-pulse font-mono text-muted">HYDRATING_PROJECT_TERMINAL...</div>
+    </div>
+  </div>
+</div>
