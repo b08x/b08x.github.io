@@ -1,5 +1,5 @@
 ---
-layout: canvas
+layout: canvas-home
 permalink: /projects/sfl-prompt-studio
 title: SFL Prompt Studio
 ---

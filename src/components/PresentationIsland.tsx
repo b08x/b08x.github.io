@@ -235,7 +235,7 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
             const computedStyle = getComputedStyle(document.documentElement);
             const borderColor = computedStyle.getPropertyValue('--border').trim() || '#333';
             ctx.fillStyle = borderColor;
-            ctx.globalAlpha = 0.3; // Manage opacity here instead
+            ctx.globalAlpha = 0.08; // Much lower alpha for light mode compatibility
             
             particles.forEach(p => {
                 p.x += p.vx;
@@ -352,12 +352,12 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
                 [ EXIT_PRESENTATION ]
             </button>
 
-            <main className="flex-grow flex items-center justify-center overflow-hidden z-10">
+            <main className="flex-grow flex items-center justify-center overflow-hidden z-10 px-4 md:px-0">
                 <div
                     ref={slideRef}
                     key={currentSlideIndex}
-                    className={`w-full h-full flex flex-col items-center justify-center transition-transform duration-200 ease-out ${
-                        isPdf ? '' : 'max-h-full px-8 py-12 md:px-16 md:py-16 prose dark:prose-invert prose-lg md:prose-2xl overflow-y-auto scrollbar-terminal'
+                    className={`w-full max-w-4xl mx-auto bg-surface border border-border shadow-sm rounded-md transition-transform duration-200 ease-out ${
+                        isPdf ? '' : 'max-h-[90vh] p-8 md:p-12 prose dark:prose-invert prose-lg md:prose-2xl overflow-y-auto scrollbar-terminal'
                     }`}
                     style={{ maxWidth: '100vw' }}
                     dangerouslySetInnerHTML={{ __html: processedSlides[currentSlideIndex] }}
@@ -365,13 +365,13 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
             </main>
 
             {/* Navigation Dots */}
-            <div className="fixed left-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-50">
+            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-50 bg-background/80 backdrop-blur-md border border-border px-4 py-2 rounded-full shadow-sm">
                 {slides.map((_, i) => (
                     <button
                         key={i}
                         onClick={() => setCurrentSlideIndex(i)}
                         className={`nav-dot w-2 h-2 rounded-full border border-border ${
-                            i === currentSlideIndex ? 'active bg-accent' : 'bg-surface'
+                            i === currentSlideIndex ? 'active bg-accent' : 'bg-muted/50'
                         }`}
                         aria-label={`Go to slide ${i + 1}`}
                     />

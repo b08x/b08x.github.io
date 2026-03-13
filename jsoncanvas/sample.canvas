@@ -1,0 +1,48 @@
+---
+layout: null
+---
+{
+  "nodes": [
+    {
+      "id": "754a8ef995f366bc",
+      "type": "group",
+      "styleAttributes": {},
+      "x": -300,
+      "y": -460,
+      "width": 610,
+      "height": 200,
+      "label": "JSON Canvas Overhauled"
+    },
+    {
+      "id": "8132d4d894c80022",
+      "type": "file",
+      "file": "readme.md",
+      "styleAttributes": {},
+      "x": -280,
+      "y": -200,
+      "width": 570,
+      "height": 560,
+      "color": "6"
+    },
+    {
+      "id": "59e896bc8da20699",
+      "type": "text",
+      "text": "### Server-Side Processed\n\n- [About](/about)\n- [Notes](/notes)\n- [Liquid Time: {{ site.time }}]",
+      "styleAttributes": {},
+      "x": 40,
+      "y": -440,
+      "width": 250,
+      "height": 160
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge1",
+      "fromNode": "754a8ef995f366bc",
+      "fromSide": "bottom",
+      "toNode": "8132d4d894c80022",
+      "toSide": "top"
+    }
+  ],
+  "metadata": {}
+}
