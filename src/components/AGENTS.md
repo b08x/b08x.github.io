@@ -30,7 +30,6 @@ components/
 ├── CanvasExporter.tsx      # Canvas export functionality (120 LOC)
 ├── NotebookGuide.tsx       # Guide/tutorial (112 LOC)
 ├── OutputPanel.tsx         # Canvas output panel (106 LOC)
-├── DashboardIsland.tsx     # Dashboard widget container (80 LOC)
 ├── ImageLightbox.tsx       # React Photo View lightbox (60 LOC)
 ├── PhotoProviderWrapper.tsx # Photo View context provider (40 LOC)
 ├── ReactPlayerIsland.tsx   # react-player wrapper (42 LOC)
@@ -49,9 +48,8 @@ components/
 | Graph visualization | `GraphView.tsx` | D3 force simulation (web worker) |
 | Search | `SearchCmdK.tsx` | Cmd/Ctrl+K trigger |
 | Canvas system | `JsonCanvasViewer.tsx` + `Canvas*.tsx` | react-jsoncanvas |
-| Lightbox | `ImageLightbox.tsx` + `PhotoProviderWrapper.tsx` | React Photo View |
+| Lightbox | `ImageLightbox.tsx` | Photo View context provider |
 | Prompt flow | `PromptFlowDiagram.tsx` | YAML-driven visualization |
-| Dashboard | `DashboardIsland.tsx` | Widget container |
 
 ## CONVENTIONS
 
@@ -121,12 +119,12 @@ useEffect(() => {
 
 ## NOTES
 
-- **Total components:** 23 (22 .tsx + 1 .ts web worker)
-- **Total LOC:** 4,937 lines
+- **Total components:** 22 (21 .tsx + 1 .ts web worker)
+- **Total LOC:** 4,857 lines
 - **Test coverage:** Minimal (1 test file for KnowledgebaseCarousel)
-- **Recent additions:** PromptFlowDiagram (924 LOC, YAML-driven prompt flow), DashboardIsland (80 LOC)
+- **Recent additions:** PromptFlowDiagram (924 LOC, YAML-driven prompt flow)
 - **Largest component:** PromptFlowDiagram at 924 lines (dual HardcodedExampleView + YAMLDrivenView)
 - **Recent refactoring:** GraphView moved to canvas homepage as movable node
 - **Web worker:** graph.worker.ts handles D3 force simulation off main thread
 - **No subdirectories:** Flat structure, all components at root level
-- **Island registry:** 20 components registered in main.tsx components object (DashboardIsland, PromptFlowDiagram added)
+- **Island registry:** 19 components registered in main.tsx components object (PromptFlowDiagram added)

@@ -73,16 +73,6 @@ Jekyll static site with React island architecture for interactive components. Di
 |-----------|-----|---------|
 | `PromptFlowDiagram` | 924 | YAML-driven prompt flow visualizer with dual rendering modes |
 | `JsonCanvasViewer` | 613 | Canvas file visualization with D3 zoom/pan |
-| `KnowledgebaseCarousel` | 498 | H2-based content carousel with keyboard nav |
-| `VideoPlayer` | 410 | HLS video with segments, transcript search |
-| `CodeBlock` | 325 | Syntax highlighting + copy + theme sync |
-| `GraphView` | 312 | D3 force-directed note graph (web worker) |
-| `MermaidViewer` | 280 | Interactive diagrams with zoom/pan |
-| `MermaidModal` | 249 | Full-screen diagram modal |
-| `NotesGrid` | 221 | Grid display with detail view |
-| `SearchCmdK` | 153 | Command palette search (Cmd/Ctrl+K) |
-| `AudioPlayer` | 144 | Audio playback with waveform |
-| `DashboardIsland` | 80 | Dashboard widget container |
 
 ## CONVENTIONS
 

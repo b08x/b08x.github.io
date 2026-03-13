@@ -38,7 +38,6 @@ const CanvasExporter = React.lazy(() => import('./components/CanvasExporter'));
 const CanvasMinimap = React.lazy(() => import('./components/CanvasMinimap'));
 const JsonCanvasViewer = React.lazy(() => import('./components/JsonCanvasViewer'));
 const ImageLightbox = React.lazy(() => import('./components/ImageLightbox'));
-const DashboardIsland = React.lazy(() => import('./components/DashboardIsland'));
 const PromptFlowDiagram = React.lazy(() => import('./components/PromptFlowDiagram'));
 const PresentationIsland = React.lazy(() => import('./components/PresentationIsland'));
 
@@ -63,7 +62,6 @@ const components: Record<string, React.ComponentType<any>> = {
   CanvasMinimap,
   JsonCanvasViewer,
   ImageLightbox,
-  DashboardIsland,
   PromptFlowDiagram,
   PresentationIsland,
 };
