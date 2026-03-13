@@ -20,6 +20,7 @@ group :jekyll_plugins do
   gem 'jekyll_picture_tag'
   gem 'jekyll-postcss-v2'
   # gem 'jekyll-react-player'
+  gem 'jekyll-optional-front-matter'
   gem 'jekyll-sass-converter'
   gem 'jekyll-seo-tag'
   gem 'jekyll-sitemap'
@@ -40,9 +41,9 @@ end
 
 # gem 'jekyll-postcss', '~> 0.5.0'
 
-gem "racc", "~> 1.8"
+gem "racc"
 
-gem "pry", "~> 0.16.0"
-gem "pry-doc", "~> 1.7"
+gem "pry"
+gem "pry-doc"
 
-gem "json_canvas", "~> 0.1.0"
+gem "json_canvas"

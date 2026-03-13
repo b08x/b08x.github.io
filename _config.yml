@@ -67,6 +67,7 @@ plugins:
   - jekyll-spaceship
   - jekyll-tabs
   - jekyll-toc
+  - jekyll-optional-front-matter
 
 sass:
   sass_dir: _sass
