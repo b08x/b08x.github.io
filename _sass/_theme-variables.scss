@@ -41,6 +41,8 @@
   --destructive: #e74c3c;
   --destructive-foreground: #ffffff;
 
+  --heading-color: #c0392b; /* Slightly darker red for light mode contrast */
+
   /* === Borders & Inputs === */
   --input: #ffffff;
   --ring: var(--primary);
@@ -136,6 +138,8 @@
   --primary: #3498db;
   --secondary: #2c2c2c;
   --secondary-foreground: #e0e0e0;
+
+  --heading-color: #e85656; /* Brighter red for dark mode contrast */
 
   --muted-bg: #2c2c2c;
   --accent-bg: rgba(52, 152, 219, 0.2);
@@ -284,7 +288,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #e85656;
+  color: var(--heading-color);
   font-weight: var(--font-weight-semibold);
   line-height: 1.3;
 }

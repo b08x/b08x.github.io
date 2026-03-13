@@ -349,7 +349,12 @@ const JsonCanvasViewer: React.FC<JsonCanvasViewerProps> = ({ url }) => {
   if (error) return <div className="flex flex-col items-center justify-center w-full h-full text-red-500 font-mono p-4 border border-red-500/50 bg-red-500/10 rounded-md"><div>SYSTEM ERROR</div><div className="text-xs">{error}</div></div>;
 
   return (
-    <div ref={containerRef} className="w-full h-full bg-background border border-border rounded-md relative cursor-grab overflow-hidden min-h-[600px]">
+    <div 
+      ref={containerRef} 
+      className="w-full h-full bg-background border border-border rounded-md relative cursor-grab overflow-hidden min-h-[600px]"
+      role="region"
+      aria-label="Interactive system map"
+    >
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundSize: `${20 * scale}px ${20 * scale}px`, backgroundPosition: `${panOffset.x}px ${panOffset.y}px`, backgroundImage: `radial-gradient(circle, var(--border) 1px, transparent 1px)`, opacity: 0.1 }} />
       <Edges nodes={nodes} edges={edges} scale={scale} translateX={panOffset.x} translateY={panOffset.y} />
       {nodes.map(node => (
