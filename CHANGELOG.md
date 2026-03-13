@@ -65,6 +65,13 @@
 - *(layout)* Add mobile navigation drawer with responsive grid system
 - *(prompts)* Add PromptFlowDiagram and migrate pacing protocol
 - *(prompts)* Implement YAML-driven prompt flow visualization and layout
+- Introduce a presentation system with a dedicated layout, interactive slides, and media controls.
+- *(presentation)* Expand slide container to full width and refine splitting logic
+- Implement URL hash synchronization for slides and fragment stepping with a new presentation demo.
+- Pre-process presentation slides to inject fragment classes and centralize fragment visibility logic.
+- *(presentation)* Add PDF-to-slides generator and layout
+- *(presentation)* Enhance PresentationIsland with interactive features and UI refinements
+- *(canvas)* Overhaul system with server-side processing and Spec 1.0 compliance
 
 ### 🐛 Bug Fixes
 
@@ -97,6 +104,10 @@
 - *(layouts)* Migrate wiki layout to base-shell
 - *(assets)* Replace jquery lightbox with react component
 - *(layouts)* Remove collapsible sidebar and simplify layout structure
+- *(presentation)* Remove experimental 3D tilt and custom cursor effects
+- Update the PDF source path in the slide generator plugin.
+- *(layout)* Optimize DOM structure and enforce design tokens
+- *(ui)* Harmonize theme tokens and viewport handling
 
 ### 📚 Documentation
 
@@ -117,6 +128,9 @@
 - Update implementation session state - all phases complete
 - Update AGENTS.md files to reflect refactoring changes
 - *(AGENTS.md)* Update project metadata, file structure, and build notes
+- Sync knowledge base, add CHANGELOG.md and ansible ontology note
+- *(wikis)* Add SFL Prompt Studio V2 documentation
+- *(project)* Initialize and update AGENTS.md documentation across subsystems
 
 ### ⚡ Performance
 
@@ -130,6 +144,8 @@
 - Adjust text color opacity in multiple components and layouts for improved readability.
 - Adjust code block border radius to use `--radius-sm` variable.
 - Adjust code block border radius to use `--radius-sm` variable.
+- *(layout)* Update main content column span and clean up sidebar markup
+- *(ui)* Standardize design tokens and improve accessibility
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -139,6 +155,7 @@
 - Remove commented-out Sass variable definitions
 - Remove planning files and refine aesthetic nomenclature
 - *(config)* Expand jekyll exclude list and update AGENTS metadata
+- Remove DashboardIsland component and its layout, updating related documentation and island registry.
 
 ### ◀️ Revert
 
