@@ -88,7 +88,7 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-jupyter-notebook (0.0.6)
       jekyll
-    jekyll-link-attributes (1.0.1)
+    jekyll-link-attributes (2.0.1)
     jekyll-optional-front-matter (0.3.2)
       jekyll (>= 3.0, < 5.0)
     jekyll-paginate-v2 (3.0.0)
@@ -307,11 +307,11 @@ DEPENDENCIES
   jekyll-toc
   jekyll-typogrify
   jekyll_picture_tag
-  json_canvas (~> 0.1.0)
+  json_canvas
   nokogiri
-  pry (~> 0.16.0)
-  pry-doc (~> 1.7)
-  racc (~> 1.8)
+  pry
+  pry-doc
+  racc
   rouge
   rubocop
   rubocop-jekyll
