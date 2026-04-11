@@ -10,16 +10,15 @@ require 'fileutils'
 require 'yaml'
 require_relative 'utils/shared_tools'
 
-# Syncopated Notes - Liminal Deck Wizard (SharedTools Edition)
-# Generates macro-typographic slide decks via OpenRouter/Mistral
+# Syncopated Notes - Liminal Deck Wizard (Collection Edition)
+# Generates macro-typographic slide decks as Jekyll Collections
 # Powered by SharedTools, Kreuzberg, and ImageProcessing.
 
-# Load environment variables if available
+# Load environment variables
 begin
   require 'dotenv'
   Dotenv.load
 rescue LoadError
-  # Dotenv not installed, assuming ENV is already populated
 end
 
 # Configure RubyLLM
@@ -34,20 +33,10 @@ def fetch_openrouter_models
     response = Net::HTTP.get(uri)
     data = JSON.parse(response)
     models = data['data'].map { |m| m['id'] }
-    
-    priority = [
-      "deepseek/deepseek-r1",
-      "openai/o3-mini",
-      "openai/gpt-4o",
-      "anthropic/claude-3.5-sonnet",
-      "google/gemini-pro-1.5",
-      "mistralai/mistral-large-2411"
-    ]
-    
+    priority = ["deepseek/deepseek-r1", "openai/o3-mini", "openai/gpt-4o", "anthropic/claude-3.5-sonnet"]
     (priority & models) + (models - priority).first(50)
   rescue => e
-    puts "Warning: Could not fetch models from OpenRouter (#{e.message}). Using defaults."
-    ["deepseek/deepseek-r1", "openai/gpt-4o", "anthropic/claude-3.5-sonnet", "google/gemini-pro-1.5"]
+    ["deepseek/deepseek-r1", "openai/gpt-4o", "anthropic/claude-3.5-sonnet"]
   end
 end
 
@@ -65,119 +54,117 @@ class SlideDeckSchema < RubyLLM::Schema
 end
 
 def main
-  puts "─── LIMINAL DECK WIZARD (ELITE) ───"
+  puts "─── LIMINAL DECK WIZARD (COLLECTION) ───"
   
-  title = SharedTools::TUI.gum(:input, ["--placeholder 'Presentation Title'"])
-  exit if title.empty?
+  title = SharedTools::TUI.input(placeholder: "Presentation Title")
+  exit if title.nil? || title.empty?
   
-  media_path = SharedTools::TUI.gum(:input, ["--placeholder 'Optional: Path to PDF (Text) or Image (Vision) source'"])
+  deck_id = title.downcase.gsub(/[^a-z0-9]+/, '-')
+  
+  media_path = SharedTools::TUI.input(placeholder: "Optional: Path to PDF or Image")
+  media_path ||= ""
   
   extracted_context = ""
   processed_media = nil
 
   if !media_path.empty? && File.exist?(media_path)
     ext = File.extname(media_path).downcase
-    
     if ext == ".pdf"
-      SharedTools::TUI.spin("Parsing PDF via Kreuzberg") do
-        extracted_context = SharedTools::Media.parse_pdf(media_path)
-        puts "[SYSTEM] Extracted #{extracted_context&.length || 0} characters from PDF."
+      extracted_context = SharedTools::TUI.spin("Parsing PDF via Kreuzberg (OCR Enabled)") do
+        SharedTools::Media.parse_pdf(media_path)
       end
+      puts "[SYSTEM] Extracted #{extracted_context&.length || 0} characters from PDF."
     elsif [".jpg", ".jpeg", ".png", ".webp"].include?(ext)
-      SharedTools::TUI.spin("Optimizing image for vision") do
-        processed_media = SharedTools::Media.optimize_image(media_path)
-        puts "[SYSTEM] Image ready for multimodal analysis."
+      processed_media = SharedTools::TUI.spin("Optimizing image for vision") do
+        SharedTools::Media.optimize_image(media_path)
       end
+      puts "[SYSTEM] Image ready for multimodal analysis."
     end
   end
 
-  context_prompt = SharedTools::TUI.write("Refine presentation context or paste source text...")
+  context_prompt = SharedTools::TUI.write("Refine presentation context...")
   context = "#{extracted_context}\n\n#{context_prompt}".strip
+  exit 1 if context.empty?
   
-  if context.empty?
-    puts "[ERROR] No context provided. Exit."
-    exit 1
-  end
-  
-  slide_count_input = SharedTools::TUI.gum(:input, ["--placeholder 'Number of slides (default: 5)'", "--value 5"])
+  slide_count_input = SharedTools::TUI.input(placeholder: "Number of slides", value: "5")
   slide_count = slide_count_input.to_i > 0 ? slide_count_input.to_i : 5
   
-  provider_choice = SharedTools::TUI.gum(:choose, ["OpenRouter", "Mistral"])
-  
-  model = ""
-  
-  if provider_choice == "OpenRouter"
-    puts "Fetching latest models from OpenRouter..."
-    models = fetch_openrouter_models
-    model = `echo "#{models.join("\n")}" | gum filter --placeholder "Select Model"`.strip
+  provider = SharedTools::TUI.choose_provider
+  model = if provider == "OpenRouter"
+    # Fallback to direct CLI for filter as it's not in gum-ruby docs
+    `echo "#{fetch_openrouter_models.join("\n")}" | gum filter --placeholder "Select Model"`.strip
   else
-    model = SharedTools::TUI.gum(:choose, ["mistral-large-latest", "mistral-small-latest", "pixtral-large-latest"])
+    SharedTools::TUI.choose(["mistral-large-latest", "pixtral-large-latest"], header: "Select Mistral Model")
   end
 
-  chat = RubyLLM.chat(model: model)
-  
-  system_prompt = <<~PROMPT
-    You are a professional presentation architect specializing in macro-typographic design.
-    Generate a slide deck based on the provided context.
-    
-    DESIGN RULES:
-    1. Titles must be bold, high-impact statements (uppercase preferred).
-    2. Subtitles should provide clear context in sans-serif style.
-    3. Content must be HTML fragments (<ul>, <li>, <p>) using Tailwind classes.
-    4. Keep content minimal and high-contrast.
-    5. Tags should be 1-3 uppercase keywords.
-    6. Author should be "B08X_SYSTEMS".
-    
-    Output exactly #{slide_count} slides.
-  PROMPT
-
-  full_prompt = "Title: #{title}\nContext: #{context}"
-  
   puts "\n[SYSTEM] Generating slides via #{model}..."
   
   begin
+    chat = RubyLLM.chat(model: model)
     query = chat.with_schema(SlideDeckSchema)
     
-    if processed_media && model =~ /vl|gpt-4o|claude|gemini|pixtral/i
-      response = query.ask([
-        { role: 'system', content: system_prompt },
-        { role: 'user', content: full_prompt }
-      ], with: processed_media)
-    else
-      response = query.ask([
-        { role: 'system', content: system_prompt },
-        { role: 'user', content: full_prompt }
-      ])
-    end
-    
+    prompt_payload = [
+      { role: 'system', content: "Generate exactly #{slide_count} slides for a macro-typographic deck. Use HTML fragments for content." },
+      { role: 'user', content: "Title: #{title}\nContext: #{context}" }
+    ]
+
+    response = processed_media ? query.ask(prompt_payload, with: processed_media) : query.ask(prompt_payload)
     result = response.content
     
     if result && result['slides']
-      slug = title.downcase.gsub(/[^a-z0-9]+/, '-')
-      file_path = "pages/#{slug}.md"
+      # 1. Create Deck Folder
+      deck_dir = "_slides/#{deck_id}"
+      FileUtils.mkdir_p(deck_dir)
       
-      yaml_data = {
+      # 2. Generate Individual Slide Files
+      result['slides'].each_with_index do |slide, index|
+        order = (index + 1).to_s.rjust(2, '0')
+        file_name = "#{order}_#{slide['title'].to_s.downcase.gsub(/[^a-z0-9]+/, '_')[0..30]}.md"
+        file_path = File.join(deck_dir, file_name)
+        
+        # Defensive metadata normalization
+        # AI models often return "" for optional fields; Jekyll collections require valid values or omission.
+        clean_author = slide['author'].to_s.strip
+        clean_author = "B08X_SYSTEMS" if clean_author.empty?
+
+        clean_date = slide['date'].to_s.strip
+        clean_date = Time.now.strftime("%Y-%m-%d") if clean_date.empty?
+
+        clean_tags = slide['tags']
+        clean_tags = [] if clean_tags.nil? || !clean_tags.is_a?(Array)
+        clean_tags = clean_tags.map(&:to_s).reject(&:empty?)
+
+        slide_meta = {
+          "layout" => nil,
+          "deck_id" => deck_id,
+          "order" => index + 1,
+          "title" => slide['title'].to_s,
+          "subtitle" => slide['subtitle'].to_s,
+          "author" => clean_author,
+          "date" => clean_date,
+          "tags" => clean_tags
+        }
+        
+        File.write(file_path, "#{slide_meta.to_yaml}---\n#{slide['content']}")
+      end
+      
+      # 3. Create Main Page
+      page_path = "pages/#{deck_id}.md"
+      page_meta = {
         "layout" => "liminal-deck",
         "title" => title,
-        "permalink" => "/#{slug}/",
-        "slides" => result['slides']
+        "deck_id" => deck_id,
+        "permalink" => "/#{deck_id}/"
       }
+      File.write(page_path, "#{page_meta.to_yaml}---")
       
-      File.write(file_path, "#{yaml_data.to_yaml}---\n")
+      puts "\n✅ SUCCESS: #{slide_count} slides generated in #{deck_dir}"
+      puts "🔗 URL: /#{deck_id}/"
       
-      puts "\n✅ SUCCESS: Deck generated at #{file_path}"
-      puts "🔗 URL: /#{slug}/"
-      
-      if SharedTools::TUI.gum(:confirm, ["Open the file for review?"]) == "true"
-        system("code #{file_path}") || system("vim #{file_path}")
-      end
-    else
-      puts "\n❌ ERROR: Failed to generate structured slide data."
-      p result
+      system("code #{deck_dir}") if SharedTools::TUI.confirm("Open folder?")
     end
   rescue => e
-    puts "\n❌ CRITICAL ERROR: #{e.message}"
-    puts e.backtrace.first(5)
+    puts "\n❌ ERROR: #{e.message}"
   end
 end
 

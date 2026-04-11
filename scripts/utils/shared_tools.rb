@@ -1,26 +1,50 @@
 # frozen_string_literal: true
 
+require 'gum'
 require 'kreuzberg'
 require 'image_processing/vips'
 require 'fileutils'
-require 'shellwords'
 
 module SharedTools
   module TUI
-    def self.gum(command, args = [])
-      # Properly escape arguments to prevent shell injection and handle spaces
-      escaped_args = args.map { |a| Shellwords.escape(a.to_s) }.join(' ')
-      `gum #{command} #{escaped_args}`.strip
+    def self.input(placeholder:, value: nil)
+      Gum.input(placeholder: placeholder, value: value)
+    end
+
+    def self.confirm(text)
+      Gum.confirm(text)
+    end
+
+    def self.choose(options, header: nil)
+      Gum.choose(options, header: header)
     end
 
     def self.write(placeholder)
-      `gum write --placeholder #{Shellwords.escape(placeholder)} --width 80 --height 10`.strip
+      # gum-ruby doesn't seem to have a direct .write method in the snippets
+      # but it's usually just a thin wrapper. If it's missing, we fall back to CLI.
+      if Gum.respond_to?(:write)
+        Gum.write(placeholder: placeholder)
+      else
+        `gum write --placeholder "#{placeholder}" --width 80 --height 10`.strip
+      end
     end
 
     def self.spin(title, &block)
-      # Gum spin is tricky with Ruby blocks, so we'll just print a status
-      puts "[TUI] #{title}..."
-      yield if block_given?
+      if Gum.respond_to?(:spin)
+        # Ensure the block result is returned through the spin call
+        result = nil
+        Gum.spin(title) do
+          result = yield if block_given?
+        end
+        result
+      else
+        puts "[TUI] #{title}..."
+        yield if block_given?
+      end
+    end
+
+    def self.choose_provider
+      choose(["OpenRouter", "Mistral"], header: "Select Provider")
     end
   end
 
@@ -28,14 +52,13 @@ module SharedTools
     def self.parse_pdf(path)
       return nil unless File.exist?(path) && File.extname(path).downcase == '.pdf'
       
-      # Configure for high-fidelity extraction with OCR fallback for scanned docs
       config = Kreuzberg::Config::Extraction.new(
         use_cache: true,
         enable_quality_processing: true,
         ocr: Kreuzberg::Config::OCR.new(
           backend: "tesseract",
-          language: "eng", # Default to English
-          tesseract: Kreuzberg::Config::Tesseract.new(psm: 6)
+          language: "eng",
+          tesseract_config: Kreuzberg::Config::Tesseract.new(psm: 6)
         )
       )
       

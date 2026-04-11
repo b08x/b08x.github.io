@@ -101,6 +101,9 @@ collections:
   wikis:
     output: true
     permalink: /wikis/:slug
+  slides:
+    output: true
+    permalink: /slides/:path
 
 # Default layout for all pages
 defaults:
