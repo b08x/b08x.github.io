@@ -14,7 +14,8 @@
     "build:jekyll": "bundle exec jekyll clean && bundle exec jekyll build",
     "watch:js": "esbuild src/main.tsx --bundle --outfile=assets/js/dist/garden-widgets-v2.js --sourcemap --target=es2020 --watch --jsx=automatic --alias:react=./node_modules/react --alias:react-dom=./node_modules/react-dom",
     "watch:worker": "esbuild src/components/graph.worker.ts --bundle --outfile=assets/js/dist/graph.worker.js --sourcemap --target=es2020 --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deck:wizard": "./scripts/liminal_wizard.rb"
   },
   "repository": {
     "type": "git",

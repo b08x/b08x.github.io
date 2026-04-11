@@ -11,12 +11,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['var(--font-mono)', 'Courier New', 'Courier', 'monospace'],
+        mono: ['JetBrains Mono', 'var(--font-mono)', 'Courier New', 'Courier', 'monospace'],
         prose: ['var(--font-prose)', 'Hack', 'Consolas', 'monospace'],
-        sans: ['var(--font-prose)', 'Courier New', 'Courier', 'monospace'],
+        sans: ['Inter', 'var(--font-prose)', 'Courier New', 'Courier', 'monospace'],
       },
 
       colors: {
+        'liminal-bg': '#0A0A0A',
         // Core theme colors (from _theme-variables.scss)
         background: 'var(--background)',
         foreground: 'var(--foreground)',

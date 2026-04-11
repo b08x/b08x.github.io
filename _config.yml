@@ -1,8 +1,8 @@
 title: syncopated notes
-include: ["_pages"]
 
 wiki_page_generator:
   enabled: false
+
 exclude:
   - .gitignore
   - .containerignore
@@ -27,11 +27,17 @@ exclude:
   - README.md
   - refactor/
   - scripts/
-  - _pages/AGENTS.md
+  - pages/AGENTS.md
   - backlog.md
   - CHANGELOG.md
   - CLAUDE.md
   - GEMINI.md
+  - package.json
+  - tailwind.config.js
+  - tsconfig.json
+  - src/
+  - graph.json
+  - homepage-canvas.json
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ""
 
