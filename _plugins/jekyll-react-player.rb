@@ -47,7 +47,7 @@ module Jekyll
           controls: true
         }
         encoded_props = Base64.strict_encode64(props.to_json)
-        %(<div id="#{id}" data-island="ReactPlayerIsland" data-props="#{encoded_props}"></div>)
+        %(<div id="#{id}" data-island="ReactPlayerIsland" data-props="#{encoded_props}" class="react-island w-full min-h-[300px]"></div>)
       end
     end
   end

@@ -15,7 +15,7 @@
 <div data-island="{{ include.name }}"
      data-props='{{ include.props | jsonify | escape }}'
      {% if include.id %}id="{{ include.id }}"{% endif %}
-     {% if include.class %}class="{{ include.class }}"{% endif %}>
+     class="react-island w-full min-h-[1em] {{ include.class }}">
   <div class="island-placeholder" data-island-status="loading">
     {{- placeholder_content | strip -}}
   </div>

@@ -182,6 +182,7 @@ export const replaceCodeBlocksWithIslands = (
       // Create island container
       const island = doc.createElement('div');
       island.setAttribute('data-island', 'CodeBlock');
+      island.className = 'react-island w-full min-h-[1em] my-4';
       island.setAttribute(
         'data-props',
         JSON.stringify({
