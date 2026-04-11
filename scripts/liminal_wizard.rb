@@ -109,26 +109,43 @@ def main
     ]
 
     response = processed_media ? query.ask(prompt_payload, with: processed_media) : query.ask(prompt_payload)
-    result = response.content
     
-    if result && result['slides']
+    # Defensive parsing: handle raw strings or malformed JSON from providers
+    raw_result = response.content
+    result = if raw_result.is_a?(Hash)
+               raw_result
+             elsif raw_result.is_a?(String)
+               # Strip potential markdown blocks and parse
+               json_text = raw_result.gsub(/```json\n?|```/, '').strip
+               begin
+                 JSON.parse(json_text)
+               rescue JSON::ParserError
+                 nil
+               end
+             else
+               nil
+             end
+    
+    if result && result['slides'] && result['slides'].is_a?(Array)
       # 1. Create Deck Folder
       deck_dir = "_slides/#{deck_id}"
       FileUtils.mkdir_p(deck_dir)
       
+      # Use a single timestamp for the entire deck to ensure consistent sorting
+      deck_timestamp = Time.now
+      iso_date = deck_timestamp.strftime("%Y-%m-%d")
+      full_timestamp = deck_timestamp.strftime("%Y-%m-%d %H:%M:%S %z")
+
       # 2. Generate Individual Slide Files
       result['slides'].each_with_index do |slide, index|
         order = (index + 1).to_s.rjust(2, '0')
-        file_name = "#{order}_#{slide['title'].to_s.downcase.gsub(/[^a-z0-9]+/, '_')[0..30]}.md"
+        # Prepend date to filename like a Jekyll post
+        safe_title = slide['title'].to_s.downcase.gsub(/[^a-z0-9]+/, '_')[0..30]
+        file_name = "#{iso_date}-#{order}_#{safe_title}.md"
         file_path = File.join(deck_dir, file_name)
         
-        # Defensive metadata normalization
-        # AI models often return "" for optional fields; Jekyll collections require valid values or omission.
         clean_author = slide['author'].to_s.strip
         clean_author = "B08X_SYSTEMS" if clean_author.empty?
-
-        clean_date = slide['date'].to_s.strip
-        clean_date = Time.now.strftime("%Y-%m-%d") if clean_date.empty?
 
         clean_tags = slide['tags']
         clean_tags = [] if clean_tags.nil? || !clean_tags.is_a?(Array)
@@ -141,7 +158,7 @@ def main
           "title" => slide['title'].to_s,
           "subtitle" => slide['subtitle'].to_s,
           "author" => clean_author,
-          "date" => clean_date,
+          "date" => full_timestamp, # Always use creation timestamp
           "tags" => clean_tags
         }
         
@@ -154,6 +171,7 @@ def main
         "layout" => "liminal-deck",
         "title" => title,
         "deck_id" => deck_id,
+        "date" => full_timestamp,
         "permalink" => "/#{deck_id}/"
       }
       File.write(page_path, "#{page_meta.to_yaml}---")
@@ -162,9 +180,16 @@ def main
       puts "🔗 URL: /#{deck_id}/"
       
       system("code #{deck_dir}") if SharedTools::TUI.confirm("Open folder?")
+    else
+      puts "\n❌ ERROR: AI returned invalid data structure."
+      puts "Expected Hash with 'slides' array, got: #{result.class}"
+      puts "--- RAW CONTENT ---"
+      puts raw_result
+      puts "-------------------"
     end
   rescue => e
-    puts "\n❌ ERROR: #{e.message}"
+    puts "\n❌ CRITICAL ERROR: #{e.message}"
+    puts e.backtrace.first(10) if ENV['DEBUG']
   end
 end
 
