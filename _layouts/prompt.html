@@ -19,7 +19,7 @@ layout: base-shell
 
   <!-- React Island: PromptFlowDiagram -->
   {% if page.prompt_data %}
-  {% capture prompt_props %}{
+  {% capture prompt_props_json %}{
     "yamlData": {{ page.prompt_data | jsonify }},
     "showTechniques": {{ page.show_techniques | default: true }}
     {% if page.exclude_components or page.include_only_components %}
@@ -34,15 +34,15 @@ layout: base-shell
     }
     {% endif %}
   }{% endcapture %}
+  {% assign prompt_props = prompt_props_json | from_json %}
 
-  <div
-    data-island="PromptFlowDiagram"
-    data-props='{{ prompt_props | strip | base64_encode }}'
-  >
+  {% capture placeholder %}
     <div class="bg-surface rounded-lg border border-border p-8 text-center">
       <span class="text-muted font-mono">Loading prompt visualization...</span>
     </div>
-  </div>
+  {% endcapture %}
+
+  {% include island.html name="PromptFlowDiagram" props=prompt_props placeholder=placeholder %}
   {% endif %}
 
 </article>

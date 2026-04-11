@@ -1,0 +1,13 @@
+{%- comment -%}
+  React Island Bridge Component
+  Standardized serialization for DOM state hardening.
+  Usage: {% include island.html name="ComponentName" props=hash_or_array placeholder="Optional HTML" %}
+{%- endcomment -%}
+<div data-island="{{ include.name }}"
+     data-props='{{ include.props | jsonify | escape }}'
+     {% if include.id %}id="{{ include.id }}"{% endif %}
+     {% if include.class %}class="{{ include.class }}"{% endif %}>
+  {%- if include.placeholder -%}
+    {{ include.placeholder }}
+  {%- endif -%}
+</div>

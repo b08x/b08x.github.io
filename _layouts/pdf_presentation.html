@@ -13,6 +13,7 @@ layout: base-shell
 
 {% assign slides = slides_html | split: '||SLIDE||' %}
 
+{% assign pdf_props = slides | to_hash: "slides" | hash_set: "isPdf", true %}
 <div id="presentation-root">
-    <div data-island="PresentationIsland" data-props='{ "slides": {{ slides | jsonify | escape }}, "isPdf": true }'></div>
+    {% include island.html name="PresentationIsland" props=pdf_props %}
 </div>

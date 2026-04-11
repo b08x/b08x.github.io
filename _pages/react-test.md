@@ -8,10 +8,8 @@ permalink: /react-test/
 
 This page tests the integration of React "Islands" within the Jekyll static site.
 
-{% capture hello_props %}{ "name": "Gemini Explorer" }{% endcapture %}
-<div data-island="HelloGarden" data-props='{{ hello_props | base64_encode }}'>
-  <!-- React will mount here -->
-  <p>Loading React component...</p>
-</div>
+{% assign hello_props = '{"name": "Gemini Explorer"}' | from_json %}
+{% capture placeholder %}<p>Loading React component...</p>{% endcapture %}
+{% include island.html name="HelloGarden" props=hello_props placeholder=placeholder %}
 
 If you see a box with "Hello, Gemini Explorer" above, the integration is successful.

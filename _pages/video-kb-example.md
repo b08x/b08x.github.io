@@ -107,15 +107,17 @@ This page demonstrates the new **VideoPlayer** component with AI-generated timec
     { "timestamp": 410, "text": "Perfect! The installation is now complete and verified." }
   ]
 }}{% endcapture %}
-<div data-island="VideoPlayer" data-props='{{ video_props | base64_encode }}'>
+{% assign video_props_parsed = video_props | from_json %}
+{% capture placeholder %}
   <!-- VideoPlayer component will mount here -->
-  <div style="padding: 2rem; text-align: center; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md);">
-    <p style="color: var(--text-secondary);">Loading video player...</p>
-    <p style="color: var(--text-tertiary); font-size: 0.875rem; margin-top: 0.5rem;">
+  <div class="p-8 text-center bg-surface border border-border rounded-lg">
+    <p class="text-foreground/75">Loading video player...</p>
+    <p class="text-muted text-sm mt-2">
       If this message persists, JavaScript may be disabled or the component failed to load.
     </p>
   </div>
-</div>
+{% endcapture %}
+{% include island.html name="VideoPlayer" props=video_props_parsed placeholder=placeholder %}
 
 ## About This Tutorial
 

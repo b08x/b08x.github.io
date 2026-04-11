@@ -7,6 +7,7 @@ layout: base-shell
 <hr />', '||SLIDE||' | replace: '
 <hr />', '||SLIDE||' | replace: '<p>||SLIDE||</p>', '||SLIDE||' | split: '||SLIDE||' %}
 
+{% assign presentation_props = slides | to_hash: "slides" %}
 <div id="presentation-root">
-    <div data-island="PresentationIsland" data-props='{ "slides": {{ slides | jsonify | escape }} }'></div>
+{% include island.html name="PresentationIsland" props=presentation_props %}
 </div>

@@ -7,14 +7,13 @@ layout: base-shell
   <div id="kb-content-source" style="display: none;">{{ content }}</div>
 
   <!-- React Island: KnowledgebaseCarousel -->
-  {% capture kb_props %}{"contentElementId":"kb-content-source"}{% endcapture %}
-  <div data-island="KnowledgebaseCarousel" data-props='{{ kb_props | base64_encode }}'
-    class="flex-grow flex flex-col min-h-0">
-    <!-- Loading placeholder (replaced by React component) -->
+  {% assign kb_props = "kb-content-source" | to_hash: "contentElementId" %}
+  {% capture placeholder %}
     <div class="flex-grow flex items-center justify-center">
       <div class="bg-surface border border-border rounded-lg p-8 text-center">
         <span class="text-muted font-mono text-sm">Loading knowledgebase...</span>
       </div>
     </div>
-  </div>
+  {% endcapture %}
+  {% include island.html name="KnowledgebaseCarousel" props=kb_props class="flex-grow flex flex-col min-h-0" placeholder=placeholder %}
 </div>

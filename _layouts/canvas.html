@@ -4,14 +4,12 @@
 
 <body class="m-0 p-0 w-screen h-screen overflow-hidden bg-slate-950">
   <!-- React Island: JsonCanvasViewer -->
-  <div id="root" 
-       data-island="JsonCanvasViewer" 
-       data-props='{"url": "{{ page.url | append: "/canvas.json" | relative_url }}"}' 
-       class="w-full h-full">
-  </div>
+  {% assign canvas_url = page.url | append: "/canvas.json" | relative_url %}
+  {% assign canvas_props = canvas_url | to_hash: "url" %}
+  {% include island.html name="JsonCanvasViewer" props=canvas_props id="root" class="w-full h-full" %}
 
   <!-- React Island: CanvasControls -->
-  <div data-island="CanvasControls"></div>
+  {% include island.html name="CanvasControls" %}
 
   <!-- Island Hydration -->
   <script src="{{ '/assets/js/dist/garden-widgets-v2.js' | relative_url }}" defer></script>
