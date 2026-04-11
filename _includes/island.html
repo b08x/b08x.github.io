@@ -3,11 +3,20 @@
   Standardized serialization for DOM state hardening.
   Usage: {% include island.html name="ComponentName" props=hash_or_array placeholder="Optional HTML" %}
 {%- endcomment -%}
+{%- capture placeholder_content -%}
+  {%- if include.placeholder -%}
+    {{ include.placeholder }}
+  {%- else -%}
+    <div class="animate-pulse bg-surface border border-border rounded-lg p-4 text-center">
+      <span class="text-muted font-mono text-sm">LOADING_{{ include.name | upcase }}...</span>
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
 <div data-island="{{ include.name }}"
      data-props='{{ include.props | jsonify | escape }}'
      {% if include.id %}id="{{ include.id }}"{% endif %}
      {% if include.class %}class="{{ include.class }}"{% endif %}>
-  {%- if include.placeholder -%}
-    {{ include.placeholder }}
-  {%- endif -%}
+  <div class="island-placeholder" data-island-status="loading">
+    {{- placeholder_content | strip -}}
+  </div>
 </div>

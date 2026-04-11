@@ -1,7 +1,19 @@
 // B08X_DEBUG_MARKER_20260104
 console.log("[Garden] Bundle version: 20260104-01");
 import React, { Suspense } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
+
+/**
+ * Epic 4: Hydration Mismatch Prevention
+ * StaticPlaceholder mirrors the server-rendered HTML exactly during the Suspense fallback phase.
+ */
+export const StaticPlaceholder: React.FC<{ html: string }> = ({ html }) => (
+  <div
+    className="island-placeholder"
+    data-island-status="loading"
+    dangerouslySetInnerHTML={{ __html: html }}
+  />
+);
 
 declare global {
   interface Window {
@@ -143,24 +155,39 @@ const mountIslands = () => {
         console.error(`[Garden] Raw props content:`, container.getAttribute('data-props'));
       }
 
-      const root = createRoot(container, {
-        onUncaughtError: (error, errorInfo) => {
-          console.error(`[Garden] React Error in island ${componentName}:`, error, errorInfo);
-        }
-      });
+      // Epic 4: Detect placeholder for hydration matching
+      const placeholder = container.querySelector('.island-placeholder');
+      const innerHTML = placeholder ? placeholder.innerHTML : '';
+
+      const initialUI = (
+        <Suspense fallback={<StaticPlaceholder html={innerHTML} />}>
+          <Component {...props} />
+        </Suspense>
+      );
+
+      let root;
+      if (placeholder) {
+        root = hydrateRoot(container, initialUI, {
+          onUncaughtError: (error, errorInfo) => {
+            console.error(`[Garden] React Hydration Error in island ${componentName}:`, error, errorInfo);
+          }
+        });
+      } else {
+        root = createRoot(container, {
+          onUncaughtError: (error, errorInfo) => {
+            console.error(`[Garden] React Error in island ${componentName}:`, error, errorInfo);
+          }
+        });
+        root.render(initialUI);
+      }
 
       // Epic 3: Track root for unmounting
       if (window.__SYNC_NOTES_ROOTS__) {
         window.__SYNC_NOTES_ROOTS__.set(container, root);
       }
 
-      root.render(
-        <Suspense fallback={<div>Loading component...</div>}>
-          <Component {...props} />
-        </Suspense>
-      );
       container.setAttribute('data-mounted', 'true');
-      console.log(`[Garden] Successfully rendered island: ${componentName}`);
+      console.log(`[Garden] Successfully ${placeholder ? 'hydrated' : 'rendered'} island: ${componentName}`);
 
       // Epic 2: Flush queued events for this specific island
       if (window.__SYNC_NOTES_QUEUE__) {

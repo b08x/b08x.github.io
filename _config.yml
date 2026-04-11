@@ -29,6 +29,9 @@ exclude:
   - scripts/
   - _pages/AGENTS.md
   - backlog.md
+  - CHANGELOG.md
+  - CLAUDE.md
+  - GEMINI.md
 # You may need to change the base URL depending on your deploy configuration.
 baseurl: ""
 
