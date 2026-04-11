@@ -227,9 +227,9 @@ const KnowledgebaseCarousel: React.FC<KnowledgebaseCarouselProps> = ({
     }
 
     // Dispatch event to let TOC know slides are ready
-    window.dispatchEvent(new CustomEvent('kb-slides-ready', {
-      detail: { slides: parsed }
-    }));
+    window.__SYNC_NOTES_DISPATCH__('kb-slides-ready', {
+      slides: initialSlides
+    });
   }, [getContent, parseSlides]);
 
   /**
@@ -247,13 +247,11 @@ const KnowledgebaseCarousel: React.FC<KnowledgebaseCarouselProps> = ({
     window.history.replaceState(null, '', `#${slides[index].id}`);
 
     // Dispatch custom event for TOC synchronization
-    window.dispatchEvent(new CustomEvent('kb-slide-change', {
-      detail: {
-        slideIndex: index,
-        slideId: slides[index].id,
-        slideTitle: slides[index].title
-      }
-    }));
+    window.__SYNC_NOTES_DISPATCH__('kb-slide-change', {
+      slideIndex: index,
+      slideId: slides[index].id,
+      slideTitle: slides[index].title
+    });
 
     // Reset transition state after animation completes
     setTimeout(() => setIsTransitioning(false), 500);
@@ -343,20 +341,15 @@ const KnowledgebaseCarousel: React.FC<KnowledgebaseCarouselProps> = ({
     }
   };
 
-  /**
-   * Dispatch TOC generation event when slides are ready
-   */
   useEffect(() => {
     if (slides.length > 0) {
-      window.dispatchEvent(new CustomEvent('kb-slides-ready', {
-        detail: {
-          slides: slides.map((slide, index) => ({
-            id: slide.id,
-            title: slide.title,
-            index
-          }))
-        }
-      }));
+      window.__SYNC_NOTES_DISPATCH__('kb-slides-ready', {
+        slides: slides.map((slide, index) => ({
+          id: slide.id,
+          title: slide.title,
+          index
+        }))
+      });
 
       // Set initial active slide
       goToSlide(currentSlide);

@@ -23,8 +23,8 @@ const CanvasControls: React.FC<CanvasControlsProps> = () => {
   const handleZoomIn = () => window.canvasAPI?.zoomIn();
   const handleZoomOut = () => window.canvasAPI?.zoomOut();
   const handleReset = () => window.canvasAPI?.resetView();
-  const handleToggleOutput = () => {
-    window.dispatchEvent(new CustomEvent('canvas:toggleOutput'));
+  const toggleOutput = () => {
+    window.__SYNC_NOTES_DISPATCH__('canvas:toggleOutput', {});
   };
 
   return (

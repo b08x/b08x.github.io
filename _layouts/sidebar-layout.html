@@ -292,11 +292,8 @@ layout: base-shell
         // Handle click to navigate to slide
         link.addEventListener('click', (event) => {
           event.preventDefault();
-          window.dispatchEvent(new CustomEvent('kb-toc-click', {
-            detail: { slideIndex: index, slideId: slide.id }
-          }));
+          window.__SYNC_NOTES_DISPATCH__('kb-toc-click', { slideIndex: index, slideId: slide.id });
         });
-
         tocContainer.appendChild(link);
       });
     });

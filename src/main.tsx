@@ -6,6 +6,8 @@ import { createRoot } from 'react-dom/client';
 declare global {
   interface Window {
     mountIslands: () => void;
+    __SYNC_NOTES_QUEUE__: Array<{ target: any; eventName: string; detail: any }>;
+    __SYNC_NOTES_DISPATCH__: (eventName: string, detail: any, target?: any) => void;
     canvasAPI?: {
       getScale: () => number;
       getPanOffset: () => { x: number; y: number; };
@@ -151,6 +153,17 @@ const mountIslands = () => {
       );
       container.setAttribute('data-mounted', 'true');
       console.log(`[Garden] Successfully rendered island: ${componentName}`);
+
+      // Epic 2: Flush queued events for this specific island
+      if (window.__SYNC_NOTES_QUEUE__) {
+        const eventsForThisIsland = window.__SYNC_NOTES_QUEUE__.filter(ev => ev.target === container);
+        eventsForThisIsland.forEach(ev => {
+          console.log(`[Garden] Flushing queued event "${ev.eventName}" for ${componentName}`);
+          container.dispatchEvent(new CustomEvent(ev.eventName, { detail: ev.detail }));
+        });
+        // Remove processed events from queue
+        window.__SYNC_NOTES_QUEUE__ = window.__SYNC_NOTES_QUEUE__.filter(ev => ev.target !== container);
+      }
     } else {
       console.warn(`[Garden] Component "${componentName}" not found in registry`);
     }

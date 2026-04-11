@@ -108,9 +108,7 @@ window.canvasAPI = {
 };
 
 function dispatchCanvasUpdate() {
-  window.dispatchEvent(new CustomEvent('canvas:dataUpdate', {
-    detail: window.canvasAPI.getCanvasData()
-  }));
+  window.__SYNC_NOTES_DISPATCH__('canvas:dataUpdate', window.canvasAPI.getCanvasData());
 }
 
 function adjustCanvasToViewport() {

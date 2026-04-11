@@ -62,9 +62,7 @@ class ThemeManager {
     localStorage.setItem(this.STORAGE_KEY, theme);
 
     // Dispatch custom event for components that need to react
-    window.dispatchEvent(new CustomEvent('themechange', {
-      detail: { theme }
-    }));
+    window.__SYNC_NOTES_DISPATCH__('themechange', { theme });
   }
 
   /**

@@ -29,6 +29,23 @@
       const theme = localStorage.getItem('preferred-theme') ||
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       if (theme === 'dark') document.documentElement.classList.add('dark');
+
+      // Epic 2: Deterministic State Management & Event Orchestration
+      window.__SYNC_NOTES_QUEUE__ = [];
+      window.__SYNC_NOTES_DISPATCH__ = function (eventName, detail, target = window) {
+        const event = new CustomEvent(eventName, { detail });
+        // If target is an island, check if it's hydrated
+        if (target instanceof HTMLElement && target.hasAttribute('data-island')) {
+          if (target.getAttribute('data-mounted') === 'true') {
+            target.dispatchEvent(event);
+          } else {
+            window.__SYNC_NOTES_QUEUE__.push({ target, eventName, detail });
+          }
+        } else {
+          // If target is window or other global, just dispatch
+          target.dispatchEvent(event);
+        }
+      };
     })();
   </script>
   <script src="{{ '/assets/js/theme-manager.js' | relative_url }}"></script>
