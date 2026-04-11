@@ -6,8 +6,11 @@ import { createRoot } from 'react-dom/client';
 declare global {
   interface Window {
     mountIslands: () => void;
+    teardownIslands: () => void;
     __SYNC_NOTES_QUEUE__: Array<{ target: any; eventName: string; detail: any }>;
     __SYNC_NOTES_DISPATCH__: (eventName: string, detail: any, target?: any) => void;
+    __SYNC_NOTES_OBSERVERS__: IntersectionObserver[];
+    __SYNC_NOTES_ROOTS__: Map<Element, { unmount: () => void }>; // React roots
     canvasAPI?: {
       getScale: () => number;
       getPanOffset: () => { x: number; y: number; };
@@ -146,6 +149,11 @@ const mountIslands = () => {
         }
       });
 
+      // Epic 3: Track root for unmounting
+      if (window.__SYNC_NOTES_ROOTS__) {
+        window.__SYNC_NOTES_ROOTS__.set(container, root);
+      }
+
       root.render(
         <Suspense fallback={<div>Loading component...</div>}>
           <Component {...props} />
@@ -186,6 +194,11 @@ const mountPhotoProvider = () => {
     document.body.appendChild(providerRoot);
 
     const root = createRoot(providerRoot);
+
+    // Epic 3: Track PhotoProvider root for unmounting
+    if (window.__SYNC_NOTES_ROOTS__) {
+      window.__SYNC_NOTES_ROOTS__.set(providerRoot, root);
+    }
 
     // Group islands by gallery for potential future needs, but for now just mount them all
     // into the PhotoProvider context. They will be portaled back to their original nodes.

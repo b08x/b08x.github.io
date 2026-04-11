@@ -99,10 +99,20 @@ const PresentationIsland: React.FC<PresentationIslandProps> = ({ slides = [], is
             });
         }, { threshold: 0.1 });
 
+        // Epic 3: Register for global garbage collection
+        if (window.__SYNC_NOTES_OBSERVERS__) {
+            window.__SYNC_NOTES_OBSERVERS__.push(observer);
+        }
+
         const animatableElements = slideRef.current.querySelectorAll('p, h1, h2, h3, li, img, pre');
         animatableElements.forEach(el => observer.observe(el));
 
-        return () => observer.disconnect();
+        return () => {
+            observer.disconnect();
+            if (window.__SYNC_NOTES_OBSERVERS__) {
+                window.__SYNC_NOTES_OBSERVERS__ = window.__SYNC_NOTES_OBSERVERS__.filter(obs => obs !== observer);
+            }
+        };
     }, [currentSlideIndex, processedSlides]);
 
     const nextSlide = useCallback(() => {

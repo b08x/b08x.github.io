@@ -46,6 +46,39 @@
           target.dispatchEvent(event);
         }
       };
+
+      // Epic 3: Garbage Collection & Observer Lifecycle Management
+      window.__SYNC_NOTES_OBSERVERS__ = [];
+      window.__SYNC_NOTES_ROOTS__ = new Map(); // island container -> React root
+
+      window.teardownIslands = function () {
+        console.log(`[Garden] Teardown: Cleaning up ${window.__SYNC_NOTES_ROOTS__.size} islands and ${window.__SYNC_NOTES_OBSERVERS__.length} observers`);
+
+        // 1. Disconnect all observers
+        window.__SYNC_NOTES_OBSERVERS__.forEach(obs => {
+          if (obs && typeof obs.disconnect === 'function') {
+            obs.disconnect();
+          }
+        });
+        window.__SYNC_NOTES_OBSERVERS__ = [];
+
+        // 2. Unmount all React roots
+        window.__SYNC_NOTES_ROOTS__.forEach((root, container) => {
+          try {
+            root.unmount();
+            container.removeAttribute('data-mounted');
+          } catch (e) {
+            console.warn('[Garden] Failed to unmount island root:', e);
+          }
+        });
+        window.__SYNC_NOTES_ROOTS__.clear();
+
+        // 3. Clear event queue
+        window.__SYNC_NOTES_QUEUE__ = [];
+      };
+
+      // Hook into page lifecycle (Generic popstate as fallback for PJAX/Turbolinks)
+      window.addEventListener('popstate', window.teardownIslands);
     })();
   </script>
   <script src="{{ '/assets/js/theme-manager.js' | relative_url }}"></script>
