@@ -73,11 +73,18 @@
 - *(presentation)* Enhance PresentationIsland with interactive features and UI refinements
 - *(canvas)* Overhaul system with server-side processing and Spec 1.0 compliance
 - *(projects)* Implement interactive island component and layout overhaul
+- *(islands)* Add island helper plugin and serialization enforcer
+- *(islands)* Add event queue system for async island hydration
+- *(islands)* Add PresentationIsland component with lazy loading
+- *(hydration)* Add hydration mismatch prevention system
+- *(liminal)* Add LiminalDeck presentation system
+- *(liminal-deck)* Add fragment support, touch/wheel navigation, and demo content
 
 ### 🐛 Bug Fixes
 
 - Correct CSS load order for proper cascade
 - *(lightbox)* Add markup type to preset and correct liquid tag syntax
+- *(wizard)* Add defensive JSON parsing for LLM responses
 
 ### 💼 Other
 
@@ -109,6 +116,7 @@
 - Update the PDF source path in the slide generator plugin.
 - *(layout)* Optimize DOM structure and enforce design tokens
 - *(ui)* Harmonize theme tokens and viewport handling
+- *(liminal)* Add slides collection and refine deck layout
 
 ### 📚 Documentation
 
@@ -159,6 +167,8 @@
 - Remove DashboardIsland component and its layout, updating related documentation and island registry.
 - Updated changelog
 - Add jekyll-optional-front-matter and refine project dependencies
+- Updated changelog
+- Add island CSS classes and update default layout
 
 ### ◀️ Revert
 

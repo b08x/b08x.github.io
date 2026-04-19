@@ -26,7 +26,20 @@ codemap --diff               # What changed vs main
 codemap --deps .             # Dependency flow
 ```
 
-### Options
+---
+
+## Tooling & Automation
+
+### Liminal Wizard (Slide Deck Generator)
+
+Use `scripts/liminal_wizard.rb` to generate high-impact slide decks from markdown or text prompts.
+
+```bash
+# Example usage (run within project root)
+bundle exec ruby scripts/liminal_wizard.rb --help
+```
+
+### Quick Start Options
 
 | Flag | Description |
 |------|-------------|

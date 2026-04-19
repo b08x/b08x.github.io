@@ -71,20 +71,22 @@ The site is designed as a personal knowledge base and note-taking system, featur
 ### Content Management
 - **Digital Garden Notes**: Markdown-based notes with automatic bidirectional linking
 - **Wiki System**: Multi-page wikis with automated pagination (12 items/page)
+- **Liminal Deck System**: High-impact, macro-typography presentation system with fragment support
 - **Rich Media**: Embedded video tutorials, audio players, and interactive diagrams
 - **Code Highlighting**: Syntax highlighting for 19+ programming languages with copy-to-clipboard
 - **Search**: Command palette search (Cmd/Ctrl+K) with real-time filtering
 
 ### Interactive Components
 - **React Islands**: Progressive enhancement with island architecture
-- **18 React Components**: From simple code blocks to complex video players and canvas viewers
+- **20+ React Components**: From simple code blocks to complex video players, canvas viewers, and presentation decks
 - **Interactive Diagrams**: Zoomable/pannable Mermaid diagrams and D3 force graphs
+- **Hydration Resilience**: Event queue and defensive hydration for complex islands
 - **Theme Awareness**: Automatic dark/light mode synchronization
 - **Accessibility**: Full keyboard navigation, ARIA labels, screen reader support
 
 ### Jekyll Enhancements
-- **11 Custom Plugins**: Bidirectional links, Obsidian callouts, wiki generation, and more
-- **17 Layout Templates**: Specialized layouts for different content types
+- **12+ Custom Plugins**: Bidirectional links, Obsidian callouts, wiki generation, and more
+- **18 Layout Templates**: Specialized layouts for different content types including `liminal-deck`
 - **Automatic Processing**: Code block enhancement, Mermaid diagram rendering
 - **SEO Optimization**: Jekyll SEO tags, sitemaps, RSS feeds
 
@@ -169,18 +171,18 @@ b08x.github.io/
 ├── tailwind.config.js          # Tailwind CSS configuration
 ├── postcss.config.js           # PostCSS configuration
 │
-├── _layouts/                   # Jekyll layout templates (17 files) → [_layouts/AGENTS.md]
+├── _layouts/                   # Jekyll layout templates (18 files) → [_layouts/AGENTS.md]
 │   ├── default.html            # Base layout
 │   ├── home.html               # Homepage layout
 │   ├── note-sidebar.html       # Note detail view
 │   ├── wiki.html               # Wiki index with pagination
-│   ├── wiki-page.html          # Wiki detail view
+│   ├── liminal-deck.html       # Presentation deck layout
 │   └── ...                     # Other specialized layouts
 │
 ├── _includes/                  # Reusable Jekyll partials → [_includes/AGENTS.md]
 │   └── page_sidebar/           # Sidebar components
 │
-├── _plugins/                   # Custom Jekyll plugins (11 files) → [_plugins/AGENTS.md]
+├── _plugins/                   # Custom Jekyll plugins (12+ files) → [_plugins/AGENTS.md]
 │   ├── bidirectional_links_generator.rb
 │   ├── wiki_page_generator.rb  # Wiki pagination system
 │   ├── obsidian_callouts.rb
@@ -192,18 +194,24 @@ b08x.github.io/
 │   ├── *.md                    # Individual notes
 │   └── nlp-ai-notebook-example/
 │
+├── _slides/                    # Liminal Deck slide collections
+│   └── {deck_id}/*.md          # Slide content for specific decks
+│
 ├── _data/                      # Jekyll data files
 │   └── wikis/                  # Wiki JSON data
 │       └── *.json              # Wiki page collections
 │
-├── _pages/                     # Static pages
+├── pages/                      # Static pages (formerly _pages/)
 │   ├── index.md                # Homepage
 │   ├── about.md                # About page
 │   └── ...
 │
+├── scripts/                    # Automation and generation tools
+│   └── liminal_wizard.rb       # LLM-powered deck generator
+│
 ├── src/                        # React components source
 │   ├── main.tsx                # Component registry & island hydration
-│   ├── components/             # React components (18 files) → [src/components/AGENTS.md]
+│   ├── components/             # React components (20+ files) → [src/components/AGENTS.md]
 │   │   ├── CodeBlock.tsx
 │   │   ├── VideoPlayer.tsx
 │   │   ├── MermaidViewer.tsx
@@ -424,7 +432,7 @@ pages:
 
 ## Component Library
 
-**18 Interactive React Components** with 4,084 total lines of code.
+**20+ Interactive React Components** with 4,500+ total lines of code.
 
 **See [src/components/README.md](src/components/README.md) or [src/components/AGENTS.md](src/components/AGENTS.md)** for comprehensive documentation including:
 - Component APIs and props interfaces
@@ -440,20 +448,16 @@ pages:
 | **KnowledgebaseCarousel** | 498  | H2-based content carousel with keyboard nav  |
 | **JsonCanvasViewer**      | 483  | Canvas file visualization and editing        |
 | **VideoPlayer**           | 410  | HLS video with segments, actions, transcript |
+| **LiminalDeckIsland**     | 161  | Macro-typography presentation system         |
+| **LiminalSlide**          | 170  | Individual slide with fragment support       |
 | **CodeBlock**             | 325  | Syntax-highlighted code with copy button     |
 | **GraphView**             | 312  | D3 force-directed graph visualization        |
 | **MermaidViewer**         | 280  | Interactive Mermaid diagrams with zoom/pan   |
 | **MermaidModal**          | 249  | Full-screen Mermaid diagram modal            |
-| **NotesGrid**             | 221  | Grid display for notes with detail view      |
+| **PresentationIsland**    | ~120 | Lazy-loaded presentation component           |
 | **SearchCmdK**            | 153  | Command palette search (Cmd+K)               |
 | **AudioPlayer**           | 144  | Audio playback with waveform                 |
-| **NotebookGuide**         | 112  | Guide/tutorial assistance                    |
-| **CanvasControls**        | ~150 | Canvas viewer control panel                  |
-| **CanvasExporter**        | ~120 | Canvas export functionality                  |
-| **CanvasMinimap**         | ~100 | Canvas minimap navigation                    |
-| **OutputPanel**           | ~80  | Canvas output display                        |
-| **NodeEditor**            | ~200 | Canvas node editing                          |
-| **ReactPlayerIsland**     | ~50  | React player wrapper component               |
+| **PaginationBadge**       | 20   | Minimal slide/page indicator                 |
 | **HelloGarden**           | 13   | Demo/test component                          |
 
 ---
@@ -786,7 +790,7 @@ See `package.json` and `Gemfile` for full list of dependencies and their license
 
 ---
 
-**Last Updated:** 2026-01-07
+**Last Updated:** 2026-04-19
 **Maintainer:** [b08x](https://github.com/b08x)
 **Status:** Active Development
 **Architecture:** Jekyll + React Islands + Tailwind CSS

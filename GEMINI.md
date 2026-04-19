@@ -4,7 +4,7 @@
 **Syncopated Notes** is a digital garden and personal knowledge base built with a unique "React Island" architecture integrated into a Jekyll static site. It combines the SEO and speed of static generation with the interactivity of modern React components.
 
 - **Primary Stack:** Jekyll (Ruby), React 19 (TypeScript), Tailwind CSS 4.x, esbuild.
-- **Key Features:** Digital garden notes with bidirectional links, automated multi-page wiki system, interactive React components (video players, graphs, diagrams), and an IDE/editor aesthetic.
+- **Key Features:** Digital garden notes with bidirectional links, automated multi-page wiki system, **Liminal Deck presentation system**, interactive React components (video players, graphs, diagrams), and an IDE/editor aesthetic.
 - **Architectural Pattern:** Island Architecture. Jekyll generates static HTML with `data-island` markers, which are then hydrated by React asynchronously.
 
 ---
@@ -54,6 +54,10 @@ The system automatically enhances standard Markdown elements into React islands:
 - **Mermaid Diagrams:** `img.mermaid` → `MermaidViewer`
 - **Images:** `picture[data-lightbox="true"]` → `ImageLightbox`
 
+**New Hydration Features:**
+- **Async Event Queue:** Prevents hydration race conditions.
+- **Mismatch Prevention:** Defensive hydration system for high-complexity components.
+
 ---
 
 ## Content Management
@@ -67,6 +71,13 @@ The system automatically enhances standard Markdown elements into React islands:
 - **Source Data:** JSON files in `_data/wikis/`.
 - **Generation:** The `wiki_page_generator.rb` plugin automatically creates paginated index pages and individual detail pages in `_wikis/`.
 - **CRITICAL:** **NEVER** edit files in `_wikis/` directly. They are overwritten on every build. Modify the JSON source instead.
+
+### 3. Liminal Deck System (`_slides/`)
+- **Concept:** High-impact, macro-typography presentation system.
+- **Source:** Markdown files in `_slides/` organized by deck ID.
+- **Generation:** Uses `_layouts/liminal-deck.html` and `LiminalDeckIsland` for interactive delivery.
+- **Features:** Fragment support, touch/wheel navigation, progress tracking.
+- **Wizard:** Use `scripts/liminal_wizard.rb` to generate new decks via LLM.
 
 ---
 
@@ -89,10 +100,13 @@ The system automatically enhances standard Markdown elements into React islands:
 ## Project Structure Map
 - `_data/wikis/`: Wiki source JSON.
 - `_includes/`: Reusable Liquid partials.
-- `_layouts/`: Jekyll templates (Primary: `sidebar-layout.html`).
+- `_layouts/`: Jekyll templates (Primary: `sidebar-layout.html`, `liminal-deck.html`).
 - `_notes/`: Digital garden Markdown content.
+- `_slides/`: Liminal Deck slide content.
+- `pages/`: Static pages (formerly `_pages/`).
 - `_plugins/`: Custom Ruby extensions.
 - `_sass/`: SCSS theme variables and styles.
+- `scripts/`: Tooling and automation (e.g., `liminal_wizard.rb`).
 - `assets/js/dist/`: Compiled JS bundles (ignored by git).
 - `src/components/`: React island source files.
 - `src/main.tsx`: Component registry and hydration logic.
@@ -111,4 +125,5 @@ The system automatically enhances standard Markdown elements into React islands:
 ## AI Agent Instructions
 - When adding features, check for an existing React component in `src/components/` that can be extended.
 - Refer to `AGENTS.md` files in subdirectories for more granular technical details on specific subsystems.
+- Use `scripts/liminal_wizard.rb` for generating high-quality slide deck content.
 - Use `npm run build` to verify that both the React bundle and Jekyll site build correctly after changes.
