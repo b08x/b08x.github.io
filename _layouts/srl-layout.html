@@ -1,0 +1,96 @@
+---
+layout: base-shell
+---
+{%- comment -%}
+  srl-layout.html — Syncopated Research Ledger
+  Full-viewport 3-column interface replacing sidebar-layout for notes.
+  
+  Front-matter keys consumed:
+    title          (string, required)
+    tags           (array)
+    video_url      (string)
+    feature        (string) "search" | "video" | "prose"  — default: prose
+    tenor_level    (number) 0–100                          — default: 45
+    active_domain  (string) pre-selected Field domain
+    active_mode    (string) "screencast" | "codeflux" | "canvas"
+    expand_graph   (bool)   expand topology minimap        — default: false
+    note_id        (string) short slug shown in meta row   — default: page slug
+    show_deck      (bool)   render HermesDSPYDeck instead  — default: false
+{%- endcomment -%}
+
+{%- assign slug = page.path | split: "/" | last | split: "." | first -%}
+{%- assign note_id = page.note_id | default: slug -%}
+{%- assign feature  = page.feature | default: "prose" -%}
+{%- assign tenor    = page.tenor_level | default: 45 -%}
+
+{%- comment -%} Build entangled nodes from bidirectional-links data if available {%- endcomment -%}
+{%- assign related_notes = site.notes | where_exp: "n", "n.url != page.url" | sort: "last_modified_at" | reverse | limit: 5 -%}
+
+{%- capture related_json -%}
+[
+  {%- for rn in related_notes -%}
+  {
+    "title":   {{ rn.title   | jsonify }},
+    "date":    {{ rn.last_modified_at | date: "%Y-%m-%d" | jsonify }},
+    "sim":     0.80,
+    "recall":  5,
+    "entropy": 0.40,
+    "url":     {{ rn.url | relative_url | jsonify }}
+  }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+]
+{%- endcapture -%}
+
+{%- capture srl_props -%}
+{
+  "title":          {{ page.title  | jsonify }},
+  "noteId":         {{ note_id     | jsonify }},
+  "date":           {{ page.last_modified_at | date: "%Y-%m-%d" | default: "" | jsonify }},
+  "tags":           {{ page.tags   | default: empty | jsonify }},
+  "content":        {{ content     | jsonify }},
+  "videoUrl":       {{ page.video_url | default: "" | jsonify }},
+  "feature":        {{ feature     | jsonify }},
+  "tenorLevel":     {{ tenor }},
+  "activeDomain":   {{ page.active_domain | default: "" | jsonify }},
+  "activeMode":     {{ page.active_mode   | default: "" | jsonify }},
+  "expandGraph":    {{ page.expand_graph  | default: false }},
+  "entangledNodes": {{ related_json | strip }}
+}
+{%- endcapture -%}
+
+{%- assign srl_props_hash = srl_props | from_json -%}
+
+<div class="h-screen overflow-hidden bg-liminal-bg">
+
+  {%- if page.show_deck -%}
+
+    {%- comment -%} Presentation / Liminal deck mode {%- endcomment -%}
+    {%- capture deck_props -%}
+    {
+      "author": {{ page.author | default: "B08X_SYSTEMS" | jsonify }},
+      "date":   {{ page.date   | date: "%Y-%m-%d" | jsonify }}
+    }
+    {%- endcapture -%}
+    {%- assign deck_hash = deck_props | from_json -%}
+    {%- capture deck_placeholder -%}
+      <div class="font-mono text-xs tracking-widest text-white/20 animate-pulse flex items-center justify-center h-screen">
+        INITIALIZING_DECK...
+      </div>
+    {%- endcapture -%}
+    {% include island.html name="HermesDSPYDeck" props=deck_hash placeholder=deck_placeholder %}
+
+  {%- else -%}
+
+    {%- comment -%} Standard SRL note layout {%- endcomment -%}
+    {%- capture srl_placeholder -%}
+      <div class="h-screen w-full flex items-center justify-center bg-liminal-bg">
+        <span class="font-mono text-xs tracking-widest text-white/20 animate-pulse">
+          LOADING_{{ page.title | upcase | truncate: 20, "" }}...
+        </span>
+      </div>
+    {%- endcapture -%}
+    {% include island.html name="SRLLayout" props=srl_props_hash placeholder=srl_placeholder %}
+
+  {%- endif -%}
+
+</div>

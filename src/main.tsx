@@ -59,6 +59,8 @@ const PromptFlowDiagram = React.lazy(() => import('./components/PromptFlowDiagra
 const PresentationIsland = React.lazy(() => import('./components/PresentationIsland'));
 const ProjectsIsland = React.lazy(() => import('./components/ProjectsIsland'));
 const LiminalDeckIsland = React.lazy(() => import('./components/LiminalDeckIsland'));
+const SRLLayout      = React.lazy(() => import('./components/SRLLayout'));
+const HermesDSPYDeck = React.lazy(() => import('./components/HermesDSPYDeck'));
 
 
 
@@ -85,6 +87,8 @@ const components: Record<string, React.ComponentType<any>> = {
   PresentationIsland,
   ProjectsIsland,
   LiminalDeckIsland,
+  SRLLayout,
+  HermesDSPYDeck,
 };
 
 // Helper to decode Base64 accurately with UTF-8 support

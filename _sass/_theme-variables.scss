@@ -546,3 +546,12 @@ footer,
 .token.number {
   color: #6ab0ff;
 }
+/* ── SRL accent tokens (Syncopated Research Ledger) ─────────────────────── */
+:root {
+  --srl-cyan:       #38bdf8;
+  --srl-rose:       #fb7185;
+  --srl-emerald:    #34d399;
+  --srl-bg-deep:    #0d0d0d;
+  --srl-border2:    #161616;
+  --srl-rose-muted: rgba(251, 113, 133, 0.12);
+}

@@ -11,6 +11,8 @@ exclude:
   - .ruby-gemset
   - .ruby-version
   - AGENTS.md
+  - assets/css/AGENTS.md
+  - assets/js/AGENTS.md
   - b08x.github.io.code-workspace
   - bin
   - cliff.toml
