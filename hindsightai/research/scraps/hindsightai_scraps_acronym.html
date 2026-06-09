@@ -1,73 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRAPS Acronym — HindsightAI Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0D0B09; --bg2: #111009;
+      --border: #2A2520; --amber: #C8962E;
+      --text: #EDE8DF; --text2: #A09890;
+      --muted: #6B6460; --dim: #3A3530;
+      --color-text-primary: #EDE8DF;
+      --color-text-secondary: #A09890;
+      --color-text-tertiary: #3A3530;
+      --color-border-tertiary: #2A2520;
+    }
+    body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(200,150,46,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(200,150,46,.035) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; z-index: 0; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 40px; border-bottom: 1px solid var(--border); background: rgba(13,11,9,.97); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 100; }
+    .logo { display: flex; align-items: center; gap: 9px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--text); text-decoration: none; }
+    .logo-mark { width: 26px; height: 26px; background: var(--amber); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--bg); font-weight: 500; }
+    .nav-links { display: flex; gap: 28px; list-style: none; font-size: 13px; color: var(--muted); }
+    .nav-links a { color: inherit; text-decoration: none; transition: color .15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--amber); }
+    .nav-cta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 7px 14px; background: transparent; border: 1px solid var(--amber); color: var(--amber); border-radius: 4px; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; }
+    .breadcrumb { padding: 14px 40px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--dim); letter-spacing: .04em; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+    .breadcrumb a { color: inherit; text-decoration: none; transition: color .15s; }
+    .breadcrumb a:hover { color: var(--amber); }
+    .breadcrumb .sep { margin: 0 8px; opacity: .4; }
+    .breadcrumb .current { color: var(--muted); }
+    .content { position: relative; z-index: 1; padding: 40px 40px 80px; }
+    footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 20px 40px; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+    .footer-left, .footer-right { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--dim); letter-spacing: .03em; }
+    @media (max-width: 768px) { nav { padding: 16px 20px; } .nav-links { display: none; } .breadcrumb, .content, footer { padding-left: 20px; padding-right: 20px; } }
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-.wrap{font-family:'IBM Plex Mono',monospace;max-width:600px;margin:0 auto;padding:2rem 1.5rem}
-.label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:1.2rem}
-.acronym-row{display:flex;gap:10px;margin-bottom:2rem;flex-wrap:wrap}
-.letter-block{display:flex;flex-direction:column;align-items:center;gap:6px}
-.letter{font-size:32px;font-weight:500;color:var(--color-text-primary);font-family:'Crimson Pro',serif;line-height:1}
-.word{font-size:10px;color:var(--color-text-tertiary);letter-spacing:.03em;white-space:nowrap}
-.word em{color:var(--color-text-secondary);font-style:normal;font-weight:500}
-.divider{width:1px;background:var(--color-border-tertiary);margin:0 2px;align-self:stretch;flex-shrink:0}
-.full-form{font-family:'Crimson Pro',serif;font-size:16px;line-height:1.55;color:var(--color-text-secondary);border-left:2px solid var(--color-border-tertiary);padding-left:1rem;margin-bottom:1.6rem;font-style:italic}
-.full-form strong{color:var(--color-text-primary);font-style:normal}
-.note{font-size:11px;color:var(--color-text-tertiary);border-top:.5px solid var(--color-border-tertiary);padding-top:.9rem;line-height:1.6}
-.note span{color:var(--color-text-secondary)}
-.alts{margin-top:1.2rem;padding-top:.9rem;border-top:.5px solid var(--color-border-tertiary)}
-.alt-label{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:.6rem}
-.alt{font-size:11px;color:var(--color-text-tertiary);line-height:1.7}
-.alt em{color:var(--color-text-secondary);font-style:normal}
-</style>
-<div class="wrap">
-  <div class="label">↩ hindsightai · proposed nomenclature</div>
-
-  <div class="acronym-row">
-    <div class="letter-block">
-      <span class="letter">S</span>
-      <span class="word"><em>Semantic</em></span>
-    </div>
-    <div class="divider"></div>
-    <div class="letter-block">
-      <span class="letter">C</span>
-      <span class="word"><em>Clustering</em></span>
-    </div>
-    <div class="divider"></div>
-    <div class="letter-block">
-      <span class="letter">R</span>
-      <span class="word"><em>Retrospective</em></span>
-    </div>
-    <div class="divider"></div>
-    <div class="letter-block">
-      <span class="letter">A</span>
-      <span class="word"><em>Archaeological</em></span>
-    </div>
-    <div class="divider"></div>
-    <div class="letter-block">
-      <span class="letter">P</span>
-      <span class="word"><em>Post-Hoc</em></span>
-    </div>
-    <div class="divider"></div>
-    <div class="letter-block">
-      <span class="letter">S</span>
-      <span class="word"><em>Segmentation</em></span>
+    /* ── Fragment styles ── */
+    .wrap { font-family: 'IBM Plex Mono', monospace; max-width: 600px; margin: 0 auto; padding: 2rem 0; }
+    .label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 1.2rem; }
+    .acronym-row { display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
+    .letter-block { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .letter { font-size: 32px; font-weight: 500; color: var(--color-text-primary); font-family: 'Crimson Pro', serif; line-height: 1; }
+    .word { font-size: 10px; color: var(--color-text-tertiary); letter-spacing: .03em; white-space: nowrap; }
+    .word em { color: var(--color-text-secondary); font-style: normal; font-weight: 500; }
+    .divider { width: 1px; background: var(--color-border-tertiary); margin: 0 2px; align-self: stretch; flex-shrink: 0; }
+    .full-form { font-family: 'Crimson Pro', serif; font-size: 16px; line-height: 1.55; color: var(--color-text-secondary); border-left: 2px solid var(--color-border-tertiary); padding-left: 1rem; margin-bottom: 1.6rem; font-style: italic; }
+    .full-form strong { color: var(--color-text-primary); font-style: normal; }
+    .note { font-size: 11px; color: var(--color-text-tertiary); border-top: .5px solid var(--color-border-tertiary); padding-top: .9rem; line-height: 1.6; }
+    .note span { color: var(--color-text-secondary); }
+    .alts { margin-top: 1.2rem; padding-top: .9rem; border-top: .5px solid var(--color-border-tertiary); }
+    .alt-label { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: .6rem; }
+    .alt { font-size: 11px; color: var(--color-text-tertiary); line-height: 1.7; }
+    .alt em { color: var(--color-text-secondary); font-style: normal; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/hindsightai/" class="logo"><div class="logo-mark">↩</div>HindsightAI</a>
+    <ul class="nav-links">
+      <li><a href="/hindsightai/">Platform</a></li>
+      <li><a href="/hindsightai/research/" class="active">Research</a></li>
+      <li><a href="#">Enterprise</a></li>
+      <li><a href="#">Blog</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Get Access</a>
+  </nav>
+  <div class="breadcrumb">
+    <a href="/">syncopated notes</a><span class="sep">/</span>
+    <a href="/hindsightai/">hindsightai</a><span class="sep">/</span>
+    <a href="/hindsightai/research/">research</a><span class="sep">/</span>
+    <span class="current">scraps · nomenclature</span>
+  </div>
+  <div class="content">
+    <div class="wrap">
+      <div class="label">↩ hindsightai · proposed nomenclature</div>
+      <div class="acronym-row">
+        <div class="letter-block"><span class="letter">S</span><span class="word"><em>Semantic</em></span></div>
+        <div class="divider"></div>
+        <div class="letter-block"><span class="letter">C</span><span class="word"><em>Clustering</em></span></div>
+        <div class="divider"></div>
+        <div class="letter-block"><span class="letter">R</span><span class="word"><em>Retrospective</em></span></div>
+        <div class="divider"></div>
+        <div class="letter-block"><span class="letter">A</span><span class="word"><em>Archaeological</em></span></div>
+        <div class="divider"></div>
+        <div class="letter-block"><span class="letter">P</span><span class="word"><em>Post-Hoc</em></span></div>
+        <div class="divider"></div>
+        <div class="letter-block"><span class="letter">S</span><span class="word"><em>Segmentation</em></span></div>
+      </div>
+      <div class="full-form"><strong>S</strong>emantic <strong>C</strong>lustering via <strong>R</strong>etrospective <strong>A</strong>rchaeological <strong>P</strong>ost-hoc <strong>S</strong>egmentation</div>
+      <div class="note">
+        <span>"God, I gotta work on that acronym."</span><br>
+        — the authors, upon submission<br><br>
+        The SCRAPS pipeline accepts that you are outputting scraps and attempts, retroactively, to determine which scraps belonged together. It does not judge the scraps. It has seen worse.
+      </div>
+      <div class="alts">
+        <div class="alt-label">rejected expansions</div>
+        <div class="alt">· <em>Segmentation by Computational Retroactive Archaeology of Post-hoc Semantics</em> — also valid, slightly more defensive</div>
+        <div class="alt">· <em>Sifting Conversational Residue via Archaeological Post-hoc Scrutiny</em> — "residue" was felt to be too on-the-nose</div>
+        <div class="alt">· <em>Statistical Clustering for Retrospective Analysis, Post-hoc Segmentation</em> — cowardly; does not mention the landfill</div>
+      </div>
     </div>
   </div>
-
-  <div class="full-form">
-    <strong>S</strong>emantic <strong>C</strong>lustering via <strong>R</strong>etrospective <strong>A</strong>rchaeological <strong>P</strong>ost-hoc <strong>S</strong>egmentation
-  </div>
-
-  <div class="note">
-    <span>"God, I gotta work on that acronym."</span><br>
-    — the authors, upon submission<br><br>
-    The SCRAPS pipeline accepts that you are outputting scraps and attempts, retroactively, to determine which scraps belonged together. It does not judge the scraps. It has seen worse.
-  </div>
-
-  <div class="alts">
-    <div class="alt-label">rejected expansions</div>
-    <div class="alt">· <em>Segmentation by Computational Retroactive Archaeology of Post-hoc Semantics</em> — also valid, slightly more defensive</div>
-    <div class="alt">· <em>Sifting Conversational Residue via Archaeological Post-hoc Scrutiny</em> — "residue" was felt to be too on-the-nose</div>
-    <div class="alt">· <em>Statistical Clustering for Retrospective Analysis, Post-hoc Segmentation</em> — cowardly; does not mention the landfill</div>
-  </div>
-</div>
+  <footer>
+    <span class="footer-left">© 2026 HindsightAI, Inc. · All rights reserved retrospectively.</span>
+    <span class="footer-right">research@hindsightai.com</span>
+  </footer>
+</body>
+</html>
