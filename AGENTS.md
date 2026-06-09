@@ -11,9 +11,9 @@ index.html                              # Landing page
 research/
   index.html                            # Research listing page
   scraps/
-    hindsightai_scraps_acronym.html     # SCRAPS acronym explainer (standalone fragment)
-    hindsightai_whitepaper_abstract.html # Paper abstract (standalone fragment)
-    hindsightai_latent_manifold.html    # Interactive canvas visualization (standalone fragment)
+    scraps-acronym.html                 # SCRAPS acronym explainer (standalone fragment)
+    whitepaper-abstract.html            # Paper abstract (standalone fragment)
+    latent-manifold.html                # Interactive canvas visualization (standalone fragment)
 ```
 
 - `index.html` — Full landing page with nav, hero, stats, feature cards, testimonial, footer.
