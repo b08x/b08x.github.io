@@ -1,0 +1,18 @@
+title: Syncopated Notes
+description: "Irregular notes and observations. b08x."
+baseurl: ""
+url: "https://b08x.github.io"
+
+markdown: kramdown
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - AGENTS.md
+  - LICENSE
+  - .trackboi
+  - .agents
+  - .codemap
+  - .tool-versions
+  - .mcp.json

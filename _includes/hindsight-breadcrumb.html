@@ -1,0 +1,3 @@
+  <div class="breadcrumb">
+    {% for crumb in page.breadcrumbs %}<a href="{{ crumb.url }}">{{ crumb.label }}</a><span class="sep">/</span>{% endfor %}<span class="current">{{ page.breadcrumb_current }}</span>
+  </div>

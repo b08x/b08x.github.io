@@ -2,33 +2,62 @@
 
 ## Overview
 
-This is a **GitHub Pages** site for **HindsightAI** — a satirical/fictional AI startup. It is a pure static HTML site with no build system, no package manager, no test framework, and no CI pipeline. Files are served directly by GitHub Pages (Jekyll backend, but no Jekyll source files are present — only flat HTML).
+This is a **Jekyll** site for **Syncopated Notes** (the landing page) and **HindsightAI** — a satirical/fictional AI startup whose research is hosted under `/hindsightai/`. It is built with Jekyll and deployed via GitHub Pages.
 
 ## Project Structure
 
 ```
-index.html                              # Landing page
-research/
-  index.html                            # Research listing page
-  scraps/
-    scraps-acronym.html                 # SCRAPS acronym explainer (standalone fragment)
-    whitepaper-abstract.html            # Paper abstract (standalone fragment)
-    latent-manifold.html                # Interactive canvas visualization (standalone fragment)
+_config.yml                             # Site config (title, url, exclude list, plugins)
+Gemfile / Gemfile.lock                  # Ruby dependencies (Jekyll + plugins)
+_layouts/
+  notes.html                            # Light-theme layout for the root landing page
+  hindsight.html                        # Dark-theme base layout for all HindsightAI pages
+_includes/
+  hindsight-nav.html                    # Shared nav bar (Platform/Research/Enterprise/Blog)
+  hindsight-breadcrumb.html             # Shared breadcrumb trail (driven by front matter)
+  hindsight-footer.html                 # Shared footer (driven by front matter)
+index.html                              # Landing page (layout: notes)
+hindsightai/
+  index.html                            # HindsightAI platform page (layout: hindsight)
+  research/
+    index.html                          # Research listing page (layout: hindsight)
+    scraps/
+      scraps-acronym.html               # SCRAPS acronym explainer (layout: hindsight)
+      whitepaper-abstract.html          # Paper abstract (layout: hindsight)
+      latent-manifold.html              # Interactive canvas visualization (layout: hindsight)
+skiing-smokers-game.html                # Self-contained canvas game (layout: null, passed through as-is)
 ```
-
-- `index.html` — Full landing page with nav, hero, stats, feature cards, testimonial, footer.
-- `research/index.html` — Research hub with paper cards, expandable abstract panel (vanilla JS `toggleAbstract()`).
-- `research/scraps/` — Self-contained HTML fragments (no `<html>`/`<body>` wrappers) for individual paper components. These are linked from the research page but are not embedded via any include mechanism.
 
 ## How to Edit
 
-- **No build step.** Edit HTML files directly and push. GitHub Pages serves them.
-- **No local dev server required.** Open files in a browser or use any static file server.
-- **No tests, linting, or formatting tools** are configured.
+- **Local dev server:** `bundle exec jekyll serve` — rebuilds on change and serves at `http://localhost:4000`.
+- **Build only:** `bundle exec jekyll build` — outputs to `_site/` (gitignored).
+- **Install/update deps:** `bundle install`.
+- **No tests, linting (beyond rubocop in the `:development` group), or CI pipeline** are configured.
+
+## Shared Layout / Include Pattern
+
+All HindsightAI-family pages (`hindsightai/index.html`, `hindsightai/research/index.html`, and the three `research/scraps/*.html` pages) use `layout: hindsight`, which provides:
+
+- The shared `<head>` (fonts, reset, `:root` CSS variables, nav/breadcrumb/footer/grid-background CSS).
+- `{% include hindsight-nav.html %}` — the nav bar. Highlights "Research" when `page.nav_active == "research"`.
+- `{% include hindsight-breadcrumb.html %}` — rendered only if `page.breadcrumbs` is set in front matter; iterates `page.breadcrumbs` (each with `label`/`url`) and ends with `page.breadcrumb_current`.
+- `{{ content }}` — the page's own markup and page-specific `<style>`/`<script>` blocks.
+- `{% include hindsight-footer.html %}` — text falls back to defaults via `page.footer_left` / `page.footer_right` (`| default: ...`), overridable per page.
+
+The root landing page (`index.html`) uses `layout: notes`, a separate light-theme layout with its own `<head>`/CSS — it does not share anything with the `hindsight` layout.
+
+`skiing-smokers-game.html` uses `layout: null` — front matter is parsed (so Liquid still runs) but no layout wraps the content, keeping the page fully self-contained.
+
+### Adding a new HindsightAI page
+
+1. Add front matter: `layout: hindsight`, `title`, `description`, `nav_active` (`"platform"` or `"research"`), and optionally `breadcrumbs` / `breadcrumb_current` / `footer_left` / `footer_right`.
+2. Write page-specific CSS in a `<style>` block and markup in the page body — both go into `{{ content }}`.
+3. To change the nav, breadcrumb, or footer across **all** HindsightAI pages, edit the relevant file in `_includes/` once.
 
 ## Design System
 
-Both pages share a dark theme defined via CSS custom properties. The landing page uses these variables:
+The HindsightAI dark theme is defined via CSS custom properties in `_layouts/hindsight.html`:
 
 ```
 --bg:       #0D0B09    (near-black background)
@@ -45,41 +74,46 @@ Both pages share a dark theme defined via CSS custom properties. The landing pag
 --red:      #B31B1B    (arXiv badge)
 ```
 
-The scraps pages use CSS variables with different names (e.g. `--color-text-primary`, `--color-border-tertiary`) — these are **not defined** in those files and will fall back to browser defaults. This appears intentional for fragment files meant to be viewed in a context where those variables are inherited, or simply an inconsistency.
+The `research/scraps/*.html` pages additionally alias `--color-text-primary`, `--color-text-secondary`, `--color-text-tertiary`, `--color-border-tertiary`, and `--border-radius-lg` in their own `:root` blocks (mapping onto the variables above) for fragments originally authored with different naming conventions.
 
 ### Typography
 
-- **Headings:** `Cormorant Garamond` (landing) / `Crimson Pro` (research) — serif, loaded from Google Fonts
+- **Headings:** `Cormorant Garamond` (landing/platform) / `Crimson Pro` (research) — serif, loaded from Google Fonts
 - **Body:** `Outfit` — sans-serif, loaded from Google Fonts
 - **Code/labels:** `IBM Plex Mono` — monospace, loaded from Google Fonts
 
-Each page loads its own Google Fonts `<link>` — there is no shared stylesheet.
+The combined Google Fonts `<link>` covering all of these families lives once in `_layouts/hindsight.html`.
 
 ### Layout Patterns
 
-- Max content width: `1100px` (landing) / `860px` (research)
+- Max content width: `1100px` (platform) / `860px` (research) / `740px` (scraps)
 - Sticky nav with `backdrop-filter: blur(8px)`
 - CSS grid for stats (4-col) and feature cards (3-col), collapsing to fewer columns at `768px` breakpoint
 - Decorative grid background via `body::before` pseudo-element
-- Glow effect via `body::after` pseudo-element (landing page only)
+- Glow effect via `body::after` pseudo-element (platform page only)
 
 ## Conventions
 
-- All CSS is inline in `<style>` blocks — no external stylesheets.
+- Page-specific CSS stays inline in `<style>` blocks within each page; shared CSS lives in `_layouts/hindsight.html`.
 - All JS is inline in `<script>` blocks — no external scripts.
-- No CSS framework, no JS framework, no dependencies.
+- No CSS framework, no JS framework.
 - Class names are semantic/kebab-case (e.g., `.feature-card`, `.paper-card`, `.btn-primary`).
 - Responsive breakpoint: `768px`.
-- Nav links to `#` are placeholders (Platform, Enterprise, Blog, Get Access).
-- The research page links to `/research/scraps/paper.html` which does **not exist** yet — it's a planned page.
+- Nav links to `#` are placeholders (Enterprise, Blog, Get Access).
+- All internal links are root-relative (`baseurl` is empty).
 
 ## Deployment
 
-Push to `main`. GitHub Pages serves from the root of the repository. No branch configuration files (e.g., `gh-pages`) or GitHub Actions workflows are present.
+Push to `main`. GitHub Pages builds the Jekyll site from the root of the repository. No GitHub Actions workflows are present.
 
 ## Gotchas
 
-- **No shared CSS/JS:** Each HTML file is self-contained. Changing the nav or footer requires editing every file.
-- **Scraps use undefined CSS variables:** The scraps pages reference `--color-text-primary`, `--color-border-tertiary`, etc., which are only defined in their local `<style>` blocks with different naming conventions from the main pages. Verify rendering after changes.
+- **`AGENTS.md` and other root dotfiles/configs are excluded** in `_config.yml`'s `exclude` list — `jekyll-optional-front-matter` would otherwise render `AGENTS.md` as a page.
 - **No 404 page:** GitHub Pages will use its default 404 if a linked resource is missing.
-- **Jekyll `.gitignore`:** The `.gitignore` is a Ruby/Jekyll template but no Jekyll source files (`_config.yml`, `_layouts/`, etc.) exist. The site is flat HTML.
+- **jekyll-spaceship** is enabled and may lightly reformat inline HTML/whitespace during build (harmless, but check rendered output after big content edits).
+
+<trackboi>
+## trackboi Skill
+
+When trackboi MCP tools are available, agents can load `.agents/skills/trackboi/SKILL.md` for details, then call `orient_agent` to catch up before updating cards, tracks, boards, or handoff notes. If `.trackboi`, `.etc/.trackboi`, or `.etc/trackboi` files are present but MCP tools are not available, agents may read those files to catch up on local context. Do not manually create, update, or delete trackboi records in the filesystem; use MCP tools for mutations.
+</trackboi>
