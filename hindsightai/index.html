@@ -7,38 +7,38 @@ footer_left: "© 2026 HindsightAI, Inc. · All past events are property of their
 footer_right: "SOC 2 Type II · GDPR · ISO 27001 · Temporally Compliant"
 ---
 <style>
-  body::after { content: ''; position: fixed; top: -80px; right: -80px; width: 420px; height: 420px; background: radial-gradient(circle, rgba(200,150,46,.06) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+  body::after { content: ''; position: fixed; top: -80px; right: -80px; width: 420px; height: 420px; background: radial-gradient(circle, rgba(181,101,74,.06) 0%, transparent 70%); pointer-events: none; z-index: 0; }
   .hero { padding: 72px 40px 0; position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
-  .badge { display: inline-flex; align-items: center; gap: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--amber); border: 1px solid var(--border2); background: rgba(200,150,46,.06); padding: 5px 12px; border-radius: 20px; margin-bottom: 28px; letter-spacing: .09em; text-transform: uppercase; }
+  .badge { display: inline-flex; align-items: center; gap: 7px; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--amber); border: 1px solid var(--border2); background: rgba(181,101,74,.06); padding: 5px 12px; border-radius: 20px; margin-bottom: 28px; letter-spacing: .09em; text-transform: uppercase; }
   .badge-dot { font-size: 8px; animation: blink 2.2s ease-in-out infinite; }
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .2; } }
-  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 60px); font-weight: 600; line-height: 1.06; letter-spacing: -.025em; max-width: 620px; margin-bottom: 20px; }
+  h1 { font-family: 'Space Mono', monospace; font-size: clamp(40px, 6vw, 60px); font-weight: 600; line-height: 1.06; letter-spacing: -.025em; max-width: 620px; margin-bottom: 20px; }
   h1 em { font-style: italic; color: var(--amber); }
   .hero-sub { font-size: 15px; color: var(--muted); max-width: 500px; line-height: 1.68; margin-bottom: 36px; font-weight: 300; }
   .hero-sub strong { color: var(--text2); font-weight: 400; }
   .hero-actions { display: flex; align-items: center; gap: 14px; margin-bottom: 56px; flex-wrap: wrap; }
-  .btn-primary { padding: 11px 22px; background: var(--amber); color: var(--bg); border: none; border-radius: 5px; font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: background .15s; text-decoration: none; display: inline-block; }
+  .btn-primary { padding: 11px 22px; background: var(--amber); color: var(--bg); border: none; border-radius: 5px; font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 500; cursor: pointer; transition: background .15s; text-decoration: none; display: inline-block; }
   .btn-primary:hover { background: var(--amber-hi); }
-  .btn-ghost { padding: 11px 22px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 5px; font-family: 'Outfit', sans-serif; font-size: 14px; cursor: pointer; transition: all .15s; text-decoration: none; display: inline-block; }
-  .btn-ghost:hover { color: var(--text); border-color: #3A3530; }
+  .btn-ghost { padding: 11px 22px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 5px; font-family: 'Space Mono', monospace; font-size: 14px; cursor: pointer; transition: all .15s; text-decoration: none; display: inline-block; }
+  .btn-ghost:hover { color: var(--text); border-color: var(--dim); }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
   .stat { padding: 24px 28px; border-right: 1px solid var(--border); }
   .stat:last-child { border-right: none; }
-  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--amber); line-height: 1; margin-bottom: 6px; }
-  .stat-label { font-size: 11px; color: var(--dim); font-family: 'IBM Plex Mono', monospace; letter-spacing: .025em; line-height: 1.45; }
+  .stat-num { font-family: 'Space Mono', monospace; font-size: 36px; font-weight: 600; color: var(--amber); line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: 11px; color: var(--dim); font-family: 'Space Mono', monospace; letter-spacing: .025em; line-height: 1.45; }
   .features { padding: 64px 40px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-  .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); margin-bottom: 28px; opacity: .8; }
+  .section-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); margin-bottom: 28px; opacity: .8; }
   .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .feature-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 24px; transition: border-color .2s; }
   .feature-card:hover { border-color: var(--border2); }
-  .feature-code { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--amber); letter-spacing: .08em; margin-bottom: 14px; opacity: .7; }
-  .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; margin-bottom: 10px; line-height: 1.2; }
+  .feature-code { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--amber); letter-spacing: .08em; margin-bottom: 14px; opacity: .7; }
+  .feature-title { font-family: 'Space Mono', monospace; font-size: 20px; font-weight: 500; margin-bottom: 10px; line-height: 1.2; }
   .feature-desc { font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 300; }
-  .feature-badge { display: inline-block; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #6A4A1A; background: rgba(200,150,46,.07); border: 1px solid var(--border2); padding: 3px 8px; border-radius: 3px; letter-spacing: .05em; }
+  .feature-badge { display: inline-block; margin-top: 14px; font-family: 'Space Mono', monospace; font-size: 9px; color: #7A4536; background: rgba(181,101,74,.07); border: 1px solid var(--border2); padding: 3px 8px; border-radius: 3px; letter-spacing: .05em; }
   .testimonial { margin: 0 40px 64px; max-width: 1020px; padding: 32px 32px 32px 40px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg2); position: relative; z-index: 1; }
-  .quote-mark { font-family: 'Cormorant Garamond', serif; font-size: 72px; color: var(--border); line-height: .4; float: left; margin-right: 12px; margin-top: 16px; user-select: none; }
-  .quote-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--text2); line-height: 1.55; margin-bottom: 16px; }
-  .quote-attr { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: .04em; }
+  .quote-mark { font-family: 'Space Mono', monospace; font-size: 72px; color: var(--border); line-height: .4; float: left; margin-right: 12px; margin-top: 16px; user-select: none; }
+  .quote-text { font-family: 'Space Mono', monospace; font-size: 18px; font-style: italic; color: var(--text2); line-height: 1.55; margin-bottom: 16px; }
+  .quote-attr { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: .04em; }
   .quote-attr span { color: var(--amber); }
   @media (max-width: 768px) {
     .hero { padding: 48px 20px 0; }
