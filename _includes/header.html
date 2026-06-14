@@ -1,0 +1,16 @@
+{% if page.layout == 'hindsight' %}
+  {% include hindsight-nav.html %}
+{% elsif page.layout == 'notes' or page.layout == 'home' or page.layout == 'post' %}
+  <header>
+    <div class="site-name">
+      <a href="/">{{ site.title }}</a>
+    </div>
+    <div class="site-meta">
+      <span>{{ site.description }}</span>
+      <span class="sep">/</span>
+      <a href="/about">About</a>
+      <span class="sep">/</span>
+      <a href="/archive">Archive</a>
+    </div>
+  </header>
+{% endif %}

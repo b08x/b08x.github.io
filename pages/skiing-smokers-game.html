@@ -1,5 +1,17 @@
 ---
 layout: null
+permalink: /skiing-smokers-game.html
+type: note
+order: 5
+title: "Skiing Smokers"
+link: "/skiing-smokers-game.html"
+description: "A simulator of athletic ambition meeting biological reality. Navigate the frozen wastes of middle age with only a pack of cigarettes and a crumbling sense of dignity."
+badge: "project"
+badge_class: "badge-blue"
+year: "2026"
+links:
+  - label: "play game"
+    url: "/skiing-smokers-game.html"
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +19,9 @@ layout: null
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cross Country Skiing for Middle-Aged Smokers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,23 +29,10 @@ layout: null
             box-sizing: border-box;
         }
 
-        :root {
-            --bg: #0D0B09;
-            --bg2: #111009;
-            --surface: #141210;
-            --border: #2A2520;
-            --border2: #3A2F1A;
-            --amber: #C8962E;
-            --amber-hi: #D4A843;
-            --text: #EDE8DF;
-            --text2: #A09890;
-            --muted: #6B6460;
-            --dim: #3A3530;
-            --red: #B31B1B;
-        }
-        
+        {% include theme-tokens.html %}
+
         body {
-            font-family: 'Courier New', monospace;
+            font-family: 'Space Mono', monospace;
             background: var(--bg);
             color: var(--text);
             overflow: hidden;
@@ -41,8 +43,8 @@ layout: null
             content: '';
             position: fixed;
             inset: 0;
-            background-image: linear-gradient(rgba(200,150,46,.035) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(200,150,46,.035) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(42,36,32,.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(42,36,32,.05) 1px, transparent 1px);
             background-size: 44px 44px;
             pointer-events: none;
             z-index: 0;
@@ -63,7 +65,7 @@ layout: null
         
         .ui-panel {
             position: absolute;
-            background: rgba(20, 18, 16, 0.9);
+            background: rgba(237, 230, 214, 0.9);
             color: var(--text);
             padding: 15px;
             border: 1px solid var(--border2);
@@ -174,18 +176,18 @@ layout: null
             content: '';
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(rgba(200,150,46,.035) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(200,150,46,.035) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(42,36,32,.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(42,36,32,.05) 1px, transparent 1px);
             background-size: 44px 44px;
             pointer-events: none;
         }
-        
+
         #start-screen h1 {
             font-size: 42px;
             margin-bottom: 20px;
             text-align: center;
             padding: 0 20px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Space Mono', monospace;
             color: var(--amber);
         }
         
@@ -205,7 +207,7 @@ layout: null
             border: none;
             padding: 15px 40px;
             font-size: 18px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Space Mono', monospace;
             cursor: pointer;
             border-radius: 4px;
             margin: 10px;
@@ -270,8 +272,8 @@ layout: null
             content: '';
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(rgba(200,150,46,.035) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(200,150,46,.035) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(42,36,32,.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(42,36,32,.05) 1px, transparent 1px);
             background-size: 44px 44px;
             pointer-events: none;
         }
@@ -384,7 +386,7 @@ layout: null
                     hasPoles: true,
                     polesBroken: false,
                     stunned: 0,
-                    color: '#C8962E',
+                    color: '#B5654A',
                     status: ''
                 }
             ],
@@ -432,15 +434,15 @@ layout: null
             }
             
             draw() {
-                ctx.fillStyle = 'rgba(200, 150, 46, 0.2)';
+                ctx.fillStyle = 'rgba(181, 101, 74, 0.2)';
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(this.x - this.size/3, this.y - this.size);
                 ctx.lineTo(this.x + this.size/3, this.y - this.size);
                 ctx.closePath();
                 ctx.fill();
-                
-                ctx.fillStyle = 'rgba(200, 150, 46, 0.4)';
+
+                ctx.fillStyle = 'rgba(181, 101, 74, 0.4)';
                 ctx.fillRect(this.x - this.size/10, this.y, this.size/5, this.size/4);
             }
         }
@@ -460,16 +462,16 @@ layout: null
             
             draw() {
                 if (this.type === 'rock') {
-                    ctx.fillStyle = '#3A3530';
+                    ctx.fillStyle = '#B0A492';
                     ctx.beginPath();
                     ctx.ellipse(this.x, this.y, this.width/2, this.height/2, 0, 0, Math.PI * 2);
                     ctx.fill();
-                    ctx.strokeStyle = 'rgba(200, 150, 46, 0.3)';
+                    ctx.strokeStyle = 'rgba(181, 101, 74, 0.3)';
                     ctx.stroke();
                 } else {
-                    ctx.fillStyle = '#2A2520';
+                    ctx.fillStyle = '#D2C7B4';
                     ctx.fillRect(this.x - this.width/2, this.y - this.height/2, this.width, this.height);
-                    ctx.strokeStyle = 'rgba(200, 150, 46, 0.3)';
+                    ctx.strokeStyle = 'rgba(181, 101, 74, 0.3)';
                     ctx.strokeRect(this.x - this.width/2, this.y - this.height/2, this.width, this.height);
                 }
             }
@@ -672,21 +674,21 @@ layout: null
             
             // Smoking
             if (player.smoking) {
-                ctx.strokeStyle = '#EDE8DF';
+                ctx.strokeStyle = '#8A7F72';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(px + 15, py - 45);
                 ctx.lineTo(px + 25, py - 48);
                 ctx.stroke();
-                
-                ctx.fillStyle = 'rgba(200, 150, 46, 0.4)';
+
+                ctx.fillStyle = 'rgba(181, 101, 74, 0.4)';
                 for (let i = 0; i < 3; i++) {
                     ctx.beginPath();
                     ctx.arc(px + 28 + i * 5, py - 52 - i * 5, 3 + i, 0, Math.PI * 2);
                     ctx.fill();
                 }
-                
-                ctx.fillStyle = '#C8962E';
+
+                ctx.fillStyle = '#B5654A';
                 ctx.beginPath();
                 ctx.arc(px + 25, py - 48, 2, 0, Math.PI * 2);
                 ctx.fill();
@@ -719,9 +721,9 @@ layout: null
             }
             
             draw() {
-                ctx.fillStyle = 'rgba(200, 150, 46, 0.15)';
+                ctx.fillStyle = 'rgba(181, 101, 74, 0.15)';
                 ctx.fillRect(this.x - this.width/2, this.y - this.height/2, this.width, this.height);
-                ctx.strokeStyle = 'rgba(212, 168, 67, 0.4)';
+                ctx.strokeStyle = 'rgba(201, 122, 94, 0.4)';
                 ctx.strokeRect(this.x - this.width/2, this.y - this.height/2, this.width, this.height);
             }
             
@@ -739,18 +741,18 @@ layout: null
             if (!game.running) return;
             
             // Clear
-            ctx.fillStyle = '#0D0B09';
+            ctx.fillStyle = '#EDE6D6';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
+
             const player = game.players[0];
-            
+
             // Ground (Latent Surface)
             game.groundOffset += player.speed / 2;
-            ctx.fillStyle = '#111009';
+            ctx.fillStyle = '#E3DBC8';
             ctx.fillRect(0, canvas.height * 0.55, canvas.width, canvas.height * 0.45);
-            
+
             // Grid Lines (Retrospective Matrix)
-            ctx.strokeStyle = 'rgba(200, 150, 46, 0.05)';
+            ctx.strokeStyle = 'rgba(42, 36, 32, 0.06)';
             ctx.lineWidth = 1;
             for (let i = 0; i < canvas.width; i += 44) {
                 const x = i - (game.groundOffset % 44);

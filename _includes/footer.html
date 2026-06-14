@@ -1,0 +1,12 @@
+{% if page.layout == 'hindsight' %}
+  {% include hindsight-footer.html %}
+{% elsif page.layout == 'notes' or page.layout == 'home' or page.layout == 'post' %}
+  <footer>
+    <div class="footer-text">
+      &copy; {{ site.time | date: '%Y' }} {{ site.title }}
+    </div>
+    <div class="footer-text">
+      Built with <a href="https://jekyllrb.com">Jekyll</a>
+    </div>
+  </footer>
+{% endif %}
