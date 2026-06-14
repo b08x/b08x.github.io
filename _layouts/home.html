@@ -1,0 +1,88 @@
+---
+layout: notes
+---
+<header>
+  <h1 class="site-name"><a href="/">Syncopated Notes</a></h1>
+  <div class="site-meta">
+    <span>b08x</span>
+    <span class="sep">·</span>
+    <span>irregular notes and observations</span>
+    <span class="sep">·</span>
+    <a href="https://github.com/b08x">github ↗</a>
+  </div>
+</header>
+
+<div class="rhythm">· — · · — — · —</div>
+
+{{ content }}
+
+<div class="section-label">Projects &amp; Notes</div>
+<div class="grid-2">
+{% assign notes = site.pages | where: "type", "note" | sort: "order" %}
+{% for note in notes %}
+  <article class="card note{% if note.stub %} stub-entry{% endif %}">
+    <div class="badge-row">
+      <span class="badge {{ note.badge_class }}">{{ note.badge }}</span>
+    </div>
+    {% if note.stub %}
+    <h2 class="note-title stub">{{ note.title }}</h2>
+    {% else %}
+    <h2 class="note-title"><a href="{{ note.link | relative_url }}">{{ note.title }}</a></h2>
+    {% endif %}
+    {% if note.description %}
+    <p class="note-desc">{{ note.description }}</p>
+    {% endif %}
+    {% if note.year or note.arxiv or note.links %}
+    <div class="note-meta">
+      {% assign has_prev = false %}
+      {% if note.arxiv %}<span>{{ note.arxiv }}</span>{% assign has_prev = true %}{% endif %}
+      {% if note.year %}{% if has_prev %}<span class="sep">·</span>{% endif %}<span>{{ note.year }}</span>{% assign has_prev = true %}{% endif %}
+      {% for link in note.links %}{% if has_prev %}<span class="sep">·</span>{% endif %}<a href="{{ link.url | relative_url }}">{{ link.label }} <span class="arrow">→</span></a>{% assign has_prev = true %}{% endfor %}
+    </div>
+    {% endif %}
+  </article>
+{% endfor %}
+</div>
+
+<footer>
+  <span class="footer-text">Syncopated Notes · <a href="https://github.com/b08x/b08x.github.io">source ↗</a></span>
+  <span class="footer-text">irregularly updated</span>
+</footer>
+
+{% assign posts = paginator.posts | default: site.posts %}
+{% if posts and posts.size > 0 %}
+<div class="section-label">Latest Posts</div>
+<div class="grid-2">
+{% for post in posts %}
+  <article class="card post-card">
+    <h2 class="note-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    <div class="note-meta">
+      <span>{{ post.date | date: "%B %-d, %Y" }}</span>
+      {% if post.tags and post.tags.size > 0 %}
+      <span class="sep">·</span>
+      <div class="badge-row">
+        {% for tag in post.tags %}<span class="badge badge-neutral">{{ tag }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% if post.excerpt %}<p class="note-desc">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>{% endif %}
+  </article>
+{% endfor %}
+</div>
+
+{% if paginator.total_pages > 1 %}
+<nav class="pager">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" class="pager-link">← newer</a>
+  {% else %}
+    <span class="pager-link disabled">← newer</span>
+  {% endif %}
+  <span class="pager-info">page {{ paginator.page }} / {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" class="pager-link">older →</a>
+  {% else %}
+    <span class="pager-link disabled">older →</span>
+  {% endif %}
+</nav>
+{% endif %}
+{% endif %}

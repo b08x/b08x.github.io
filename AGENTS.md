@@ -7,16 +7,23 @@ This is a **Jekyll** site for **Syncopated Notes** (the landing page) and **Hind
 ## Project Structure
 
 ```
-_config.yml                             # Site config (title, url, exclude list, plugins)
+_config.yml                             # Site config (title, url, collections, pagination, defaults, exclude list, plugins)
 Gemfile / Gemfile.lock                  # Ruby dependencies (Jekyll + plugins)
 _layouts/
-  notes.html                            # Light-theme layout for the root landing page
+  notes.html                            # Light-theme base layout (head/CSS) for the root landing page and anything that chains to it
+  home.html                             # Landing page body (layout: notes) — header, rhythm mark, paginated _notes list, footer
+  post.html                             # Blog post body (layout: notes) — back link, post header (title/date/tags), post content
   hindsight.html                        # Dark-theme base layout for all HindsightAI pages
 _includes/
+  theme-tokens.html                     # Shared "Field Note" CSS tokens/components (palette, badges, cards, post/code/blockquote/mermaid typography)
   hindsight-nav.html                    # Shared nav bar (Platform/Research/Enterprise/Blog)
   hindsight-breadcrumb.html             # Shared breadcrumb trail (driven by front matter)
   hindsight-footer.html                 # Shared footer (driven by front matter)
-index.html                              # Landing page (layout: notes)
+_notes/                                  # Collection (output: false) — entries shown in the paginated home page list
+  *.md                                   # Front matter: order, title, link, badge, badge_class, description, year, arxiv, offset, stub, links[]
+_posts/                                  # Standard Jekyll posts collection — layout: post via _config.yml defaults
+  YYYY-MM-DD-*.md                        # Front matter: title, tags[] (date comes from filename)
+index.md                                # Landing page (layout: home)
 hindsightai/
   index.html                            # HindsightAI platform page (layout: hindsight)
   research/
@@ -25,7 +32,8 @@ hindsightai/
       scraps-acronym.html               # SCRAPS acronym explainer (layout: hindsight)
       whitepaper-abstract.html          # Paper abstract (layout: hindsight)
       latent-manifold.html              # Interactive canvas visualization (layout: hindsight)
-skiing-smokers-game.html                # Self-contained canvas game (layout: null, passed through as-is)
+pages/
+  skiing-smokers-game.html               # Self-contained canvas game (layout: null), themed; permalink pinned to /skiing-smokers-game.html via _config.yml defaults
 ```
 
 ## How to Edit
@@ -45,9 +53,24 @@ All HindsightAI-family pages (`hindsightai/index.html`, `hindsightai/research/in
 - `{{ content }}` — the page's own markup and page-specific `<style>`/`<script>` blocks.
 - `{% include hindsight-footer.html %}` — text falls back to defaults via `page.footer_left` / `page.footer_right` (`| default: ...`), overridable per page.
 
-The root landing page (`index.html`) uses `layout: notes`, a separate light-theme layout with its own `<head>`/CSS — it does not share anything with the `hindsight` layout.
+The root landing page (`index.md`) uses `layout: home`, which itself declares `layout: notes` — `notes.html` provides the shared `<head>`/CSS/`.container` shell (it does not share anything with the `hindsight` layout), and `home.html` renders into `{{ content }}` with the header, rhythm mark, paginated `_notes` list, and footer.
 
-`skiing-smokers-game.html` uses `layout: null` — front matter is parsed (so Liquid still runs) but no layout wraps the content, keeping the page fully self-contained.
+### Home page and the `_notes` collection
+
+- `_notes/*.md` are entries in the `notes` collection (`output: false` in `_config.yml`, so no standalone `/notes/*.html` pages are generated — they only feed the home page list).
+- Front matter fields: `order` (sort key), `title`, `link` (the entry's target URL — **must** be named `link`, not `url`, because `url` is a reserved/computed attribute on Jekyll `Document` objects and would silently override it), `badge` / `badge_class` (`badge-blue|green|red|neutral`), `description`, `year`, `arxiv` (optional), `offset` (optional indent), `stub` (renders an italic non-link title with no description/meta), and `links` (array of `{label, url}` shown in the meta row).
+- `_config.yml` configures `jekyll-paginate-v2` for this collection: `collection: notes`, `per_page: 3`, `permalink: '/page/:num/'`, sorted by `order` ascending.
+- `_layouts/home.html` iterates `paginator.posts` (the `jekyll-paginate-v2` Liquid accessor — **not** `paginator.documents`) and renders the pagination nav (`.pagination`, styles in `_layouts/notes.html`) when `paginator.total_pages > 1`.
+- `index.md` must carry `pagination:\n  enabled: true` in its front matter — `jekyll-paginate-v2` only paginates pages that opt in.
+
+### Blog posts (`_posts/`)
+
+- Standard Jekyll posts collection, filenames `YYYY-MM-DD-title.md`. A `defaults` scope in `_config.yml` for `path: "_posts"` sets `layout: post`, so post front matter only needs `title` and optionally `tags: [...]`.
+- `_layouts/post.html` (chains to `layout: notes`) renders a "← back to notes" link, a `.post-header` (title + date + `tags` as `.badge-neutral` pills), and wraps `{{ content }}` in `.post-content`.
+- `.post-content` typography (headings, lists, links, tables, blockquotes, inline `code`, Rouge `.highlight` code blocks, and `.mermaid` images) is defined in `_includes/theme-tokens.html` so it's themed consistently with the rest of the "Field Note" palette — see Design System below.
+- Mermaid diagrams use plain ```` ```mermaid ```` fenced code blocks. `jekyll-spaceship`'s `mermaid-processor` (configured in `_config.yml`) renders them via `mermaid.ink` as `<img class="mermaid">` tags, with `themeVariables` set to match the site's cream/terracotta palette — requires network access at build/view time to load the diagram image.
+
+`pages/skiing-smokers-game.html` uses `layout: null` — front matter is parsed (so Liquid still runs) but no layout wraps the content, keeping the page fully self-contained. It still applies the shared "Field Note" palette/typography via `{% include theme-tokens.html %}`. A `defaults` entry in `_config.yml` scoped to `path: "pages"` sets `permalink: "/:basename:output_ext"`, so this page (and any future ones added under `pages/`) builds to the site root (e.g. `/skiing-smokers-game.html`) rather than `/pages/skiing-smokers-game.html`.
 
 ### Adding a new HindsightAI page
 
@@ -82,9 +105,11 @@ The site uses a shared "Field Note" theme — a cream/parchment palette with dar
 
 `theme-tokens.html` also defines the reusable components:
 
-- `.badge-row` / `.badge` + `.badge-blue` / `.badge-red` / `.badge-green` / `.badge-neutral` — small colored pill labels (used for the landing page's note tags)
+- `.badge-row` / `.badge` + `.badge-blue` / `.badge-red` / `.badge-green` / `.badge-neutral` — small colored pill labels (used for the landing page's note tags and post tags)
 - `.field-note`, `.field-note-meta`, `.field-note-title`, `.field-note-body` — bordered "index card" component
 - `.code-panel`, `.code-cmd`, `.code-output` — muted inset panel for command/output snippets
+- `.back-link`, `.post-header`, `.post-title`, `.post-meta` — blog post header (used by `_layouts/post.html`)
+- `.post-content` — typography for rendered Markdown: headings, lists, tables, `blockquote` (terracotta left border, `--bg2` background), inline `code`, Rouge `.highlight` code blocks (syntax token colors mapped onto the palette — keywords in `--amber`, strings in `--badge-green` (#6B7F52), comments muted/italic, numbers in `--badge-blue`), and `.mermaid img` (framed in a `--bg2` panel to match code blocks)
 
 The `research/scraps/*.html` pages alias `--color-text-primary`, `--color-text-secondary`, `--color-text-tertiary`, `--color-border-tertiary`, and `--border-radius-lg` in their own `:root` blocks directly onto `var(--text)`, `var(--text2)`, `var(--dim)`, `var(--border)` — changing the shared tokens re-skins these pages automatically. `latent-manifold.html`'s canvas/dark-panel widget intentionally keeps its own hardcoded dark colors as a contrasting "viewport" inset.
 
@@ -112,13 +137,14 @@ The `research/scraps/*.html` pages alias `--color-text-primary`, `--color-text-s
 
 ## Deployment
 
-Push to `main`. GitHub Pages builds the Jekyll site from the root of the repository. No GitHub Actions workflows are present.
+Push to `main`. `.github/workflows/jekyll.yml` builds the site with `bundle exec jekyll build` (full build, not GitHub Pages' restricted "safe mode") and deploys via GitHub Pages — so plugins outside the GH Pages whitelist (`jekyll-paginate-v2`, `jekyll-spaceship`, etc.) work fine.
 
 ## Gotchas
 
 - **`AGENTS.md` and other root dotfiles/configs are excluded** in `_config.yml`'s `exclude` list — `jekyll-optional-front-matter` would otherwise render `AGENTS.md` as a page.
 - **No 404 page:** GitHub Pages will use its default 404 if a linked resource is missing.
 - **jekyll-spaceship** is enabled and may lightly reformat inline HTML/whitespace during build (harmless, but check rendered output after big content edits).
+- **Mermaid diagrams render as remote images:** `jekyll-spaceship`'s mermaid-processor builds a `mermaid.ink` URL at build time and emits `<img class="mermaid" src="https://mermaid.ink/svg/...">` — the diagram itself isn't rendered locally, so it won't display in offline/sandboxed previews, but works once the page is served with network access.
 
 <trackboi>
 ## trackboi Skill

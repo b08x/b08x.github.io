@@ -1,0 +1,23 @@
+---
+layout: notes
+---
+<a href="/" class="back-link">← back to notes</a>
+
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      {% if page.date %}<span>{{ page.date | date: "%B %-d, %Y" }}</span>{% endif %}
+      {% if page.tags and page.tags.size > 0 %}
+        {% if page.date %}<span class="sep">·</span>{% endif %}
+        <div class="badge-row">
+          {% for tag in page.tags %}<span class="badge badge-neutral">{{ tag }}</span>{% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>

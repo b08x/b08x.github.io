@@ -103,3 +103,204 @@ body {
 .code-output {
   color: var(--text2);
 }
+
+/* ── Back link ── */
+.back-link {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: .03em;
+  color: var(--muted);
+  margin-bottom: 32px;
+  transition: color .15s;
+}
+
+.back-link:hover { color: var(--amber); }
+
+/* ── Post header ── */
+.post-header {
+  margin-bottom: 40px;
+}
+
+.post-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.post-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .03em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.post-meta .badge-row {
+  gap: 6px;
+}
+
+/* ── Post content typography ── */
+.post-content {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.post-content > * + * {
+  margin-top: 18px;
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4 {
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+  margin-top: 36px;
+  margin-bottom: 4px;
+}
+
+.post-content h1 { font-size: 22px; }
+.post-content h2 { font-size: 19px; }
+.post-content h3 { font-size: 16px; }
+
+.post-content h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text2);
+}
+
+.post-content h1:first-child,
+.post-content h2:first-child,
+.post-content h3:first-child,
+.post-content h4:first-child {
+  margin-top: 0;
+}
+
+.post-content strong { font-weight: 700; }
+.post-content em { color: var(--text2); }
+
+.post-content a {
+  color: var(--amber);
+  border-bottom: 1px solid var(--border2);
+}
+
+.post-content a:hover {
+  color: var(--amber-hi);
+  border-color: var(--amber-hi);
+}
+
+.post-content ul,
+.post-content ol {
+  padding-left: 1.4em;
+}
+
+.post-content li { margin-bottom: 6px; }
+.post-content li > p { margin-top: 0; }
+
+.post-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+/* ── Blockquote ── */
+.post-content blockquote {
+  border-left: 3px solid var(--amber);
+  background: var(--bg2);
+  padding: 12px 18px;
+  color: var(--text2);
+  font-style: italic;
+  border-radius: 0 4px 4px 0;
+}
+
+.post-content blockquote > *:first-child { margin-top: 0; }
+.post-content blockquote > *:last-child { margin-bottom: 0; }
+.post-content blockquote p { margin: 0; }
+
+/* ── Inline code ── */
+.post-content code {
+  font-family: 'Space Mono', monospace;
+  font-size: .88em;
+  background: var(--bg2);
+  color: var(--amber);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+/* ── Code blocks (rouge) ── */
+.post-content .highlighter-rouge { margin: 0; }
+
+.post-content .highlight {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.post-content .highlight pre { margin: 0; }
+
+.post-content .highlight code {
+  background: none;
+  color: var(--text);
+  padding: 0;
+  font-size: 1em;
+}
+
+/* Rouge syntax tokens */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cp, .highlight .cs { color: var(--muted); font-style: italic; }
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt { color: var(--amber); font-weight: 700; }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .ss, .highlight .il { color: #6B7F52; }
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .mb, .highlight .mx { color: var(--badge-blue); }
+.highlight .nf, .highlight .nc, .highlight .nn { color: var(--text2); font-weight: 700; }
+.highlight .nb, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .n { color: var(--text); }
+.highlight .o, .highlight .ow { color: var(--amber-hi); }
+.highlight .err { color: var(--red); background: none; }
+.highlight .gh, .highlight .gu { color: var(--text2); font-weight: 700; }
+.highlight .gd { color: var(--red); }
+.highlight .gi { color: #6B7F52; }
+
+/* ── Tables ── */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.post-content th,
+.post-content td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.post-content th {
+  background: var(--bg2);
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text2);
+}
+
+/* ── Mermaid diagrams ── */
+.post-content .mermaid,
+.post-content img.mermaid {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+}

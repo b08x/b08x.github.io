@@ -5,14 +5,92 @@ url: "https://b08x.github.io"
 
 markdown: kramdown
 
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/page/:num/'
+  title: ':title - page :num'
+  sort_field: 'date'
+  sort_reverse: true
+  trail:
+    before: 1
+    after: 1
+
+jekyll-spaceship:
+  mermaid-processor:
+    mode: default
+    syntax:
+      code: 'mermaid'
+      custom: ['@startmermaid', '@endmermaid']
+    css:
+      class: mermaid
+    config:
+      theme: base
+      themeVariables:
+        primaryColor: '#E3DBC8'
+        primaryTextColor: '#2A2420'
+        primaryBorderColor: '#B5654A'
+        lineColor: '#8A7F72'
+        secondaryColor: '#EDE6D6'
+        tertiaryColor: '#EDE6D6'
+        fontFamily: 'Space Mono, monospace'
+    src: https://mermaid.ink/svg/
+
+defaults:
+  - scope:
+      path: "_posts"
+    values:
+      layout: post
+
 exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
   - AGENTS.md
+  - GEMINI.md
   - LICENSE
   - .trackboi
   - .agents
   - .codemap
   - .tool-versions
   - .mcp.json
+
+permalink: pretty
+relative_permalinks: false
+
+plugins:
+  - jekyll-last-modified-at
+  - jekyll-feed
+  - jekyll-jupyter-notebook
+  - jekyll-link-attributes
+  - jekyll-paginate-v2
+  - jekyll-pandoc
+  - jekyll-sass-converter
+  - jekyll-sitemap
+  - jekyll-spaceship
+  - jekyll-tabs
+  - jekyll-toc
+  - jekyll-optional-front-matter
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+picture:
+  source: "assets/img"
+  output: "assets/img/generated"
+  suppress_warnings: true
+  nomarkdown: false
+
+use_html_extension: false
+
+# Set to `true` to open non-internal links in new tabs, or
+# set to `false` to open non-internal links in current tab.
+open_external_links_in_new_tab: true
+
+# External link security configuration (jekyll-link-attributes)
+external_links:
+  enabled: true
+  rel: noopener noreferrer
+  target: _blank
+  exclude:
