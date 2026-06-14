@@ -7,30 +7,18 @@
   <meta name="description" content="{{ page.description }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg:      #F4EFE6;
-      --bg2:     #EDE7DC;
-      --border:  #D4CABF;
-      --text:    #1C1814;
-      --text2:   #6B5A4E;
-      --muted:   #9A8A7E;
-      --dim:     #B8A898;
-      --accent:  #7D5A1E;
-      --accent2: #A07030;
-    }
+    {% include theme-tokens.html %}
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Fraunces', serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      font-optical-sizing: auto;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -55,10 +43,10 @@
       margin-bottom: 8px;
     }
 
-    .site-name a:hover { color: var(--accent); transition: color .15s; }
+    .site-name a:hover { color: var(--amber); transition: color .15s; }
 
     .site-meta {
-      font-family: 'DM Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 10.5px;
       color: var(--muted);
       letter-spacing: .03em;
@@ -73,7 +61,7 @@
       transition: color .15s;
     }
 
-    .site-meta a:hover { color: var(--accent); }
+    .site-meta a:hover { color: var(--amber); }
 
     .sep {
       opacity: .4;
@@ -101,33 +89,9 @@
       padding-left: 20px;
     }
 
-    .note-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .07em;
-      text-transform: uppercase;
+    .note .badge-row {
       margin-bottom: 9px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
-
-    .tag-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-
-    .tag-project  .tag-dot { background: #7A3020; }
-    .tag-research .tag-dot { background: #1A4A3A; }
-    .tag-note     .tag-dot { background: #3A3A6A; }
-    .tag-draft    .tag-dot { background: var(--dim); }
-
-    .tag-project  { color: #7A3020; }
-    .tag-research { color: #1A4A3A; }
-    .tag-note     { color: #3A3A6A; }
-    .tag-draft    { color: var(--muted); }
 
     .note-title {
       font-size: 22px;
@@ -138,7 +102,7 @@
     }
 
     .note-title a:hover {
-      color: var(--accent);
+      color: var(--amber);
       transition: color .15s;
     }
 
@@ -158,7 +122,7 @@
     }
 
     .note-meta {
-      font-family: 'DM Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 10px;
       color: var(--muted);
       letter-spacing: .03em;
@@ -169,11 +133,11 @@
     }
 
     .note-meta a {
-      color: var(--accent);
+      color: var(--amber);
       transition: color .15s;
     }
 
-    .note-meta a:hover { color: var(--accent2); }
+    .note-meta a:hover { color: var(--amber-hi); }
 
     .note-meta .arrow { font-size: 11px; }
 
@@ -189,7 +153,7 @@
 
     /* ── Section label ── */
     .section-label {
-      font-family: 'DM Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 10px;
       color: var(--dim);
       letter-spacing: .1em;
@@ -213,7 +177,7 @@
     }
 
     .footer-text {
-      font-family: 'DM Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 10px;
       color: var(--dim);
       letter-spacing: .03em;
@@ -224,11 +188,11 @@
       transition: color .15s;
     }
 
-    .footer-text a:hover { color: var(--accent); }
+    .footer-text a:hover { color: var(--amber); }
 
     /* ── Rhythm mark ── */
     .rhythm {
-      font-family: 'DM Mono', monospace;
+      font-family: 'Space Mono', monospace;
       font-size: 11px;
       color: var(--dim);
       letter-spacing: .2em;

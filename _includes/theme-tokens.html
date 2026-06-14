@@ -1,0 +1,105 @@
+/* ── Field Note theme tokens ── */
+:root {
+  --bg:        #EDE6D6;
+  --bg2:       #E3DBC8;
+  --surface:   #E3DBC8;
+  --border:    #D2C7B4;
+  --border2:   #C9B8A0;
+  --amber:     #B5654A;
+  --amber-hi:  #C97A5E;
+  --text:      #2A2420;
+  --text2:     #5C5248;
+  --muted:     #8A7F72;
+  --dim:       #B0A492;
+  --red:       #A8453A;
+
+  --badge-blue:    #5C7C99;
+  --badge-green:   #6B7F52;
+  --badge-red:     #A8453A;
+  --badge-neutral: #8A7F72;
+  --badge-text:    #F4EFE3;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+}
+
+/* ── Badge pills ── */
+.badge-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--badge-text);
+  padding: 4px 10px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+
+.badge-blue    { background: var(--badge-blue); }
+.badge-red     { background: var(--badge-red); }
+.badge-green   { background: var(--badge-green); }
+.badge-neutral { background: var(--badge-neutral); }
+
+/* ── Field note card ── */
+.field-note {
+  background: var(--bg);
+  border: 1px solid var(--text);
+  border-radius: 4px;
+  padding: 24px 28px;
+}
+
+.field-note-meta {
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.field-note-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  margin-bottom: 16px;
+}
+
+.field-note .badge-row {
+  margin-bottom: 16px;
+}
+
+.field-note-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.field-note-body:last-child {
+  margin-bottom: 0;
+}
+
+.code-panel {
+  background: var(--bg2);
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.code-cmd {
+  color: var(--amber);
+}
+
+.code-output {
+  color: var(--text2);
+}

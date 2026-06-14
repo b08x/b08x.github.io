@@ -57,32 +57,40 @@ The root landing page (`index.html`) uses `layout: notes`, a separate light-them
 
 ## Design System
 
-The HindsightAI dark theme is defined via CSS custom properties in `_layouts/hindsight.html`:
+The site uses a shared "Field Note" theme — a cream/parchment palette with dark ink text and Space Mono typography everywhere. Tokens live in `_includes/theme-tokens.html`, a raw-CSS partial included inside the `<style>` block of every layout (`_layouts/notes.html` and `_layouts/hindsight.html`):
 
 ```
---bg:       #0D0B09    (near-black background)
---bg2:      #111009    (slightly lighter surface)
---surface:  #141210    (card surface)
---border:   #2A2520    (standard border)
---border2:  #3A2F1A    (amber-tinted border, used on hover)
---amber:    #C8962E    (primary accent)
---amber-hi: #D4A843    (hover accent)
---text:     #EDE8DF    (primary text)
---text2:    #A09890    (secondary text)
---muted:    #6B6460    (muted text)
---dim:      #3A3530    (very dim)
---red:      #B31B1B    (arXiv badge)
+--bg:        #EDE6D6   (cream paper background)
+--bg2:       #E3DBC8   (panel / code surface)
+--surface:   #E3DBC8   (card surface)
+--border:    #D2C7B4   (standard border)
+--border2:   #C9B8A0   (stronger/hover border)
+--amber:     #B5654A   (primary accent — terracotta)
+--amber-hi:  #C97A5E   (hover accent)
+--text:      #2A2420   (primary ink)
+--text2:     #5C5248   (secondary text)
+--muted:     #8A7F72   (muted text)
+--dim:       #B0A492   (very dim)
+--red:       #A8453A   (arXiv badge)
+
+--badge-blue:    #5C7C99
+--badge-green:   #6B7F52
+--badge-red:     #A8453A
+--badge-neutral: #8A7F72
+--badge-text:    #F4EFE3
 ```
 
-The `research/scraps/*.html` pages additionally alias `--color-text-primary`, `--color-text-secondary`, `--color-text-tertiary`, `--color-border-tertiary`, and `--border-radius-lg` in their own `:root` blocks (mapping onto the variables above) for fragments originally authored with different naming conventions.
+`theme-tokens.html` also defines the reusable components:
+
+- `.badge-row` / `.badge` + `.badge-blue` / `.badge-red` / `.badge-green` / `.badge-neutral` — small colored pill labels (used for the landing page's note tags)
+- `.field-note`, `.field-note-meta`, `.field-note-title`, `.field-note-body` — bordered "index card" component
+- `.code-panel`, `.code-cmd`, `.code-output` — muted inset panel for command/output snippets
+
+The `research/scraps/*.html` pages alias `--color-text-primary`, `--color-text-secondary`, `--color-text-tertiary`, `--color-border-tertiary`, and `--border-radius-lg` in their own `:root` blocks directly onto `var(--text)`, `var(--text2)`, `var(--dim)`, `var(--border)` — changing the shared tokens re-skins these pages automatically. `latent-manifold.html`'s canvas/dark-panel widget intentionally keeps its own hardcoded dark colors as a contrasting "viewport" inset.
 
 ### Typography
 
-- **Headings:** `Cormorant Garamond` (landing/platform) / `Crimson Pro` (research) — serif, loaded from Google Fonts
-- **Body:** `Outfit` — sans-serif, loaded from Google Fonts
-- **Code/labels:** `IBM Plex Mono` — monospace, loaded from Google Fonts
-
-The combined Google Fonts `<link>` covering all of these families lives once in `_layouts/hindsight.html`.
+- **Everything:** `Space Mono` (400/700, regular + italic) — monospace, loaded from Google Fonts in each layout's `<head>`.
 
 ### Layout Patterns
 

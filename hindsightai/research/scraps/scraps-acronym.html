@@ -13,23 +13,23 @@ breadcrumb_current: "scraps · nomenclature"
 ---
 <style>
   :root {
-    --color-text-primary: #EDE8DF;
-    --color-text-secondary: #A09890;
-    --color-text-tertiary: #3A3530;
-    --color-border-tertiary: #2A2520;
+    --color-text-primary: var(--text);
+    --color-text-secondary: var(--text2);
+    --color-text-tertiary: var(--dim);
+    --color-border-tertiary: var(--border);
   }
   .content { position: relative; z-index: 1; padding: 40px 40px 80px; }
 
   /* ── Fragment styles ── */
-  .wrap { font-family: 'IBM Plex Mono', monospace; max-width: 600px; margin: 0 auto; padding: 2rem 0; }
+  .wrap { font-family: 'Space Mono', monospace; max-width: 600px; margin: 0 auto; padding: 2rem 0; }
   .label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 1.2rem; }
   .acronym-row { display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
   .letter-block { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .letter { font-size: 32px; font-weight: 500; color: var(--color-text-primary); font-family: 'Crimson Pro', serif; line-height: 1; }
+  .letter { font-size: 32px; font-weight: 500; color: var(--color-text-primary); font-family: 'Space Mono', monospace; line-height: 1; }
   .word { font-size: 10px; color: var(--color-text-tertiary); letter-spacing: .03em; white-space: nowrap; }
   .word em { color: var(--color-text-secondary); font-style: normal; font-weight: 500; }
   .divider { width: 1px; background: var(--color-border-tertiary); margin: 0 2px; align-self: stretch; flex-shrink: 0; }
-  .full-form { font-family: 'Crimson Pro', serif; font-size: 16px; line-height: 1.55; color: var(--color-text-secondary); border-left: 2px solid var(--color-border-tertiary); padding-left: 1rem; margin-bottom: 1.6rem; font-style: italic; }
+  .full-form { font-family: 'Space Mono', monospace; font-size: 16px; line-height: 1.55; color: var(--color-text-secondary); border-left: 2px solid var(--color-border-tertiary); padding-left: 1rem; margin-bottom: 1.6rem; font-style: italic; }
   .full-form strong { color: var(--color-text-primary); font-style: normal; }
   .note { font-size: 11px; color: var(--color-text-tertiary); border-top: .5px solid var(--color-border-tertiary); padding-top: .9rem; line-height: 1.6; }
   .note span { color: var(--color-text-secondary); }
