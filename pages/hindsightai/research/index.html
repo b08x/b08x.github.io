@@ -43,7 +43,7 @@ breadcrumb_current: "research"
   .btn-abstract:hover { background: rgba(181,101,74,.08); }
   .btn-abstract .arrow { display: inline-block; transition: transform .25s ease; }
   .btn-abstract.open .arrow { transform: rotate(90deg); }
-  .btn-secondary { font-family: 'Space Mono', monospace; font-size: 11px; padding: 7px 16px; background: transparent; border: 1px solid var(--border); color: var(--muted); border-radius: 4px; cursor: pointer; transition: all .15s; text-decoration: none; display: inline-block; }
+  .btn-secondary { font-family: 'Space Mono', monospace; font-size: 11px; padding: 7px 16px; background: transparent; border: 1px solid var(--border); color: var(--muted); border-radius: 4px; cursor: pointer; transition: color .15s, border-color .15s; text-decoration: none; display: inline-block; }
   .btn-secondary:hover { color: var(--text2); border-color: var(--dim); }
   .abstract-panel { border-top: 1px solid var(--border); padding: 0 28px; background: var(--bg); max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .4s ease; }
   .abstract-panel.open { max-height: 800px; padding: 28px; }
@@ -83,9 +83,9 @@ breadcrumb_current: "research"
         <p class="card-excerpt">We propose abandoning prescriptive parsing in favor of post-hoc unsupervised clustering, depositing conversational wreckage into a latent manifold and permitting semantic boundaries to self-reveal according to data gravity. HDBSCAN is employed as the principled instantiation of "wait and see."</p>
         <div class="card-actions">
           <button class="btn-abstract" id="abs-btn" onclick="toggleAbstract()">Abstract <span class="arrow">›</span></button>
-          <a href="/hindsightai/research/scraps/whitepaper-abstract" class="btn-secondary">Full paper ↗</a>
-          <a href="/hindsightai/research/scraps/latent-manifold" class="btn-secondary">Manifold ↗</a>
-          <a href="/hindsightai/research/scraps/scraps-acronym" class="btn-secondary">SCRAPS ↗</a>
+          <a href="/hindsightai/research/whitepaper-abstract/" class="btn-secondary">Full Paper ↗</a>
+          <a href="/hindsightai/research/latent-manifold/" class="btn-secondary">Manifold ↗</a>
+          <a href="/hindsightai/research/scraps-acronym/" class="btn-secondary">SCRAPS ↗</a>
         </div>
       </div>
       <div class="abstract-panel" id="abs-panel">

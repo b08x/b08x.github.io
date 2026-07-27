@@ -1,10 +1,9 @@
   <nav>
-    <a href="{% if page.nav_active == "platform" %}/{% else %}/hindsightai/{% endif %}" class="logo"><div class="logo-mark">↩</div>HindsightAI</a>
+    <a href="/hindsightai/" class="logo"><div class="logo-mark">↩</div>HindsightAI</a>
     <ul class="nav-links">
-      <li><a href="/hindsightai/">Platform</a></li>
+      <li><a href="/" title="Back to Syncopated Notes">Site Home</a></li>
+      <li><a href="/hindsightai/"{% if page.nav_active == "platform" %} class="active"{% endif %}>Platform</a></li>
       <li><a href="/hindsightai/research/"{% if page.nav_active == "research" %} class="active"{% endif %}>Research</a></li>
-      <li><a href="#">Enterprise</a></li>
-      <li><a href="#">Blog</a></li>
     </ul>
-    <a href="#" class="nav-cta">Get Access</a>
+    <a href="/hindsightai/" class="nav-cta">Request Access</a>
   </nav>

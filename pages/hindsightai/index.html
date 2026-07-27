@@ -30,7 +30,7 @@ footer_right: "SOC 2 Type II · GDPR · ISO 27001 · Temporally Compliant"
   .hero-actions { display: flex; align-items: center; gap: 14px; margin-bottom: 56px; flex-wrap: wrap; }
   .btn-primary { padding: 11px 22px; background: var(--amber); color: var(--bg); border: none; border-radius: 5px; font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 500; cursor: pointer; transition: background .15s; text-decoration: none; display: inline-block; }
   .btn-primary:hover { background: var(--amber-hi); }
-  .btn-ghost { padding: 11px 22px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 5px; font-family: 'Space Mono', monospace; font-size: 14px; cursor: pointer; transition: all .15s; text-decoration: none; display: inline-block; }
+  .btn-ghost { padding: 11px 22px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 5px; font-family: 'Space Mono', monospace; font-size: 14px; cursor: pointer; transition: color .15s, border-color .15s; text-decoration: none; display: inline-block; }
   .btn-ghost:hover { color: var(--text); border-color: var(--dim); }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
   .stat { padding: 24px 28px; border-right: 1px solid var(--border); }
@@ -57,6 +57,9 @@ footer_right: "SOC 2 Type II · GDPR · ISO 27001 · Temporally Compliant"
     .features { padding: 48px 20px; } .feature-grid { grid-template-columns: 1fr; }
     .testimonial { margin: 0 20px 48px; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    .badge-dot { animation: none; }
+  }
 </style>
 
   <div class="hero">
@@ -64,8 +67,8 @@ footer_right: "SOC 2 Type II · GDPR · ISO 27001 · Temporally Compliant"
     <h1>The future of knowing<br>what <em>already happened</em>.</h1>
     <p class="hero-sub">HindsightAI leverages <strong>scaled geometric latent spaces</strong> and retrospective neural embeddings to surface enterprise-grade clarity on events that have fully concluded. No predictions. No uncertainty. Pure hindsight.</p>
     <div class="hero-actions">
-      <a href="#" class="btn-primary">Start analyzing the past →</a>
-      <a href="/hindsightai/research/" class="btn-ghost">Read the whitepaper</a>
+      <a href="/hindsightai/" class="btn-primary">Start Analyzing the Past →</a>
+      <a href="/hindsightai/research/" class="btn-ghost">Read the Whitepaper</a>
     </div>
   </div>
 
@@ -94,14 +97,14 @@ footer_right: "SOC 2 Type II · GDPR · ISO 27001 · Temporally Compliant"
       <div class="feature-card">
         <div class="feature-code">[ SCRAPS-v1 ]</div>
         <div class="feature-title">SCRAPS Pipeline</div>
-        <p class="feature-desc">Semantic Clustering via Retrospective Archaeological Post-Hoc Segmentation. The least rigidly stupid approach to parsing conversational wreckage. <a href="/hindsightai/research/" style="color: var(--amber); text-decoration: none;">Read the paper →</a></p>
+        <p class="feature-desc">Semantic Clustering via Retrospective Archaeological Post-Hoc Segmentation. The least rigidly stupid approach to parsing conversational wreckage. <a href="/hindsightai/research/" style="color: var(--amber); text-decoration: none;">Read the Paper →</a></p>
         <span class="feature-badge">PEER REVIEWED</span>
       </div>
     </div>
   </div>
 
   <div class="testimonial">
-    <span class="quote-mark">"</span>
+    <span class="quote-mark">“</span>
     <p class="quote-text">HindsightAI told us exactly why our Series A failed. This is precisely the kind of insight we needed six months before our Series A. The geometric latent space visualization alone justified the contract.</p>
     <div class="quote-attr">— <span>David K., CTO</span> · EnterpriseScale™ · (company has since pivoted)</div>
   </div>
