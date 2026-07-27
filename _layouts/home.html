@@ -1,16 +1,7 @@
 ---
 layout: notes
 ---
-<header>
-  <h1 class="site-name"><a href="/">Syncopated Notes</a></h1>
-  <div class="site-meta">
-    <span>b08x</span>
-    <span class="sep">·</span>
-    <span>irregular notes and observations</span>
-    <span class="sep">·</span>
-    <a href="https://github.com/b08x">github ↗</a>
-  </div>
-</header>
+
 
 <div class="rhythm">· — · · — — · —</div>
 
@@ -18,8 +9,8 @@ layout: notes
 
 <div class="section-label">Projects &amp; Notes</div>
 <div class="grid-2">
-{% assign notes = site.pages | where: "type", "note" | sort: "order" %}
-{% for note in notes %}
+  {% assign notes = site.pages | where: "type", "note" | sort: "order" %}
+  {% for note in notes %}
   <article class="card note{% if note.stub %} stub-entry{% endif %}">
     <div class="badge-row">
       <span class="badge {{ note.badge_class }}">{{ note.badge }}</span>
@@ -36,12 +27,15 @@ layout: notes
     <div class="note-meta">
       {% assign has_prev = false %}
       {% if note.arxiv %}<span>{{ note.arxiv }}</span>{% assign has_prev = true %}{% endif %}
-      {% if note.year %}{% if has_prev %}<span class="sep">·</span>{% endif %}<span>{{ note.year }}</span>{% assign has_prev = true %}{% endif %}
-      {% for link in note.links %}{% if has_prev %}<span class="sep">·</span>{% endif %}<a href="{{ link.url | relative_url }}">{{ link.label }} <span class="arrow">→</span></a>{% assign has_prev = true %}{% endfor %}
+      {% if note.year %}{% if has_prev %}<span class="sep">·</span>{% endif %}<span>{{ note.year }}</span>{% assign
+      has_prev = true %}{% endif %}
+      {% for link in note.links %}{% if has_prev %}<span class="sep">·</span>{% endif %}<a
+        href="{{ link.url | relative_url }}">{{ link.label }} <span class="arrow">→</span></a>{% assign has_prev = true
+      %}{% endfor %}
     </div>
     {% endif %}
   </article>
-{% endfor %}
+  {% endfor %}
 </div>
 
 <footer>
@@ -53,7 +47,7 @@ layout: notes
 {% if posts and posts.size > 0 %}
 <div class="section-label">Latest Posts</div>
 <div class="grid-2">
-{% for post in posts %}
+  {% for post in posts %}
   <article class="card post-card">
     <h2 class="note-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
     <div class="note-meta">
@@ -67,21 +61,21 @@ layout: notes
     </div>
     {% if post.excerpt %}<p class="note-desc">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>{% endif %}
   </article>
-{% endfor %}
+  {% endfor %}
 </div>
 
 {% if paginator.total_pages > 1 %}
 <nav class="pager">
   {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | relative_url }}" class="pager-link">← newer</a>
+  <a href="{{ paginator.previous_page_path | relative_url }}" class="pager-link">← Newer</a>
   {% else %}
-    <span class="pager-link disabled">← newer</span>
+  <span class="pager-link disabled">← Newer</span>
   {% endif %}
   <span class="pager-info">page {{ paginator.page }} / {{ paginator.total_pages }}</span>
   {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | relative_url }}" class="pager-link">older →</a>
+  <a href="{{ paginator.next_page_path | relative_url }}" class="pager-link">Older →</a>
   {% else %}
-    <span class="pager-link disabled">older →</span>
+  <span class="pager-link disabled">Older →</span>
   {% endif %}
 </nav>
 {% endif %}

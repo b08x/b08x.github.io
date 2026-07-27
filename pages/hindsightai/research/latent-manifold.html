@@ -43,8 +43,8 @@ breadcrumb_current: "scraps · latent manifold"
       </div>
       <canvas id="mc" style="width:100%;display:block;"></canvas>
       <div class="mc">
-        <button class="be" id="btn-run" onclick="runExcavation()">run excavation →</button>
-        <button class="br" onclick="resetManifold()">reset</button>
+        <button class="be" id="btn-run" onclick="runExcavation()">Run Excavation →</button>
+        <button class="br" onclick="resetManifold()">Reset</button>
         <span class="st" id="stat-lbl">n=77 embeddings · unstructured</span>
       </div>
     </div>
@@ -80,4 +80,6 @@ breadcrumb_current: "scraps · latent manifold"
   function runExcavation(){if(state!=='idle')return;state='animating';animStart=null;haloA=0;labelA=0;document.getElementById('phase-lbl').textContent='umap · excavating manifold...';document.getElementById('stat-lbl').textContent='computing dimensionality reduction...';document.getElementById('btn-run').disabled=true;requestAnimationFrame(anim);}
   function resetManifold(){state='idle';animStart=null;haloA=0;labelA=0;genPoints();draw(0);document.getElementById('phase-lbl').textContent='void · unexcavated';document.getElementById('stat-lbl').textContent='n=77 embeddings · unstructured';document.getElementById('btn-run').disabled=false;}
   genPoints();draw(0);
+</script>
+draw(0);
 </script>
