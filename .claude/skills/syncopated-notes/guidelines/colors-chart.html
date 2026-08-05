@@ -1,0 +1,28 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Editor / Chart Palette" subtitle="Syntax highlighting + data viz — 1 blue · 2 ochre · 3 olive · 4 plum · 5 red" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 20px; background: var(--background); font-family: var(--font-ui); }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .sw { width: 124px; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  .chip { height: 56px; }
+  .meta { padding: 7px 9px; }
+  .nm { font-size: 12px; font-weight: 700; color: var(--foreground); }
+  .hx { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .demo { margin-top: 16px; background: var(--bg-code); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 14px; font-family: var(--font-code); font-size: 13px; line-height: 1.7; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--chart-1)"></div><div class="meta"><div class="nm">chart-1</div><div class="hx">blue · tags</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--chart-2)"></div><div class="meta"><div class="nm">chart-2</div><div class="hx">ochre · types</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--chart-3)"></div><div class="meta"><div class="nm">chart-3</div><div class="hx">olive · strings</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--chart-4)"></div><div class="meta"><div class="nm">chart-4</div><div class="hx">plum · fns</div></div></div>
+    <div class="sw"><div class="chip" style="background:var(--chart-5)"></div><div class="meta"><div class="nm">chart-5</div><div class="hx">red · errors</div></div></div>
+  </div>
+  <div class="demo"><span style="color:var(--accent);font-weight:700">def</span> <span style="color:var(--chart-4);font-weight:700">route</span>(<span style="color:var(--chart-2)">task</span>): <span style="color:var(--muted)"># dispatch</span> <span style="color:var(--chart-3)">"planner"</span> → <span style="color:var(--chart-1)">&lt;agent&gt;</span></div>
+</body>
+</html>
