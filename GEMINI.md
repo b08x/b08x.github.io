@@ -18,7 +18,7 @@ This is a **Jekyll**-based website hosting "Syncopated Notes" (a personal landin
 
 - `index.md`: The root landing page, using the `home` layout.
 - `_notes/`: Custom collection of "irregular notes" rendered at `/notes/:path/` (`output: true`). Displayed on the home page grid (not paginated, sorted by title).
-- `_projects/`: Custom collection rendered at `/:path/` (`output: true`). Contains the HindsightAI platform and research pages (`_projects/hindsightai/`) and standalone pages like `skiing-smokers-game.html` (`layout: null`). Entries with `card: true` appear on the home page grid.
+- `_projects/`: Custom collection rendered at `/:path/` (`output: true`). Contains the HindsightAI platform and research pages (`_projects/hindsightai/`) and standalone pages like `skiing-smokers-game.html` (`_projects/fun/`, using `layout: none`). Entries with `card: true` appear on the home page grid.
 - `_posts/`: Standard Jekyll blog posts, paginated on the home page.
 - `_layouts/`:
   - `default.html`: Base HTML shell that loads head, header, nav, and footer includes.

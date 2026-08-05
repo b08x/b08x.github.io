@@ -34,7 +34,8 @@ _projects/                               # Custom `projects` collection — outp
       scraps-acronym.html                #     SCRAPS acronym explainer (layout: hindsight)
       whitepaper-abstract.html           #     Paper abstract (layout: hindsight)
       latent-manifold.html               #     Interactive canvas visualization (layout: hindsight)
-  skiing-smokers-game.html               # Self-contained canvas game (layout: null), card: true → home-page card, tag: humor
+  fun/                                   # Standalone games and interactive entertainment
+    skiing-smokers-game.html             #   Self-contained canvas game (layout: none), card: true → home-page card, tag: humor
 index.md                                # Landing page (layout: home)
 ```
 
@@ -64,7 +65,7 @@ The root landing page (`index.md`) uses `layout: home`, which itself declares `l
 
 - **Data File (`_data/projects.yml`):** The canonical registry of projects (both internal and external). Each entry specifies `title`, `description`, `url`, `external: true/false`, `badge`, `tags[]`, and `card: true` (if featured on the landing page).
 - **Projects Page (`projects.html`):** Renders at `/projects/` (`permalink: /projects/`) using `layout: notes`. Features interactive Vanilla JS filtering (All / Internal / External), accessible clickable card overlays, and dynamic micro-animations.
-- **Projects Collection (`_projects/`):** Files under `_projects/` are defined in `_config.yml` with `output: true` and `permalink: /:path/`, providing standalone content pages for internal projects like HindsightAI (`_projects/hindsightai/index.html`) and Skiing Smokers (`_projects/skiing-smokers-game.html`).
+- **Projects Collection (`_projects/`):** Files under `_projects/` are defined in `_config.yml` with `output: true` and `permalink: /:path/`, providing standalone content pages for internal projects like HindsightAI (`_projects/hindsightai/index.html`) and Skiing Smokers (`_projects/fun/skiing-smokers-game.html`).
 - `_layouts/home.html` iterates `site.data.projects | where: "card", true` for the projects list on the landing page, rendering appropriate external link badges and targets (`target="_blank" rel="noopener noreferrer"`).
 - `_layouts/project.html` is the default wrapper (chains to `notes`) for any project file that doesn't override with `layout:` — keeps the field notes theme on any project that wants it.
 - HindsightAI and Skiing Smokers are tagged `[humor, satire, project]` (HindsightAI is the placeholder/satirical piece; Skiing Smokers is its companion game).
@@ -84,9 +85,9 @@ The root landing page (`index.md`) uses `layout: home`, which itself declares `l
 - `index.md` must carry `pagination:\n  enabled: true` in its front matter — `jekyll-paginate-v2` only paginates pages that opt in.
 - Notes and Projects are **not** paginated; the home page grows as those collections grow.
 
-### Standalone `layout: null` pages
+### Standalone `layout: none` pages
 
-`_projects/skiing-smokers-game.html` uses `layout: null` — front matter is parsed (so Liquid still runs) but no layout wraps the content, keeping the page fully self-contained with its own `<head>`/`<body>` and inline `<style>`/`<script>`. The file declares its own `permalink: /skiing-smokers-game.html` in front matter (the `_projects` collection's default `permalink: /:path/` would otherwise map it to `/skiing-smokers-game`).
+`_projects/fun/skiing-smokers-game.html` uses `layout: none` (which resolves to the pass-through `_layouts/none.html` containing only `{{ content }}`) — front matter is parsed (so Liquid still runs) but no decorative site layout wraps the content, keeping the page fully self-contained with its own `<head>`/`<body>`, inline `<style>`/`<script>`, and internal navigation links back to Home and Projects. Note: Do NOT use `layout: null` in YAML front matter when a collection default layout exists in `_config.yml`, because YAML evaluates `null` to Ruby `nil`, causing Jekyll to fall back to the default wrapper layout. The file declares `permalink: /fun/skiing-smokers-game.html` in front matter.
 
 ### Adding a new HindsightAI page
 
@@ -163,7 +164,8 @@ Push to `main`. `.github/workflows/jekyll.yml` builds the site with `bundle exec
 - **`_config.yml`'s pagination block has no `collection:` key** — it paginates `_posts` only (the default for `jekyll-paginate-v2`). The notes and projects lists are **not** paginated; if you add many, the home page just gets longer.
 - **jekyll-spaceship** is enabled and may lightly reformat inline HTML/whitespace during build (harmless, but check rendered output after big content edits).
 - **Mermaid diagrams render as remote images:** `jekyll-spaceship`'s mermaid-processor builds a `mermaid.ink` URL at build time and emits `<img class="mermaid" src="https://mermaid.ink/svg/...">` — the diagram itself isn't rendered locally, so it won't display in offline/sandboxed previews, but works once the page is served with network access.
-- **Collection permalinks and the HindsightAI subtree:** `_projects` is configured with `permalink: /:path/` so `_projects/hindsightai/index.html` keeps `/hindsightai/`, `_projects/hindsightai/research/index.html` keeps `/hindsightai/research/`, etc. If you rename or move files in that subtree, the permalinks follow the new `:path` automatically. Files that need a URL not matching their on-disk path (like `skiing-smokers-game.html`) declare an explicit `permalink:` in front matter.
+- **Collection permalinks and the HindsightAI subtree:** `_projects` is configured with `permalink: /:path/` so `_projects/hindsightai/index.html` keeps `/hindsightai/`, `_projects/hindsightai/research/index.html` keeps `/hindsightai/research/`, etc. If you rename or move files in that subtree, the permalinks follow the new `:path` automatically. Files that need an explicit extension (like `skiing-smokers-game.html`) declare an explicit `permalink:` in front matter.
+- **YAML `layout: null` vs `layout: none`:** In YAML front matter, writing `layout: null` sets the Ruby variable to `nil`, which triggers Jekyll's fallback to `_config.yml` collection default layouts. To create self-contained pages without wrappers, set `layout: none` and use `_layouts/none.html`.
 - **`card: true` is the opt-in for the home-page Projects section.** Without it, a project file still builds its standalone page but doesn't appear on the landing grid — that's why the internal `research/` pages don't pollute the home page.
 - **`.tool-versions` pins Ruby 3.4.4** — `bundle install` against a different Ruby will produce native-extension mismatches for `nokogiri`, `ffi`, `sass-embedded`, etc.
 
