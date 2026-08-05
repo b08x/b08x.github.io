@@ -1,0 +1,20 @@
+{
+	"id": "default",
+	"version": 1,
+	"name": "b08x.github.io",
+	"columns": [
+		{
+			"id": "todo",
+			"name": "To Do"
+		},
+		{
+			"id": "doing",
+			"name": "Doing"
+		},
+		{
+			"id": "done",
+			"name": "Done"
+		}
+	],
+	"customFields": []
+}
