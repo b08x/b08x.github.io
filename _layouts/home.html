@@ -104,3 +104,21 @@ layout: notes
   {% endfor %}
 </div>
 
+{% if site.prompts.size > 0 %}
+<div class="section-label" style="display: flex; justify-content: space-between; align-items: center;">
+  <span>Prompts</span>
+  <a href="/prompts/" style="text-transform: lowercase; font-size: 0.9em; text-decoration: none; color: var(--amber);">all prompts →</a>
+</div>
+<div class="grid-2">
+  {% for prompt in site.prompts %}
+  <article class="card note">
+    <div class="badge-row">
+      <span class="badge badge-neutral">{{ prompt.tag }}</span>
+    </div>
+    <h2 class="note-title"><a href="/prompts/">{{ prompt.title }}</a></h2>
+    <p class="note-desc">{{ prompt.instructions | truncatewords: 24 }}</p>
+  </article>
+  {% endfor %}
+</div>
+{% endif %}
+

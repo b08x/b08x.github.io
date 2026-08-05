@@ -1,1 +1,11 @@
-<!-- Global Nav (if needed beyond header) -->
+{% unless page.layout == 'hindsight' %}
+<nav class="site-nav">
+  <a href="/"{% if page.url == '/' or page.layout == 'post' %} class="active"{% endif %}>notes</a>
+  <span class="sep">·</span>
+  <a href="/projects/"{% if page.layout == 'project' or page.url == '/projects/' %} class="active"{% endif %}>projects</a>
+  <span class="sep">·</span>
+  <a href="/prompts/"{% if page.layout == 'prompt' or page.url == '/prompts/' %} class="active"{% endif %}>prompts</a>
+  <span class="sep">·</span>
+  <a href="/hindsightai/">hindsightai</a>
+</nav>
+{% endunless %}
