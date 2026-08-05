@@ -1,17 +1,9 @@
 ---
 layout: post
-permalink: /sentience-appearance/
-type: note
-order: 4
+permalink: /notes/sentience-appearance/
 title: "// on the appearance of sentience"
 description: "The appearance-of-sentience effect, disambiguated from illusion and from evidence, using a Nabokov novel and a 1966 chatbot as control group."
-badge: "note"
-badge_class: "badge-neutral"
-year: "2026"
-link: "/sentience-appearance/"
-links:
-  - label: "read"
-    url: "/sentience-appearance/"
+tags: [essay, language, llm]
 ---
 
 Talk to a language model long enough and something in the exchange starts to feel
