@@ -1,0 +1,62 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Core — Buttons, Badges, Tags, Cards" subtitle="Action + display primitives" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; padding: 22px; background: var(--background); }
+  .stack { display: flex; flex-direction: column; gap: 18px; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .lbl { font-family: var(--font-ui); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); width: 100%; margin-bottom: -6px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const { Button, Badge, Tag, Card, IconButton } = window.SyncopatedNotesDesignSystem_f2adea;
+  const Plus = () => <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>;
+  function Demo() {
+    return (
+      <div className="stack">
+        <div className="row">
+          <span className="lbl">Buttons</span>
+          <Button variant="primary" icon={<Plus/>}>New note</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Copy prompt</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="danger" size="sm">Delete</Button>
+          <Button variant="primary" disabled>Disabled</Button>
+        </div>
+        <div className="row">
+          <span className="lbl">Badges & Tags</span>
+          <Badge tone="info">note</Badge>
+          <Badge tone="success" solid>done</Badge>
+          <Badge tone="warning">caution</Badge>
+          <Badge tone="danger">error</Badge>
+          <Badge tone="coral">draft</Badge>
+          <Tag>prompt-engineering</Tag>
+          <Tag active>agentic</Tag>
+        </div>
+        <div className="row" style={{alignItems:'stretch'}}>
+          <span className="lbl">Cards</span>
+          <Card eyebrow="Recent note" title="The Natural Pacing Protocol"
+            actions={<IconButton size="sm" title="Copy">⧉</IconButton>}
+            footer="Last modified 2026-02-02" style={{width:320}}>
+            Interpersonal scaffolding is essentially relational noise that obscures data.
+          </Card>
+          <Card accent title="Guardrails" style={{width:240}}>
+            Policy engine · approval workflow · trace.
+          </Card>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body>
+</html>

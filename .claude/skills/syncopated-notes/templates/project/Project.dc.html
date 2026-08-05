@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Project" description="Case-study project page — hero, metadata, problem/approach/outcome sections" -->
+<helmet><script src="./ds-base.js"></script><script src="../../image-slot.js"></script></helmet>
+<div style="background:var(--background);min-height:100vh;color:var(--foreground)">
+<header style="position:sticky;top:0;z-index:30;height:56px;display:flex;align-items:center;gap:20px;padding:0 26px;background:color-mix(in oklab, var(--background) 86%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)">
+<span style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--cyan);letter-spacing:-0.01em">syncopated notes</span>
+<nav style="margin-left:auto;display:flex;gap:20px">
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">Notes</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--cyan);text-decoration:none">Projects</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">Wikis</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">About</a>
+</nav>
+</header>
+<div style="max-width:1100px;margin:0 auto;padding:36px 26px 100px">
+<a href="#" style="font-family:var(--font-ui);font-size:12px;color:var(--muted);text-decoration:none">&larr; back to projects</a>
+
+<div style="display:grid;grid-template-columns:1.3fr 1fr;gap:32px;margin-top:22px;align-items:start">
+<div>
+<h1 style="font-size:var(--text-3xl);color:var(--accent);margin:0 0 12px">{{ title }}</h1>
+<p style="font-family:var(--font-body);font-size:15px;color:var(--text-2);line-height:1.6;margin:0 0 18px;max-width:60ch">A message bus for agent memory and policy propagation across tool calls — the load-bearing layer under every orchestrated agent demo.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<x-import component-from-global-scope="SyncopatedNotesDesignSystem_f2adea.Tag" hash="{{ false }}" hint-size="60px,26px">RUBY</x-import>
+<x-import component-from-global-scope="SyncopatedNotesDesignSystem_f2adea.Tag" hash="{{ false }}" hint-size="70px,26px">AGENTS</x-import>
+<span style="display:inline-flex;align-items:center;white-space:nowrap;font-family:var(--font-code);font-size:12px;font-weight:500;line-height:1.4;padding:2px 8px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface);border:1px solid var(--border)">MESSAGE-BUS</span>
+</div>
+</div>
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:12px">
+<div><div style="font-family:var(--font-ui);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Status</div><div style="font-family:var(--font-code);font-size:13px;color:var(--status-success)">Active</div></div>
+<div><div style="font-family:var(--font-ui);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Timeframe</div><div style="font-family:var(--font-code);font-size:13px;color:var(--text-2)">2025 — present</div></div>
+<div><div style="font-family:var(--font-ui);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:3px">Links</div><a href="#" style="font-family:var(--font-code);font-size:13px;color:var(--cyan);text-decoration:none;display:block">github.com/repo ↗</a><a href="#" style="font-family:var(--font-code);font-size:13px;color:var(--cyan);text-decoration:none;display:block">live demo ↗</a></div>
+</div>
+</div>
+
+<image-slot id="hero" style="width:100%;aspect-ratio:16/7;margin:30px 0" shape="rounded" radius="12" placeholder="Drop a hero screenshot"></image-slot>
+
+<div style="font-family:var(--font-body);font-size:15px;line-height:1.8;color:var(--foreground)">
+<h2 style="font-size:var(--text-2xl);color:var(--accent);margin:0 0 12px">Problem</h2>
+<p style="margin:0 0 30px;max-width:85ch">Agent orchestration keeps re-deriving the same plumbing — capability discovery, context handoff, retries, tracing — inline, per integration, with no shared substrate. Every new tool call means another bespoke wiring job.</p>
+
+<h2 style="font-size:var(--text-2xl);color:var(--accent);margin:0 0 12px">Approach</h2>
+<p style="margin:0 0 16px;max-width:85ch">Model the handoff as messages on a typed bus instead of function calls between services. Each agent publishes state changes and capability offers; a thin router matches intents to subscribers and stamps every message with trace and policy metadata on the way through.</p>
+<x-import component-from-global-scope="SyncopatedNotesDesignSystem_f2adea.CodePanel" filename="bus.rb" lang="ruby" hint-size="100%,140px">Bus.publish(:context, payload, trace_id: trace_id)
+Bus.subscribe(:context) { |msg| Planner.absorb(msg) }</x-import>
+<p style="margin:20px 0 0;max-width:85ch">Policy enforcement and approval gates sit as bus middleware, so they apply once instead of once per integration.</p>
+
+<h2 style="font-size:var(--text-2xl);color:var(--accent);margin:36px 0 12px">Outcome</h2>
+<p style="margin:0 0 20px;max-width:85ch">Three agents now share one bus in production. Adding a fourth took an afternoon instead of a sprint — the new agent only had to speak the message schema, not learn every other agent's API.</p>
+</div>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Shared Context Bus&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { title: this.props.title ?? "Shared Context Bus" };
+  }
+}
+</script>
+</body>
+</html>

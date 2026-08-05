@@ -1,0 +1,26 @@
+<!-- @dsCard group="Spacing" viewport="700x170" name="Radius & Borders" subtitle="Minimal corners, hairline structure" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 20px; background: var(--background); font-family: var(--font-ui); }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .u { text-align: center; }
+  .box { width: 76px; height: 56px; background: var(--surface); border: 1px solid var(--border-2); }
+  .u b { display: block; font-size: 11px; color: var(--foreground); margin-top: 7px; }
+  .u i { font-style: normal; font-size: 10px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="u"><div class="box" style="border-radius:var(--radius-xs)"></div><b>xs</b><i>3px</i></div>
+    <div class="u"><div class="box" style="border-radius:var(--radius-sm)"></div><b>sm</b><i>4px</i></div>
+    <div class="u"><div class="box" style="border-radius:var(--radius-md)"></div><b>md</b><i>8px</i></div>
+    <div class="u"><div class="box" style="border-radius:var(--radius-lg)"></div><b>lg</b><i>12px</i></div>
+    <div class="u"><div class="box" style="border-radius:var(--radius-xl)"></div><b>xl</b><i>20px</i></div>
+    <div class="u"><div class="box" style="border-radius:var(--radius-pill)"></div><b>pill</b><i>999px</i></div>
+  </div>
+</body>
+</html>

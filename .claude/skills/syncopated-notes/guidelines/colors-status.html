@@ -1,0 +1,37 @@
+<!-- @dsCard group="Colors" viewport="700x220" name="Status & Diagram Layers" subtitle="Callout hues — and the Cisco-Visio → Agentic overlay mapping" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; padding: 20px; background: var(--background); font-family: var(--font-ui); }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill { display: flex; align-items: center; gap: 7px; padding: 6px 11px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 600; border: 1px solid var(--border); background: var(--surface); color: var(--foreground); }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .lbl { margin: 18px 0 8px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .layers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .layer { border: 1px solid var(--border); border-left: 4px solid; border-radius: var(--radius-sm); padding: 9px 11px; background: var(--surface); }
+  .layer b { display:block; font-size: 12px; color: var(--foreground); }
+  .layer span { font-size: 10.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <span class="pill"><span class="dot" style="background:var(--status-info)"></span>info</span>
+    <span class="pill"><span class="dot" style="background:var(--status-accent)"></span>abstract</span>
+    <span class="pill"><span class="dot" style="background:var(--status-success)"></span>success</span>
+    <span class="pill"><span class="dot" style="background:var(--status-question)"></span>question</span>
+    <span class="pill"><span class="dot" style="background:var(--status-warning)"></span>warning</span>
+    <span class="pill"><span class="dot" style="background:var(--status-danger)"></span>danger</span>
+    <span class="pill"><span class="dot" style="background:var(--status-special)"></span>example</span>
+  </div>
+  <div class="lbl">Diagram overlay layers</div>
+  <div class="layers">
+    <div class="layer" style="border-left-color:var(--layer-routing)"><b>Routing</b><span>Packet → Task</span></div>
+    <div class="layer" style="border-left-color:var(--layer-addressing)"><b>Addressing</b><span>IP → Capability</span></div>
+    <div class="layer" style="border-left-color:var(--layer-subnet)"><b>Subnet</b><span>VLAN → Domain</span></div>
+    <div class="layer" style="border-left-color:var(--layer-firewall)"><b>Firewall</b><span>ACL → Guardrails</span></div>
+  </div>
+</body>
+</html>

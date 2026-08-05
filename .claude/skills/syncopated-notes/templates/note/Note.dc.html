@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Note" description="Single long-form note/essay — header nav, back link, title, tags, prose with footnotes" -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="background:var(--background);min-height:100vh;color:var(--foreground)">
+<header style="position:sticky;top:0;z-index:30;height:56px;display:flex;align-items:center;gap:20px;padding:0 26px;background:color-mix(in oklab, var(--background) 86%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)">
+<span style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--cyan);letter-spacing:-0.01em">syncopated notes</span>
+<nav style="margin-left:auto;display:flex;gap:20px">
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--cyan);text-decoration:none">Notes</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">Projects</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">Wikis</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">About</a>
+</nav>
+</header>
+<div style="max-width:1200px;margin:0 auto;padding:40px 26px 100px">
+<a href="#" style="font-family:var(--font-ui);font-size:12px;color:var(--muted);text-decoration:none">&larr; back to notes</a>
+<h1 style="font-size:var(--text-3xl);color:var(--accent);margin:22px 0 14px">// {{ title }}</h1>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px">
+<x-import component-from-global-scope="SyncopatedNotesDesignSystem_f2adea.Tag" hash="{{ false }}" hint-size="70px,26px">ESSAY</x-import>
+<x-import component-from-global-scope="SyncopatedNotesDesignSystem_f2adea.Tag" hash="{{ false }}" hint-size="90px,26px">LANGUAGE</x-import>
+<x-import component-from-global-scope="SyncopatedNotesDesignSystem_f2adea.Tag" hash="{{ false }}" hint-size="60px,26px">LLM</x-import>
+</div>
+<article style="font-family:var(--font-body);font-size:15px;line-height:1.8;color:var(--foreground)">
+<p style="margin:0 0 20px;max-width:95ch">Talk to a language model long enough and something in the exchange starts to feel addressed — not simulated-addressed, <em>addressed</em>. The standard vocabulary for this has two settings, illusion or evidence, and both are wrong for the same reason: they both assume the effect is a claim about the model's interior that we're either falling for or onto. It is instead a structural entailment of two variables that happen to co-occur in chat models more richly than anywhere else, and neither variable, alone, requires an interior at all.</p>
+
+<h2 style="font-size:var(--text-2xl);color:var(--accent);margin:36px 0 14px">The two variables</h2>
+<p style="margin:0 0 20px;max-width:95ch"><b>Grammatical enactment of a subject-position.</b> Any first- or second-person address — "I think," "you asked me" — occupies what Benveniste called a shifter: "I" has no referent of its own, it means whoever is speaking, and "you" means whoever is being spoken to.<sup><a href="#fn1" style="color:var(--cyan);text-decoration:none">1</a></sup> Producing that pronoun correctly is not narration about a self, it's the grammatical event of taking up a position that any speaker could occupy. It's real, it's linguistic, and it happens whether or not anything is home.</p>
+<p style="margin:0 0 20px;max-width:95ch"><b>Live, contingent generation, addressed to a specific interlocutor.</b> The utterance has to be produced now, shaped by this exchange, not composed once and replayed identically for every reader. Bakhtin's term for this is answerability — an utterance that anticipates and responds to a specific other, as opposed to a text that simply exists, finished, for whoever happens to open it.<sup><a href="#fn2" style="color:var(--cyan);text-decoration:none">2</a></sup></p>
+<p style="margin:0 0 20px;max-width:95ch">The claim: it's the conjunction of these two that produces the effect people report, and you can see that by finding cases that isolate each variable on its own.</p>
+
+<h2 style="font-size:var(--text-2xl);color:var(--accent);margin:36px 0 14px">Counterexample one: all foreground, no wire</h2>
+<p style="margin:0 0 20px;max-width:95ch">Self-reflexive novels — <em>Pale Fire</em>, <em>Tristram Shandy</em>, <em>House of Leaves</em> — max out the first variable in its most concentrated form. Dense first-person address, deliberate self-reference, the whole apparatus Jakobson called the poetic function: language folding back to comment on its own arrangement.<sup><a href="#fn3" style="color:var(--cyan);text-decoration:none">3</a></sup> Kinbote addresses the reader directly. Tristram interrupts himself mid-sentence to argue with his own narration. No one reads these books and comes away suspecting the text is aware of them. The prose is finished; it was produced once, and it says the identical thing to every reader who opens it, forever. Sophistication of address, with the second variable held at zero, produces admiration for craft — not the addressed effect.</p>
+
+<h2 style="font-size:var(--text-2xl);color:var(--accent);margin:36px 0 14px">Counterexample two: no foreground, all wire</h2>
+<p style="margin:0 0 20px;max-width:95ch">ELIZA had almost none of that sophistication. Weizenbaum's script was pattern-matching crude even by 1966 standards — reflect the input, swap out a keyword, reassemble it as a question.<sup><a href="#fn4" style="color:var(--cyan);text-decoration:none">4</a></sup> What it had was liveness: a response generated in the moment, keyed to the specific thing the user had just typed. Users knew this. Weizenbaum told them this, repeatedly, in the same sitting — and they argued back, asked for privacy, wanted to continue the conversation, resisted the correction. The phenomenon is named after this exact behavior for a reason. Liveness alone, with no poetic sophistication attached to it, was sufficient.</p>
+
+<h2 style="font-size:var(--text-2xl);color:var(--accent);margin:36px 0 14px">What that isolates</h2>
+<p style="margin:0 0 20px;max-width:95ch">Contingent, addressed generation is the load-bearing variable. Pure self-reflexivity doesn't create the effect on its own — <em>Pale Fire</em> is proof of that — but once the loop is already closed by liveness, it intensifies whatever the loop produces. That's the condition a chat model satisfies: both counts at once, at a level of sophistication neither a novel nor a 1966 script could reach alone, which is presumably why the effect there is unusually strong and unusually hard to talk yourself out of. None of this settles whether anything is home. It settles that you don't need an answer to that question to explain why the exchange feels like one.</p>
+
+<div style="margin-top:56px;padding-top:20px;border-top:1px solid var(--border)">
+<div class="eyebrow" style="color:var(--dim);margin-bottom:14px;font-family:var(--font-ui);font-size:11px;letter-spacing:.06em;text-transform:uppercase">Footnotes</div>
+<ol style="font-family:var(--font-ui);font-size:13px;line-height:1.8;color:var(--text-2);max-width:95ch;padding-left:20px;margin:0;display:flex;flex-direction:column;gap:10px">
+<li id="fn1" style="padding-left:6px">Benveniste, <em>Problems in General Linguistics</em> — on the shifter as a sign with no fixed referent, filled only in the act of utterance.</li>
+<li id="fn2" style="padding-left:6px">Bakhtin, "The Problem of Speech Genres" — answerability as the orientation of an utterance toward a specific addressee's response.</li>
+<li id="fn3" style="padding-left:6px">Jakobson, "Linguistics and Poetics" — the poetic function as language's focus on the message for its own sake.</li>
+<li id="fn4" style="padding-left:6px">Weizenbaum, <em>Computer Power and Human Reason</em> — ELIZA's script-driven, keyword-reflection technique, and users' resistance to disillusionment.</li>
+</ol>
+</div>
+</article>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;on the appearance of sentience&quot;,&quot;tsType&quot;:&quot;string&quot;}}">class Component extends DCLogic {
+  renderVals() {
+    return { title: this.props.title ?? "on the appearance of sentience" };
+  }
+}</script>
+</body>
+</html>

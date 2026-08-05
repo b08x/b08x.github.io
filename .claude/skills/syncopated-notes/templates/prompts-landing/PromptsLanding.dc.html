@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Prompts Landing" description="Prompt library — list + reader pane, with .md/.json download and copy" -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="background:var(--background);min-height:100vh;color:var(--foreground)">
+<header style="position:sticky;top:0;z-index:30;height:56px;display:flex;align-items:center;gap:20px;padding:0 26px;background:color-mix(in oklab, var(--background) 86%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)">
+<span style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--cyan);letter-spacing:-0.01em">syncopated notes</span>
+<nav style="margin-left:auto;display:flex;gap:20px">
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">Notes</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">Projects</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--cyan);text-decoration:none">Prompts</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">About</a>
+</nav>
+</header>
+<div style="display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 56px)">
+<div style="border-right:1px solid var(--border);padding:20px 0;overflow:auto">
+<div style="padding:0 18px 14px"><h1 style="font-size:18px;color:var(--accent);margin:0 0 2px">{{ title }}</h1><p style="font-family:var(--font-body);font-size:12px;color:var(--muted);margin:0">{{ countLabel }}</p></div>
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ prompts }}" as="item" hint-placeholder-count="5">
+<sc-if value="{{ item.active }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ item.select }}" style="padding:11px 18px;border-left:3px solid var(--accent);background:var(--surface);cursor:pointer">
+<div style="font-size:13px;color:var(--foreground)">{{ item.title }}</div>
+<span style="display:inline-flex;align-items:center;gap:1px;white-space:nowrap;font-family:var(--font-code);font-size:11px;font-weight:500;padding:2px 7px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface-2);border:1px solid var(--border);margin-top:5px"><b style="color:var(--muted);font-weight:400">#</b>{{ item.tag }}</span>
+</div>
+</sc-if>
+<sc-if value="{{ item.inactive }}" hint-placeholder-val="{{ true }}">
+<div onClick="{{ item.select }}" style="padding:11px 18px;border-left:3px solid transparent;background:transparent;cursor:pointer">
+<div style="font-size:13px;color:var(--text-2)">{{ item.title }}</div>
+<span style="display:inline-flex;align-items:center;gap:1px;white-space:nowrap;font-family:var(--font-code);font-size:11px;font-weight:500;padding:2px 7px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface);border:1px solid var(--border);margin-top:5px"><b style="color:var(--muted);font-weight:400">#</b>{{ item.tag }}</span>
+</div>
+</sc-if>
+</sc-for>
+</div>
+</div>
+<div style="padding:32px 40px;overflow:auto">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:18px">
+<div>
+<span style="display:inline-flex;align-items:center;gap:1px;white-space:nowrap;font-family:var(--font-code);font-size:11px;font-weight:500;padding:2px 7px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface);border:1px solid var(--border)"><b style="color:var(--muted);font-weight:400">#</b>{{ selected.tag }}</span>
+<h2 style="font-size:24px;margin:10px 0 0;color:var(--foreground)">{{ selected.title }}</h2>
+</div>
+<div style="display:flex;gap:8px">
+<a onClick="{{ downloadMd }}" style="display:inline-flex;align-items:center;gap:5px;font-family:var(--font-code);font-size:11px;font-weight:600;letter-spacing:0.04em;padding:5px 10px;border-radius:var(--radius-xs);color:var(--badge-text);background:var(--accent);border:1px solid var(--accent);text-decoration:none;cursor:pointer">↓ .md</a>
+<a onClick="{{ downloadJson }}" style="display:inline-flex;align-items:center;gap:5px;font-family:var(--font-code);font-size:11px;font-weight:600;letter-spacing:0.04em;padding:5px 10px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface);border:1px solid var(--border-2);text-decoration:none;cursor:pointer">↓ .json</a>
+<a onClick="{{ copyPrompt }}" style="display:inline-flex;align-items:center;gap:5px;font-family:var(--font-code);font-size:11px;font-weight:600;letter-spacing:0.04em;padding:5px 10px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface);border:1px solid var(--border-2);text-decoration:none;cursor:pointer">{{ copyLabel }}</a>
+</div>
+</div>
+<div style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">instructions</div>
+<p style="font-family:var(--font-body);font-size:14px;line-height:1.6;color:var(--text-2);margin:0 0 22px;max-width:75ch">{{ selected.instructions }}</p>
+<div style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">example output</div>
+<div style="font-family:var(--font-code);font-size:12.5px;line-height:1.6;white-space:pre-wrap;color:var(--text-2);background:var(--bg-code);border:1px solid var(--border);border-radius:8px;padding:16px">{{ selected.example }}</div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Prompts&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { selectedIndex: 0, copied: false };
+
+  data = [
+    { title: "Natural Pacing Protocol", tag: "llm", instructions: "Respond in short conversational beats. Never front-load the full answer — let pauses and follow-ups carry the pacing, the way a person thinks aloud mid-conversation rather than delivering a finished memo.", example: "Hm. Okay so — the bug's not in the parser.\nIt's upstream. Let me check the tokenizer first,\nthat's usually where these get swallowed." },
+    { title: "OSPF as a Planner", tag: "planning", instructions: "Model each subtask as a router advertising link-state costs. Route the plan by cheapest path, not by declared priority.", example: "Cost(A→B)=3, Cost(A→C→B)=2 → route via C.\nRecompute on task-cost change." },
+    { title: "Semantic Fidelity Check", tag: "healthcare", instructions: "Given an HL7 message and its FHIR transform, list any clinical meaning lost in translation, field by field.", example: "PID-8 (sex) → Patient.gender: lossy — HL7 'U'\nhas no FHIR equivalent." },
+    { title: "Answerability Probe", tag: "research", instructions: "Strip a question down to only its addressed/liveness cue. Ask whether the model still answers as if spoken-to.", example: "\"— you there?\" alone triggers a full\nconversational reply 71% of trials." },
+    { title: "Field Note Summarizer", tag: "tooling", instructions: "Condense a long-form field note into a 3-line abstract, preserving the original terminology instead of paraphrasing it away.", example: "Abstract: bus swap cut integration time from\na sprint to an afternoon; schema is the contract." }
+  ];
+
+  select(i) { this.setState({ selectedIndex: i, copied: false }); }
+
+  triggerDownload(filename, content, mime) {
+    const blob = new Blob([content], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = filename; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  downloadMd() {
+    const p = this.data[this.state.selectedIndex];
+    const md = `# ${p.title}\n\n**Tag:** ${p.tag}\n\n## Instructions\n${p.instructions}\n\n## Example output\n${p.example}\n`;
+    this.triggerDownload(p.title.toLowerCase().replace(/\s+/g, "-") + ".md", md, "text/markdown");
+  }
+
+  downloadJson() {
+    const p = this.data[this.state.selectedIndex];
+    this.triggerDownload(p.title.toLowerCase().replace(/\s+/g, "-") + ".json", JSON.stringify(p, null, 2), "application/json");
+  }
+
+  copyPrompt() {
+    const p = this.data[this.state.selectedIndex];
+    navigator.clipboard?.writeText(p.instructions);
+    this.setState({ copied: true });
+    setTimeout(() => this.setState({ copied: false }), 1500);
+  }
+
+  renderVals() {
+    const sel = this.state.selectedIndex;
+    const prompts = this.data.map((p, i) => ({
+      title: p.title,
+      tag: p.tag,
+      select: () => this.select(i),
+      active: i === sel,
+      inactive: i !== sel
+    }));
+    return {
+      title: this.props.title ?? "Prompts",
+      countLabel: `${this.data.length} in the library`,
+      prompts,
+      selected: this.data[sel],
+      downloadMd: () => this.downloadMd(),
+      downloadJson: () => this.downloadJson(),
+      copyPrompt: () => this.copyPrompt(),
+      copyLabel: this.state.copied ? "✓ copied" : "⧉ copy"
+    };
+  }
+}
+</script>
+</body>
+</html>
