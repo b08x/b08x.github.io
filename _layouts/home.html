@@ -7,48 +7,15 @@ layout: notes
 
 {{ content }}
 
-<div class="section-label">Projects &amp; Notes</div>
-<div class="grid-2">
-  {% assign notes = site.pages | where: "type", "note" | sort: "order" %}
-  {% for note in notes %}
-  <article class="card note{% if note.stub %} stub-entry{% endif %}">
-    <div class="badge-row">
-      <span class="badge {{ note.badge_class }}">{{ note.badge }}</span>
-    </div>
-    {% if note.stub %}
-    <h2 class="note-title stub">{{ note.title }}</h2>
-    {% else %}
-    <h2 class="note-title"><a href="{{ note.link | relative_url }}">{{ note.title }}</a></h2>
-    {% endif %}
-    {% if note.description %}
-    <p class="note-desc">{{ note.description }}</p>
-    {% endif %}
-    {% if note.year or note.arxiv or note.links %}
-    <div class="note-meta">
-      {% assign has_prev = false %}
-      {% if note.arxiv %}<span>{{ note.arxiv }}</span>{% assign has_prev = true %}{% endif %}
-      {% if note.year %}{% if has_prev %}<span class="sep">·</span>{% endif %}<span>{{ note.year }}</span>{% assign
-      has_prev = true %}{% endif %}
-      {% for link in note.links %}{% if has_prev %}<span class="sep">·</span>{% endif %}<a
-        href="{{ link.url | relative_url }}">{{ link.label }} <span class="arrow">→</span></a>{% assign has_prev = true
-      %}{% endfor %}
-    </div>
-    {% endif %}
-  </article>
-  {% endfor %}
-</div>
-
-<footer>
-  <span class="footer-text">Syncopated Notes · <a href="https://github.com/b08x/b08x.github.io">source ↗</a></span>
-  <span class="footer-text">irregularly updated</span>
-</footer>
-
 {% assign posts = paginator.posts | default: site.posts %}
-{% if posts and posts.size > 0 %}
-<div class="section-label">Latest Posts</div>
+
+<div class="section-label">Latest Notes &amp; Posts</div>
 <div class="grid-2">
   {% for post in posts %}
   <article class="card post-card">
+    <div class="badge-row">
+      <span class="badge badge-neutral">post</span>
+    </div>
     <h2 class="note-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
     <div class="note-meta">
       <span>{{ post.date | date: "%B %-d, %Y" }}</span>
@@ -60,6 +27,28 @@ layout: notes
       {% endif %}
     </div>
     {% if post.excerpt %}<p class="note-desc">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>{% endif %}
+  </article>
+  {% endfor %}
+
+  {% assign notes = site.notes | sort: "title" %}
+  {% for note in notes %}
+  <article class="card note">
+    <div class="badge-row">
+      <span class="badge badge-neutral">note</span>
+    </div>
+    <h2 class="note-title"><a href="{{ note.url | relative_url }}">{{ note.title }}</a></h2>
+    {% if note.description %}
+    <p class="note-desc">{{ note.description }}</p>
+    {% elsif note.excerpt %}
+    <p class="note-desc">{{ note.excerpt | strip_html | truncatewords: 30 }}</p>
+    {% endif %}
+    {% if note.tags and note.tags.size > 0 %}
+    <div class="note-meta">
+      <div class="badge-row">
+        {% for tag in note.tags %}<span class="badge badge-neutral">{{ tag }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endif %}
   </article>
   {% endfor %}
 </div>
@@ -79,4 +68,31 @@ layout: notes
   {% endif %}
 </nav>
 {% endif %}
-{% endif %}
+
+<div class="section-label">Projects</div>
+<div class="grid-2">
+  {% assign projects = site.projects | where: "card", true | sort: "title" %}
+  {% for project in projects %}
+  <article class="card note">
+    <div class="badge-row">
+      <span class="badge {{ project.badge_class | default: 'badge-blue' }}">{{ project.badge | default: 'project' }}</span>
+    </div>
+    <h2 class="note-title"><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
+    {% if project.description %}
+    <p class="note-desc">{{ project.description }}</p>
+    {% endif %}
+    {% if project.tags and project.tags.size > 0 %}
+    <div class="note-meta">
+      <div class="badge-row">
+        {% for tag in project.tags %}<span class="badge badge-neutral">{{ tag }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>
+
+<footer>
+  <span class="footer-text">Syncopated Notes · <a href="https://github.com/b08x/b08x.github.io">source ↗</a></span>
+  <span class="footer-text">irregularly updated</span>
+</footer>
