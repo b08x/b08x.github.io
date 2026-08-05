@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">HindsightAI project preview</title>
+  <desc id="desc">A terracotta and blue geometric field note representing retrospective artificial intelligence.</desc>
+  <rect width="1200" height="700" fill="#e3dbc8"/>
+  <path d="M0 520 300 260 560 470 850 120 1200 390V700H0Z" fill="#d2c7b4"/>
+  <path d="M0 520 300 260 560 470 850 120 1200 390" fill="none" stroke="#b5654a" stroke-width="8"/>
+  <g fill="#5c7c99" stroke="#ede6d6" stroke-width="8"><circle cx="300" cy="260" r="24"/><circle cx="560" cy="470" r="24"/><circle cx="850" cy="120" r="24"/></g>
+  <text x="70" y="620" fill="#2a2420" font-family="monospace" font-size="42" font-weight="700">HINDSIGHTAI / SCRAPS</text>
+</svg>

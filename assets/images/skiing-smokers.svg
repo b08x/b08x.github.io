@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Skiing Smokers project preview</title>
+  <desc id="desc">A stylized snowy slope with terracotta ski tracks and a blue sky.</desc>
+  <rect width="1200" height="700" fill="#5c7c99"/>
+  <path d="M0 290 360 150 740 290 1200 80V700H0Z" fill="#f4efe3"/>
+  <path d="M0 520 310 340 560 470 880 270 1200 390V700H0Z" fill="#e3dbc8"/>
+  <path d="M120 700c180-210 330-220 490-70 120 110 230 105 470-90" fill="none" stroke="#b5654a" stroke-width="16" stroke-dasharray="28 22"/>
+  <text x="70" y="620" fill="#2a2420" font-family="monospace" font-size="42" font-weight="700">SKIING SMOKERS / GAME</text>
+</svg>
