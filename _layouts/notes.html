@@ -9,7 +9,7 @@ layout: default
   .container {
     max-width: 1040px;
     margin: 0 auto;
-    padding: 52px 32px 80px;
+    padding: 52px 32px 32px;
   }
 
   /* ── Header ── */
@@ -54,8 +54,9 @@ layout: default
 
   /* ── Footer ── */
   footer {
-    margin-top: 64px;
-    padding-top: 20px;
+    max-width: 1040px;
+    margin: 32px auto 0;
+    padding: 20px 32px 80px;
     border-top: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -217,7 +218,8 @@ layout: default
 
   /* ── Responsive ── */
   @media (max-width: 760px) {
-    .container { padding: 36px 20px 60px; }
+    .container { padding: 36px 20px 24px; }
+    footer { padding: 20px 20px 60px; }
     .grid-2 { grid-template-columns: 1fr; }
   }
 </style>

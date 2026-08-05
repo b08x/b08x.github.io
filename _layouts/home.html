@@ -69,15 +69,27 @@ layout: notes
 </nav>
 {% endif %}
 
-<div class="section-label">Projects</div>
+<div class="section-label" style="display: flex; justify-content: space-between; align-items: center;">
+  <span>Projects</span>
+  <a href="/projects/" style="text-transform: lowercase; font-size: 0.9em; text-decoration: none; color: var(--amber);">all projects →</a>
+</div>
 <div class="grid-2">
-  {% assign projects = site.projects | where: "card", true | sort: "title" %}
+  {% assign projects = site.data.projects | where: "card", true %}
   {% for project in projects %}
   <article class="card note">
     <div class="badge-row">
       <span class="badge {{ project.badge_class | default: 'badge-blue' }}">{{ project.badge | default: 'project' }}</span>
+      {% if project.external %}
+      <span class="badge badge-neutral">external ↗</span>
+      {% endif %}
     </div>
-    <h2 class="note-title"><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
+    <h2 class="note-title">
+      {% if project.external %}
+      <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer">{{ project.title }} ↗</a>
+      {% else %}
+      <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
+      {% endif %}
+    </h2>
     {% if project.description %}
     <p class="note-desc">{{ project.description }}</p>
     {% endif %}
@@ -92,7 +104,3 @@ layout: notes
   {% endfor %}
 </div>
 
-<footer>
-  <span class="footer-text">Syncopated Notes · <a href="https://github.com/b08x/b08x.github.io">source ↗</a></span>
-  <span class="footer-text">irregularly updated</span>
-</footer>

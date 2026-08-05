@@ -17,18 +17,19 @@ This is a **Jekyll**-based website hosting "Syncopated Notes" (a personal landin
 ## Architecture & Structure
 
 - `index.md`: The root landing page, using the `home` layout.
-- `_notes/`: A Jekyll collection of "irregular notes" displayed on the home page (not generated as standalone pages).
-- `_posts/`: Standard Jekyll blog posts.
-- `hindsightai/`: Contains the HindsightAI platform and research pages.
+- `_notes/`: Custom collection of "irregular notes" rendered at `/notes/:path/` (`output: true`). Displayed on the home page grid (not paginated, sorted by title).
+- `_projects/`: Custom collection rendered at `/:path/` (`output: true`). Contains the HindsightAI platform and research pages (`_projects/hindsightai/`) and standalone pages like `skiing-smokers-game.html` (`layout: null`). Entries with `card: true` appear on the home page grid.
+- `_posts/`: Standard Jekyll blog posts, paginated on the home page.
 - `_layouts/`:
-  - `notes.html`: Light-theme base layout for the landing page and posts.
-  - `home.html`: Landing page specific layout.
-  - `post.html`: Layout for blog posts.
-  - `hindsight.html`: Dark-theme base layout for HindsightAI pages.
+  - `default.html`: Base HTML shell that loads head, header, nav, and footer includes.
+  - `notes.html`: Light-theme base layout (chains to `default`) providing container, card grid, and pager styles.
+  - `home.html`: Landing page layout (chains to `notes`), rendering filtered notes/projects and paginated posts.
+  - `post.html`: Layout for blog posts (chains to `notes`).
+  - `project.html`: Default wrapper for `_projects/` collection entries (chains to `notes`).
+  - `hindsight.html`: Dark-theme base layout for HindsightAI pages (chains to `default`).
 - `_includes/`:
-  - `theme-tokens.html`: **Critical File.** Contains the design system's CSS variables and reusable components (badges, field-notes, etc.).
-  - `hindsight-*.html`: Components specific to the HindsightAI layout (nav, breadcrumbs, footer).
-- `pages/`: Standalone pages like `skiing-smokers-game.html`.
+  - `theme-tokens.html`: **Critical File.** Contains the design system's CSS variables and reusable components (badges, field-notes, post typography, code panels, etc.).
+  - `hindsight-*.html`: Components specific to the HindsightAI layout (`hindsight-nav.html`, `hindsight-breadcrumb.html`, `hindsight-footer.html`).
 
 ## Getting Started
 
@@ -54,11 +55,12 @@ This is a **Jekyll**-based website hosting "Syncopated Notes" (a personal landin
 
 ### Content & Layout
 
-- **HindsightAI Pages:** Must use `layout: hindsight`. Use `nav_active`, `breadcrumbs`, and `footer_*` front matter to control layout features.
-- **Notes Collection:** Managed in `_notes/*.md`. Use the `order` field for sorting.
-- **Blog Posts:** Standard Jekyll format in `_posts/`. Layout is automatically set to `post` via `_config.yml` defaults.
-- **Links:** Prefer root-relative links. `baseurl` is empty.
-- **CSS/JS:** Prefer inline `<style>` and `<script>` blocks for page-specific logic to keep pages self-contained. No external frameworks.
+- **Notes Collection (`_notes/`):** Custom collection rendered at `/notes/:path/`. Front matter uses `title`, `description`, and `tags[]`. On the home page, notes are displayed sorted by title (`sort: "title"`). Vestigial `order`, `link`, and `badge_class` fields are no longer used. Notes are not paginated.
+- **Projects Collection & Data (`_data/projects.yml` / `_projects/`):** `_data/projects.yml` is the canonical registry of projects (internal & external). To display on the home page grid, set `card: true`. Dedicated projects showcase is at `/projects/` (`projects.html`), featuring real-time JS category filtering and accessible card layouts. Internal generated pages live under `_projects/` collection (`output: true`, `permalink: /:path/`).
+- **HindsightAI Pages:** Managed under `_projects/hindsightai/`. Must use `layout: hindsight`. Use `nav_active`, `breadcrumbs`, and `footer_*` front matter to control layout features. Do not add `card: true` to internal research pages in front matter or data files.
+- **Blog Posts (`_posts/`):** Standard Jekyll format (`YYYY-MM-DD-title.md`). Layout is automatically set to `post` via `_config.yml` defaults. Only blog posts are paginated on the landing page (`jekyll-paginate-v2`, accessed via `paginator.posts`).
+- **Links:** Prefer root-relative links. `baseurl` is empty in `_config.yml`.
+- **CSS/JS:** Prefer inline `<style>` and `<script>` blocks for page-specific logic to keep pages self-contained. Shared styles live in `_layouts/*.html` and `_includes/theme-tokens.html`. No external CSS or JS frameworks.
 
 ### Diagrams
 

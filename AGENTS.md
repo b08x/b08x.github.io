@@ -12,7 +12,7 @@ Gemfile / Gemfile.lock                  # Ruby dependencies (Jekyll + plugins)
 _layouts/
   default.html                          # Base HTML shell — loads head.html, header.html, nav.html, footer.html
   notes.html                            # Light-theme base (chains to default) — container grid + card / pager styles
-  home.html                             # Landing page body (layout: notes) — rhythm mark, posts+notes grid, projects grid, footer
+  home.html                             # Landing page body (layout: notes) — rhythm mark, posts+notes grid, projects grid
   post.html                             # Blog post body (layout: notes) — back link, post header (title/date/tags), post content
   hindsight.html                        # Dark-theme base (chains to default) — nav, breadcrumb slot, footer slot, grid bg
   project.html                          # Default for _projects/ entries (chains to layout: notes) — applies when a project file doesn't override
@@ -49,8 +49,8 @@ index.md                                # Landing page (layout: home)
 
 `default.html` is the actual base. Every other layout declares `layout: default` and is rendered into the `{{ content }}` slot between the header/nav and footer includes. The shell includes themselves are layout-conditional:
 
-- `header.html` renders the `<header>` only for `notes` / `home` / `post`; for `hindsight` it includes `hindsight-nav.html` instead.
-- `footer.html` includes `hindsight-footer.html` for `hindsight`; otherwise renders the default `<footer>` with site title + "Built with Jekyll".
+- `header.html` includes `hindsight-nav.html` for `hindsight`; otherwise renders the default `<header>` (for `notes` / `home` / `post` / `project`).
+- `footer.html` includes `hindsight-footer.html` for `hindsight`; otherwise renders the uniform default `<footer>` (site title, source link, update status, and "Built with Jekyll") across all other layouts.
 
 The root landing page (`index.md`) uses `layout: home`, which itself declares `layout: notes` — `notes.html` provides the shared `.container` shell, `.grid-2` card layout, and `.pager` pagination styles (it does not share anything with the `hindsight` layout), and `home.html` renders into `{{ content }}` with the rhythm mark, the filtered `type: note` page list, and the paginated `_posts` list.
 
@@ -60,14 +60,15 @@ The root landing page (`index.md`) uses `layout: home`, which itself declares `l
 - Front matter: `layout`, `title`, `description`, `tags[]`. The home-page card renderer reads `title` + `description` (falls back to `excerpt`) + `tags[]`. No `link` / `order` / `badge_class` fields — those are vestigial from the old `type: note` page-based scheme.
 - `_layouts/home.html` iterates `site.notes | sort: "title"` for the notes list. Notes are **not** paginated.
 
-### Projects (`_projects/` collection)
+### Projects (`_projects/` collection & `_data/projects.yml`)
 
-- Files under `_projects/`. Defined in `_config.yml` with `output: true` and `permalink: /:path/` (so `_projects/hindsightai/index.html` still lands at `/hindsightai/` and the research subtree preserves `/hindsightai/research/...`).
-- Front matter: `layout`, `title`, `description`, `tags[]`, `badge` / `badge_class` (optional — used by the home-page card), and `card: true` to opt the file into the home-page **Projects** section. Files **without** `card: true` are still generated as standalone pages but don't appear on the home grid — that's how `_projects/hindsightai/research/` and the scraps fragments stay out of the landing page.
-- `_layouts/home.html` iterates `site.projects | where: "card", true | sort: "title"` for the projects list.
+- **Data File (`_data/projects.yml`):** The canonical registry of projects (both internal and external). Each entry specifies `title`, `description`, `url`, `external: true/false`, `badge`, `tags[]`, and `card: true` (if featured on the landing page).
+- **Projects Page (`projects.html`):** Renders at `/projects/` (`permalink: /projects/`) using `layout: notes`. Features interactive Vanilla JS filtering (All / Internal / External), accessible clickable card overlays, and dynamic micro-animations.
+- **Projects Collection (`_projects/`):** Files under `_projects/` are defined in `_config.yml` with `output: true` and `permalink: /:path/`, providing standalone content pages for internal projects like HindsightAI (`_projects/hindsightai/index.html`) and Skiing Smokers (`_projects/skiing-smokers-game.html`).
+- `_layouts/home.html` iterates `site.data.projects | where: "card", true` for the projects list on the landing page, rendering appropriate external link badges and targets (`target="_blank" rel="noopener noreferrer"`).
 - `_layouts/project.html` is the default wrapper (chains to `notes`) for any project file that doesn't override with `layout:` — keeps the field notes theme on any project that wants it.
 - HindsightAI and Skiing Smokers are tagged `[humor, satire, project]` (HindsightAI is the placeholder/satirical piece; Skiing Smokers is its companion game).
-- Add a new project by dropping a file under `_projects/`, giving it `permalink:` if you don't want the default `/:path/`, and adding `card: true` if it should appear on the home page.
+- Add a new project by adding its metadata to `_data/projects.yml`, setting `external: true` for remote repositories or `external: false` for internal pages in `_projects/`.
 
 ### Blog posts (`_posts/`)
 
