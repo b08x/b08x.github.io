@@ -1,0 +1,23 @@
+---
+layout: notes
+---
+<a href="/prompts/" class="back-link">← back to prompts</a>
+
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      <span class="badge badge-neutral">{{ page.tag }}</span>
+    </div>
+  </header>
+
+  <div class="post-content">
+    <h4>Instructions</h4>
+    <p>{{ page.instructions }}</p>
+
+    <h4>Example output</h4>
+    <div class="code-panel"><span class="code-output">{{ page.example | newline_to_br }}</span></div>
+
+    {{ content }}
+  </div>
+</article>

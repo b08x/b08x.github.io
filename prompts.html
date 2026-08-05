@@ -1,0 +1,150 @@
+---
+layout: notes
+title: Prompts
+description: "A working library — instructions, example runs, ready to lift."
+permalink: /prompts/
+---
+<style>
+  .prompts-page { max-width: 1048px; margin: 0 auto; }
+  .prompts-header { margin: 0 0 24px; }
+  .prompts-title { margin: 0 0 6px; color: var(--amber); font-size: 24px; }
+  .prompts-subtitle { margin: 0; color: var(--muted); font-size: 14px; }
+
+  .workbench { display: grid; grid-template-columns: 260px 1fr; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; min-height: 420px; }
+
+  .prompt-list { border-right: 1px solid var(--border); padding: 14px 0; overflow: auto; background: var(--bg2); }
+  .prompt-list-item { display: block; width: 100%; text-align: left; padding: 11px 16px; border-left: 3px solid transparent; background: transparent; border-top: none; border-right: none; border-bottom: none; cursor: pointer; font-family: 'Space Mono', monospace; }
+  .prompt-list-item .item-title { font-size: 13px; color: var(--text2); margin-bottom: 5px; }
+  .prompt-list-item.active { border-left-color: var(--amber); background: var(--bg); }
+  .prompt-list-item.active .item-title { color: var(--text); }
+
+  .p-tag { display: inline-flex; align-items: center; gap: 1px; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 4px; color: var(--text2); background: var(--bg2); border: 1px solid var(--border); }
+  .p-tag b { color: var(--muted); font-weight: 400; }
+
+  .prompt-reader { padding: 28px 32px; }
+  .reader-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+  .reader-title { font-size: 22px; margin: 10px 0 0; color: var(--text); }
+  .reader-actions { display: flex; gap: 8px; }
+  .dl-btn { display: inline-flex; align-items: center; gap: 5px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 5px 10px; border-radius: 4px; color: var(--text2); background: var(--bg2); border: 1px solid var(--border2); cursor: pointer; }
+  .dl-btn:hover { color: var(--text); border-color: var(--amber); }
+  .dl-btn.primary { color: var(--badge-text); background: var(--amber); border-color: var(--amber); }
+  .dl-btn.primary:hover { background: var(--amber-hi); border-color: var(--amber-hi); }
+
+  .reader-label { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .reader-instructions { font-size: 14px; line-height: 1.6; color: var(--text2); margin: 0 0 22px; max-width: 75ch; }
+
+  @media (max-width: 700px) {
+    .workbench { grid-template-columns: 1fr; }
+    .prompt-list { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+</style>
+
+<div class="prompts-page">
+  <header class="prompts-header">
+    <h1 class="prompts-title">{{ page.title }}</h1>
+    <p class="prompts-subtitle">{{ page.description }}</p>
+  </header>
+
+  <div class="workbench" id="prompts-workbench">
+    <nav class="prompt-list" id="prompt-list"></nav>
+    <div class="prompt-reader">
+      <div class="reader-top">
+        <div>
+          <span class="p-tag" id="reader-tag"><b>#</b></span>
+          <h2 class="reader-title" id="reader-title"></h2>
+        </div>
+        <div class="reader-actions">
+          <button type="button" class="dl-btn primary" id="dl-md">↓ .md</button>
+          <button type="button" class="dl-btn" id="dl-json">↓ .json</button>
+          <button type="button" class="dl-btn" id="dl-copy">⧉ copy</button>
+        </div>
+      </div>
+      <div class="reader-label">instructions</div>
+      <p class="reader-instructions" id="reader-instructions"></p>
+      <div class="reader-label">example output</div>
+      <div class="code-panel"><span class="code-output" id="reader-example"></span></div>
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="prompts-data">
+[
+  {% for prompt in site.prompts %}
+  {
+    "title": {{ prompt.title | jsonify }},
+    "tag": {{ prompt.tag | jsonify }},
+    "instructions": {{ prompt.instructions | jsonify }},
+    "example": {{ prompt.example | jsonify }},
+    "url": {{ prompt.url | relative_url | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
+</script>
+
+<script>
+(function () {
+  var data = JSON.parse(document.getElementById('prompts-data').textContent);
+  var listEl = document.getElementById('prompt-list');
+  var selected = 0;
+
+  function slug(title) {
+    return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
+  function download(filename, content, mime) {
+    var blob = new Blob([content], { type: mime });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function render() {
+    if (!data.length) {
+      listEl.innerHTML = '<div style="padding:14px 16px;font-size:12px;color:var(--muted)">No prompts yet.</div>';
+      return;
+    }
+    var p = data[selected];
+
+    listEl.innerHTML = data.map(function (item, i) {
+      return '<button type="button" class="prompt-list-item' + (i === selected ? ' active' : '') + '" data-index="' + i + '">' +
+        '<div class="item-title">' + item.title + '</div>' +
+        '<span class="p-tag"><b>#</b>' + item.tag + '</span>' +
+        '</button>';
+    }).join('');
+
+    Array.prototype.forEach.call(listEl.querySelectorAll('.prompt-list-item'), function (btn) {
+      btn.addEventListener('click', function () {
+        selected = parseInt(btn.getAttribute('data-index'), 10);
+        render();
+      });
+    });
+
+    document.getElementById('reader-tag').innerHTML = '<b>#</b>' + p.tag;
+    document.getElementById('reader-title').textContent = p.title;
+    document.getElementById('reader-instructions').textContent = p.instructions;
+    document.getElementById('reader-example').innerHTML = p.example.replace(/\n/g, '<br>');
+  }
+
+  document.getElementById('dl-md').addEventListener('click', function () {
+    var p = data[selected];
+    var md = '# ' + p.title + '\n\n**Tag:** ' + p.tag + '\n\n## Instructions\n' + p.instructions + '\n\n## Example output\n' + p.example + '\n';
+    download(slug(p.title) + '.md', md, 'text/markdown');
+  });
+
+  document.getElementById('dl-json').addEventListener('click', function () {
+    var p = data[selected];
+    download(slug(p.title) + '.json', JSON.stringify(p, null, 2), 'application/json');
+  });
+
+  document.getElementById('dl-copy').addEventListener('click', function () {
+    var p = data[selected];
+    var btn = document.getElementById('dl-copy');
+    navigator.clipboard && navigator.clipboard.writeText(p.instructions);
+    btn.textContent = '✓ copied';
+    setTimeout(function () { btn.textContent = '⧉ copy'; }, 1500);
+  });
+
+  render();
+})();
+</script>

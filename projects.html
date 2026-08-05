@@ -6,40 +6,39 @@ permalink: /projects/
 ---
 <style>
   .projects-page { max-width: 1048px; margin: 0 auto; }
-  .projects-header { margin: 0 0 32px; }
-  .projects-title { display: inline; margin: 0; padding: 2px 4px; background: #e7d2c5; color: var(--amber); font-size: 30px; line-height: 1.25; letter-spacing: -.03em; }
-  .projects-subtitle { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+  .projects-header { margin: 0 0 30px; }
+  .projects-title { margin: 0 0 6px; color: var(--amber); font-size: 24px; }
+  .projects-subtitle { margin: 0; color: var(--muted); font-size: 14px; }
 
-  .featured-project { display: grid; grid-template-columns: 1fr 1fr; min-height: 350px; margin-bottom: 40px; overflow: hidden; border: 1px solid var(--border2); border-radius: 8px; background: var(--surface); }
-  .project-image { min-height: 220px; background: #d8d1c0; border: 1px dashed var(--border2); overflow: hidden; }
+  .p-tag { display: inline-flex; align-items: center; gap: 1px; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 4px; color: var(--text2); background: var(--bg2); border: 1px solid var(--border); }
+  .p-tag b { color: var(--muted); font-weight: 400; }
+  .p-tagrow { display: flex; gap: 6px; flex-wrap: wrap; }
+  .p-link { font-size: 12px; color: var(--badge-blue); }
+  .p-link:hover { color: var(--amber); }
+
+  .featured-project { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 28px; overflow: hidden; border: 1px solid var(--border); border-radius: 10px; background: var(--bg2); }
+  .project-image { background: var(--bg2); overflow: hidden; }
   .project-image img { display: block; width: 100%; height: 100%; min-height: 220px; object-fit: cover; }
-  .project-image.placeholder { display: grid; place-content: center; text-align: center; color: var(--muted); font-size: 13px; }
+  .project-image.placeholder { display: grid; place-content: center; text-align: center; color: var(--muted); font-size: 13px; min-height: 220px; border: 1px dashed var(--border2); }
   .project-image.placeholder span { display: block; margin-bottom: 8px; font-size: 28px; }
   .project-image.placeholder a { color: var(--text2); text-decoration: underline; font-size: 11px; }
-  .featured-copy { display: flex; flex-direction: column; justify-content: center; padding: 36px 24px; }
-  .project-tag { display: inline-block; width: fit-content; padding: 4px 8px; border: 1px solid var(--border); border-radius: 3px; color: var(--muted); font-size: 10px; }
-  .featured-copy .project-tag { margin-bottom: 16px; }
-  .featured-title { margin: 0 0 12px; font-size: 21px; line-height: 1.25; }
-  .featured-desc { margin: 0 0 14px; color: var(--text2); font-size: 14px; line-height: 1.65; }
-  .project-link { margin-top: 14px; color: var(--badge-blue); font-size: 12px; }
-  .project-link:hover { color: var(--amber); }
+  .featured-copy { padding: 24px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+  .featured-copy .p-tag { align-self: flex-start; }
+  .featured-title { margin: 0; font-size: 22px; }
+  .featured-title a:hover { color: var(--amber); }
+  .featured-desc { margin: 0; font-size: 14px; color: var(--text2); line-height: 1.6; }
 
-  .project-list { margin-bottom: 48px; }
-  .project-row { display: grid; grid-template-columns: 64px 1fr auto; align-items: center; gap: 16px; min-height: 76px; border-bottom: 1px solid var(--border); }
-  .project-row:first-child { border-top: 1px solid var(--border); }
-  .project-row .project-image { width: 48px; height: 48px; min-height: 48px; border-radius: 5px; }
+  .project-list { display: flex; flex-direction: column; }
+  .project-row { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .project-row .project-image { width: 48px; height: 48px; flex-shrink: 0; border-radius: 6px; }
   .project-row .project-image img { min-height: 48px; }
-  .project-row .placeholder { font-size: 10px; line-height: 1.25; }
-  .project-row .placeholder span { margin: 0; font-size: 16px; }
-  .project-row .placeholder a { font-size: 9px; }
-  .project-row-title { margin: 0 0 6px; font-size: 14px; }
-  .project-row-link { color: var(--badge-blue); font-size: 11px; white-space: nowrap; }
+  .project-row .placeholder { font-size: 16px; min-height: 48px; }
+  .project-row-body { flex: 1; min-width: 0; }
+  .project-row-title { margin: 0 0 4px; font-size: 14px; color: var(--text); }
+  .project-row-title a:hover { color: var(--amber); }
 
   @media (max-width: 700px) {
     .featured-project { grid-template-columns: 1fr; }
-    .featured-copy { padding: 24px; }
-    .project-row { grid-template-columns: 52px 1fr; gap: 10px; }
-    .project-row-link { grid-column: 2; margin-top: -12px; margin-bottom: 10px; }
   }
 </style>
 
@@ -59,11 +58,11 @@ permalink: /projects/
     <div class="project-image placeholder"><div><span aria-hidden="true">▧</span>featured screenshot<br><a href="{{ featured.url }}">or browse files</a></div></div>
     {% endif %}
     <div class="featured-copy">
-      <span class="project-tag">#featured</span>
+      <span class="p-tag"><b>#</b>featured</span>
       <h2 class="featured-title"><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h2>
       <p class="featured-desc">{{ featured.description }}</p>
-      <div class="badge-row">{% for tag in featured.tags %}<span class="project-tag">#{{ tag }}</span>{% endfor %}</div>
-      <a class="project-link" href="{{ featured.url | relative_url }}">{% if featured.external %}{{ featured.url | remove: 'https://' }} ↗{% else %}{{ featured.url }} →{% endif %}</a>
+      <div class="p-tagrow">{% for tag in featured.tags %}<span class="p-tag"><b>#</b>{{ tag }}</span>{% endfor %}</div>
+      <a class="p-link" href="{{ featured.url | relative_url }}">{% if featured.external %}{{ featured.url | remove: 'https://' }} ↗{% else %}{{ featured.url }} →{% endif %}</a>
     </div>
   </article>
   {% endif %}
@@ -76,13 +75,13 @@ permalink: /projects/
           {% if project_page.image %}
           <div class="project-image"><img src="{{ project_page.image | relative_url }}" alt="{{ project_page.image_alt | default: project.title }}"></div>
           {% else %}
-          <div class="project-image placeholder"><div><span aria-hidden="true">▧</span><a href="{{ project.url }}">browse</a></div></div>
+          <div class="project-image placeholder"><div><span aria-hidden="true">▧</span></div></div>
           {% endif %}
-          <div>
+          <div class="project-row-body">
             <h2 class="project-row-title"><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
-            <div class="badge-row"><span class="project-tag">#{{ project.tags | first }}</span></div>
+            <div class="p-tagrow">{% for tag in project.tags limit: 2 %}<span class="p-tag"><b>#</b>{{ tag }}</span>{% endfor %}</div>
           </div>
-          <a class="project-row-link" href="{{ project.url | relative_url }}">{% if project.external %}repo ↗{% else %}demo ↗{% endif %}</a>
+          <a class="p-link" href="{{ project.url | relative_url }}">{% if project.external %}repo ↗{% else %}demo ↗{% endif %}</a>
         </article>
       {% endunless %}
     {% endfor %}
