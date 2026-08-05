@@ -1,0 +1,43 @@
+# _data/projects.yml
+# Canonical registry of projects, tooling, experiments, and games.
+# 
+# Attributes:
+# - title: Name of the project
+# - description: Brief summary of features and value proposition
+# - url: Destination link (relative path for internal, https:// for external)
+# - external: true if hosted externally (e.g. GitHub repo), false if internal site page
+# - badge: Primary descriptor or category pill
+# - badge_class: CSS class for badge styling (badge-blue, badge-green, badge-red, badge-neutral)
+# - year: Release or project year
+# - tags: Array of keyword tags
+# - card: true to feature on the landing page (index.md / home layout), false to display only on /projects/
+
+- title: "Trackboi"
+  description: "A localized task and track management tool designed for agentic AI and human pair programming workflows. Uses local context and MCP server integration."
+  url: "https://github.com/b08x/trackboi"
+  external: true
+  badge: "tool · cli"
+  badge_class: "badge-green"
+  year: "2026"
+  tags: [cli, workflow, mcp, ai, tool]
+  card: true
+
+- title: "HindsightAI Platform"
+  description: "A satirical AI startup research platform and empirical playground. Pioneering retrospective artificial intelligence, latent manifolds, and SCRAPS nomenclature."
+  url: "/hindsightai/"
+  external: false
+  badge: "research · satire"
+  badge_class: "badge-red"
+  year: "2026"
+  tags: [humor, satire, ai, research, project]
+  card: true
+
+- title: "Skiing Smokers"
+  description: "A simulator of athletic ambition meeting biological reality. Navigate the frozen wastes of middle age with only a pack of cigarettes and a crumbling sense of dignity."
+  url: "/skiing-smokers-game.html"
+  external: false
+  badge: "project · humor"
+  badge_class: "badge-blue"
+  year: "2026"
+  tags: [humor, satire, project, game]
+  card: true
