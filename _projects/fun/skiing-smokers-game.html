@@ -1,6 +1,6 @@
 ---
-layout: null
-permalink: /skiing-smokers-game.html
+layout: none
+permalink: /fun/skiing-smokers-game.html
 title: "Skiing Smokers"
 description: "A simulator of athletic ambition meeting biological reality. Navigate the frozen wastes of middle age with only a pack of cigarettes and a crumbling sense of dignity."
 badge: "project · humor"
@@ -287,6 +287,25 @@ card: true
             text-align: center;
             color: var(--text2);
         }
+
+        .nav-back-link {
+            color: var(--amber);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all .15s ease;
+            background: rgba(227, 219, 200, 0.85);
+            padding: 6px 12px;
+            border: 1px solid var(--border2);
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+        }
+        
+        .nav-back-link:hover {
+            color: var(--amber-hi);
+            border-color: var(--amber);
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body>
@@ -294,9 +313,12 @@ card: true
         <canvas id="canvas" aria-label="Cross country skiing game for smokers. Navigate obstacles while managing lung capacity and agitation."></canvas>
         
         <div class="ui-panel" id="ui-player1">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <div class="player-name" style="margin-bottom: 0;">Player 1 (Blue)</div>
-                <a href="/" style="font-size: 10px; color: var(--muted); text-decoration: none; border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px;">Exit to Home</a>
+                <div style="display: flex; gap: 6px;">
+                    <a href="/" style="font-size: 10px; color: var(--amber); text-decoration: none; border: 1px solid var(--border2); padding: 2px 6px; border-radius: 4px; background: var(--bg2); transition: all .15s;">← home</a>
+                    <a href="/projects/" style="font-size: 10px; color: var(--amber); text-decoration: none; border: 1px solid var(--border2); padding: 2px 6px; border-radius: 4px; background: var(--bg2); transition: all .15s;">projects</a>
+                </div>
             </div>
             <div><strong>Distance:</strong> <span id="distance1">0</span>m</div>
             <div style="margin-top: 8px;">
@@ -329,6 +351,10 @@ card: true
         <div id="commentary" aria-live="polite"></div>
         
         <div id="start-screen">
+            <div style="position: absolute; top: 24px; left: 24px; z-index: 1001; display: flex; gap: 12px;">
+                <a href="/" class="nav-back-link">← home</a>
+                <a href="/projects/" class="nav-back-link">all projects →</a>
+            </div>
             <h1>Cross Country Skiing<br>for Middle-Aged Smokers</h1>
             <p>
                 Your doctor said you need more exercise.<br>
@@ -350,6 +376,10 @@ card: true
         </div>
         
         <div id="game-over">
+            <div style="position: absolute; top: 24px; left: 24px; z-index: 1001; display: flex; gap: 12px;">
+                <a href="/" class="nav-back-link">← home</a>
+                <a href="/projects/" class="nav-back-link">all projects →</a>
+            </div>
             <h2>Inevitable Conclusion</h2>
             <p id="game-over-text"></p>
             <button onclick="location.reload()">Surely It'll Go Better Next Time</button>
