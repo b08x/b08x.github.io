@@ -30,6 +30,7 @@
   badge_class: "badge-red"
   year: "2026"
   tags: [humor, satire, ai, research, project]
+  featured: true
   card: true
 
 - title: "Skiing Smokers"
