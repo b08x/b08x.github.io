@@ -1,0 +1,109 @@
+{%- comment -%}
+  Chaptered audio-overview player. Reads a Supertonic-style manifest.json
+  (chunk/section/offset_sec/duration_sec/text per line — see
+  demo/build_narration.py in source projects) and renders section chapter
+  markers + a live caption line, no framework.
+  Usage: {% include audio-overview.html audio="/assets/audio/x/full.mp3" manifest="/assets/audio/x/manifest.json" %}
+{%- endcomment -%}
+<div class="audio-overview" data-audio="{{ include.audio | relative_url }}" data-manifest="{{ include.manifest | relative_url }}">
+  <div class="ao-controls">
+    <button type="button" class="ao-play" aria-label="Play audio overview">▶</button>
+    <div class="ao-scrub"><div class="ao-progress"></div></div>
+    <span class="ao-time">0:00 / 0:00</span>
+  </div>
+  <p class="ao-caption" aria-live="polite">Audio overview — click play</p>
+  <ol class="ao-chapters"></ol>
+  <audio class="ao-audio" preload="none"><source src="{{ include.audio | relative_url }}" type="audio/mpeg"></audio>
+</div>
+
+<script>
+(function () {
+  function fmt(s) {
+    s = Math.max(0, Math.floor(s));
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+  function chapterLabel(section) {
+    var t = section.replace(/^\d+_/, '').replace(/_/g, ' ');
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+
+  document.querySelectorAll('.audio-overview').forEach(function (root) {
+    var audio = root.querySelector('.ao-audio');
+    var playBtn = root.querySelector('.ao-play');
+    var scrub = root.querySelector('.ao-scrub');
+    var progress = root.querySelector('.ao-progress');
+    var timeEl = root.querySelector('.ao-time');
+    var caption = root.querySelector('.ao-caption');
+    var chaptersEl = root.querySelector('.ao-chapters');
+    var chunks = [];
+    var chapters = [];
+
+    fetch(root.getAttribute('data-manifest'))
+      .then(function (r) { return r.json(); })
+      .then(function (m) {
+        chunks = m.chunks || [];
+        var seen = {};
+        chunks.forEach(function (c) {
+          if (!seen[c.section]) {
+            seen[c.section] = true;
+            chapters.push({ section: c.section, offset: c.offset_sec });
+          }
+        });
+        chaptersEl.innerHTML = chapters.map(function (ch, i) {
+          return '<li><button type="button" data-offset="' + ch.offset + '">' +
+            '<span class="ao-ch-num">' + String(i + 1).padStart(2, '0') + '</span>' +
+            '<span class="ao-ch-label">' + chapterLabel(ch.section) + '</span></button></li>';
+        }).join('');
+        chaptersEl.querySelectorAll('button').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            audio.currentTime = parseFloat(btn.getAttribute('data-offset'));
+            play();
+          });
+        });
+      })
+      .catch(function () { chaptersEl.innerHTML = ''; });
+
+    function play() {
+      audio.play();
+      playBtn.textContent = '❚❚';
+    }
+    function pause() {
+      audio.pause();
+      playBtn.textContent = '▶';
+    }
+
+    playBtn.addEventListener('click', function () {
+      if (audio.paused) play(); else pause();
+    });
+
+    audio.addEventListener('ended', function () { pause(); });
+
+    audio.addEventListener('timeupdate', function () {
+      var dur = audio.duration || 0;
+      var pct = dur ? (audio.currentTime / dur) * 100 : 0;
+      progress.style.width = pct + '%';
+      timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(dur);
+
+      var current = null;
+      for (var i = 0; i < chunks.length; i++) {
+        if (chunks[i].offset_sec <= audio.currentTime) current = chunks[i]; else break;
+      }
+      if (current) caption.textContent = current.text;
+
+      var activeChapter = null;
+      for (var j = 0; j < chapters.length; j++) {
+        if (chapters[j].offset <= audio.currentTime) activeChapter = j; else break;
+      }
+      chaptersEl.querySelectorAll('button').forEach(function (btn, idx) {
+        btn.classList.toggle('active', idx === activeChapter);
+      });
+    });
+
+    scrub.addEventListener('click', function (e) {
+      var rect = scrub.getBoundingClientRect();
+      var pct = (e.clientX - rect.left) / rect.width;
+      if (audio.duration) audio.currentTime = pct * audio.duration;
+    });
+  });
+})();
+</script>
