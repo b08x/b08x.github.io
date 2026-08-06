@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page.title }} · Syncopated Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* Field Note "warm lamp-lit night" — never a cold IDE black */
+  :root {
+    --deck-bg: #211C17;
+    --deck-surface: #2A241D;
+    --deck-border: #3A3228;
+    --deck-fg: #ECE3D2;
+    --deck-fg2: #C7BBA6;
+    --deck-muted: #968A78;
+    --deck-dim: #5E5546;
+    --deck-accent: #C97A5E;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--deck-bg);
+    color: var(--deck-fg);
+    font-family: 'Space Mono', monospace;
+    overflow: hidden;
+  }
+
+  .deck-back-link {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 50;
+    font-size: 11px;
+    letter-spacing: .03em;
+    color: var(--deck-muted);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.3);
+    border: 1px solid var(--deck-border);
+    transition: color .15s, border-color .15s;
+  }
+  .deck-back-link:hover { color: var(--deck-fg); border-color: var(--deck-accent); }
+
+  .deck-stage {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .deck-slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 120px;
+    background-image:
+      linear-gradient(var(--deck-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--deck-border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: center;
+  }
+  .deck-slide[data-active] { display: flex; }
+
+  .deck-slide .eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--deck-accent);
+    margin-bottom: 20px;
+  }
+  .deck-slide h1 {
+    font-size: 58px;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    max-width: 18ch;
+    margin-bottom: 22px;
+  }
+  .deck-slide .subtitle {
+    font-family: 'Space Mono', monospace;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--deck-fg2);
+    max-width: 70ch;
+  }
+  .deck-slide .deck-body {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--deck-fg2);
+    max-width: 90ch;
+  }
+  .deck-slide .deck-body > * + * { margin-top: 16px; }
+  .deck-slide .deck-body h2 { font-size: 26px; color: var(--deck-fg); letter-spacing: -.01em; }
+  .deck-slide .deck-body h3 { font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--deck-accent); }
+  .deck-slide .deck-body strong { color: var(--deck-fg); }
+  .deck-slide .deck-body code { background: var(--deck-surface); color: var(--deck-accent); padding: 2px 6px; border-radius: 3px; }
+  .deck-slide .deck-body pre { background: var(--deck-surface); border: 1px solid var(--deck-border); border-radius: 6px; padding: 16px 20px; overflow-x: auto; font-size: 14px; line-height: 1.7; }
+  .deck-slide .deck-body ul, .deck-slide .deck-body ol { padding-left: 1.4em; }
+
+  /* Mermaid renders on a light SVG canvas (Field Note theme) — frame it as
+     an intentional paper inset against the dark deck rather than a stray
+     white box; mirrors the light/dark contrast pairing already used for
+     canvas widgets elsewhere in this design system. */
+  .deck-slide .deck-body img.mermaid {
+    display: block;
+    max-width: 100%;
+    background: #EDE6D6;
+    border: 1px solid var(--deck-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 0 auto;
+  }
+
+  .deck-tags {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .deck-tags span {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--deck-border);
+    color: var(--deck-muted);
+  }
+
+  /* Progressive reveal — author marks an element class="fragment" */
+  .fragment {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .fragment.visible { opacity: 1; transform: none; }
+
+  /* ── Nav overlay ── */
+  .deck-overlay {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 6px;
+    background: rgba(0,0,0,.4);
+    border: 1px solid var(--deck-border);
+    border-radius: 999px;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+  }
+  .deck-overlay[data-visible] { opacity: 1; pointer-events: auto; }
+  .deck-overlay button {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    color: var(--deck-fg2);
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .deck-overlay button:hover { background: rgba(255,255,255,.08); color: var(--deck-fg); }
+  .deck-overlay .count {
+    font-size: 11px;
+    color: var(--deck-muted);
+    padding: 0 8px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .deck-tap-zone {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 20%;
+    z-index: 10;
+    cursor: pointer;
+  }
+  .deck-tap-zone.prev { left: 0; }
+  .deck-tap-zone.next { right: 0; }
+
+  @media (max-width: 760px) {
+    .deck-slide { padding: 60px 32px; }
+    .deck-slide h1 { font-size: 36px; }
+    .deck-slide .subtitle, .deck-slide .deck-body { font-size: 15px; }
+  }
+
+  @media print {
+    html, body { overflow: visible; height: auto; }
+    .deck-back-link, .deck-overlay, .deck-tap-zone { display: none !important; }
+    .deck-slide {
+      position: relative;
+      display: flex !important;
+      height: 100vh;
+      break-after: page;
+    }
+    .fragment { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+{% assign deck_slides = site.slides | where: "deck_id", page.deck_id | sort: "order" %}
+
+<a href="{{ page.back_url | default: '/projects/' }}" class="deck-back-link">← back{% if page.back_label %} to {{ page.back_label }}{% endif %}</a>
+
+<div class="deck-stage" id="deck-stage">
+  {% for slide in deck_slides %}
+  <section class="deck-slide" data-index="{{ forloop.index0 }}">
+    {% if slide.eyebrow %}<div class="eyebrow">{{ slide.eyebrow }}</div>{% endif %}
+    {% if slide.title %}<h1>{{ slide.title }}</h1>{% endif %}
+    {% if slide.subtitle %}<p class="subtitle">{{ slide.subtitle }}</p>{% endif %}
+    {% if slide.content and slide.content != "" %}<div class="deck-body">{{ slide.content | markdownify }}</div>{% endif %}
+    {% if slide.tags and slide.tags.size > 0 %}
+    <div class="deck-tags">{% for tag in slide.tags %}<span>#{{ tag }}</span>{% endfor %}</div>
+    {% endif %}
+  </section>
+  {% endfor %}
+  {% if content and content != "" %}
+  <section class="deck-slide" data-index="{{ deck_slides.size }}">
+    {% if page.last_slide_eyebrow %}<div class="eyebrow">{{ page.last_slide_eyebrow }}</div>{% endif %}
+    {% if page.last_slide_title %}<h1>{{ page.last_slide_title }}</h1>{% endif %}
+    <div class="deck-body">{{ content }}</div>
+  </section>
+  {% endif %}
+</div>
+
+<div class="deck-tap-zone prev" id="deck-tap-prev"></div>
+<div class="deck-tap-zone next" id="deck-tap-next"></div>
+
+<div class="deck-overlay" id="deck-overlay">
+  <button type="button" id="deck-prev" aria-label="Previous">‹</button>
+  <span class="count"><span id="deck-current">1</span> / <span id="deck-total">1</span></span>
+  <button type="button" id="deck-next" aria-label="Next">›</button>
+</div>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.deck-slide'));
+  var total = slides.length;
+  if (!total) return;
+
+  var index = 0;
+  var fragIndex = 0;
+
+  var overlay = document.getElementById('deck-overlay');
+  var currentEl = document.getElementById('deck-current');
+  var totalEl = document.getElementById('deck-total');
+  totalEl.textContent = String(total);
+
+  var hideTimer;
+  function flashOverlay() {
+    overlay.setAttribute('data-visible', '');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function () { overlay.removeAttribute('data-visible'); }, 1800);
+  }
+
+  function fragmentsFor(i) {
+    return Array.prototype.slice.call(slides[i].querySelectorAll('.fragment'));
+  }
+
+  function render() {
+    slides.forEach(function (s, i) {
+      if (i === index) s.setAttribute('data-active', '');
+      else s.removeAttribute('data-active');
+    });
+    var frags = fragmentsFor(index);
+    frags.forEach(function (f, i) {
+      if (i < fragIndex) f.classList.add('visible');
+      else f.classList.remove('visible');
+    });
+    currentEl.textContent = String(index + 1);
+    try { history.replaceState(null, '', '#' + (index + 1)); } catch (e) {}
+    flashOverlay();
+  }
+
+  function goTo(i) {
+    index = Math.max(0, Math.min(total - 1, i));
+    fragIndex = fragmentsFor(index).length; // land on a slide with all its fragments already shown
+    render();
+  }
+
+  function advance(dir) {
+    if (dir > 0) {
+      var frags = fragmentsFor(index);
+      if (fragIndex < frags.length) { fragIndex++; render(); return; }
+      if (index < total - 1) { index++; fragIndex = 0; render(); }
+      else { flashOverlay(); }
+    } else {
+      if (fragIndex > 0) { fragIndex--; render(); return; }
+      if (index > 0) { index--; fragIndex = fragmentsFor(index).length; render(); }
+      else { flashOverlay(); }
+    }
+  }
+
+  document.getElementById('deck-prev').addEventListener('click', function () { advance(-1); });
+  document.getElementById('deck-next').addEventListener('click', function () { advance(1); });
+  document.getElementById('deck-tap-prev').addEventListener('click', function () { advance(-1); });
+  document.getElementById('deck-tap-next').addEventListener('click', function () { advance(1); });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { advance(1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { advance(-1); e.preventDefault(); }
+    else if (e.key === 'Home') { goTo(0); e.preventDefault(); }
+    else if (e.key === 'End') { goTo(total - 1); e.preventDefault(); }
+  });
+
+  window.addEventListener('mousemove', flashOverlay);
+
+  var startHash = (location.hash || '').match(/^#(\d+)$/);
+  if (startHash) goTo(parseInt(startHash[1], 10) - 1);
+  else render();
+})();
+</script>
+
+</body>
+</html>

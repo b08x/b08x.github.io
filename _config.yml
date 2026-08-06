@@ -53,6 +53,10 @@ defaults:
       path: "_prompts"
     values:
       layout: prompt
+  - scope:
+      path: "_slides"
+    values:
+      layout: null
 
 collections:
   notes:
@@ -64,6 +68,8 @@ collections:
   prompts:
     output: true
     permalink: /prompts/:path/
+  slides:
+    output: false
 
 exclude:
   - Gemfile

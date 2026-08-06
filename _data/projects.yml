@@ -33,6 +33,16 @@
   featured: true
   card: true
 
+- title: "SFL Engine"
+  description: "Stance-filtered RAG for LLM security — separates what was said from how it was said, then filters the how before it reaches the model."
+  url: "/sfl-engine/"
+  external: false
+  badge: "research · ruby"
+  badge_class: "badge-green"
+  year: "2025"
+  tags: [ruby, rag, security, llm]
+  card: true
+
 - title: "Skiing Smokers"
   description: "A simulator of athletic ambition meeting biological reality. Navigate the frozen wastes of middle age with only a pack of cigarettes and a crumbling sense of dignity."
   url: "/fun/skiing-smokers-game.html"

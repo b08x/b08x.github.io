@@ -1,4 +1,104 @@
 ---
 layout: notes
 ---
-{{ content }}
+<style>
+  .project-page { max-width: 1048px; margin: 0 auto; }
+
+  .project-hero {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 32px;
+    align-items: start;
+    margin-bottom: 30px;
+  }
+
+  .project-title { font-size: 30px; color: var(--amber); margin: 0 0 12px; letter-spacing: -.015em; }
+  .project-desc { font-size: 15px; color: var(--text2); line-height: 1.6; margin: 0 0 18px; max-width: 60ch; }
+
+  .p-tag { display: inline-flex; align-items: center; gap: 1px; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 4px; color: var(--text2); background: var(--bg2); border: 1px solid var(--border); }
+  .p-tag b { color: var(--muted); font-weight: 400; }
+
+  .project-meta-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .project-meta-label { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin-bottom: 3px; }
+  .project-meta-value { font-size: 13px; color: var(--text2); }
+  .project-meta-value.status-active { color: var(--badge-green); }
+  .project-meta-value a { color: var(--badge-blue); display: block; }
+  .project-meta-value a:hover { color: var(--amber); }
+
+  .project-hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    margin: 0 0 32px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background: var(--bg2);
+  }
+  .project-hero-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  @media (max-width: 700px) {
+    .project-hero { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="project-page">
+  <a href="/projects/" class="back-link">← back to projects</a>
+
+  <div class="project-hero">
+    <div>
+      <h1 class="project-title">{{ page.title }}</h1>
+      {% if page.description %}<p class="project-desc">{{ page.description }}</p>{% endif %}
+      {% if page.tags and page.tags.size > 0 %}
+      <div class="badge-row">
+        {% for tag in page.tags %}<span class="p-tag"><b>#</b>{{ tag }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    {% if page.status or page.timeframe or page.links %}
+    <div class="project-meta-card">
+      {% if page.status %}
+      <div>
+        <div class="project-meta-label">Status</div>
+        <div class="project-meta-value{% if page.status == 'Active' %} status-active{% endif %}">{{ page.status }}</div>
+      </div>
+      {% endif %}
+      {% if page.timeframe %}
+      <div>
+        <div class="project-meta-label">Timeframe</div>
+        <div class="project-meta-value">{{ page.timeframe }}</div>
+      </div>
+      {% endif %}
+      {% if page.links and page.links.size > 0 %}
+      <div>
+        <div class="project-meta-label">Links</div>
+        {% for link in page.links %}
+          {% if link.internal %}
+          <a href="{{ link.url | relative_url }}">{{ link.label }} →</a>
+          {% else %}
+          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }} ↗</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+
+  {% if page.image %}
+  <div class="project-hero-image"><img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title }}"></div>
+  {% endif %}
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+</div>
