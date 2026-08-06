@@ -12,15 +12,15 @@
 # - tags: Array of keyword tags
 # - card: true to feature on the landing page (index.md / home layout), false to display only on /projects/
 
-- title: "Trackboi"
-  description: "A localized task and track management tool designed for agentic AI and human pair programming workflows. Uses local context and MCP server integration."
-  url: "https://github.com/b08x/trackboi"
-  external: true
-  badge: "tool · cli"
-  badge_class: "badge-green"
-  year: "2026"
-  tags: [cli, workflow, mcp, ai, tool]
-  card: true
+#- title: "Trackboi"
+#  description: "A localized task and track management tool designed for agentic AI and human pair programming workflows. Uses local context and MCP server integration."
+#  url: "https://github.com/b08x/trackboi"
+#  external: true
+#  badge: "tool · cli"
+#  badge_class: "badge-green"
+#  year: "2026"
+#  tags: [cli, workflow, mcp, ai, tool]
+#  card: true
 
 - title: "HindsightAI Platform"
   description: "A satirical AI startup research platform and empirical playground. Pioneering retrospective artificial intelligence, latent manifolds, and SCRAPS nomenclature."
