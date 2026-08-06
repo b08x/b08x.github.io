@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="RIS Triage mark — a single continuous stroke looping through one central node">
+  <defs><linearGradient id="ink" x1="0.62" y1="0" x2="0.28" y2="1">
+    <stop offset="0" stop-color="#C46BEB"/><stop offset=".5" stop-color="#9B2FD1"/>
+    <stop offset="1" stop-color="#4A1668"/></linearGradient></defs>
+  <path d="M256,256 C178.2,208.7 143.7,84.2 205.1,54.2 C253.9,39.6 301.9,171.8 256,256 C205.1,323.9 85.4,345.9 62.3,287 C52.7,241.1 180.9,207.2 256,256 C309.7,325.1 305.1,457.9 244.3,469.8 C198.6,470.1 173.2,341.1 256,256 C334.5,213.3 460.5,238.7 457.2,301.1 C450.5,347.6 318.6,338.6 256,256 C346,136 391,66 402,58"
+    fill="none" stroke="url(#ink)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="256" cy="256" r="14" fill="#E8A13D"/>
+</svg>

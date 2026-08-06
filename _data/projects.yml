@@ -43,6 +43,16 @@
   tags: [ruby, rag, security, llm]
   card: true
 
+- title: "RIS Triage"
+  description: "A Claude plugin packaging a senior radiology-IT analyst's triage method — ticket clarification, incident comms, and knowledge capture."
+  url: "/ris-triage/"
+  external: false
+  badge: "agents · pre-alpha"
+  badge_class: "badge-blue"
+  year: "2025"
+  tags: [claude-plugin, radiology-it, incident-comms, agents]
+  card: true
+
 - title: "Skiing Smokers"
   description: "A simulator of athletic ambition meeting biological reality. Navigate the frozen wastes of middle age with only a pack of cigarettes and a crumbling sense of dignity."
   url: "/fun/skiing-smokers-game.html"
