@@ -4,8 +4,8 @@
 # Copy documentation out of a source repository into a _docs collection,
 # injecting Jekyll frontmatter and rewriting intra-repo links.
 #
-#   ruby _sync/sync_docs.rb _sync/ris-triage.yml
-#   ruby _sync/sync_docs.rb _sync/ris-triage.yml --check
+#   ruby _sync/sync_docs.rb _sync/ris-assist.yml
+#   ruby _sync/sync_docs.rb _sync/ris-assist.yml --check
 #
 # --check writes nothing and exits non-zero if any output is missing or stale,
 # which makes it usable as a pre-commit or CI guard.

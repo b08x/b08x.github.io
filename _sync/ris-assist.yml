@@ -1,0 +1,86 @@
+# Sync manifest — RIS Assist docs
+#
+# Source of truth is the plugin repo. Pages listed here are COPIED into
+# _docs/ris-assist/ by _sync/sync_docs.rb and must not be hand-edited; edit
+# the source file in the plugin repo and re-run the sync.
+#
+# Guide pages are authored directly in _docs/ris-assist/ and are absent from
+# this manifest on purpose — they have no upstream source.
+
+repo_root: "../ris-assist"
+doc_set: ris-assist
+output_dir: _docs/ris-assist
+
+# Links to repo files that aren't published here fall back to this base
+# rather than becoming dead relative .md links.
+github_blob_base: "https://github.com/b08x/ris_assist/blob/main"
+
+pages:
+  # ── Domain explainers ──────────────────────────────────────────────────
+  - source: plugins/ris-assist/skills/explainer/references/order-lifecycle.md
+    slug: order-lifecycle
+    title: Order lifecycle
+    description: "ordered → scheduled → performed → read → reported, and what breaks between each step."
+    nav_order: 20
+
+  - source: plugins/ris-assist/skills/explainer/references/accession-vs-order-number.md
+    slug: accession-vs-order-number
+    title: Accession vs. order number
+    description: "The single most common 'why does this system show a different number' question."
+    nav_order: 21
+
+  - source: plugins/ris-assist/skills/explainer/references/modality-worklist.md
+    slug: modality-worklist
+    title: Modality worklist
+    description: "How studies reach the scanner, and what an empty worklist actually means."
+    nav_order: 22
+
+  - source: plugins/ris-assist/skills/explainer/references/report-status-flow.md
+    slug: report-status-flow
+    title: Report status flow
+    description: "Draft, preliminary, signed, finalized — and where reports get stuck."
+    nav_order: 23
+
+  - source: plugins/ris-assist/skills/explainer/references/topology-patterns.md
+    slug: topology-patterns
+    title: Topology patterns
+    description: "Generic RIS ↔ PACS ↔ EHR shapes, without assuming yours."
+    nav_order: 24
+
+  # ── Reference ──────────────────────────────────────────────────────────
+  - source: docs/PERSONA-SPEC.md
+    slug: persona-spec
+    title: Analyst persona
+    description: "The stance every skill speaks through — observation separated from inference, confidence marked, cite or decline."
+    nav_order: 30
+
+  - source: docs/GUARDRAILS.md
+    slug: guardrails
+    title: Guardrails
+    description: "Ten named failure modes the project is built to resist."
+    nav_order: 31
+
+  - source: docs/NON-GOALS.md
+    slug: non-goals
+    title: Non-goals
+    description: "What this deliberately does not do, and why the boundary sits there."
+    nav_order: 32
+
+  - source: docs/DATA-PROVENANCE.md
+    slug: data-provenance
+    title: Data provenance
+    description: "Synthetic from birth — and why de-identified production data is excluded too."
+    nav_order: 33
+
+  # ── Decision records ───────────────────────────────────────────────────
+  - source: docs/adr/README.md
+    slug: decisions
+    title: Decision records
+    description: "Dated records of the decisions that shaped this project, including what was rejected."
+    nav_order: 40
+
+  - source: docs/adr/0008-separate-forensics-plugin.md
+    slug: adr-0008-separate-forensics-plugin
+    title: "ADR-0008 — Message forensics as a separate plugin"
+    description: "Why HL7 parsing was split out rather than shipped alongside triage."
+    nav_order: 41

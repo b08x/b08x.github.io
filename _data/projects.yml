@@ -32,9 +32,9 @@
   tags: [ruby, rag, security, llm]
   card: true
 
-- title: "RIS Triage"
+- title: "RIS Assist"
   description: "A Claude plugin packaging a senior radiology-IT analyst's triage method — ticket clarification, incident comms, and knowledge capture."
-  url: "/ris-triage/"
+  url: "/ris-assist/"
   external: false
   badge: "agents · pre-alpha"
   badge_class: "badge-blue"
