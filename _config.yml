@@ -41,6 +41,7 @@ defaults:
       path: "_posts"
     values:
       layout: post
+      toc: true
   - scope:
       path: "_projects"
     values:
@@ -49,6 +50,7 @@ defaults:
       path: "_notes"
     values:
       layout: post
+      toc: true
   - scope:
       path: "_prompts"
     values:
