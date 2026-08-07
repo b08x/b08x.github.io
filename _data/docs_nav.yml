@@ -1,0 +1,78 @@
+# Sidebar definitions for the _docs collection, keyed by `doc_set` in each
+# page's frontmatter. One key per documented project.
+
+ris-triage:
+  title: RIS Triage
+  subtitle: pre-alpha
+  project_url: /ris-triage/
+  edit_base: "https://github.com/b08x/ris_triage/edit/main/"
+
+  # Palette lifted from /ris-triage/persona-card.html — the project's own
+  # identity rather than the site's Field Note theme. Keys are the site's
+  # existing token names, so every shared component (post-content, badges,
+  # rouge, tables) re-skins without touching its CSS.
+  theme:
+    bg: "#14101A"
+    bg2: "#1B1230"
+    surface: "#241838"
+    border: "#35234A"
+    border2: "#4A2E63"
+    text: "#E8DFF5"
+    text2: "#C3B2DC"
+    muted: "#A895C4"
+    dim: "#9A86B8"
+    amber: "#C46BEB"
+    amber-hi: "#E0A0F5"
+    red: "#E8636B"
+    badge-blue: "#7FA8D9"
+    badge-green: "#A9E08A"
+    badge-red: "#E8636B"
+    badge-neutral: "#9A86B8"
+    badge-text: "#14101A"
+    # Uppercase labels and section markers — amber, as on the persona card.
+    label: "#E8A13D"
+    glow: "rgba(163,43,214,.18)"
+  groups:
+    - title: Guide
+      items:
+        - title: What is RIS Triage
+          url: /docs/ris-triage/
+        - title: Installing
+          url: /docs/ris-triage/installing/
+        - title: Site profile setup
+          url: /docs/ris-triage/site-profile/
+        - title: Commands
+          url: /docs/ris-triage/commands/
+        - title: Status and roadmap
+          url: /docs/ris-triage/roadmap/
+
+    - title: Domain explainers
+      items:
+        - title: Order lifecycle
+          url: /docs/ris-triage/order-lifecycle/
+        - title: Accession vs. order number
+          url: /docs/ris-triage/accession-vs-order-number/
+        - title: Modality worklist
+          url: /docs/ris-triage/modality-worklist/
+        - title: Report status flow
+          url: /docs/ris-triage/report-status-flow/
+        - title: Topology patterns
+          url: /docs/ris-triage/topology-patterns/
+
+    - title: Reference
+      items:
+        - title: Analyst persona
+          url: /docs/ris-triage/persona-spec/
+        - title: Guardrails
+          url: /docs/ris-triage/guardrails/
+        - title: Non-goals
+          url: /docs/ris-triage/non-goals/
+        - title: Data provenance
+          url: /docs/ris-triage/data-provenance/
+
+    - title: Decision records
+      items:
+        - title: Index
+          url: /docs/ris-triage/decisions/
+        - title: "ADR-0008 — Forensics split"
+          url: /docs/ris-triage/adr-0008-separate-forensics-plugin/
