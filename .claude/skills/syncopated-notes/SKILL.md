@@ -1,11 +1,11 @@
 ---
 name: syncopated-notes
-description: Edit and design the b08x.github.io Jekyll site — adding posts, notes, projects, HindsightAI research pages, or self-contained pages; running/building the site locally; and generating well-branded interfaces, mocks, decks, or components in the "Field Note" design system (cream parchment + dark ink, terracotta accent, Space Mono, light & dark). Use whenever working in this repo on _posts/, _notes/, _projects/, _data/projects.yml, _layouts/, _includes/, _config.yml, or theme-tokens.html, or when asked to add content, add a project, update the Field Note theme, build a mock/deck/prototype in this brand, or diagnose a Jekyll build/Mermaid-rendering issue on this site.
+description: Edit and design the b08x.github.io Jekyll site — adding posts, notes, projects, or self-contained pages; running/building the site locally; and generating well-branded interfaces, mocks, decks, or components in the "Field Note" design system (cream parchment + dark ink, terracotta accent, Space Mono, light & dark). Use whenever working in this repo on _posts/, _notes/, _projects/, _data/projects.yml, _layouts/, _includes/, _config.yml, or theme-tokens.html, or when asked to add content, add a project, update the Field Note theme, build a mock/deck/prototype in this brand, or diagnose a Jekyll build/Mermaid-rendering issue on this site.
 ---
 
 # Syncopated Notes — Jekyll Site + Design System
 
-This skill covers **both halves** of working on `b08x.github.io`: the Jekyll site itself (a personal landing + blog at `/`, plus **HindsightAI**, a satirical/fictional AI startup at `/hindsightai/`) and the **Field Note** design system that skins it (cream parchment, dark ink, terracotta accent, Space Mono everywhere, light & dark faces). They're combined here because they're one brand, edited by one person, in one repo — keeping them split just meant cross-referencing two skills for what's usually a single task.
+This skill covers **both halves** of working on `b08x.github.io`: the Jekyll site itself (a personal landing + blog at `/`) and the **Field Note** design system that skins it (cream parchment, dark ink, terracotta accent, Space Mono everywhere, light & dark faces). They're combined here because they're one brand, edited by one person, in one repo — keeping them split just meant cross-referencing two skills for what's usually a single task.
 
 The canonical *technical* reference for the site is the project's own `AGENTS.md` — read it for full detail on the Jekyll setup. The canonical *design* reference is `readme.md` in this skill's own root — read it for the full brand guide (voice, visual foundations, iconography). `references/design-system.md` is a condensed cheat sheet that also maps each design-system token to its equivalent CSS variable name in the site's own `_includes/theme-tokens.html` (the site's tokens are a **subset** of the full system, under different names — that mapping isn't in `readme.md` itself, which is why it's worth keeping as a separate quick-lookup file).
 
@@ -13,7 +13,7 @@ The canonical *technical* reference for the site is the project's own `AGENTS.md
 
 **Site editing:**
 - "Add a new note to my website" / "Create a blog post" / "Add a new project to /projects/"
-- "Update the HindsightAI landing page" / "Add a research page under /hindsightai/research/"
+
 - "Run the Jekyll site locally" / "Why isn't my Mermaid diagram showing?"
 - "How do I add a card to the home page?" / "Update the Field Note theme tokens"
 
@@ -73,7 +73,7 @@ If invoked for a design task with no other guidance, ask what the user wants to 
 **Collections & permalinks** (`_config.yml`):
 - `_posts/` → `/YYYY/MM/DD/title/` (standard; **paginated** by `jekyll-paginate-v2`, 5 per page)
 - `_notes/` → `/notes/:path/` (`output: true`, sorted by title, NOT paginated)
-- `_projects/` → `/:path/` (`output: true`, preserves `/hindsightai/...`)
+- `_projects/` → `/:path/` (`output: true`)
 - `_data/projects.yml` → canonical project registry
 
 **Layouts** (`_layouts/`, chain root = `default`):
@@ -82,7 +82,7 @@ If invoked for a design task with no other guidance, ask what the user wants to 
 - `home.html` → `notes` + paginated posts + filtered notes + projects grid
 - `post.html` → `notes` + post header & content
 - `project.html` → `notes` (default wrapper for `_projects/`)
-- `hindsight.html` → `default` + dark-theme grid bg, nav, breadcrumb slot
+
 - `none.html` → bare `{{ content }}` (self-contained pages; **never use `layout: null`**)
 
 **Design tokens** (`_includes/theme-tokens.html`):
@@ -131,27 +131,6 @@ tags: [essay, llm]
 2. For internal project pages, add a file under `_projects/<subtree>/index.html` (or `.md`) with front matter; set `permalink` to keep URLs stable.
 3. **`card: true` lives only in `_data/projects.yml`** — never in `_projects/.../index.html` front matter (that flag is for the landing-page grid only).
 
-### 4. Add a HindsightAI research page
-
-1. Drop the file under `_projects/hindsightai/<subdir>/<name>.html`.
-2. Front matter:
-   ```yaml
-   ---
-   layout: hindsight
-   permalink: /hindsightai/<subdir>/<name>/
-   title: "..."
-   nav_active: platform   # or "research"
-   breadcrumbs:
-     - label: "syncopated notes"
-       url: "/"
-     - label: "hindsightai"
-       url: "/hindsightai/"
-   breadcrumb_current: "<page label>"
-   ---
-   ```
-3. Page-specific CSS in an inline `<style>` block; markup in the page body — both go into `{{ content }}`.
-4. **Do not** add `card: true` — internal research pages shouldn't appear on the home grid.
-5. To change nav / breadcrumb / footer site-wide, edit `_includes/hindsight-nav.html`, `_includes/hindsight-breadcrumb.html`, or `_includes/hindsight-footer.html`.
 
 ### 5. Add a self-contained page (e.g. game)
 
@@ -163,8 +142,6 @@ tags: [essay, llm]
 ### 6. Update the design system on the live site
 
 - Edit `_includes/theme-tokens.html` once — all layouts that chain to `default` inherit via `_includes/head.html`
-- HindsightAI research pages alias `--color-text-primary/secondary/tertiary` and `--color-border-tertiary` onto `var(--text) / var(--text2) / var(--dim) / var(--border)` — change the shared tokens and those pages re-skin automatically
-- `latent-manifold.html`'s canvas widget intentionally keeps its own hardcoded dark colors as a contrasting viewport inset
 - For the **canonical** (expanded) token set — chart/status palettes, layout widths, type scale, spacing, radius, elevation, motion, iconography, voice rules, component vocabulary — see `readme.md` and `references/design-system.md`
 
 ### 7. Run locally
@@ -182,12 +159,12 @@ Then preview at `http://localhost:4000` (Chrome MCP `navigate`, or just open it 
 - **Mermaid = remote images** — `jekyll-spaceship`'s `mermaid-processor` builds a `mermaid.ink/svg/...` URL at build time and emits `<img class="mermaid">`. Diagrams will NOT render offline; network access is required at build/view.
 - **`layout: null` ≠ `layout: none`** — YAML `null` becomes Ruby `nil` and falls back to the collection default layout (e.g. `_config.yml`'s `path: _projects` defaults to `layout: project`). Use `layout: none` + `_layouts/none.html` for self-contained pages.
 - **`card: true` is opt-in** — projects without it still build a standalone page but don't appear on the home grid. Set it only in `_data/projects.yml`.
-- **`permalink: /:path/` preserves `/hindsightai/...`** — renaming files in that subtree changes URLs because the path comes from the file path; declare explicit `permalink:` if you need a stable URL.
+- **`permalink: /:path/` preserves URLs** — renaming files changes URLs because the path comes from the file path; declare explicit `permalink:` if you need a stable URL.
 - **Ruby 3.4.4 is pinned** in `.tool-versions` — bundle install against another Ruby produces native-extension mismatches.
 - **Excluded files** — `AGENTS.md`, `GEMINI.md`, `README.md`, `LICENSE`, `.trackboi`, `.agents`, `.codemap`, `.tool-versions`, `.mcp.json`, `Gemfile`, `Gemfile.lock` are listed in `_config.yml` `exclude`. Don't expect them in `_site/`.
 - **jekyll-spaceship may reformat inline HTML/whitespace** during build — re-check rendered output after big content edits.
 - **No 404 page** — GitHub Pages serves its default 404 for missing links.
-- **HindsightAI `#` placeholders** — the "Request Access" CTA in `_includes/hindsight-nav.html` points at `/hindsightai/` by design.
+
 - **Internal links are root-relative** — `baseurl` is empty in `_config.yml`; never prepend a base path.
 - **No CSS/JS frameworks on the live site** — every page embeds its own `<style>` / `<script>`; only shared tokens live in `_includes/theme-tokens.html`. The `components/` React primitives in this skill are for mocks/prototypes/decks, not for importing into the Jekyll build.
 - **Plum `#8B0A5F` is logo-only** — never use it in chrome, badges, or accents.

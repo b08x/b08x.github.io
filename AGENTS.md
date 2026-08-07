@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a **Jekyll** site for **Syncopated Notes** (the landing page) and **HindsightAI** — a satirical/fictional AI startup whose research is hosted under `/hindsightai/`. It is built with Jekyll and deployed via GitHub Pages.
+This is a **Jekyll** site for **Syncopated Notes** (the landing page). It is built with Jekyll and deployed via GitHub Pages.
 
 ## Project Structure
 
@@ -14,26 +14,17 @@ _layouts/
   notes.html                            # Light-theme base (chains to default) — container grid + card / pager styles
   home.html                             # Landing page body (layout: notes) — rhythm mark, posts+notes grid, projects grid
   post.html                             # Blog post body (layout: notes) — back link, post header (title/date/tags), post content
-  hindsight.html                        # Dark-theme base (chains to default) — nav, breadcrumb slot, footer slot, grid bg
+
   project.html                          # Default for _projects/ entries (chains to layout: notes) — applies when a project file doesn't override
 _includes/
   head.html / header.html / nav.html / footer.html   # Default layout's shell includes (most files are layout-conditional)
   theme-tokens.html                     # Shared "Field Note" CSS tokens/components (palette, badges, cards, post/code/blockquote/mermaid typography)
-  hindsight-nav.html                    # Shared HindsightAI nav bar (Platform / Research / "Request Access")
-  hindsight-breadcrumb.html             # Shared breadcrumb trail (driven by front matter)
-  hindsight-footer.html                 # Shared footer (driven by front matter)
+
 _posts/                                  # Standard Jekyll posts collection — layout: post via _config.yml defaults
   YYYY-MM-DD-*.md                        # Front matter: title, tags[] (date comes from filename)
 _notes/                                  # Custom `notes` collection — output: true, permalink: /notes/:path/
   *.md / *.html                          # Front matter: layout, title, description, tags[]; rendered at /notes/<filename-stem>/
-_projects/                               # Custom `projects` collection — output: true, permalink: /:path/ (so the HindsightAI subtree keeps /hindsightai/...)
-  hindsightai/                           # HindsightAI platform subtree (satirical/humor project)
-    index.html                           #   Platform landing (layout: hindsight, card: true → home-page card, tag: humor)
-    research/                            #   Research subtree — internal pages, no `card:` → not on home page
-      index.html                         #     Research listing (layout: hindsight, permalink: /hindsightai/research/)
-      scraps-acronym.html                #     SCRAPS acronym explainer (layout: hindsight)
-      whitepaper-abstract.html           #     Paper abstract (layout: hindsight)
-      latent-manifold.html               #     Interactive canvas visualization (layout: hindsight)
+_projects/                               # Custom `projects` collection — output: true, permalink: /:path/
   fun/                                   # Standalone games and interactive entertainment
     skiing-smokers-game.html             #   Self-contained canvas game (layout: none), card: true → home-page card, tag: humor
 index.md                                # Landing page (layout: home)
@@ -50,10 +41,10 @@ index.md                                # Landing page (layout: home)
 
 `default.html` is the actual base. Every other layout declares `layout: default` and is rendered into the `{{ content }}` slot between the header/nav and footer includes. The shell includes themselves are layout-conditional:
 
-- `header.html` includes `hindsight-nav.html` for `hindsight`; otherwise renders the default `<header>` (for `notes` / `home` / `post` / `project`).
-- `footer.html` includes `hindsight-footer.html` for `hindsight`; otherwise renders the uniform default `<footer>` (site title, source link, update status, and "Built with Jekyll") across all other layouts.
+- `header.html` renders the default `<header>` (for `notes` / `home` / `post` / `project`).
+- `footer.html` renders the uniform default `<footer>` (site title, source link, update status, and "Built with Jekyll") across all layouts.
 
-The root landing page (`index.md`) uses `layout: home`, which itself declares `layout: notes` — `notes.html` provides the shared `.container` shell, `.grid-2` card layout, and `.pager` pagination styles (it does not share anything with the `hindsight` layout), and `home.html` renders into `{{ content }}` with the rhythm mark, the filtered `type: note` page list, and the paginated `_posts` list.
+The root landing page (`index.md`) uses `layout: home`, which itself declares `layout: notes` — `notes.html` provides the shared `.container` shell, `.grid-2` card layout, and `.pager` pagination styles, and `home.html` renders into `{{ content }}` with the rhythm mark, the filtered `type: note` page list, and the paginated `_posts` list.
 
 ### Notes (`_notes/` collection)
 
@@ -65,10 +56,10 @@ The root landing page (`index.md`) uses `layout: home`, which itself declares `l
 
 - **Data File (`_data/projects.yml`):** The canonical registry of projects (both internal and external). Each entry specifies `title`, `description`, `url`, `external: true/false`, `badge`, `tags[]`, and `card: true` (if featured on the landing page).
 - **Projects Page (`projects.html`):** Renders at `/projects/` (`permalink: /projects/`) using `layout: notes`. Features interactive Vanilla JS filtering (All / Internal / External), accessible clickable card overlays, and dynamic micro-animations.
-- **Projects Collection (`_projects/`):** Files under `_projects/` are defined in `_config.yml` with `output: true` and `permalink: /:path/`, providing standalone content pages for internal projects like HindsightAI (`_projects/hindsightai/index.html`) and Skiing Smokers (`_projects/fun/skiing-smokers-game.html`).
+- **Projects Collection (`_projects/`):** Files under `_projects/` are defined in `_config.yml` with `output: true` and `permalink: /:path/`, providing standalone content pages for internal projects like Skiing Smokers (`_projects/fun/skiing-smokers-game.html`).
 - `_layouts/home.html` iterates `site.data.projects | where: "card", true` for the projects list on the landing page, rendering appropriate external link badges and targets (`target="_blank" rel="noopener noreferrer"`).
 - `_layouts/project.html` is the default wrapper (chains to `notes`) for any project file that doesn't override with `layout:` — keeps the field notes theme on any project that wants it.
-- HindsightAI and Skiing Smokers are tagged `[humor, satire, project]` (HindsightAI is the placeholder/satirical piece; Skiing Smokers is its companion game).
+- Skiing Smokers is tagged `[humor, satire, project]`.
 - Add a new project by adding its metadata to `_data/projects.yml`, setting `external: true` for remote repositories or `external: false` for internal pages in `_projects/`.
 
 ### Blog posts (`_posts/`)
@@ -89,12 +80,6 @@ The root landing page (`index.md`) uses `layout: home`, which itself declares `l
 
 `_projects/fun/skiing-smokers-game.html` uses `layout: none` (which resolves to the pass-through `_layouts/none.html` containing only `{{ content }}`) — front matter is parsed (so Liquid still runs) but no decorative site layout wraps the content, keeping the page fully self-contained with its own `<head>`/`<body>`, inline `<style>`/`<script>`, and internal navigation links back to Home and Projects. Note: Do NOT use `layout: null` in YAML front matter when a collection default layout exists in `_config.yml`, because YAML evaluates `null` to Ruby `nil`, causing Jekyll to fall back to the default wrapper layout. The file declares `permalink: /fun/skiing-smokers-game.html` in front matter.
 
-### Adding a new HindsightAI page
-
-1. Drop the file under `_projects/hindsightai/...`, e.g. `_projects/hindsightai/research/foo.md`.
-2. Add front matter: `layout: hindsight`, `title`, `description`, an explicit `permalink: /hindsightai/...` (or rely on the `/:path/` default), `nav_active` (`"platform"` or `"research"`), and optionally `breadcrumbs` / `breadcrumb_current` / `footer_left` / `footer_right`. **Do not** add `card: true` — internal research pages shouldn't show on the home grid.
-3. Write page-specific CSS in a `<style>` block and markup in the page body — both go into `{{ content }}`.
-4. To change the nav, breadcrumb, or footer across **all** HindsightAI pages, edit the relevant file in `_includes/` once.
 
 ## Design System
 
@@ -129,7 +114,7 @@ The site uses a shared "Field Note" theme — a cream/parchment palette with dar
 - `.back-link`, `.post-header`, `.post-title`, `.post-meta` — blog post header (used by `_layouts/post.html`)
 - `.post-content` — typography for rendered Markdown: headings, lists, tables, `blockquote` (terracotta left border, `--bg2` background), inline `code`, Rouge `.highlight` code blocks (syntax token colors mapped onto the palette — keywords in `--amber`, strings in `--badge-green` (#6B7F52), comments muted/italic, numbers in `--badge-blue`), and `.mermaid img` (framed in a `--bg2` panel to match code blocks)
 
-The `pages/hindsightai/research/*.html` pages alias `--color-text-primary`, `--color-text-secondary`, `--color-text-tertiary`, `--color-border-tertiary`, and `--border-radius-lg` in their own `:root` blocks directly onto `var(--text)`, `var(--text2)`, `var(--dim)`, `var(--border)` — changing the shared tokens re-skins these pages automatically. `latent-manifold.html`'s canvas/dark-panel widget intentionally keeps its own hardcoded dark colors as a contrasting "viewport" inset.
+
 
 ### Typography
 
@@ -137,11 +122,8 @@ The `pages/hindsightai/research/*.html` pages alias `--color-text-primary`, `--c
 
 ### Layout Patterns
 
-- Max content width: `1100px` (platform) / `860px` (research listing) / `740px` (research/scraps fragment pages)
-- Sticky nav with `backdrop-filter: blur(8px)` (defined in `_layouts/hindsight.html`)
-- CSS grid for stats (4-col on platform) and feature cards (3-col), collapsing to fewer columns at the `768px` breakpoint (hindsight) / `760px` (notes)
-- Decorative grid background via `body::before` pseudo-element (hindsight layout)
-- Glow effect via `body::after` pseudo-element (platform page only)
+- Max content width: `1100px`
+- CSS grid for feature cards (3-col), collapsing to fewer columns at the `760px` breakpoint (notes)
 
 ## Conventions
 
@@ -149,8 +131,7 @@ The `pages/hindsightai/research/*.html` pages alias `--color-text-primary`, `--c
 - All JS is inline in `<script>` blocks — no external scripts.
 - No CSS framework, no JS framework.
 - Class names are semantic/kebab-case (e.g., `.feature-card`, `.paper-card`, `.btn-primary`).
-- Responsive breakpoints: `768px` (hindsight layout), `760px` (notes layout) — pick the one matching the layout you're editing.
-- HindsightAI nav links to `#` are placeholders (e.g. the "Request Access" CTA points at `/hindsightai/`).
+- Responsive breakpoints: `760px` (notes layout).
 - All internal links are root-relative (`baseurl` is empty in `_config.yml`).
 
 ## Deployment
@@ -164,9 +145,9 @@ Push to `main`. `.github/workflows/jekyll.yml` builds the site with `bundle exec
 - **`_config.yml`'s pagination block has no `collection:` key** — it paginates `_posts` only (the default for `jekyll-paginate-v2`). The notes and projects lists are **not** paginated; if you add many, the home page just gets longer.
 - **jekyll-spaceship** is enabled and may lightly reformat inline HTML/whitespace during build (harmless, but check rendered output after big content edits).
 - **Mermaid diagrams render as remote images:** `jekyll-spaceship`'s mermaid-processor builds a `mermaid.ink` URL at build time and emits `<img class="mermaid" src="https://mermaid.ink/svg/...">` — the diagram itself isn't rendered locally, so it won't display in offline/sandboxed previews, but works once the page is served with network access.
-- **Collection permalinks and the HindsightAI subtree:** `_projects` is configured with `permalink: /:path/` so `_projects/hindsightai/index.html` keeps `/hindsightai/`, `_projects/hindsightai/research/index.html` keeps `/hindsightai/research/`, etc. If you rename or move files in that subtree, the permalinks follow the new `:path` automatically. Files that need an explicit extension (like `skiing-smokers-game.html`) declare an explicit `permalink:` in front matter.
+- **Collection permalinks:** `_projects` is configured with `permalink: /:path/`. Files that need an explicit extension (like `skiing-smokers-game.html`) declare an explicit `permalink:` in front matter.
 - **YAML `layout: null` vs `layout: none`:** In YAML front matter, writing `layout: null` sets the Ruby variable to `nil`, which triggers Jekyll's fallback to `_config.yml` collection default layouts. To create self-contained pages without wrappers, set `layout: none` and use `_layouts/none.html`.
-- **`card: true` is the opt-in for the home-page Projects section.** Without it, a project file still builds its standalone page but doesn't appear on the landing grid — that's why the internal `research/` pages don't pollute the home page.
+- **`card: true` is the opt-in for the home-page Projects section.** Without it, a project file still builds its standalone page but doesn't appear on the landing grid.
 - **`.tool-versions` pins Ruby 3.4.4** — `bundle install` against a different Ruby will produce native-extension mismatches for `nokogiri`, `ffi`, `sass-embedded`, etc.
 
 <trackboi>

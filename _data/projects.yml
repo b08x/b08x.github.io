@@ -22,17 +22,6 @@
 #  tags: [cli, workflow, mcp, ai, tool]
 #  card: true
 
-- title: "HindsightAI Platform"
-  description: "A satirical AI startup research platform and empirical playground. Pioneering retrospective artificial intelligence, latent manifolds, and SCRAPS nomenclature."
-  url: "/hindsightai/"
-  external: false
-  badge: "research · satire"
-  badge_class: "badge-red"
-  year: "2026"
-  tags: [humor, satire, ai, research, project]
-  featured: true
-  card: true
-
 - title: "SFL Engine"
   description: "Stance-filtered RAG for LLM security — separates what was said from how it was said, then filters the how before it reaches the model."
   url: "/sfl-engine/"

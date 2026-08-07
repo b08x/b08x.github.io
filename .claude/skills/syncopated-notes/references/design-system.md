@@ -174,13 +174,13 @@ Weights: 300 / 400 / 500 / 600 / 700. The site currently only uses 400 +
 
 | Token | Value | Used on site |
 |---|---|---|
-| `--width-content` | 1100px | HindsightAI platform |
-| `--width-article` | 860px | HindsightAI research listing |
-| `--width-narrow` | 740px | HindsightAI research fragment pages |
+| `--width-content` | 1100px |  |
+| `--width-article` | 860px |  |
+| `--width-narrow` | 740px |  |
 | `--measure-prose` | 65ch | (not used — site prose is `.post` at 680px) |
 | `--sidebar-w` | 232px | (not used — site has no left rail) |
 | `--toc-w` | 220px | (not used — site has no TOC rail) |
-| `--header-h` | 56px | HindsightAI sticky nav (close — no token) |
+| `--header-h` | 56px |  |
 
 The site's `.post` column is **680px** — between `--width-narrow` and
 `--width-article`. Consider normalizing.
@@ -218,9 +218,7 @@ enough but not tokenized.
 Mostly flat paper. **Signature decorative motif is a faint blueprint
 grid** (48px, hairline) on hero/diagram surfaces — never gradients. No
 photographic hero imagery in chrome; imagery appears as embedded note
-media (diagrams, canvas maps). The HindsightAI platform already uses
-this grid via `body::before` in `_layouts/hindsight.html`.
-
+media (diagrams, canvas maps).
 ## Iconography
 
 The product is **deliberately light on iconography** — its "icons" are
@@ -257,7 +255,7 @@ are the agent vocabulary; actual markup stays plain HTML + CSS classes.
 | `Callout` | admonition block | not yet implemented — would slot into `.post-content` |
 | `CodePanel` | command + output panel | `.code-panel` / `.code-cmd` / `.code-output` |
 | `Input` / `Select` / `Switch` / `Checkbox` | form primitives | none — site has no forms |
-| `NavItem` / `Tabs` | nav rail + tabs | `_includes/hindsight-nav.html` + `.filter-btn` on `/projects/` |
+| `NavItem` / `Tabs` | nav rail + tabs | `.filter-btn` on `/projects/` |
 | `IconButton` | square icon action | not yet implemented |
 
 Namespace in the DS bundle: `window.SyncopatedNotesDesignSystem_f2adea_*`
@@ -269,10 +267,7 @@ reference for naming CSS classes / files instead.
 
 1. Pick the matching class name from the table above (kebab-case).
 2. Add the styles to `_includes/theme-tokens.html` so every layout that
-   chains to `default` inherits them. For HindsightAI research fragments
-   that alias `--color-text-primary/secondary/tertiary` etc. onto
-   `var(--text) / var(--text2) / var(--dim) / var(--border)`, your new
-   tokens should auto-re-skin those pages too.
+   chains to `default` inherits them.
 3. If it's a feedback/typography component (callout, code panel), prefer
    extending `.post-content` selectors — that's where the prose styles
    live today.

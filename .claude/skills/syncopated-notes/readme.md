@@ -21,8 +21,7 @@ This system was reverse-engineered from the real product and its marketing site.
 You do **not** need access to these — they are recorded so a future maintainer can go deeper.
 
 - **GitHub — `b08x/b08x.github.io`** (`https://github.com/b08x/b08x.github.io`)
-  The Jekyll site for Syncopated Notes (landing) + *HindsightAI* (a satirical/fictional
-  research startup). Defines the published **"Field Note"** theme (`_includes/theme-tokens.html`):
+  The Jekyll site for Syncopated Notes (landing). Defines the published **"Field Note"** theme (`_includes/theme-tokens.html`):
   cream parchment, terracotta amber, Space Mono. Explore it to understand the warm,
   field-notebook side of the brand and the badge / field-note / code-panel components.
 - **Attached codebase — `assets/`** (the live knowledgebase app build)
