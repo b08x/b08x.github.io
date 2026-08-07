@@ -5,65 +5,146 @@ description: "A working library — instructions, example runs, ready to lift."
 permalink: /prompts/
 ---
 <style>
-  .prompts-page { max-width: 1048px; margin: 0 auto; }
-  .prompts-header { margin: 0 0 24px; }
+  .prompts-page { max-width: 1440px; margin: 0 auto; padding: 0 20px; }
+  .prompts-header { margin: 0 0 24px; text-align: center; }
   .prompts-title { margin: 0 0 6px; color: var(--amber); font-size: 24px; }
   .prompts-subtitle { margin: 0; color: var(--muted); font-size: 14px; }
 
-  .workbench { display: grid; grid-template-columns: 260px 1fr; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; min-height: 420px; }
+  /* 3-pane Bento Grid */
+  .workbench { 
+    display: grid; 
+    grid-template-columns: 260px minmax(0, 1fr) 340px; 
+    border: 1px solid var(--border); 
+    border-radius: 4px; 
+    overflow: hidden; 
+    min-height: 700px;
+    background: var(--bg);
+  }
 
-  .prompt-list { border-right: 1px solid var(--border); padding: 14px 0; overflow: auto; background: var(--bg2); }
-  .prompt-list-item { display: block; width: 100%; text-align: left; padding: 11px 16px; border-left: 3px solid transparent; background: transparent; border-top: none; border-right: none; border-bottom: none; cursor: pointer; font-family: 'Space Mono', monospace; }
-  .prompt-list-item .item-title { font-size: 13px; color: var(--text2); margin-bottom: 5px; }
+  /* Left Pane */
+  .prompt-sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; background: var(--bg2); }
+  .sidebar-header { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+  .prompt-list { flex: 1; overflow-y: auto; }
+  .prompt-list-item { 
+    display: block; width: 100%; text-align: left; padding: 11px 16px; 
+    border-left: 3px solid transparent; background: transparent; 
+    border-top: none; border-right: none; border-bottom: 1px solid var(--border);
+    cursor: pointer; font-family: 'Space Mono', monospace; 
+  }
+  .prompt-list-item:last-child { border-bottom: none; }
+  .prompt-list-item .item-title { font-size: 13px; color: var(--text2); margin-bottom: 5px; font-weight: 600; }
+  .prompt-list-item:hover { background: var(--bg); }
   .prompt-list-item.active { border-left-color: var(--amber); background: var(--bg); }
   .prompt-list-item.active .item-title { color: var(--text); }
 
-  .p-tag { display: inline-flex; align-items: center; gap: 1px; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 4px; color: var(--text2); background: var(--bg2); border: 1px solid var(--border); }
-  .p-tag b { color: var(--muted); font-weight: 400; }
+  .p-tag { display: inline-flex; align-items: center; gap: 1px; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; color: var(--text2); background: var(--bg2); border: 1px solid var(--border); text-transform: uppercase; }
+  
+  /* Middle Pane */
+  .prompt-reader { padding: 32px 40px; overflow-y: auto; max-width: 80ch; margin: 0 auto; }
+  .reader-top { margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+  .reader-title { font-size: 28px; margin: 10px 0; color: var(--text); font-weight: 700; letter-spacing: -.02em; }
+  
+  .reader-label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: 32px; margin-bottom: 10px; font-weight: 700; }
+  .reader-instructions { font-size: 14px; line-height: 1.7; color: var(--text2); margin: 0; }
+  
+  .code-panel { margin-top: 10px; }
+  .code-output { display: block; white-space: pre-wrap; word-wrap: break-word; font-size: 13px; line-height: 1.6; }
 
-  .prompt-reader { padding: 28px 32px; }
-  .reader-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
-  .reader-title { font-size: 22px; margin: 10px 0 0; color: var(--text); }
-  .reader-actions { display: flex; gap: 8px; }
-  .dl-btn { display: inline-flex; align-items: center; gap: 5px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 5px 10px; border-radius: 4px; color: var(--text2); background: var(--bg2); border: 1px solid var(--border2); cursor: pointer; }
+  /* Right Pane (SFL Config) */
+  .prompt-config { border-left: 1px solid var(--border); display: flex; flex-direction: column; background: var(--bg2); }
+  .config-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .config-title { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+  
+  .config-body { padding: 24px 20px; overflow-y: auto; flex: 1; }
+  
+  /* SFL Controls */
+  .sfl-control { margin-bottom: 24px; }
+  .sfl-label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em; }
+  .sfl-val { color: var(--amber); }
+  .sfl-slider { width: 100%; appearance: none; background: var(--border); height: 4px; border-radius: 2px; outline: none; }
+  .sfl-slider::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--amber); cursor: pointer; border: 2px solid var(--bg2); }
+  
+  .json-preview { margin-top: 32px; }
+  .json-preview-title { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+  .json-block { background: var(--bg); border: 1px solid var(--border); padding: 12px; border-radius: 4px; font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--text2); white-space: pre-wrap; word-wrap: break-word; }
+  
+  .config-footer { padding: 16px 20px; border-top: 1px solid var(--border); background: var(--bg2); display: flex; flex-direction: column; gap: 10px; }
+  
+  .dl-btn { display: flex; justify-content: center; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: .04em; padding: 10px 16px; border-radius: 4px; color: var(--text2); background: var(--bg); border: 1px solid var(--border2); cursor: pointer; transition: all .15s; width: 100%; }
   .dl-btn:hover { color: var(--text); border-color: var(--amber); }
   .dl-btn.primary { color: var(--badge-text); background: var(--amber); border-color: var(--amber); }
   .dl-btn.primary:hover { background: var(--amber-hi); border-color: var(--amber-hi); }
 
-  .reader-label { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-  .reader-instructions { font-size: 14px; line-height: 1.6; color: var(--text2); margin: 0 0 22px; max-width: 75ch; }
-
-  @media (max-width: 700px) {
+  @media (max-width: 1024px) {
+    .workbench { grid-template-columns: 240px 1fr; }
+    .prompt-config { display: none; }
+  }
+  @media (max-width: 760px) {
     .workbench { grid-template-columns: 1fr; }
-    .prompt-list { border-right: none; border-bottom: 1px solid var(--border); }
+    .prompt-sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: 250px; }
   }
 </style>
 
 <div class="prompts-page">
   <header class="prompts-header">
     <h1 class="prompts-title">{{ page.title }}</h1>
-    <p class="prompts-subtitle">{{ page.description }}</p>
+    <p class="prompts-subtitle">Unified Prompt Library Workspace</p>
   </header>
 
   <div class="workbench" id="prompts-workbench">
-    <nav class="prompt-list" id="prompt-list"></nav>
-    <div class="prompt-reader">
+    <!-- Left Pane -->
+    <aside class="prompt-sidebar">
+      <div class="sidebar-header">Library Index</div>
+      <nav class="prompt-list" id="prompt-list"></nav>
+    </aside>
+    
+    <!-- Middle Pane -->
+    <main class="prompt-reader">
       <div class="reader-top">
-        <div>
-          <span class="p-tag" id="reader-tag"><b>#</b></span>
-          <h2 class="reader-title" id="reader-title"></h2>
-        </div>
-        <div class="reader-actions">
-          <button type="button" class="dl-btn primary" id="dl-md">↓ .md</button>
-          <button type="button" class="dl-btn" id="dl-json">↓ .json</button>
-          <button type="button" class="dl-btn" id="dl-copy">⧉ copy</button>
-        </div>
+        <span class="p-tag" id="reader-tag"></span>
+        <h2 class="reader-title" id="reader-title"></h2>
       </div>
-      <div class="reader-label">instructions</div>
+      
+      <div class="reader-label">Architecture & Purpose</div>
       <p class="reader-instructions" id="reader-instructions"></p>
-      <div class="reader-label">example output</div>
+      
+      <div class="reader-label">Output Schema / Example</div>
       <div class="code-panel"><span class="code-output" id="reader-example"></span></div>
-    </div>
+    </main>
+
+    <!-- Right Pane -->
+    <aside class="prompt-config">
+      <div class="config-header">
+        <span class="config-title">SFL Configuration</span>
+      </div>
+      <div class="config-body">
+        
+        <div class="sfl-control">
+          <div class="sfl-label"><span>Imagery Density</span> <span class="sfl-val">0.3</span></div>
+          <input type="range" class="sfl-slider" min="0" max="1" step="0.1" value="0.3">
+        </div>
+        
+        <div class="sfl-control">
+          <div class="sfl-label"><span>Abstraction Level</span> <span class="sfl-val">0.8</span></div>
+          <input type="range" class="sfl-slider" min="0" max="1" step="0.1" value="0.8">
+        </div>
+        
+        <div class="sfl-control">
+          <div class="sfl-label"><span>Novelty Injection</span> <span class="sfl-val">0.1</span></div>
+          <input type="range" class="sfl-slider" min="0" max="1" step="0.1" value="0.1">
+        </div>
+
+        <div class="json-preview">
+          <div class="json-preview-title">Generated Config Payload</div>
+          <div class="json-block" id="json-preview-block"></div>
+        </div>
+
+      </div>
+      <div class="config-footer">
+        <button type="button" class="dl-btn primary" id="dl-copy">⧉ Export to AI Studio</button>
+        <button type="button" class="dl-btn" id="dl-json">↓ Download .json</button>
+      </div>
+    </aside>
   </div>
 </div>
 
@@ -98,6 +179,20 @@ permalink: /prompts/
     a.href = url; a.download = filename; a.click();
     URL.revokeObjectURL(url);
   }
+  
+  function updateJSONPreview(p) {
+    var config = {
+      meta: { schema_version: "2.0", name: p.title },
+      dimensions: {
+        imagery_density: 0.3,
+        abstraction_level: 0.8,
+        novelty_injection: 0.1
+      },
+      _legacy_migration_data: { instructions: p.instructions }
+    };
+    document.getElementById('json-preview-block').textContent = JSON.stringify(config, null, 2);
+    return config;
+  }
 
   function render() {
     if (!data.length) {
@@ -109,7 +204,7 @@ permalink: /prompts/
     listEl.innerHTML = data.map(function (item, i) {
       return '<button type="button" class="prompt-list-item' + (i === selected ? ' active' : '') + '" data-index="' + i + '">' +
         '<div class="item-title">' + item.title + '</div>' +
-        '<span class="p-tag"><b>#</b>' + item.tag + '</span>' +
+        '<span class="p-tag">' + item.tag + '</span>' +
         '</button>';
     }).join('');
 
@@ -120,29 +215,32 @@ permalink: /prompts/
       });
     });
 
-    document.getElementById('reader-tag').innerHTML = '<b>#</b>' + p.tag;
+    document.getElementById('reader-tag').textContent = p.tag;
     document.getElementById('reader-title').textContent = p.title;
     document.getElementById('reader-instructions').textContent = p.instructions;
     document.getElementById('reader-example').innerHTML = p.example.replace(/\n/g, '<br>');
+    
+    updateJSONPreview(p);
   }
 
-  document.getElementById('dl-md').addEventListener('click', function () {
-    var p = data[selected];
-    var md = '# ' + p.title + '\n\n**Tag:** ' + p.tag + '\n\n## Instructions\n' + p.instructions + '\n\n## Example output\n' + p.example + '\n';
-    download(slug(p.title) + '.md', md, 'text/markdown');
-  });
-
   document.getElementById('dl-json').addEventListener('click', function () {
-    var p = data[selected];
-    download(slug(p.title) + '.json', JSON.stringify(p, null, 2), 'application/json');
+    var config = updateJSONPreview(data[selected]);
+    download(slug(data[selected].title) + '_v2.json', JSON.stringify(config, null, 2), 'application/json');
   });
 
   document.getElementById('dl-copy').addEventListener('click', function () {
-    var p = data[selected];
+    var config = updateJSONPreview(data[selected]);
     var btn = document.getElementById('dl-copy');
-    navigator.clipboard && navigator.clipboard.writeText(p.instructions);
-    btn.textContent = '✓ copied';
-    setTimeout(function () { btn.textContent = '⧉ copy'; }, 1500);
+    navigator.clipboard && navigator.clipboard.writeText(JSON.stringify(config, null, 2));
+    btn.textContent = '✓ Copied Config';
+    setTimeout(function () { btn.textContent = '⧉ Export to AI Studio'; }, 2000);
+  });
+  
+  // Wire up dummy sliders to update JSON preview visually
+  document.querySelectorAll('.sfl-slider').forEach(function(slider) {
+    slider.addEventListener('input', function(e) {
+      e.target.parentElement.querySelector('.sfl-val').textContent = e.target.value;
+    });
   });
 
   render();
