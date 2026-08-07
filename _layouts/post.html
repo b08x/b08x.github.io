@@ -17,7 +17,15 @@ layout: notes
     </div>
   </header>
 
-  <div class="post-content">
-    {{ content }}
+  <div class="post-layout">
+    <div class="post-content">
+      {{ content }}
+    </div>
+    <aside class="post-toc">
+      {% if page.toc != false %}
+      <div class="toc-title">On this page</div>
+      {{ content | toc_only }}
+      {% endif %}
+    </aside>
   </div>
 </article>

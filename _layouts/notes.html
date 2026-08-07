@@ -182,11 +182,47 @@ layout: default
     user-select: none;
   }
 
-  /* ── Single post (keep prose readable inside the wider container) ── */
+  /* ── Single post layout (wider with TOC) ── */
   .post {
-    max-width: 680px;
+    max-width: 1040px;
     margin: 0 auto;
   }
+  
+  .post-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    gap: 40px;
+    align-items: start;
+  }
+  
+  .post-toc {
+    position: sticky;
+    top: 24px;
+    font-size: 11.5px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+  
+  .post-toc .toc-title {
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 10px;
+  }
+  
+  .post-toc ul { list-style: none; margin: 0; padding: 0; }
+  .post-toc ul ul { padding-left: 12px; }
+  
+  .post-toc a {
+    display: block;
+    color: var(--muted);
+    padding: 3px 0;
+    line-height: 1.5;
+    transition: color .15s;
+  }
+  
+  .post-toc a:hover { color: var(--amber); }
 
   /* ── Pagination ── */
   .pager {
@@ -217,6 +253,11 @@ layout: default
   }
 
   /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .post-layout { grid-template-columns: 1fr; }
+    .post-toc { display: none; }
+  }
+
   @media (max-width: 760px) {
     .container { padding: 36px 20px 24px; }
     footer { padding: 20px 20px 60px; }
