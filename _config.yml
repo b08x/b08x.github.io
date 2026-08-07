@@ -57,6 +57,12 @@ defaults:
       path: "_slides"
     values:
       layout: null
+  - scope:
+      path: "_docs"
+    values:
+      layout: doc
+      toc: true
+      body_class: docs
 
 collections:
   notes:
@@ -65,6 +71,9 @@ collections:
   projects:
     output: true
     permalink: /:path/
+  docs:
+    output: true
+    permalink: /docs/:path/
   prompts:
     output: true
     permalink: /prompts/:path/
