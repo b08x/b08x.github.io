@@ -34,7 +34,7 @@
 
 - title: "RIS Assist"
   description: "A Claude plugin packaging a senior radiology-IT analyst's triage method — ticket clarification, incident comms, and knowledge capture."
-  url: "/ris-assist/"
+  url: "/projects/ris-assist/"
   external: false
   badge: "agents · pre-alpha"
   badge_class: "badge-blue"

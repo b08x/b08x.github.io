@@ -1,5 +1,5 @@
 ---
-permalink: /ris-assist/
+permalink: /projects/ris-assist/
 title: "RIS Assist"
 description: "A Claude plugin packaging a senior radiology-IT analyst's triage method — ticket clarification, incident comms, and knowledge capture, for the overnight engineer with no one to ask."
 status: "Pre-alpha"
@@ -7,10 +7,10 @@ timeframe: "2025 — present"
 tags: [claude-plugin, radiology-it, incident-comms, agents]
 links:
   - label: "coverage demo"
-    url: "/ris-assist/coverage-demo.html"
+    url: "/projects/ris-assist/coverage-demo.html"
     internal: true
   - label: "analyst persona"
-    url: "/ris-assist/persona-card.html"
+    url: "/projects/ris-assist/persona-card.html"
     internal: true
 ---
 
@@ -18,7 +18,7 @@ links:
 
 RIS support lives at a messy intersection: tickets arrive from radiologists, techs, and scheduling staff about a system wired into PACS, dictation, the EHR, and a tangle of HL7 interfaces. Most "RIS problems" are really integration problems, most triage knowledge lives in one senior analyst's head, and most of it walks out the door at every staff rotation — hardest exactly when it's needed most: overnight, alone, no senior analyst to ask, vendor support behind a callback queue.
 
-Notifications compound the problem. A single outage needs different messages for radiologists (where to read from), technologists (which paper process to start), and leadership (how big this is) — and most sites have never written most of those variants down. The [coverage demo](/ris-assist/coverage-demo.html) makes the gap visible: event class down one side, audience across the top, most cells hatched.
+Notifications compound the problem. A single outage needs different messages for radiologists (where to read from), technologists (which paper process to start), and leadership (how big this is) — and most sites have never written most of those variants down. The [coverage demo](/projects/ris-assist/coverage-demo.html) makes the gap visible: event class down one side, audience across the top, most cells hatched.
 
 ## Approach
 
@@ -30,7 +30,7 @@ RIS Assist packages the senior analyst's working method as a Claude plugin, buil
 
 **Synthetic from birth.** Every example — Riverside Regional Imaging, its tickets, its site profile — is invented. Nothing derives from production clinical data, not even de-identified derivatives, because provenance survives scrubbing.
 
-Every skill speaks through one [analyst persona](/ris-assist/persona-card.html): observation separated from inference, every diagnostic conclusion marked *confirmed / likely / possible*, anything absent from the site profile declared absent rather than given a plausible fiction.
+Every skill speaks through one [analyst persona](/projects/ris-assist/persona-card.html): observation separated from inference, every diagnostic conclusion marked *confirmed / likely / possible*, anything absent from the site profile declared absent rather than given a plausible fiction.
 
 {% include audio-overview.html audio="/assets/audio/ris-assist/full.mp3" manifest="/assets/audio/ris-assist/manifest.json" %}
 

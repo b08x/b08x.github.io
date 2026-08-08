@@ -4,10 +4,10 @@
 ris-assist:
   title: RIS Assist
   subtitle: pre-alpha
-  project_url: /ris-assist/
+  project_url: /projects/ris-assist/
   edit_base: "https://github.com/b08x/ris_assist/edit/main/"
 
-  # Palette lifted from /ris-assist/persona-card.html — the project's own
+  # Palette lifted from /projects/ris-assist/persona-card.html — the project's own
   # identity rather than the site's Field Note theme. Keys are the site's
   # existing token names, so every shared component (post-content, badges,
   # rouge, tables) re-skins without touching its CSS.
