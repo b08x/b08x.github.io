@@ -34,7 +34,7 @@
 
 - title: ""
   description: "A Claude plugin packaging a senior radiology-IT analyst's triage method — ticket clarification, incident comms, and knowledge capture."
-  url: "//"
+  url: "/projects//"
   external: false
   badge: "agents · pre-alpha"
   badge_class: "badge-blue"

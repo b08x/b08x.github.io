@@ -4,10 +4,10 @@
 :
   title: 
   subtitle: pre-alpha
-  project_url: //
+  project_url: /projects//
   edit_base: "https://github.com/b08x//edit/main/"
 
-  # Palette lifted from //persona-card.html — the project's own
+  # Palette lifted from /projects//persona-card.html — the project's own
   # identity rather than the site's Field Note theme. Keys are the site's
   # existing token names, so every shared component (post-content, badges,
   # rouge, tables) re-skins without touching its CSS.
