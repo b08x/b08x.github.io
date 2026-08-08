@@ -61,7 +61,7 @@ Message forensics is a separate plugin, not a missing feature. It waits on data
 access and on a symbolic parse layer, and shipping a model-interpreted version
 in the meantime would be the exact behavior this project argues against. See
 [ADR-0008](/docs/ris-assist/adr-0008-separate-forensics-plugin/) and
-[FORENSICS-BACKLOG.md](https://github.com/b08x/ris_assist/blob/main/docs/FORENSICS-BACKLOG.md).
+[FORENSICS-BACKLOG.md](https://github.com/b08x/ris-assist/blob/main/docs/FORENSICS-BACKLOG.md).
 
 ## It is not a clinical tool
 

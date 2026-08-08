@@ -34,6 +34,84 @@ Every skill speaks through one [analyst persona](/ris-assist/persona-card.html):
 
 {% include audio-overview.html audio="/assets/audio/ris-assist/full.mp3" manifest="/assets/audio/ris-assist/manifest.json" %}
 
+## Architecture
+
+The plugin is structured to separate site-specific profiles from the core logic, ensuring that local data never pollutes the plugin repository.
+
+### Overall Structure
+
+```mermaid
+graph LR
+    plugin-root["Plugin Root\nplugins/ris-assist/"]
+    commands["Commands\nplugins/ris-assist/commands/"]
+    skills["Skills\nplugins/ris-assist/skills/"]
+    agents["Agents\nplugins/ris-assist/agents/"]
+    examples["Examples\nplugins/ris-assist/examples/"]
+    docs["Documentation\ndocs/"]
+    demo["Demo\ndemo/"]
+    plugin-config[".claude-plugin\n.claude-plugin/"]
+
+    plugin-root -->|"6 slash commands"| commands
+    plugin-root -->|"5 skill directories"| skills
+    plugin-root -->|"1 agent definition"| agents
+    plugin-root -->|"example configs"| examples
+    plugin-root -->|"plugin metadata"| plugin-config
+
+    commands -->|"invokes"| skills
+    skills -->|"references"| docs
+    skills -->|"reads/writes"| examples
+
+    demo -->|"narration scripts"| plugin-root
+    docs -->|"ADRs, backlog, specs"| plugin-root
+```
+
+### Plugin Root
+
+```mermaid
+graph LR
+    commands["Commands\ncommands/"]
+    skills["Skills\nskills/"]
+    agents["Agents\nagents/"]
+    examples["Examples\nexamples/"]
+    plugin-json["plugin.json\n.claude-plugin/"]
+    persona["PERSONA-SPEC.md\nPERSONA-SPEC.md"]
+
+    commands -->|"invokes"| skills
+    skills -->|"references"| examples
+    skills -->|"reads"| persona
+    agents -->|"persona rules"| persona
+```
+
+### Command Surface
+
+```mermaid
+graph LR
+    user["User\nClaude Desktop"]
+    triage["/triage\nTicket clarification"]
+    kb-draft["/kb-draft\nKB article drafting"]
+    downtime["/downtime\nService notifications"]
+    explain["/explain\nDomain explanation"]
+    setup["/setup\nSite profile interview"]
+    comms-tune["/comms-tune\nComms customization"]
+
+    user -->|"slash command"| triage
+    user -->|"slash command"| kb-draft
+    user -->|"slash command"| downtime
+    user -->|"slash command"| explain
+    user -->|"slash command"| setup
+    user -->|"slash command"| comms-tune
+
+    triage -->|"reads"| site-profile["Site Profile\n(local path)"]
+    kb-draft -->|"reads"| site-profile
+    downtime -->|"reads"| site-profile
+    downtime -->|"reads"| comms-profile["Comms Profile\n(local path)"]
+    explain -->|"reads"| site-profile
+    setup -->|"writes"| site-profile
+    comms-tune -->|"reads/writes"| comms-profile
+
+    kb-draft -->|"Bash (render only)"| html-to-docx["html_to_docx.py\nHTML→DOCX"]
+```
+
 ## Outcome
 
 Four capabilities ship as slash commands — `/triage`, `/kb-draft`, `/downtime`, `/explain`, plus `/setup` and `/comms-tune` — each a thin skill over the same analyst persona and site profile. It is a triage assistant, not an operator: it drafts, decodes, and recommends. It does not execute state-changing operations, does not handle identified PHI, and does not parse HL7 directly — those stay separate, deliberately, until the deterministic groundwork under them exists.

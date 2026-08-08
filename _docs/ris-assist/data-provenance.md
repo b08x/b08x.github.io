@@ -12,8 +12,8 @@ prev:
   title: Non-goals
   url: "/docs/ris-assist/non-goals/"
 next:
-  title: Decision records
-  url: "/docs/ris-assist/decisions/"
+  title: Coverage demo script
+  url: "/docs/ris-assist/coverage-demo-script/"
 ---
 
 ## The policy

@@ -13,7 +13,7 @@ output_dir: _docs/ris-assist
 
 # Links to repo files that aren't published here fall back to this base
 # rather than becoming dead relative .md links.
-github_blob_base: "https://github.com/b08x/ris_assist/blob/main"
+github_blob_base: "https://github.com/b08x/ris-assist/blob/main"
 
 pages:
   # ── Domain explainers ──────────────────────────────────────────────────
@@ -71,6 +71,19 @@ pages:
     title: Data provenance
     description: "Synthetic from birth — and why de-identified production data is excluded too."
     nav_order: 33
+
+  # ── Demo Scripts ───────────────────────────────────────────────────────
+  - source: demo/narration.md
+    slug: coverage-demo-script
+    title: Coverage demo script
+    description: "The narrative script accompanying the coverage interactive demo."
+    nav_order: 35
+
+  - source: demo/persona-narration.md
+    slug: persona-demo-script
+    title: Persona demo script
+    description: "The narrative script accompanying the persona interactive demo."
+    nav_order: 36
 
   # ── Decision records ───────────────────────────────────────────────────
   - source: docs/adr/README.md

@@ -9,8 +9,8 @@ source_path: docs/adr/README.md
 nav_order: 40
 toc: true
 prev:
-  title: Data provenance
-  url: "/docs/ris-assist/data-provenance/"
+  title: Persona demo script
+  url: "/docs/ris-assist/persona-demo-script/"
 next:
   title: ADR-0008 — Message forensics as a separate plugin
   url: "/docs/ris-assist/adr-0008-separate-forensics-plugin/"
@@ -56,8 +56,8 @@ What this makes easy, what it makes hard, what it commits us to.
 | 0006 | Confidence marking and cite-or-decline as enforced persona rules | Accepted |
 | 0007 | Elicitation stops at routability, not at question exhaustion | Accepted |
 | [0008](/docs/ris-assist/adr-0008-separate-forensics-plugin/) | Message forensics split into its own plugin | Accepted |
-| [0009](https://github.com/b08x/ris_assist/blob/main/docs/adr/0009-servicenow-shaped-kb-output.md) | ServiceNow-shaped KB output replaces the KCS markdown template | Accepted (rendering path amended by 0010) |
-| [0010](https://github.com/b08x/ris_assist/blob/main/docs/adr/0010-word-readable-html-as-the-default-artifact.md) | Word-readable HTML is the default artifact; the Python renderer is optional | Accepted |
+| [0009](https://github.com/b08x/ris-assist/blob/main/docs/adr/0009-servicenow-shaped-kb-output.md) | ServiceNow-shaped KB output replaces the KCS markdown template | Accepted (rendering path amended by 0010) |
+| [0010](https://github.com/b08x/ris-assist/blob/main/docs/adr/0010-word-readable-html-as-the-default-artifact.md) | Word-readable HTML is the default artifact; the Python renderer is optional | Accepted |
 
 *Backfill in progress (backlog E11.1) — the index lists decisions already made
 in design; individual records are being written up.*

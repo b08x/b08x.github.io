@@ -69,6 +69,10 @@ ris-assist:
           url: /docs/ris-assist/non-goals/
         - title: Data provenance
           url: /docs/ris-assist/data-provenance/
+        - title: Coverage demo script
+          url: /docs/ris-assist/coverage-demo-script/
+        - title: Persona demo script
+          url: /docs/ris-assist/persona-demo-script/
 
     - title: Decision records
       items:
