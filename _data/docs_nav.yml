@@ -69,6 +69,10 @@
           url: /docs//non-goals/
         - title: Data provenance
           url: /docs//data-provenance/
+        - title: Coverage demo script
+          url: /docs//coverage-demo-script/
+        - title: Persona demo script
+          url: /docs//persona-demo-script/
 
     - title: Decision records
       items:
