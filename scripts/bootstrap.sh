@@ -6,6 +6,11 @@
 
 set -euo pipefail
 
+if [[ $EUID -ne 0 ]]; then
+  echo "This script must be run as root (e.g., using sudo)." >&2
+  exit 1
+fi
+
 # -----------------------------------------------------------------------------
 # Configuration & State
 # -----------------------------------------------------------------------------
@@ -37,14 +42,23 @@ cleanup() {
   [[ -f "$STATE_FILE" ]] && rm -f "$STATE_FILE"
 
   if [[ $exit_code -eq 0 ]]; then
-    echo "" | gum style --foreground "${COLORS[success]}" --border double --padding "1 2" --align center \
-      "Bootstrap completed successfully"
+    if command_exists gum; then
+      echo "" | gum style --foreground "${COLORS[success]}" --border double --padding "1 2" --align center \
+        "Bootstrap completed successfully"
+    else
+      echo "Bootstrap completed successfully"
+    fi
   else
-    echo "" | gum style --foreground "${COLORS[error]}" --border double --padding "1 2" --align center \
-      "Bootstrap exited with errors (code: $exit_code)"
-    [[ -n "$signal" && "$signal" != "EXIT" ]] && \
-      echo "" | gum style --foreground "${COLORS[warning]}" --padding "0 2" --align center \
-        "Signal received: $signal"
+    if command_exists gum; then
+      echo "" | gum style --foreground "${COLORS[error]}" --border double --padding "1 2" --align center \
+        "Bootstrap exited with errors (code: $exit_code)"
+      [[ -n "$signal" && "$signal" != "EXIT" ]] && \
+        echo "" | gum style --foreground "${COLORS[warning]}" --padding "0 2" --align center \
+          "Signal received: $signal"
+    else
+      echo "Bootstrap exited with errors (code: $exit_code)"
+      [[ -n "$signal" && "$signal" != "EXIT" ]] && echo "Signal received: $signal"
+    fi
   fi
   exit $exit_code
 }
@@ -67,16 +81,26 @@ handle_error() {
   local cmd="$1"
   local line="$2"
   local exit_code="$3"
-  echo "" | gum style --foreground "${COLORS[error]}" --border double --padding "1 2" \
-    "Error in command: ${cmd}" \
-    "Line: ${line}" \
-    "Exit code: ${exit_code}"
+  if command_exists gum; then
+    echo "" | gum style --foreground "${COLORS[error]}" --border double --padding "1 2" \
+      "Error in command: ${cmd}" \
+      "Line: ${line}" \
+      "Exit code: ${exit_code}"
+  else
+    echo "ERROR: Command '${cmd}' failed at line ${line} with exit code ${exit_code}"
+  fi
+
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: Command '${cmd}' failed at line ${line} with exit code ${exit_code}" >> "$LOG_FILE"
-  if gum confirm --affirmative "Continue" --negative "Exit" \
-    "Attempt to continue with next steps?"; then
-    echo "" | gum style --foreground "${COLORS[warning]}" --padding "0 2" --align center \
-      "Continuing with caution..."
-    return 0
+  
+  if command_exists gum; then
+    if gum confirm --affirmative "Continue" --negative "Exit" \
+      "Attempt to continue with next steps?"; then
+      echo "" | gum style --foreground "${COLORS[warning]}" --padding "0 2" --align center \
+        "Continuing with caution..."
+      return 0
+    else
+      cleanup "ERR"
+    fi
   else
     cleanup "ERR"
   fi
@@ -154,20 +178,21 @@ command_exists() {
 
 ensure_gum() {
   if ! command_exists gum; then
-    section_header "Installing Gum (TUI Toolkit)"
-    log info "Gum not found. Installing from official repository..."
-    if with_spinner "Installing gum package" \
-      sudo dnf install -y https://github.com/charmbracelet/gum/releases/download/v2.0.0/gum-2.0.0-1.x86_64.rpm; then
-      log success "Gum installed successfully!"
+    echo "============================================================"
+    echo "Installing Gum (TUI Toolkit)"
+    echo "============================================================"
+    echo "Gum not found. Installing from official repository..."
+    if dnf install -y https://github.com/charmbracelet/gum/releases/download/v2.0.0/gum-2.0.0-1.x86_64.rpm; then
       if command_exists gum; then
+        log success "Gum installed successfully!"
         log info "Gum version: $(gum --version)"
       else
-        log error "Gum installation failed. Please install manually from https://github.com/charmbracelet/gum"
+        echo "ERROR: Gum installation failed. Please install manually from https://github.com/charmbracelet/gum"
         exit 1
       fi
     else
-      log error "Failed to install Gum. Some TUI features will be disabled."
-      return 1
+      echo "ERROR: Failed to install Gum. This script requires Gum."
+      exit 1
     fi
   else
     log info "Gum is already installed: $(gum --version)"
@@ -181,8 +206,8 @@ ensure_gum() {
 install_dnf_setup() {
   section_header "Setting up DNF Package Manager"
   step_indicator 1 3 "Installing DNF plugins and GPG keys"
-  if with_spinner "Installing epel-release and dependencies" \
-    sudo dnf install -y epel-release distribution-gpg-keys dnf-plugins-core; then
+  log info "Installing epel-release and dependencies..."
+  if dnf install -y epel-release distribution-gpg-keys dnf-plugins-core; then
     log success "DNF plugins installed"
   else
     log error "Failed to install DNF plugins"
@@ -190,8 +215,8 @@ install_dnf_setup() {
   fi
 
   step_indicator 2 3 "Enabling additional repositories"
-  if with_spinner "Enabling CRB, HA, NFV, RT repositories" \
-    sudo dnf config-manager --set-enabled crb highavailability nfv rt; then
+  log info "Enabling CRB, HA, NFV, RT repositories..."
+  if dnf config-manager --set-enabled crb highavailability nfv rt; then
     log success "Repositories enabled"
   else
     log error "Failed to enable repositories"
@@ -201,17 +226,17 @@ install_dnf_setup() {
   step_indicator 3 3 "Importing RPM Fusion GPG keys"
   local rhel_version
   rhel_version=$(rpm -E %rhel)
-  if with_spinner "Importing RPM Fusion keys" \
-    sudo rpmkeys --import /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-el-${rhel_version} \
-    && sudo rpmkeys --import /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-el-${rhel_version}; then
+  log info "Importing RPM Fusion keys..."
+  if rpmkeys --import /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-el-${rhel_version} \
+    && rpmkeys --import /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-el-${rhel_version}; then
     log success "GPG keys imported"
   else
     log error "Failed to import GPG keys"
     return 1
   fi
 
-  if with_spinner "Installing RPM Fusion repositories" \
-    sudo dnf --setopt=localpkg_gpgcheck=1 install -y \
+  log info "Installing RPM Fusion repositories..."
+  if dnf --setopt=localpkg_gpgcheck=1 install -y \
       https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-${rhel_version}.noarch.rpm \
       https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-${rhel_version}.noarch.rpm; then
     log success "RPM Fusion repositories installed"
@@ -220,11 +245,16 @@ install_dnf_setup() {
     return 1
   fi
 
-  if with_spinner "Cleaning DNF cache and updating" \
-    sudo dnf clean all && sudo dnf makecache; then
-    log success "DNF cache updated"
+  if gum confirm --affirmative "Yes" --negative "Skip" \
+    "Do you want to clean the DNF cache and update it?"; then
+    log info "Cleaning DNF cache and updating..."
+    if dnf clean all && dnf makecache; then
+      log success "DNF cache updated"
+    else
+      log warning "DNF cache update had issues, continuing anyway"
+    fi
   else
-    log warning "DNF cache update had issues, continuing anyway"
+    log info "Skipping DNF cache clean and update"
   fi
   return 0
 }
@@ -233,6 +263,8 @@ install_core_packages() {
   section_header "Installing Core Development Packages"
   local packages=(
     "ansible-core"
+    "ansible-collection-ansible-posix"
+    "ansible-collection-ansible-utils"
     "curl"
     "git"
     "gcc"
@@ -243,13 +275,14 @@ install_core_packages() {
     "cargo"
     "pipx"
     "python3.14"
+    "flatseal"
   )
   log info "The following packages will be installed:"
   printf '  %s\n' "${packages[@]}" | gum style --foreground "${COLORS[secondary]}"
   if gum confirm --affirmative "Install" --negative "Skip" \
     "Proceed with installing these packages?"; then
-    if with_spinner "Installing core packages" \
-      sudo dnf install -y "${packages[@]}"; then
+    log info "Installing core packages..."
+    if dnf install -y "${packages[@]}"; then
       log success "Core packages installed"
     else
       log error "Failed to install core packages"
@@ -262,16 +295,16 @@ install_core_packages() {
 
   step_indicator 1 1 "Updating all installed packages"
   if gum confirm --affirmative "Update" --negative "Skip" \
-    "Run system update (sudo dnf update)?"; then
-    if with_spinner "Updating system packages" \
-      sudo dnf update -y; then
+    "Run system update (dnf update)?"; then
+    log info "Updating system packages..."
+    if dnf update -y; then
       log success "System updated"
       if [[ -f /var/run/reboot-required ]]; then
         log warning "A system reboot is required for some updates"
         if gum confirm --affirmative "Reboot" --negative "Later" \
           "Reboot now to apply all updates?"; then
           log info "Rebooting system..."
-          sudo reboot
+          reboot
         fi
       fi
     else
@@ -293,7 +326,7 @@ install_yadm() {
       curl -fLo /usr/local/bin/yadm https://github.com/yadm-dev/yadm/raw/master/yadm \
       && chmod a+x /usr/local/bin/yadm; then
       log success "YADM installed to /usr/local/bin/yadm"
-      log info "YADM version: $(yadm --version)"
+      log info "YADM version: $(/usr/local/bin/yadm --version)"
     else
       log error "Failed to install YADM"
       return 1
@@ -305,40 +338,6 @@ install_yadm() {
   return 0
 }
 
-install_homebrew() {
-  section_header "Installing Homebrew (Package Manager)"
-  if command_exists brew; then
-    log info "Homebrew is already installed: $(brew --version)"
-    return 0
-  fi
-  if gum confirm --affirmative "Install" --negative "Skip" \
-    "Install Homebrew for additional package management?"; then
-    log info "Installing Homebrew (this may take a few minutes)..."
-    if with_spinner "Installing Homebrew" \
-      NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; then
-      log success "Homebrew installed"
-      local brew_path
-      brew_path=$(grep -m1 'eval "$(/home/linuxbrew' /home/b08x/.bashrc || echo "")
-      if [[ -z "$brew_path" ]]; then
-        log info "Adding Homebrew to your .bashrc"
-        echo "" >> /home/b08x/.bashrc
-        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> /home/b08x/.bashrc
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-        log success "Homebrew added to PATH"
-      else
-        log info "Homebrew is already in your PATH"
-      fi
-      log info "Homebrew version: $(brew --version)"
-    else
-      log error "Failed to install Homebrew"
-      return 1
-    fi
-  else
-    log info "Skipping Homebrew installation"
-    return 0
-  fi
-  return 0
-}
 
 # -----------------------------------------------------------------------------
 # Interactive Menu System
@@ -355,7 +354,6 @@ show_main_menu() {
     "DNF Setup (Plugins, Repos, GPG Keys)"
     "Core Development Packages (ansible, git, gcc, etc.)"
     "YADM (Dotfile Manager)"
-    "Homebrew (Package Manager)"
     "All of the above (Full Bootstrap)"
     "Exit"
   )
@@ -377,12 +375,10 @@ show_main_menu() {
     install_dnf_setup
     install_core_packages
     install_yadm
-    install_homebrew
   else
     if [[ "$selected" == *"DNF Setup"* ]]; then install_dnf_setup; fi
     if [[ "$selected" == *"Core Development Packages"* ]]; then install_core_packages; fi
     if [[ "$selected" == *"YADM"* ]]; then install_yadm; fi
-    if [[ "$selected" == *"Homebrew"* ]]; then install_homebrew; fi
   fi
 }
 
@@ -394,8 +390,7 @@ show_summary() {
     "Next steps you might want to take:"
   local next_steps=(
     "Run 'yadm clone' to set up your dotfiles"
-    "Run 'brew update' to update Homebrew packages"
-    "Run 'sudo dnf autoremove' to clean up unused packages"
+    "Run 'dnf autoremove' to clean up unused packages"
     "Review the log file at: $LOG_FILE"
     "Restart your terminal to apply all PATH changes"
   )
@@ -410,6 +405,9 @@ show_summary() {
 
 main() {
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] Bootstrap script started" > "$LOG_FILE"
+  
+  ensure_gum
+
   echo "" | gum style \
     --foreground "${COLORS[primary]}" \
     --border double \
@@ -427,9 +425,7 @@ main() {
     --padding "0 2" \
     --align center \
     "Press Ctrl+C at any time to interrupt the process"
-  if ! ensure_gum; then
-    log warning "Continuing without Gum TUI features"
-  fi
+
   while true; do
     show_main_menu
     if gum confirm --affirmative "Yes" --negative "No" \
@@ -442,6 +438,8 @@ main() {
   show_summary
   cleanup "EXIT"
 }
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 main "$@"
 
