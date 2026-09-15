@@ -1,0 +1,43 @@
+{
+  "stage": "interview",
+  "title": "GitAgent Workbench Docs Collection",
+  "goalSlug": "docs-collection",
+  "questions": [
+    {
+      "id": "content_location",
+      "prompt": "How do you want to manage the actual markdown content for the gitagent-workbench docs? Should the markdown files be committed directly into `b08x.github.io/_docs/`, or do you want to pull them from the `gitagent-workbench` repo (e.g., via a build script or submodule)?",
+      "answerMode": "single-custom",
+      "recommendedAnswer": "Commit directly into b08x.github.io/_docs/",
+      "recommendedOptionIds": ["direct"],
+      "options": [
+        { "id": "direct", "label": "Commit directly to b08x.github.io/_docs/" },
+        { "id": "script", "label": "Copy from gitagent-workbench during build" }
+      ],
+      "required": true
+    },
+    {
+      "id": "layout",
+      "prompt": "The site uses a 'Field Note' design system with a shared `notes` layout. For this new `_docs` collection, should we reuse the existing `notes` layout or create a dedicated `doc.html` layout (e.g., to support a sidebar)?",
+      "answerMode": "single-custom",
+      "recommendedAnswer": "Create a dedicated layout with a sidebar",
+      "recommendedOptionIds": ["dedicated"],
+      "options": [
+        { "id": "dedicated", "label": "New dedicated doc.html layout (with sidebar)" },
+        { "id": "reuse", "label": "Reuse the existing notes.html layout" }
+      ],
+      "required": true
+    },
+    {
+      "id": "index_page",
+      "prompt": "Should we create a central landing page for the documentation on the site (e.g. `/docs/`) that lists the available docs?",
+      "answerMode": "single",
+      "recommendedAnswer": "Yes, create a landing page",
+      "recommendedOptionIds": ["yes"],
+      "options": [
+        { "id": "yes", "label": "Yes" },
+        { "id": "no", "label": "No, just direct links" }
+      ],
+      "required": true
+    }
+  ]
+}

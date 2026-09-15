@@ -1,0 +1,4 @@
+- A `_docs` collection is defined in `b08x.github.io/_config.yml` with output enabled.
+- A central index page for all documentation is available at `/docs/` on the site.
+- A navigation structure for GitAgent Workbench is defined (e.g., in `_data/docs_nav.yml`) so that pages using the `doc.html` layout render a sidebar.
+- A sync script (e.g., in a `Justfile`) exists to compile/copy the documentation from the `gitagent-workbench` repository into the `b08x.github.io/_docs/gitagent-workbench/` directory.

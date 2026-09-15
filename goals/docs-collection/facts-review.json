@@ -1,0 +1,39 @@
+{
+  "stage": "facts",
+  "title": "GitAgent Workbench Docs Collection",
+  "goalSlug": "docs-collection",
+  "facts": [
+    {
+      "id": "fact-1",
+      "text": "A `_docs` collection is defined in `b08x.github.io/_config.yml` with output enabled.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-2",
+      "text": "A central index page for all documentation is available at `/docs/` on the site.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-3",
+      "text": "A navigation structure for GitAgent Workbench is defined (e.g., in `_data/docs_nav.yml`) so that pages using the `doc.html` layout render a sidebar.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    },
+    {
+      "id": "fact-4",
+      "text": "A sync script (e.g., in a `Justfile`) exists to compile/copy the documentation from the `gitagent-workbench` repository into the `b08x.github.io/_docs/gitagent-workbench/` directory.",
+      "accepted": false,
+      "removed": false,
+      "recommendedAutomatedVerification": true,
+      "automatedVerification": true
+    }
+  ]
+}
