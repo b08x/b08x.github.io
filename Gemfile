@@ -44,16 +44,15 @@ end
 
 # gem 'jekyll-postcss', '~> 0.5.0'
 
-gem "racc"
+gem 'racc'
 
-gem "pry"
-gem "pry-doc"
+gem 'pry'
+gem 'pry-doc'
 
-gem "json_canvas"
+gem 'json_canvas'
 
-gem "gum", "~> 0.3.2"
-gem "kreuzberg"
-gem "image_processing"
-gem "ruby_llm"
-gem "ruby_llm-schema"
-
+gem 'gum', '~> 0.3.2'
+gem 'image_processing'
+gem 'kreuzberg'
+gem 'ruby_llm'
+gem 'ruby_llm-schema'
