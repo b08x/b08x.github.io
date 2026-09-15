@@ -1,0 +1,18 @@
+# Ordering manifest for the `gitagent-workbench` doc set.
+#
+# Line order is the reading order: it drives `nav_order` and the prev/next
+# pager, and must match the group ordering in `_data/docs_nav.yml`.
+#
+# Tab-separated columns:
+#   1. source     path relative to <source-repo>/<docs-subdir>/
+#   2. out        output basename; `index` publishes at /docs/<set>/
+#   3. title      page title (rendered as the H1 by _layouts/doc.html)
+#   4. fallback   description used only when the source has no lede paragraph
+#
+# source | out | title | fallback
+getting-started.md	index	Getting started	Install the workbench, run the wizard, and export your first agent package.
+agent-patterns.md	agent-patterns	Agent design patterns	Best practices for structuring agents, skills, and compliance tiers.
+custom-tools.md	custom-tools	Custom tools	Defining MCP-compatible tool schemas the generated agent can call at runtime.
+architecture.md	architecture	Architecture overview	How the wizard, serializer, local HTTP API, and context backend fit together.
+api-reference.md	api-reference	API reference	The local HTTP endpoints for key management, model listing, and generation.
+troubleshooting.md	troubleshooting	Troubleshooting	Common failures in key handling, generation, serialization, and local dev.

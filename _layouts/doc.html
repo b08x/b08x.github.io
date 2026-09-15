@@ -3,39 +3,6 @@ layout: default
 ---
 {% assign nav = site.data.docs_nav[page.doc_set] %}
 
-{% if nav.theme %}
-<style>
-  /* Per-doc-set palette. Redeclaring the site's tokens on <body> overrides
-     the :root values from theme-tokens.html for everything inside — header,
-     nav, content, footer — so the whole page reads as this project rather
-     than as a light page with a dark panel bolted into it. */
-  body.docs {
-    {% for token in nav.theme %}--{{ token[0] }}: {{ token[1] }};
-    {% endfor %}
-    background:
-      radial-gradient(120% 80% at 78% -10%, var(--glow, transparent), transparent 60%),
-      var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
-
-  /* Rouge hardcodes two olive greens in theme-tokens.html that were picked
-     against paper and go muddy on a dark ground. */
-  body.docs .highlight .s,  body.docs .highlight .s1, body.docs .highlight .s2,
-  body.docs .highlight .sb, body.docs .highlight .sc, body.docs .highlight .sd,
-  body.docs .highlight .se, body.docs .highlight .sh, body.docs .highlight .si,
-  body.docs .highlight .sx, body.docs .highlight .sr, body.docs .highlight .ss,
-  body.docs .highlight .il { color: #A9E08A; }
-  body.docs .highlight .gi { color: #A9E08A; }
-
-  /* Mermaid's theme comes from _config.yml and is tuned for paper. */
-  body.docs .post-content .mermaid,
-  body.docs .post-content img.mermaid {
-    background: var(--bg2);
-    border-color: var(--border);
-  }
-</style>
-{% endif %}
 
 <style>
   .doc-shell {
@@ -62,13 +29,13 @@ layout: default
     font-size: 13px;
     font-weight: 700;
     letter-spacing: -.01em;
-    color: var(--text);
+    color: var(--foreground);
     margin-bottom: 4px;
   }
 
   .doc-sidebar-sub {
     font-size: 10px;
-    color: var(--label, var(--dim));
+    color: var(--dim);
     letter-spacing: .14em;
     text-transform: uppercase;
     margin-bottom: 22px;
@@ -80,7 +47,7 @@ layout: default
     font-size: 10px;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--label, var(--dim));
+    color: var(--dim);
     margin-bottom: 8px;
   }
 
@@ -92,17 +59,17 @@ layout: default
     display: block;
     font-size: 12.5px;
     line-height: 1.5;
-    color: var(--text2);
+    color: var(--text-2);
     padding: 4px 0 4px 10px;
     border-left: 1px solid var(--border);
     transition: color .15s, border-color .15s;
   }
 
-  .doc-group a:hover { color: var(--amber); }
+  .doc-group a:hover { color: var(--accent); }
 
   .doc-group a.active {
-    color: var(--amber);
-    border-left-color: var(--amber);
+    color: var(--accent);
+    border-left-color: var(--accent);
     font-weight: 700;
   }
 
@@ -119,7 +86,7 @@ layout: default
     font-size: 10px;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--label, var(--dim));
+    color: var(--dim);
     margin-bottom: 10px;
   }
 
@@ -134,7 +101,7 @@ layout: default
     transition: color .15s;
   }
 
-  .doc-outline a:hover { color: var(--amber); }
+  .doc-outline a:hover { color: var(--accent); }
 
   /* ── Main column ── */
   .doc-main { min-width: 0; }
@@ -147,7 +114,7 @@ layout: default
   }
 
   .doc-breadcrumb a { color: var(--muted); }
-  .doc-breadcrumb a:hover { color: var(--amber); }
+  .doc-breadcrumb a:hover { color: var(--accent); }
   .doc-breadcrumb .sep { opacity: .4; margin: 0 6px; }
 
   .doc-title {
@@ -160,7 +127,7 @@ layout: default
 
   .doc-lede {
     font-size: 15px;
-    color: var(--text2);
+    color: var(--text-2);
     line-height: 1.65;
     margin-bottom: 28px;
     max-width: 68ch;
@@ -171,12 +138,12 @@ layout: default
   /* ── Custom blocks (VitePress-style containers) ── */
   .doc-body .callout {
     border-left: 3px solid var(--badge-blue);
-    background: var(--bg2);
+    background: var(--surface);
     border-radius: 0 4px 4px 0;
     padding: 14px 18px;
     font-size: 14px;
     line-height: 1.7;
-    color: var(--text2);
+    color: var(--text-2);
     font-style: normal;
   }
 
@@ -193,8 +160,8 @@ layout: default
   .doc-body .callout.tip { border-left-color: var(--badge-green); }
   .doc-body .callout.tip::before { content: "Tip"; color: var(--badge-green); }
   .doc-body .callout.info::before { content: "Note"; }
-  .doc-body .callout.warning { border-left-color: var(--amber); }
-  .doc-body .callout.warning::before { content: "Warning"; color: var(--amber); }
+  .doc-body .callout.warning { border-left-color: var(--accent); }
+  .doc-body .callout.warning::before { content: "Warning"; color: var(--accent); }
   .doc-body .callout.danger { border-left-color: var(--red); }
   .doc-body .callout.danger::before { content: "Caution"; color: var(--red); }
 
@@ -211,8 +178,8 @@ layout: default
     margin-bottom: 20px;
   }
 
-  .doc-edit a { color: var(--amber); }
-  .doc-edit a:hover { color: var(--amber-hi); }
+  .doc-edit a { color: var(--accent); }
+  .doc-edit a:hover { color: var(--accent-hi); }
 
   .doc-pager {
     display: grid;
@@ -227,18 +194,18 @@ layout: default
     transition: border-color .15s;
   }
 
-  .doc-pager a:hover { border-color: var(--amber); }
+  .doc-pager a:hover { border-color: var(--accent); }
 
   .doc-pager .dir {
     display: block;
     font-size: 10px;
     letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--label, var(--dim));
+    color: var(--dim);
     margin-bottom: 4px;
   }
 
-  .doc-pager .lbl { font-size: 13px; color: var(--amber); }
+  .doc-pager .lbl { font-size: 13px; color: var(--accent); }
   .doc-pager .next { text-align: right; }
 
   @media (max-width: 1100px) {
@@ -284,7 +251,18 @@ layout: default
     <div class="doc-breadcrumb">
       <a href="/projects/">projects</a>
       <span class="sep">/</span>
-      {% if nav.project_url %}<a href="{{ nav.project_url | relative_url }}">{{ nav.title }}</a>
+      {% comment %}
+        A doc set can be registered before its project page exists, so only
+        link the crumb once something actually builds at that URL.
+      {% endcomment %}
+      {% assign project_page = nil %}
+      {% if nav.project_url %}
+        {% assign project_page = site.documents | where: "url", nav.project_url | first %}
+        {% unless project_page %}
+          {% assign project_page = site.pages | where: "url", nav.project_url | first %}
+        {% endunless %}
+      {% endif %}
+      {% if project_page %}<a href="{{ nav.project_url | relative_url }}">{{ nav.title }}</a>
       {% else %}{{ nav.title }}{% endif %}
       <span class="sep">/</span>
       docs
@@ -304,19 +282,19 @@ layout: default
       </div>
       {% endif %}
 
-      {% if page.prev or page.next %}
+      {% if page.nav_prev or page.nav_next %}
       <div class="doc-pager">
-        {% if page.prev %}
-        <a href="{{ page.prev.url | relative_url }}">
+        {% if page.nav_prev %}
+        <a href="{{ page.nav_prev.url | relative_url }}">
           <span class="dir">Previous</span>
-          <span class="lbl">{{ page.prev.title }}</span>
+          <span class="lbl">{{ page.nav_prev.title }}</span>
         </a>
         {% else %}<span></span>{% endif %}
 
-        {% if page.next %}
-        <a class="next" href="{{ page.next.url | relative_url }}">
+        {% if page.nav_next %}
+        <a class="next" href="{{ page.nav_next.url | relative_url }}">
           <span class="dir">Next</span>
-          <span class="lbl">{{ page.next.title }}</span>
+          <span class="lbl">{{ page.nav_next.title }}</span>
         </a>
         {% endif %}
       </div>

@@ -6,32 +6,8 @@
   subtitle: pre-alpha
   project_url: /projects//
   edit_base: "https://github.com/b08x//edit/main/"
+  description: "A Claude plugin packaging a senior radiology-IT analyst's triage method — for the overnight engineer with no one to ask."
 
-  # Palette lifted from /projects//persona-card.html — the project's own
-  # identity rather than the site's Field Note theme. Keys are the site's
-  # existing token names, so every shared component (post-content, badges,
-  # rouge, tables) re-skins without touching its CSS.
-  theme:
-    bg: "#14101A"
-    bg2: "#1B1230"
-    surface: "#241838"
-    border: "#35234A"
-    border2: "#4A2E63"
-    text: "#E8DFF5"
-    text2: "#C3B2DC"
-    muted: "#A895C4"
-    dim: "#9A86B8"
-    amber: "#C46BEB"
-    amber-hi: "#E0A0F5"
-    red: "#E8636B"
-    badge-blue: "#7FA8D9"
-    badge-green: "#A9E08A"
-    badge-red: "#E8636B"
-    badge-neutral: "#9A86B8"
-    badge-text: "#14101A"
-    # Uppercase labels and section markers — amber, as on the persona card.
-    label: "#E8A13D"
-    glow: "rgba(163,43,214,.18)"
   groups:
     - title: Guide
       items:
@@ -80,3 +56,31 @@
           url: /docs//decisions/
         - title: "ADR-0008 — Forensics split"
           url: /docs//adr-0008-separate-forensics-plugin/
+
+gitagent-workbench:
+  title: GitAgent Workbench
+  subtitle: alpha
+  # No `project_url`: this doc set is the project's page on the site, and
+  # _data/projects.yml points its card straight here. Add one if a dedicated
+  # /projects/ page ever lands — the breadcrumb picks it up automatically.
+  edit_base: "https://github.com/b08x/gitagent-workbench/edit/main/"
+  description: "Visual development environment for building production-ready AI agents: a guided wizard for identity, capabilities, models, compliance, and deployment structure that exports a complete agent package."
+
+  groups:
+    - title: Guide
+      items:
+        - title: Getting started
+          url: /docs/gitagent-workbench/
+        - title: Agent design patterns
+          url: /docs/gitagent-workbench/agent-patterns/
+        - title: Custom tools
+          url: /docs/gitagent-workbench/custom-tools/
+
+    - title: Reference
+      items:
+        - title: Architecture overview
+          url: /docs/gitagent-workbench/architecture/
+        - title: API reference
+          url: /docs/gitagent-workbench/api-reference/
+        - title: Troubleshooting
+          url: /docs/gitagent-workbench/troubleshooting/
