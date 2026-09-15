@@ -1,25 +1,58 @@
 ---
 layout: notes
+body_class: prompts-bench
 ---
-<a href="/prompts/" class="back-link">← back to prompts</a>
 
-<article class="post">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    {% if page.tag %}
-    <div class="post-meta">
-      <div class="tag-row"><span class="tag"><b>#</b>{{ page.tag }}</span></div>
-    </div>
-    {% endif %}
-  </header>
+<style>
+  /* The permalink page carries the same bench, so the only extra chrome is
+     the way back into the library and whatever prose the prompt's own
+     markdown body adds beneath it. */
+  .prompt-return {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+    padding: var(--space-2) var(--space-3);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    color: var(--muted);
+    font-family: var(--font-ui);
+    font-size: var(--text-2xs);
+    letter-spacing: var(--tracking-wide);
+    text-decoration: none;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+  .prompt-return:hover { color: var(--foreground); border-color: var(--accent); }
 
-  <div class="post-content">
-    <h4>Instructions</h4>
-    <p>{{ page.instructions }}</p>
+  .prompt-notes {
+    margin-top: var(--space-8);
+    padding-top: var(--space-5);
+    border-top: var(--border-width) solid var(--border);
+    max-width: var(--measure-prose);
+  }
+</style>
 
-    <h4>Example output</h4>
-    <div class="code-panel"><span class="code-output">{{ page.example | newline_to_br }}</span></div>
+<a href="{{ '/prompts/' | relative_url }}" class="prompt-return">&larr; back to prompts</a>
 
-    {{ content }}
-  </div>
-</article>
+<script type="application/json" id="prompts-data">
+[
+  {
+    "title": {{ page.title | jsonify }},
+    "tag": {{ page.tag | jsonify }},
+    "category": {{ page.category | jsonify }},
+    "instructions": {{ page.instructions | jsonify }},
+    "example": {{ page.example | jsonify }},
+    "sfl": {{ page.sfl | jsonify }},
+    "url": {{ page.url | relative_url | jsonify }}
+  }
+]
+</script>
+
+{% include prompt-bench.html mode="single" %}
+
+{% if content != "" %}
+<div class="prompt-notes post-content">
+  {{ content }}
+</div>
+{% endif %}

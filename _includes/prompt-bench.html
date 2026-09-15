@@ -1,0 +1,1015 @@
+<!-- prompt-bench.html — the SFL demonstration bench.
+
+     Consumed by `prompts.html` (library mode: pages through every prompt
+     like a deck) and `_layouts/prompt.html` (single mode: one prompt, no
+     inter-prompt nav). Both emit a `#prompts-data` JSON block first; this
+     include carries the styles, the markup and the realization engine.
+
+     The engine is deterministic and runs entirely in the browser. A prompt
+     is authored as a small grammar rather than as fixed text: each clause
+     names a tenor-selected subject frame, a modality-selected modal
+     operator and an abstraction/imagery-selected predicate. The dials pick
+     bands, the renderer reassembles. A prompt with no `sfl.clauses` falls
+     back to its static `instructions` and the dials only drive the export.
+
+     The `ground` block is the invariant. It renders unconditionally, the
+     dials never touch it, and after each re-render every ground anchor is
+     checked against the generated text so a dropped proposition is shown
+     rather than assumed away. -->
+
+<style>
+  /* ── Shell ──
+     Both host pages sit inside `notes.html`'s `.container`, which is capped
+     at --width-content. The bench needs the full article measure, so the
+     body class widens it rather than breaking out of the flow. */
+  body.prompts-bench .container { max-width: var(--width-article); }
+
+  .bench {
+    --bench-gap-in:  var(--space-2);   /* within a group  */
+    --bench-gap-out: var(--space-5);   /* between groups — 3× the above */
+    display: flex;
+    flex-direction: column;
+    gap: var(--bench-gap-out);
+  }
+
+  /* ── Masthead ── */
+  .bench-masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: var(--border-width) solid var(--border);
+  }
+  .bench-masthead > div:first-child { flex: 1 1 32ch; min-width: 0; }
+  .bench-masthead h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--accent);
+    margin: 0 0 var(--space-1);
+  }
+  .bench-lede {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+    color: var(--muted);
+    margin: 0;
+    max-width: 58ch;
+  }
+
+  /* ── Deck-style transport ──
+     Grouped controls, so they sit tighter to each other than to anything
+     else and read as one instrument. */
+  .bench-transport {
+    display: flex;
+    align-items: center;
+    gap: var(--bench-gap-in);
+    padding: var(--space-1);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+  }
+  .bench-transport button {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    padding-inline: var(--space-2);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--text-2);
+    font-family: var(--font-ui);
+    font-size: var(--text-base);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+  .bench-transport button:hover { background: var(--surface-2); color: var(--foreground); }
+  .bench-transport button:disabled { opacity: .4; cursor: default; }
+  .bench-transport button:disabled:hover { background: transparent; color: var(--text-2); }
+  .bench-count {
+    font-family: var(--font-code);
+    font-size: var(--text-xs);
+    color: var(--muted);
+    padding-inline: var(--space-2);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .bench-hint {
+    font-family: var(--font-ui);
+    font-size: var(--text-2xs);
+    color: var(--dim);
+    letter-spacing: var(--tracking-wide);
+    padding-inline: var(--space-2) var(--space-3);
+    border-inline-start: var(--border-width) solid var(--border);
+    white-space: nowrap;
+  }
+
+  /* ── Stage ──
+     Container queries, so the split collapses when the bench itself stops
+     fitting rather than at a device preset. The console is ~340px of
+     controls; below ~880px of bench there is no room for both. */
+  .bench-stage-wrap { container-type: inline-size; }
+  .bench-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 340px);
+    gap: var(--bench-gap-out);
+    align-items: start;
+  }
+  @container (max-width: 880px) {
+    .bench-stage { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* ── Realization panel ── */
+  .bench-realization { min-width: 0; }
+
+  .bench-eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--bench-gap-in);
+    margin-bottom: var(--space-3);
+  }
+  .bench-tag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-code);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    padding: 3px var(--space-2);
+    border-radius: var(--radius-pill);
+    border: var(--border-width) solid var(--border);
+    background: var(--surface);
+    color: var(--text-2);
+  }
+  .bench-tag.category { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft); }
+
+  .bench-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3.4cqi, var(--text-3xl));
+    font-weight: var(--weight-bold);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tighter);
+    color: var(--foreground);
+    margin: 0 0 var(--space-5);
+    max-width: 24ch;
+  }
+
+  .bench-section + .bench-section { margin-top: var(--bench-gap-out); }
+  .bench-section-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    font-family: var(--font-ui);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+  }
+  .bench-section-note {
+    font-weight: var(--weight-regular);
+    text-transform: none;
+    letter-spacing: var(--tracking-normal);
+    color: var(--dim);
+  }
+
+  /* The live text. Clauses are block-level so a dial change is legible as a
+     line rewriting itself rather than as a reflowing paragraph. */
+  .bench-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--text-2);
+    margin: 0;
+    max-width: 68ch;
+  }
+  .bench-clause {
+    display: block;
+    padding: var(--space-2) 0 var(--space-2) var(--space-4);
+    border-inline-start: var(--border-accent) solid transparent;
+    transition: border-color var(--transition-base) var(--ease-out),
+                background var(--transition-base) var(--ease-out);
+  }
+  .bench-clause + .bench-clause { margin-top: var(--space-1); }
+  .bench-clause[data-changed] {
+    border-inline-start-color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 7%, transparent);
+  }
+  .bench-clause em { font-style: normal; color: var(--foreground); }
+  .bench-clause.rider { color: var(--muted); }
+  .bench-clause.rider::before {
+    content: "+ ";
+    color: var(--accent);
+    font-weight: var(--weight-bold);
+  }
+  .bench-clause.lock { color: var(--muted); }
+  .bench-clause.lock::before {
+    content: "\00a7\00a0";
+    color: var(--cyan);
+    font-weight: var(--weight-bold);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bench-clause { transition: none; }
+  }
+
+  .bench-code {
+    display: block;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-family: var(--font-code);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--text-2);
+    background: var(--bg-code);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    overflow-x: auto;
+  }
+
+  /* ── Console ──
+     Sticky, because the point of the bench is watching the text change
+     while a dial moves; the dial must stay reachable while the realization
+     scrolls. `top` clears the site header. */
+  .bench-console {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-4));
+    display: flex;
+    flex-direction: column;
+    gap: var(--bench-gap-out);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    padding: var(--space-5) var(--space-4);
+    max-height: calc(100vh - var(--header-h) - var(--space-6));
+    overflow-y: auto;
+  }
+  @container (max-width: 880px) {
+    .bench-console { position: static; max-height: none; }
+  }
+
+  .console-group > * + * { margin-top: var(--bench-gap-in); }
+  .console-heading {
+    font-family: var(--font-ui);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--dim);
+    margin: 0 0 var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  /* ── Ground ──
+     Rendered before the dials, because it is the thing the dials are not
+     allowed to disturb; reading order carries that claim. */
+  .ground-item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-2);
+    align-items: start;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    background: var(--background);
+    border: var(--border-width) solid var(--border);
+  }
+  .ground-item + .ground-item { margin-top: var(--bench-gap-in); }
+  .ground-state {
+    font-family: var(--font-code);
+    font-size: var(--text-xs);
+    line-height: var(--leading-relaxed);
+    color: var(--status-success);
+  }
+  .ground-item[data-drift] { border-color: var(--status-warning); }
+  .ground-item[data-drift] .ground-state { color: var(--status-warning); }
+  .ground-gist {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+    color: var(--text-2);
+  }
+  .ground-anchors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: var(--space-1);
+  }
+  .ground-anchors code {
+    font-family: var(--font-code);
+    font-size: var(--text-2xs);
+    color: var(--muted);
+    background: var(--surface-2);
+    border-radius: var(--radius-xs);
+    padding: 1px 5px;
+  }
+  .ground-note {
+    font-family: var(--font-body);
+    font-size: var(--text-2xs);
+    line-height: var(--leading-normal);
+    color: var(--dim);
+    margin: var(--space-3) 0 0;
+  }
+
+  /* ── Dials ──
+     24px between borderless controls, per the layout density floor. */
+  .dial + .dial { margin-top: var(--space-5); }
+  .dial-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    font-family: var(--font-ui);
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-2);
+    margin-bottom: var(--space-2);
+  }
+  .dial-value {
+    font-family: var(--font-code);
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .dial input[type="range"] {
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 22px;              /* hit area, not track height */
+    background: transparent;
+    cursor: pointer;
+  }
+  .dial input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--border-2);
+  }
+  .dial input[type="range"]::-moz-range-track {
+    height: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--border-2);
+  }
+  .dial input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    margin-top: -5.5px;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    border: var(--border-width-2) solid var(--surface);
+  }
+  .dial input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    border: var(--border-width-2) solid var(--surface);
+  }
+  .dial input[type="range"]:focus-visible { outline: none; }
+  .dial input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: var(--shadow-glow); }
+  .dial input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: var(--shadow-glow); }
+
+  .dial-poles {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    font-family: var(--font-ui);
+    font-size: var(--text-2xs);
+    color: var(--dim);
+    margin-top: 2px;
+  }
+  .dial-poles span:last-child { text-align: end; }
+
+  .dial-note {
+    font-family: var(--font-ui);
+    font-size: var(--text-2xs);
+    line-height: var(--leading-normal);
+    color: var(--dim);
+    text-align: start;
+    margin-top: var(--space-1);
+  }
+
+  /* ── Console actions ──
+     Full-width but inset inside the console's own padding, with a visible
+     radius — never flush to an edge. */
+  .console-actions { display: flex; flex-direction: column; gap: var(--bench-gap-in); }
+  .bench-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-sm);
+    border: var(--border-width) solid var(--border-2);
+    background: var(--background);
+    color: var(--text-2);
+    font-family: var(--font-ui);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
+    cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  }
+  .bench-btn:hover { color: var(--foreground); border-color: var(--accent); }
+  .bench-btn.primary {
+    color: var(--badge-text);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .bench-btn.primary:hover { background: var(--accent-hi); border-color: var(--accent-hi); }
+
+  .json-block {
+    font-family: var(--font-code);
+    font-size: var(--text-2xs);
+    line-height: var(--leading-normal);
+    color: var(--text-2);
+    background: var(--background);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+    margin: 0;
+    max-height: 220px;
+    overflow: auto;
+    white-space: pre;
+  }
+
+  /* ── Index overlay ──
+     Progressive disclosure with a visible affordance: the "index" button in
+     the transport, plus the keyboard hint beside it. */
+  .bench-index-toggle { gap: var(--space-2); }
+  .bench-index {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: grid;
+    place-items: start center;
+    padding: calc(env(safe-area-inset-top, 0px) + var(--space-6)) var(--space-4)
+             calc(env(safe-area-inset-bottom, 0px) + var(--space-6));
+    background: color-mix(in oklab, var(--background) 82%, transparent);
+    backdrop-filter: blur(3px);
+    overflow-y: auto;
+  }
+  /* `display: grid` above outranks the UA's `[hidden] { display: none }`, so
+     the closed state has to be restated at equal specificity or the overlay
+     covers the page on first paint. */
+  .bench-index[hidden] { display: none; }
+  .bench-index-panel {
+    width: min(100%, 560px);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--popover);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .bench-index-search {
+    display: block;
+    width: 100%;
+    padding: var(--space-4);
+    border: 0;
+    border-bottom: var(--border-width) solid var(--border);
+    background: var(--surface);
+    color: var(--foreground);
+    font-family: var(--font-code);
+    font-size: var(--text-sm);
+  }
+  .bench-index-search:focus-visible { outline: var(--border-width-2) solid var(--accent); outline-offset: -2px; }
+  .bench-index-list { max-height: min(60vh, 440px); overflow-y: auto; }
+  .bench-index-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    text-align: start;
+    background: transparent;
+    border: 0;
+    border-bottom: var(--border-width) solid var(--border);
+    border-inline-start: var(--border-accent) solid transparent;
+    cursor: pointer;
+    font-family: var(--font-ui);
+  }
+  .bench-index-item:last-child { border-bottom: 0; }
+  .bench-index-item .idx-title {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--text-2);
+  }
+  .bench-index-item:hover { background: var(--surface); }
+  .bench-index-item[aria-current="true"] { border-inline-start-color: var(--accent); background: var(--surface); }
+  .bench-index-item[aria-current="true"] .idx-title { color: var(--foreground); }
+  .bench-index-empty {
+    padding: var(--space-5) var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+
+  .bench-empty {
+    padding: var(--space-8) var(--space-4);
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--muted);
+    border: var(--border-width) dashed var(--border-2);
+    border-radius: var(--radius-md);
+  }
+</style>
+
+<div class="bench" id="bench" data-mode="{{ include.mode | default: 'library' }}">
+
+  {% if include.mode != 'single' %}
+  <header class="bench-masthead">
+    <div>
+      <h1>{{ page.title }}</h1>
+      <p class="bench-lede">{{ page.description }}</p>
+    </div>
+    <div class="bench-transport" role="group" aria-label="Prompt navigation">
+      <button type="button" id="bench-prev" aria-label="Previous prompt">&lsaquo;</button>
+      <span class="bench-count"><span id="bench-current">1</span> / <span id="bench-total">0</span></span>
+      <button type="button" id="bench-next" aria-label="Next prompt">&rsaquo;</button>
+      <button type="button" class="bench-index-toggle" id="bench-index-open" aria-haspopup="dialog">Index</button>
+      <span class="bench-hint">&larr; &rarr; &middot; / &middot; R</span>
+    </div>
+  </header>
+  {% endif %}
+
+  <div class="bench-stage-wrap">
+    <div class="bench-stage" id="bench-stage">
+
+      <article class="bench-realization">
+        <div class="bench-eyebrow" id="bench-eyebrow"></div>
+        {% comment %}On a permalink page the prompt's name is the page's own
+        heading; inside the library the masthead already owns the h1.{% endcomment %}
+        {% if include.mode == 'single' %}
+        <h1 class="bench-title" id="bench-title"></h1>
+        {% else %}
+        <h2 class="bench-title" id="bench-title"></h2>
+        {% endif %}
+
+        <section class="bench-section">
+          <div class="bench-section-label">
+            <span>Realization</span>
+            <span class="bench-section-note" id="bench-realization-note"></span>
+          </div>
+          <div class="bench-text" id="bench-text"></div>
+        </section>
+
+        <section class="bench-section" id="bench-example-section">
+          <div class="bench-section-label"><span>Example output</span></div>
+          <code class="bench-code" id="bench-example"></code>
+        </section>
+      </article>
+
+      <aside class="bench-console" aria-label="SFL console">
+        <section class="console-group">
+          <h3 class="console-heading">Ground &mdash; invariant</h3>
+          <div id="bench-ground"></div>
+          <p class="ground-note">The dials below change how these propositions are
+            realized, never which propositions are made. Each anchor is re-checked
+            against the generated text after every adjustment.</p>
+        </section>
+
+        <section class="console-group">
+          <h3 class="console-heading">Metafunctions</h3>
+          <div id="bench-dials"></div>
+        </section>
+
+        <section class="console-group">
+          <h3 class="console-heading">Config payload</h3>
+          <pre class="json-block" id="bench-json"></pre>
+          <div class="console-actions">
+            <button type="button" class="bench-btn primary" id="bench-copy">Copy config</button>
+            <button type="button" class="bench-btn" id="bench-download">Download .json</button>
+            <button type="button" class="bench-btn" id="bench-reset">Reset dials</button>
+          </div>
+        </section>
+      </aside>
+
+    </div>
+  </div>
+
+  {% if include.mode != 'single' %}
+  <div class="bench-index" id="bench-index" role="dialog" aria-modal="true" aria-label="Prompt index" hidden>
+    <div class="bench-index-panel">
+      <input type="search" class="bench-index-search" id="bench-index-search"
+             placeholder="Filter prompts&hellip;" autocomplete="off" aria-label="Filter prompts">
+      <div class="bench-index-list" id="bench-index-list"></div>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('bench');
+  if (!root) return;
+
+  var dataEl = document.getElementById('prompts-data');
+  var data = dataEl ? JSON.parse(dataEl.textContent) : [];
+  var isLibrary = root.getAttribute('data-mode') !== 'single';
+
+  var stage = document.getElementById('bench-stage');
+  if (!data.length) {
+    stage.innerHTML = '<p class="bench-empty">No prompts published yet.</p>';
+    return;
+  }
+
+  /* ── The realization grammar ───────────────────────────────────────────
+     Five dials, each 0..1, matching sfl-engine's TenorValue /
+     ModalityWeight constraint. `bands` names the keys a clause may supply
+     for that dial; `pick` maps a value onto one of them. Authors write the
+     bands they care about and the renderer falls back along the list, so a
+     clause that only distinguishes two tenors still works.            */
+  var DIALS = [
+    { key: 'tenor',       label: 'Tenor',       poles: ['deferential', 'commanding'],
+      bands: ['low', 'mid', 'high'],
+      note: 'Social distance between the prompt and its reader.' },
+    { key: 'modality',    label: 'Modality',    poles: ['hedged', 'categorical'],
+      bands: ['low', 'mid', 'high'],
+      note: 'How much room the instruction leaves for exception.' },
+    { key: 'imagery',     label: 'Imagery density', poles: ['literal', 'figurative'],
+      bands: ['low', 'high'],
+      note: 'Whether a predicate is stated or figured.' },
+    { key: 'abstraction', label: 'Abstraction', poles: ['concrete', 'schematic'],
+      bands: ['concrete', 'abstract'],
+      note: 'Instance-level wording versus category-level wording.' },
+    { key: 'novelty',     label: 'Novelty injection', poles: ['locked', 'generative'],
+      bands: ['low', 'high'],
+      note: 'Admits generative riders, or clamps the prompt to fidelity.' }
+  ];
+
+  var DEFAULTS = { tenor: 0.5, modality: 0.7, imagery: 0.3, abstraction: 0.8, novelty: 0.1 };
+
+  function band3(v) { return v < 0.34 ? 'low' : (v < 0.67 ? 'mid' : 'high'); }
+  function band2(v, lo, hi) { return v < 0.5 ? lo : hi; }
+
+  /* Resolve a clause slot against the dial state, walking outward from the
+     requested band so partially-authored clauses still realize. */
+  function resolve(slot, want, order) {
+    if (slot == null) return null;
+    if (typeof slot === 'string') return slot;
+    if (slot[want] != null) return slot[want];
+    var i = order.indexOf(want);
+    for (var d = 1; d < order.length; d++) {
+      var lo = order[i - d], hi = order[i + d];
+      if (lo && slot[lo] != null) return slot[lo];
+      if (hi && slot[hi] != null) return slot[hi];
+    }
+    for (var k in slot) if (slot[k] != null) return slot[k];
+    return null;
+  }
+
+  function joinClause(parts) {
+    var text = parts.filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    if (!text) return '';
+    text = text.charAt(0).toUpperCase() + text.slice(1);
+    return /[.!?]$/.test(text) ? text : text + '.';
+  }
+
+  /* Build the full realization for one prompt at one dial setting.
+     Returns the clause strings plus the ground-anchor verdicts, so the
+     console can show which propositions survived this particular setting. */
+  function realize(prompt, dials) {
+    var sfl = prompt.sfl || {};
+    var clauses = sfl.clauses || [];
+    var out = [];
+
+    var tBand = band3(dials.tenor);
+    var mBand = band3(dials.modality);
+    var aBand = band2(dials.abstraction, 'concrete', 'abstract');
+    var figurative = dials.imagery >= 0.6;
+    var generative = dials.novelty >= 0.6;
+    var locked = dials.novelty <= 0.2;
+
+    clauses.forEach(function (c) {
+      var subject = resolve(c.subject, tBand, ['low', 'mid', 'high']);
+      var modal   = resolve(c.modal,   mBand, ['low', 'mid', 'high']);
+      var figure  = figurative ? resolve(c.figure, aBand, ['concrete', 'abstract']) : null;
+      var object  = figure || resolve(c.object, aBand, ['concrete', 'abstract']);
+      var text = joinClause([subject, modal, object]);
+      if (text) out.push({ text: text, kind: 'clause', ground: c.ground || null });
+
+      if (generative && c.rider) out.push({ text: joinClause([c.rider]), kind: 'rider', ground: c.ground || null });
+      if (locked && c.lock)      out.push({ text: joinClause([c.lock]),  kind: 'lock',  ground: c.ground || null });
+    });
+
+    if (!out.length && prompt.instructions) {
+      prompt.instructions.split(/\n{2,}/).forEach(function (para) {
+        if (para.trim()) out.push({ text: para.trim(), kind: 'clause', ground: null });
+      });
+    }
+
+    var rendered = out.map(function (c) { return c.text; }).join(' ').toLowerCase();
+    var ground = (sfl.ground || []).map(function (g) {
+      var anchors = g.anchors || [];
+      var missing = anchors.filter(function (a) { return rendered.indexOf(String(a).toLowerCase()) === -1; });
+      return { id: g.id, gist: g.gist, anchors: anchors, missing: missing };
+    });
+
+    return { clauses: out, ground: ground };
+  }
+
+  /* ── State ── */
+  var index = 0;
+  var dials = Object.assign({}, DEFAULTS);
+  var lastClauseText = [];
+
+  function currentPrompt() { return data[index]; }
+
+  function seedDials() {
+    var d = (currentPrompt().sfl || {}).defaults || {};
+    dials = Object.assign({}, DEFAULTS);
+    DIALS.forEach(function (dial) {
+      if (typeof d[dial.key] === 'number') dials[dial.key] = d[dial.key];
+    });
+  }
+
+  /* ── Rendering ── */
+  var elEyebrow = document.getElementById('bench-eyebrow');
+  var elTitle   = document.getElementById('bench-title');
+  var elText    = document.getElementById('bench-text');
+  var elNote    = document.getElementById('bench-realization-note');
+  var elGround  = document.getElementById('bench-ground');
+  var elDials   = document.getElementById('bench-dials');
+  var elJson    = document.getElementById('bench-json');
+  var elExample = document.getElementById('bench-example');
+  var elExampleSection = document.getElementById('bench-example-section');
+
+  function text(tag, cls, value) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (value != null) n.textContent = value;
+    return n;
+  }
+
+  function renderHead() {
+    var p = currentPrompt();
+    elEyebrow.textContent = '';
+    if (p.category) elEyebrow.appendChild(text('span', 'bench-tag category', p.category));
+    var sameWord = p.tag && p.category && p.tag.toLowerCase() === p.category.toLowerCase();
+    if (p.tag && !sameWord) elEyebrow.appendChild(text('span', 'bench-tag', p.tag));
+    elTitle.textContent = p.title;
+
+    if (p.example) {
+      elExampleSection.hidden = false;
+      elExample.textContent = p.example;
+    } else {
+      elExampleSection.hidden = true;
+    }
+  }
+
+  function renderBody() {
+    var p = currentPrompt();
+    var result = realize(p, dials);
+    var authored = (p.sfl && p.sfl.clauses && p.sfl.clauses.length) > 0;
+
+    elNote.textContent = authored
+      ? 'rewritten live from the dials'
+      : 'static — no clause grammar authored for this prompt';
+
+    elText.textContent = '';
+    result.clauses.forEach(function (c, i) {
+      var node = text('span', 'bench-clause' + (c.kind !== 'clause' ? ' ' + c.kind : ''), c.text);
+      if (authored && lastClauseText[i] !== undefined && lastClauseText[i] !== c.text) {
+        node.setAttribute('data-changed', '');
+      }
+      elText.appendChild(node);
+    });
+    lastClauseText = result.clauses.map(function (c) { return c.text; });
+
+    elGround.textContent = '';
+    if (!result.ground.length) {
+      elGround.appendChild(text('p', 'ground-note', 'No ground declared for this prompt.'));
+    } else {
+      result.ground.forEach(function (g) {
+        var item = text('div', 'ground-item');
+        if (g.missing.length) item.setAttribute('data-drift', '');
+        item.appendChild(text('span', 'ground-state', g.missing.length ? '!' : '✓'));
+        var body = text('div');
+        body.appendChild(text('div', 'ground-gist', g.gist));
+        if (g.anchors.length) {
+          var anchors = text('div', 'ground-anchors');
+          g.anchors.forEach(function (a) {
+            var code = text('code', null, a);
+            if (g.missing.indexOf(a) !== -1) code.style.color = 'var(--status-warning)';
+            anchors.appendChild(code);
+          });
+          body.appendChild(anchors);
+        }
+        if (g.missing.length) {
+          body.appendChild(text('div', 'ground-gist',
+            'Dropped from the surface at this setting — held here, not in the text.'));
+        }
+        item.appendChild(body);
+        elGround.appendChild(item);
+      });
+    }
+
+    elJson.textContent = JSON.stringify(buildConfig(p, result), null, 2);
+  }
+
+  function buildConfig(p, result) {
+    return {
+      meta: { schema_version: '2.0', name: p.title, tag: p.tag || null, category: p.category || null },
+      dimensions: DIALS.reduce(function (acc, d) {
+        acc[d.key] = Number(dials[d.key].toFixed(2));
+        return acc;
+      }, {}),
+      ground: result.ground.map(function (g) {
+        return { id: g.id, gist: g.gist, anchors: g.anchors, surfaced: g.missing.length === 0 };
+      }),
+      realization: result.clauses.map(function (c) { return c.text; })
+    };
+  }
+
+  function renderDials() {
+    elDials.textContent = '';
+    DIALS.forEach(function (d) {
+      var wrap = text('div', 'dial');
+
+      var label = text('label', 'dial-label');
+      label.setAttribute('for', 'dial-' + d.key);
+      label.appendChild(text('span', null, d.label));
+      var val = text('span', 'dial-value', dials[d.key].toFixed(2));
+      label.appendChild(val);
+      wrap.appendChild(label);
+
+      var input = document.createElement('input');
+      input.type = 'range';
+      input.id = 'dial-' + d.key;
+      input.min = '0'; input.max = '1'; input.step = '0.05';
+      input.value = String(dials[d.key]);
+      input.setAttribute('aria-describedby', 'dial-note-' + d.key);
+      input.addEventListener('input', function () {
+        dials[d.key] = parseFloat(input.value);
+        val.textContent = dials[d.key].toFixed(2);
+        renderBody();
+      });
+      wrap.appendChild(input);
+
+      var poles = text('div', 'dial-poles');
+      poles.appendChild(text('span', null, d.poles[0]));
+      poles.appendChild(text('span', null, d.poles[1]));
+      wrap.appendChild(poles);
+
+      var note = text('div', 'dial-note', d.note);
+      note.id = 'dial-note-' + d.key;
+      wrap.appendChild(note);
+
+      elDials.appendChild(wrap);
+    });
+  }
+
+  function renderAll() {
+    renderHead();
+    renderDials();
+    lastClauseText = [];
+    renderBody();
+    if (isLibrary) renderTransport();
+  }
+
+  /* ── Library navigation ── */
+  var elCurrent, elTotal, elPrev, elNext, elIndex, elIndexList, elIndexSearch, indexOpener;
+
+  function renderTransport() {
+    elCurrent.textContent = String(index + 1);
+    elPrev.disabled = index === 0;
+    elNext.disabled = index === data.length - 1;
+    Array.prototype.forEach.call(elIndexList.querySelectorAll('.bench-index-item'), function (b) {
+      b.setAttribute('aria-current', String(Number(b.dataset.index) === index));
+    });
+    try { history.replaceState(null, '', '#' + (index + 1)); } catch (e) {}
+  }
+
+  function goTo(i) {
+    var next = Math.max(0, Math.min(data.length - 1, i));
+    if (next === index) return;
+    index = next;
+    seedDials();
+    renderAll();
+    elTitle.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  function buildIndex(filter) {
+    elIndexList.textContent = '';
+    var q = (filter || '').trim().toLowerCase();
+    var hits = 0;
+    data.forEach(function (p, i) {
+      var hay = [p.title, p.tag, p.category].filter(Boolean).join(' ').toLowerCase();
+      if (q && hay.indexOf(q) === -1) return;
+      hits++;
+      var btn = text('button', 'bench-index-item');
+      btn.type = 'button';
+      btn.dataset.index = String(i);
+      btn.setAttribute('aria-current', String(i === index));
+      btn.appendChild(text('span', 'idx-title', p.title));
+      if (p.tag) btn.appendChild(text('span', 'bench-tag', p.tag));
+      btn.addEventListener('click', function () { closeIndex(); goTo(i); });
+      elIndexList.appendChild(btn);
+    });
+    if (!hits) elIndexList.appendChild(text('p', 'bench-index-empty', 'Nothing matches that.'));
+  }
+
+  function openIndex() {
+    elIndex.hidden = false;
+    elIndexSearch.value = '';
+    buildIndex('');
+    elIndexSearch.focus();
+  }
+  function closeIndex() {
+    elIndex.hidden = true;
+    if (indexOpener) indexOpener.focus();
+  }
+
+  if (isLibrary) {
+    elCurrent     = document.getElementById('bench-current');
+    elTotal       = document.getElementById('bench-total');
+    elPrev        = document.getElementById('bench-prev');
+    elNext        = document.getElementById('bench-next');
+    elIndex       = document.getElementById('bench-index');
+    elIndexList   = document.getElementById('bench-index-list');
+    elIndexSearch = document.getElementById('bench-index-search');
+    indexOpener   = document.getElementById('bench-index-open');
+
+    elTotal.textContent = String(data.length);
+    elPrev.addEventListener('click', function () { goTo(index - 1); });
+    elNext.addEventListener('click', function () { goTo(index + 1); });
+    indexOpener.addEventListener('click', openIndex);
+    elIndexSearch.addEventListener('input', function () { buildIndex(elIndexSearch.value); });
+    elIndex.addEventListener('click', function (e) { if (e.target === elIndex) closeIndex(); });
+    buildIndex('');
+
+    window.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (!elIndex.hidden) {
+        if (e.key === 'Escape') { closeIndex(); e.preventDefault(); }
+        return;
+      }
+      var t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') { goTo(index + 1); e.preventDefault(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { goTo(index - 1); e.preventDefault(); }
+      else if (e.key === 'Home') { goTo(0); e.preventDefault(); }
+      else if (e.key === 'End') { goTo(data.length - 1); e.preventDefault(); }
+      else if (e.key === '/') { openIndex(); e.preventDefault(); }
+      else if (e.key === 'r' || e.key === 'R') { seedDials(); renderAll(); e.preventDefault(); }
+      else if (/^[1-9]$/.test(e.key)) { goTo(parseInt(e.key, 10) - 1); e.preventDefault(); }
+    });
+
+    var startHash = (location.hash || '').match(/^#(\d+)$/);
+    if (startHash) index = Math.max(0, Math.min(data.length - 1, parseInt(startHash[1], 10) - 1));
+  }
+
+  /* ── Export ── */
+  function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
+  function payload() {
+    var p = currentPrompt();
+    return JSON.stringify(buildConfig(p, realize(p, dials)), null, 2);
+  }
+
+  var copyBtn = document.getElementById('bench-copy');
+  copyBtn.addEventListener('click', function () {
+    var body = payload();
+    var done = function () {
+      copyBtn.textContent = 'Copied';
+      setTimeout(function () { copyBtn.textContent = 'Copy config'; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(body).then(done, function () { copyBtn.textContent = 'Copy failed'; });
+    } else { done(); }
+  });
+
+  document.getElementById('bench-download').addEventListener('click', function () {
+    var blob = new Blob([payload()], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = slug(currentPrompt().title) + '.sfl.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('bench-reset').addEventListener('click', function () {
+    seedDials();
+    renderAll();
+  });
+
+  seedDials();
+  renderAll();
+})();
+</script>
