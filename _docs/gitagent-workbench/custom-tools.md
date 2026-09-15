@@ -1,6 +1,6 @@
 ---
 title: Custom tools
-description: "Tools are MCP-compatible function definitions that your agent can call at runtime. GitAgent Workbench generates tool schemas as part of the agent package, and the serializer ensures they use the correct format for `gitagent validate`."
+description: "Tools are MCP-compatible function definitions that your agent can call at runtime. GitAgent Workbench generates tool schemas as part of the agent package, and the serializer ensures they use the correct format for gitagent validate."
 permalink: /docs/gitagent-workbench/custom-tools/
 doc_set: gitagent-workbench
 source_path: docs/custom-tools.md

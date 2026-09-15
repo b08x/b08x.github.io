@@ -1,6 +1,6 @@
 ---
 title: API reference
-description: "GitAgent Workbench exposes a local HTTP API through `server.ts` on port 3000. The frontend communicates with this API for key management, model listing, and AI generation."
+description: "GitAgent Workbench exposes a local HTTP API through server.ts on port 3000. The frontend communicates with this API for key management, model listing, and AI generation."
 permalink: /docs/gitagent-workbench/api-reference/
 doc_set: gitagent-workbench
 source_path: docs/api-reference.md
