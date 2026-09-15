@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFL Math for Dummies</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" crossorigin="anonymous">
+    <!-- Removed 'defer' to ensure KaTeX and auto-render load before the inline script uses them -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --chalk-bg: #2a3439;
+            --chalk-text: #e2e8f0;
+            --chalk-yellow: #fde047;
+            --chalk-blue: #93c5fd;
+            --chalk-pink: #f9a8d4;
+            --chalk-green: #86efac;
+        }
+
+        body {
+            font-family: 'Patrick Hand', cursive;
+            background-color: var(--chalk-bg);
+            color: var(--chalk-text);
+            /* Creating a subtle chalk dust texture */
+            background-image: 
+                radial-gradient(circle at center, #37464f 0%, #21292d 100%),
+                url('data:image/svg+xml;utf8,<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="200" height="200" filter="url(%23noise)" opacity="0.04"/></svg>');
+            background-blend-mode: overlay;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Chalk text effect */
+        .chalk-text {
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2), -1px -1px 2px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.05em;
+        }
+        
+        .chalk-yellow { color: var(--chalk-yellow); text-shadow: 0px 0px 4px rgba(253, 224, 71, 0.4); }
+        .chalk-blue { color: var(--chalk-blue); text-shadow: 0px 0px 4px rgba(147, 197, 253, 0.4); }
+        .chalk-pink { color: var(--chalk-pink); text-shadow: 0px 0px 4px rgba(249, 168, 212, 0.4); }
+        .chalk-green { color: var(--chalk-green); text-shadow: 0px 0px 4px rgba(134, 239, 172, 0.4); }
+
+        /* Chalk lines and borders */
+        .chalk-border {
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(255,255,255,0.1), inset 0 0 5px rgba(255,255,255,0.1);
+            position: relative;
+        }
+        
+        /* Wobbly hand-drawn border effect via pseudo-element */
+        .chalk-border::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px 6px 10px 4px;
+            pointer-events: none;
+        }
+
+        .chalk-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            margin: 20px 0;
+        }
+
+        /* Sidebar Nav Buttons */
+        .nav-btn {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        .nav-btn:hover {
+            opacity: 1;
+            transform: scale(1.02) translateX(4px);
+        }
+        .nav-btn.active {
+            opacity: 1;
+            color: var(--chalk-yellow);
+            border-left: 3px solid var(--chalk-yellow);
+            padding-left: 1rem;
+        }
+
+        /* Math container styling */
+        .math-box {
+            font-family: 'Courier New', Courier, monospace; /* Fallback for KaTeX */
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--chalk-blue);
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.5); }
+        
+        /* Eraser Smudge effect */
+        .smudge {
+            position: absolute;
+            width: 150px;
+            height: 100px;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body class="text-lg md:text-xl md:flex-row flex-col">
+
+    <!-- Decorative Smudges -->
+    <div class="smudge top-10 left-20"></div>
+    <div class="smudge bottom-20 right-1/4" style="width: 300px; height: 200px; opacity: 0.5;"></div>
+
+    <!-- Mobile Header -->
+    <div class="md:hidden p-4 chalk-border m-2 text-center">
+        <h1 class="text-3xl chalk-yellow chalk-text mb-2">SFL Math for Dummies</h1>
+        <select id="mobile-nav" class="w-full bg-transparent text-white border-b-2 border-white p-2 outline-none appearance-none chalk-text">
+            <!-- Options populated by JS -->
+        </select>
+    </div>
+
+    <!-- Sidebar (Desktop) -->
+    <nav class="hidden md:flex flex-col w-1/4 min-w-[250px] max-w-[300px] p-6 border-r-2 border-[rgba(255,255,255,0.1)] h-screen overflow-y-auto content-layer">
+        <h1 class="text-4xl chalk-yellow chalk-text mb-2 leading-tight">SFL Math<br><span class="text-2xl text-white">for Dummies</span></h1>
+        <p class="text-sm opacity-70 mb-6">How to mathematically evaluate AI language models.</p>
+        
+        <div id="desktop-nav" class="flex flex-col gap-4 text-xl">
+            <!-- Navigation items populated by JS -->
+        </div>
+        
+        <div class="mt-auto pt-8">
+            <div class="chalk-border p-3 text-center text-sm opacity-70">
+                ✏️ Drawn with ❤️ for learners
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 md:p-12 h-screen overflow-y-auto content-layer">
+        <div id="content-container" class="max-w-4xl mx-auto pb-24">
+            <!-- Content dynamically injected here -->
+        </div>
+        
+        <!-- Navigation Controls -->
+        <div class="max-w-4xl mx-auto flex justify-between mt-8 pt-4 border-t-2 border-[rgba(255,255,255,0.2)]">
+            <button id="btn-prev" class="chalk-border px-6 py-2 hover:bg-[rgba(255,255,255,0.1)] transition-colors hidden">
+                &larr; Previous Lesson
+            </button>
+            <button id="btn-next" class="chalk-border px-6 py-2 hover:bg-[rgba(255,255,255,0.1)] transition-colors ml-auto hidden">
+                Next Lesson &rarr;
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // Data Structure for the Knowledge Base
+        const lessons = [
+            {
+                id: 'intro',
+                title: '1. Why Evaluate LLMs Differently?',
+                content: `
+                    <h2 class="text-4xl mb-4 chalk-text chalk-yellow">The Problem with Old Metrics</h2>
+                    <p class="mb-4">Imagine you have an AI writing a legal document. Traditional math tools for AI (like <strong>BLEU</strong> or <strong>ROUGE</strong>) just count matching words. They are like a teacher who only checks if you spelled the words right, but doesn't care if the essay makes sense!</p>
+                    
+                    <div class="chalk-border p-4 mb-6 relative bg-[rgba(255,255,255,0.02)]">
+                        <p class="mb-2"><strong class="chalk-pink">Example:</strong></p>
+                        <ul class="list-disc ml-6 space-y-2">
+                            <li><strong>AI Output:</strong> "The defendant is super bad, bro."</li>
+                            <li><strong>Perfect Human Output:</strong> "The defendant's actions were unlawful."</li>
+                        </ul>
+                        <p class="mt-4 text-sm opacity-80">Old metrics give this a low score because the words don't match. But wait... what if the AI output was "The unlawful actions were defendant's"? The old metric gives a HIGH score because the words match, even though it's gibberish!</p>
+                    </div>
+
+                    <h2 class="text-3xl mb-4 chalk-text chalk-blue">Enter: SFL (Systemic Functional Linguistics)</h2>
+                    <p class="mb-4">SFL is a theory that treats language as a set of <strong class="chalk-yellow">CHOICES</strong> based on context. It asks three questions:</p>
+                    
+                    <ol class="list-decimal ml-6 space-y-4 mb-6">
+                        <li><strong class="chalk-green">Ideational (Field):</strong> What is going on? Is it complex? Is it a story or science?</li>
+                        <li><strong class="chalk-pink">Interpersonal (Tenor):</strong> Who is talking? What is their attitude? Are they polite or bossy?</li>
+                        <li><strong class="chalk-blue">Textual (Mode):</strong> How is it organized? Does it flow well?</li>
+                    </ol>
+                    
+                    <p>In this guide, we will turn these three human concepts into <strong>hard math</strong> so computers can grade AI automatically.</p>
+                `
+            },
+            {
+                id: 'vector',
+                title: '2. Language as Math (The Vector)',
+                content: `
+                    <h2 class="text-4xl mb-4 chalk-text chalk-yellow">The SFL Vector</h2>
+                    <p class="mb-4">To make a computer understand SFL, we have to turn text into a sequence of numbers, known as a <strong class="chalk-green">Vector</strong>.</p>
+                    
+                    <p class="mb-4">Think of a color on a computer. It's represented by three numbers: RGB (Red, Green, Blue). A text in SFL is also represented by three main components!</p>
+
+                    <div class="math-box text-center text-2xl">
+                        $$ V_{SFL} = [ V_{id}, V_{in}, V_{te} ] $$
+                    </div>
+
+                    <ul class="list-disc ml-6 space-y-4 mb-6">
+                        <li>$$V_{id}$$ = The <strong class="chalk-green">Ideational</strong> vector (Numbers measuring complexity and action).</li>
+                        <li>$$V_{in}$$ = The <strong class="chalk-pink">Interpersonal</strong> vector (Numbers measuring emotion and formality).</li>
+                        <li>$$V_{te}$$ = The <strong class="chalk-blue">Textual</strong> vector (Numbers measuring flow and structure).</li>
+                    </ul>
+
+                    <p>By putting all these numbers together, we get a mathematical "fingerprint" of how the AI writes. Let's look at how we calculate each one!</p>
+                `
+            },
+            {
+                id: 'ideational',
+                title: '3. Field: Measuring Complexity',
+                content: `
+                    <h2 class="text-4xl mb-4 chalk-text chalk-green">The Ideational Metafunction ($V_{id}$)</h2>
+                    <p class="mb-4">This measures how "dense" and complex the information is. A science paper is very dense; a chat text is not.</p>
+
+                    <h3 class="text-2xl mb-2 chalk-yellow">Lexical Density (LD)</h3>
+                    <p class="mb-2">Lexical Density measures how many "content words" (nouns, verbs, adjectives—the juicy words) are stuffed into a single clause (part of a sentence).</p>
+                    
+                    <div class="math-box">
+                        $$ LD = \\frac{N_{LI}}{N_{RC}} $$
+                    </div>
+                    <p class="mb-4 text-sm">Where $$N_{LI}$$ is the Number of Lexical Items (juicy words) and $$N_{RC}$$ is the Number of Ranking Clauses.</p>
+
+                    <div class="chalk-border p-6 mb-6">
+                        <h4 class="text-xl chalk-blue mb-2">🎮 Try it! Lexical Density Estimator</h4>
+                        <p class="text-sm mb-4">Type a sentence below. We'll pretend words over 4 letters are "juicy" content words just for this demo.</p>
+                        <textarea id="ld-input" class="w-full bg-[rgba(0,0,0,0.3)] text-white p-3 rounded border border-gray-500 focus:border-yellow-300 outline-none mb-3" rows="3">The quick brown fox jumps over the lazy dog, because he was very energetic today.</textarea>
+                        <div class="flex items-center gap-4">
+                            <button onclick="calculateLD()" class="bg-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.2)] border border-white rounded px-4 py-2 transition">Calculate Math!</button>
+                            <div id="ld-result" class="text-xl chalk-yellow"></div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-2xl mb-2 chalk-yellow">Transitivity (Action Types)</h3>
+                    <p class="mb-4">We also count the probability of different verb types. Is the AI using <em>Material</em> processes (doing/action: "he ran"), or <em>Relational</em> processes (being: "it is")?</p>
+                    <div class="math-box">
+                        $$ P_{trans}(action) = \\frac{\\text{Count of Action Verbs}}{\\text{Total Verbs}} $$
+                    </div>
+                `
+            },
+            {
+                id: 'interpersonal',
+                title: '4. Tenor: Measuring Attitude',
+                content: `
+                    <h2 class="text-4xl mb-4 chalk-text chalk-pink">The Interpersonal Metafunction ($V_{in}$)</h2>
+                    <p class="mb-4">This part of the vector measures <strong>Tenor</strong>: who is talking and what is their stance? We measure this using a system called <strong>Appraisal</strong>.</p>
+                    
+                    <p class="mb-4">We extract raw counts of different emotional and judgmental words, and normalize them by dividing by the total number of words ($$N_W$$).</p>
+
+                    <div class="math-box">
+                        $$ V_{in} = \\left[ \\frac{N(Attitude^+)}{N_{W}}, \\frac{N(Attitude^-)}{N_{W}}, \\dots, \\bar{g} \\right] $$
+                    </div>
+
+                    <h3 class="text-2xl mb-4 chalk-yellow mt-8">The 3 Subsystems:</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-base">
+                        <div class="chalk-border p-4 text-center hover:bg-[rgba(255,255,255,0.05)] transition">
+                            <h4 class="chalk-pink text-xl mb-2">Attitude</h4>
+                            <p>Positive or Negative? Emotions ("I am sad"), Judgments ("He is evil"), and Aesthetics ("This painting is ugly").</p>
+                        </div>
+                        <div class="chalk-border p-4 text-center hover:bg-[rgba(255,255,255,0.05)] transition">
+                            <h4 class="chalk-pink text-xl mb-2">Engagement</h4>
+                            <p>Does the AI allow other opinions? "It is a fact that..." (Closed) vs "Some might argue that..." (Open).</p>
+                        </div>
+                        <div class="chalk-border p-4 text-center hover:bg-[rgba(255,255,255,0.05)] transition">
+                            <h4 class="chalk-pink text-xl mb-2">Graduation ($\\bar{g}$)</h4>
+                            <p>How intense is it? "Slightly bad" (Multiplier < 1) vs "EXTREMELY BAD" (Multiplier > 1).</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'textual',
+                title: '5. Mode: Measuring Flow',
+                content: `
+                    <h2 class="text-4xl mb-4 chalk-text chalk-blue">The Textual Metafunction ($V_{te}$)</h2>
+                    <p class="mb-4">How well does the AI connect its ideas? We look at <strong>Thematic Progression</strong>.</p>
+                    
+                    <p class="mb-4">Every sentence has a <strong>Theme</strong> (the start, old info) and a <strong>Rheme</strong> (the end, new info). We build a mathematical probability matrix (a Markov chain) to see how often the AI uses good patterns.</p>
+
+                    <div class="chalk-border p-6 mb-6">
+                        <h3 class="text-2xl chalk-yellow mb-4">Common Transition Types:</h3>
+                        
+                        <div class="mb-4">
+                            <strong class="text-xl">1. Constant Theme $$P(Constant)$$</strong>
+                            <p class="ml-4 opacity-80 italic">"The dog ran. The dog barked." (Theme stays the same).</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <strong class="text-xl">2. Linear / Zig-Zag $$P(Linear)$$</strong>
+                            <p class="ml-4 opacity-80 italic">"I saw a cat. The cat was sleeping." (Old end becomes new start).</p>
+                        </div>
+
+                        <div>
+                            <strong class="text-xl">3. Unrelated $$P(Unrelated)$$</strong>
+                            <p class="ml-4 opacity-80 italic text-red-300">"I like apples. Physics is hard." (No connection! AI hallucination!)</p>
+                        </div>
+                    </div>
+
+                    <div class="math-box">
+                        $$ V_{te} = \\left[ P(Constant), P(Linear), P(Split), P(Unrelated) \\right]^T $$
+                    </div>
+                    <p class="text-sm mt-2">A good AI will have a very low score for $$P(Unrelated)$$.</p>
+                `
+            },
+            {
+                id: 'distance',
+                title: '6. The Grand Finale: Mahalanobis',
+                content: `
+                    <h2 class="text-4xl mb-4 chalk-text chalk-yellow">Putting it Together: Scoring the AI</h2>
+                    <p class="mb-4">Now we have the AI's SFL Vector ($$x$$). How do we know if it's "good"? We compare it to the Average Vector ($$\\mu$$) of a bunch of perfect human texts!</p>
+                    
+                    <p class="mb-4">We can't just use a normal ruler (Euclidean distance) because language features are tangled together (e.g., long sentences usually have complex words). Instead, we use the <strong class="chalk-pink">Mahalanobis Distance ($D_M$)</strong>.</p>
+
+                    <div class="math-box text-center">
+                        $$ D_M^2(x) = (x - \\mu)^T \\Sigma^{-1} (x - \\mu) $$
+                    </div>
+
+                    <ul class="list-disc ml-6 space-y-4 mb-8">
+                        <li>$$x$$ = The AI's linguistic vector.</li>
+                        <li>$$\\mu$$ = The target "perfect" human mean vector.</li>
+                        <li>$$\\Sigma^{-1}$$ = The Inverse Covariance Matrix (This math magic adjusts the score based on how features are correlated).</li>
+                    </ul>
+
+                    <div class="chalk-border p-6 bg-[rgba(255,255,255,0.05)]">
+                        <h3 class="text-2xl chalk-green mb-2">The Result</h3>
+                        <p>If $$D_M$$ is small (e.g., close to 0), the AI output beautifully matches the desired human register! It has perfect <strong>Metafunctional Balance</strong>.</p>
+                        <p class="mt-2">If $$D_M$$ is huge, the AI failed. Maybe it was factually correct, but it was too informal ($V_{in}$ failure) or disorganized ($V_{te}$ failure).</p>
+                    </div>
+                    
+                    <div class="text-center mt-8">
+                        <p class="text-2xl chalk-yellow chalk-text">🎉 You are now an SFL Math Master! 🎉</p>
+                    </div>
+                `
+            }
+        ];
+
+        let currentIndex = 0;
+
+        const contentContainer = document.getElementById('content-container');
+        const desktopNav = document.getElementById('desktop-nav');
+        const mobileNav = document.getElementById('mobile-nav');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+
+        function initNav() {
+            lessons.forEach((lesson, index) => {
+                // Desktop Nav
+                const navBtn = document.createElement('div');
+                navBtn.className = 'nav-btn';
+                navBtn.innerText = lesson.title;
+                navBtn.onclick = () => renderLesson(index);
+                desktopNav.appendChild(navBtn);
+
+                // Mobile Nav
+                const option = document.createElement('option');
+                option.value = index;
+                option.innerText = lesson.title;
+                mobileNav.appendChild(option);
+            });
+
+            mobileNav.addEventListener('change', (e) => {
+                renderLesson(parseInt(e.target.value));
+            });
+
+            btnPrev.onclick = () => renderLesson(currentIndex - 1);
+            btnNext.onclick = () => renderLesson(currentIndex + 1);
+        }
+
+        function renderLesson(index) {
+            if (index < 0 || index >= lessons.length) return;
+            currentIndex = index;
+
+            // Update Content
+            contentContainer.style.opacity = 0;
+            
+            setTimeout(() => {
+                contentContainer.innerHTML = lessons[index].content;
+                
+                // Update Nav States
+                Array.from(desktopNav.children).forEach((child, i) => {
+                    if (i === index) {
+                        child.classList.add('active');
+                    } else {
+                        child.classList.remove('active');
+                    }
+                });
+                mobileNav.value = index;
+
+                // Update Buttons
+                btnPrev.style.display = index === 0 ? 'none' : 'block';
+                btnNext.style.display = index === lessons.length - 1 ? 'none' : 'block';
+
+                // Trigger Math Rendering safely
+                if (typeof renderMathInElement === 'function') {
+                    renderMathInElement(contentContainer, {
+                        delimiters: [
+                            {left: '$$', right: '$$', display: true},
+                            {left: '$', right: '$', display: false}
+                        ],
+                        throwOnError: false
+                    });
+                } else {
+                    console.warn("KaTeX renderMathInElement is not available yet.");
+                }
+
+                contentContainer.style.transition = 'opacity 0.3s ease-in-out';
+                contentContainer.style.opacity = 1;
+                
+                // Reset scroll
+                document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
+            }, 150);
+        }
+
+        window.calculateLD = function() {
+            const input = document.getElementById('ld-input').value;
+            // Fake algorithm for "Dummies" demonstration purposes
+            // Clauses are roughly estimated by punctuation splits
+            const clauses = input.split(/[.,;!?]+/).filter(c => c.trim().length > 0).length || 1;
+            
+            const words = input.match(/\b\w+\b/g) || [];
+            // "Juicy" words estimated as length > 4 for demo simplicity
+            const lexicalItems = words.filter(w => w.length > 4).length;
+            
+            const ld = lexicalItems / clauses;
+            
+            const resultDiv = document.getElementById('ld-result');
+            resultDiv.innerHTML = `
+                LD = <span class="chalk-green">${lexicalItems}</span> (juicy words) 
+                ÷ <span class="chalk-blue">${clauses}</span> (clauses) 
+                = <strong>${ld.toFixed(2)}</strong>
+            `;
+            
+            // Add a little pop animation
+            resultDiv.style.transform = 'scale(1.1)';
+            setTimeout(() => resultDiv.style.transform = 'scale(1)', 200);
+            resultDiv.style.transition = 'transform 0.2s';
+        };
+
+        // Initialize App on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initNav();
+            renderLesson(0);
+        });
+
+    </script>
+</body>
+</html>
