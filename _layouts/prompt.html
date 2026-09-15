@@ -6,9 +6,11 @@ layout: notes
 <article class="post">
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.tag %}
     <div class="post-meta">
-      <span class="badge badge-neutral">{{ page.tag }}</span>
+      <div class="tag-row"><span class="tag"><b>#</b>{{ page.tag }}</span></div>
     </div>
+    {% endif %}
   </header>
 
   <div class="post-content">

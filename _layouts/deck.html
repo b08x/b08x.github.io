@@ -1,51 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ page.title }} · Syncopated Notes</title>
+<title>{{ page.title }} · {{ site.title }}</title>
+<link rel="icon" type="image/svg+xml" href="/assets/images/site-icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  /* Field Note "warm lamp-lit night" — never a cold IDE black */
+  {% include theme-tokens.html %}
+
+  /* The deck always presents on the dark face — `class="dark"` is hardcoded
+     on <html> above, so there is no toggle and no pre-paint flash. Slide
+     authors address the canonical tokens; the --deck-* names below are
+     aliases kept so existing slide CSS keeps resolving. */
   :root {
-    --deck-bg: #211C17;
-    --deck-surface: #2A241D;
-    --deck-border: #3A3228;
-    --deck-fg: #ECE3D2;
-    --deck-fg2: #C7BBA6;
-    --deck-muted: #968A78;
-    --deck-dim: #5E5546;
-    --deck-accent: #C97A5E;
+    --deck-bg:      var(--background);
+    --deck-surface: var(--surface);
+    --deck-border:  var(--border);
+    --deck-fg:      var(--foreground);
+    --deck-fg2:     var(--text-2);
+    --deck-muted:   var(--muted);
+    --deck-dim:     var(--dim);
+    --deck-accent:  var(--accent);
+    --deck-link:    var(--cyan);
   }
 
   html, body {
     height: 100%;
-    background: var(--deck-bg);
-    color: var(--deck-fg);
-    font-family: 'Space Mono', monospace;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-mono);
     overflow: hidden;
   }
 
+  /* ── Corner chrome ── */
   .deck-back-link {
     position: fixed;
     top: 16px;
     left: 16px;
-    z-index: 50;
+    z-index: var(--z-modal);
     font-size: 11px;
-    letter-spacing: .03em;
-    color: var(--deck-muted);
+    letter-spacing: var(--tracking-wide);
+    color: var(--muted);
     text-decoration: none;
     padding: 6px 12px;
-    border-radius: 999px;
-    background: rgba(0,0,0,.3);
-    border: 1px solid var(--deck-border);
-    transition: color .15s, border-color .15s;
+    border-radius: var(--radius-pill);
+    background: color-mix(in oklab, var(--background) 70%, transparent);
+    border: var(--border-width) solid var(--border);
+    transition: color var(--transition-fast), border-color var(--transition-fast);
   }
-  .deck-back-link:hover { color: var(--deck-fg); border-color: var(--deck-accent); }
+  .deck-back-link:hover { color: var(--foreground); border-color: var(--accent); }
+
+  /* Brand lockup, mirroring the imported deck's title-slide header. */
+  .deck-brand {
+    position: fixed;
+    top: 16px;
+    right: 18px;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+  }
+  .deck-brand img { width: 22px; height: 26px; display: block; }
+  .deck-brand .mark {
+    font-size: 13px;
+    font-weight: var(--weight-bold);
+    color: var(--accent);
+    letter-spacing: var(--tracking-tight);
+  }
+  .deck-brand .kicker {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    padding-left: 10px;
+    border-left: var(--border-width) solid var(--border);
+  }
 
   .deck-stage {
     position: relative;
@@ -53,68 +88,142 @@
     width: 100vw;
   }
 
+  /* ── Slides ──
+     Hidden, not unmounted: the Mermaid images and any embedded media keep
+     their loaded state across navigation. */
   .deck-slide {
     position: absolute;
     inset: 0;
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 100px 120px;
+    padding: clamp(40px, 5vh, 72px) clamp(28px, 4.2vw, 80px);
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .deck-slide[data-active] {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    animation: sn-fade var(--transition-slow) var(--ease-out);
+  }
+
+  @keyframes sn-fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deck-slide[data-active] { animation: none; }
+  }
+
+  /* The grid ground reads as a cover treatment, so it is reserved for the
+     opening slide rather than repeated behind every one. */
+  .deck-slide:first-child {
     background-image:
-      linear-gradient(var(--deck-border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--deck-border) 1px, transparent 1px);
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
     background-size: 48px 48px;
     background-position: center;
   }
-  .deck-slide[data-active] { display: flex; }
 
+  /* ── Slide typography ──
+     Proportioned against the imported deck's 1920×1080 design canvas
+     (eyebrow 17px, h1 84px, subtitle 26px, body 19px) but expressed
+     fluidly, since these slides are markdown of arbitrary length. */
   .deck-slide .eyebrow {
-    font-size: 13px;
-    font-weight: 700;
+    font-family: var(--font-ui);
+    font-size: clamp(11px, .9vw, 17px);
+    font-weight: var(--weight-bold);
     letter-spacing: .18em;
     text-transform: uppercase;
-    color: var(--deck-accent);
-    margin-bottom: 20px;
+    color: var(--accent);
+    margin-bottom: 24px;
   }
   .deck-slide h1 {
-    font-size: 58px;
-    line-height: 1.1;
-    letter-spacing: -.02em;
+    font-size: clamp(34px, 4.4vw, 84px);
+    line-height: 1.05;
+    letter-spacing: var(--tracking-tighter);
+    color: var(--foreground);
     max-width: 18ch;
-    margin-bottom: 22px;
+    margin-bottom: 28px;
   }
   .deck-slide .subtitle {
-    font-family: 'Space Mono', monospace;
-    font-style: italic;
-    font-size: 20px;
-    line-height: 1.6;
-    color: var(--deck-fg2);
-    max-width: 70ch;
+    font-family: var(--font-body);
+    font-size: clamp(15px, 1.35vw, 26px);
+    line-height: var(--leading-normal);
+    color: var(--text-2);
+    max-width: 62ch;
   }
   .deck-slide .deck-body {
-    font-size: 17px;
+    font-family: var(--font-body);
+    font-size: clamp(14px, .95vw, 19px);
     line-height: 1.75;
-    color: var(--deck-fg2);
+    color: var(--text-2);
     max-width: 90ch;
   }
   .deck-slide .deck-body > * + * { margin-top: 16px; }
-  .deck-slide .deck-body h2 { font-size: 26px; color: var(--deck-fg); letter-spacing: -.01em; }
-  .deck-slide .deck-body h3 { font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--deck-accent); }
-  .deck-slide .deck-body strong { color: var(--deck-fg); }
-  .deck-slide .deck-body code { background: var(--deck-surface); color: var(--deck-accent); padding: 2px 6px; border-radius: 3px; }
-  .deck-slide .deck-body pre { background: var(--deck-surface); border: 1px solid var(--deck-border); border-radius: 6px; padding: 16px 20px; overflow-x: auto; font-size: 14px; line-height: 1.7; }
+  .deck-slide .deck-body h2 {
+    font-size: clamp(22px, 2vw, 38px);
+    color: var(--foreground);
+    letter-spacing: var(--tracking-tight);
+  }
+  .deck-slide .deck-body h3 {
+    font-size: clamp(13px, 1vw, 15px);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .deck-slide .deck-body strong { color: var(--foreground); }
+  .deck-slide .deck-body a { color: var(--cyan); }
+  .deck-slide .deck-body a:hover { color: var(--cyan-hi); }
+  .deck-slide .deck-body code {
+    font-family: var(--font-code);
+    background: var(--bg-code);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+  }
+  .deck-slide .deck-body pre {
+    background: var(--bg-code);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: var(--leading-relaxed);
+  }
+  .deck-slide .deck-body pre code { background: none; color: var(--foreground); padding: 0; }
   .deck-slide .deck-body ul, .deck-slide .deck-body ol { padding-left: 1.4em; }
+  .deck-slide .deck-body blockquote {
+    border-left: var(--border-accent) solid var(--accent);
+    background: var(--surface);
+    padding: 12px 18px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+  .deck-slide .deck-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .95em;
+  }
+  .deck-slide .deck-body th,
+  .deck-slide .deck-body td {
+    border: var(--border-width) solid var(--border);
+    padding: var(--space-2) var(--space-3);
+    text-align: left;
+  }
+  .deck-slide .deck-body th { background: var(--surface); color: var(--text-2); }
 
-  /* Mermaid renders on a light SVG canvas (Field Note theme) — frame it as
-     an intentional paper inset against the dark deck rather than a stray
-     white box; mirrors the light/dark contrast pairing already used for
-     canvas widgets elsewhere in this design system. */
+  /* Mermaid renders on a light SVG canvas, so frame it as an intentional
+     paper inset against the dark deck rather than a stray white box. */
   .deck-slide .deck-body img.mermaid {
     display: block;
     max-width: 100%;
-    background: #EDE6D6;
-    border: 1px solid var(--deck-border);
-    border-radius: 8px;
+    background: var(--brand-paper);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
     padding: 20px;
     margin: 0 auto;
   }
@@ -122,21 +231,23 @@
   .deck-tags {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
     margin-top: 28px;
   }
   .deck-tags span {
+    font-family: var(--font-code);
     font-size: 11px;
     padding: 3px 9px;
-    border-radius: 999px;
-    border: 1px solid var(--deck-border);
-    color: var(--deck-muted);
+    border-radius: var(--radius-pill);
+    border: var(--border-width) solid var(--border);
+    color: var(--muted);
   }
 
   /* Progressive reveal — author marks an element class="fragment" */
   .fragment {
     opacity: 0;
     transform: translateY(8px);
-    transition: opacity .4s ease, transform .4s ease;
+    transition: opacity .4s var(--ease-out), transform .4s var(--ease-out);
   }
   .fragment.visible { opacity: 1; transform: none; }
 
@@ -150,33 +261,42 @@
     align-items: center;
     gap: 4px;
     padding: 5px 6px;
-    background: rgba(0,0,0,.4);
-    border: 1px solid var(--deck-border);
-    border-radius: 999px;
-    z-index: 50;
+    background: color-mix(in oklab, var(--background) 70%, transparent);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-pill);
+    z-index: var(--z-modal);
     opacity: 0;
     pointer-events: none;
-    transition: opacity .2s ease;
+    transition: opacity var(--transition-base) var(--ease-out);
   }
   .deck-overlay[data-visible] { opacity: 1; pointer-events: auto; }
   .deck-overlay button {
     appearance: none;
     background: transparent;
     border: 0;
-    color: var(--deck-fg2);
-    font-family: 'Space Mono', monospace;
+    color: var(--text-2);
+    font-family: var(--font-ui);
     font-size: 15px;
     width: 26px;
     height: 26px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     cursor: pointer;
   }
-  .deck-overlay button:hover { background: rgba(255,255,255,.08); color: var(--deck-fg); }
+  .deck-overlay button:hover { background: var(--surface-2); color: var(--foreground); }
   .deck-overlay .count {
+    font-family: var(--font-code);
     font-size: 11px;
-    color: var(--deck-muted);
+    color: var(--muted);
     padding: 0 8px;
     font-variant-numeric: tabular-nums;
+  }
+  .deck-overlay .hint {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: var(--tracking-wide);
+    padding: 0 8px 0 4px;
+    border-left: var(--border-width) solid var(--border);
   }
 
   .deck-tap-zone {
@@ -184,25 +304,27 @@
     top: 0;
     bottom: 0;
     width: 20%;
-    z-index: 10;
+    z-index: var(--z-raised);
     cursor: pointer;
   }
   .deck-tap-zone.prev { left: 0; }
   .deck-tap-zone.next { right: 0; }
 
   @media (max-width: 760px) {
-    .deck-slide { padding: 60px 32px; }
-    .deck-slide h1 { font-size: 36px; }
-    .deck-slide .subtitle, .deck-slide .deck-body { font-size: 15px; }
+    .deck-brand .kicker, .deck-brand .mark { display: none; }
+    .deck-overlay .hint { display: none; }
   }
 
   @media print {
     html, body { overflow: visible; height: auto; }
-    .deck-back-link, .deck-overlay, .deck-tap-zone { display: none !important; }
+    .deck-back-link, .deck-brand, .deck-overlay, .deck-tap-zone { display: none !important; }
     .deck-slide {
       position: relative;
-      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      animation: none !important;
       height: 100vh;
+      overflow: visible;
       break-after: page;
     }
     .fragment { opacity: 1 !important; transform: none !important; }
@@ -214,6 +336,12 @@
 {% assign deck_slides = site.slides | where: "deck_id", page.deck_id | sort: "order" %}
 
 <a href="{{ page.back_url | default: '/projects/' }}" class="deck-back-link">← back{% if page.back_label %} to {{ page.back_label }}{% endif %}</a>
+
+<div class="deck-brand">
+  <img src="/assets/images/site-icon.svg" alt="">
+  <span class="mark">{{ site.title | downcase }}</span>
+  {% if page.title %}<span class="kicker">{{ page.title }}</span>{% endif %}
+</div>
 
 <div class="deck-stage" id="deck-stage">
   {% for slide in deck_slides %}
@@ -243,6 +371,7 @@
   <button type="button" id="deck-prev" aria-label="Previous">‹</button>
   <span class="count"><span id="deck-current">1</span> / <span id="deck-total">1</span></span>
   <button type="button" id="deck-next" aria-label="Next">›</button>
+  <span class="hint">← → · 1-9 · R</span>
 </div>
 
 <script>
@@ -280,6 +409,7 @@
       if (i < fragIndex) f.classList.add('visible');
       else f.classList.remove('visible');
     });
+    slides[index].scrollTop = 0;
     currentEl.textContent = String(index + 1);
     try { history.replaceState(null, '', '#' + (index + 1)); } catch (e) {}
     flashOverlay();
@@ -315,6 +445,8 @@
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { advance(-1); e.preventDefault(); }
     else if (e.key === 'Home') { goTo(0); e.preventDefault(); }
     else if (e.key === 'End') { goTo(total - 1); e.preventDefault(); }
+    else if (e.key === 'r' || e.key === 'R') { goTo(0); e.preventDefault(); }
+    else if (/^[1-9]$/.test(e.key)) { goTo(parseInt(e.key, 10) - 1); e.preventDefault(); }
   });
 
   window.addEventListener('mousemove', flashOverlay);

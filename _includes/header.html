@@ -1,8 +1,8 @@
-<header>
-  <div class="site-name">
-    <a href="/">{{ site.title }}</a>
-  </div>
-  <div class="site-meta">
-    <span>{{ site.description }}</span>
-  </div>
+<header class="site-header">
+  <a href="/" class="site-brand">
+    <img src="/assets/images/site-icon.svg" alt="" width="22" height="26">
+    <span>{{ site.title }}</span>
+  </a>
+  {% include nav.html %}
+  <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme">&#9680;</button>
 </header>

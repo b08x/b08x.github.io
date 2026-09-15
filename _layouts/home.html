@@ -2,54 +2,74 @@
 layout: notes
 ---
 
-
 <div class="rhythm">· — · · — — · —</div>
 
 {{ content }}
 
 {% assign posts = paginator.posts | default: site.posts %}
+{% assign notes = site.notes | sort: "title" %}
 
 <div class="section-label">Latest Notes &amp; Posts</div>
-<div class="grid-2">
-  {% for post in posts %}
-  <article class="card post-card">
-    <div class="badge-row">
-      <span class="badge badge-neutral">post</span>
+
+{% if posts.size > 0 %}
+  {% assign featured = posts.first %}
+  <a href="{{ featured.url | relative_url }}" class="featured-card{% unless featured.image %} no-shot{% endunless %}">
+    {% if featured.image %}
+      <img class="featured-shot" src="{{ featured.image | relative_url }}" alt="{{ featured.image_alt | default: featured.title }}">
+    {% endif %}
+    <div class="featured-body">
+      <div class="tag-row"><span class="tag"><b>#</b>latest</span></div>
+      <h3>{{ featured.title }}</h3>
+      {% if featured.description %}
+        <p>{{ featured.description }}</p>
+      {% elsif featured.excerpt %}
+        <p>{{ featured.excerpt | strip_html | truncatewords: 34 }}</p>
+      {% endif %}
+      {% if featured.tags and featured.tags.size > 0 %}
+      <div class="tag-row">
+        {% for tag in featured.tags %}<span class="tag"><b>#</b>{{ tag }}</span>{% endfor %}
+      </div>
+      {% endif %}
+      <span class="link-label">{{ featured.date | date: "%B %-d, %Y" }} ↗</span>
     </div>
-    <h2 class="note-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-    <div class="note-meta">
-      <span>{{ post.date | date: "%B %-d, %Y" }}</span>
+  </a>
+{% endif %}
+
+<div class="row-list">
+  {% for post in posts offset: 1 %}
+  <a href="{{ post.url | relative_url }}" class="row">
+    {% if post.image %}<img class="row-thumb" src="{{ post.image | relative_url }}" alt="">{% endif %}
+    <div class="row-main">
+      <h3>{{ post.title }}</h3>
+      {% if post.excerpt %}<p class="row-desc">{{ post.excerpt | strip_html | truncatewords: 22 }}</p>{% endif %}
       {% if post.tags and post.tags.size > 0 %}
-      <span class="sep">·</span>
-      <div class="badge-row">
-        {% for tag in post.tags %}<span class="badge badge-neutral">{{ tag }}</span>{% endfor %}
+      <div class="tag-row">
+        {% for tag in post.tags %}<span class="tag"><b>#</b>{{ tag }}</span>{% endfor %}
       </div>
       {% endif %}
     </div>
-    {% if post.excerpt %}<p class="note-desc">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>{% endif %}
-  </article>
+    <span class="row-date">{{ post.date | date: "%Y-%m-%d" }}</span>
+  </a>
   {% endfor %}
 
-  {% assign notes = site.notes | sort: "title" %}
   {% for note in notes %}
-  <article class="card note">
-    <div class="badge-row">
-      <span class="badge badge-neutral">note</span>
-    </div>
-    <h2 class="note-title"><a href="{{ note.url | relative_url }}">{{ note.title }}</a></h2>
-    {% if note.description %}
-    <p class="note-desc">{{ note.description }}</p>
-    {% elsif note.excerpt %}
-    <p class="note-desc">{{ note.excerpt | strip_html | truncatewords: 30 }}</p>
-    {% endif %}
-    {% if note.tags and note.tags.size > 0 %}
-    <div class="note-meta">
-      <div class="badge-row">
-        {% for tag in note.tags %}<span class="badge badge-neutral">{{ tag }}</span>{% endfor %}
+  <a href="{{ note.url | relative_url }}" class="row">
+    {% if note.image %}<img class="row-thumb" src="{{ note.image | relative_url }}" alt="">{% endif %}
+    <div class="row-main">
+      <h3>{{ note.title }}</h3>
+      {% if note.description %}
+        <p class="row-desc">{{ note.description }}</p>
+      {% elsif note.excerpt %}
+        <p class="row-desc">{{ note.excerpt | strip_html | truncatewords: 22 }}</p>
+      {% endif %}
+      {% if note.tags and note.tags.size > 0 %}
+      <div class="tag-row">
+        {% for tag in note.tags %}<span class="tag"><b>#</b>{{ tag }}</span>{% endfor %}
       </div>
+      {% endif %}
     </div>
-    {% endif %}
-  </article>
+    <span class="row-date">note</span>
+  </a>
   {% endfor %}
 </div>
 
@@ -69,56 +89,43 @@ layout: notes
 </nav>
 {% endif %}
 
-<div class="section-label" style="display: flex; justify-content: space-between; align-items: center;">
-  <span>Projects</span>
-  <a href="/projects/" style="text-transform: lowercase; font-size: 0.9em; text-decoration: none; color: var(--amber);">all projects →</a>
+{% assign projects = site.data.projects | where: "card", true %}
+{% if projects.size > 0 %}
+<div class="section-label">
+  Projects <a href="/projects/">all projects →</a>
 </div>
-<div class="grid-2">
-  {% assign projects = site.data.projects | where: "card", true %}
+<div class="row-list">
   {% for project in projects %}
-  <article class="card note">
-    <div class="badge-row">
-      <span class="badge {{ project.badge_class | default: 'badge-blue' }}">{{ project.badge | default: 'project' }}</span>
-      {% if project.external %}
-      <span class="badge badge-neutral">external ↗</span>
-      {% endif %}
-    </div>
-    <h2 class="note-title">
-      {% if project.external %}
-      <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer">{{ project.title }} ↗</a>
-      {% else %}
-      <a href="{{ project.url | relative_url }}">{{ project.title }}</a>
-      {% endif %}
-    </h2>
-    {% if project.description %}
-    <p class="note-desc">{{ project.description }}</p>
-    {% endif %}
-    {% if project.tags and project.tags.size > 0 %}
-    <div class="note-meta">
-      <div class="badge-row">
-        {% for tag in project.tags %}<span class="badge badge-neutral">{{ tag }}</span>{% endfor %}
+  <a href="{% if project.external %}{{ project.url }}{% else %}{{ project.url | relative_url }}{% endif %}" class="row"{% if project.external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+    {% if project.image %}<img class="row-thumb" src="{{ project.image | relative_url }}" alt="">{% endif %}
+    <div class="row-main">
+      <h3>{{ project.title }}</h3>
+      {% if project.description %}<p class="row-desc">{{ project.description }}</p>{% endif %}
+      <div class="tag-row">
+        {% if project.badge %}<span class="tag"><b>#</b>{{ project.badge }}</span>{% endif %}
+        {% for tag in project.tags %}<span class="tag"><b>#</b>{{ tag }}</span>{% endfor %}
       </div>
     </div>
-    {% endif %}
-  </article>
-  {% endfor %}
-</div>
-
-{% if site.prompts.size > 0 %}
-<div class="section-label" style="display: flex; justify-content: space-between; align-items: center;">
-  <span>Prompts</span>
-  <a href="/prompts/" style="text-transform: lowercase; font-size: 0.9em; text-decoration: none; color: var(--amber);">all prompts →</a>
-</div>
-<div class="grid-2">
-  {% for prompt in site.prompts %}
-  <article class="card note">
-    <div class="badge-row">
-      <span class="badge badge-neutral">{{ prompt.tag }}</span>
-    </div>
-    <h2 class="note-title"><a href="/prompts/">{{ prompt.title }}</a></h2>
-    <p class="note-desc">{{ prompt.instructions | truncatewords: 24 }}</p>
-  </article>
+    <span class="link-label">{% if project.external %}repo ↗{% else %}{{ project.year | default: 'open' }} →{% endif %}</span>
+  </a>
   {% endfor %}
 </div>
 {% endif %}
 
+{% if site.prompts.size > 0 %}
+<div class="section-label">
+  Prompts <a href="/prompts/">all prompts →</a>
+</div>
+<div class="row-list">
+  {% for prompt in site.prompts %}
+  <a href="/prompts/" class="row">
+    <div class="row-main">
+      <h3>{{ prompt.title }}</h3>
+      <p class="row-desc">{{ prompt.instructions | truncatewords: 22 }}</p>
+      {% if prompt.tag %}<div class="tag-row"><span class="tag"><b>#</b>{{ prompt.tag }}</span></div>{% endif %}
+    </div>
+    <span class="link-label">open →</span>
+  </a>
+  {% endfor %}
+</div>
+{% endif %}

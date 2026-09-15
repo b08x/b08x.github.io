@@ -41,10 +41,10 @@ index.md                                # Landing page (layout: home)
 
 `default.html` is the actual base. Every other layout declares `layout: default` and is rendered into the `{{ content }}` slot between the header/nav and footer includes. The shell includes themselves are layout-conditional:
 
-- `header.html` renders the default `<header>` (for `notes` / `home` / `post` / `project`).
+- `header.html` renders the sticky 56px `<header>` — brand icon + wordmark, `nav.html`, and the `[data-theme-toggle]` button. It is included once by `default.html` and spans the full viewport width, outside `.container`.
 - `footer.html` renders the uniform default `<footer>` (site title, source link, update status, and "Built with Jekyll") across all layouts.
 
-The root landing page (`index.md`) uses `layout: home`, which itself declares `layout: notes` — `notes.html` provides the shared `.container` shell, `.grid-2` card layout, and `.pager` pagination styles, and `home.html` renders into `{{ content }}` with the rhythm mark, the filtered `type: note` page list, and the paginated `_posts` list.
+The root landing page (`index.md`) uses `layout: home`, which itself declares `layout: notes` — `notes.html` provides the shared `.container` shell, the `.featured-card` / `.row-list` entry layouts, and `.pager` pagination styles, and `home.html` renders into `{{ content }}` with the rhythm mark, the filtered `type: note` page list, and the paginated `_posts` list.
 
 ### Notes (`_notes/` collection)
 
@@ -67,7 +67,7 @@ The root landing page (`index.md`) uses `layout: home`, which itself declares `l
 - Standard Jekyll posts collection, filenames `YYYY-MM-DD-title.md`. A `defaults` scope in `_config.yml` for `path: "_posts"` sets `layout: post`, so post front matter only needs `title` and optionally `tags: [...]`.
 - `_layouts/post.html` (chains to `layout: notes`) renders a "← back to notes" link, a `.post-header` (title + date + `tags` as `.badge-neutral` pills), and wraps `{{ content }}` in `.post-content`.
 - `.post-content` typography (headings, lists, links, tables, blockquotes, inline `code`, Rouge `.highlight` code blocks, and `.mermaid` images) is defined in `_includes/theme-tokens.html` so it's themed consistently with the rest of the "Field Note" palette — see Design System below.
-- Mermaid diagrams use plain ```` ```mermaid ```` fenced code blocks. `jekyll-spaceship`'s `mermaid-processor` (configured in `_config.yml`) renders them via `mermaid.ink` as `<img class="mermaid">` tags, with `themeVariables` set to match the site's cream/terracotta palette — requires network access at build/view time to load the diagram image.
+- Mermaid diagrams use plain ```` ```mermaid ```` fenced code blocks. `jekyll-spaceship`'s `mermaid-processor` (configured in `_config.yml`) renders them via `mermaid.ink` as `<img class="mermaid">` tags, with `themeVariables` set to match the site's cream/violet palette — requires network access at build/view time to load the diagram image.
 
 ### Pagination (posts only)
 
@@ -83,28 +83,45 @@ The root landing page (`index.md`) uses `layout: home`, which itself declares `l
 
 ## Design System
 
-The site uses a shared "Field Note" theme — a cream/parchment palette with dark ink text and Space Mono typography everywhere. Tokens live in `_includes/theme-tokens.html`, a raw-CSS partial included from `_includes/head.html` and therefore applied to every layout that chains to `default`:
+The site uses a shared theme imported from the Claude Design project `511342be-de7c-4c55-833c-393d459dfcb2`: violet primary / rust secondary on cream parchment in light mode, on a cool `#1F1F24` neutral stack in dark mode, with Space Mono typography everywhere. Tokens live in `_includes/theme-tokens.html`, a raw-CSS partial included from `_includes/head.html` and therefore applied to every layout that chains to `default`.
+
+Canonical token names are the design-system names. The short legacy names (`--bg`, `--amber`, `--text`…) are kept as `var()` aliases so `_layouts/doc.html`, `projects.html`, `prompts.html` and the self-contained pages under `_projects/` keep working and inherit dark mode for free.
+
+`_layouts/deck.html` is a standalone document (it does not chain to `default`), so it includes `theme-tokens.html` directly and hardcodes `class="dark"` on `<html>`: a deck always presents on the dark face, with no toggle and no pre-paint flash. Its own `--deck-bg` / `--deck-fg` / `--deck-accent` names are a second alias layer over the canonical tokens, kept so authored slide CSS keeps resolving.
+
+Dark mode is a `dark` class on `<html>`, applied before first paint by an inline snippet in `_includes/head.html` and toggled by `assets/js/theme.js` (persisted in `localStorage` under `syncopated-theme`, defaulting to `prefers-color-scheme`). Any `[data-theme-toggle]` element acts as the switch.
 
 ```
---bg:        #EDE6D6   (cream paper background)
---bg2:       #E3DBC8   (panel / code surface)
---surface:   #E3DBC8   (card surface)
---border:    #D2C7B4   (standard border)
---border2:   #C9B8A0   (stronger/hover border)
---amber:     #B5654A   (primary accent — terracotta)
---amber-hi:  #C97A5E   (hover accent)
---text:      #2A2420   (primary ink)
---text2:     #5C5248   (secondary text)
---muted:     #8A7F72   (muted text)
---dim:       #B0A492   (very dim)
---red:       #A8453A   (arXiv badge)
+                     light        dark       legacy alias
+--background:        #EDE6D6      #1F1F24    --bg
+--surface:           #E3DBC8      #26262E    --bg2
+--surface-2:         #DACFB8      #2F2F39
+--bg-code:           #E3DBC8      #17171B
+--foreground:        #2A2420      #ECEAF2    --text
+--text-2:            #5C5248      #B6B2C4    --text2
+--muted:             #8A7F72      #8A8698
+--dim:               #B0A492      #5A5668
+--border:            #D2C7B4      #33333D
+--border-2:          #C9B8A0      #45454F    --border2
+--accent:            #7C3AED      #A855F7    --amber      (violet — headings, primary)
+--accent-hi:         #4C1D95      #C08BFA    --amber-hi
+--accent-soft:       #E6DBF5      #2A1D3D
+--cyan:              #B7410E      #F0913F                 (rust / ember — links)
+--cyan-hi:           #8F320B      #F7AE69
+--badge-text:        #F7F4FA      #17171B
 
---badge-blue:    #5C7C99
---badge-green:   #6B7F52
---badge-red:     #A8453A
---badge-neutral: #8A7F72
---badge-text:    #F4EFE3
+--status-success:    #1E8F4E      #33E666    --badge-green
+--status-info:       #7C3AED      #A855F7    --badge-blue
+--status-danger:     #95260A      #E2563A    --badge-red / --red
+--status-warning:    #B7410E      #D9662A
+--status-question:   #B8690F      #F0913F
+--chart-1 … --chart-5                        (syntax + diagram palette)
 ```
+
+Non-color scales are also defined: `--text-2xs … --text-5xl`, `--weight-*`, `--leading-*`,
+`--tracking-*`, `--space-0 … --space-12`, `--width-content` / `--width-article`,
+`--radius-xs … --radius-pill`, `--shadow-xs … --shadow-lg`, `--transition-*`, `--ease-*`,
+`--header-h` (56px) and the `--z-*` scale.
 
 `theme-tokens.html` also defines the reusable components:
 
@@ -112,7 +129,10 @@ The site uses a shared "Field Note" theme — a cream/parchment palette with dar
 - `.field-note`, `.field-note-meta`, `.field-note-title`, `.field-note-body` — bordered "index card" component
 - `.code-panel`, `.code-cmd`, `.code-output` — muted inset panel for command/output snippets
 - `.back-link`, `.post-header`, `.post-title`, `.post-meta` — blog post header (used by `_layouts/post.html`)
-- `.post-content` — typography for rendered Markdown: headings, lists, tables, `blockquote` (terracotta left border, `--bg2` background), inline `code`, Rouge `.highlight` code blocks (syntax token colors mapped onto the palette — keywords in `--amber`, strings in `--badge-green` (#6B7F52), comments muted/italic, numbers in `--badge-blue`), and `.mermaid img` (framed in a `--bg2` panel to match code blocks)
+- `.site-header` / `.site-brand` / `.site-nav` / `.theme-toggle` — the sticky 56px chrome
+- `.tag` / `.tag-row` — `#tag` chips (mono, hairline border, `--surface-2` fill)
+- `.link-label` — the trailing `repo ↗` / date affordance, in `--cyan`
+- `.post-content` — typography for rendered Markdown: headings (in `--accent`), lists, tables, `blockquote` (accent left border, `--surface` background), inline `code`, Rouge `.highlight` code blocks (syntax token colors mapped onto `--chart-1 … --chart-5`), and `.mermaid img` (framed in a `--surface` panel; forced onto a light ground in dark mode, since the diagrams are remote images rendered light)
 
 
 
