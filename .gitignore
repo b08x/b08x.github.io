@@ -1,3 +1,4 @@
+.playwright-mcp/
 # Jekyll build output
 _site/
 .sass-cache/

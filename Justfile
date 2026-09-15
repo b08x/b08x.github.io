@@ -26,10 +26,6 @@ sync-docs doc_set source="":
 sync-docs-dry doc_set source="":
     scripts/sync-docs.sh {{doc_set}} --dry-run {{ if source == "" { "" } else { "--source " + source } }}
 
-# Pull the GitAgent Workbench docs in from the sibling checkout.
-sync-gitagent-docs:
-    just sync-docs gitagent-workbench
-
 # Sync every registered doc set that has a manifest and a sibling checkout.
 sync-all-docs:
     for m in scripts/docs-manifests/*.tsv; do \
