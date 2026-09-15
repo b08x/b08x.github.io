@@ -1,0 +1,22 @@
+# Ordering manifest for the `sfl-engine` doc set.
+#
+# Line order is the reading order: it drives `nav_order` and the prev/next
+# pager, and must match the group ordering in `_data/docs_nav.yml`.
+#
+# Tab-separated columns:
+#   1. source     path relative to <source-repo>/<docs-subdir>/
+#   2. out        output basename; `index` publishes at /docs/<set>/
+#   3. title      page title (rendered as the H1 by _layouts/doc.html)
+#   4. fallback   description used only when the source has no lede paragraph
+#
+# docs/refactor/ and docs/superpowers/ are internal working material and are
+# deliberately left out. ROADMAP.md lives at the repo root, outside the docs
+# subdir, so it cannot be listed here as-is.
+#
+# source | out | title | fallback
+introduction.md	index	Introduction and intent	Why the SFL Engine treats model failure as a grammatical problem, and what Systemic Functional Linguistics buys that topical retrieval does not.
+project-overview.md	project-overview	Project overview	What the SFL Engine is and does, described neutrally for any audience.
+ecosystem-architecture.md	ecosystem-architecture	Ecosystem architecture	Target-state frame shared between sfl-engine and syncopated-context-compiler.
+architecture-diagrams.md	architecture-diagrams	Architecture diagrams	Core flows, component boundaries, and deployment topology.
+data-model.md	data-model	Data model	Clauses, annotations, embeddings, and reviews as persisted in Postgres via Sequel.
+api-reference.md	api-reference	API reference	Every HTTP route exposed by the sfl-engine API.

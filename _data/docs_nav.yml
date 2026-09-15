@@ -28,3 +28,28 @@ gitagent-workbench:
           url: /docs/gitagent-workbench/api-reference/
         - title: Troubleshooting
           url: /docs/gitagent-workbench/troubleshooting/
+
+sfl-engine:
+  title: SFL Engine
+  subtitle: research
+  project_url: /sfl-engine/
+  edit_base: "https://github.com/b08x/sfl-engine/edit/main/"
+  description: "Stance-filtered RAG for LLM security — separates what was said from how it was said, then filters the how before it reaches the model."
+  groups:
+    - title: Guide
+      items:
+        - title: Introduction and intent
+          url: /docs/sfl-engine/
+        - title: Project overview
+          url: /docs/sfl-engine/project-overview/
+        - title: Ecosystem architecture
+          url: /docs/sfl-engine/ecosystem-architecture/
+
+    - title: Reference
+      items:
+        - title: Architecture diagrams
+          url: /docs/sfl-engine/architecture-diagrams/
+        - title: Data model
+          url: /docs/sfl-engine/data-model/
+        - title: API reference
+          url: /docs/sfl-engine/api-reference/

@@ -66,6 +66,11 @@ Docs::yaml_escape() {
 # Emits the body to stdout and the lede paragraph (if any) to $desc_file.
 # A lede is the first plain paragraph after the H1 — headings, fences, lists,
 # tables, blockquotes and raw HTML are body content and are left alone.
+#
+# A paragraph carrying markdown links is left in the body instead. Promoting it
+# would move those links into the front matter, where the body link rewriter
+# never sees them and the layout would print the raw `[text](target)` syntax.
+# Such a page takes its description from the manifest instead.
 Docs::split_lede() {
   local src="$1" desc_file="$2"
 
@@ -79,17 +84,45 @@ Docs::split_lede() {
 
       if (i <= n && lines[i] !~ /^(#|```|[-*+] |[0-9]+\. |> |\||<)/) {
         desc = ""
-        while (i <= n && lines[i] !~ /^[[:space:]]*$/) {
-          desc = (desc == "") ? lines[i] : desc " " lines[i]
-          i++
+        j = i
+        while (j <= n && lines[j] !~ /^[[:space:]]*$/) {
+          desc = (desc == "") ? lines[j] : desc " " lines[j]
+          j++
         }
-        print desc > desc_file
-        while (i <= n && lines[i] ~ /^[[:space:]]*$/) i++
+
+        # A paragraph opening with a bolded label (`**Status:** ...`) is a
+        # metadata block, not prose, and reads badly as a description.
+        is_metadata = (lines[i] ~ /^\*\*[^*]+:\*\*/)
+
+        if (desc !~ /\]\(/ && !is_metadata) {
+          print desc > desc_file
+          i = j
+          while (i <= n && lines[i] ~ /^[[:space:]]*$/) i++
+        }
       }
 
       for (; i <= n; i++) print lines[i]
     }
   ' "$src"
+}
+
+# Reduce a markdown paragraph to plain prose, keeping the visible words.
+#
+# The promoted lede becomes `description`, which the layout prints literally
+# and which also has to survive as a YAML scalar — so markup would show up
+# as-is on the page. Link targets are dropped rather than rewritten: they sit
+# in the front matter, which the body link rewriter never sees, and a lede
+# reads fine without them (the same links remain in the body).
+Docs::plain_text() {
+  # shellcheck disable=SC2016  # the backticks are markdown, not a subshell
+  printf '%s' "$1" | sed -E '
+    s@!\[([^]]*)\]\([^)]*\)@\1@g
+    s@\[([^]]*)\]\([^)]*\)@\1@g
+    s@\*\*([^*]+)\*\*@\1@g
+    s@\*([^*]+)\*@\1@g
+    s@`([^`]+)`@\1@g
+    s@  +@ @g
+  '
 }
 
 # Collapse `.` and `..` segments. Pure lexical — the paths come from markdown
@@ -142,7 +175,11 @@ Docs::rewrite_offsite_links() {
   while IFS= read -r link; do
     [[ -n "$link" ]] || continue
     exprs+=(-e "s@](${link})@](${blob_base}/$(Docs::normalize_path "${docs_subdir}/${link}"))@g")
-  done < <(grep -oE '\]\(\.{1,2}/[^)]*\.md\)' "$file" |
+    # Any relative .md target: `./x.md`, `../x.md` or a bare `x.md`. Excluding
+    # `:` skips absolute URLs, and excluding a leading `/` skips the site
+    # permalinks the manifest pass has already written (which end in `/`
+    # anyway, so they cannot match `.md` here).
+  done < <(grep -oE '\]\([^):/][^):]*\.md\)' "$file" |
     sed -E 's@^\]\((.*)\)$@\1@' | sort -u)
 
   ((${#exprs[@]} > 0)) || return 0
@@ -213,11 +250,13 @@ Docs::main() {
   local count="${#sources[@]}"
   ((count > 0)) || Docs::die "manifest is empty: ${manifest#"$REPO_ROOT"/}"
 
-  # Rewrite the source repo's relative `./page.md` links to site permalinks.
+  # Rewrite the source repo's relative links to site permalinks. The `./` is
+  # optional because repos write cross-references both ways — `./page.md` and
+  # a bare `page.md` — and any trailing `#anchor` is carried across.
   local -a link_rewrites=()
   local i
   for ((i = 0; i < count; i++)); do
-    link_rewrites+=(-e "s@](\\./\?${sources[i]}\\(#[^)]*\\)\\?)@](${urls[i]}\\1)@g")
+    link_rewrites+=(-e "s@\\]\\((\\./)?${sources[i]}(#[^)]*)?\\)@](${urls[i]}\\2)@g")
   done
 
   if [[ "$dry_run" == "true" ]]; then
@@ -249,6 +288,7 @@ Docs::main() {
     body="$(Docs::split_lede "$src_file" "$tmp_desc")"
     description="$(< "$tmp_desc")"
     description="${description%$'\n'}"
+    description="$(Docs::plain_text "$description")"
     description="${description:-${fallbacks[i]}}"
 
     {
@@ -272,7 +312,7 @@ Docs::main() {
       fi
 
       printf -- '---\n\n'
-      printf '%s\n' "$body" | sed "${link_rewrites[@]}"
+      printf '%s\n' "$body" | sed -E "${link_rewrites[@]}"
     } > "$out_file"
 
     Docs::rewrite_offsite_links "$out_file" "$docs_subdir" "$blob_base"
