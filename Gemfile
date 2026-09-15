@@ -6,6 +6,8 @@ gem 'jekyll'
 gem 'jekyll-last-modified-at', git: 'https://github.com/maximevaillancourt/jekyll-last-modified-at',
                                branch: 'add-support-for-files-in-git-submodules'
 gem 'nokogiri'
+# No longer a default gem in Ruby 4.0; required by jekyll-spaceship.
+gem 'ostruct'
 gem 'ruby-vips'
 gem 'webrick'
 
@@ -17,7 +19,8 @@ group :jekyll_plugins do
   gem 'jekyll-link-attributes'
   gem 'jekyll-paginate-v2'
   gem 'jekyll-pandoc'
-  gem 'jekyll_picture_tag'
+  # jekyll_picture_tag caps Ruby at < 4.0 and no content uses its picture tag.
+  # gem 'jekyll_picture_tag'
   gem 'jekyll-postcss-v2'
   # gem 'jekyll-react-player'
   gem 'jekyll-optional-front-matter'

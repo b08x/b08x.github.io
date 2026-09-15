@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 14 200 232" role="img" aria-label="syncopated notes">
+<title>syncopated notes</title>
+<defs>
+<linearGradient id="sn-hood" x1="60" y1="20" x2="220" y2="236" gradientUnits="userSpaceOnUse">
+<stop offset="0" stop-color="#A855F7"></stop>
+<stop offset="0.45" stop-color="#7C3AED"></stop>
+<stop offset="1" stop-color="#4C1D95"></stop>
+</linearGradient>
+<linearGradient id="sn-rust" x1="40" y1="150" x2="80" y2="198" gradientUnits="userSpaceOnUse">
+<stop offset="0" stop-color="#F0913F"></stop>
+<stop offset="1" stop-color="#B7410E"></stop>
+</linearGradient>
+</defs>
+<path fill="url(#sn-hood)" d="M 152 20 C 176 36 188 58 186 84 C 188 98 196 106 206 116 C 216 126 220 152 222 178 C 224 200 226 214 228 232 L 216 218 L 208 234 L 198 220 L 186 231 L 176 216 L 164 233 L 152 221 L 140 236 L 128 222 L 116 232 L 104 218 L 92 234 L 80 220 L 70 231 L 60 217 L 48 228 C 50 200 56 172 64 148 C 68 134 74 122 82 112 C 88 104 94 98 101 92 C 106 86 112 82 114 92 C 96 98 68 104 44 108 C 66 96 94 76 116 56 C 122 42 136 30 152 20 Z"></path>
+<path fill="url(#sn-hood)" d="M 90 106 C 76 116 64 130 58 144 C 64 152 74 154 82 150 C 84 134 88 118 94 108 Z"></path>
+<path stroke="#B7410E" stroke-width="3" fill="none" stroke-linecap="round" d="M 70 148 C 68 157 63 159 59 159"></path>
+<path fill="url(#sn-rust)" d="M 45 163 L 73 163 L 67 199 L 51 199 Z"></path>
+<path fill="#3B0F6B" opacity="0.35" d="M 52 171 L 66 171 L 63 192 L 55 192 Z"></path>
+<path stroke="#3B0F6B" stroke-width="6" stroke-linecap="round" fill="none" d="M 208 88 L 106 214"></path>
+<circle cx="104" cy="217" r="8" fill="url(#sn-rust)"></circle>
+<circle cx="150" cy="64" r="11" fill="#3B0F6B"></circle>
+<circle cx="146" cy="61" r="3.4" fill="#F0913F" opacity="0.9"></circle>
+</svg>

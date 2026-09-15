@@ -29,8 +29,8 @@ jekyll-spaceship:
       themeVariables:
         primaryColor: '#E3DBC8'
         primaryTextColor: '#2A2420'
-        primaryBorderColor: '#B5654A'
-        lineColor: '#8A7F72'
+        primaryBorderColor: '#7C3AED'
+        lineColor: '#B7410E'
         secondaryColor: '#EDE6D6'
         tertiaryColor: '#EDE6D6'
         fontFamily: 'Space Mono, monospace'
