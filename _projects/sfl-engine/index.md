@@ -8,6 +8,9 @@ tags: [ruby, rag, security, llm]
 links:
   - label: "github.com/b08x/sfl-engine"
     url: "https://github.com/b08x/sfl-engine"
+  - label: "documentation"
+    url: "/docs/sfl-engine/"
+    internal: true
   - label: "architectural lineage (deck)"
     url: "/sfl-engine/architectural-lineage/"
     internal: true

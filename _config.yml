@@ -46,6 +46,7 @@ defaults:
       path: "_projects"
     values:
       layout: project
+      toc: true
   - scope:
       path: "_notes"
     values:

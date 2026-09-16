@@ -54,7 +54,7 @@
 
 - title: "GitAgent Workbench"
   description: "A visual development environment for AI agents — a guided wizard for identity, capabilities, models, and compliance that exports a complete, validated agent package."
-  url: "/docs/gitagent-workbench/"
+  url: "/gitagent-workbench/"
   external: false
   badge: "tool · web"
   badge_class: "badge-blue"

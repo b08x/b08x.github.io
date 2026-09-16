@@ -1,0 +1,118 @@
+{% comment %}
+  Shared three-column shell (sidebar / body / on-page outline) for any
+  "detail page" — a doc page or a project profile. Included inside a
+  <style> block by _layouts/doc.html and _layouts/project.html so both
+  stay visually identical without copy-pasted CSS. Layout-specific rules
+  (docs nav tree, project meta card, callouts, pager) live in the layout
+  that needs them.
+{% endcomment %}
+.doc-shell {
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 28px 32px 32px;
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr) 200px;
+  gap: 40px;
+  align-items: start;
+}
+
+.doc-sidebar {
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding-right: 8px;
+  border-right: 1px solid var(--border);
+}
+
+.doc-sidebar-head {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--foreground);
+  margin-bottom: 4px;
+}
+
+.doc-sidebar-sub {
+  font-size: 10px;
+  color: var(--dim);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.doc-outline {
+  position: sticky;
+  top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  font-size: 11.5px;
+}
+
+.doc-outline-title {
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 10px;
+}
+
+.doc-outline ul { list-style: none; margin: 0; padding: 0; }
+.doc-outline ul ul { padding-left: 12px; }
+
+.doc-outline a {
+  display: block;
+  color: var(--muted);
+  padding: 3px 0;
+  line-height: 1.5;
+  transition: color .15s;
+}
+
+.doc-outline a:hover { color: var(--accent); }
+
+.doc-main { min-width: 0; }
+
+.doc-breadcrumb {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .03em;
+  margin-bottom: 18px;
+}
+
+.doc-breadcrumb a { color: var(--muted); }
+.doc-breadcrumb a:hover { color: var(--accent); }
+.doc-breadcrumb .sep { opacity: .4; margin: 0 6px; }
+
+.doc-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.doc-lede {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.65;
+  margin-bottom: 28px;
+  max-width: 90ch;
+}
+
+.doc-body { max-width: 92ch; }
+
+@media (max-width: 1100px) {
+  .doc-shell { grid-template-columns: 210px minmax(0, 1fr); }
+  .doc-outline { display: none; }
+}
+
+@media (max-width: 760px) {
+  .doc-shell { grid-template-columns: 1fr; padding: 20px; gap: 24px; }
+  .doc-sidebar {
+    position: static;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 18px;
+  }
+}

@@ -4,9 +4,7 @@
 gitagent-workbench:
   title: GitAgent Workbench
   subtitle: alpha
-  # No `project_url`: this doc set is the project's page on the site, and
-  # _data/projects.yml points its card straight here. Add one if a dedicated
-  # /projects/ page ever lands — the breadcrumb picks it up automatically.
+  project_url: /gitagent-workbench/
   edit_base: "https://github.com/b08x/gitagent-workbench/edit/main/"
   description: "Visual development environment for building production-ready AI agents: a guided wizard for identity, capabilities, models, compliance, and deployment structure that exports a complete agent package."
 
