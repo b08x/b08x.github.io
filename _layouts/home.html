@@ -9,7 +9,7 @@ layout: notes
 {% assign posts = paginator.posts | default: site.posts %}
 {% assign notes = site.notes | sort: "title" %}
 
-<div class="section-label">Latest Notes &amp; Posts</div>
+<div class="section-label">Posts</div>
 
 {% if posts.size > 0 %}
   {% assign featured = posts.first %}
@@ -51,7 +51,28 @@ layout: notes
     <span class="row-date">{{ post.date | date: "%Y-%m-%d" }}</span>
   </a>
   {% endfor %}
+</div>
 
+{% if paginator.total_pages > 1 %}
+<nav class="pager">
+  {% if paginator.previous_page %}
+  <a href="{{ paginator.previous_page_path | relative_url }}" class="pager-link">← Newer</a>
+  {% else %}
+  <span class="pager-link disabled">← Newer</span>
+  {% endif %}
+  <span class="pager-info">page {{ paginator.page }} / {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+  <a href="{{ paginator.next_page_path | relative_url }}" class="pager-link">Older →</a>
+  {% else %}
+  <span class="pager-link disabled">Older →</span>
+  {% endif %}
+</nav>
+{% endif %}
+
+{% if notes.size > 0 %}
+<div class="section-label">Notes</div>
+
+<div class="row-list">
   {% for note in notes %}
   <a href="{{ note.url | relative_url }}" class="row">
     {% if note.image %}<img class="row-thumb" src="{{ note.image | relative_url }}" alt="">{% endif %}
@@ -72,21 +93,6 @@ layout: notes
   </a>
   {% endfor %}
 </div>
-
-{% if paginator.total_pages > 1 %}
-<nav class="pager">
-  {% if paginator.previous_page %}
-  <a href="{{ paginator.previous_page_path | relative_url }}" class="pager-link">← Newer</a>
-  {% else %}
-  <span class="pager-link disabled">← Newer</span>
-  {% endif %}
-  <span class="pager-info">page {{ paginator.page }} / {{ paginator.total_pages }}</span>
-  {% if paginator.next_page %}
-  <a href="{{ paginator.next_page_path | relative_url }}" class="pager-link">Older →</a>
-  {% else %}
-  <span class="pager-link disabled">Older →</span>
-  {% endif %}
-</nav>
 {% endif %}
 
 {% assign projects = site.data.projects | where: "card", true %}
@@ -107,24 +113,6 @@ layout: notes
       </div>
     </div>
     <span class="link-label">{% if project.external %}repo ↗{% else %}{{ project.year | default: 'open' }} →{% endif %}</span>
-  </a>
-  {% endfor %}
-</div>
-{% endif %}
-
-{% if site.prompts.size > 0 %}
-<div class="section-label">
-  Prompts <a href="/prompts/">all prompts →</a>
-</div>
-<div class="row-list">
-  {% for prompt in site.prompts %}
-  <a href="/prompts/" class="row">
-    <div class="row-main">
-      <h3>{{ prompt.title }}</h3>
-      <p class="row-desc">{{ prompt.instructions | truncatewords: 22 }}</p>
-      {% if prompt.tag %}<div class="tag-row"><span class="tag"><b>#</b>{{ prompt.tag }}</span></div>{% endif %}
-    </div>
-    <span class="link-label">open →</span>
   </a>
   {% endfor %}
 </div>

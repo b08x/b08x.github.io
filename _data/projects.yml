@@ -42,6 +42,16 @@
   tags: [humor, satire, project, game]
   card: true
 
+- title: "Prompt Library"
+  description: "An interactive bench for prompt and context engineering — instructions, example runs, and SFL-driven dials to watch the same ground get realized differently."
+  url: "/projects/prompt-library/"
+  external: false
+  badge: "tool · prompt engineering"
+  badge_class: "badge-blue"
+  year: "2026"
+  tags: [prompts, context-engineering, llm]
+  card: true
+
 - title: "GitAgent Workbench"
   description: "A visual development environment for AI agents — a guided wizard for identity, capabilities, models, and compliance that exports a complete, validated agent package."
   url: "/docs/gitagent-workbench/"

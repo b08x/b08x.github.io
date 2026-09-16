@@ -78,7 +78,7 @@ collections:
     permalink: /docs/:path/
   prompts:
     output: true
-    permalink: /prompts/:path/
+    permalink: /projects/prompt-library/:path/
   slides:
     output: false
 
@@ -94,6 +94,7 @@ exclude:
   - .codemap
   - .tool-versions
   - .mcp.json
+  - goals
 
 permalink: pretty
 relative_permalinks: false
