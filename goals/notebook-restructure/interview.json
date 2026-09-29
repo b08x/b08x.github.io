@@ -1,0 +1,87 @@
+{
+  "stage": "interview",
+  "title": "Notebook / Projects IA restructure",
+  "goalSlug": "notebook-restructure",
+  "questions": [
+    {
+      "id": "notebook_url",
+      "prompt": "Should the Notebook landing page keep the existing URL (site root `/`), or move to a dedicated `/notebook/` path?",
+      "description": "Today \"Notes\" in the nav points at `/` (the home layout, which blends `_posts` and the `_notes` collection). Renaming the nav label to \"Notebook\" is free either way, but changing the URL changes what's canonical for search engines and any existing bookmarks/backlinks.",
+      "answerMode": "single",
+      "recommendedAnswer": "Keep it at `/` — only rename the nav label and update the page's own title/framing.",
+      "recommendedOptionIds": ["keep_root"],
+      "options": [
+        { "id": "keep_root", "label": "Keep at `/` (rename label only)" },
+        { "id": "move_notebook", "label": "Move to `/notebook/` (root becomes a redirect or something else)" }
+      ],
+      "required": true
+    },
+    {
+      "id": "posts_vs_notes",
+      "prompt": "Inside Notebook, should blog-style `_posts` and the `_notes` collection stay blended into one feed (as today), or split into two visible sub-areas (e.g. \"Notes\" and \"Posts\")?",
+      "description": "You said Notes lives inside Notebook. The home page currently interleaves both collections without distinguishing them.",
+      "answerMode": "single",
+      "recommendedAnswer": "Keep them blended as one Notebook feed — introducing a Posts/Notes split is a separate, later concern.",
+      "recommendedOptionIds": ["blended"],
+      "options": [
+        { "id": "blended", "label": "Keep blended (no visible split)" },
+        { "id": "split", "label": "Split into distinct Notes / Posts sub-areas now" }
+      ],
+      "required": true
+    },
+    {
+      "id": "prompt_library_placement",
+      "prompt": "How should the Prompt Library be represented as a project?",
+      "description": "It already lives at `/prompts/` via the `_prompts` collection + `prompt-bench.html` (sliders UI). Moving its URL under `/projects/...` would touch the collection's permalink config and the recent prompt-bench work; keeping its own URL and just adding it as a card in `_data/projects.yml` (same pattern as the SFL Engine project) is much less disruptive.",
+      "answerMode": "single",
+      "recommendedAnswer": "Add a Prompt Library card to `_data/projects.yml` pointing at the existing `/prompts/` URL — no change to the `_prompts` collection, its permalinks, or the prompt-bench UI.",
+      "recommendedOptionIds": ["card_only"],
+      "options": [
+        { "id": "card_only", "label": "Add a projects.yml card pointing at existing /prompts/ URL" },
+        { "id": "move_url", "label": "Move it under /projects/prompt-library/ (re-permalink the collection)" }
+      ],
+      "required": true
+    },
+    {
+      "id": "nav_links",
+      "prompt": "Confirm the new top nav: just \"Projects\" and \"Notebook\" (removing the standalone \"Prompts\" link, since it's now reached via the Projects card)?",
+      "description": "Current nav.html has three links: Notes, Projects, Prompts.",
+      "answerMode": "single",
+      "recommendedAnswer": "Yes — two links only: Projects, Notebook.",
+      "recommendedOptionIds": ["two_links"],
+      "options": [
+        { "id": "two_links", "label": "Two links: Projects, Notebook" },
+        { "id": "three_links", "label": "Keep a direct Prompts nav link too, in addition to the project card" }
+      ],
+      "required": true
+    },
+    {
+      "id": "layout_scope",
+      "prompt": "Where should the better-layout skill's thinking (grouping, reading order, progressive disclosure) actually get applied in this goal?",
+      "description": "Scoping this avoids the plan ballooning into a full visual redesign.",
+      "answerMode": "multi",
+      "recommendedAnswer": "Nav component and the Notebook/Projects landing pages — not a full visual redesign of every page.",
+      "recommendedOptionIds": ["nav", "landing_pages"],
+      "options": [
+        { "id": "nav", "label": "Nav component (site-nav)" },
+        { "id": "landing_pages", "label": "Notebook + Projects landing pages" },
+        { "id": "project_cards", "label": "Individual project card layout in projects.yml-driven grid" },
+        { "id": "prompt_bench", "label": "Prompt-bench / slider UI itself" }
+      ],
+      "required": true
+    },
+    {
+      "id": "slider_expansion",
+      "prompt": "You mentioned wanting to expand the interactive pedagogical sliders eventually — is that expansion in scope for this goal, or purely a future intent to note for later?",
+      "description": "Keeping it out of scope keeps this goal focused on the IA restructure.",
+      "answerMode": "single",
+      "recommendedAnswer": "Out of scope for this goal — just the IA/nav restructure and the Prompt Library project card.",
+      "recommendedOptionIds": ["out_of_scope"],
+      "options": [
+        { "id": "out_of_scope", "label": "Out of scope — note it for a future goal" },
+        { "id": "in_scope", "label": "In scope — sketch initial expansion now" }
+      ],
+      "required": true
+    }
+  ]
+}
