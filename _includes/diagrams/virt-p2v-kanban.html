@@ -1,0 +1,97 @@
+<style>
+/* The board is drawn at 880px; let it extend into the gutters so it
+   renders at native size inside the 800px text column. */
+.p2vk-fig { margin: 28px 0; }
+@media (min-width: 901px) { .p2vk-fig { margin-inline: -40px; } .p2vk-fig figcaption { padding-inline: 40px; } }
+.p2vk-scroll { overflow-x: auto; }
+.p2vk { display: block; width: 100%; min-width: 720px; height: auto; --p2vk-card: #F7F3E9; }
+html.dark .p2vk { --p2vk-card: var(--surface-2); }
+.p2vk .col { fill: color-mix(in oklab, var(--foreground) 5%, transparent); }
+.p2vk .hd { fill: var(--foreground); font: 600 12px var(--font-prose); }
+.p2vk .chip { fill: none; stroke: var(--muted); stroke-width: .8; }
+.p2vk .chipt { fill: var(--text-2); font: 8px var(--font-mono); }
+.p2vk .rule { stroke: color-mix(in oklab, var(--foreground) 22%, transparent); stroke-width: 1; }
+.p2vk .card { fill: var(--p2vk-card); stroke: var(--foreground); stroke-width: 1; }
+.p2vk .card.blocked { fill: color-mix(in oklab, var(--rust) 8%, var(--p2vk-card)); stroke: var(--rust); stroke-dasharray: 4 4; }
+.p2vk .card.waiting { fill: color-mix(in oklab, var(--foreground) 4%, transparent); stroke: color-mix(in oklab, var(--foreground) 35%, transparent); stroke-dasharray: 4 3; }
+.p2vk .bar { fill: var(--rust); }
+.p2vk .ct { fill: var(--foreground); font: 600 11px var(--font-prose); }
+.p2vk .cs { fill: var(--text-2); font: 8px var(--font-mono); }
+.p2vk .lg { fill: var(--text-2); font: 8px var(--font-mono); }
+.p2vk .lt { fill: var(--text-2); font: 9px var(--font-prose); }
+.p2vk-fig figcaption { margin-top: 8px; font-family: var(--font-ui); font-size: var(--text-xs); color: var(--text-2); }
+</style>
+<figure class="p2vk-fig">
+<div class="p2vk-scroll">
+<svg class="p2vk" viewBox="0 0 880 372" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="virt-p2v-kanban-title virt-p2v-kanban-desc">
+<title id="virt-p2v-kanban-title">virt-p2v migration board</title>
+<desc id="virt-p2v-kanban-desc">Kanban board of the four stages of a virt-p2v migration: build the boot medium, prepare the Alma host, copy the machine over SSH, and clean up. Twelve tasks sit under their stage; one is flagged as a silent-failure setting and one as a physical step.</desc>
+<rect class="col" x="16" y="40" width="200" height="256" rx="8"/>
+<rect class="col" x="232" y="40" width="200" height="256" rx="8"/>
+<rect class="col" x="448" y="40" width="200" height="256" rx="8"/>
+<rect class="col" x="664" y="40" width="200" height="256" rx="8"/>
+<text class="hd" x="32" y="60">Build medium</text>
+<rect class="chip" x="168" y="48" width="32" height="16" rx="2"/>
+<text class="chipt" x="184" y="59" text-anchor="middle">3</text>
+<line class="rule" x1="16" y1="76" x2="216" y2="76"/>
+<text class="hd" x="248" y="60">Prepare Alma host</text>
+<rect class="chip" x="384" y="48" width="32" height="16" rx="2"/>
+<text class="chipt" x="400" y="59" text-anchor="middle">3</text>
+<line class="rule" x1="232" y1="76" x2="432" y2="76"/>
+<text class="hd" x="464" y="60">Copy over SSH</text>
+<rect class="chip" x="600" y="48" width="32" height="16" rx="2"/>
+<text class="chipt" x="616" y="59" text-anchor="middle">3</text>
+<line class="rule" x1="448" y1="76" x2="648" y2="76"/>
+<text class="hd" x="680" y="60">Clean up</text>
+<rect class="chip" x="816" y="48" width="32" height="16" rx="2"/>
+<text class="chipt" x="832" y="59" text-anchor="middle">3</text>
+<line class="rule" x1="664" y1="76" x2="864" y2="76"/>
+<rect class="card" x="28" y="88" width="176" height="56" rx="6"/>
+<text class="ct" x="40" y="110">Install virt-p2v</text>
+<text class="cs" x="40" y="126">dnf install virt-p2v</text>
+<rect class="card" x="28" y="156" width="176" height="56" rx="6"/>
+<text class="ct" x="40" y="178">Build the boot image</text>
+<text class="cs" x="40" y="194">virt-p2v-make-disk</text>
+<rect class="card" x="28" y="224" width="176" height="56" rx="6"/>
+<text class="ct" x="40" y="246">Write the image to USB</text>
+<text class="cs" x="40" y="262">dd to USB · erases the stick</text>
+<rect class="card" x="244" y="88" width="176" height="56" rx="6"/>
+<text class="ct" x="256" y="110">Install virt-v2v</text>
+<text class="cs" x="256" y="126">dnf install virt-v2v</text>
+<rect class="card" x="244" y="156" width="176" height="56" rx="6"/>
+<text class="ct" x="256" y="178">Allow SSH login</text>
+<text class="cs" x="256" y="194">firewall · PermitRootLogin</text>
+<rect class="card blocked" x="244" y="224" width="176" height="56" rx="6"/>
+<rect class="bar" x="244" y="224" width="4" height="56"/>
+<text class="ct" x="260" y="246">AllowTcpForwarding: yes</text>
+<text class="cs" x="260" y="262">off stalls the transfer</text>
+<rect class="card waiting" x="460" y="88" width="176" height="56" rx="6"/>
+<text class="ct" x="472" y="110">Boot from the USB stick</text>
+<text class="cs" x="472" y="126">physical step · workstation</text>
+<rect class="card" x="460" y="156" width="176" height="56" rx="6"/>
+<text class="ct" x="472" y="178">Test connection</text>
+<text class="cs" x="472" y="194">dialog 1 · checks login</text>
+<rect class="card" x="460" y="224" width="176" height="56" rx="6"/>
+<text class="ct" x="472" y="246">Pick disks, start</text>
+<text class="cs" x="472" y="262">all LVM disks · Start</text>
+<rect class="card" x="676" y="88" width="176" height="56" rx="6"/>
+<text class="ct" x="688" y="110">Inspect and start guest</text>
+<text class="cs" x="688" y="126">virsh list · start · console</text>
+<rect class="card" x="676" y="156" width="176" height="56" rx="6"/>
+<text class="ct" x="688" y="178">Fix NIC and GPU driver</text>
+<text class="cs" x="688" y="194">new MAC · drop NVIDIA driver</text>
+<rect class="card" x="676" y="224" width="176" height="56" rx="6"/>
+<text class="ct" x="688" y="246">Keep the old disk a day</text>
+<text class="cs" x="688" y="262">rollback · keep it off</text>
+<line class="rule" x1="16" y1="320" x2="864" y2="320"/>
+<text class="lg" x="16" y="336" letter-spacing="0.18em">LEGEND</text>
+<rect class="card" x="16" y="348" width="16" height="8"/>
+<text class="lt" x="40" y="356">Default</text>
+<rect class="card blocked" x="160" y="348" width="16" height="8"/>
+<text class="lt" x="184" y="356">Blocked: silent failure</text>
+<rect class="card waiting" x="392" y="348" width="16" height="8"/>
+<text class="lt" x="416" y="356">Waiting / external</text>
+</svg>
+</div>
+<figcaption>The four stages and their tasks. The dashed rust card is the one setting that fails silently; the grey dashed card is the physical step.</figcaption>
+</figure>
