@@ -529,6 +529,9 @@
   }
 </style>
 
+{% comment %}Single mode: _layouts/prompt.html owns the markup (including #bench) and only
+  loads the styles and engine from here.{% endcomment %}
+{% if include.mode != 'single' %}
 <div class="bench" id="bench" data-mode="{{ include.mode | default: 'library' }}">
 
   {% if include.mode != 'single' %}
@@ -613,6 +616,7 @@
   {% endif %}
 
 </div>
+{% endif %}
 
 <script>
 (function () {
@@ -623,7 +627,7 @@
   var data = dataEl ? JSON.parse(dataEl.textContent) : [];
   var isLibrary = root.getAttribute('data-mode') !== 'single';
 
-  var stage = document.getElementById('bench-stage');
+  var stage = document.getElementById('bench-stage') || root;
   if (!data.length) {
     stage.innerHTML = '<p class="bench-empty">No prompts published yet.</p>';
     return;
@@ -746,7 +750,7 @@
   var elNote    = document.getElementById('bench-realization-note');
   var elGround  = document.getElementById('bench-ground');
   var elDials   = document.getElementById('bench-dials');
-  var elJson    = document.getElementById('bench-json');
+  var elJson    = document.getElementById('bench-json');   // library mode only
   var elExample = document.getElementById('bench-example');
   var elExampleSection = document.getElementById('bench-example-section');
 
@@ -820,7 +824,13 @@
       });
     }
 
-    elJson.textContent = JSON.stringify(buildConfig(p, result), null, 2);
+    lastResult = result;
+    realizationNote = elNote.textContent;
+    if (elJson) elJson.textContent = JSON.stringify(buildConfig(p, result), null, 2);
+    updatePanelNote();
+    renderOutput();
+    renderDiagram(p, result);
+    syncHash();
   }
 
   function buildConfig(p, result) {
@@ -855,6 +865,7 @@
       input.min = '0'; input.max = '1'; input.step = '0.05';
       input.value = String(dials[d.key]);
       input.setAttribute('aria-describedby', 'dial-note-' + d.key);
+      input.title = d.note;
       input.addEventListener('input', function () {
         dials[d.key] = parseFloat(input.value);
         val.textContent = dials[d.key].toFixed(2);
@@ -975,34 +986,212 @@
     if (startHash) index = Math.max(0, Math.min(data.length - 1, parseInt(startHash[1], 10) - 1));
   }
 
-  /* ── Export ── */
+  /* ── Formats ───────────────────────────────────────────────────────────
+     One realization, serialized for the places it ends up being pasted.
+     "Realized" is the on-page view; copying it yields the plain text. */
   function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''); }
-  function payload() {
-    var p = currentPrompt();
-    return JSON.stringify(buildConfig(p, realize(p, dials)), null, 2);
+
+  function plainText(p, result) {
+    var authored = ((p.sfl || {}).clauses || []).length > 0;
+    return result.clauses.map(function (c) { return c.text; }).join(authored ? '\n' : '\n\n');
   }
 
-  var copyBtn = document.getElementById('bench-copy');
+  function markdownDoc(p, result) {
+    var lines = ['---', 'name: ' + slug(p.title),
+      'description: ' + JSON.stringify(p.title + (p.category ? ' — ' + p.category : ''))];
+    if (p.tag) lines.push('tag: ' + p.tag);
+    if (p.category) lines.push('category: ' + JSON.stringify(p.category));
+    lines.push('dials:');
+    DIALS.forEach(function (d) { lines.push('  ' + d.key + ': ' + dials[d.key].toFixed(2)); });
+    lines.push('---', '', '# ' + p.title, '', plainText(p, result));
+    if (p.example) lines.push('', '## Example output', '', '```text', String(p.example).replace(/\s+$/, ''), '```');
+    return lines.join('\n') + '\n';
+  }
+
+  function chatMessages(p, result) {
+    return JSON.stringify({ messages: [
+      { role: 'system', content: plainText(p, result) },
+      { role: 'user', content: '{% raw %}{{input}}{% endraw %}' }
+    ] }, null, 2);
+  }
+
+  function jsonConfig(p, result) { return JSON.stringify(buildConfig(p, result), null, 2); }
+
+  var FORMATS = {
+    realized: { label: 'Realized', copy: 'Copy text', short: 'Text', ext: 'txt', mime: 'text/plain', build: plainText,
+                note: '' },
+    text:     { label: 'Text', copy: 'Copy text', short: 'Text', ext: 'txt', mime: 'text/plain', build: plainText,
+                note: 'Plain text — paste into any chat or system prompt.' },
+    markdown: { label: 'Markdown', copy: 'Copy markdown', short: 'Markdown', ext: 'md', mime: 'text/markdown', build: markdownDoc,
+                note: 'Front matter plus the prompt body — drop it into a repo or a skill file.' },
+    chat:     { label: 'Chat API', copy: 'Copy messages', short: 'Chat API', ext: 'messages.json', mime: 'application/json', build: chatMessages,
+                note: 'A messages array for chat-completion APIs; {% raw %}{{input}}{% endraw %} marks the user turn.' },
+    json:     { label: 'JSON', copy: 'Copy JSON', short: 'JSON', ext: 'sfl.json', mime: 'application/json', build: jsonConfig,
+                note: 'The full SFL config: dials, ground verdicts and the realization.' }
+  };
+
+  var format = isLibrary ? 'json' : 'realized';
+  var lastResult = null;
+  var realizationNote = '';
+
+  function currentOutput() {
+    var p = currentPrompt();
+    return FORMATS[format].build(p, lastResult || realize(p, dials));
+  }
+
+  /* ── Tabs (single mode) ── */
+  var tabEls = Array.prototype.slice.call(document.querySelectorAll('[role="tab"][data-format]'));
+  var hasTabs = tabEls.length > 0;
+  var elPanel    = document.getElementById('pb-panel');
+  var elRealized = document.getElementById('pb-realized');
+  var elCode     = document.getElementById('pb-code');
+  var elOut      = document.getElementById('bench-out');
+  var copyBtn    = document.getElementById('bench-copy');
+  var dlBtn      = document.getElementById('bench-download');
+  var shareBtn   = document.getElementById('bench-share');
+  var elStatus   = document.getElementById('pb-status');
+
+  function copyLabel() {
+    return isLibrary ? 'Copy config' : FORMATS[format].copy;
+  }
+  function downloadLabel() {
+    return isLibrary ? 'Download .json' : 'Download .' + FORMATS[format].ext;
+  }
+  function updatePanelNote() {
+    if (hasTabs) elNote.textContent = format === 'realized' ? realizationNote : FORMATS[format].note;
+  }
+  function renderOutput() {
+    if (!elOut || format === 'realized') return;
+    elOut.textContent = currentOutput();
+  }
+
+  function setFormat(f, focus) {
+    if (!FORMATS[f] || !hasTabs) return;
+    format = f;
+    tabEls.forEach(function (t) {
+      var on = t.getAttribute('data-format') === f;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      if (on) {
+        elPanel.setAttribute('aria-labelledby', t.id);
+        if (focus) t.focus();
+      }
+    });
+    elRealized.hidden = f !== 'realized';
+    elCode.hidden = f === 'realized';
+    copyBtn.textContent = copyLabel();
+    dlBtn.textContent = downloadLabel();
+    updatePanelNote();
+    renderOutput();
+    if (lastResult) renderDiagram(currentPrompt(), lastResult);
+    syncHash();
+  }
+
+  if (hasTabs) {
+    tabEls.forEach(function (t, i) {
+      t.addEventListener('click', function () { setFormat(t.getAttribute('data-format')); });
+      t.addEventListener('keydown', function (e) {
+        var to = null;
+        if (e.key === 'ArrowRight') to = (i + 1) % tabEls.length;
+        else if (e.key === 'ArrowLeft') to = (i - 1 + tabEls.length) % tabEls.length;
+        else if (e.key === 'Home') to = 0;
+        else if (e.key === 'End') to = tabEls.length - 1;
+        if (to !== null) { setFormat(tabEls[to].getAttribute('data-format'), true); e.preventDefault(); }
+      });
+    });
+  }
+
+  /* ── Shareable state: dials + format live in the URL hash ── */
+  function readHash() {
+    if (isLibrary || !location.hash) return;
+    var q;
+    try { q = new URLSearchParams(location.hash.slice(1)); } catch (e) { return; }
+    DIALS.forEach(function (d) {
+      var v = parseFloat(q.get(d.key));
+      if (v >= 0 && v <= 1) dials[d.key] = v;
+    });
+    var f = q.get('format');
+    if (f && FORMATS[f] && hasTabs) format = f;
+  }
+  function syncHash() {
+    if (isLibrary) return;
+    var q = new URLSearchParams();
+    DIALS.forEach(function (d) { q.set(d.key, dials[d.key].toFixed(2)); });
+    if (hasTabs) q.set('format', format);
+    try { history.replaceState(null, '', '#' + q.toString()); } catch (e) {}
+  }
+
+  /* ── Workflow diagram (single mode): the same pipeline, live values ── */
+  function setText(id, v) { var n = document.getElementById(id); if (n) n.textContent = v; }
+  function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
+  function dialStr(v) { return v.toFixed(2).replace(/^0/, ''); }
+
+  function renderDiagram(p, result) {
+    if (!document.getElementById('pb-diagram')) return;
+    var authored = ((p.sfl || {}).clauses || []).length;
+    var ground = result.ground;
+    var anchors = ground.reduce(function (n, g) { return n + g.anchors.length; }, 0);
+    var ok = ground.filter(function (g) { return !g.missing.length; }).length;
+    var riders = result.clauses.filter(function (c) { return c.kind === 'rider'; }).length;
+    var locks = result.clauses.filter(function (c) { return c.kind === 'lock'; }).length;
+    var body = result.clauses.length - riders - locks;
+
+    setText('pb-d-authored-1', (authored ? plural(authored, 'clause') : 'static text') + ' · ' + plural(ground.length, 'ground'));
+    setText('pb-d-authored-2', authored ? 'grammar in front matter' : 'no clause grammar');
+    setText('pb-d-dials-1', DIALS.map(function (d) { return d.label.charAt(0) + ' ' + dialStr(dials[d.key]); }).join(' · '));
+    setText('pb-d-realize-1', authored ? plural(body, 'clause') + ' → text' : 'static · dials idle');
+    setText('pb-d-realize-2', authored ? '+' + plural(riders, 'rider') + ' · ' + plural(locks, 'lock') : 'dials set the export only');
+    setText('pb-d-check-1', ground.length ? ok + '/' + ground.length + ' surfaced' : 'nothing to check');
+    setText('pb-d-check-2', plural(anchors, 'anchor') + ' checked');
+    setText('pb-d-ground-1', plural(ground.length, 'invariant proposition'));
+    setText('pb-d-export-1', FORMATS[format].short);
+    setText('pb-d-export-2', '.' + FORMATS[format].ext);
+
+    var check = document.getElementById('pb-d-check');
+    if (check) {
+      if (ok < ground.length) check.setAttribute('data-drift', '');
+      else check.removeAttribute('data-drift');
+    }
+  }
+
+  /* ── Export ── */
+  function say(msg) { if (elStatus) elStatus.textContent = msg; }
+  function flash(btn, msg, restore) {
+    btn.textContent = msg;
+    say(msg);
+    setTimeout(function () { btn.textContent = restore(); }, 1600);
+  }
+  function copyText(value) {
+    return navigator.clipboard && navigator.clipboard.writeText
+      ? navigator.clipboard.writeText(value) : Promise.reject(new Error('no clipboard'));
+  }
+
   copyBtn.addEventListener('click', function () {
-    var body = payload();
-    var done = function () {
-      copyBtn.textContent = 'Copied';
-      setTimeout(function () { copyBtn.textContent = 'Copy config'; }, 1600);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(body).then(done, function () { copyBtn.textContent = 'Copy failed'; });
-    } else { done(); }
+    copyText(currentOutput()).then(
+      function () { flash(copyBtn, 'Copied', copyLabel); },
+      function () { flash(copyBtn, 'Copy failed', copyLabel); });
   });
 
-  document.getElementById('bench-download').addEventListener('click', function () {
-    var blob = new Blob([payload()], { type: 'application/json' });
+  dlBtn.addEventListener('click', function () {
+    var f = FORMATS[format];
+    var blob = new Blob([currentOutput()], { type: f.mime });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = slug(currentPrompt().title) + '.sfl.json';
+    a.download = slug(currentPrompt().title) + '.' + f.ext;
     a.click();
     URL.revokeObjectURL(url);
   });
+
+  if (shareBtn) {
+    var shareLabel = function () { return 'Copy link'; };
+    shareBtn.addEventListener('click', function () {
+      syncHash();
+      copyText(location.href).then(
+        function () { flash(shareBtn, 'Link copied', shareLabel); },
+        function () { flash(shareBtn, 'Copy failed', shareLabel); });
+    });
+  }
 
   document.getElementById('bench-reset').addEventListener('click', function () {
     seedDials();
@@ -1010,6 +1199,8 @@
   });
 
   seedDials();
+  readHash();
   renderAll();
+  if (hasTabs) setFormat(format);
 })();
 </script>

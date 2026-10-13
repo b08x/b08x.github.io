@@ -1,43 +1,49 @@
 ---
 layout: notes
 ---
+{%- comment -%}
+  Project profile: article column on the left, a sticky rail on the right
+  with an info card (name, status, tags, facts, links, copyable repo) and the
+  Contents list. Front matter used: title, description, status, timeframe,
+  tags, links (label/url/internal), image, image_alt, icon, toc.
+{%- endcomment -%}
+{%- assign primary = nil -%}
+{%- for link in page.links -%}
+  {%- unless link.internal -%}{%- unless primary -%}{%- assign primary = link -%}{%- endunless -%}{%- endunless -%}
+{%- endfor -%}
+{%- assign words = page.title | split: ' ' -%}
+{%- assign initials = words[0] | slice: 0, 1 | append: words[1] | upcase | truncate: 2, '' -%}
 <style>
-  {% include detail-shell.html %}
+  {% include detail-frame.html %}
 
-  /* ── Left sidebar: project meta instead of a docs nav tree ── */
-  .doc-sidebar-head { margin-bottom: 16px; }
-  .project-meta-block + .project-meta-block { margin-top: 22px; }
+  .detail .post-title { margin-bottom: 28px; }
 
-  .project-meta-label {
-    font-size: 10px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--dim);
-    margin-bottom: 4px;
+  /* Summary: the one-line pitch, boxed above the body. */
+  .project-summary {
+    margin: 0 0 36px;
+    padding: 20px 24px 22px;
+    background: var(--surface);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-md);
   }
 
-  .project-meta-value {
-    font-family: var(--font-code);
-    font-size: 12.5px;
-    color: var(--text-2);
-    line-height: 1.5;
-  }
-
-  .project-meta-value.status-active { color: var(--status-success); }
-
-  .project-meta-value a {
+  .project-summary-label {
     display: block;
-    color: var(--cyan);
-    padding: 2px 0;
-    transition: color .15s;
+    margin-bottom: 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-2);
   }
 
-  .project-meta-value a:hover { color: var(--cyan-hi); }
+  .project-summary p { font-size: 1.125rem; line-height: 1.6; color: var(--foreground); }
 
   .project-hero-image {
     width: 100%;
     aspect-ratio: 16 / 7;
-    margin: 0 0 28px;
+    margin: 0 0 36px;
     border-radius: var(--radius-lg);
     border: var(--border-width) solid var(--border);
     overflow: hidden;
@@ -45,73 +51,94 @@ layout: notes
   }
 
   .project-hero-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  .detail .post-content { font-size: 1.0625rem; line-height: 1.7; max-width: 46rem; }
+  .detail .post-content h2 {
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin-top: 56px;
+  }
+  .detail .post-content h2:first-child { margin-top: 0; }
 </style>
 
-<div class="doc-shell">
-  <aside class="doc-sidebar">
-    <div class="doc-sidebar-head">{{ page.title }}</div>
+<div class="detail">
+  <article class="detail-main">
+    {% include crumbs.html parent_label="Projects" parent_url="/projects/" %}
 
-    {% if page.tags and page.tags.size > 0 %}
-    <div class="project-meta-block">
-      <div class="tag-row">
-        {% for tag in page.tags %}<span class="tag"><b>#</b>{{ tag }}</span>{% endfor %}
-      </div>
+    <h1 class="post-title">{{ page.title }}</h1>
+
+    {% if page.description %}
+    <div class="project-summary">
+      <span class="project-summary-label">Summary</span>
+      <p>{{ page.description }}</p>
     </div>
     {% endif %}
-
-    {% if page.status %}
-    <div class="project-meta-block">
-      <div class="project-meta-label">Status</div>
-      <div class="project-meta-value{% if page.status == 'Active' %} status-active{% endif %}">{{ page.status }}</div>
-    </div>
-    {% endif %}
-
-    {% if page.timeframe %}
-    <div class="project-meta-block">
-      <div class="project-meta-label">Timeframe</div>
-      <div class="project-meta-value">{{ page.timeframe }}</div>
-    </div>
-    {% endif %}
-
-    {% if page.links and page.links.size > 0 %}
-    <div class="project-meta-block">
-      <div class="project-meta-label">Links</div>
-      <div class="project-meta-value">
-        {% for link in page.links %}
-          {% if link.internal %}
-          <a href="{{ link.url | relative_url }}">{{ link.label }} →</a>
-          {% else %}
-          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">{{ link.label }} ↗</a>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-  </aside>
-
-  <main class="doc-main">
-    <div class="doc-breadcrumb">
-      <a href="/projects/">projects</a>
-      <span class="sep">/</span>
-      {{ page.title }}
-    </div>
-
-    <h1 class="doc-title">{{ page.title }}</h1>
-    {% if page.description %}<p class="doc-lede">{{ page.description }}</p>{% endif %}
 
     {% if page.image %}
     <div class="project-hero-image"><img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title }}"></div>
     {% endif %}
 
-    <div class="doc-body post-content">
+    <div class="post-content">
       {{ content }}
     </div>
-  </main>
+  </article>
 
-  <aside class="doc-outline">
+  <aside class="detail-rail" aria-label="Project details">
+    <div class="detail-card">
+      <div class="detail-card-top">
+        <div class="detail-card-head">
+          <span class="detail-icon" aria-hidden="true">{% if page.icon %}<img src="{{ page.icon | relative_url }}" alt="">{% else %}{{ initials }}{% endif %}</span>
+          <h2 class="detail-card-title">{{ page.title }}</h2>
+        </div>
+        {% if page.tags and page.tags.size > 0 %}
+        <div class="tag-row">
+          {% for tag in page.tags %}<span class="tag"><b>#</b>{{ tag }}</span>{% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      {% if page.status or page.timeframe %}
+      <dl class="detail-facts">
+        {% if page.status %}<div class="detail-row"><dt>Status</dt><dd><span class="detail-status" data-status="{{ page.status | downcase }}">{{ page.status }}</span></dd></div>{% endif %}
+        {% if page.timeframe %}<div class="detail-row"><dt>Timeframe</dt><dd>{{ page.timeframe }}</dd></div>{% endif %}
+      </dl>
+      {% endif %}
+
+      {% capture other_links %}
+        {%- for link in page.links -%}
+          {%- if link == primary -%}{%- continue -%}{%- endif -%}
+          {%- if link.internal -%}
+          <li><a class="detail-row" href="{{ link.url | relative_url }}"><span class="detail-row-label">{{ link.label }}</span><span class="detail-row-arrow" aria-hidden="true">→</span></a></li>
+          {%- else -%}
+          <li><a class="detail-row" href="{{ link.url }}" target="_blank" rel="noopener noreferrer"><span class="detail-row-label">{{ link.label }}<span class="sr-only"> (opens in new tab)</span></span><span class="detail-row-arrow" aria-hidden="true">↗</span></a></li>
+          {%- endif -%}
+        {%- endfor -%}
+      {% endcapture %}
+      {% assign other_links = other_links | strip %}
+      {% if other_links != '' %}
+      <ul class="detail-links">{{ other_links }}</ul>
+      {% endif %}
+
+      {% if primary %}
+      <div class="detail-copy-wrap">
+        <div class="detail-copy">
+          <code>{{ primary.label }}</code>
+          <button type="button" data-copy="{{ primary.url }}" aria-label="Copy repository link" title="Copy link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 3.5v-1a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1"/></svg>
+          </button>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
     {% if page.toc != false %}
-    <div class="doc-outline-title">On this page</div>
-    {{ content | toc_only }}
+    <nav class="post-toc" aria-label="Contents">
+      <div class="toc-title">Contents</div>
+      {{ content | toc_only }}
+    </nav>
     {% endif %}
   </aside>
 </div>
+
+{% include page-scripts.html %}

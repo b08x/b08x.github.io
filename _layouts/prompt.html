@@ -2,38 +2,192 @@
 layout: notes
 body_class: prompts-bench
 ---
-
+{%- comment -%}
+  One prompt, same shell as the post and project pages: breadcrumb, big title,
+  article column on the left, sticky rail on the right. The engine (dials,
+  clause realization, ground check, export formats) lives in
+  _includes/prompt-bench.html; this file owns the markup it binds to.
+  Front matter used: title, tag, category, source, instructions, example, sfl.
+{%- endcomment -%}
+{%- assign words = page.title | split: ' ' -%}
+{%- assign initials = words[0] | slice: 0, 1 | append: words[1] | upcase | truncate: 2, '' -%}
+{%- assign clause_count = page.sfl.clauses | size -%}
 <style>
-  /* The permalink page carries the same bench, so the only extra chrome is
-     the way back into the library and whatever prose the prompt's own
-     markdown body adds beneath it. */
-  .prompt-return {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-5);
-    padding: var(--space-2) var(--space-3);
-    border: var(--border-width) solid var(--border);
-    border-radius: var(--radius-pill);
-    background: var(--surface);
-    color: var(--muted);
-    font-family: var(--font-ui);
-    font-size: var(--text-2xs);
-    letter-spacing: var(--tracking-wide);
-    text-decoration: none;
-    transition: color var(--transition-fast), border-color var(--transition-fast);
-  }
-  .prompt-return:hover { color: var(--foreground); border-color: var(--accent); }
+  {% include detail-frame.html %}
 
-  .prompt-notes {
-    margin-top: var(--space-8);
-    padding-top: var(--space-5);
-    border-top: var(--border-width) solid var(--border);
-    max-width: var(--measure-prose);
+  .pb .post-title { margin-bottom: 16px; }
+  .pb .bench-eyebrow { margin-bottom: 0; }
+  .pb .bench-tag { border-radius: var(--radius-xs); }
+  .pb .bench-tag.category { color: var(--rust); background: transparent; border-color: var(--rust); }
+
+  /* Sections: a grey tab sitting on a rule, like the post headings. */
+  .pb-section { margin-top: 56px; }
+  .pb-h {
+    display: flex;
+    align-items: flex-end;
+    margin: 0 0 20px;
+    font-family: var(--font-code);
+    font-size: 0.8125rem;
+    font-weight: var(--weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    line-height: 1.35;
+    color: var(--foreground);
+    border-bottom: var(--border-width) solid var(--border-2);
+  }
+  .pb-h span {
+    display: inline-block;
+    padding: 9px 14px;
+    background: var(--surface-2);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+  .pb-lede { margin: 0 0 20px; max-width: 62ch; color: var(--text-2); line-height: 1.65; }
+
+  /* ── Format tabs ── */
+  .pb-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    border-bottom: var(--border-width) solid var(--border-2);
+  }
+  .pb-tabs [role="tab"] {
+    flex-shrink: 0;
+    margin-bottom: -1px;
+    padding: 11px 16px;
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-2);
+    background: transparent;
+    border: var(--border-width) solid transparent;
+    border-bottom: none;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+  .pb-tabs [role="tab"]:hover { color: var(--foreground); }
+  .pb-tabs [role="tab"][aria-selected="true"] {
+    color: var(--foreground);
+    background: var(--card);
+    border-color: var(--border-2);
+    border-bottom: var(--border-width) solid var(--card);
+    box-shadow: inset 0 2px 0 var(--rust);
+  }
+
+  .pb-panel {
+    padding: 18px 22px 22px;
+    background: var(--card);
+    border: var(--border-width) solid var(--border-2);
+    border-top: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+  .pb-panel-note {
+    display: block;
+    margin-bottom: 14px;
+    font-family: var(--font-code);
+    font-size: 11.5px;
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-2);
+  }
+  .pb .bench-text { max-width: none; color: var(--foreground); font-size: 1rem; }
+  .pb .bench-clause[data-changed] {
+    border-inline-start-color: var(--rust);
+    background: color-mix(in oklab, var(--rust) 8%, transparent);
+  }
+  .pb .bench-clause.rider::before { color: var(--rust); }
+  .pb .bench-clause.lock::before { color: var(--rust); }
+
+  .pb-code {
+    margin: 0;
+    padding: 16px 18px;
+    max-height: 440px;
+    overflow: auto;
+    background: var(--bg-code);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-code);
+    font-size: 12.5px;
+    line-height: var(--leading-relaxed);
+    color: var(--foreground);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .pb-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .pb-actions .bench-btn { width: auto; padding: 10px 16px; }
+  .pb-actions .bench-btn.primary { background: var(--rust); border-color: var(--rust); color: var(--on-rust); }
+  .pb-actions .bench-btn.primary:hover { background: var(--foreground); border-color: var(--foreground); color: var(--background); }
+  .pb-actions .bench-btn:hover { border-color: var(--rust); }
+
+  .pb .ground-item { background: var(--card); }
+  .pb .ground-note { margin-top: 14px; max-width: 62ch; }
+
+  /* ── Workflow diagram ── */
+  .pb-figure { margin: 0; }
+  .pb-scroll { overflow-x: auto; }
+  .pb-d { display: block; width: 100%; min-width: 640px; height: auto; }
+  .pb-d .d-node { fill: var(--card); stroke: var(--foreground); stroke-width: 1; }
+  .pb-d .d-focal { fill: color-mix(in oklab, var(--rust) 8%, var(--card)); stroke: var(--rust); }
+  .pb-d .d-ground {
+    fill: color-mix(in oklab, var(--foreground) 4%, transparent);
+    stroke: color-mix(in oklab, var(--foreground) 35%, transparent);
+    stroke-dasharray: 4 3;
+  }
+  .pb-d [data-drift] .d-node {
+    fill: color-mix(in oklab, var(--rust) 8%, var(--card));
+    stroke: var(--rust);
+    stroke-dasharray: 4 4;
+  }
+  .pb-d .d-name { fill: var(--foreground); font: 600 12px var(--font-prose); }
+  .pb-d .d-sub { fill: var(--text-2); font: 8.5px var(--font-mono); }
+  .pb-d .d-flow { fill: none; stroke: var(--text-2); stroke-width: 1.2; }
+  .pb-d .d-flow.r { stroke: var(--rust); }
+  .pb-d .d-flow.dash { stroke-dasharray: 5 4; }
+  .pb-d .d-head { fill: var(--text-2); }
+  .pb-d .d-head.r { fill: var(--rust); }
+  .pb-d .d-rule { stroke: color-mix(in oklab, var(--foreground) 14%, transparent); stroke-width: 0.8; }
+  .pb-d .d-lg { fill: var(--text-2); font: 8px var(--font-mono); letter-spacing: 0.18em; }
+  .pb-d .d-lt { fill: var(--text-2); font: 8.5px var(--font-prose); }
+
+  .prompt-notes { margin-top: 56px; max-width: 46rem; }
+
+  /* ── Dials in the rail ── */
+  .pb-dials { margin-top: 20px; padding: 18px 22px 22px; }
+  .pb-dials-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+  .pb-dials-title {
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--foreground);
+  }
+  .pb-reset {
+    padding: 2px 0;
+    font-family: var(--font-code);
+    font-size: 11.5px;
+    color: var(--text-2);
+    background: none;
+    border: none;
+    border-bottom: var(--border-width) solid var(--border-2);
+    cursor: pointer;
+  }
+  .pb-reset:hover { color: var(--rust); border-color: var(--rust); }
+  .pb-dials .dial + .dial { margin-top: 14px; }
+  .pb-dials .dial-label { margin-bottom: 2px; }
+  .pb-dials .dial-value { color: var(--rust); }
+  .pb-dials .dial-note { display: none; }
+  .pb-dials .dial-poles { color: var(--text-2); }
+  .pb-dials .dial input[type="range"]::-webkit-slider-thumb { background: var(--rust); border-color: var(--card); }
+  .pb-dials .dial input[type="range"]::-moz-range-thumb { background: var(--rust); border-color: var(--card); }
+  .detail-row dd.pb-source { font-weight: var(--weight-regular); font-size: 0.8125rem; overflow-wrap: anywhere; }
+
+  @media (max-width: 900px) {
+    .pb .detail-rail { grid-row: auto; padding-top: 40px; }
   }
 </style>
-
-<a href="{{ '/projects/prompt-library/' | relative_url }}" class="prompt-return">&larr; back to prompts</a>
 
 <script type="application/json" id="prompts-data">
 [
@@ -49,10 +203,158 @@ body_class: prompts-bench
 ]
 </script>
 
-{% include prompt-bench.html mode="single" %}
+<div class="detail pb" id="bench" data-mode="single">
+  <article class="detail-main">
+    {% include crumbs.html parent_label="Prompts" parent_url="/projects/prompt-library/" %}
 
-{% if content != "" %}
-<div class="prompt-notes post-content">
-  {{ content }}
+    <h1 class="post-title" id="bench-title">{{ page.title }}</h1>
+    <div class="bench-eyebrow" id="bench-eyebrow"></div>
+
+    <section class="pb-section" aria-labelledby="pb-h-get">
+      <h2 class="pb-h" id="pb-h-get"><span>Get the prompt</span></h2>
+      <div class="pb-tabs" role="tablist" aria-label="Prompt format">
+        <button type="button" role="tab" id="pb-tab-realized" data-format="realized" aria-selected="true" aria-controls="pb-panel">Realized</button>
+        <button type="button" role="tab" id="pb-tab-text" data-format="text" aria-selected="false" aria-controls="pb-panel" tabindex="-1">Text</button>
+        <button type="button" role="tab" id="pb-tab-markdown" data-format="markdown" aria-selected="false" aria-controls="pb-panel" tabindex="-1">Markdown</button>
+        <button type="button" role="tab" id="pb-tab-chat" data-format="chat" aria-selected="false" aria-controls="pb-panel" tabindex="-1">Chat API</button>
+        <button type="button" role="tab" id="pb-tab-json" data-format="json" aria-selected="false" aria-controls="pb-panel" tabindex="-1">JSON</button>
+      </div>
+      <div class="pb-panel" id="pb-panel" role="tabpanel" aria-labelledby="pb-tab-realized">
+        <span class="pb-panel-note" id="bench-realization-note"></span>
+        <div id="pb-realized"><div class="bench-text" id="bench-text"></div></div>
+        <pre class="pb-code" id="pb-code" tabindex="0" hidden><code id="bench-out"></code></pre>
+      </div>
+      <div class="pb-actions">
+        <button type="button" class="bench-btn primary" id="bench-copy">Copy text</button>
+        <button type="button" class="bench-btn" id="bench-download">Download .txt</button>
+        <button type="button" class="bench-btn" id="bench-share">Copy link</button>
+        <span class="sr-only" id="pb-status" role="status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <section class="pb-section" aria-labelledby="pb-h-how">
+      <h2 class="pb-h" id="pb-h-how"><span>How it works</span></h2>
+      <p class="pb-lede">Move a dial and the pipeline re-runs: the prompt's clauses are re-picked, the ground is re-checked, and whatever you export is cut from that result.</p>
+      <figure class="pb-figure">
+        <div class="pb-scroll">
+<svg id="pb-diagram" class="pb-d" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="pb-d-title pb-d-desc">
+  <title id="pb-d-title">How a prompt is realized</title>
+  <desc id="pb-d-desc">Workflow: the authored prompt and the dials feed a realize step; the realized text is checked against the ground, which the dials never touch, and exported as text, markdown, chat messages or JSON. The values in the boxes update live as the dials move.</desc>
+  <defs>
+    <marker id="pb-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="d-head"/></marker>
+    <marker id="pb-arrow-r" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L8,4 L0,8 Z" class="d-head r"/></marker>
+  </defs>
+
+  <path class="d-flow" d="M180 168 H220" marker-end="url(#pb-arrow)"/>
+  <path class="d-flow" d="M380 168 H420" marker-end="url(#pb-arrow)"/>
+  <path class="d-flow" d="M580 168 H620" marker-end="url(#pb-arrow)"/>
+  <path class="d-flow r" d="M300 96 V136" marker-end="url(#pb-arrow-r)"/>
+  <path class="d-flow dash" d="M500 240 V200" marker-end="url(#pb-arrow)"/>
+  <path class="d-flow dash" d="M100 200 V264 a8 8 0 0 0 8 8 H420" marker-end="url(#pb-arrow)"/>
+
+  <g>
+    <rect class="d-node" x="20" y="136" width="160" height="64" rx="6"/>
+    <text class="d-name" x="34" y="160">Authored prompt</text>
+    <text class="d-sub" x="34" y="177" id="pb-d-authored-1"></text>
+    <text class="d-sub" x="34" y="190" id="pb-d-authored-2"></text>
+  </g>
+  <g>
+    <rect class="d-node" x="220" y="136" width="160" height="64" rx="6"/>
+    <text class="d-name" x="234" y="160">Realize</text>
+    <text class="d-sub" x="234" y="177" id="pb-d-realize-1"></text>
+    <text class="d-sub" x="234" y="190" id="pb-d-realize-2"></text>
+  </g>
+  <g id="pb-d-check">
+    <rect class="d-node" x="420" y="136" width="160" height="64" rx="6"/>
+    <text class="d-name" x="434" y="160">Anchor check</text>
+    <text class="d-sub" x="434" y="177" id="pb-d-check-1"></text>
+    <text class="d-sub" x="434" y="190" id="pb-d-check-2"></text>
+  </g>
+  <g>
+    <rect class="d-node" x="620" y="136" width="160" height="64" rx="6"/>
+    <text class="d-name" x="634" y="160">Export</text>
+    <text class="d-sub" x="634" y="177" id="pb-d-export-1"></text>
+    <text class="d-sub" x="634" y="190" id="pb-d-export-2"></text>
+  </g>
+  <g>
+    <rect class="d-node d-focal" x="140" y="32" width="320" height="64" rx="6"/>
+    <text class="d-name" x="156" y="56">Dials</text>
+    <text class="d-sub" x="156" y="73" id="pb-d-dials-1"></text>
+    <text class="d-sub" x="156" y="86">tenor · modality · imagery · abstraction · novelty</text>
+  </g>
+  <g>
+    <rect class="d-node d-ground" x="420" y="240" width="160" height="64" rx="6"/>
+    <text class="d-name" x="434" y="264">Ground</text>
+    <text class="d-sub" x="434" y="281" id="pb-d-ground-1"></text>
+    <text class="d-sub" x="434" y="294">held outside the dials</text>
+  </g>
+
+  <line class="d-rule" x1="20" y1="324" x2="780" y2="324"/>
+  <text class="d-lg" x="20" y="344">LEGEND</text>
+  <line class="d-flow" x1="90" y1="341" x2="112" y2="341"/>
+  <text class="d-lt" x="120" y="344">Data flow</text>
+  <line class="d-flow dash" x1="214" y1="341" x2="236" y2="341"/>
+  <text class="d-lt" x="244" y="344">Ground: never dialed</text>
+  <rect class="d-node d-focal" x="400" y="337" width="16" height="8"/>
+  <text class="d-lt" x="424" y="344">The dials you control</text>
+  <rect class="d-node" x="590" y="337" width="16" height="8" style="fill: color-mix(in oklab, var(--rust) 8%, var(--card)); stroke: var(--rust); stroke-dasharray: 4 4"/>
+  <text class="d-lt" x="614" y="344">Anchor drift (live)</text>
+</svg>
+        </div>
+      </figure>
+    </section>
+
+    <section class="pb-section" aria-labelledby="pb-h-ground">
+      <h2 class="pb-h" id="pb-h-ground"><span>Ground: invariant</span></h2>
+      <div id="bench-ground"></div>
+      <p class="ground-note">The dials change how these propositions are realized, never which propositions are made. Each anchor is re-checked against the generated text after every adjustment.</p>
+    </section>
+
+    <section class="pb-section" id="bench-example-section" aria-labelledby="pb-h-example">
+      <h2 class="pb-h" id="pb-h-example"><span>Example output</span></h2>
+      <code class="bench-code" id="bench-example"></code>
+    </section>
+
+    {% if content != "" %}
+    <div class="prompt-notes post-content">
+      {{ content }}
+    </div>
+    {% endif %}
+  </article>
+
+  <aside class="detail-rail" aria-label="Prompt details">
+    <div class="detail-card">
+      <div class="detail-card-top">
+        <div class="detail-card-head">
+          <span class="detail-icon" aria-hidden="true">{{ initials }}</span>
+          <h2 class="detail-card-title">{{ page.title }}</h2>
+        </div>
+      </div>
+      <dl class="detail-facts">
+        {% if page.category %}<div class="detail-row"><dt>Category</dt><dd>{{ page.category }}</dd></div>{% endif %}
+        {% if page.tag %}<div class="detail-row"><dt>Tag</dt><dd>#{{ page.tag }}</dd></div>{% endif %}
+        <div class="detail-row"><dt>Clauses</dt><dd>{% if clause_count > 0 %}{{ clause_count }}{% else %}static{% endif %}</dd></div>
+        {% if page.source %}<div class="detail-row"><dt>Source</dt><dd class="pb-source">{{ page.source }}</dd></div>{% endif %}
+      </dl>
+      <div class="detail-copy-wrap">
+        <div class="detail-copy">
+          <code>{{ page.url }}</code>
+          <button type="button" data-copy="{{ page.url | absolute_url }}" aria-label="Copy prompt page link" title="Copy link">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 3.5v-1a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-card pb-dials">
+      <div class="pb-dials-head">
+        <h2 class="pb-dials-title">Dials</h2>
+        <button type="button" class="pb-reset" id="bench-reset">Reset</button>
+      </div>
+      <div id="bench-dials"></div>
+    </div>
+  </aside>
 </div>
-{% endif %}
+
+{% include prompt-bench.html mode="single" %}
+{% include page-scripts.html %}

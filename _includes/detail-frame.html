@@ -1,0 +1,201 @@
+{%- comment -%}
+  Shared frame for detail pages with a sticky right rail (project profiles and
+  prompt pages): the article/rail grid, the info card (icon, title, tags, key
+  rows, link rows, copyable field) and the mobile collapse. Included inside a
+  <style> block by _layouts/project.html and _layouts/prompt.html, the same way
+  detail-shell.html is for docs.
+{%- endcomment -%}
+  .detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    align-items: start;
+  }
+
+  .detail-main { padding-right: 48px; min-width: 0; }
+  .detail-main .crumbs { margin-bottom: 40px; }
+
+  /* ── Rail ───────────────────────────────────────────────── */
+  .detail-rail {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-4));
+    max-height: calc(100vh - var(--header-h) - var(--space-6));
+    overflow-y: auto;
+    padding-left: 40px;
+    border-left: var(--border-width) solid var(--border-2);
+  }
+
+  .detail-card {
+    background: var(--card);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .detail-card-top { padding: 22px 22px 20px; }
+
+  .detail-card-head { display: flex; align-items: center; gap: 14px; }
+
+  .detail-icon {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
+    border: var(--border-width) solid var(--border-2);
+    font-family: var(--font-code);
+    font-size: 16px;
+    font-weight: var(--weight-bold);
+    color: var(--rust);
+  }
+
+  .detail-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+
+  .detail-card-title {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--foreground);
+    overflow-wrap: break-word;
+  }
+
+  .detail-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .detail-status::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  .detail-status[data-status="active"]::before { background: var(--status-success); }
+  .detail-status[data-status="alpha"]::before,
+  .detail-status[data-status="beta"]::before { background: var(--rust); }
+
+  .detail-card .tag-row { margin-top: 18px; }
+
+  .detail-facts, .detail-links, .detail-copy-wrap {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: var(--border-width) solid var(--border);
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 22px;
+    font-size: 0.9375rem;
+    color: var(--text-2);
+  }
+
+  .detail-row + .detail-row { border-top: var(--border-width) solid var(--border); }
+  .detail-row dt { color: var(--text-2); }
+  .detail-row dd { margin: 0; font-weight: var(--weight-semibold); color: var(--foreground); text-align: right; }
+
+  .detail-links a.detail-row { color: var(--foreground); transition: background var(--transition-fast); }
+  .detail-links a.detail-row:hover { background: var(--surface); }
+  .detail-row-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .detail-row-arrow { flex-shrink: 0; color: var(--rust); }
+
+  .detail-copy-wrap { padding: 16px 22px 20px; }
+
+  .detail-copy {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 4px 4px 14px;
+    background: var(--background);
+    border: var(--border-width) solid var(--border-2);
+    border-radius: var(--radius-sm);
+  }
+
+  .detail-copy code {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 0;
+    overflow-wrap: anywhere;
+    font-family: var(--font-code);
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--foreground);
+  }
+
+  .detail-copy button {
+    position: relative;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    color: var(--text-2);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-xs);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+
+  .detail-copy button:hover { color: var(--rust); }
+  .detail-copy button[hidden], .crumb-copy[hidden] { display: none; }
+
+  .detail-copy button[data-state="copied"]::after {
+    content: "Copied";
+    position: absolute;
+    bottom: calc(100% + 6px);
+    right: 0;
+    padding: 3px 8px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    white-space: nowrap;
+    color: var(--background);
+    background: var(--foreground);
+    border-radius: var(--radius-xs);
+  }
+
+  .detail-rail .post-toc {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    margin-top: 32px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 900px) {
+    .detail { grid-template-columns: minmax(0, 1fr); }
+    .detail-main { padding-right: 0; }
+    .detail-rail {
+      grid-row: 1;
+      position: static;
+      max-height: none;
+      overflow: visible;
+      padding: 0 0 32px;
+      border-left: none;
+    }
+    .detail-rail .post-toc { display: none; }
+  }
