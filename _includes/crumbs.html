@@ -1,0 +1,14 @@
+{%- comment -%}
+  Breadcrumb row shared by the post and project layouts: trail, a rule that
+  fills the gap, and a copy-link button (wired up in page-scripts.html).
+  Params: parent_label (default "Notebook"), parent_url (default "/").
+{%- endcomment -%}
+<nav class="crumbs" aria-label="Breadcrumb">
+  <a href="{{ include.parent_url | default: '/' }}">{{ include.parent_label | default: 'Notebook' }}</a>
+  <span class="crumb-sep" aria-hidden="true">›</span>
+  <span class="crumb-current" aria-current="page">{{ page.title }}</span>
+  <span class="crumb-rule" aria-hidden="true"></span>
+  <button type="button" class="crumb-copy" data-copy-link aria-label="Copy link to this page" title="Copy link">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 3.5v-1a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1"/></svg>
+  </button>
+</nav>

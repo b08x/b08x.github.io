@@ -18,7 +18,7 @@ layout: default
     font-size: var(--text-2xl);
     font-weight: var(--weight-bold);
     letter-spacing: var(--tracking-tight);
-    color: var(--accent);
+    color: var(--heading);
     margin: 0 0 6px;
   }
 
@@ -187,47 +187,123 @@ layout: default
     flex-shrink: 0;
   }
 
-  /* ── Single post layout (article + TOC rail) ── */
-  .post { margin: 0 auto; }
+  /* ── Single post layout (card: breadcrumb, title, text column + Contents rail) ── */
+  .post {
+    --measure: 50rem;
+    max-width: calc(var(--measure) + 40px + var(--toc-w) + 96px);
+    margin: 0 auto;
+    padding: 28px 48px 64px;
+    background: var(--card);
+    border: var(--border-width) solid var(--border);
+    border-radius: 16px;
+  }
+  .post-header { max-width: var(--measure); }
+
+  /* Breadcrumb row: trail, a rule that fills the gap, copy-link button. */
+  .crumbs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 44px;
+    font-family: var(--font-code);
+    font-size: 12px;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+  .crumbs a { color: var(--text-2); flex-shrink: 0; }
+  .crumbs a:hover { color: var(--rust); }
+  .crumb-current {
+    min-width: 0;
+    flex: 0 1 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: var(--weight-bold);
+    color: var(--foreground);
+  }
+  .crumb-rule { flex: 1 1 24px; min-width: 24px; height: 1px; background: var(--border-2); }
+  .crumb-copy {
+    position: relative;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-2);
+    background: transparent;
+    border: var(--border-width) solid var(--border-2);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+  .crumb-copy:hover { color: var(--rust); border-color: var(--rust); }
+  .crumb-copy[data-state="copied"]::after {
+    content: "Copied";
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    padding: 3px 8px;
+    font-size: 11px;
+    letter-spacing: var(--tracking-wide);
+    white-space: nowrap;
+    color: var(--background);
+    background: var(--foreground);
+    border-radius: var(--radius-xs);
+  }
 
   .post-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) var(--toc-w);
+    grid-template-columns: minmax(0, var(--measure)) var(--toc-w);
     gap: 40px;
     align-items: start;
   }
 
-  .post-content { max-width: 95ch; }
-
+  /* Contents rail: a rule down the left, a rust square on the current section. */
   .post-toc {
     position: sticky;
     top: calc(var(--header-h) + var(--space-4));
-    font-family: var(--font-ui);
-    font-size: 11.5px;
+    font-family: var(--font-prose);
+    font-size: 13.5px;
     max-height: calc(100vh - var(--header-h) - var(--space-6));
     overflow-y: auto;
   }
 
   .post-toc .toc-title {
-    font-size: 10px;
-    letter-spacing: var(--tracking-widest);
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
-    color: var(--dim);
-    margin-bottom: 10px;
+    color: var(--foreground);
+    margin-bottom: 16px;
   }
 
-  .post-toc ul { list-style: none; margin: 0; padding: 0; }
-  .post-toc ul ul { padding-left: var(--space-3); }
+  .post-toc ul { list-style: none; margin: 0; padding: 0; border-left: var(--border-width) solid var(--border-2); }
+  .post-toc ul ul { padding-left: 14px; border-left: none; }
 
   .post-toc a {
+    position: relative;
     display: block;
-    color: var(--muted);
-    padding: 3px 0;
+    padding: 5px 0 5px 16px;
+    color: var(--text-2);
     line-height: var(--leading-normal);
     transition: color var(--transition-fast);
   }
 
-  .post-toc a:hover { color: var(--accent); }
+  .post-toc a:hover { color: var(--foreground); }
+  .post-toc a.active { color: var(--foreground); font-weight: var(--weight-semibold); }
+  .post-toc a.active::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    background: var(--rust);
+    transform: translateY(-50%);
+  }
 
   /* ── Pagination ── */
   .pager {
@@ -253,12 +329,14 @@ layout: default
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
-    .post-layout { grid-template-columns: 1fr; }
+    .post-layout { grid-template-columns: minmax(0, 1fr); }
     .post-toc { display: none; }
   }
 
   @media (max-width: 700px) {
     .container, .container.wide { padding: 26px 16px 60px; }
+    .post { padding: 20px 18px 44px; border-radius: 12px; }
+    .crumbs { margin-bottom: 28px; }
     footer { padding: var(--space-5) 16px 48px; }
     .featured-card { grid-template-columns: 1fr; }
     .featured-shot { min-height: 160px; aspect-ratio: 16 / 9; }
@@ -266,6 +344,6 @@ layout: default
   }
 </style>
 
-<div class="container{% if page.layout == 'post' %} wide{% endif %}">
+<div class="container{% if page.layout == 'post' or page.layout == 'project' or page.layout == 'prompt' %} wide{% endif %}">
   {{ content }}
 </div>

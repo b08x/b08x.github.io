@@ -1,0 +1,58 @@
+{%- comment -%}
+  Behaviour shared by the post and project layouts:
+  - [data-copy-link] copies the page URL; [data-copy="text"] copies that text.
+  - The Contents rail (.post-toc) marks the section currently under the header.
+{%- endcomment -%}
+<script>
+(function () {
+  document.querySelectorAll('[data-copy], [data-copy-link]').forEach(function (btn) {
+    if (!navigator.clipboard) { btn.hidden = true; return; }
+    var label = btn.getAttribute('aria-label');
+    btn.addEventListener('click', function () {
+      var text = btn.dataset.copy || location.href.split('#')[0];
+      navigator.clipboard.writeText(text).then(function () {
+        btn.dataset.state = 'copied';
+        btn.setAttribute('aria-label', 'Copied');
+        setTimeout(function () {
+          delete btn.dataset.state;
+          btn.setAttribute('aria-label', label);
+        }, 1600);
+      });
+    });
+  });
+
+  var toc = document.querySelector('.post-toc');
+  if (!toc) return;
+  var links = {};
+  toc.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    links[decodeURIComponent(a.getAttribute('href').slice(1))] = a;
+  });
+  var heads = Array.prototype.filter.call(
+    document.querySelectorAll('.post-content h2[id], .post-content h3[id]'),
+    function (h) { return links[h.id]; });
+  if (!heads.length) return;
+  var current, ticking = false;
+  function mark(id) {
+    if (current === id) return;
+    if (current) { links[current].classList.remove('active'); links[current].removeAttribute('aria-current'); }
+    current = id;
+    links[id].classList.add('active');
+    links[id].setAttribute('aria-current', 'location');
+  }
+  // Current section = the last heading that has scrolled past the header;
+  // at the very bottom of the page, the last one (it may never reach the top).
+  function update() {
+    ticking = false;
+    var atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    var id = heads[0].id;
+    if (atEnd) id = heads[heads.length - 1].id;
+    else heads.forEach(function (h) { if (h.getBoundingClientRect().top <= 120) id = h.id; });
+    mark(id);
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
