@@ -51,7 +51,6 @@ gem 'pry-doc'
 
 gem 'json_canvas'
 
-gem 'gum', '~> 0.3.2'
 gem 'image_processing'
 gem 'kreuzberg'
 gem 'ruby_llm'
