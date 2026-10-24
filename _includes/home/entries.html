@@ -1,0 +1,72 @@
+{% comment %}
+  Entry section: a section head (kicker + optional "all →" link)
+  over an ordered list of entry rows, with the pager after the
+  list when this section is the paginated one.
+
+  Parameters:
+    kicker    — section label, e.g. "Writing"
+    items     — the documents to list
+    kind      — "post" (date + tags + reading time) or "note"
+                (tags + kind label; date only when present)
+    all_url / all_label — optional right-hand link
+    paginate  — true to render the post pager after the list
+
+  Row anatomy: meta column (date · tags · reading time) beside
+  title + lede. The meta column moves above the title in a
+  single stack below 600px of container width — see the
+  @container rule in _layouts/home.html.
+{% endcomment %}
+<section class="home-sec">
+  <div class="home-sec-hd">
+    <h2 class="home-kicker">{{ include.kicker }}</h2>
+    {% if include.all_url %}
+    <a class="home-sec-l" href="{{ include.all_url | relative_url }}">{{ include.all_label }} <span aria-hidden="true">→</span></a>
+    {% endif %}
+  </div>
+
+  <ol class="entries">
+    {% for item in include.items %}
+    <li class="entry">
+      <div class="entry-meta">
+        {% if item.date %}
+        <time class="entry-date" datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%b %-d, %Y" }}</time>
+        {% endif %}
+        {% if item.tags and item.tags.size > 0 %}
+        <div class="tag-row">
+          {% for tag in item.tags %}<span class="tag"><b>#</b>{{ tag }}</span>{% endfor %}
+        </div>
+        {% endif %}
+        {% if include.kind == "post" %}
+        <span class="entry-time">{{ item.content | number_of_words | plus: 179 | divided_by: 180 }} min</span>
+        {% else %}
+        <span class="entry-time">note</span>
+        {% endif %}
+      </div>
+      <div class="entry-body">
+        <h3 class="entry-title"><a href="{{ item.url | relative_url }}">{{ item.title }}</a></h3>
+        {% if item.description %}
+        <p class="entry-blurb">{{ item.description }}</p>
+        {% elsif item.excerpt %}
+        <p class="entry-blurb">{{ item.excerpt | strip_html | truncatewords: 26 }}</p>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+
+  {% if include.paginate and paginator.total_pages > 1 %}
+  <nav class="pager">
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" class="pager-link">← Newer</a>
+    {% else %}
+    <span class="pager-link disabled">← Newer</span>
+    {% endif %}
+    <span class="pager-info">page {{ paginator.page }} / {{ paginator.total_pages }}</span>
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" class="pager-link">Older →</a>
+    {% else %}
+    <span class="pager-link disabled">Older →</span>
+    {% endif %}
+  </nav>
+  {% endif %}
+</section>

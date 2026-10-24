@@ -1,0 +1,35 @@
+{% comment %}
+  Side rail: the Projects section — kicker + "all →" link over
+  cards for every _data/projects.yml entry flagged card: true.
+  Card anatomy: name · spec line (badge · year) · description ·
+  destination, with the url pushed to the card floor so the
+  stack aligns even when descriptions differ in length.
+{% endcomment %}
+{% assign projects = site.data.projects | where: "card", true %}
+{% if projects.size > 0 %}
+<section class="home-sec">
+  <div class="home-sec-hd">
+    <h2 class="home-kicker">Projects</h2>
+    <a class="home-sec-l" href="/projects/">All projects <span aria-hidden="true">→</span></a>
+  </div>
+
+  <div class="home-pgrid">
+    {% for project in projects %}
+    <a class="pc" href="{% if project.external %}{{ project.url }}{% else %}{{ project.url | relative_url }}{% endif %}"{% if project.external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+      <span class="pc-name">{{ project.title }}</span>
+      {% if project.badge or project.year %}
+      <span class="pc-meta">{% if project.badge %}{{ project.badge }}{% endif %}{% if project.badge and project.year %} · {% endif %}{% if project.year %}{{ project.year }}{% endif %}</span>
+      {% endif %}
+      {% if project.description %}<p class="pc-desc">{{ project.description }}</p>{% endif %}
+      <span class="pc-url">
+        {% if project.external %}
+        {{ project.url | remove: 'https://' | remove: 'http://' }} <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span>
+        {% else %}
+        {{ project.url }} <span aria-hidden="true">→</span>
+        {% endif %}
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
