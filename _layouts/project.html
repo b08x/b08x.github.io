@@ -5,12 +5,21 @@ layout: notes
   Project profile: article column on the left, a sticky rail on the right
   with an info card (name, status, tags, facts, links, copyable repo) and the
   Contents list. Front matter used: title, description, status, timeframe,
-  tags, links (label/url/internal), image, image_alt, icon, toc.
+  tags, links (label/url/internal), repo (repository web URL — defaults to
+  the first external link), fork_of (name + url — renders the fork badge),
+  image, image_alt, icon, toc.
 {%- endcomment -%}
 {%- assign primary = nil -%}
 {%- for link in page.links -%}
   {%- unless link.internal -%}{%- unless primary -%}{%- assign primary = link -%}{%- endunless -%}{%- endunless -%}
 {%- endfor -%}
+{%- comment -%}
+  repo_url — the repository link rendered as a web URL in the rail: an
+  explicit `repo:` in front matter wins, else the first external link
+  (the conventional repo entry). Used by the repository row and the
+  copy field; the links loop below skips whichever link it covers.
+{%- endcomment -%}
+{%- assign repo_url = page.repo | default: primary.url -%}
 {%- assign words = page.title | split: ' ' -%}
 {%- assign initials = words[0] | slice: 0, 1 | append: words[1] | upcase | truncate: 2, '' -%}
 <style>
@@ -60,6 +69,37 @@ layout: notes
     margin-top: 56px;
   }
   .detail .post-content h2:first-child { margin-top: 0; }
+
+  /* ── Fork note: "FORK of owner/repo ↗" in the rail card ── */
+  .fork-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 16px 0 0;
+    font-family: var(--font-code);
+    font-size: var(--text-2xs);
+    color: var(--text-2);
+  }
+
+  .fork-badge {
+    padding: 2px 7px;
+    background: var(--surface-2);
+    border: var(--border-width) solid var(--border-2);
+    border-radius: var(--radius-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--rust);
+  }
+
+  .fork-note a {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .fork-note a:hover { color: var(--rust); }
 </style>
 
 <div class="detail">
@@ -93,8 +133,11 @@ layout: notes
         </div>
         {% if page.tags and page.tags.size > 0 %}
         <div class="tag-row">
-          {% for tag in page.tags %}<span class="tag"><b>#</b>{{ tag }}</span>{% endfor %}
+          {% for tag in page.tags %}<a class="tag" href="/tags/{{ tag | slugify }}/"><b>#</b>{{ tag }}</a>{% endfor %}
         </div>
+        {% endif %}
+        {% if page.fork_of %}
+        <p class="fork-note"><span class="fork-badge">fork</span><span>of <a href="{{ page.fork_of.url }}" target="_blank" rel="noopener noreferrer">{{ page.fork_of.name }}<span class="sr-only"> (opens in new tab)</span> <span aria-hidden="true">↗</span></a></span></p>
         {% endif %}
       </div>
 
@@ -106,8 +149,11 @@ layout: notes
       {% endif %}
 
       {% capture other_links %}
+        {%- if repo_url -%}
+        <li><a class="detail-row detail-row-repo" href="{{ repo_url }}" target="_blank" rel="noopener noreferrer"><span class="detail-row-label">repository<span class="sr-only"> (opens in new tab)</span></span><span class="detail-row-arrow" aria-hidden="true">↗</span></a></li>
+        {%- endif -%}
         {%- for link in page.links -%}
-          {%- if link == primary -%}{%- continue -%}{%- endif -%}
+          {%- if link.url == repo_url -%}{%- continue -%}{%- endif -%}
           {%- if link.internal -%}
           <li><a class="detail-row" href="{{ link.url | relative_url }}"><span class="detail-row-label">{{ link.label }}</span><span class="detail-row-arrow" aria-hidden="true">→</span></a></li>
           {%- else -%}
@@ -120,11 +166,11 @@ layout: notes
       <ul class="detail-links">{{ other_links }}</ul>
       {% endif %}
 
-      {% if primary %}
+      {% if repo_url %}
       <div class="detail-copy-wrap">
         <div class="detail-copy">
-          <code>{{ primary.label }}</code>
-          <button type="button" data-copy="{{ primary.url }}" aria-label="Copy repository link" title="Copy link">
+          <code>{{ repo_url | remove: 'https://' | remove: 'http://' }}</code>
+          <button type="button" data-copy="{{ repo_url }}" aria-label="Copy repository link" title="Copy link">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 3.5v-1a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1"/></svg>
           </button>
         </div>

@@ -17,8 +17,8 @@
     {% for project in projects %}
     <a class="pc" href="{% if project.external %}{{ project.url }}{% else %}{{ project.url | relative_url }}{% endif %}"{% if project.external %} target="_blank" rel="noopener noreferrer"{% endif %}>
       <span class="pc-name">{{ project.title }}</span>
-      {% if project.badge or project.year %}
-      <span class="pc-meta">{% if project.badge %}{{ project.badge }}{% endif %}{% if project.badge and project.year %} · {% endif %}{% if project.year %}{{ project.year }}{% endif %}</span>
+      {% if project.badge or project.year or project.fork_of %}
+      <span class="pc-meta">{% if project.badge %}{{ project.badge }}{% endif %}{% if project.badge and project.year %} · {% endif %}{% if project.year %}{{ project.year }}{% endif %}{% if project.fork_of %}{% if project.badge or project.year %} · {% endif %}fork{% endif %}</span>
       {% endif %}
       {% if project.description %}<p class="pc-desc">{{ project.description }}</p>{% endif %}
       <span class="pc-url">

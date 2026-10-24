@@ -11,6 +11,12 @@
 # - year: Release or project year
 # - tags: Array of keyword tags
 # - card: true to feature on the landing page (index.md / home layout), false to display only on /projects/
+# - repo: Repository web URL (https://) — adds a "repo ↗" link on the /projects/ row.
+#   Project pages (layout: project) also derive a repo link from their first external
+#   `links:` entry, so `repo:` here is for registry rows that point at an internal page.
+# - fork_of: {name: "owner/repo", url: "https://github.com/..."} — marks the entry as a
+#   fork of an external repository; renders the fork badge and upstream link on the
+#   project page, the /projects/ row and the home card. Omit for standalone work.
 
 #- title: "Trackboi"
 #  description: "A localized task and track management tool designed for agentic AI and human pair programming workflows. Uses local context and MCP server integration."
@@ -26,6 +32,7 @@
   description: "Stance-filtered RAG for LLM security — separates what was said from how it was said, then filters the how before it reaches the model."
   url: "/sfl-engine/"
   external: false
+  repo: "https://github.com/b08x/sfl-engine"
   badge: "research · ruby"
   badge_class: "badge-green"
   year: "2025"
@@ -56,6 +63,7 @@
   description: "A visual development environment for AI agents — a guided wizard for identity, capabilities, models, and compliance that exports a complete, validated agent package."
   url: "/gitagent-workbench/"
   external: false
+  repo: "https://github.com/b08x/gitagent-workbench"
   badge: "tool · web"
   badge_class: "badge-blue"
   year: "2026"
