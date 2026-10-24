@@ -191,11 +191,12 @@
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-md);
     padding: 16px 20px;
-    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
     font-size: 14px;
     line-height: var(--leading-relaxed);
   }
-  .deck-slide .deck-body pre code { background: none; color: var(--foreground); padding: 0; }
+  .deck-slide .deck-body pre code { background: none; color: var(--foreground); padding: 0; white-space: inherit; }
   .deck-slide .deck-body ul, .deck-slide .deck-body ol { padding-left: 1.4em; }
   .deck-slide .deck-body blockquote {
     border-left: var(--border-accent) solid var(--accent);
