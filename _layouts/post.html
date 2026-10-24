@@ -5,7 +5,7 @@ layout: notes
   {% include crumbs.html %}
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
-    {% if page.date or page.tags.size > 0 or page.categories.size > 0 %}
+    {% if page.date or page.tags.size > 0 or page.categories.size > 0 or page.author %}
     <div class="post-meta">
       {% if page.date %}<span>{{ page.date | date: "%B %-d, %Y" }}</span>{% endif %}
       {% if page.categories and page.categories.size > 0 %}
@@ -17,6 +17,11 @@ layout: notes
         <div class="tag-row">
           {% for tag in page.tags %}<a class="tag" href="/tags/{{ tag | slugify }}/"><b>#</b>{{ tag }}</a>{% endfor %}
         </div>
+      {% endif %}
+      {% if page.author %}
+        {%- assign persona_url = '/about/personas/' | append: page.author | append: '/' -%}
+        {%- assign persona = site.personas | where: 'url', persona_url | first -%}
+        <a class="post-author" href="{{ persona_url }}">by {{ persona.title | default: page.author }}</a>
       {% endif %}
     </div>
     {% endif %}

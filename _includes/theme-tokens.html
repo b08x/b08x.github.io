@@ -433,6 +433,21 @@ a.tag:hover {
   flex-wrap: wrap;
 }
 
+/* ── Byline: link to the author persona profile ───────────── */
+.post-author {
+  font-family: var(--font-code);
+  color: var(--text-2);
+  text-decoration: underline;
+  text-decoration-color: var(--border-2);
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+.post-author:hover {
+  color: var(--rust);
+  text-decoration-color: var(--rust);
+}
+
 /* ── Link label (repo ↗) ──────────────────────────────────── */
 .link-label {
   font-family: var(--font-code);

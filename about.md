@@ -27,6 +27,8 @@ links:
     external: true
   - label: "projects"
     url: "/projects/"
+  - label: "personas"
+    url: "/about/personas/"
 ---
 
 Placeholder prose. This column is the reading surface: standard Markdown,

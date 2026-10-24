@@ -66,6 +66,10 @@ defaults:
       layout: doc
       toc: true
       body_class: docs
+  - scope:
+      path: "_personas"
+    values:
+      layout: persona
 
 collections:
   notes:
@@ -74,6 +78,9 @@ collections:
   projects:
     output: true
     permalink: /:path/
+  personas:
+    output: true
+    permalink: /about/personas/:path/
   docs:
     output: true
     permalink: /docs/:path/
