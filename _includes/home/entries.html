@@ -33,7 +33,7 @@
         {% endif %}
         {% if item.tags and item.tags.size > 0 %}
         <div class="tag-row">
-          {% for tag in item.tags %}<span class="tag"><b>#</b>{{ tag }}</span>{% endfor %}
+          {% for tag in item.tags %}<a class="tag" href="/tags/{{ tag | slugify }}/"><b>#</b>{{ tag }}</a>{% endfor %}
         </div>
         {% endif %}
         {% if include.kind == "post" %}

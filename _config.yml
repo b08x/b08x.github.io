@@ -97,7 +97,11 @@ exclude:
   - .mcp.json
   - goals
 
-permalink: pretty
+# Explicit, without :categories — "pretty" expands to
+# /:categories/:year/:month/:day/:title/, which would move every post's URL
+# the moment a category is filed. Categories group (see _plugins/taxonomy.rb),
+# they don't address.
+permalink: /:year/:month/:day/:title/
 relative_permalinks: false
 
 plugins:

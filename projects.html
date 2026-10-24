@@ -13,6 +13,8 @@ permalink: /projects/
   .p-tag { display: inline-flex; align-items: center; gap: 1px; font-size: 11px; font-weight: 500; padding: 2px 7px; border-radius: 4px; color: var(--text2); background: var(--bg2); border: 1px solid var(--border); }
   .p-tag b { color: var(--muted); font-weight: 400; }
   .p-tagrow { display: flex; gap: 6px; flex-wrap: wrap; }
+  a.p-tag { text-decoration: none; transition: color var(--transition-fast), border-color var(--transition-fast); }
+  a.p-tag:hover { color: var(--amber); border-color: var(--amber); }
   .p-link { font-size: 12px; color: var(--cyan); }
   .p-link:hover { color: var(--cyan-hi); }
 
@@ -61,7 +63,7 @@ permalink: /projects/
       <span class="p-tag"><b>#</b>featured</span>
       <h2 class="featured-title"><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h2>
       <p class="featured-desc">{{ featured.description }}</p>
-      <div class="p-tagrow">{% for tag in featured.tags %}<span class="p-tag"><b>#</b>{{ tag }}</span>{% endfor %}</div>
+      <div class="p-tagrow">{% for tag in featured.tags %}<a class="p-tag" href="/tags/{{ tag | slugify }}/"><b>#</b>{{ tag }}</a>{% endfor %}</div>
       <a class="p-link" href="{{ featured.url | relative_url }}">{% if featured.external %}{{ featured.url | remove: 'https://' }} ↗{% else %}{{ featured.url }} →{% endif %}</a>
     </div>
   </article>
@@ -79,7 +81,7 @@ permalink: /projects/
           {% endif %}
           <div class="project-row-body">
             <h2 class="project-row-title"><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
-            <div class="p-tagrow">{% for tag in project.tags limit: 2 %}<span class="p-tag"><b>#</b>{{ tag }}</span>{% endfor %}</div>
+            <div class="p-tagrow">{% for tag in project.tags limit: 2 %}<a class="p-tag" href="/tags/{{ tag | slugify }}/"><b>#</b>{{ tag }}</a>{% endfor %}</div>
           </div>
           <a class="p-link" href="{{ project.url | relative_url }}">{% if project.external %}repo ↗{% else %}demo ↗{% endif %}</a>
         </article>
