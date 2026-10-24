@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="design_doc_mode" content="canvas">
+<title>Projects landing — options</title>
+<link rel="stylesheet" href="styles.css" />
+<script src="image-slot.js"></script>
+<style>
+html,body{margin:0;background:#1a1712}
+.frame{position:absolute;background:var(--background);color:var(--foreground);font-family:var(--font-ui);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.badge{position:absolute;top:-30px;left:0;font-family:var(--font-code);font-size:12px;color:#eee;background:#000;padding:3px 8px;border-radius:4px}
+header.hdr{position:sticky;top:0;height:56px;display:flex;align-items:center;gap:20px;padding:0 26px;background:color-mix(in oklab, var(--background) 86%, transparent);border-bottom:1px solid var(--border)}
+.logo{font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--cyan);letter-spacing:-.01em}
+nav.top{margin-left:auto;display:flex;gap:20px}
+nav.top a{font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none}
+nav.top a.active{color:var(--cyan)}
+h1.page-title{font-size:var(--text-2xl);color:var(--accent);margin:0 0 6px}
+p.page-sub{font-family:var(--font-body);font-size:14px;color:var(--muted);margin:0 0 30px}
+.tag{display:inline-flex;align-items:center;gap:1px;font-family:var(--font-code);font-size:11px;font-weight:500;padding:2px 7px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface);border:1px solid var(--border)}
+.tag b{color:var(--muted);font-weight:400}
+.link{font-family:var(--font-code);font-size:12px;color:var(--cyan);text-decoration:none}
+.link:hover{color:var(--cyan-hi)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md,10px);overflow:hidden;display:flex;flex-direction:column}
+.card .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px}
+.card h3{font-size:16px;margin:0;color:var(--foreground)}
+.card p{font-family:var(--font-body);font-size:13px;color:var(--text-2);margin:0;line-height:1.5}
+.tagrow{display:flex;gap:6px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="frame" style="left:0;top:0;width:1200px;height:900px">
+<div class="badge">1a — Card grid</div>
+<header class="hdr"><span class="logo">syncopated notes</span><nav class="top"><a href="#">Notes</a><a href="#" class="active">Projects</a><a href="#">Wikis</a><a href="#">About</a></nav></header>
+<div style="max-width:1100px;margin:0 auto;padding:36px 26px">
+<h1 class="page-title">Projects</h1>
+<p class="page-sub">Things built, mostly finished.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+<div class="card"><image-slot id="a1" style="width:100%;aspect-ratio:16/9" shape="rect" placeholder="screenshot"></image-slot><div class="body"><h3>Shared Context Bus</h3><p>A message bus for agent memory and policy propagation across tool calls.</p><div class="tagrow"><span class="tag"><b>#</b>ruby</span><span class="tag"><b>#</b>agents</span></div><a class="link" href="#">github.com/repo ↗</a></div></div>
+<div class="card"><image-slot id="a2" style="width:100%;aspect-ratio:16/9" shape="rect" placeholder="screenshot"></image-slot><div class="body"><h3>OSPF as a Planner</h3><p>Modeling task routing as a link-state protocol instead of a DAG.</p><div class="tagrow"><span class="tag"><b>#</b>networking</span><span class="tag"><b>#</b>planning</span></div><a class="link" href="#">github.com/repo ↗</a></div></div>
+<div class="card"><image-slot id="a3" style="width:100%;aspect-ratio:16/9" shape="rect" placeholder="screenshot"></image-slot><div class="body"><h3>Natural Pacing Protocol</h3><p>A prompt scaffold for human-rhythm turn-taking in chat models.</p><div class="tagrow"><span class="tag"><b>#</b>llm</span><span class="tag"><b>#</b>prompt-engineering</span></div><a class="link" href="#">live demo ↗</a></div></div>
+<div class="card"><image-slot id="a4" style="width:100%;aspect-ratio:16/9" shape="rect" placeholder="screenshot"></image-slot><div class="body"><h3>Semantic Fidelity (HL7)</h3><p>Round-trip checking clinical meaning through HL7 → FHIR transforms.</p><div class="tagrow"><span class="tag"><b>#</b>healthcare</span><span class="tag"><b>#</b>fhir</span></div><a class="link" href="#">github.com/repo ↗</a></div></div>
+<div class="card"><image-slot id="a5" style="width:100%;aspect-ratio:16/9" shape="rect" placeholder="screenshot"></image-slot><div class="body"><h3>Field Note Renderer</h3><p>A tiny static-site generator tuned for long-form annotated notes.</p><div class="tagrow"><span class="tag"><b>#</b>tooling</span></div><a class="link" href="#">github.com/repo ↗</a></div></div>
+<div class="card"><image-slot id="a6" style="width:100%;aspect-ratio:16/9" shape="rect" placeholder="screenshot"></image-slot><div class="body"><h3>Answerability Probe</h3><p>Testing whether isolating liveness alone reproduces the addressed effect.</p><div class="tagrow"><span class="tag"><b>#</b>research</span></div><a class="link" href="#">write-up ↗</a></div></div>
+</div>
+</div>
+</div>
+
+<div class="frame" style="left:1280px;top:0;width:1200px;height:900px">
+<div class="badge">1b — Compact list</div>
+<header class="hdr"><span class="logo">syncopated notes</span><nav class="top"><a href="#">Notes</a><a href="#" class="active">Projects</a><a href="#">Wikis</a><a href="#">About</a></nav></header>
+<div style="max-width:820px;margin:0 auto;padding:36px 26px">
+<h1 class="page-title">Projects</h1>
+<p class="page-sub">Things built, mostly finished.</p>
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--border)">
+<image-slot id="b1" style="width:64px;height:64px;flex-shrink:0" shape="rounded" radius="8" placeholder="img"></image-slot>
+<div style="flex:1;min-width:0"><h3 style="font-size:15px;margin:0 0 4px;color:var(--foreground)">Shared Context Bus</h3><p style="font-family:var(--font-body);font-size:13px;color:var(--text-2);margin:0 0 8px;line-height:1.5">A message bus for agent memory and policy propagation across tool calls.</p><div class="tagrow"><span class="tag"><b>#</b>ruby</span><span class="tag"><b>#</b>agents</span></div></div>
+<a class="link" href="#" style="flex-shrink:0;margin-top:2px">repo ↗</a>
+</div>
+<div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--border)">
+<image-slot id="b2" style="width:64px;height:64px;flex-shrink:0" shape="rounded" radius="8" placeholder="img"></image-slot>
+<div style="flex:1;min-width:0"><h3 style="font-size:15px;margin:0 0 4px;color:var(--foreground)">OSPF as a Planner</h3><p style="font-family:var(--font-body);font-size:13px;color:var(--text-2);margin:0 0 8px;line-height:1.5">Modeling task routing as a link-state protocol instead of a DAG.</p><div class="tagrow"><span class="tag"><b>#</b>networking</span><span class="tag"><b>#</b>planning</span></div></div>
+<a class="link" href="#" style="flex-shrink:0;margin-top:2px">repo ↗</a>
+</div>
+<div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--border)">
+<image-slot id="b3" style="width:64px;height:64px;flex-shrink:0" shape="rounded" radius="8" placeholder="img"></image-slot>
+<div style="flex:1;min-width:0"><h3 style="font-size:15px;margin:0 0 4px;color:var(--foreground)">Natural Pacing Protocol</h3><p style="font-family:var(--font-body);font-size:13px;color:var(--text-2);margin:0 0 8px;line-height:1.5">A prompt scaffold for human-rhythm turn-taking in chat models.</p><div class="tagrow"><span class="tag"><b>#</b>llm</span><span class="tag"><b>#</b>prompt-engineering</span></div></div>
+<a class="link" href="#" style="flex-shrink:0;margin-top:2px">demo ↗</a>
+</div>
+<div style="display:flex;gap:16px;align-items:flex-start;padding:16px 0">
+<image-slot id="b4" style="width:64px;height:64px;flex-shrink:0" shape="rounded" radius="8" placeholder="img"></image-slot>
+<div style="flex:1;min-width:0"><h3 style="font-size:15px;margin:0 0 4px;color:var(--foreground)">Semantic Fidelity (HL7)</h3><p style="font-family:var(--font-body);font-size:13px;color:var(--text-2);margin:0 0 8px;line-height:1.5">Round-trip checking clinical meaning through HL7 → FHIR transforms.</p><div class="tagrow"><span class="tag"><b>#</b>healthcare</span><span class="tag"><b>#</b>fhir</span></div></div>
+<a class="link" href="#" style="flex-shrink:0;margin-top:2px">repo ↗</a>
+</div>
+</div>
+</div>
+</div>
+
+<div class="frame" style="left:2560px;top:0;width:1200px;height:900px">
+<div class="badge">1c — Featured + list</div>
+<header class="hdr"><span class="logo">syncopated notes</span><nav class="top"><a href="#">Notes</a><a href="#" class="active">Projects</a><a href="#">Wikis</a><a href="#">About</a></nav></header>
+<div style="max-width:1100px;margin:0 auto;padding:36px 26px">
+<h1 class="page-title">Projects</h1>
+<p class="page-sub">Things built, mostly finished.</p>
+<div class="card" style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:28px">
+<image-slot id="c0" style="width:100%;height:100%" shape="rect" placeholder="featured screenshot"></image-slot>
+<div class="body" style="padding:24px;gap:12px;justify-content:center">
+<span class="tag" style="align-self:flex-start"><b>#</b>featured</span>
+<h3 style="font-size:22px">Shared Context Bus</h3>
+<p style="font-size:14px">A message bus for agent memory and policy propagation across tool calls — the load-bearing layer under every orchestrated agent demo.</p>
+<div class="tagrow"><span class="tag"><b>#</b>ruby</span><span class="tag"><b>#</b>agents</span></div>
+<a class="link" href="#">github.com/repo ↗</a>
+</div>
+</div>
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)">
+<image-slot id="c1" style="width:48px;height:48px;flex-shrink:0" shape="rounded" radius="6" placeholder="img"></image-slot>
+<div style="flex:1"><h3 style="font-size:14px;margin:0 0 2px;color:var(--foreground)">OSPF as a Planner</h3><div class="tagrow"><span class="tag"><b>#</b>networking</span></div></div>
+<a class="link" href="#">repo ↗</a>
+</div>
+<div style="display:flex;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)">
+<image-slot id="c2" style="width:48px;height:48px;flex-shrink:0" shape="rounded" radius="6" placeholder="img"></image-slot>
+<div style="flex:1"><h3 style="font-size:14px;margin:0 0 2px;color:var(--foreground)">Natural Pacing Protocol</h3><div class="tagrow"><span class="tag"><b>#</b>llm</span></div></div>
+<a class="link" href="#">demo ↗</a>
+</div>
+<div style="display:flex;gap:16px;align-items:center;padding:14px 0">
+<image-slot id="c3" style="width:48px;height:48px;flex-shrink:0" shape="rounded" radius="6" placeholder="img"></image-slot>
+<div style="flex:1"><h3 style="font-size:14px;margin:0 0 2px;color:var(--foreground)">Semantic Fidelity (HL7)</h3><div class="tagrow"><span class="tag"><b>#</b>healthcare</span></div></div>
+<a class="link" href="#">repo ↗</a>
+</div>
+</div>
+</div>
+</div>
+
+<template id="__bundler_thumbnail"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#B5654A"/><text x="50" y="58" font-size="40" text-anchor="middle" fill="#fff" font-family="monospace">P</text></svg></template>
+</body>
+</html>

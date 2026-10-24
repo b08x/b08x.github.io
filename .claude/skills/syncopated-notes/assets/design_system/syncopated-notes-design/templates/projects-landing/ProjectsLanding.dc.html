@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Projects Landing" description="Projects index — featured project + compact list, links to case studies" -->
+<helmet><script src="./ds-base.js"></script><script src="../../image-slot.js"></script><style>image-slot[id^="row-"]::part(empty){display:none}</style></helmet>
+<div style="background:var(--background);min-height:100vh;color:var(--foreground)">
+<header style="position:sticky;top:0;z-index:30;height:56px;display:flex;align-items:center;gap:20px;padding:0 26px;background:color-mix(in oklab, var(--background) 86%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)">
+<span style="font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--cyan);letter-spacing:-0.01em">syncopated notes</span>
+<nav style="margin-left:auto;display:flex;gap:20px">
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">Notes</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--cyan);text-decoration:none">Projects</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">Prompts</a>
+<a href="#" style="font-family:var(--font-ui);font-size:13px;color:var(--text-2);text-decoration:none">About</a>
+</nav>
+</header>
+<div style="max-width:1100px;margin:0 auto;padding:36px 26px 100px">
+<h1 style="font-size:var(--text-2xl);color:var(--accent);margin:0 0 6px">{{ title }}</h1>
+<p style="font-family:var(--font-body);font-size:14px;color:var(--muted);margin:0 0 30px">Things built, mostly finished.</p>
+
+<a href="{{ featured.href }}" style="text-decoration:none;color:inherit;display:grid;grid-template-columns:1fr 1fr;margin-bottom:28px;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+<image-slot id="featured-shot" style="width:100%;height:100%" shape="rect" placeholder="featured screenshot"></image-slot>
+<div style="padding:24px;display:flex;flex-direction:column;gap:12px;justify-content:center">
+<span style="display:inline-flex;align-self:flex-start;align-items:center;white-space:nowrap;font-family:var(--font-code);font-size:11px;font-weight:500;padding:2px 7px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface-2);border:1px solid var(--border)"><b style="color:var(--muted);font-weight:400">#</b>featured</span>
+<h3 style="font-size:22px;margin:0;color:var(--foreground)">{{ featured.title }}</h3>
+<p style="font-family:var(--font-body);font-size:14px;color:var(--text-2);margin:0;line-height:1.5">{{ featured.description }}</p>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<sc-for list="{{ featured.tags }}" as="t" hint-placeholder-count="2">
+<span style="display:inline-flex;align-items:center;white-space:nowrap;font-family:var(--font-code);font-size:11px;font-weight:500;padding:2px 7px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface-2);border:1px solid var(--border)"><b style="color:var(--muted);font-weight:400">#</b>{{ t }}</span>
+</sc-for>
+</div>
+<span style="font-family:var(--font-code);font-size:12px;color:var(--cyan)">{{ featured.linkLabel }} ↗</span>
+</div>
+</a>
+
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
+<a href="{{ p.href }}" style="text-decoration:none;color:inherit;display:flex;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)">
+<image-slot id="{{ p.slotId }}" style="width:48px;height:48px;flex-shrink:0" shape="rounded" radius="6" placeholder=""></image-slot>
+<div style="flex:1;min-width:0"><h3 style="font-size:14px;margin:0 0 2px;color:var(--foreground)">{{ p.title }}</h3><div style="display:flex;gap:6px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;white-space:nowrap;font-family:var(--font-code);font-size:11px;font-weight:500;padding:2px 7px;border-radius:var(--radius-xs);color:var(--text-2);background:var(--surface);border:1px solid var(--border)"><b style="color:var(--muted);font-weight:400">#</b>{{ p.tag }}</span></div></div>
+<span style="font-family:var(--font-code);font-size:12px;color:var(--cyan);flex-shrink:0">{{ p.linkLabel }} ↗</span>
+</a>
+</sc-for>
+</div>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Projects&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  data = {
+    featured: { title: "Shared Context Bus", description: "A message bus for agent memory and policy propagation across tool calls — the load-bearing layer under every orchestrated agent demo.", tags: ["ruby", "agents"], linkLabel: "github.com/repo", href: "../project/Project.dc.html" },
+    rest: [
+      { title: "OSPF as a Planner", tag: "networking", linkLabel: "repo", href: "../project/Project.dc.html" },
+      { title: "Natural Pacing Protocol", tag: "llm", linkLabel: "demo", href: "../project/Project.dc.html" },
+      { title: "Semantic Fidelity (HL7)", tag: "healthcare", linkLabel: "repo", href: "../project/Project.dc.html" },
+      { title: "Field Note Renderer", tag: "tooling", linkLabel: "repo", href: "../project/Project.dc.html" },
+      { title: "Answerability Probe", tag: "research", linkLabel: "write-up", href: "../project/Project.dc.html" }
+    ]
+  };
+
+  renderVals() {
+    return {
+      title: this.props.title ?? "Projects",
+      featured: this.data.featured,
+      projects: this.data.rest.map((p, i) => ({ ...p, slotId: "row-" + i }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>
