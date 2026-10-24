@@ -1,0 +1,20 @@
+{% comment %}
+  Career panel. Driven by page.career: an array of maps with
+  years / role / at / note. Renders nothing when the array is
+  empty, so the sidebar degrades to just the CTA.
+{% endcomment %}
+{% if include.rows and include.rows.size > 0 %}
+<section class="about-panel">
+  <h2 class="about-panel-title">{{ include.title | default: "Career" }}</h2>
+  <div class="about-career">
+    {% for row in include.rows %}
+    <div class="cr">
+      {% if row.years %}<span class="cr-year">{{ row.years }}</span>{% endif %}
+      {% if row.role %}<h3 class="cr-role">{{ row.role }}</h3>{% endif %}
+      {% if row.at %}<span class="cr-at">{{ row.at }}</span>{% endif %}
+      {% if row.note %}<p class="cr-note">{{ row.note }}</p>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

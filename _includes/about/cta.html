@@ -1,0 +1,17 @@
+{% comment %}
+  "Say hello" panel. Driven by page.cta (title, blurb) and
+  page.links (an array of maps with label / url / external).
+{% endcomment %}
+<section class="about-panel about-cta">
+  <h2 class="about-cta-title">{{ include.cta.title | default: "Say hello." }}</h2>
+  {% if include.cta.blurb %}<p class="about-cta-blurb">{{ include.cta.blurb }}</p>{% endif %}
+  {% if include.links and include.links.size > 0 %}
+  <ul class="about-links">
+    {% for link in include.links %}
+    <li>
+      <a href="{{ link.url }}"{% if link.external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ link.label }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>

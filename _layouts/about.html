@@ -1,0 +1,228 @@
+---
+layout: notes
+---
+<style>
+  /* ── About layout ──
+     Two-column: a prose column plus a sticky sidebar of panels.
+     Everything below is scoped to .about so nothing leaks into
+     the shared token layer. */
+
+  .about { --space-side: var(--space-8); }
+
+  /* Marker hues: the six-accent set used for the kicker, the
+     company names and the hover colour cycle. Pulled from the
+     chart/status palettes so dark mode flips with the tokens. */
+  .about {
+    --mk-1: var(--accent);          /* violet   */
+    --mk-2: var(--rust);            /* rust     */
+    --mk-3: var(--chart-3);         /* green    */
+    --mk-4: var(--status-question); /* ochre    */
+    --mk-5: var(--heading);         /* violet-lo */
+    --mk-6: var(--status-danger);   /* rust-lo  */
+  }
+
+  /* ── Hero ── */
+  .about-hd { margin-bottom: var(--space-8); }
+
+  .about-kicker {
+    display: block;
+    font-family: var(--font-code);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: var(--space-3);
+  }
+
+  .about-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 1rem + 4vw, 3.75rem);
+    font-weight: var(--weight-bold);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    text-wrap: balance;
+    color: var(--foreground);
+    margin: 0;
+  }
+
+  .about-lede {
+    font-family: var(--font-code);
+    font-style: italic;
+    font-size: var(--text-md);
+    line-height: var(--leading-normal);
+    color: var(--text-2);
+    max-width: 58ch;
+    margin: var(--space-4) 0 0;
+  }
+
+  /* The wordmark-slash trick, relocated: hovering the hero runs the
+     kicker through the six marker hues. */
+  @keyframes about-cycle {
+    0%, 100%  { color: var(--mk-1); }
+    16.667%   { color: var(--mk-2); }
+    33.333%   { color: var(--mk-3); }
+    50%       { color: var(--mk-4); }
+    66.667%   { color: var(--mk-5); }
+    83.333%   { color: var(--mk-6); }
+  }
+
+  @media (hover: hover) {
+    .about-hd:hover .about-kicker { animation: about-cycle 7.2s linear infinite; }
+  }
+
+  /* ── Grid ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  .about-prose { max-width: var(--measure-prose); min-width: 0; }
+
+  .about-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    min-width: 0;
+  }
+
+  /* ── Panels (career, say-hello) ── */
+  .about-panel {
+    background: var(--card);
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5) 22px;
+  }
+
+  .about-panel-title {
+    font-family: var(--font-code);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin: 0 0 var(--space-4);
+  }
+
+  /* ── Career rows ── */
+  .about-career { display: flex; flex-direction: column; }
+
+  .cr {
+    display: grid;
+    gap: 3px;
+    padding: var(--space-4) 0;
+    border-bottom: var(--border-width) solid var(--border);
+  }
+
+  .cr:first-child { padding-top: 0; }
+  .cr:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .cr-year {
+    font-family: var(--font-code);
+    font-size: var(--text-2xs);
+    letter-spacing: var(--tracking-wide);
+    color: var(--dim);
+  }
+
+  .cr-role {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--foreground);
+    margin: 0;
+  }
+
+  .cr-at {
+    font-family: var(--font-code);
+    font-size: var(--text-xs);
+    color: var(--mk-3); /* marker green — swap for any --mk-* hue */
+  }
+
+  .cr-note {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    line-height: var(--leading-normal);
+    color: var(--muted);
+    margin: var(--space-2) 0 0;
+  }
+
+  /* ── Say hello ── */
+  .about-cta-title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--foreground);
+    margin: 0 0 var(--space-2);
+  }
+
+  .about-cta-blurb {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--muted);
+    margin: 0 0 var(--space-4);
+  }
+
+  .about-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .about-links a {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-code);
+    font-size: var(--text-xs);
+    color: var(--text-2);
+    padding: 5px 10px;
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast), color var(--transition-fast),
+                border-color var(--transition-fast);
+  }
+
+  .about-links a:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--badge-text);
+  }
+
+  /* ── Two columns, once the sidebar can hold a card ── */
+  @media (min-width: 900px) {
+    .about-grid { grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: var(--space-side); }
+    .about-side { position: sticky; top: calc(var(--header-h) + var(--space-4)); }
+  }
+
+  @media (max-width: 700px) {
+    .about-hd { margin-bottom: var(--space-6); }
+    .about-panel { padding: var(--space-4) 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-hd:hover .about-kicker { animation: none; }
+  }
+</style>
+
+<article class="about">
+  <header class="about-hd">
+    <span class="about-kicker">{{ page.kicker | default: "About" }}</span>
+    <h1 class="about-title">{{ page.title }}</h1>
+    {% if page.lede %}<p class="about-lede">{{ page.lede }}</p>{% endif %}
+  </header>
+
+  <div class="about-grid">
+    <div class="about-prose post-content">
+      {{ content }}
+    </div>
+
+    {% include about/side.html %}
+  </div>
+</article>
