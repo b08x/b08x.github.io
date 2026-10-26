@@ -11,6 +11,9 @@
 # - year: Release or project year
 # - tags: Array of keyword tags
 # - card: true to feature on the landing page (index.md / home layout), false to display only on /projects/
+# - archived: true to file the entry under "Past projects" on /projects/ instead of
+#   "Active projects". Omit (or false) for current work — the Past section only
+#   renders once at least one entry sets it.
 # - repo: Repository web URL (https://) — adds a "repo ↗" link on the /projects/ row.
 #   Project pages (layout: project) also derive a repo link from their first external
 #   `links:` entry, so `repo:` here is for registry rows that point at an internal page.

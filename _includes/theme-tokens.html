@@ -278,6 +278,39 @@ a { color: inherit; text-decoration: none; }
   color: var(--muted);
 }
 
+/* ── Skip link (first tab stop, sits above the sticky header) ─ */
+.skip-link {
+  position: absolute;
+  top: -64px;
+  left: var(--space-4);
+  z-index: var(--z-modal);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--badge-text);
+  background: var(--accent);
+  border: var(--border-width) solid var(--accent);
+  border-radius: var(--radius-sm);
+  transition: top var(--transition-fast) var(--ease-out);
+}
+
+.skip-link:focus { top: var(--space-2); }
+
+/* ── Screen-reader-only utility ────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ── Site header (sticky, 56px) ───────────────────────────── */
 .site-header {
   position: sticky;

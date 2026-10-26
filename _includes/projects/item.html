@@ -1,0 +1,40 @@
+{% comment %}
+  One /projects/ entry, in the page's three-tier row anatomy:
+    1. title + dot-separated metadata strip (category · year · tags · fork)
+    2. description
+    3. action links (repo / demo)
+
+  Separators are CSS-generated (.p-meta > * + *::before), so an
+  optional part that doesn't render never leaves a stray "·" behind.
+
+  Params: project — an entry from _data/projects.yml
+{% endcomment %}
+{% assign p = include.project %}
+<article class="p-item">
+  <div class="p-item-head">
+    <h3 class="p-item-title">
+      <a href="{{ p.url | relative_url }}"{% if p.external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ p.title }}{% if p.external %}<span class="sr-only"> (opens in new tab)</span>{% endif %}</a>
+    </h3>
+    <span class="p-meta">
+      {% if p.badge %}<span class="p-meta-cat">{{ p.badge }}</span>{% endif %}
+      {% if p.year %}<span class="p-meta-year">{{ p.year }}</span>{% endif %}
+      {% if p.tags and p.tags.size > 0 %}
+      <span class="p-tags">
+        {% for tag in p.tags %}<a class="p-meta-tag" href="/tags/{{ tag | slugify }}/">#{{ tag }}</a>{% endfor %}
+      </span>
+      {% endif %}
+      {% if p.fork_of %}<span class="p-fork">fork of <a href="{{ p.fork_of.url }}" target="_blank" rel="noopener noreferrer">{{ p.fork_of.name }} ↗<span class="sr-only"> (opens in new tab)</span></a></span>{% endif %}
+    </span>
+  </div>
+
+  <p class="p-item-desc">{{ p.description }}</p>
+
+  <div class="p-item-actions">
+    {% if p.external %}
+    <a class="p-action" href="{{ p.url | relative_url }}" target="_blank" rel="noopener noreferrer">repo ↗<span class="sr-only"> ({{ p.title }} repository, opens in new tab)</span></a>
+    {% else %}
+    {% if p.repo %}<a class="p-action" href="{{ p.repo }}" target="_blank" rel="noopener noreferrer">repo ↗<span class="sr-only"> (opens in new tab)</span></a>{% endif %}
+    <a class="p-action" href="{{ p.url | relative_url }}">demo →</a>
+    {% endif %}
+  </div>
+</article>

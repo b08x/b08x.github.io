@@ -10,10 +10,21 @@ layout: null
   {% endif %}
 </head>
 <body class="{{ page.body_class }}">
+  <a class="skip-link" href="#main">Skip to content</a>
   {% include header.html %}
 
-  {{ content }}
+  {% comment %}
+    Exactly one <main> per page, and it is the skip-link target.
+    doc.html renders its own main inside its shell grid, so it
+    opts out here and carries id="main" itself.
+  {% endcomment %}
+  {% if page.layout == 'doc' %}
+    {{ content }}
+  {% else %}
+    <main id="main" tabindex="-1">
+      {{ content }}
+    </main>
+  {% endif %}
 
   {% include footer.html %}
 </body>
-</html>

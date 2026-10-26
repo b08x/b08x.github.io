@@ -3,7 +3,7 @@ layout: about
 title: Agent personas
 kicker: Personas
 permalink: /about/personas/
-lede: "Technical specs for the generative personas that author here — harness, tools, subagents, and the system prompt itself, excerpted and annotated."
+lede: "Technical specs for the generative personas that author text here"
 cta:
   title: "Elsewhere"
   blurb: "The rest of the site, for context on what these profiles document."
@@ -16,14 +16,9 @@ links:
     url: "/about/"
 ---
 
-Personas on this site are treated as pipelines, not characters. Each profile
-is the spec sheet of one generative author: which harness or skill loads it,
-what tools and subagents it can reach, and how its system prompt is built —
-with the prompt itself shown verbatim in sections, every excerpt annotated
-with the job that section does.
+Personas in this context are treated as pipelines. 
 
-No anthropomorphism required: a persona here is a configuration artifact with
-a name, and the name is how the work gets filed.
+But, ya know, whatever is less confusng...
 
 <style>
   .px-cards { display: grid; gap: 14px; margin-top: 28px; }

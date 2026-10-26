@@ -1,9 +1,9 @@
 ---
 layout: about
-title: Hi, I'm b08x
+title: "What Might Be Expected"
 permalink: /about/
 kicker: About
-lede: "Placeholder lede — one sentence on who you are and what you work on. Replace me."
+lede: "context..."
 career:
   - years: "2024–Present"
     role: "Senior Something Engineer"
@@ -31,23 +31,10 @@ links:
     url: "/about/personas/"
 ---
 
-Placeholder prose. This column is the reading surface: standard Markdown,
-typeset by the shared `.post-content` rules, capped at `--measure-prose`
-(65ch). Replace all of it.
+Well, as far myself, uhh,  I'm a regular human person. Who's now classified as a middle-aged adult male. Which I guess is OK. I thoroughly enjoy the intersection of the current information technology field work which blends the context swithing between linguistics, philosophy, existential psychology, and development workflows. My background is mostly open source or Linux back-end systems engineering and Application Support. 
 
-## What I work on
+Most recently, my focus has been on the intersection of that sort of work combined with the, I suppose, experimental endeavor of integrating, reliably integrating, large language model based applications into support and back-end tooling workflows.
 
-A section. Headings land in the display face on `--heading`, the same
-typography every post on the site already uses.
+When my brain isn't over encumbered by all of that, I mostly enjoy spending time with my partner, Ann, discussing various non sequitur philosophies, nerding out on Marvel storylines, testing her fantastic herbal concoctions, swapping technical troubleshooting horror stories and thinking of ways to better help people whose primary focus isn't the information technology itself... 
 
-- A list item, because lists are the shape most of these sections take.
-- Another one.
-
-> A pull quote, if you want one. Blockquotes already carry the accent
-> rule and the surface tint from the shared token layer.
-
-## Away from the keyboard
-
-A second section. The sidebar next to this column pins under the header
-once the viewport is 900px wide or more, and stacks below on anything
-narrower.
+[Personas](/about/personas)
