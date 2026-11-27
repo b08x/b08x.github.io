@@ -15,7 +15,6 @@
 #   or
 #   DOTS_REPO="https://github.com/b08x/dots.git" ./ws-install.sh
 # =============================================================================
-
 # If invoked via a non-bash shell (e.g. sh ws-install.sh or curl ... | sh where sh is not bash)
 if [ -z "${BASH_VERSION:-}" ]; then
   if command -v bash >/dev/null 2>&1; then
@@ -155,8 +154,15 @@ main() {
     fi
   fi
 
-  # 4. Enable Copr Repository & Install yadm
+  # 4. Enable Copr Repository & Install Bootstrap Prerequisites
   local copr_name="b08x/syncopated"
+  local package
+  local -a missing_packages=()
+  for package in yadm uv zsh; do
+    if ! command -v "$package" >/dev/null 2>&1; then
+      missing_packages+=("$package")
+    fi
+  done
   if [ "$is_ostree" -eq 1 ]; then
     local fedora_ver="${VERSION_ID:-}"
     if [ -z "$fedora_ver" ] && command -v rpm >/dev/null 2>&1; then
@@ -170,12 +176,13 @@ main() {
     $sudo_cmd curl -fsSL "$repo_url" -o "$repo_dest"
     ok "Copr repo configured at $repo_dest"
 
-    if ! command -v yadm >/dev/null 2>&1; then
-      info "Installing yadm via rpm-ostree..."
-      $sudo_cmd rpm-ostree install --idempotent --apply-live yadm || $sudo_cmd rpm-ostree install --idempotent yadm
-      ok "yadm installed successfully"
-    else
-      ok "yadm is already installed"
+    if (( ${#missing_packages[@]} )); then
+      info "Installing ${missing_packages[*]} via rpm-ostree..."
+      if ! $sudo_cmd rpm-ostree install --idempotent --apply-live "${missing_packages[@]}"; then
+        $sudo_cmd rpm-ostree install --idempotent "${missing_packages[@]}"
+        warn "Packages staged. Reboot and rerun this installer to continue."
+        return 0
+      fi
     fi
   else
     local dnf_cmd="dnf"
@@ -191,12 +198,9 @@ main() {
     fi
     ok "Copr repo enabled"
 
-    if ! command -v yadm >/dev/null 2>&1; then
-      info "Installing yadm via $dnf_cmd..."
-      $sudo_cmd "$dnf_cmd" install -y yadm
-      ok "yadm installed successfully"
-    else
-      ok "yadm is already installed"
+    if (( ${#missing_packages[@]} )); then
+      info "Installing ${missing_packages[*]} via $dnf_cmd..."
+      $sudo_cmd "$dnf_cmd" install -y "${missing_packages[@]}"
     fi
   fi
 
